@@ -3,69 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Clínica Dental Sonrisa - Odontología estética y general en Bogotá. Blanqueamiento, implantes, ortodoncia invisible.">
-  <title>SmileDent Pro | Clínica Dental en Bogotá</title>
+  <meta name="description" content="AURA - Agencia creativa especializada en branding, diseño web y experiencias digitales memorables.">
+  <title>AURA | Creative Agency Portfolio</title>
   
-  <!-- Google Fonts - Tipografía profesional -->
+  <!-- Google Fonts Premium -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     /* ========================================
-       VARIABLES CSS - Diseño Premium
+       DESIGN TOKENS - Sistema de diseño profesional
        ======================================== */
     :root {
-      /* Colores principales */
-      --color-primary: #00a8cc;
-      --color-primary-dark: #008ba3;
-      --color-primary-light: #e6f7fa;
-      --color-secondary: #1a1a2e;
-      --color-secondary-light: #2d2d44;
-      --color-accent: #f39c12;
-      --color-accent-hover: #d68910;
+      /* Colores - Paleta sofisticada */
+      --color-bg: #0a0a0f;
+      --color-bg-secondary: #13131a;
+      --color-bg-tertiary: #1a1a24;
+      --color-text: #ffffff;
+      --color-text-secondary: #a0a0b0;
+      --color-text-muted: #666677;
+      --color-primary: #6366f1;
+      --color-primary-hover: #4f46e5;
+      --color-accent: #f472b6;
+      --color-success: #10b981;
+      --color-border: rgba(255,255,255,0.08);
+      --color-border-hover: rgba(99,102,241,0.4);
       
-      /* Neutros */
-      --color-white: #ffffff;
-      --color-light: #f8f9fa;
-      --color-gray: #6c757d;
-      --color-gray-light: #e9ecef;
-      --color-dark: #1a1a2e;
+      /* Sombras y profundidad */
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 40px rgba(99,102,241,0.25);
+      --shadow-glow-hover: 0 0 60px rgba(99,102,241,0.4);
       
-      /* Sombras y efectos */
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-      --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
-      --shadow-hover: 0 20px 60px rgba(0,168,204,0.25);
-      
-      /* Bordes */
+      /* Bordes y radios */
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 16px;
-      --radius-full: 50px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
       
-      /* Transiciones */
-      --transition-fast: 150ms ease;
-      --transition-normal: 300ms ease;
-      --transition-slow: 500ms ease;
+      /* Transiciones y animaciones */
+      --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+      --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+      --transition-fast: 150ms var(--ease-out);
+      --transition-normal: 300ms var(--ease-out);
+      --transition-slow: 500ms var(--ease-in-out);
       
       /* Tipografía */
-      --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
       --text-base: 1rem;
       --text-lg: 1.125rem;
       --text-xl: 1.25rem;
       --text-2xl: 1.5rem;
-      --text-3xl: 2rem;
-      --text-4xl: 2.5rem;
-      --text-5xl: 3.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+      --text-5xl: 3rem;
+      --text-6xl: 4rem;
+      --text-7xl: 5rem;
       
       /* Espaciado */
-      --space-xs: 0.5rem;
-      --space-sm: 1rem;
-      --space-md: 2rem;
-      --space-lg: 4rem;
-      --space-xl: 6rem;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      
+      /* Layout */
+      --container-max: 1440px;
+      --header-height: 80px;
+      --header-height-scrolled: 64px;
     }
 
     /* ========================================
@@ -79,34 +97,45 @@
     
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 80px;
+      scroll-padding-top: var(--header-height);
+      font-size: 16px;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
     
     body {
       font-family: var(--font-body);
       font-size: var(--text-base);
-      line-height: 1.7;
-      color: var(--color-secondary);
-      background: var(--color-white);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
     
     /* Tipografía */
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      line-height: 1.25;
-      color: var(--color-secondary);
-      margin-bottom: var(--space-sm);
+      font-family: var(--font-display);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
     }
     
-    h1 { font-size: var(--text-5xl); }
-    h2 { font-size: var(--text-4xl); }
-    h3 { font-size: var(--text-2xl); }
-    h4 { font-size: var(--text-xl); }
+    h1 { font-size: var(--text-7xl); letter-spacing: -0.03em; }
+    h2 { font-size: var(--text-5xl); letter-spacing: -0.02em; }
+    h3 { font-size: var(--text-3xl); }
+    h4 { font-size: var(--text-2xl); }
     
-    p { margin-bottom: var(--space-sm); }
+    p { margin-bottom: var(--space-4); color: var(--color-text-secondary); }
     
     a {
       color: inherit;
@@ -128,91 +157,111 @@
     /* Contenedor */
     .container {
       width: 100%;
-      max-width: 1280px;
+      max-width: var(--container-max);
       margin: 0 auto;
-      padding: 0 var(--space-md);
+      padding: 0 var(--space-8);
     }
     
-    @media (min-width: 1400px) {
-      .container { max-width: 1400px; }
+    @media (min-width: 1600px) {
+      .container { padding: 0 var(--space-12); }
     }
 
     /* ========================================
-       BOTONES - Estilo Premium
+       UTILITIES - Clases de utilidad
        ======================================== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .text-center { text-align: center; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: var(--space-2); }
+    .gap-4 { gap: var(--space-4); }
+    .gap-6 { gap: var(--space-6); }
+    .gap-8 { gap: var(--space-8); }
+    
+    .section { padding: var(--space-24) 0; }
+    .section-sm { padding: var(--space-16) 0; }
+    
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: var(--space-xs);
-      padding: 14px 32px;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: var(--text-base);
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-sm);
       border-radius: var(--radius-full);
       border: none;
       cursor: pointer;
       transition: all var(--transition-normal);
       position: relative;
       overflow: hidden;
+      white-space: nowrap;
     }
     
-    .btn::after {
+    .btn::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255,255,255,0.15);
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
       opacity: 0;
       transition: opacity var(--transition-fast);
     }
     
-    .btn:hover::after { opacity: 1; }
+    .btn:hover::before { opacity: 1; }
     
     .btn-primary {
-      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-      color: var(--color-white);
-      box-shadow: var(--shadow-md);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
+      box-shadow: var(--shadow-md), var(--shadow-glow);
     }
     
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow-hover);
     }
     
     .btn-outline {
       background: transparent;
-      color: var(--color-primary);
-      border: 2px solid var(--color-primary);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
     }
     
     .btn-outline:hover {
-      background: var(--color-primary);
-      color: var(--color-white);
-    }
-    
-    .btn-outline-white {
-      background: transparent;
-      color: var(--color-white);
-      border: 2px solid var(--color-white);
-    }
-    
-    .btn-outline-white:hover {
-      background: var(--color-white);
-      color: var(--color-primary);
+      border-color: var(--color-primary);
+      background: rgba(99,102,241,0.1);
     }
     
     .btn-lg {
-      padding: 18px 40px;
-      font-size: var(--text-lg);
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-base);
     }
-    
-    .btn-block { width: 100%; }
 
     /* ========================================
-       HEADER - Sticky con efecto scroll
+       HEADER - Navegación elegante
        ======================================== */
     .header {
       position: fixed;
@@ -220,16 +269,16 @@
       left: 0;
       width: 100%;
       z-index: 1000;
-      padding: var(--space-md) 0;
+      padding: var(--space-4) 0;
       transition: all var(--transition-normal);
       background: transparent;
     }
     
     .header.scrolled {
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow-md);
-      padding: var(--space-sm) 0;
+      background: rgba(10,10,15,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-3) 0;
     }
     
     .header-content {
@@ -241,35 +290,38 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: var(--space-xs);
-      font-family: var(--font-heading);
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--color-white);
+      gap: var(--space-2);
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
     }
     
     .logo-icon {
-      font-size: 2rem;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
     }
     
-    .logo span { color: var(--color-primary); }
-    
-    .header.scrolled .logo { color: var(--color-secondary); }
-    
-    /* Navegación */
     .nav {
       display: flex;
       align-items: center;
-      gap: var(--space-lg);
+      gap: var(--space-8);
     }
     
     .nav-link {
-      font-family: var(--font-heading);
+      font-family: var(--font-display);
       font-weight: 500;
-      font-size: var(--text-base);
-      color: var(--color-white);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
       position: relative;
-      padding: var(--space-xs) 0;
+      padding: var(--space-2) 0;
+      transition: color var(--transition-fast);
     }
     
     .nav-link::after {
@@ -279,176 +331,169 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--color-primary);
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
       transition: width var(--transition-normal);
+      border-radius: var(--radius-full);
     }
     
-    .nav-link:hover::after { width: 100%; }
-    .nav-link:hover { color: var(--color-primary); }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-text);
+    }
     
-    .header.scrolled .nav-link { color: var(--color-secondary); }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
     
-    /* Acciones del header */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: var(--space-md);
+      gap: var(--space-4);
     }
-    
-    .header-phone {
-      display: flex;
-      align-items: center;
-      gap: var(--space-xs);
-      color: var(--color-white);
-      font-weight: 600;
-      font-family: var(--font-heading);
-    }
-    
-    .header-phone:hover { color: var(--color-primary); }
-    .header.scrolled .header-phone { color: var(--color-secondary); }
     
     .menu-toggle {
       display: none;
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       background: none;
       border: none;
-      color: var(--color-white);
+      color: var(--color-text);
       cursor: pointer;
-      padding: var(--space-xs);
-      transition: color var(--transition-fast);
+      padding: var(--space-2);
+      transition: transform var(--transition-fast);
     }
     
-    .header.scrolled .menu-toggle { color: var(--color-secondary); }
-    
-    .menu-toggle:hover { color: var(--color-primary); }
+    .menu-toggle:hover { transform: scale(1.1); }
+    .menu-toggle:active { transform: scale(0.95); }
 
     /* ========================================
-       HERO SLIDER - Animaciones profesionales
+       HERO - Impacto visual premium
        ======================================== */
     .hero {
       position: relative;
-      height: 100vh;
-      min-height: 750px;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+      padding-top: var(--header-height);
       overflow: hidden;
+      background: 
+        radial-gradient(ellipse at top, rgba(99,102,241,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(244,114,182,0.1) 0%, transparent 50%),
+        var(--color-bg);
     }
     
-    .hero-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-    
-    .hero-slide.active { opacity: 1; }
-    
-    .hero-slide::before {
+    .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: -50%;
+      right: -20%;
+      width: 70%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 50%;
       height: 100%;
-      background: linear-gradient(135deg, 
-        rgba(26,26,46,0.92) 0%, 
-        rgba(0,168,204,0.15) 50%,
-        rgba(26,26,46,0.85) 100%);
+      background: radial-gradient(ellipse, rgba(244,114,182,0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: float 25s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(2%, 2%) scale(1.02); }
+      50% { transform: translate(0, 4%) scale(0.98); }
+      75% { transform: translate(-2%, 2%) scale(1.01); }
     }
     
     .hero-content {
       position: relative;
       z-index: 2;
-      color: var(--color-white);
       max-width: 700px;
-      padding-left: 5%;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: rgba(99,102,241,0.15);
+      border: 1px solid var(--color-border-hover);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: var(--space-6);
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
     }
     
     .hero-title {
-      font-size: var(--text-5xl);
-      font-weight: 800;
-      margin-bottom: var(--space-md);
-      animation: fadeInUp 0.8s ease forwards;
+      font-size: var(--text-7xl);
+      font-weight: 700;
+      line-height: 0.95;
+      margin-bottom: var(--space-6);
+      animation: fadeInUp 0.6s ease 0.1s forwards;
       opacity: 0;
       transform: translateY(20px);
     }
     
-    .hero-slide.active .hero-title {
-      animation-delay: 0.2s;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .hero-text {
+    .hero-subtitle {
       font-size: var(--text-xl);
-      margin-bottom: var(--space-lg);
-      opacity: 0.95;
-      animation: fadeInUp 0.8s ease forwards;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-8);
+      max-width: 550px;
+      animation: fadeInUp 0.6s ease 0.2s forwards;
       opacity: 0;
       transform: translateY(20px);
-    }
-    
-    .hero-slide.active .hero-text {
-      animation-delay: 0.4s;
-      opacity: 0.95;
-      transform: translateY(0);
     }
     
     .hero-buttons {
       display: flex;
-      gap: var(--space-sm);
-      animation: fadeInUp 0.8s ease forwards;
+      gap: var(--space-4);
+      animation: fadeInUp 0.6s ease 0.3s forwards;
       opacity: 0;
       transform: translateY(20px);
     }
     
-    .hero-slide.active .hero-buttons {
-      animation-delay: 0.6s;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Navegación del slider */
-    .hero-nav {
-      position: absolute;
-      bottom: var(--space-lg);
-      left: 50%;
-      transform: translateX(-50%);
+    .hero-stats {
       display: flex;
-      gap: var(--space-xs);
-      z-index: 2;
+      gap: var(--space-8);
+      margin-top: var(--space-16);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+      animation: fadeInUp 0.6s ease 0.4s forwards;
+      opacity: 0;
+      transform: translateY(20px);
     }
     
-    .hero-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all var(--transition-normal);
-      padding: 0;
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
     }
     
-    .hero-dot:hover {
-      background: rgba(255,255,255,0.7);
-      transform: scale(1.1);
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
     }
     
-    .hero-dot.active {
-      background: var(--color-primary);
-      border-color: var(--color-white);
-      transform: scale(1.2);
+    .stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
     }
     
-    /* Animaciones */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -459,68 +504,345 @@
         transform: translateY(0);
       }
     }
+
+    /* ========================================
+       PORTFOLIO - Grid elegante con filtros
+       ======================================== */
+    .portfolio {
+      background: var(--color-bg-secondary);
+    }
     
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-12);
+      flex-wrap: wrap;
+      gap: var(--space-6);
+    }
+    
+    .portfolio-filters {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: white;
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: var(--space-6);
+    }
+    
+    .portfolio-item {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-bg-tertiary);
+      cursor: pointer;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .portfolio-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow-hover);
+    }
+    
+    .portfolio-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--color-primary);
+      transition: transform var(--transition-slow);
+    }
+    
+    .portfolio-item:hover .portfolio-image {
+      transform: scale(1.05);
+    }
+    
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,15,0.95), transparent 60%);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+    
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    
+    .portfolio-category {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-2);
+    }
+    
+    .portfolio-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+    
+    .portfolio-excerpt {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
     }
 
     /* ========================================
-       SECCIONES - Estructura consistente
+       LIGHTBOX - Experiencia inmersiva
        ======================================== */
-    .section {
-      padding: var(--space-xl) 0;
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,15,0.98);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
     }
     
-    .section-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto var(--space-lg);
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
     }
     
-    .section-title {
-      font-size: var(--text-4xl);
-      font-weight: 800;
-      margin-bottom: var(--space-sm);
+    .lightbox-content {
+      max-width: 1200px;
+      width: 100%;
+      max-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-8);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform var(--transition-normal);
+    }
+    
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+    
+    .lightbox-image {
+      background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      color: var(--color-primary);
+    }
+    
+    .lightbox-info {
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-4);
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: var(--space-6);
+      right: var(--space-6);
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-full);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+    
+    .lightbox-close:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: rotate(90deg);
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+    
+    .lightbox-nav:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    
+    .lightbox-prev { left: var(--space-6); }
+    .lightbox-next { right: var(--space-6); }
+
+    /* ========================================
+       ABOUT - Sección con progres bars
+       ======================================== */
+    .about {
+      background: var(--color-bg);
+    }
+    
+    .about-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: center;
+    }
+    
+    .about-image {
       position: relative;
-      display: inline-block;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      color: var(--color-primary);
     }
     
-    .section-title::after {
+    .about-image::before {
       content: '';
       position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
-      border-radius: 2px;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), transparent);
     }
     
-    .section-subtitle {
+    .about-content h2 {
+      margin-bottom: var(--space-6);
+    }
+    
+    .about-text {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-8);
       font-size: var(--text-lg);
-      color: var(--color-gray);
-      margin-top: var(--space-md);
+    }
+    
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .skill-name {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    
+    .skill-percent {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    
+    .skill-bar {
+      height: 6px;
+      background: var(--color-border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-full);
+      width: 0;
+      transition: width 1.2s var(--ease-out);
+    }
+    
+    .skill-item.visible .skill-progress {
+      width: var(--progress);
     }
 
     /* ========================================
-       SERVICIOS - Tarjetas con hover premium
+       SERVICES - Cards con iconos elegantes
        ======================================== */
-    .services { background: var(--color-white); }
+    .services {
+      background: var(--color-bg-secondary);
+    }
     
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: var(--space-md);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
     }
     
     .service-card {
-      background: var(--color-white);
-      padding: var(--space-lg);
+      padding: var(--space-8);
+      background: var(--color-bg-tertiary);
       border-radius: var(--radius-lg);
-      text-align: center;
-      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
       transition: all var(--transition-normal);
       opacity: 0;
       transform: translateY(30px);
@@ -529,523 +851,296 @@
     .service-card.visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     
     .service-card:hover {
-      transform: translateY(-12px);
-      box-shadow: var(--shadow-hover);
+      border-color: var(--color-primary);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow-hover);
     }
     
     .service-icon {
-      width: 85px;
-      height: 85px;
-      margin: 0 auto var(--space-md);
-      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(244,114,182,0.2));
+      border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
-      color: var(--color-white);
-      box-shadow: 0 8px 25px rgba(0,168,204,0.3);
-      transition: transform var(--transition-normal);
-    }
-    
-    .service-card:hover .service-icon {
-      transform: scale(1.1) rotate(5deg);
+      font-size: 1.8rem;
+      margin-bottom: var(--space-5);
+      color: var(--color-primary);
     }
     
     .service-card h3 {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-sm);
+      margin-bottom: var(--space-3);
     }
     
     .service-card p {
-      color: var(--color-gray);
-      font-size: var(--text-base);
+      font-size: var(--text-sm);
+      margin-bottom: 0;
     }
 
     /* ========================================
-       ESTADÍSTICAS - Contadores animados
+       TESTIMONIALS - Carrusel sofisticado
        ======================================== */
-    .stats {
-      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-      color: var(--color-white);
-      text-align: center;
+    .testimonials {
+      background: var(--color-bg);
     }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: var(--space-lg);
-    }
-    
-    .stat-item {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all var(--transition-normal);
-    }
-    
-    .stat-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .stat-number {
-      font-family: var(--font-heading);
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: var(--space-xs);
-      background: linear-gradient(to right, var(--color-white), var(--color-primary-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-label {
-      font-size: var(--text-lg);
-      font-weight: 500;
-      opacity: 0.95;
-    }
-
-    /* ========================================
-       DOCTORES - Tarjetas profesionales
-       ======================================== */
-    .doctors { background: var(--color-light); }
-    
-    .doctors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-md);
-    }
-    
-    .doctor-card {
-      background: var(--color-white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: all var(--transition-normal);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    
-    .doctor-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .doctor-card:hover {
-      transform: translateY(-12px);
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .doctor-image {
-      position: relative;
-      height: 340px;
-      background: linear-gradient(135deg, var(--color-primary-light), #b3e5fc);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    
-    .doctor-image::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
-    }
-    
-    .doctor-avatar {
-      font-size: 5rem;
-      opacity: 0.8;
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .doctor-info {
-      padding: var(--space-md);
-      text-align: center;
-    }
-    
-    .doctor-name {
-      font-size: var(--text-xl);
-      font-weight: 700;
-      margin-bottom: var(--space-xs);
-    }
-    
-    .doctor-role {
-      color: var(--color-primary);
-      font-weight: 600;
-      font-size: var(--text-base);
-      margin-bottom: var(--space-sm);
-      display: block;
-    }
-    
-    .doctor-bio {
-      color: var(--color-gray);
-      font-size: 0.95rem;
-      margin-bottom: var(--space-md);
-    }
-    
-    .doctor-social {
-      display: flex;
-      justify-content: center;
-      gap: var(--space-xs);
-    }
-    
-    .doctor-social a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition-fast);
-      font-size: 1.1rem;
-    }
-    
-    .doctor-social a:hover {
-      background: var(--color-primary);
-      color: var(--color-white);
-      transform: translateY(-3px);
-    }
-
-    /* ========================================
-       TESTIMONIOS - Slider elegante
-       ======================================== */
-    .testimonials { background: var(--color-white); }
     
     .testimonial-slider {
-      max-width: 850px;
+      max-width: 900px;
       margin: 0 auto;
       position: relative;
+      overflow: hidden;
     }
     
     .testimonial-track {
       display: flex;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform 0.6s var(--ease-in-out);
     }
     
     .testimonial-slide {
       min-width: 100%;
-      padding: 0 var(--space-sm);
+      padding: 0 var(--space-4);
     }
     
     .testimonial-card {
-      background: var(--color-light);
-      padding: var(--space-lg);
-      border-radius: var(--radius-lg);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+    
+    .testimonial-quote {
+      font-size: var(--text-2xl);
+      font-style: italic;
+      color: var(--color-text);
+      margin-bottom: var(--space-8);
+      line-height: 1.5;
       position: relative;
     }
     
-    .testimonial-card::before {
+    .testimonial-quote::before,
+    .testimonial-quote::after {
       content: '"';
-      position: absolute;
-      top: 20px;
-      left: 30px;
       font-family: Georgia, serif;
-      font-size: 5rem;
+      font-size: 4rem;
       color: var(--color-primary);
-      opacity: 0.15;
+      opacity: 0.3;
+      position: absolute;
       line-height: 1;
     }
     
-    .testimonial-text {
-      font-size: var(--text-lg);
-      font-style: italic;
-      color: var(--color-secondary);
-      position: relative;
-      z-index: 1;
-      margin-bottom: var(--space-md);
-      line-height: 1.8;
+    .testimonial-quote::before {
+      top: -20px;
+      left: -15px;
+    }
+    
+    .testimonial-quote::after {
+      bottom: -40px;
+      right: -15px;
+      transform: rotate(180deg);
     }
     
     .testimonial-author {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: var(--space-sm);
-      padding-top: var(--space-sm);
-      border-top: 1px solid var(--color-gray-light);
+      gap: var(--space-3);
     }
     
     .author-avatar {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--color-white);
       font-weight: 700;
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      font-size: var(--text-xl);
+      color: white;
     }
     
     .author-name {
       font-weight: 600;
-      font-size: var(--text-base);
-      margin-bottom: 2px;
+      font-size: var(--text-lg);
     }
     
     .author-role {
-      color: var(--color-gray);
-      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
     }
     
     .testimonial-nav {
       display: flex;
       justify-content: center;
-      gap: var(--space-xs);
-      margin-top: var(--space-md);
+      gap: var(--space-3);
+      margin-top: var(--space-8);
     }
     
     .testimonial-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--color-gray-light);
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-full);
+      background: var(--color-border);
       border: none;
       cursor: pointer;
       transition: all var(--transition-fast);
       padding: 0;
     }
     
-    .testimonial-dot:hover {
-      background: var(--color-primary);
-      transform: scale(1.2);
-    }
-    
+    .testimonial-dot:hover,
     .testimonial-dot.active {
       background: var(--color-primary);
       transform: scale(1.3);
     }
 
     /* ========================================
-       POR QUÉ ELEGIRNOS - Lista animada
+       CONTACT - Formulario minimalista
        ======================================== */
-    .why-us { background: var(--color-light); }
+    .contact {
+      background: var(--color-bg-secondary);
+    }
     
-    .why-us-wrapper {
+    .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-xl);
-      align-items: center;
+      gap: var(--space-16);
     }
     
-    .why-us-content h2 {
-      font-size: var(--text-4xl);
-      margin-bottom: var(--space-md);
-    }
-    
-    .why-us-list {
+    .contact-info {
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
+      gap: var(--space-8);
     }
     
-    .why-item {
+    .contact-item {
       display: flex;
-      gap: var(--space-md);
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: all var(--transition-normal);
+      gap: var(--space-4);
+      align-items: flex-start;
     }
     
-    .why-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    
-    .why-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-bg-tertiary);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      color: var(--color-white);
+      font-size: 1.3rem;
+      color: var(--color-primary);
       flex-shrink: 0;
-      box-shadow: 0 8px 20px rgba(0,168,204,0.25);
     }
     
-    .why-text h4 {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-xs);
+    .contact-text h4 {
+      margin-bottom: var(--space-1);
     }
     
-    .why-text p {
-      color: var(--color-gray);
-      font-size: 0.98rem;
+    .contact-text p,
+    .contact-text a {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      margin-bottom: 0;
     }
     
-    .why-us-image {
-      background: linear-gradient(135deg, var(--color-primary-light), #b3e5fc);
-      border-radius: var(--radius-lg);
-      height: 480px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6rem;
+    .contact-text a:hover {
       color: var(--color-primary);
-      box-shadow: var(--shadow-lg);
     }
-
-    /* ========================================
-       BLOG - Tarjetas de artículos
-       ======================================== */
-    .blog { background: var(--color-white); }
     
-    .blog-grid {
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    
+    .form-label {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    
+    .form-input,
+    .form-textarea {
+      padding: var(--space-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    }
+    
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-text-muted);
+    }
+    
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    
+    .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: var(--space-md);
-    }
-    
-    .blog-card {
-      background: var(--color-white);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: all var(--transition-normal);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    
-    .blog-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .blog-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .blog-image {
-      height: 200px;
-      background: linear-gradient(135deg, var(--color-primary-light), #e0f7fa);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.5rem;
-      color: var(--color-primary);
-    }
-    
-    .blog-content { padding: var(--space-md); }
-    
-    .blog-meta {
-      display: flex;
-      gap: var(--space-md);
-      color: var(--color-gray);
-      font-size: 0.9rem;
-      margin-bottom: var(--space-sm);
-    }
-    
-    .blog-meta span {
-      display: flex;
-      align-items: center;
-      gap: var(--space-xs);
-    }
-    
-    .blog-title {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-sm);
-      line-height: 1.4;
-    }
-    
-    .blog-excerpt {
-      color: var(--color-gray);
-      font-size: 0.98rem;
-      margin-bottom: var(--space-md);
-    }
-    
-    .blog-link {
-      color: var(--color-primary);
-      font-weight: 600;
-      font-family: var(--font-heading);
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      transition: gap var(--transition-fast);
-    }
-    
-    .blog-link:hover { gap: var(--space-sm); }
-
-    /* ========================================
-       CTA - Llamado a la acción
-       ======================================== */
-    .cta {
-      background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-      color: var(--color-white);
-      text-align: center;
-      padding: var(--space-lg) 0;
-    }
-    
-    .cta-title {
-      font-size: var(--text-4xl);
-      font-weight: 800;
-      margin-bottom: var(--space-sm);
-    }
-    
-    .cta-text {
-      font-size: var(--text-lg);
-      opacity: 0.95;
-      margin-bottom: var(--space-lg);
-      max-width: 650px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .cta .btn {
-      padding: 18px 45px;
-      font-size: var(--text-lg);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
     }
 
     /* ========================================
-       FOOTER - Diseño profesional
+       FOOTER - Diseño elegante
        ======================================== */
     .footer {
-      background: var(--color-secondary);
-      color: var(--color-white);
-      padding: var(--space-xl) 0 var(--space-md);
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-16) 0 var(--space-8);
     }
     
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--space-lg);
-      margin-bottom: var(--space-lg);
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-12);
+      margin-bottom: var(--space-12);
     }
     
     .footer-brand .logo {
-      color: var(--color-white);
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-5);
     }
     
     .footer-brand p {
-      color: rgba(255,255,255,0.8);
-      margin-bottom: var(--space-md);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+      max-width: 320px;
     }
     
     .social-links {
       display: flex;
-      gap: var(--space-xs);
+      gap: var(--space-3);
     }
     
-    .social-links a {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1053,164 +1148,102 @@
       font-size: 1.1rem;
     }
     
-    .social-links a:hover {
+    .social-link:hover {
       background: var(--color-primary);
+      border-color: var(--color-primary);
       transform: translateY(-3px);
     }
     
     .footer-col h4 {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-md);
-      position: relative;
-      padding-bottom: var(--space-sm);
-    }
-    
-    .footer-col h4::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 3px;
-      background: var(--color-primary);
-      border-radius: 2px;
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-5);
     }
     
     .footer-links {
       display: flex;
       flex-direction: column;
-      gap: var(--space-sm);
+      gap: var(--space-3);
     }
     
     .footer-links a {
-      color: rgba(255,255,255,0.8);
-      display: flex;
-      align-items: center;
-      gap: var(--space-xs);
-      transition: all var(--transition-fast);
-      padding: var(--space-xs) 0;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      transition: color var(--transition-fast);
+      padding: var(--space-1) 0;
     }
     
     .footer-links a:hover {
       color: var(--color-primary);
-      transform: translateX(5px);
-    }
-    
-    .footer-contact {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-    }
-    
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-sm);
-      color: rgba(255,255,255,0.8);
-    }
-    
-    .contact-icon {
-      font-size: 1.3rem;
-      color: var(--color-primary);
-      margin-top: 3px;
     }
     
     .footer-bottom {
-      text-align: center;
-      padding-top: var(--space-md);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      flex-wrap: wrap;
+      gap: var(--space-4);
     }
     
-    .footer-bottom a {
-      color: var(--color-primary);
+    .footer-bottom-links {
+      display: flex;
+      gap: var(--space-6);
+    }
+    
+    .footer-bottom-links a {
+      color: var(--color-text-muted);
       transition: color var(--transition-fast);
     }
     
-    .footer-bottom a:hover { color: var(--color-primary-light); }
-
-    /* ========================================
-       WHATSAPP FLOAT - Animación pulsante
-       ======================================== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 62px;
-      height: 62px;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: var(--color-white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      box-shadow: 0 10px 30px rgba(37,211,102,0.4);
-      z-index: 999;
-      transition: all var(--transition-normal);
-      animation: pulse 2.5s infinite;
-    }
-    
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      animation: none;
-      box-shadow: 0 15px 40px rgba(37,211,102,0.6);
-    }
-    
-    @keyframes pulse {
-      0%, 100% { 
-        box-shadow: 0 10px 30px rgba(37,211,102,0.4);
-        transform: scale(1);
-      }
-      50% { 
-        box-shadow: 0 10px 40px rgba(37,211,102,0.7);
-        transform: scale(1.08);
-      }
+    .footer-bottom-links a:hover {
+      color: var(--color-primary);
     }
 
     /* ========================================
        RESPONSIVE - Mobile First
        ======================================== */
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       :root {
-        --text-5xl: 3rem;
-        --text-4xl: 2.25rem;
+        --text-7xl: 4rem;
+        --text-6xl: 3.5rem;
+        --text-5xl: 2.5rem;
       }
       
-      .why-us-wrapper {
+      .about-wrapper,
+      .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-12);
       }
       
-      .why-us-image {
-        order: -1;
-        height: 380px;
+      .about-image { order: -1; }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
       }
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       :root {
-        --space-lg: 3rem;
-        --space-xl: 4.5rem;
-        --text-5xl: 2.5rem;
-        --text-4xl: 2rem;
-        --text-2xl: 1.35rem;
+        --text-7xl: 3.5rem;
+        --space-24: 5rem;
       }
       
-      /* Header móvil */
       .menu-toggle { display: block; }
       
       .nav {
         position: fixed;
-        top: 80px;
+        top: var(--header-height);
         left: 0;
         width: 100%;
-        background: var(--color-white);
+        background: var(--color-bg-secondary);
         flex-direction: column;
-        padding: var(--space-md) var(--space-lg);
-        gap: var(--space-sm);
-        box-shadow: var(--shadow-lg);
+        padding: var(--space-8);
+        gap: var(--space-4);
+        border-bottom: 1px solid var(--color-border);
         transform: translateY(-150%);
         transition: transform var(--transition-normal);
         z-index: 999;
@@ -1219,265 +1252,381 @@
       .nav.active { transform: translateY(0); }
       
       .nav-link {
-        color: var(--color-secondary);
+        color: var(--color-text);
         font-size: var(--text-lg);
-        padding: var(--space-xs) 0;
+        padding: var(--space-3) 0;
       }
       
       .header-actions { display: none; }
       
-      /* Hero */
-      .hero-content { padding-left: var(--space-md); padding-right: var(--space-md); text-align: center; }
-      .hero-buttons { justify-content: center; flex-wrap: wrap; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; }
       
-      /* Secciones */
-      .section { padding: var(--space-lg) 0; }
-      .section-title { font-size: var(--text-3xl); }
+      .portfolio-grid { grid-template-columns: 1fr; }
       
-      /* Stats */
-      .stat-number { font-size: 2.8rem; }
+      .lightbox-content {
+        grid-template-columns: 1fr;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
       
-      /* Footer */
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .lightbox-nav { display: none; }
+      
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
     
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
       :root {
-        --text-5xl: 2.2rem;
-        --text-4xl: 1.75rem;
-        --text-xl: 1.15rem;
+        --text-7xl: 2.75rem;
+        --text-5xl: 2rem;
+        --space-24: 4rem;
+        --space-16: 3rem;
       }
       
-      .container { padding: 0 var(--space-sm); }
+      .container { padding: 0 var(--space-6); }
       
-      .btn { padding: 12px 24px; font-size: 0.95rem; }
-      .btn-lg { padding: 14px 28px; }
-      
-      .service-card, .doctor-card, .blog-card { padding: var(--space-md); }
-      
-      .footer-grid { grid-template-columns: 1fr; text-align: center; }
-      .footer-links a { justify-content: center; }
-      .contact-item { justify-content: center; }
-      
-      .whatsapp-float {
-        width: 56px;
-        height: 56px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 1.8rem;
+      .hero-stats {
+        flex-direction: column;
+        gap: var(--space-4);
+        align-items: flex-start;
       }
+      
+      .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .form-row { grid-template-columns: 1fr; }
+      
+      .btn { width: 100%; }
+      .btn-lg { padding: var(--space-4); }
     }
 
     /* ========================================
-       ACCESIBILIDAD - Reduced motion
+       ACCESIBILIDAD
        ======================================== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
       }
     }
     
-    /* Focus visible para navegación con teclado */
     a:focus-visible,
     button:focus-visible,
     input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible {
-      outline: 3px solid var(--color-primary);
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--color-primary);
       outline-offset: 2px;
+    }
+    
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--color-primary);
+      color: white;
+      padding: var(--space-3) var(--space-5);
+      z-index: 1001;
+      transition: top var(--transition-fast);
+    }
+    
+    .skip-link:focus {
+      top: 0;
     }
   </style>
 </head>
 <body>
+  <!-- Skip link para accesibilidad -->
+  <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
   <!-- ===== HEADER ===== -->
   <header class="header" id="header">
     <div class="container header-content">
       <a href="#" class="logo">
-        <span class="logo-icon">🦷</span>
-        Smile<span>Dent</span>
+        <span class="logo-icon">✨</span>
+        AURA
       </a>
       
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       
       <nav class="nav" id="navMenu" aria-label="Menú principal">
-        <a href="#inicio" class="nav-link">Inicio</a>
-        <a href="#servicios" class="nav-link">Servicios</a>
-        <a href="#doctores" class="nav-link">Equipo</a>
-        <a href="#testimonios" class="nav-link">Testimonios</a>
-        <a href="#blog" class="nav-link">Blog</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
+        <a href="#inicio" class="nav-link active">Inicio</a>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#about" class="nav-link">Sobre</a>
+        <a href="#services" class="nav-link">Servicios</a>
+        <a href="#testimonials" class="nav-link">Testimonios</a>
+        <a href="#contact" class="nav-link">Contacto</a>
       </nav>
       
       <div class="header-actions">
-        <a href="tel:+573123456789" class="header-phone">
-          <span>📞</span> +57 312 345 6789
-        </a>
-        <a href="#contacto" class="btn btn-primary">📅 Agendar Cita</a>
+        <a href="#contact" class="btn btn-outline">Empezar Proyecto</a>
       </div>
     </div>
   </header>
 
-  <!-- ===== HERO SLIDER ===== -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="inicio">
-    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1606811971608-47f54944fb3c?auto=format&fit=crop&w=1920&q=80')"></div>
-    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1920&q=80')"></div>
-    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=1920&q=80')"></div>
-    
-    <div class="container hero-content">
-      <h1 class="hero-title">Tu Sonrisa, Nuestra Prioridad</h1>
-      <p class="hero-text">Cuidamos de tu salud bucal con tecnología de vanguardia y un equipo de especialistas comprometidos con tu bienestar y confianza.</p>
-      <div class="hero-buttons">
-        <a href="#contacto" class="btn btn-primary btn-lg">📅 Agenda tu Cita</a>
-        <a href="#servicios" class="btn btn-outline-white btn-lg">Nuestros Servicios</a>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>🚀</span>
+          Agencia creativa premiada
+        </div>
+        <h1 class="hero-title">Creamos experiencias <span class="text-gradient">digitales</span> que inspiran</h1>
+        <p class="hero-subtitle">Somos un equipo de diseñadores, desarrolladores y estrategas apasionados por transformar ideas en productos digitales excepcionales.</p>
+        <div class="hero-buttons">
+          <a href="#portfolio" class="btn btn-primary btn-lg">Ver nuestro trabajo</a>
+          <a href="#contact" class="btn btn-outline btn-lg">Hablemos</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">150+</span>
+            <span class="stat-label">Proyectos completados</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">4.9/5</span>
+            <span class="stat-label">Satisfacción de clientes</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">8+</span>
+            <span class="stat-label">Años de experiencia</span>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    <div class="hero-nav">
-      <button class="hero-dot active" data-slide="0" aria-label="Ver slide 1"></button>
-      <button class="hero-dot" data-slide="1" aria-label="Ver slide 2"></button>
-      <button class="hero-dot" data-slide="2" aria-label="Ver slide 3"></button>
     </div>
   </section>
 
-  <!-- ===== SERVICIOS ===== -->
-  <section class="section services" id="servicios">
+  <!-- ===== PORTFOLIO ===== -->
+  <section class="section portfolio" id="portfolio">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Nuestros Servicios</h2>
-        <p class="section-subtitle">Soluciones integrales para cuidar y embellecer tu sonrisa con los más altos estándares de calidad</p>
+      <div class="portfolio-header">
+        <div>
+          <h2>Nuestro <span class="text-gradient">Portfolio</span></h2>
+          <p style="color: var(--color-text-secondary); margin-top: var(--space-2);">Explora algunos de nuestros proyectos más recientes</p>
+        </div>
+        <div class="portfolio-filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="branding">Branding</button>
+          <button class="filter-btn" data-filter="web">Web Design</button>
+          <button class="filter-btn" data-filter="app">Apps</button>
+        </div>
+      </div>
+      
+      <div class="portfolio-grid">
+        <article class="portfolio-item" data-category="branding" tabindex="0">
+          <div class="portfolio-image">🎨</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Branding</span>
+            <h3 class="portfolio-title">Nova Finance</h3>
+            <p class="portfolio-excerpt">Identidad visual completa para fintech innovadora</p>
+          </div>
+        </article>
+        
+        <article class="portfolio-item" data-category="web" tabindex="0">
+          <div class="portfolio-image">💻</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Web Design</span>
+            <h3 class="portfolio-title">EcoTravel</h3>
+            <p class="portfolio-excerpt">Plataforma de turismo sostenible con UX intuitiva</p>
+          </div>
+        </article>
+        
+        <article class="portfolio-item" data-category="app" tabindex="0">
+          <div class="portfolio-image">📱</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">App Design</span>
+            <h3 class="portfolio-title">FitPulse</h3>
+            <p class="portfolio-excerpt">App de wellness con interfaz minimalista y funcional</p>
+          </div>
+        </article>
+        
+        <article class="portfolio-item" data-category="branding" tabindex="0">
+          <div class="portfolio-image">✨</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Branding</span>
+            <h3 class="portfolio-title">Lumina Studio</h3>
+            <p class="portfolio-excerpt">Rebranding completo para estudio de fotografía</p>
+          </div>
+        </article>
+        
+        <article class="portfolio-item" data-category="web" tabindex="0">
+          <div class="portfolio-image">🌐</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Web Design</span>
+            <h3 class="portfolio-title">Artisan Market</h3>
+            <p class="portfolio-excerpt">E-commerce premium para productos artesanales</p>
+          </div>
+        </article>
+        
+        <article class="portfolio-item" data-category="app" tabindex="0">
+          <div class="portfolio-image">🎵</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">App Design</span>
+            <h3 class="portfolio-title">SoundWave</h3>
+            <p class="portfolio-excerpt">App de streaming musical con experiencia inmersiva</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista detallada del proyecto">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar lightbox">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Proyecto anterior">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Proyecto siguiente">›</button>
+    
+    <div class="lightbox-content">
+      <div class="lightbox-image" id="lightboxImage">🎨</div>
+      <div class="lightbox-info">
+        <span class="portfolio-category" id="lightboxCategory">Branding</span>
+        <h2 id="lightboxTitle">Nova Finance</h2>
+        <p id="lightboxExcerpt" style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">Identidad visual completa para fintech innovadora, incluyendo logo, sistema de colores, tipografía y aplicaciones en medios digitales e impresos.</p>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Cliente:</span>
+            <span style="font-weight: 500;">Nova Finance Inc.</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Servicios:</span>
+            <span style="font-weight: 500;">Branding, UI Design, Strategy</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Año:</span>
+            <span style="font-weight: 500;">2025</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-primary" style="margin-top: var(--space-6);">Iniciar proyecto similar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-wrapper">
+        <div class="about-image">👥</div>
+        <div class="about-content">
+          <h2>Sobre <span class="text-gradient">AURA</span></h2>
+          <p class="about-text">Somos una agencia creativa con sede en Bogotá, especializada en crear experiencias digitales que no solo se ven increíbles, sino que generan resultados reales para nuestros clientes.</p>
+          <p class="about-text">Nuestro enfoque colaborativo combina estrategia, diseño y tecnología para entregar soluciones que destacan en un mercado competitivo.</p>
+          
+          <div class="skills-list">
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Diseño UI/UX</span>
+                <span class="skill-percent">95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="--progress: 95%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Desarrollo Web</span>
+                <span class="skill-percent">90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="--progress: 90%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Estrategia de Marca</span>
+                <span class="skill-percent">88%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="--progress: 88%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Marketing Digital</span>
+                <span class="skill-percent">85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="--progress: 85%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-header text-center" style="max-width: 600px; margin: 0 auto var(--space-16);">
+        <h2>Nuestros <span class="text-gradient">Servicios</span></h2>
+        <p style="color: var(--color-text-secondary);">Soluciones integrales para impulsar tu presencia digital</p>
       </div>
       
       <div class="services-grid">
         <article class="service-card">
-          <div class="service-icon">✨</div>
-          <h3>Blanqueamiento Dental</h3>
-          <p>Logra una sonrisa más blanca y brillante con nuestros tratamientos seguros, efectivos y sin sensibilidad post-tratamiento.</p>
+          <div class="service-icon">🎨</div>
+          <h3>Diseño de Marca</h3>
+          <p>Creación de identidades visuales memorables que comunican tu esencia y conectan con tu audiencia objetivo.</p>
         </article>
         
         <article class="service-card">
-          <div class="service-icon">💎</div>
-          <h3>Carillas de Porcelana</h3>
-          <p>Corrige imperfecciones, cierra espacios y diseña la sonrisa que siempre soñaste con carillas personalizadas de alta calidad.</p>
+          <div class="service-icon">💻</div>
+          <h3>Diseño Web</h3>
+          <p>Sitios web modernos, responsive y optimizados para conversión, con experiencias de usuario excepcionales.</p>
         </article>
         
         <article class="service-card">
-          <div class="service-icon">🦷</div>
-          <h3>Implantes Dentales</h3>
-          <p>Recupera tu confianza y funcionalidad con implantes de titanio que se integran naturalmente a tu mandíbula para toda la vida.</p>
+          <div class="service-icon">📱</div>
+          <h3>Desarrollo de Apps</h3>
+          <p>Aplicaciones móviles nativas e híbridas que combinan funcionalidad robusta con interfaces intuitivas.</p>
         </article>
         
         <article class="service-card">
-          <div class="service-icon">😁</div>
-          <h3>Ortodoncia Invisible</h3>
-          <p>Alinea tus dientes de forma discreta y cómoda con alineadores transparentes. Sin brackets metálicos, sin comprometer tu estilo.</p>
+          <div class="service-icon">🚀</div>
+          <h3>Estrategia Digital</h3>
+          <p>Planes personalizados de marketing y crecimiento para maximizar tu impacto en el entorno digital.</p>
+        </article>
+        
+        <article class="service-card">
+          <div class="service-icon">✍️</div>
+          <h3>Contenido & Copy</h3>
+          <p>Redacción estratégica y creación de contenido que engage, convence y convierte a tu audiencia ideal.</p>
+        </article>
+        
+        <article class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Analytics & SEO</h3>
+          <p>Optimización para motores de búsqueda y análisis de datos para tomar decisiones basadas en evidencia.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===== ESTADÍSTICAS ===== -->
-  <section class="section stats">
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section testimonials" id="testimonials">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number" data-count="2480">0</div>
-          <div class="stat-label">Pacientes al año</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-count="26">0</div>
-          <div class="stat-label">Profesionales</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-count="38">0</div>
-          <div class="stat-label">Años de experiencia</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-count="7856">0</div>
-          <div class="stat-label">Sonrisas transformadas</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DOCTORES ===== -->
-  <section class="section doctors" id="doctores">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Nuestro Equipo</h2>
-        <p class="section-subtitle">Profesionales altamente capacitados con formación internacional para brindarte la mejor atención</p>
-      </div>
-      
-      <div class="doctors-grid">
-        <article class="doctor-card">
-          <div class="doctor-image">
-            <span class="doctor-avatar">👨‍⚕️</span>
-          </div>
-          <div class="doctor-info">
-            <h3 class="doctor-name">Dr. Andrés Martínez</h3>
-            <span class="doctor-role">Odontólogo General</span>
-            <p class="doctor-bio">Especialista en odontología restauradora con más de 15 años de experiencia cuidando sonrisas en Bogotá.</p>
-            <div class="doctor-social">
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="Instagram">📷</a>
-            </div>
-          </div>
-        </article>
-        
-        <article class="doctor-card">
-          <div class="doctor-image">
-            <span class="doctor-avatar">👩‍⚕️</span>
-          </div>
-          <div class="doctor-info">
-            <h3 class="doctor-name">Dra. Laura Sánchez</h3>
-            <span class="doctor-role">Ortodoncista</span>
-            <p class="doctor-bio">Experta en ortodoncia invisible y tratamientos de alineación dental para niños, adolescentes y adultos.</p>
-            <div class="doctor-social">
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="Instagram">📷</a>
-            </div>
-          </div>
-        </article>
-        
-        <article class="doctor-card">
-          <div class="doctor-image">
-            <span class="doctor-avatar">👨‍⚕️</span>
-          </div>
-          <div class="doctor-info">
-            <h3 class="doctor-name">Dr. Carlos Rojas</h3>
-            <span class="doctor-role">Cirujano Maxilofacial</span>
-            <p class="doctor-bio">Especialista en implantes dentales y cirugía bucal con formación en universidades de Estados Unidos y Europa.</p>
-            <div class="doctor-social">
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="Instagram">📷</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TESTIMONIOS ===== -->
-  <section class="section testimonials" id="testimonios">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
-        <p class="section-subtitle">Historias reales de personas que confiaron en nosotros para transformar su sonrisa</p>
+      <div class="section-header text-center" style="max-width: 600px; margin: 0 auto var(--space-16);">
+        <h2>Lo que dicen <span class="text-gradient">nuestros clientes</span></h2>
+        <p style="color: var(--color-text-secondary);">Historias reales de colaboraciones exitosas</p>
       </div>
       
       <div class="testimonial-slider">
         <div class="testimonial-track" id="testimonialTrack">
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-text">¡Mi sonrisa cambió por completo! El equipo fue muy profesional, me explicaron todo el proceso paso a paso y el resultado superó mis expectativas. Totalmente recomendado para quien busque calidad y calidez humana.</p>
+              <p class="testimonial-quote">AURA transformó completamente nuestra presencia digital. Su enfoque estratégico y atención al detalle superaron todas nuestras expectativas. ¡Altamente recomendados!</p>
               <div class="testimonial-author">
-                <div class="author-avatar">MG</div>
+                <div class="author-avatar">MC</div>
                 <div>
-                  <div class="author-name">María González</div>
-                  <div class="author-role">Paciente de blanqueamiento</div>
+                  <div class="author-name">María Castro</div>
+                  <div class="author-role">CEO, Nova Finance</div>
                 </div>
               </div>
             </div>
@@ -1485,12 +1634,12 @@
           
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-text">Llevé a mis hijos por primera vez al dentista y el trato fue excepcional. El personal fue muy paciente y cariñoso con ellos, convirtiendo una experiencia que temían en algo divertido. ¡Ya no les da miedo ir!</p>
+              <p class="testimonial-quote">Trabajar con el equipo de AURA fue una experiencia excepcional. Entendieron nuestra visión desde el primer día y la ejecutaron con creatividad y precisión técnica impecables.</p>
               <div class="testimonial-author">
-                <div class="author-avatar">CR</div>
+                <div class="author-avatar">JR</div>
                 <div>
-                  <div class="author-name">Carlos Ramírez</div>
-                  <div class="author-role">Padre de paciente infantil</div>
+                  <div class="author-name">Juan Ramírez</div>
+                  <div class="author-role">Fundador, EcoTravel</div>
                 </div>
               </div>
             </div>
@@ -1498,12 +1647,12 @@
           
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-text">Después de años evitando el dentista por miedo, encontré en SmileDent un lugar donde me siento cómodo y seguro. El Dr. Martínez fue muy empático y el tratamiento de implantes fue indoloro. ¡Gracias por devolverme la confianza!</p>
+              <p class="testimonial-quote">La app que desarrollaron para nosotros no solo es hermosa, sino que también es increíblemente funcional. Nuestros usuarios la aman y nuestras métricas lo demuestran.</p>
               <div class="testimonial-author">
                 <div class="author-avatar">AL</div>
                 <div>
                   <div class="author-name">Ana López</div>
-                  <div class="author-role">Paciente de implantes</div>
+                  <div class="author-role">Product Lead, FitPulse</div>
                 </div>
               </div>
             </div>
@@ -1519,110 +1668,86 @@
     </div>
   </section>
 
-  <!-- ===== POR QUÉ ELEGIRNOS ===== -->
-  <section class="section why-us">
+  <!-- ===== CONTACT ===== -->
+  <section class="section contact" id="contact">
     <div class="container">
-      <div class="why-us-wrapper">
-        <div class="why-us-content">
-          <h2>¿Por qué elegir SmileDent?</h2>
+      <div class="section-header text-center" style="max-width: 600px; margin: 0 auto var(--space-16);">
+        <h2>Empecemos algo <span class="text-gradient">increíble</span></h2>
+        <p style="color: var(--color-text-secondary);">Cuéntanos sobre tu proyecto y te responderemos en menos de 24 horas</p>
+      </div>
+      
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              <h4>Ubicación</h4>
+              <p>Calle 93 # 12-45, Oficina 801<br>Chapinero, Bogotá D.C.<br>Colombia</p>
+            </div>
+          </div>
           
-          <div class="why-us-list">
-            <div class="why-item">
-              <div class="why-icon">🔬</div>
-              <div class="why-text">
-                <h4>Tecnología de Vanguardia</h4>
-                <p>Contamos con equipos digitales de última generación para diagnósticos precisos y tratamientos mínimamente invasivos con mayor comodidad.</p>
-              </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:hola@aura.agency">hola@aura.agency</a><br><a href="mailto:proyectos@aura.agency">proyectos@aura.agency</a></p>
             </div>
-            
-            <div class="why-item">
-              <div class="why-icon">🤝</div>
-              <div class="why-text">
-                <h4>Trato Humano y Personalizado</h4>
-                <p>Cada paciente es único. Diseñamos planes de tratamiento personalizados según tus necesidades, expectativas y presupuesto.</p>
-              </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-text">
+              <h4>Teléfono</h4>
+              <p><a href="tel:+5712345678">+57 (1) 234-5678</a><br>Lun - Vie: 9:00 - 18:00</p>
             </div>
-            
-            <div class="why-item">
-              <div class="why-icon">💳</div>
-              <div class="why-text">
-                <h4>Planes de Pago Flexibles</h4>
-                <p>Ofrecemos opciones de financiamiento sin intereses y convenios con EPS y prepagadas para hacer accesible tu tratamiento dental ideal.</p>
-              </div>
-            </div>
-            
-            <div class="why-item">
-              <div class="why-icon">🏆</div>
-              <div class="why-text">
-                <h4>Garantía de Calidad</h4>
-                <p>Todos nuestros procedimientos cuentan con garantía escrita y seguimos protocolos internacionales de bioseguridad y esterilización.</p>
-              </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-text">
+              <h4>WhatsApp</h4>
+              <p><a href="https://wa.me/573123456789" target="_blank" rel="noopener">+57 312 345 6789</a><br>Respuesta en tiempo real</p>
             </div>
           </div>
         </div>
         
-        <div class="why-us-image">🏥</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== BLOG ===== -->
-  <section class="section blog" id="blog">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Últimas Noticias</h2>
-        <p class="section-subtitle">Consejos prácticos y novedades para cuidar tu salud bucal día a día</p>
-      </div>
-      
-      <div class="blog-grid">
-        <article class="blog-card">
-          <div class="blog-image">🪥</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span>📅 15 Ene 2026</span>
-              <span>⏱️ 5 min</span>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">Nombre *</label>
+              <input type="text" id="name" name="name" class="form-input" required placeholder="Tu nombre">
             </div>
-            <h3 class="blog-title">5 Consejos para un cepillado efectivo que tu dentista aprueba</h3>
-            <p class="blog-excerpt">Aprende las técnicas correctas para mantener tus dientes y encías saludables todos los días sin dañar el esmalte...</p>
-            <a href="#" class="blog-link">Leer artículo →</a>
-          </div>
-        </article>
-        
-        <article class="blog-card">
-          <div class="blog-image">🍎</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span>📅 8 Ene 2026</span>
-              <span>⏱️ 4 min</span>
+            <div class="form-group">
+              <label class="form-label" for="email">Email *</label>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="tu@email.com">
             </div>
-            <h3 class="blog-title">Alimentos que fortalecen tu esmalte dental naturalmente</h3>
-            <p class="blog-excerpt">Descubre qué alimentos puedes incluir en tu dieta diaria para proteger y remineralizar tus dientes de forma natural...</p>
-            <a href="#" class="blog-link">Leer artículo →</a>
           </div>
-        </article>
-        
-        <article class="blog-card">
-          <div class="blog-image">😴</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span>📅 2 Ene 2026</span>
-              <span>⏱️ 6 min</span>
-            </div>
-            <h3 class="blog-title">¿Bruxismo? Cómo proteger tus dientes al dormir sin complicaciones</h3>
-            <p class="blog-excerpt">El rechinar de dientes puede causar daños severos. Conoce las soluciones disponibles y cuándo consultar a un especialista...</p>
-            <a href="#" class="blog-link">Leer artículo →</a>
+          
+          <div class="form-group">
+            <label class="form-label" for="service">Servicio de interés</label>
+            <select id="service" name="service" class="form-input">
+              <option value="">Selecciona una opción</option>
+              <option value="branding">Diseño de Marca</option>
+              <option value="web">Diseño Web</option>
+              <option value="app">Desarrollo de Apps</option>
+              <option value="strategy">Estrategia Digital</option>
+              <option value="content">Contenido & Copy</option>
+              <option value="other">Otro</option>
+            </select>
           </div>
-        </article>
+          
+          <div class="form-group">
+            <label class="form-label" for="message">Mensaje *</label>
+            <textarea id="message" name="message" class="form-textarea" required placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-lg">Enviar Mensaje ✨</button>
+          
+          <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-3); text-align: center;">
+            Al enviar, aceptas nuestra <a href="#" style="color: var(--color-primary);">Política de Privacidad</a>
+          </p>
+        </form>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="cta" id="contacto">
-    <div class="container">
-      <h2 class="cta-title">¿Listo para transformar tu sonrisa?</h2>
-      <p class="cta-text">Agenda tu cita de evaluación gratuita hoy mismo. Nuestro equipo está listo para atenderte con la mejor calidad, tecnología y calidez humana.</p>
-      <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Me%20gustar%C3%ADa%20agendar%20una%20cita%20de%20evaluaci%C3%B3n%20gratuita" class="btn btn-primary btn-lg" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
     </div>
   </section>
 
@@ -1632,109 +1757,92 @@
       <div class="footer-grid">
         <div class="footer-col footer-brand">
           <a href="#" class="logo">
-            <span class="logo-icon">🦷</span>
-            Smile<span>Dent</span>
+            <span class="logo-icon">✨</span>
+            AURA
           </a>
-          <p>Clínica odontológica especializada en brindar tratamientos de alta calidad con tecnología de vanguardia y un enfoque humano y personalizado.</p>
+          <p>Agencia creativa especializada en diseñar experiencias digitales memorables que impulsan el crecimiento de marcas ambiciosas.</p>
           <div class="social-links">
-            <a href="#" aria-label="Facebook">f</a>
-            <a href="#" aria-label="Instagram">📷</a>
-            <a href="#" aria-label="YouTube">▶</a>
-            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-link" aria-label="Instagram">📷</a>
+            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-link" aria-label="Dribbble">🏀</a>
+            <a href="#" class="social-link" aria-label="Behance">🎨</a>
           </div>
         </div>
         
         <div class="footer-col">
           <h4>Servicios</h4>
           <ul class="footer-links">
-            <li><a href="#">✨ Blanqueamiento Dental</a></li>
-            <li><a href="#">💎 Carillas de Porcelana</a></li>
-            <li><a href="#">🦷 Implantes Dentales</a></li>
-            <li><a href="#">😁 Ortodoncia Invisible</a></li>
-            <li><a href="#">👶 Odontopediatría</a></li>
-            <li><a href="#">🦷 Endodoncia</a></li>
+            <li><a href="#">🎨 Diseño de Marca</a></li>
+            <li><a href="#">💻 Diseño Web</a></li>
+            <li><a href="#">📱 Desarrollo de Apps</a></li>
+            <li><a href="#">🚀 Estrategia Digital</a></li>
+            <li><a href="#">✍️ Contenido & Copy</a></li>
           </ul>
         </div>
         
         <div class="footer-col">
-          <h4>Enlaces Útiles</h4>
+          <h4>Compañía</h4>
           <ul class="footer-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#doctores">Equipo Médico</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#blog">Blog de Salud</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#about">Sobre Nosotros</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#">Carreras</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#contact">Contacto</a></li>
           </ul>
         </div>
         
         <div class="footer-col">
-          <h4>Contacto</h4>
-          <div class="footer-contact">
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <p>Calle 100 # 15-30, Oficina 501<br>Barrio Chicó, Bogotá D.C.<br>Colombia</p>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📞</span>
-              <p>+57 (1) 234-5678<br>+57 312 345 6789</p>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">✉️</span>
-              <p>contacto@smiledent.com.co<br>Horario: Lun-Vie 8am-6pm, Sáb 9am-1pm</p>
-            </div>
-          </div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Política de Cookies</a></li>
+            <li><a href="#">Licencias</a></li>
+          </ul>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2026 SmileDent. Todos los derechos reservados. | <a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
+        <p>&copy; 2026 AURA Creative Agency. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+          <a href="#">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== WHATSAPP FLOAT ===== -->
-  <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Necesito%20informaci%C3%B3n%20sobre%20sus%20servicios" 
-     class="whatsapp-float" 
-     target="_blank" 
-     rel="noopener" 
-     aria-label="Contactar por WhatsApp">
-    💬
-  </a>
-
   <!-- ===== JAVASCRIPT ===== -->
   <script>
     // ========================================
-    // SmileDent Pro - JavaScript Premium
+    // AURA Creative Agency - JavaScript Premium
     // ========================================
 
     // 1. HEADER SCROLL EFFECT
     const header = document.getElementById('header');
-    let lastScroll = 0;
-    
+    let lastScrollY = window.scrollY;
+
     window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      
-      if (currentScroll > 100) {
+      if (window.scrollY > 100) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-      
-      lastScroll = currentScroll;
+      lastScrollY = window.scrollY;
     }, { passive: true });
 
     // 2. MOBILE MENU
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
-    
+
     menuToggle.addEventListener('click', () => {
       const isActive = navMenu.classList.toggle('active');
       menuToggle.setAttribute('aria-expanded', isActive);
       menuToggle.innerHTML = isActive ? '✕' : '☰';
       document.body.style.overflow = isActive ? 'hidden' : '';
     });
-    
+
     // Close menu when clicking a link
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
@@ -1744,7 +1852,7 @@
         document.body.style.overflow = '';
       });
     });
-    
+
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.header') && navMenu.classList.contains('active')) {
@@ -1755,86 +1863,138 @@
       }
     });
 
-    // 3. HERO SLIDER
-    const heroSlides = document.querySelectorAll('.hero-slide');
-    const heroDots = document.querySelectorAll('.hero-dot');
-    let currentHeroSlide = 0;
-    let heroInterval;
-    
-    function goToHeroSlide(index) {
-      heroSlides.forEach(slide => slide.classList.remove('active'));
-      heroDots.forEach(dot => dot.classList.remove('active'));
-      
-      heroSlides[index].classList.add('active');
-      heroDots[index].classList.add('active');
-      currentHeroSlide = index;
-      
-      // Reset animation for content
-      const content = heroSlides[index].closest('.hero').querySelector('.hero-content');
-      content.querySelectorAll('.hero-title, .hero-text, .hero-buttons').forEach(el => {
-        el.style.animation = 'none';
-        el.offsetHeight; // Trigger reflow
-        el.style.animation = '';
-      });
-    }
-    
-    heroDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        goToHeroSlide(parseInt(dot.dataset.slide));
-        resetHeroTimer();
+    // 3. PORTFOLIO FILTERING
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active state
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.dataset.filter;
+        
+        // Filter items with animation
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+            setTimeout(() => item.classList.add('visible'), 50);
+          } else {
+            item.classList.remove('visible');
+            setTimeout(() => item.style.display = 'none', 300);
+          }
+        });
       });
     });
-    
-    function startHeroTimer() {
-      heroInterval = setInterval(() => {
-        let nextSlide = (currentHeroSlide + 1) % heroSlides.length;
-        goToHeroSlide(nextSlide);
-      }, 7000);
-    }
-    
-    function resetHeroTimer() {
-      clearInterval(heroInterval);
-      startHeroTimer();
-    }
-    
-    startHeroTimer();
 
-    // 4. TESTIMONIAL SLIDER
+    // 4. PORTFOLIO LIGHTBOX
+    const lightbox = document.getElementById('lightbox');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCategory = document.getElementById('lightboxCategory');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxExcerpt = document.getElementById('lightboxExcerpt');
+    
+    let currentProjectIndex = 0;
+    const projects = Array.from(portfolioItems);
+
+    function openLightbox(index) {
+      const project = projects[index];
+      currentProjectIndex = index;
+      
+      // Update content
+      lightboxImage.textContent = project.querySelector('.portfolio-image').textContent;
+      lightboxCategory.textContent = project.querySelector('.portfolio-category').textContent;
+      lightboxTitle.textContent = project.querySelector('.portfolio-title').textContent;
+      lightboxExcerpt.textContent = project.querySelector('.portfolio-excerpt').textContent;
+      
+      // Show lightbox
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Focus trap for accessibility
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(direction) {
+      currentProjectIndex += direction;
+      if (currentProjectIndex < 0) currentProjectIndex = projects.length - 1;
+      if (currentProjectIndex >= projects.length) currentProjectIndex = 0;
+      openLightbox(currentProjectIndex);
+    }
+
+    // Event listeners for lightbox
+    portfolioItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(index);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+    lightboxNext.addEventListener('click', () => navigateLightbox(1));
+    
+    // Close on background click or Escape key
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // 5. TESTIMONIAL SLIDER
     const testimonialTrack = document.getElementById('testimonialTrack');
     const testimonialSlides = document.querySelectorAll('.testimonial-slide');
     const testimonialDots = document.querySelectorAll('.testimonial-dot');
     let currentTestimonial = 0;
     let testimonialInterval;
-    
+
     function goToTestimonial(index) {
       testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
       testimonialDots.forEach(dot => dot.classList.remove('active'));
       testimonialDots[index].classList.add('active');
       currentTestimonial = index;
     }
-    
+
     testimonialDots.forEach(dot => {
       dot.addEventListener('click', () => {
         goToTestimonial(parseInt(dot.dataset.slide));
         resetTestimonialTimer();
       });
     });
-    
+
     function startTestimonialTimer() {
       testimonialInterval = setInterval(() => {
-        let nextSlide = (currentTestimonial + 1) % testimonialSlides.length;
+        const nextSlide = (currentTestimonial + 1) % testimonialSlides.length;
         goToTestimonial(nextSlide);
-      }, 9000);
+      }, 8000);
     }
-    
+
     function resetTestimonialTimer() {
       clearInterval(testimonialInterval);
       startTestimonialTimer();
     }
-    
+
     startTestimonialTimer();
 
-    // 5. SCROLL REVEAL ANIMATIONS
+    // 6. SCROLL REVEAL ANIMATIONS
     const revealOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
     
     const revealObserver = new IntersectionObserver((entries) => {
@@ -1845,45 +2005,54 @@
         }
       });
     }, revealOptions);
-    
-    document.querySelectorAll('.service-card, .doctor-card, .blog-card, .why-item, .stat-item').forEach(el => {
+
+    document.querySelectorAll('.portfolio-item, .service-card, .skill-item').forEach(el => {
       revealObserver.observe(el);
     });
 
-    // 6. COUNTER ANIMATION FOR STATS
-    function animateCounter(element, target, duration = 2000) {
-      let start = 0;
-      const increment = target / (duration / 16);
-      
-      function update() {
-        start += increment;
-        if (start < target) {
-          element.textContent = Math.floor(start).toLocaleString('es-CO');
-          requestAnimationFrame(update);
-        } else {
-          element.textContent = target.toLocaleString('es-CO');
-        }
-      }
-      update();
-    }
-    
-    const statsObserver = new IntersectionObserver((entries) => {
+    // 7. SKILL BARS ANIMATION
+    const skillsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const counters = entry.target.querySelectorAll('.stat-number');
-          counters.forEach(counter => {
-            const target = parseInt(counter.dataset.count);
-            animateCounter(counter, target);
+          entry.target.querySelectorAll('.skill-item').forEach(item => {
+            item.classList.add('visible');
           });
-          statsObserver.unobserve(entry.target);
+          skillsObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.5 });
-    
-    const statsSection = document.querySelector('.stats');
-    if (statsSection) statsObserver.observe(statsSection);
 
-    // 7. SMOOTH SCROLL FOR ANCHOR LINKS
+    const skillsSection = document.querySelector('.skills-list');
+    if (skillsSection) skillsObserver.observe(skillsSection);
+
+    // 8. CONTACT FORM
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Basic validation
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      if (!name || !email || !message) {
+        alert('Por favor completa todos los campos obligatorios.');
+        return;
+      }
+      
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Por favor ingresa un email válido.');
+        return;
+      }
+      
+      // Demo success message (replace with actual form submission)
+      alert(`¡Gracias ${name}! ✨\n\nHemos recibido tu mensaje y te responderemos en menos de 24 horas.\n\nPara una respuesta más rápida, también puedes escribirnos por WhatsApp.`);
+      
+      this.reset();
+    });
+
+    // 9. SMOOTH SCROLL FOR ANCHOR LINKS
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1902,54 +2071,44 @@
       });
     });
 
-    // 8. INITIALIZE ON LOAD
+    // 10. ACTIVE NAV LINK ON SCROLL
+    const sections = document.querySelectorAll('section[id]');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 11. INITIALIZE ON LOAD
     document.addEventListener('DOMContentLoaded', () => {
       // Trigger reveal for elements already in viewport
       setTimeout(() => {
-        document.querySelectorAll('.service-card, .doctor-card, .blog-card, .why-item').forEach(el => {
+        document.querySelectorAll('.portfolio-item, .service-card').forEach(el => {
           if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
             el.classList.add('visible');
           }
         });
       }, 300);
       
-      // Add loaded class to body for CSS hooks
+      // Add loaded class for CSS hooks
       document.body.classList.add('loaded');
     });
 
-    // 9. KEYBOARD NAVIGATION FOR LIGHTBOX/SLIDERS (Accessibility)
-    document.addEventListener('keydown', (e) => {
-      // Close mobile menu with Escape
-      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.innerHTML = '☰';
-        menuToggle.focus();
-        document.body.style.overflow = '';
-      }
-    });
-
-    // 10. PERFORMANCE: Lazy load images (progressive enhancement)
-    if ('loading' in HTMLImageElement.prototype) {
-      // Browser supports native lazy loading
-      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        img.src = img.dataset.src;
-      });
-    } else {
-      // Fallback for older browsers
-      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.removeAttribute('loading');
-            imageObserver.unobserve(img);
-          }
-        });
-      });
-      lazyImages.forEach(img => imageObserver.observe(img));
-    }
+    // 12. PERFORMANCE: Lazy load placeholder images (progressive enhancement)
+    // Note: In production, replace emoji placeholders with actual optimized images
   </script>
 </body>
 </html>
