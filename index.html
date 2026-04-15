@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adon Style Scroll Effect</title>
+    <title>Adon Style - Text & Image Expand</title>
     <style>
-        /* RESET BÁSICO */
         * {
             margin: 0;
             padding: 0;
@@ -13,14 +12,13 @@
         }
 
         body {
-            background-color: #111; /* Fondo negro casi puro */
+            background-color: #111;
             color: #fff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             overflow-x: hidden;
         }
 
-        /* ESPACIO PARA HACER SCROLL */
-        /* Necesitamos mucho espacio vacío para que el efecto funcione */
+        /* ESPACIO INICIAL */
         .scroll-spacer {
             height: 100vh;
             display: flex;
@@ -31,61 +29,39 @@
             letter-spacing: 2px;
         }
 
-        .bottom-content {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        /* CONTENEDOR DEL TEXTO GRANDE */
+        /* SECCIÓN TEXTO RECENT WORK */
         .hero-section {
-            height: 100vh; /* Ocupa toda la pantalla */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky; /* Se queda pegado mientras hace efecto */
+            position: sticky;
             top: 0;
             overflow: hidden;
+            z-index: 10;
         }
 
-        /* ESTILO DE LAS FILAS DE TEXTO */
         .text-line {
-            font-size: 14vw; /* Tamaño gigante responsivo */
+            font-size: 14vw;
             font-weight: 800;
             line-height: 0.85;
             text-transform: uppercase;
             white-space: nowrap;
             position: relative;
-            will-change: transform, letter-spacing; /* Optimización de rendimiento */
-            mix-blend-mode: difference; /* Efecto artístico si se superponen */
+            will-change: transform, letter-spacing;
         }
 
-        /* Estilo para cada letra individual */
         .char {
             display: inline-block;
             transition: transform 0.1s ease-out;
         }
-        
-        /* Pequeño detalle para la segunda línea para que se mueva en sentido contrario o igual */
+
         .line-right {
             justify-content: flex-end;
             text-align: right;
         }
 
-        .line-left {
-            justify-content: flex-start;
-            text-align: left;
-        }
-
-        .line-center {
-             justify-content: center;
-             text-align: center;
-        }
-
-        /* Scroll indicator */
         .scroll-hint {
             position: absolute;
             bottom: 40px;
@@ -101,91 +77,257 @@
             40% {transform: translateX(-50%) translateY(-10px);}
             60% {transform: translateX(-50%) translateY(-5px);}
         }
+
+        /* SECCIÓN IMÁGENES EXPANDIBLES */
+        .images-section {
+            min-height: 300vh; /* Espacio para el scroll */
+            position: relative;
+            background: #0a0a0a;
+        }
+
+        .images-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            overflow: hidden;
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 40%;
+            height: 60%;
+            border-radius: 12px;
+            overflow: hidden;
+            will-change: transform, width, height;
+            transition: transform 0.1s ease-out;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .image-info.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .image-info p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .image-info .year {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ESPACIO FINAL */
+        .final-spacer {
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .text-line {
+                font-size: 18vw;
+            }
+            
+            .images-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+            }
+            
+            .image-wrapper {
+                width: 100%;
+                height: 40%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ESPACIO VACÍO ARRIBA PARA ENTRAR -->
+    <!-- ESPACIO VACÍO ARRIBA -->
     <div class="scroll-spacer">
-        <p>↓ Scrolldown ↓</p>
+        <p>↓ Scroll Down ↓</p>
     </div>
 
-    <!-- SECCIÓN PRINCIPAL DEL EFECTO -->
+    <!-- SECCIÓN 1: TEXTO RECENT WORK -->
     <section class="hero-section">
-        <div class="text-line line-center" data-speed="0.5">RECENT</div>
-        <div class="text-line line-right" data-speed="-0.5">WORK</div>
-        
+        <div class="text-line line-center">RECENT</div>
+        <div class="text-line line-right">WORK</div>
         <div class="scroll-hint">SCROLL</div>
     </section>
 
-    <!-- ESPACIO VACÍO ABAJO PARA SALIR DEL EFECTO -->
-    <div class="bottom-content">
-        <p style="color: #333; font-size: 12px;">CONTENIDO DE LA PÁGINA...</p>
+    <!-- SECCIÓN 2: IMÁGENES QUE SE EXPANDEN -->
+    <section class="images-section">
+        <div class="images-container">
+            <div class="image-wrapper" data-index="0">
+                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&q=80" alt="Project 1">
+                <div class="image-info">
+                    <h3>Arrox Digital Agency HTML Template</h3>
+                    <p>WordPress, Themeforest</p>
+                    <div class="year">(2025)</div>
+                </div>
+            </div>
+            
+            <div class="image-wrapper" data-index="1">
+                <img src="https://images.unsplash.com/photo-1507643179173-617d6545517d?w=800&q=80" alt="Project 2">
+                <div class="image-info">
+                    <h3>Al Khobar Uptown</h3>
+                    <p>Visual Identity, Branding</p>
+                    <div class="year">(2021)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPACIO FINAL -->
+    <div class="final-spacer">
+        <p>Continue Scrolling...</p>
     </div>
 
     <script>
-        // 1. SELECCIONAR ELEMENTOS
+        // ==========================================
+        // EFECTO 1: TEXTO RECENT WORK
+        // ==========================================
         const textLines = document.querySelectorAll('.text-line');
         
-        // 2. FUNCIÓN PARA SEPARAR LAS LETRAS
-        // Esto crea un <span> por cada letra para poder animarlas individualmente si quisiéramos,
-        // pero en este caso lo usamos para calcular el centro.
+        // Separar letras
         textLines.forEach(line => {
             const text = line.innerText;
-            line.innerHTML = ''; // Limpiar texto original
+            line.innerHTML = '';
             
-            // Crear spans para cada letra
             text.split('').forEach((char, index) => {
                 const span = document.createElement('span');
                 span.innerText = char;
                 span.classList.add('char');
-                // Guardamos el índice para animar luego
                 span.dataset.index = index;
                 line.appendChild(span);
             });
         });
 
-        // 3. ESCUCHAR EL SCROLL
+        // ==========================================
+        // EFECTO 2: IMÁGENES EXPANDIBLES
+        // ==========================================
+        const imageWrappers = document.querySelectorAll('.image-wrapper');
+        const imagesSection = document.querySelector('.images-section');
+        const imageInfos = document.querySelectorAll('.image-info');
+
+        // ==========================================
+        // SCROLL PRINCIPAL
+        // ==========================================
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
-
-            textLines.forEach(line => {
-                // Calculamos la posición del elemento en la pantalla
-                const rect = line.getBoundingClientRect();
-                
-                // Solo animamos si el elemento está visible (o cerca de estarlo)
-                // "Progress" va de 0 (arriba) a 1 (cuando el elemento está centrado)
-                // Ajustamos el cálculo para que el efecto ocurra mientras el elemento entra
-                const progress = 1 - (rect.top / windowHeight);
-                
-                // Limitamos el progreso entre 0 y 1 para que no se rompa
-                const clampedProgress = Math.max(0, Math.min(1, progress));
-
+            const textSection = document.querySelector('.hero-section');
+            const textSectionTop = textSection.offsetTop;
+            const textSectionHeight = textSection.offsetHeight;
+            
+            // Calcular progreso del texto (0 a 1)
+            const textProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 0.8)));
+            
+            // Animar texto
+            textLines.forEach((line, lineIndex) => {
                 const chars = line.querySelectorAll('.char');
                 const totalChars = chars.length;
-
-                // LA MAGIA: MOVER LAS LETRAS
+                
                 chars.forEach((char, index) => {
-                    // Calculamos un valor basado en el scroll
-                    // Si progress es 0 (arriba), el espaciado es grande.
-                    // Si progress es 1 (centro), el espaciado es 0.
-                    
-                    const moveAmount = (clampedProgress - 1) * -200; // 200px de dispersión inicial
-                    
-                    // Movemos cada letra en dirección opuesta a su índice para juntarlas
-                    // Esto centra las letras
+                    const moveAmount = (textProgress - 1) * -150;
                     const centerOffset = (index - (totalChars / 2)) * moveAmount;
-
-                    // Aplicamos la transformación
-                    // Añadimos un pequeño translateY para que parezca que vienen de lejos
-                    char.style.transform = `translateX(${centerOffset}px) scale(${0.5 + (clampedProgress * 0.5)})`;
-                    char.style.opacity = clampedProgress;
+                    
+                    char.style.transform = `translateX(${centerOffset}px) scale(${0.5 + (textProgress * 0.5)})`;
+                    char.style.opacity = textProgress;
                 });
             });
+
+            // ==========================================
+            // ANIMACIÓN DE IMÁGENES
+            // ==========================================
+            const imagesSectionTop = imagesSection.offsetTop;
+            const imagesSectionHeight = imagesSection.offsetHeight;
+            
+            // Progreso dentro de la sección de imágenes (0 a 1)
+            const imagesProgress = Math.min(1, Math.max(0, 
+                (scrollY - textSectionHeight + windowHeight) / (imagesSectionHeight - windowHeight)
+            ));
+
+            // Animar cada imagen
+            imageWrappers.forEach((wrapper, index) => {
+                const info = wrapper.querySelector('.image-info');
+                
+                // Calcular escala y posición
+                // Empiezan pequeñas (scale 0.6) y crecen hasta scale 1.2
+                const startScale = 0.6;
+                const endScale = 1.1;
+                const currentScale = startScale + (endScale - startScale) * imagesProgress;
+                
+                // Calcular ancho y alto
+                // Empiezan en 40% width / 60% height y terminan en 50% width / 100% height
+                const startWidth = 40;
+                const endWidth = 50;
+                const currentWidth = startWidth + (endWidth - startWidth) * imagesProgress;
+                
+                const startHeight = 60;
+                const endHeight = 100;
+                const currentHeight = startHeight + (endHeight - startHeight) * imagesProgress;
+                
+                // Separación: empiezan juntas y se separan
+                const translateX = index === 0 ? -50 * imagesProgress : 50 * imagesProgress;
+                
+                // Aplicar transformaciones
+                wrapper.style.transform = `
+                    scale(${currentScale}) 
+                    translateX(${translateX}vw)
+                `;
+                wrapper.style.width = `${currentWidth}%`;
+                wrapper.style.height = `${currentHeight}vh`;
+                
+                // Mostrar información cuando las imágenes estén lo suficientemente grandes
+                if (imagesProgress > 0.6) {
+                    info.classList.add('visible');
+                } else {
+                    info.classList.remove('visible');
+                }
+            });
         });
-        
-        // Disparar evento scroll al cargar para colocar las letras si ya estamos en medio de la página
+
+        // Disparar scroll al cargar
         window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
