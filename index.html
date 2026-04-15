@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capabilities Section</title>
+  <title>Velvett — Servicios</title>
   <style>
-    /* ── RESET & BASE ── */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -17,194 +16,132 @@
       color: #fff;
       font-family: 'Segoe UI', Arial, sans-serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       overflow-x: hidden;
     }
 
-    /* ── TOP BAR ── */
-    .top-bar {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      background: #1a1a1a;
-      border-bottom: 1px solid #2a2a2a;
+    /* ── TEXTO DE FONDO "EXPERIENCIA VELVETT" ─ */
+    .bg-brand {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(60px, 10vw, 140px);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      user-select: none;
     }
 
-    .top-bar .brand {
-      font-size: 14px;
-      color: #aaa;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .top-bar .btn-buy {
-      background: #5cb85c;
-      color: #fff;
-      border: none;
-      padding: 6px 16px;
-      border-radius: 4px;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-
-    .top-bar .btn-buy:hover {
-      background: #4cae4c;
-    }
-
-    /* ─ HEADER / CAPABILITIES ── */
-    .header {
-      text-align: center;
-      margin-top: 60px;
-      margin-bottom: 40px;
+    /* ── CONTENEDOR PRINCIPAL ── */
+    .main-container {
       position: relative;
-    }
-
-    .header .logo-area {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 260px;
-      margin: 0 auto 30px;
-      padding: 12px 20px;
-      border: 1px solid #333;
-      border-radius: 12px;
-      background: #1a1a1a;
-    }
-
-    .header .logo-text {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header .logo-text .icon {
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, #fff, #888);
-      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
-      display: inline-block;
-    }
-
-    .header .menu-icon {
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
+      align-items: center;
+      padding: 80px 20px 60px;
+      min-height: 100vh;
     }
 
-    .header .menu-icon span {
-      width: 20px;
-      height: 2px;
-      background: #888;
-      border-radius: 2px;
-      transition: 0.3s;
+    /* ── HEADER ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
     }
 
-    .header h1 {
-      font-size: 32px;
+    .section-header h1 {
+      font-size: clamp(28px, 5vw, 42px);
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
-    .header .subtitle {
-      font-size: 18px;
-      color: #666;
+    .section-header .explore-link {
+      display: inline-block;
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: #555;
       text-decoration: none;
       cursor: pointer;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, color 0.3s;
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
     }
 
-    .header .subtitle:hover {
+    .section-header .explore-link:hover {
       color: #fff;
       border-bottom-color: #fff;
     }
 
-    /* ── CARDS CONTAINER ── */
-    .cards-wrapper {
+    /* ── CONTENEDOR DE TARJETAS (con perspectiva para animación) ── */
+    .cards-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      height: 340px;
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 0 20px;
-      max-width: 1200px;
-      margin-bottom: 40px;
+      perspective: 1200px;
     }
 
-    /* ── INDIVIDUAL CARD ── */
+    /* ─ TARJETAS ── */
     .card {
+      position: absolute;
       background: #fff;
       color: #111;
-      width: 200px;
-      min-height: 260px;
-      border-radius: 14px;
+      width: 190px;
+      min-height: 280px;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 30px 20px;
+      padding: 32px 20px;
       cursor: pointer;
-      transition: transform 0.35s cubic-bezier(.25,.8,.25,1),
-                  box-shadow 0.35s ease;
-      position: relative;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s ease,
+                  opacity 0.6s ease;
       opacity: 0;
-      transform: translateY(40px);
-    }
-
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 20px 40px rgba(255,255,255,0.12);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      will-change: transform, opacity;
     }
 
     .card .card-icon {
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 10px;
+    }
+
+    .card .card-icon svg {
+      width: 44px;
+      height: 44px;
     }
 
     .card .card-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       text-align: center;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
-    /* ─ SVG ICONS INSIDE CARDS ── */
-    .card .card-icon svg {
-      width: 48px;
-      height: 48px;
+    /* ── TARJETA CENTRAL DESTACADA ── */
+    .card.center-highlight {
+      border: 2.5px solid transparent;
     }
 
-    /* ── CENTER CARD HIGHLIGHT RING ── */
-    .card.highlighted {
-      border: 3px solid transparent;
-      background-clip: padding-box;
-    }
-
-    .card.highlighted::before {
+    .card.center-highlight::after {
       content: '';
       position: absolute;
-      inset: -4px;
-      border-radius: 18px;
-      padding: 3px;
-      background: linear-gradient(135deg, #fff, #aaa);
+      inset: -3px;
+      border-radius: 19px;
+      padding: 2.5px;
+      background: linear-gradient(135deg, #ffffff, #999999);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -224,8 +161,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 30px;
       transition: transform 0.3s, background 0.3s;
+      z-index: 10;
+      position: relative;
     }
 
     .plus-btn:hover {
@@ -233,17 +172,31 @@
       background: #ddd;
     }
 
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      margin-top: 20px;
+      color: #444;
+      font-size: 13px;
+      text-align: center;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
     /* ── SCROLL TO TOP ── */
     .scroll-top {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #333;
       color: #fff;
-      border: none;
+      border: 1px solid #444;
       font-size: 18px;
       cursor: pointer;
       display: flex;
@@ -251,6 +204,7 @@
       justify-content: center;
       opacity: 0;
       transition: opacity 0.3s, background 0.3s;
+      z-index: 100;
     }
 
     .scroll-top.show {
@@ -263,165 +217,218 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .cards-wrapper {
-        gap: 10px;
+      .cards-stage {
+        height: 280px;
       }
       .card {
         width: 150px;
-        min-height: 200px;
-        padding: 20px 14px;
+        min-height: 220px;
+        padding: 24px 14px;
       }
       .card .card-icon svg {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
       }
       .card .card-title {
-        font-size: 14px;
-      }
-      .header h1 {
-        font-size: 24px;
+        font-size: 13px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <div class="top-bar">
-    <span class="brand">envato market</span>
-    <button class="btn-buy">Buy now</button>
-  </div>
+  <!-- FONDO DECORATIVO -->
+  <div class="bg-brand">Experiencia Velvett</div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-area">
-      <div class="logo-text">
-        <span class="icon"></span>
-        ADON<br>CREATIVE
-      </div>
-      <div class="menu-icon" id="menuIcon">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <h1>Capabilities</h1>
-    <a class="subtitle">Explore</a>
-  </div>
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="main-container">
 
-  <!-- CARDS -->
-  <div class="cards-wrapper" id="cardsWrapper">
-
-    <!-- Card 1: Interaction Design -->
-    <div class="card" data-delay="0">
-      <div class="card-icon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
-          <line x1="24" y1="4" x2="24" y2="44"/>
-          <line x1="4" y1="24" x2="44" y2="24"/>
-          <line x1="8" y1="8" x2="40" y2="40"/>
-          <line x1="40" y1="8" x2="8" y2="40"/>
-        </svg>
-      </div>
-      <div class="card-title">Interaction Design</div>
+    <!-- HEADER -->
+    <div class="section-header">
+      <h1>Servicios</h1>
+      <a class="explore-link">Explora</a>
     </div>
 
-    <!-- Card 2: Website Development -->
-    <div class="card" data-delay="100">
-      <div class="card-icon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
-          <circle cx="24" cy="24" r="18"/>
-          <path d="M24 6 C24 6, 6 24, 24 24 C24 24, 42 24, 24 42" fill="#111"/>
-          <path d="M24 6 C24 6, 42 24, 24 24 C24 24, 6 24, 24 42" stroke="#111" fill="none"/>
-        </svg>
+    <!-- ETAPA DE TARJETAS -->
+    <div class="cards-stage" id="cardsStage">
+
+      <!-- Card 1 -->
+      <div class="card" data-index="0">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
+            <line x1="24" y1="4" x2="24" y2="44"/>
+            <line x1="4" y1="24" x2="44" y2="24"/>
+            <line x1="8" y1="8" x2="40" y2="40"/>
+            <line x1="40" y1="8" x2="8" y2="40"/>
+          </svg>
+        </div>
+        <div class="card-title">Formación<br>Profesional</div>
       </div>
-      <div class="card-title">Website Development</div>
+
+      <!-- Card 2 -->
+      <div class="card" data-index="1">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="M24 6 C24 6, 6 24, 24 24 C24 24, 42 24, 24 42" fill="#111"/>
+            <path d="M24 6 C24 6, 42 24, 24 24 C24 24, 6 24, 24 42" stroke="#111" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-title">Excelencia<br>Comprobada</div>
+      </div>
+
+      <!-- Card 3 (CENTRO — destacada) -->
+      <div class="card center-highlight" data-index="2">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+            <rect x="6" y="6" width="22" height="22" rx="2"/>
+            <rect x="20" y="20" width="22" height="22" rx="2"/>
+          </svg>
+        </div>
+        <div class="card-title">Comunidad<br>Exclusiva</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card" data-index="3">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+            <path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14 Z"/>
+            <line x1="24" y1="4" x2="24" y2="44"/>
+            <line x1="6" y1="14" x2="24" y2="24"/>
+            <line x1="42" y1="14" x2="24" y2="24"/>
+          </svg>
+        </div>
+        <div class="card-title">Excelencia<br>Comprobada</div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card" data-index="4">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+            <circle cx="24" cy="24" r="18"/>
+            <path d="M24 6 A18 18 0 0 1 42 24 L24 24 Z" fill="#111"/>
+            <rect x="21" y="21" width="6" height="6" fill="#111"/>
+          </svg>
+        </div>
+        <div class="card-title">Ingresos<br>Extraordinarios</div>
+      </div>
+
     </div>
 
-    <!-- Card 3: SaaS Product Design (CENTER / highlighted) -->
-    <div class="card highlighted" data-delay="200">
-      <div class="card-icon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
-          <rect x="6" y="6" width="22" height="22" rx="2"/>
-          <rect x="20" y="20" width="22" height="22" rx="2"/>
-        </svg>
-      </div>
-      <div class="card-title">SaaS Product Design</div>
-    </div>
+    <!-- HINT -->
+    <div class="scroll-hint" id="scrollHint">↓ Desliza para desplegar ↓</div>
 
-    <!-- Card 4: Digital Marketing -->
-    <div class="card" data-delay="300">
-      <div class="card-icon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
-          <path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14 Z"/>
-          <line x1="24" y1="4" x2="24" y2="44"/>
-          <line x1="6" y1="14" x2="24" y2="24"/>
-          <line x1="42" y1="14" x2="24" y2="24"/>
-        </svg>
-      </div>
-      <div class="card-title">Digital Marketing</div>
-    </div>
-
-    <!-- Card 5: Brand Guidelines -->
-    <div class="card" data-delay="400">
-      <div class="card-icon">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
-          <circle cx="24" cy="24" r="18"/>
-          <path d="M24 6 A18 18 0 0 1 42 24 L24 24 Z" fill="#111"/>
-          <rect x="21" y="21" width="6" height="6" fill="#111"/>
-        </svg>
-      </div>
-      <div class="card-title">Brand Guidelines</div>
-    </div>
+    <!-- PLUS -->
+    <button class="plus-btn" id="plusBtn">+</button>
 
   </div>
-
-  <!-- PLUS BUTTON -->
-  <button class="plus-btn" id="plusBtn">+</button>
 
   <!-- SCROLL TO TOP -->
   <button class="scroll-top" id="scrollTop">↑</button>
 
   <script>
-    // ── ANIMATE CARDS ON LOAD ──
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.card');
+    const stage = document.getElementById('cardsStage');
+    const scrollHint = document.getElementById('scrollHint');
 
-      cards.forEach(card => {
-        const delay = parseInt(card.getAttribute('data-delay')) || 0;
-        setTimeout(() => {
-          card.classList.add('visible');
-        }, 300 + delay);
+    const totalCards = cards.length;
+    const spreadDistance = 200; // px de separación entre tarjetas
+
+    // ── POSICIONES FINALES (distribución horizontal) ──
+    const cardWidth = 190;
+    const totalWidth = totalCards * (cardWidth + 12);
+    const startX = -(totalWidth / 2) + cardWidth / 2;
+
+    // ── ESTADO INICIAL: TODAS AGRUPADAS EN EL CENTRO ──
+    function setInitialState() {
+      cards.forEach((card, i) => {
+        // Apiladas: todas centradas con ligera rotación y offset vertical escalonado
+        const offsetY = i * -6;
+        const rotation = (i - Math.floor(totalCards / 2)) * 3;
+        card.style.transform = `translate(0px, ${offsetY}px) rotate(${rotation}deg) scale(0.85)`;
+        card.style.zIndex = i;
       });
+    }
+
+    // ── POSICIÓN FINAL DESPLEGADA ──
+    function setFinalState() {
+      cards.forEach((card, i) => {
+        const offsetX = i * (cardWidth + 12) - (totalCards - 1) * (cardWidth + 12) / 2;
+        card.style.transform = `translate(${offsetX}px, 0px) rotate(0deg) scale(1)`;
+        card.style.zIndex = 2;
+      });
+    }
+
+    // ─ ANIMACIÓN BASADA EN SCROLL ──
+    let animating = false;
+
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const viewportH = window.innerHeight;
+
+      // Progreso: 0 = agrupado, 1 = desplegado
+      const progress = Math.min(scrollY / (viewportH * 0.7), 1);
+
+      // Easing suave
+      const eased = easeOutCubic(progress);
+
+      cards.forEach((card, i) => {
+        const startX = -(totalCards - 1) * (cardWidth + 12) / 2;
+        const endX = i * (cardWidth + 12) - (totalCards - 1) * (cardWidth + 12) / 2;
+        const offsetX = startX + (endX - startX) * eased;
+
+        const startY = i * -6;
+        const endY = 0;
+        const offsetY = startY + (endY - startY) * eased;
+
+        const startRotation = (i - Math.floor(totalCards / 2)) * 3;
+        const rotation = startRotation * (1 - eased);
+
+        const startScale = 0.85;
+        const endScale = 1;
+        const scale = startScale + (endScale - startScale) * eased;
+
+        card.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg) scale(${scale})`;
+
+        // Opacidad progresiva
+        card.style.opacity = 0.3 + eased * 0.7;
+      });
+
+      // Ocultar hint cuando se despliega
+      if (progress > 0.5) {
+        scrollHint.style.opacity = '0';
+        scrollHint.style.pointerEvents = 'none';
+      } else {
+        scrollHint.style.opacity = '1';
+        scrollHint.style.pointerEvents = 'auto';
+      }
+    }
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    // ── SCROLL TO TOP ──
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 100);
+      handleScroll();
     });
 
-    // ── MENU ICON TOGGLE ──
-    const menuIcon = document.getElementById('menuIcon');
-    menuIcon.addEventListener('click', () => {
-      const spans = menuIcon.querySelectorAll('span');
-      spans[0].style.transform = spans[0].style.transform
-        ? '' : 'rotate(45deg) translate(4px, 4px)';
-      spans[1].style.opacity = spans[1].style.opacity === '0' ? '1' : '0';
-      spans[2].style.transform = spans[2].style.transform
-        ? '' : 'rotate(-45deg) translate(4px, -4px)';
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ── PLUS BUTTON → ADD CARD ──
+    // ── PLUS BUTTON ──
     const plusBtn = document.getElementById('plusBtn');
-    const wrapper = document.getElementById('cardsWrapper');
-    let cardCount = 5;
-
-    const extraServices = [
-      'UI Engineering',
-      'Motion Design',
-      'User Research',
-      'Content Strategy',
-      'App Design'
-    ];
+    let extraIndex = 0;
+    const extraNames = ['Mentoría 1-a-1', 'Networking VIP', 'Certificación'];
 
     plusBtn.addEventListener('click', () => {
-      const name = extraServices[cardCount - 5] || `Service ${cardCount + 1}`;
+      const name = extraNames[extraIndex % extraNames.length] || 'Nuevo Servicio';
       const card = document.createElement('div');
-      card.className = 'card visible';
+      card.className = 'card';
+      card.setAttribute('data-index', totalCards + extraIndex);
       card.innerHTML = `
         <div class="card-icon">
           <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
@@ -432,24 +439,30 @@
         </div>
         <div class="card-title">${name}</div>
       `;
-      wrapper.appendChild(card);
-      card.style.transform = 'translateY(40px) scale(0.8)';
+      card.style.transform = 'translate(0, 0) rotate(0deg) scale(0.5)';
       card.style.opacity = '0';
+      stage.appendChild(card);
+
       requestAnimationFrame(() => {
-        card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-        card.style.transform = 'translateY(0) scale(1)';
+        card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+        card.style.transform = 'translate(0, -20px) rotate(0deg) scale(1)';
         card.style.opacity = '1';
       });
-      cardCount++;
+
+      extraIndex++;
     });
 
-    // ── SCROLL TO TOP BUTTON ─
-    const scrollTopBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-      scrollTopBtn.classList.toggle('show', window.scrollY > 200);
-    });
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ── INICIALIZACIÓN ──
+    window.addEventListener('DOMContentLoaded', () => {
+      // Empezar agrupadas con opacidad visible
+      cards.forEach((card, i) => {
+        const rotation = (i - Math.floor(totalCards / 2)) * 3;
+        const offsetY = i * -6;
+        card.style.transform = `translate(0px, ${offsetY}px) rotate(${rotation}deg) scale(0.85)`;
+        card.style.opacity = '0.5';
+      });
+
+      handleScroll();
     });
   </script>
 </body>
