@@ -61,705 +61,147 @@
       gap: 8px;
     }
     
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.3); }
     
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.3);
-    }
+    .btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-secondary:hover { background: var(--primary); color: white; }
     
-    .btn-secondary {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-    
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-    }
-    
-    .btn-whatsapp {
-      background: var(--whatsapp);
-      color: white;
-    }
-    
-    .btn-whatsapp:hover {
-      background: #128c7e;
-      transform: translateY(-2px);
-    }
+    .btn-whatsapp { background: var(--whatsapp); color: white; }
+    .btn-whatsapp:hover { background: #128c7e; transform: translateY(-2px); }
     
     .btn-block { width: 100%; justify-content: center; }
 
     /* ===== HEADER ===== */
-    .header {
-      background: white;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      padding: 15px 0;
-    }
-    
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--dark);
-    }
-    
+    .header { background: white; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; padding: 15px 0; }
+    .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .logo { font-size: 1.8rem; font-weight: 700; color: var(--dark); }
     .logo span { color: var(--primary); }
-    
-    .nav {
-      display: flex;
-      gap: 25px;
-    }
-    
-    .nav a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      transition: var(--transition);
-      padding: 5px 0;
-      position: relative;
-    }
-    
-    .nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: var(--transition);
-    }
-    
+    .nav { display: flex; gap: 25px; }
+    .nav a { text-decoration: none; color: var(--dark); font-weight: 500; transition: var(--transition); padding: 5px 0; position: relative; }
+    .nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary); transition: var(--transition); }
     .nav a:hover::after { width: 100%; }
     .nav a:hover { color: var(--primary); }
-    
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--dark);
-      padding: 5px;
-    }
+    .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--dark); padding: 5px; }
 
     /* ===== HERO SECTION ===== */
-    .hero {
-      background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
-      padding: 100px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
+    .hero { background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%); padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
     .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-    
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: var(--dark);
-      line-height: 1.2;
-    }
-    
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--gray);
-      margin-bottom: 30px;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .hero h1 { font-size: 3rem; margin-bottom: 20px; color: var(--dark); line-height: 1.2; }
+    .hero p { font-size: 1.25rem; color: var(--gray); margin-bottom: 30px; }
+    .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
     /* ===== SECCIONES GENERALES ===== */
     section { padding: 80px 0; }
-    
-    .section-title {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: var(--dark);
-      position: relative;
-    }
-    
-    .section-subtitle {
-      text-align: center;
-      color: var(--gray);
-      margin-bottom: 50px;
-      font-size: 1.1rem;
-    }
-    
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: var(--primary);
-      margin: 15px auto 0;
-      border-radius: 2px;
-    }
+    .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 20px; color: var(--dark); position: relative; }
+    .section-subtitle { text-align: center; color: var(--gray); margin-bottom: 50px; font-size: 1.1rem; }
+    .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 15px auto 0; border-radius: 2px; }
 
     /* ===== SERVICIOS ===== */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    
-    .service-card {
-      background: white;
-      padding: 30px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      text-align: center;
-      transition: var(--transition);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    
-    .service-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-    }
-    
-    .service-card .icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      display: block;
-    }
-    
-    .service-card h3 {
-      margin: 15px 0;
-      color: var(--dark);
-      font-size: 1.3rem;
-    }
-    
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .service-card { background: white; padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: var(--transition); opacity: 0; transform: translateY(30px); }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); }
+    .service-card .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+    .service-card h3 { margin: 15px 0; color: var(--dark); font-size: 1.3rem; }
     .service-card p { color: var(--gray); }
 
     /* ===== GALERÍA ===== */
-    .gallery {
-      background: var(--secondary);
-    }
-    
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    
-    .gallery-item {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      aspect-ratio: 4/3;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-    }
-    
-    .gallery-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .gallery-item:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.2);
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: white;
-      padding: 20px;
-      transform: translateY(100%);
-      transition: var(--transition);
-    }
-    
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-    
-    .gallery-overlay h4 {
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
-    
-    .gallery-overlay p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
+    .gallery { background: var(--secondary); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; aspect-ratio: 4/3; opacity: 0; transform: translateY(30px); transition: var(--transition); }
+    .gallery-item.visible { opacity: 1; transform: translateY(0); }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.2); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; padding: 20px; transform: translateY(100%); transition: var(--transition); }
+    .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+    .gallery-overlay h4 { font-size: 1.2rem; margin-bottom: 5px; }
+    .gallery-overlay p { font-size: 0.9rem; opacity: 0.9; }
 
     /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    
-    .lightbox.active {
-      display: flex;
-    }
-    
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      font-size: 3rem;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .lightbox-close:hover {
-      color: var(--primary);
-      transform: rotate(90deg);
-    }
-    
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border: none;
-      padding: 15px 20px;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: var(--transition);
-      border-radius: 8px;
-    }
-    
-    .lightbox-nav:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    
+    .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .lightbox-close { position: absolute; top: 20px; right: 40px; font-size: 3rem; color: white; background: none; border: none; cursor: pointer; transition: var(--transition); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+    .lightbox-close:hover { color: var(--primary); transform: rotate(90deg); }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: white; border: none; padding: 15px 20px; font-size: 2rem; cursor: pointer; transition: var(--transition); border-radius: 8px; }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
     .lightbox-prev { left: 20px; }
     .lightbox-next { right: 20px; }
 
     /* ===== NOSOTROS ===== */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-    
-    .about-list {
-      list-style: none;
-      margin: 20px 0;
-    }
-    
-    .about-list li {
-      margin: 12px 0;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .about-image img {
-      width: 100%;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about-list { list-style: none; margin: 20px 0; }
+    .about-list li { margin: 12px 0; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+    .about-image img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
 
     /* ===== TESTIMONIOS ===== */
     .testimonials { background: var(--secondary); }
-    
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    
-    .testimonial-card {
-      background: white;
-      padding: 30px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-    }
-    
-    .testimonial-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .testimonial-card p {
-      font-style: italic;
-      margin-bottom: 20px;
-      color: var(--gray);
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-    
-    .testimonial-card strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .testimonial-card { background: white; padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); opacity: 0; transform: translateY(30px); transition: var(--transition); }
+    .testimonial-card.visible { opacity: 1; transform: translateY(0); }
+    .testimonial-card p { font-style: italic; margin-bottom: 20px; color: var(--gray); font-size: 1.05rem; line-height: 1.7; }
+    .testimonial-card strong { color: var(--primary); font-weight: 600; }
 
     /* ===== UBICACIÓN / MAPA ===== */
-    .location {
-      background: white;
-    }
-    
-    .location-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    
-    .location-info {
-      padding: 30px;
-      background: var(--secondary);
-      border-radius: var(--radius);
-    }
-    
-    .location-info h3 {
-      margin-bottom: 20px;
-      color: var(--dark);
-      font-size: 1.5rem;
-    }
-    
-    .location-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-    
-    .location-icon {
-      font-size: 1.5rem;
-      color: var(--primary);
-      min-width: 30px;
-    }
-    
-    .location-text h4 {
-      margin-bottom: 5px;
-      color: var(--dark);
-    }
-    
-    .location-text p {
-      color: var(--gray);
-      line-height: 1.6;
-    }
-    
-    .map-container {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      height: 400px;
-    }
-    
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    .location { background: white; }
+    .location-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .location-info { padding: 30px; background: var(--secondary); border-radius: var(--radius); }
+    .location-info h3 { margin-bottom: 20px; color: var(--dark); font-size: 1.5rem; }
+    .location-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+    .location-icon { font-size: 1.5rem; color: var(--primary); min-width: 30px; }
+    .location-text h4 { margin-bottom: 5px; color: var(--dark); }
+    .location-text p { color: var(--gray); line-height: 1.6; }
+    .map-container { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); height: 400px; }
+    .map-container iframe { width: 100%; height: 100%; border: none; }
 
     /* ===== CONTACTO ===== */
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
-      padding: 40px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    
+    .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); }
     .form-group { margin-bottom: 20px; }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: var(--transition);
-      font-family: inherit;
-    }
-    
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
-    }
-    
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--dark); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: var(--transition); font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1); }
     .form-group textarea { resize: vertical; min-height: 120px; }
 
     /* ===== FOOTER ===== */
-    .footer {
-      background: var(--dark);
-      color: white;
-      padding: 50px 0 25px;
-      text-align: center;
-    }
-    
-    .footer-logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-    
+    .footer { background: var(--dark); color: white; padding: 50px 0 25px; text-align: center; }
+    .footer-logo { font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; }
     .footer-logo span { color: var(--primary); }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin: 25px 0;
-      flex-wrap: wrap;
-    }
-    
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      transition: var(--transition);
-      font-weight: 500;
-    }
-    
+    .footer-links { display: flex; justify-content: center; gap: 25px; margin: 25px 0; flex-wrap: wrap; }
+    .footer-links a { color: #cbd5e1; text-decoration: none; transition: var(--transition); font-weight: 500; }
     .footer-links a:hover { color: white; }
-    
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 25px 0;
-    }
-    
-    .social-links a {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.3rem;
-      transition: var(--transition);
-    }
-    
-    .social-links a:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .copyright {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 20px;
-    }
+    .social-links { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+    .social-links a { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; transition: var(--transition); }
+    .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+    .copyright { color: #94a3b8; font-size: 0.9rem; margin-top: 20px; }
 
     /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: var(--whatsapp);
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 2rem;
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: var(--transition);
-      animation: pulse 2s infinite;
-    }
-    
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
-      animation: none;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    .whatsapp-tooltip {
-      position: absolute;
-      right: 70px;
-      background: white;
-      color: var(--dark);
-      padding: 8px 15px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-    }
-    
-    .whatsapp-float:hover .whatsapp-tooltip {
-      opacity: 1;
-      right: 75px;
-    }
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--whatsapp); color: white; border-radius: 50%; text-align: center; font-size: 2rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); animation: pulse 2s infinite; }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5); animation: none; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    .whatsapp-tooltip { position: absolute; right: 70px; background: white; color: var(--dark); padding: 8px 15px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition); box-shadow: var(--shadow); }
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; right: 75px; }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      .about-content,
-      .location-content { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.5rem; }
-      .map-container { height: 300px; }
-    }
-    
+    @media (max-width: 900px) { .about-content, .location-content { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } .map-container { height: 300px; } }
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
-      
-      .nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        padding: 20px 0;
-        background: white;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        margin-top: 10px;
-      }
-      
+      .nav { display: none; flex-direction: column; width: 100%; text-align: center; padding: 20px 0; background: white; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 10px; }
       .nav.active { display: flex; }
       .nav a { padding: 12px 0; }
-      
       .header-content { flex-direction: column; text-align: center; }
-      
-      .hero { padding: 70px 0; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.1rem; }
-      
-      .hero-buttons { flex-direction: column; align-items: center; }
-      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; }
-      
-      .section-title { font-size: 1.8rem; }
-      section { padding: 60px 0; }
-      
+      .hero { padding: 70px 0; } .hero h1 { font-size: 2rem; } .hero p { font-size: 1.1rem; }
+      .hero-buttons { flex-direction: column; align-items: center; } .btn-primary, .btn-secondary { width: 100%; max-width: 300px; }
+      .section-title { font-size: 1.8rem; } section { padding: 60px 0; }
       .contact-form { padding: 30px 20px; }
-      
       .gallery-grid { grid-template-columns: 1fr; }
-      
-      .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 55px;
-        height: 55px;
-        font-size: 1.8rem;
-      }
-      
+      .whatsapp-float { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 1.8rem; }
       .whatsapp-tooltip { display: none; }
-      
-      .lightbox-nav {
-        padding: 10px 15px;
-        font-size: 1.5rem;
-      }
-      .lightbox-close {
-        top: 10px;
-        right: 20px;
-        font-size: 2rem;
-      }
+      .lightbox-nav { padding: 10px 15px; font-size: 1.5rem; } .lightbox-close { top: 10px; right: 20px; font-size: 2rem; }
     }
-
-    /* ===== ACCESIBILIDAD ===== */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      html { scroll-behavior: auto; }
-    }
-    
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-      outline: 3px solid var(--primary);
-      outline-offset: 2px;
-    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
   </style>
 </head>
 <body>
@@ -768,11 +210,7 @@
   <header class="header">
     <div class="container header-content">
       <div class="logo">Smile<span>Dent</span></div>
-      
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
-        ☰
-      </button>
-      
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav" id="navMenu" aria-label="Menú principal">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
@@ -781,10 +219,7 @@
         <a href="#ubicacion">Ubicación</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      
-      <button class="btn-primary" onclick="scrollToSection('contacto')" aria-label="Agendar cita">
-        📅 Agendar Cita
-      </button>
+      <button class="btn-primary" onclick="scrollToSection('contacto')" aria-label="Agendar cita">📅 Agendar Cita</button>
     </div>
   </header>
 
@@ -795,9 +230,7 @@
       <p>Transformamos tu sonrisa con tratamientos de odontología estética de alta calidad y tecnología de vanguardia. Resultados naturales que enamoran.</p>
       <div class="hero-buttons">
         <button class="btn-primary" onclick="scrollToSection('servicios')">Ver Servicios</button>
-        <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Me%20gustaría%20agendar%20una%20cita%20de%20evaluación" class="btn-whatsapp btn-secondary" target="_blank" rel="noopener">
-          💬 WhatsApp
-        </a>
+        <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Me%20gustaría%20agendar%20una%20cita%20de%20evaluación" class="btn-whatsapp btn-secondary" target="_blank" rel="noopener">💬 WhatsApp</a>
       </div>
     </div>
   </section>
@@ -808,31 +241,26 @@
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-subtitle">Ofrecemos soluciones completas para cuidar y embellecer tu sonrisa</p>
       <div class="services-grid">
-        
         <article class="service-card">
           <span class="icon" aria-hidden="true">✨</span>
           <h3>Blanqueamiento Dental</h3>
           <p>Logra una sonrisa más blanca y brillante con nuestros tratamientos seguros, efectivos y sin sensibilidad.</p>
         </article>
-        
         <article class="service-card">
           <span class="icon" aria-hidden="true">💎</span>
           <h3>Carillas de Porcelana</h3>
           <p>Corrige imperfecciones, cierra espacios y diseña la sonrisa que siempre soñaste con carillas personalizadas.</p>
         </article>
-        
         <article class="service-card">
           <span class="icon" aria-hidden="true">🦷</span>
           <h3>Implantes Dentales</h3>
           <p>Recupera tu confianza y funcionalidad con implantes de alta calidad que se integran naturalmente.</p>
         </article>
-        
         <article class="service-card">
           <span class="icon" aria-hidden="true">😁</span>
           <h3>Ortodoncia Invisible</h3>
           <p>Alinea tus dientes de forma discreta y cómoda con alineadores transparentes. Sin brackets metálicos.</p>
         </article>
-        
       </div>
     </div>
   </section>
@@ -842,11 +270,10 @@
     <div class="container">
       <h2 class="section-title">Galería de Resultados</h2>
       <p class="section-subtitle">Conoce algunas de las transformaciones que hemos logrado</p>
-      
       <div class="gallery-grid">
         
         <div class="gallery-item" onclick="openLightbox(0)">
-          <img src="https://images.unsplash.com/photo-1606811971608-47f54944fb3c?w=800&q=80" alt="Sonrisa perfecta - Blanqueamiento dental" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=800&q=80" alt="Sonrisa brillante - Blanqueamiento dental" loading="lazy">
           <div class="gallery-overlay">
             <h4>Blanqueamiento Dental</h4>
             <p>Resultado después del tratamiento</p>
@@ -854,7 +281,7 @@
         </div>
         
         <div class="gallery-item" onclick="openLightbox(1)">
-          <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Carillas de porcelana - Antes y después" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80" alt="Carillas de porcelana - Antes y después" loading="lazy">
           <div class="gallery-overlay">
             <h4>Carillas de Porcelana</h4>
             <p>Diseño de sonrisa personalizado</p>
@@ -862,7 +289,7 @@
         </div>
         
         <div class="gallery-item" onclick="openLightbox(2)">
-          <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&q=80" alt="Implantes dentales - Sonrisa renovada" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=80" alt="Implantes dentales - Sonrisa renovada" loading="lazy">
           <div class="gallery-overlay">
             <h4>Implantes Dentales</h4>
             <p>Recuperación completa de la sonrisa</p>
@@ -870,7 +297,7 @@
         </div>
         
         <div class="gallery-item" onclick="openLightbox(3)">
-          <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=800&q=80" alt="Ortodoncia invisible - Alineadores" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=800&q=80" alt="Ortodoncia invisible - Alineadores" loading="lazy">
           <div class="gallery-overlay">
             <h4>Ortodoncia Invisible</h4>
             <p>Alineación perfecta sin brackets</p>
@@ -878,7 +305,7 @@
         </div>
         
         <div class="gallery-item" onclick="openLightbox(4)">
-          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80" alt="Tecnología dental avanzada - Equipos modernos" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Tecnología dental avanzada - Equipos modernos" loading="lazy">
           <div class="gallery-overlay">
             <h4>Tecnología Avanzada</h4>
             <p>Equipamiento de última generación</p>
@@ -886,7 +313,7 @@
         </div>
         
         <div class="gallery-item" onclick="openLightbox(5)">
-          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" alt="Clínica dental moderna - Instalaciones cómodas" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="Clínica dental moderna - Instalaciones cómodas" loading="lazy">
           <div class="gallery-overlay">
             <h4>Nuestras Instalaciones</h4>
             <p>Ambiente cómodo y seguro</p>
@@ -912,7 +339,6 @@
         <h2 class="section-title">Sobre Nosotros</h2>
         <p>En <strong>SmileDent</strong>, combinamos experiencia, tecnología avanzada y un trato humano para ofrecerte los mejores resultados en odontología estética.</p>
         <p>Nuestro equipo de especialistas está comprometido con tu comodidad y satisfacción, brindando tratamientos personalizados en un ambiente relajado y moderno.</p>
-        
         <ul class="about-list">
           <li>✅ Más de 15 años de experiencia</li>
           <li>✅ Tecnología de última generación</li>
@@ -920,14 +346,10 @@
           <li>✅ Planes de financiamiento flexibles</li>
           <li>✅ Primera consulta de evaluación gratuita</li>
         </ul>
-        
-        <button class="btn-primary" onclick="scrollToSection('contacto')" style="margin-top: 20px;">
-          Conoce al Equipo
-        </button>
+        <button class="btn-primary" onclick="scrollToSection('contacto')" style="margin-top: 20px;">Conoce al Equipo</button>
       </div>
-      
       <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&q=80" alt="Equipo profesional de SmileDent" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80" alt="Equipo profesional de SmileDent" loading="lazy">
       </div>
     </div>
   </section>
@@ -938,22 +360,18 @@
       <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
       <p class="section-subtitle">Historias reales de sonrisas transformadas</p>
       <div class="testimonials-grid">
-        
         <article class="testimonial-card">
           <p>"¡Mi sonrisa cambió por completo! El equipo fue muy profesional, me explicaron todo el proceso y el resultado superó mis expectativas. ¡Totalmente recomendado!"</p>
           <strong>— María González</strong>
         </article>
-        
         <article class="testimonial-card">
           <p>"El blanqueamiento dental fue rápido, indoloro y los resultados son increíbles. Ya no me da vergüenza sonreír en las fotos. ¡Gracias SmileDent!"</p>
           <strong>— Carlos Ramírez</strong>
         </article>
-        
         <article class="testimonial-card">
           <p>"Me encantó la atención personalizada. Me explicaron cada paso del tratamiento con claridad y paciencia. El ambiente es muy acogedor."</p>
           <strong>— Ana López</strong>
         </article>
-        
       </div>
     </div>
   </section>
@@ -963,11 +381,9 @@
     <div class="container">
       <h2 class="section-title">Ubicación</h2>
       <p class="section-subtitle">Visítanos en nuestras modernas instalaciones</p>
-      
       <div class="location-content">
         <div class="location-info">
           <h3>Información de Contacto</h3>
-          
           <div class="location-item">
             <span class="location-icon">📍</span>
             <div class="location-text">
@@ -975,7 +391,6 @@
               <p>Calle 100 # 15-30, Oficina 501<br>Barrio Chicó, Bogotá D.C.<br>Colombia</p>
             </div>
           </div>
-          
           <div class="location-item">
             <span class="location-icon">📞</span>
             <div class="location-text">
@@ -983,7 +398,6 @@
               <p>+57 (1) 234-5678<br>Cel: +57 312 345 6789<br>Lun - Vie: 8:00 - 18:00<br>Sáb: 9:00 - 13:00</p>
             </div>
           </div>
-          
           <div class="location-item">
             <span class="location-icon">✉️</span>
             <div class="location-text">
@@ -991,21 +405,10 @@
               <p>contacto@smiledent.com.co<br>citas@smiledent.com.co</p>
             </div>
           </div>
-          
-          <a href="https://wa.me/573123456789?text=Hola!%20Me%20gustaría%20más%20información%20sobre%20sus%20servicios" class="btn-whatsapp btn-primary" target="_blank" rel="noopener" style="margin-top: 20px; display: inline-flex;">
-            💬 Escríbenos por WhatsApp
-          </a>
+          <a href="https://wa.me/573123456789?text=Hola!%20Me%20gustaría%20más%20información%20sobre%20sus%20servicios" class="btn-whatsapp btn-primary" target="_blank" rel="noopener" style="margin-top: 20px; display: inline-flex;">💬 Escríbenos por WhatsApp</a>
         </div>
-        
         <div class="map-container">
-          <!-- Google Maps - Bogotá, Colombia (Zona Chicó) -->
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.636887373506!2d-74.0589!3d4.6759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bfd2da6cb29%3A0x5b2a2b2a2b2a2b2a!2sZona%20T%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1234567890123!5m2!1ses!2sco" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Ubicación de SmileDent en Bogotá">
-          </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.636887373506!2d-74.0589!3d4.6759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bfd2da6cb29%3A0x5b2a2b2a2b2a2b2a!2sZona%20T%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1234567890123!5m2!1ses!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de SmileDent en Bogotá"></iframe>
         </div>
       </div>
     </div>
@@ -1016,23 +419,19 @@
     <div class="container">
       <h2 class="section-title">Agenda tu Cita</h2>
       <p class="section-subtitle">Completa el formulario y nos contactaremos contigo en menos de 24 horas</p>
-      
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-group">
           <label for="nombre">Nombre completo *</label>
           <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Ej: María García"/>
         </div>
-        
         <div class="form-group">
           <label for="email">Correo electrónico *</label>
           <input type="email" id="email" name="email" required autocomplete="email" placeholder="ejemplo@correo.com"/>
         </div>
-        
         <div class="form-group">
           <label for="telefono">Teléfono (opcional)</label>
           <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+57 312 345 6789"/>
         </div>
-        
         <div class="form-group">
           <label for="servicio">Servicio de interés</label>
           <select id="servicio" name="servicio">
@@ -1045,19 +444,14 @@
             <option value="otro">Otro</option>
           </select>
         </div>
-        
         <div class="form-group">
           <label for="mensaje">Mensaje (opcional)</label>
           <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
         </div>
-        
         <button type="submit" class="btn-primary btn-block">Enviar Solicitud ✉️</button>
-        
         <p style="text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.9rem;">
           ¿Prefieres contacto inmediato?<br>
-          <a href="https://wa.me/573123456789" style="color: var(--whatsapp); font-weight: 600; text-decoration: none;">
-            💬 Escríbenos por WhatsApp
-          </a>
+          <a href="https://wa.me/573123456789" style="color: var(--whatsapp); font-weight: 600; text-decoration: none;">💬 Escríbenos por WhatsApp</a>
         </p>
       </form>
     </div>
@@ -1068,14 +462,12 @@
     <div class="container footer-content">
       <div class="footer-logo">Smile<span>Dent</span></div>
       <p>Transformando sonrisas con excelencia, tecnología y cuidado humano.</p>
-      
       <div class="social-links">
         <a href="#" aria-label="Facebook">📘</a>
         <a href="#" aria-label="Instagram">📷</a>
         <a href="https://wa.me/573123456789" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
         <a href="#" aria-label="YouTube">🎥</a>
       </div>
-      
       <div class="footer-links">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
@@ -1084,244 +476,67 @@
         <a href="#ubicacion">Ubicación</a>
         <a href="#contacto">Contacto</a>
       </div>
-      
       <p class="copyright">
         &copy; <span id="year"></span> SmileDent. Todos los derechos reservados.<br>
-        <small style="color: #64748b; display: block; margin-top: 8px;">
-          📍 Calle 100 # 15-30, Bogotá D.C. | 📞 +57 (1) 234-5678
-        </small>
+        <small style="color: #64748b; display: block; margin-top: 8px;">📍 Calle 100 # 15-30, Bogotá D.C. | 📞 +57 (1) 234-5678</small>
       </p>
     </div>
   </footer>
 
   <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
-  <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Me%20gustar%C3%ADa%20agendar%20una%20cita%20de%20evaluaci%C3%B3n" 
-     class="whatsapp-float" 
-     target="_blank" 
-     rel="noopener"
-     aria-label="Contactar por WhatsApp">
+  <a href="https://wa.me/573123456789?text=Hola%20SmileDent!%20Me%20gustar%C3%ADa%20agendar%20una%20cita%20de%20evaluaci%C3%B3n" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
     <span class="whatsapp-tooltip">¡Escríbenos!</span>
     💬
   </a>
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    // ========================================
-    // 🦷 SmileDent - JavaScript Completo
-    // ========================================
+    // 1. SCROLL SUAVE
+    function scrollToSection(sectionId) { const section = document.getElementById(sectionId); if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
-    // 1. SCROLL SUAVE A SECCIONES
-    function scrollToSection(sectionId) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-    // 2. MENÚ RESPONSIVE (MÓVIL)
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    menuToggle?.addEventListener('click', () => {
-      const isActive = navMenu.classList.toggle('active');
-      menuToggle.setAttribute('aria-expanded', isActive);
-      menuToggle.innerHTML = isActive ? '✕' : '☰';
-    });
-
-    // Cerrar menú al hacer click en un enlace (móvil)
-    document.querySelectorAll('.nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.innerHTML = '☰';
-      });
-    });
-
-    // Cerrar menú al hacer click fuera de él
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.header') && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.innerHTML = '☰';
-      }
-    });
+    // 2. MENÚ RESPONSIVE
+    const menuToggle = document.getElementById('menuToggle'), navMenu = document.getElementById('navMenu');
+    menuToggle?.addEventListener('click', () => { const isActive = navMenu.classList.toggle('active'); menuToggle.setAttribute('aria-expanded', isActive); menuToggle.innerHTML = isActive ? '✕' : '☰'; });
+    document.querySelectorAll('.nav a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('active'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.innerHTML = '☰'; }));
+    document.addEventListener('click', (e) => { if (!e.target.closest('.header') && navMenu.classList.contains('active')) { navMenu.classList.remove('active'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.innerHTML = '☰'; } });
 
     // 3. GALERÍA LIGHTBOX
     const galleryImages = [
-      "https://images.unsplash.com/photo-1606811971608-47f54944fb3c?w=1200&q=90",
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&q=90",
-      "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=90",
-      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=1200&q=90",
-      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&q=90",
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&q=90"
+      "https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=90",
+      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=90"
     ];
-    
     let currentImageIndex = 0;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightbox-img');
+    function openLightbox(index) { currentImageIndex = index; lightboxImg.src = galleryImages[index]; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+    function changeImage(direction) { currentImageIndex += direction; if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1; if (currentImageIndex >= galleryImages.length) currentImageIndex = 0; lightboxImg.src = galleryImages[currentImageIndex]; }
+    document.addEventListener('keydown', (e) => { if (!lightbox.classList.contains('active')) return; if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowLeft') changeImage(-1); if (e.key === 'ArrowRight') changeImage(1); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-    function openLightbox(index) {
-      currentImageIndex = index;
-      lightboxImg.src = galleryImages[index];
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function changeImage(direction) {
-      currentImageIndex += direction;
-      if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
-      if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
-      lightboxImg.src = galleryImages[currentImageIndex];
-    }
-
-    // Navegación con teclado en lightbox
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') changeImage(-1);
-      if (e.key === 'ArrowRight') changeImage(1);
-    });
-
-    // Cerrar lightbox al hacer click fuera de la imagen
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // 4. FORMULARIO DE CONTACTO
+    // 4. FORMULARIO
     const contactForm = document.getElementById('contactForm');
-    
     contactForm?.addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      const nombre = document.getElementById('nombre').value.trim();
-      const email = document.getElementById('email').value.trim();
-      
-      // Validación básica
-      if (!nombre || !email) {
-        alert('⚠️ Por favor, completa los campos obligatorios (Nombre y Email).');
-        return;
-      }
-      
-      if (!isValidEmail(email)) {
-        alert('⚠️ Por favor, ingresa un correo electrónico válido.');
-        return;
-      }
-
-      // ========================================
-      // 🔧 PARA CONECTAR CON FORMSPREE (GRATIS):
-      // ========================================
-      // 1. Regístrate en https://formspree.io/
-      // 2. Crea un nuevo formulario y copia tu endpoint
-      // 3. Reemplaza la URL en el fetch() de abajo
-      // 4. Descomenta el código del fetch y comenta el alert de abajo
-      
-      /*
-      fetch('https://formspree.io/f/TU_ID_AQUI', {
-        method: 'POST',
-        body: new FormData(this),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('✅ ¡Gracias! Hemos recibido tu solicitud. Te contactaremos pronto.');
-          this.reset();
-        } else {
-          alert('❌ Ocurrió un error al enviar. Por favor intenta de nuevo.');
-        }
-      })
-      .catch(() => alert('❌ Error de conexión. Verifica tu internet.'));
-      */
-
-      // ✅ DEMO: Mensaje de éxito
+      const nombre = document.getElementById('nombre').value.trim(), email = document.getElementById('email').value.trim();
+      if (!nombre || !email) { alert('⚠️ Por favor, completa los campos obligatorios (Nombre y Email).'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('⚠️ Por favor, ingresa un correo electrónico válido.'); return; }
       alert(`✅ ¡Gracias ${nombre.split(' ')[0]}! 🎉\n\nHemos recibido tu solicitud.\nTe contactaremos pronto al correo: ${email}\n\n📍 También puedes escribirnos por WhatsApp para una respuesta más rápida.`);
-      
       this.reset();
     });
 
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
+    // 5. SCROLL REVEAL
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+    const scrollObserver = new IntersectionObserver((entries) => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); scrollObserver.unobserve(entry.target); } }), observerOptions);
+    document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => scrollObserver.observe(el));
 
-    // 5. EFECTO SCROLL REVEAL
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          scrollObserver.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => {
-      scrollObserver.observe(el);
-    });
-
-    // 6. AÑO DINÁMICO EN FOOTER
+    // 6. AÑO DINÁMICO & INICIALIZACIÓN
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 7. ACCESIBILIDAD: NAVEGACIÓN CON TECLADO
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.innerHTML = '☰';
-        menuToggle.focus();
-      }
-    });
-
-    // 8. INICIALIZAR ANIMACIONES AL CARGAR
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.9) {
-            el.classList.add('visible');
-          }
-        });
-      }, 300);
-    });
-
-    // ========================================
-    // 📝 INSTRUCCIONES DE PERSONALIZACIÓN:
-    // ========================================
-    // 
-    // 1. CAMBIAR NÚMERO DE WHATSAPP:
-    //    Busca "573123456789" y reemplázalo con tu número
-    //    Formato Colombia: 57 + 3XX + XXXXXXX (sin espacios)
-    //    Ejemplo: 573123456789
-    //
-    // 2. CAMBIAR UBICACIÓN DE GOOGLE MAPS:
-    //    - Ve a Google Maps
-    //    - Busca tu dirección en Bogotá
-    //    - Click en "Compartir" → "Insertar mapa"
-    //    - Copia el HTML del iframe
-    //    - Reemplaza el iframe en la sección #ubicacion
-    //
-    // 3. CAMBIAR IMÁGENES DE LA GALERÍA:
-    //    - Reemplaza las URLs de Unsplash por tus imágenes
-    //    - Puedes subir tus fotos a imgur.com o usar GitHub
-    //    - Actualiza el array galleryImages en el JavaScript
-    //
-    // 4. PERSONALIZAR COLORES:
-    //    - Edita las variables CSS en :root al inicio del <style>
-    //    - --primary: color principal
-    //    - --whatsapp: color del botón de WhatsApp
-    //
-    // 5. RECIBIR FORMULARIOS:
-    //    - Usa Formspree (gratis) siguiendo las instrucciones
-    //    - O conecta a tu propio backend
-    // ========================================
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && navMenu?.classList.contains('active')) { navMenu.classList.remove('active'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.innerHTML = '☰'; menuToggle.focus(); } });
+    document.addEventListener('DOMContentLoaded', () => { setTimeout(() => { document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('visible'); }); }, 300); });
   </script>
 </body>
 </html>
