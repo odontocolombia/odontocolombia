@@ -171,7 +171,7 @@
         }
 
         /* ==========================================
-           BLOQUE SERVICIOS - CARD ANIMATION
+           BLOQUE SERVICIOS - CARD ANIMATION MEJORADO
            ========================================== */
         .servicios-wrapper {
             position: relative;
@@ -229,7 +229,7 @@
             flex-direction: column;
             align-items: center;
             padding: 120px 20px 100px;
-            min-height: 250vh;
+            min-height: 300vh;
         }
 
         .servicios-header {
@@ -592,7 +592,7 @@
     </div>
 
     <!-- ==========================================
-         BLOQUE 4: SERVICIOS - CARD ANIMATION
+         BLOQUE 4: SERVICIOS - CARD ANIMATION MEJORADO
          ========================================== -->
     <section class="servicios-wrapper" id="serviciosSection">
         <div class="servicios-bg-grid"></div>
@@ -776,7 +776,7 @@
         }
 
         /* ==========================================
-           SCRIPT 2: SERVICIOS - CARD ANIMATION CON PAUSA DE 3 SEGUNDOS
+           SCRIPT 2: SERVICIOS - CARD ANIMATION MEJORADO
            ========================================== */
         function initServiciosAnimation() {
             const cards = document.querySelectorAll('.servicios-card');
@@ -788,9 +788,13 @@
             if (!cards.length || !stage) return;
 
             const totalCards = cards.length;
-            const step = 216; // cardW(200) + gap(16)
+            const cardW = 200;
+            const gap = 16;
+            const step = cardW + gap;
 
+            // Easing functions mejoradas
             const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            const easeInOutQuart = t => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
             const easeOutBack = t => {
                 const c1 = 1.70158;
                 const c3 = c1 + 1;
@@ -801,15 +805,22 @@
                 return (i - Math.floor(totalCards / 2)) * step;
             }
 
+            // Inicializar cartas APILADAS de forma compacta
             function initCards() {
                 cards.forEach((card, i) => {
-                    const fanAngle = (i - Math.floor(totalCards / 2)) * 8;
-                    const stackY = i * -4;
-                    const stackX = (i - Math.floor(totalCards / 2)) * 6;
-                    const scale = 0.92 - Math.abs(i - Math.floor(totalCards / 2)) * 0.03;
-                    card.style.transform = `translate(${stackX}px, ${stackY}px) rotate(${fanAngle}deg) scale(${scale})`;
-                    card.style.opacity = 0.6 + (1 - Math.abs(i - Math.floor(totalCards / 2)) / totalCards) * 0.4;
-                    card.style.zIndex = i;
+                    const centerIndex = Math.floor(totalCards / 2);
+                    const distanceFromCenter = i - centerIndex;
+                    
+                    // Apilamiento compacto inicial - todas centradas con ligero offset
+                    const stackX = distanceFromCenter * 8; // Muy poco desplazamiento horizontal
+                    const stackY = i * -3; // Apilamiento vertical suave
+                    const rotation = distanceFromCenter * 3; // Rotación mínima
+                    const scale = 0.95 - Math.abs(distanceFromCenter) * 0.02; // Escala casi uniforme
+                    const opacity = 0.7 + (1 - Math.abs(distanceFromCenter) / totalCards) * 0.3;
+
+                    card.style.transform = `translate(${stackX}px, ${stackY}px) rotate(${rotation}deg) scale(${scale})`;
+                    card.style.opacity = opacity;
+                    card.style.zIndex = i + 1;
                 });
             }
 
@@ -853,39 +864,54 @@
                 // Si está en pausa, no actualizar el progreso de scroll
                 let rawProgress = 0;
                 if (!isPaused) {
-                    rawProgress = Math.min(1, Math.max(0, (window.scrollY - sectionTop) / (sectionHeight * 0.5)));
+                    rawProgress = Math.min(1, Math.max(0, (window.scrollY - sectionTop) / (sectionHeight * 0.6)));
                 }
                 const progress = easeOutExpo(rawProgress);
 
                 scrollProgress.style.width = (progress * 100) + '%';
 
+                // Animar cada carta con delay escalonado
                 cards.forEach((card, i) => {
-                    const fanAngle = (i - Math.floor(totalCards / 2)) * 8;
-                    const stackY = i * -4;
-                    const stackX = (i - Math.floor(totalCards / 2)) * 6;
-                    const startScale = 0.92 - Math.abs(i - Math.floor(totalCards / 2)) * 0.03;
+                    const centerIndex = Math.floor(totalCards / 2);
+                    const distanceFromCenter = i - centerIndex;
+                    
+                    // Posición inicial (apilada compacta)
+                    const startStackX = distanceFromCenter * 8;
+                    const startStackY = i * -3;
+                    const startRotation = distanceFromCenter * 3;
+                    const startScale = 0.95 - Math.abs(distanceFromCenter) * 0.02;
 
+                    // Posición final (desplegada en abanico)
                     const endX = getFinalX(i);
-                    const cardDelay = 0.08 * i;
-                    const cardProgress = Math.max(0, Math.min(1, (progress - cardDelay) / (1 - cardDelay)));
-                    const easedProgress = easeOutBack(cardProgress);
+                    const endY = 0;
+                    const endRotation = 0;
+                    const endScale = 1;
 
-                    const currentX = stackX + (endX - stackX) * easedProgress;
-                    const currentY = stackY * (1 - easedProgress);
-                    const currentAngle = fanAngle * (1 - easedProgress);
-                    const currentScale = startScale + (1 - startScale) * easedProgress;
-                    const currentOpacity = 0.4 + 0.6 * easedProgress;
-                    const parallaxY = (i % 2 === 0 ? -1 : 1) * 15 * (1 - easedProgress);
+                    // Delay escalonado por carta para efecto cascada
+                    const cardDelay = 0.12 * i;
+                    const cardDuration = 0.7;
+                    const cardProgress = Math.max(0, Math.min(1, (progress - cardDelay) / cardDuration));
+                    const easedProgress = easeInOutQuart(cardProgress);
 
-                    card.style.transform = `translate(${currentX}px, ${currentY + parallaxY}px) rotate(${currentAngle}deg) scale(${currentScale})`;
+                    // Interpolación suave entre inicio y fin
+                    const currentX = startStackX + (endX - startStackX) * easedProgress;
+                    const currentY = startStackY + (endY - startStackY) * easedProgress;
+                    const currentRotation = startRotation + (endRotation - startRotation) * easedProgress;
+                    const currentScale = startScale + (endScale - startScale) * easedProgress;
+                    const currentOpacity = 0.5 + 0.5 * easedProgress;
+
+                    // Efecto parallax sutil: cartas alternas se mueven ligeramente diferente
+                    const parallaxY = (i % 2 === 0 ? -1 : 1) * 10 * (1 - easedProgress);
+
+                    card.style.transform = `translate(${currentX}px, ${currentY + parallaxY}px) rotate(${currentRotation}deg) scale(${currentScale})`;
                     card.style.opacity = currentOpacity;
-                    card.style.zIndex = 2 + Math.abs(i - Math.floor(totalCards / 2));
+                    card.style.zIndex = 2 + Math.abs(distanceFromCenter);
                 });
 
                 scrollTopBtn.classList.toggle('show', window.scrollY > sectionTop + 150 && !isPaused);
             }
 
-            // Hover effects
+            // Hover effects mejorados
             let isSpread = false;
             cards.forEach(card => {
                 card.addEventListener('mouseenter', () => {
@@ -907,8 +933,8 @@
 
             window.addEventListener('scroll', () => {
                 const sectionRect = serviciosSection.getBoundingClientRect();
-                const progress = (window.scrollY - serviciosSection.offsetTop) / (serviciosSection.scrollHeight * 0.5);
-                isSpread = progress > 0.5;
+                const progress = (window.scrollY - serviciosSection.offsetTop) / (serviciosSection.scrollHeight * 0.6);
+                isSpread = progress > 0.7;
                 onServiciosScroll();
             });
 
@@ -925,7 +951,10 @@
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => { onServiciosScroll(); }, 100);
+                resizeTimer = setTimeout(() => { 
+                    initCards();
+                    onServiciosScroll(); 
+                }, 100);
             });
         }
 
