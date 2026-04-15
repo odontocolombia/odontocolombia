@@ -11,6 +11,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #0a0a0a;
             color: #fff;
@@ -77,7 +81,7 @@
             60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        /* BLOQUE 2: GALERÍA 2 IMÁGENES FULL WIDTH */
+        /* BLOQUE 2 & 4: GALERÍAS FULL WIDTH */
         .gallery-section {
             background-color: #0a0a0a;
             position: relative;
@@ -98,33 +102,20 @@
             will-change: transform;
         }
 
-        /* BLOQUE 3: ESPACIO NEGRO PARA FUTURO TERCER BLOQUE */
+        /* BLOQUE 3: ESPACIO NEGRO SEPARADOR */
         .block-spacer {
             height: 100vh;
             background-color: #0a0a0a;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #222;
+            color: #1a1a1a;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 0.8rem;
+            letter-spacing: 6px;
+            font-size: 0.75rem;
         }
 
-        /* BLOQUE 4: TEXTO TRABAJA MODELO WEBCAM */
-        .final-text-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-color: #0a0a0a;
-            position: sticky;
-            top: 0;
-        }
-
-        /* BLOQUE 5: FOOTER NEGRO */
+        /* BLOQUE 5: FOOTER */
         .footer-spacer {
             height: 100vh;
             background-color: #0a0a0a;
@@ -149,26 +140,25 @@
 </head>
 <body>
 
-    <!-- BLOQUE 1: VELVETT AGENCY -->
+    <!-- INICIO -->
     <div class="scroll-spacer">
         <p>↓ Scroll Down ↓</p>
     </div>
 
+    <!-- BLOQUE 1: VELVETT AGENCY -->
     <section class="hero-section" id="heroSection">
         <div class="text-line line-center" id="line1">VELVETT</div>
         <div class="text-line line-right" id="line2">AGENCY</div>
         <div class="scroll-hint">SCROLL</div>
     </section>
 
-    <!-- BLOQUE 2: 2 IMÁGENES FULL WIDTH CON PARALLAX -->
+    <!-- BLOQUE 2: IMÁGENES 1 & 2 -->
     <section class="gallery-section">
-        <!-- Project 1 -->
         <div class="project-card" data-speed="0.08">
             <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1920&q=80" alt="Project 1" class="project-image">
         </div>
-        <!-- Project 2 - Imagen colorida -->
-        <div class="project-card" data-speed="0.1">
-            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1920&q=80" alt="Project 2" class="project-image">
+        <div class="project-card" data-speed="0.10">
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1920&q=80" alt="Project 2" class="project-image">
         </div>
     </section>
 
@@ -177,15 +167,19 @@
         <p>· · ·</p>
     </div>
 
-    <!-- BLOQUE 4: TRABAJA MODELO WEBCAM -->
-    <section class="final-text-section" id="finalSection">
-        <div class="text-line line-center" id="line3">TRABAJA</div>
-        <div class="text-line line-right" id="line4">MODELO WEBCAM</div>
+    <!-- BLOQUE 4: IMÁGENES 3 & 4 -->
+    <section class="gallery-section">
+        <div class="project-card" data-speed="0.08">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="Project 3" class="project-image">
+        </div>
+        <div class="project-card" data-speed="0.10">
+            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1920&q=80" alt="Project 4" class="project-image">
+        </div>
     </section>
 
-    <!-- BLOQUE 5: FOOTER NEGRO -->
+    <!-- BLOQUE 5: FOOTER -->
     <div class="footer-spacer">
-        <p>Velvett Agency</p>
+        <p>Velvett Agency © 2026</p>
     </div>
 
     <script>
@@ -203,59 +197,46 @@
             });
         }
 
-        // INICIALIZAR TODOS LOS TEXTOS
+        // INICIALIZAR TEXTO PRINCIPAL
         const line1 = document.getElementById('line1');
         const line2 = document.getElementById('line2');
-        const line3 = document.getElementById('line3');
-        const line4 = document.getElementById('line4');
-
         splitText(line1);
         splitText(line2);
-        splitText(line3);
-        splitText(line4);
 
         const chars1 = line1.querySelectorAll('.char');
         const chars2 = line2.querySelectorAll('.char');
-        const chars3 = line3.querySelectorAll('.char');
-        const chars4 = line4.querySelectorAll('.char');
-
         const heroSection = document.getElementById('heroSection');
-        const finalSection = document.getElementById('finalSection');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
 
             // ==========================================
-            // BLOQUE 1: VELVETT AGENCY
-            // Entrada → Hold → Salida (se va a los lados)
+            // ANIMACIÓN TEXTO 1: VELVETT AGENCY
             // ==========================================
             const heroTop = heroSection.offsetTop;
             const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.8)));
             
-            // Entrada (0 - 0.25)
+            // Fase 1: Entrada (0 - 0.25)
             const heroEnter = Math.min(1, heroProgress / 0.25);
             
-            // Hold (0.25 - 0.45) - letras estáticas
+            // Fase 2: Hold (0.25 - 0.45)
             const holdProgress = heroProgress;
             
-            // Salida (0.45 - 1.0) - letras se van a los lados y desaparecen
+            // Fase 3: Salida a los lados (0.45 - 1.0)
             const heroExit = Math.min(1, Math.max(0, (heroProgress - 0.45) / 0.55));
             const easedExit = easeInCubic(heroExit);
 
             if (heroProgress <= 0.25) {
-                // Entrada: letras vienen desde los lados
                 animateEnter(chars1, chars2, easeOutCubic(heroEnter));
             } else if (heroProgress > 0.45) {
-                // Salida: letras se van a los lados y desaparecen
                 animateExit(chars1, chars2, easedExit);
             } else {
-                // Hold: letras estáticas en el centro
                 animateHold(chars1, chars2);
             }
 
             // ==========================================
-            // BLOQUE 2: PARALLAX DE IMÁGENES
+            // PARALLAX PARA TODAS LAS IMÁGENES (1 a 4)
             // ==========================================
             const images = document.querySelectorAll('.project-card');
             
@@ -270,35 +251,19 @@
                     img.style.transform = `translateY(${parallaxOffset}px)`;
                 }
             });
-
-            // ==========================================
-            // BLOQUE 4: TRABAJA MODELO WEBCAM
-            // Entra desde los lados como el primero
-            // ==========================================
-            const finalTop = finalSection.offsetTop;
-            const finalProgress = Math.min(1, Math.max(0, (scrollY - finalTop + windowHeight) / (windowHeight * 0.8)));
-            const easedFinal = easeOutCubic(finalProgress);
-
-            animateEnter(chars3, chars4, easedFinal);
         });
 
-        // Función: Letras entran desde los lados hacia el centro
+        // Función: Letras entran desde los lados
         function animateEnter(charsLeft, charsRight, progress) {
             charsLeft.forEach((char, index) => {
                 const startX = -80 - (index * 25);
-                const currentX = startX * (1 - progress);
-                const scale = 0.5 + (progress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.transform = `translateX(${startX * (1 - progress)}px) scale(${0.5 + (progress * 0.5)})`;
                 char.style.opacity = progress;
             });
 
             charsRight.forEach((char, index) => {
                 const startX = 80 + (index * 25);
-                const currentX = startX * (1 - progress);
-                const scale = 0.5 + (progress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.transform = `translateX(${startX * (1 - progress)}px) scale(${0.5 + (progress * 0.5)})`;
                 char.style.opacity = progress;
             });
         }
@@ -306,27 +271,19 @@
         // Función: Letras se van a los lados y desaparecen
         function animateExit(charsLeft, charsRight, progress) {
             charsLeft.forEach((char, index) => {
-                // Se van hacia la izquierda
                 const endX = -80 - (index * 25);
-                const currentX = endX * progress;
-                const opacity = 1 - progress;
-                
-                char.style.transform = `translateX(${currentX}px) scale(1)`;
-                char.style.opacity = opacity;
+                char.style.transform = `translateX(${endX * progress}px) scale(1)`;
+                char.style.opacity = 1 - progress;
             });
 
             charsRight.forEach((char, index) => {
-                // Se van hacia la derecha
                 const endX = 80 + (index * 25);
-                const currentX = endX * progress;
-                const opacity = 1 - progress;
-                
-                char.style.transform = `translateX(${currentX}px) scale(1)`;
-                char.style.opacity = opacity;
+                char.style.transform = `translateX(${endX * progress}px) scale(1)`;
+                char.style.opacity = 1 - progress;
             });
         }
 
-        // Función: Letras estáticas en el centro
+        // Función: Hold estático
         function animateHold(charsLeft, charsRight) {
             [...charsLeft, ...charsRight].forEach(char => {
                 char.style.transform = `translateX(0px) scale(1)`;
@@ -335,14 +292,10 @@
         }
 
         // Easing functions
-        function easeOutCubic(t) {
-            return 1 - Math.pow(1 - t, 3);
-        }
+        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+        function easeInCubic(t) { return t * t * t; }
 
-        function easeInCubic(t) {
-            return t * t * t;
-        }
-
+        // Inicializar estado
         window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
