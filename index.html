@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adon Style - Full Width Gallery</title>
+    <title>Velvett Agency</title>
     <style>
         * {
             margin: 0;
@@ -28,20 +28,20 @@
             letter-spacing: 2px;
         }
 
+        /* SECCIÓN 1: TEXTO VELVETT AGENCY */
         .hero-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 0;
             overflow: hidden;
             background-color: #0a0a0a;
+            position: relative;
         }
 
         .text-line {
-            font-size: 14vw;
+            font-size: 11.2vw; /* 14vw - 20% = 11.2vw */
             font-weight: 800;
             line-height: 0.85;
             text-transform: uppercase;
@@ -75,12 +75,7 @@
             60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        .transition-spacer {
-            height: 50vh;
-            background-color: #0a0a0a;
-        }
-
-        /* GALERÍA FULL WIDTH */
+        /* GALERÍA FULL WIDTH - 4 IMÁGENES */
         .gallery-section {
             background-color: #0a0a0a;
             position: relative;
@@ -97,33 +92,32 @@
             width: 100%;
             height: 70vh;
             overflow: hidden;
-            will-change: transform;
         }
 
         .project-image {
             width: 100%;
-            height: 120%;
+            height: 130%;
             object-fit: cover;
             display: block;
             will-change: transform;
         }
 
-        .final-spacer {
+        /* ESPACIO ENTRE GALERÍA Y TEXTO FINAL */
+        .mid-spacer {
             height: 50vh;
             background-color: #0a0a0a;
         }
 
-        /* SECCIÓN FINAL DE TEXTO */
+        /* SECCIÓN 2: TEXTO TRABAJA MODELO WEBCAM */
         .final-text-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 0;
             overflow: hidden;
             background-color: #0a0a0a;
+            position: relative;
         }
 
         .footer-spacer {
@@ -137,7 +131,7 @@
 
         @media (max-width: 768px) {
             .text-line {
-                font-size: 16vw;
+                font-size: 12.8vw; /* Reducido 20% en móvil también */
             }
 
             .project-card {
@@ -148,47 +142,56 @@
 </head>
 <body>
 
+    <!-- ESPACIO INICIAL -->
     <div class="scroll-spacer">
         <p>↓ Scroll Down ↓</p>
     </div>
 
-    <section class="hero-section">
-        <div class="text-line line-center" id="line1">RECENT</div>
-        <div class="text-line line-right" id="line2">WORK</div>
-        
+    <!-- SECCIÓN 1: VELVETT AGENCY -->
+    <section class="hero-section" id="heroSection">
+        <div class="text-line line-center" id="line1">VELVETT</div>
+        <div class="text-line line-right" id="line2">AGENCY</div>
         <div class="scroll-hint">SCROLL</div>
     </section>
 
-    <div class="transition-spacer"></div>
-
+    <!-- GALERÍA 4 IMÁGENES FULL WIDTH -->
     <section class="gallery-section">
         <div class="gallery-container">
-            <div class="project-card" data-speed="0.1">
+            <!-- Project 1 -->
+            <div class="project-card" data-speed="0.08">
                 <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1920&q=80" alt="Project 1" class="project-image">
             </div>
-
-            <div class="project-card" data-speed="0.15">
+            <!-- Project 2 -->
+            <div class="project-card" data-speed="0.1">
                 <img src="https://images.unsplash.com/photo-1507643179173-617d6545517d?w=1920&q=80" alt="Project 2" class="project-image">
+            </div>
+            <!-- Project 3 -->
+            <div class="project-card" data-speed="0.08">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80" alt="Project 3" class="project-image">
+            </div>
+            <!-- Project 4 -->
+            <div class="project-card" data-speed="0.1">
+                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1920&q=80" alt="Project 4" class="project-image">
             </div>
         </div>
     </section>
 
-    <div class="final-spacer"></div>
+    <!-- ESPACIO MEDIO -->
+    <div class="mid-spacer"></div>
 
-    <section class="final-text-section">
+    <!-- SECCIÓN 2: TRABAJA MODELO WEBCAM -->
+    <section class="final-text-section" id="finalSection">
         <div class="text-line line-center" id="line3">TRABAJA</div>
         <div class="text-line line-right" id="line4">MODELO WEBCAM</div>
     </section>
 
+    <!-- FOOTER -->
     <div class="footer-spacer">
         <p style="color: #333; font-size: 12px;">End of Page</p>
     </div>
 
     <script>
-        // SEPARAR LETRAS - PRIMER TEXTO (RECENT WORK)
-        const line1 = document.getElementById('line1');
-        const line2 = document.getElementById('line2');
-
+        // FUNCIÓN PARA SEPARAR LETRAS
         function splitText(line) {
             const text = line.innerText;
             line.innerHTML = '';
@@ -202,100 +205,120 @@
             });
         }
 
-        splitText(line1);
-        splitText(line2);
-
-        const chars1 = line1.querySelectorAll('.char');
-        const chars2 = line2.querySelectorAll('.char');
-
-        // SEPARAR LETRAS - SEGUNDO TEXTO (TRABAJA MODELO WEBCAM)
+        // INICIALIZAR TODOS LOS TEXTOS
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
         const line3 = document.getElementById('line3');
         const line4 = document.getElementById('line4');
 
+        splitText(line1);
+        splitText(line2);
         splitText(line3);
         splitText(line4);
 
+        const chars1 = line1.querySelectorAll('.char');
+        const chars2 = line2.querySelectorAll('.char');
         const chars3 = line3.querySelectorAll('.char');
         const chars4 = line4.querySelectorAll('.char');
 
-        // EFECTO DE TEXTO Y PARALLAX
+        const heroSection = document.getElementById('heroSection');
+        const finalSection = document.getElementById('finalSection');
+
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
 
             // ==========================================
-            // PRIMER TEXTO: RECENT WORK
+            // TEXTO 1: VELVETT AGENCY
+            // Entra al inicio, se queda un momento, luego desaparece
             // ==========================================
-            const textProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 0.8)));
+            const heroTop = heroSection.offsetTop;
+            const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.5)));
+            
+            // Fase de entrada (0 - 0.3)
+            const heroEnterProgress = Math.min(1, heroProgress / 0.3);
+            const easedEnter = easeOutCubic(heroEnterProgress);
+            
+            // Fase de hold (0.3 - 0.5)
+            const holdProgress = heroProgress;
+            
+            // Fase de salida (0.5 - 1.0)
+            const heroExitProgress = Math.min(1, Math.max(0, (heroProgress - 0.5) / 0.5));
+            const easedExit = easeInCubic(heroExitProgress);
 
-            // RECENT - Letras vienen desde la izquierda
-            chars1.forEach((char, index) => {
-                const startX = -100 - (index * 30);
-                const currentX = startX * (1 - textProgress);
-                const scale = 0.5 + (textProgress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
-                char.style.opacity = textProgress;
-            });
-
-            // WORK - Letras vienen desde la derecha
-            chars2.forEach((char, index) => {
-                const startX = 100 + (index * 30);
-                const currentX = startX * (1 - textProgress);
-                const scale = 0.5 + (textProgress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
-                char.style.opacity = textProgress;
-            });
+            if (heroProgress <= 0.3) {
+                // Entrada: letras se juntan
+                animateText(chars1, chars2, easedEnter, -1);
+            } else if (heroProgress > 0.5) {
+                // Salida: letras se van a los lados
+                animateText(chars1, chars2, easedExit, 1);
+            } else {
+                // Hold: letras estáticas en el centro
+                animateText(chars1, chars2, 1, 0);
+            }
 
             // ==========================================
-            // PARALLAX PARA LAS IMÁGENES
+            // PARALLAX PARA LAS 4 IMÁGENES
             // ==========================================
             const images = document.querySelectorAll('.project-card');
             
             images.forEach((card) => {
                 const rect = card.getBoundingClientRect();
                 const img = card.querySelector('.project-image');
-                const speed = parseFloat(card.dataset.speed) || 0.1;
+                const speed = parseFloat(card.dataset.speed) || 0.08;
                 
                 if (rect.top < windowHeight && rect.bottom > 0) {
                     const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const parallaxOffset = scrollProgress * 100 * speed;
+                    const parallaxOffset = scrollProgress * 120 * speed;
                     
                     img.style.transform = `translateY(${parallaxOffset}px)`;
                 }
             });
 
             // ==========================================
-            // SEGUNDO TEXTO: TRABAJA MODELO WEBCAM
+            // TEXTO 2: TRABAJA MODELO WEBCAM
+            // Aparece después de la galería
             // ==========================================
-            // Calcular posición de la sección final
-            const finalSection = document.querySelector('.final-text-section');
-            const finalRect = finalSection.getBoundingClientRect();
-            
-            // Progreso para el segundo texto (cuando entra en pantalla)
-            const finalTextProgress = Math.min(1, Math.max(0, (windowHeight - finalRect.top) / (windowHeight * 0.8)));
+            const finalTop = finalSection.offsetTop;
+            const finalProgress = Math.min(1, Math.max(0, (scrollY - finalTop + windowHeight) / (windowHeight * 0.8)));
+            const easedFinal = easeOutCubic(finalProgress);
 
-            // TRABAJA - Letras vienen desde la izquierda
-            chars3.forEach((char, index) => {
-                const startX = -100 - (index * 30);
-                const currentX = startX * (1 - finalTextProgress);
-                const scale = 0.5 + (finalTextProgress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
-                char.style.opacity = finalTextProgress;
-            });
-
-            // MODELO WEBCAM - Letras vienen desde la derecha
-            chars4.forEach((char, index) => {
-                const startX = 100 + (index * 30);
-                const currentX = startX * (1 - finalTextProgress);
-                const scale = 0.5 + (finalTextProgress * 0.5);
-                
-                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
-                char.style.opacity = finalTextProgress;
-            });
+            animateText(chars3, chars4, easedFinal, -1);
         });
+
+        // Función auxiliar para animar letras
+        function animateText(charsLeft, charsRight, progress, direction) {
+            // direction: -1 = entrada (vienen a juntarse), 1 = salida (se van a los lados)
+            
+            charsLeft.forEach((char, index) => {
+                // Letras de la izquierda vienen desde la izquierda
+                const startX = (-80 - (index * 25)) * direction;
+                const currentX = startX * (1 - progress);
+                const scale = 0.5 + (progress * 0.5);
+                
+                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.opacity = progress;
+            });
+
+            charsRight.forEach((char, index) => {
+                // Letras de la derecha vienen desde la derecha
+                const startX = (80 + (index * 25)) * direction;
+                const currentX = startX * (1 - progress);
+                const scale = 0.5 + (progress * 0.5);
+                
+                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.opacity = progress;
+            });
+        }
+
+        // Easing functions
+        function easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        function easeInCubic(t) {
+            return t * t * t;
+        }
 
         window.dispatchEvent(new Event('scroll'));
     </script>
