@@ -18,6 +18,7 @@
             overflow-x: hidden;
         }
 
+        /* ESPACIO INICIAL */
         .scroll-spacer {
             height: 100vh;
             display: flex;
@@ -28,7 +29,7 @@
             letter-spacing: 2px;
         }
 
-        /* SECCIÓN 1: TEXTO VELVETT AGENCY */
+        /* BLOQUE 1: TEXTO VELVETT AGENCY */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -37,11 +38,12 @@
             align-items: center;
             overflow: hidden;
             background-color: #0a0a0a;
-            position: relative;
+            position: sticky;
+            top: 0;
         }
 
         .text-line {
-            font-size: 11.2vw; /* 14vw - 20% = 11.2vw */
+            font-size: 11.2vw;
             font-weight: 800;
             line-height: 0.85;
             text-transform: uppercase;
@@ -75,22 +77,16 @@
             60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        /* GALERÍA FULL WIDTH - 4 IMÁGENES */
+        /* BLOQUE 2: GALERÍA 2 IMÁGENES FULL WIDTH */
         .gallery-section {
             background-color: #0a0a0a;
             position: relative;
         }
 
-        .gallery-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
         .project-card {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 75vh;
             overflow: hidden;
         }
 
@@ -102,13 +98,20 @@
             will-change: transform;
         }
 
-        /* ESPACIO ENTRE GALERÍA Y TEXTO FINAL */
-        .mid-spacer {
-            height: 50vh;
+        /* BLOQUE 3: ESPACIO NEGRO PARA FUTURO TERCER BLOQUE */
+        .block-spacer {
+            height: 100vh;
             background-color: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
         }
 
-        /* SECCIÓN 2: TEXTO TRABAJA MODELO WEBCAM */
+        /* BLOQUE 4: TEXTO TRABAJA MODELO WEBCAM */
         .final-text-section {
             height: 100vh;
             display: flex;
@@ -117,23 +120,27 @@
             align-items: center;
             overflow: hidden;
             background-color: #0a0a0a;
-            position: relative;
+            position: sticky;
+            top: 0;
         }
 
+        /* BLOQUE 5: FOOTER NEGRO */
         .footer-spacer {
             height: 100vh;
             background-color: #0a0a0a;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
             .text-line {
-                font-size: 12.8vw; /* Reducido 20% en móvil también */
+                font-size: 13vw;
             }
-
             .project-card {
                 height: 60vh;
             }
@@ -142,52 +149,43 @@
 </head>
 <body>
 
-    <!-- ESPACIO INICIAL -->
+    <!-- BLOQUE 1: VELVETT AGENCY -->
     <div class="scroll-spacer">
         <p>↓ Scroll Down ↓</p>
     </div>
 
-    <!-- SECCIÓN 1: VELVETT AGENCY -->
     <section class="hero-section" id="heroSection">
         <div class="text-line line-center" id="line1">VELVETT</div>
         <div class="text-line line-right" id="line2">AGENCY</div>
         <div class="scroll-hint">SCROLL</div>
     </section>
 
-    <!-- GALERÍA 4 IMÁGENES FULL WIDTH -->
+    <!-- BLOQUE 2: 2 IMÁGENES FULL WIDTH CON PARALLAX -->
     <section class="gallery-section">
-        <div class="gallery-container">
-            <!-- Project 1 -->
-            <div class="project-card" data-speed="0.08">
-                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1920&q=80" alt="Project 1" class="project-image">
-            </div>
-            <!-- Project 2 -->
-            <div class="project-card" data-speed="0.1">
-                <img src="https://images.unsplash.com/photo-1507643179173-617d6545517d?w=1920&q=80" alt="Project 2" class="project-image">
-            </div>
-            <!-- Project 3 -->
-            <div class="project-card" data-speed="0.08">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1920&q=80" alt="Project 3" class="project-image">
-            </div>
-            <!-- Project 4 -->
-            <div class="project-card" data-speed="0.1">
-                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1920&q=80" alt="Project 4" class="project-image">
-            </div>
+        <!-- Project 1 -->
+        <div class="project-card" data-speed="0.08">
+            <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1920&q=80" alt="Project 1" class="project-image">
+        </div>
+        <!-- Project 2 - Imagen colorida -->
+        <div class="project-card" data-speed="0.1">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1920&q=80" alt="Project 2" class="project-image">
         </div>
     </section>
 
-    <!-- ESPACIO MEDIO -->
-    <div class="mid-spacer"></div>
+    <!-- BLOQUE 3: ESPACIO NEGRO -->
+    <div class="block-spacer">
+        <p>· · ·</p>
+    </div>
 
-    <!-- SECCIÓN 2: TRABAJA MODELO WEBCAM -->
+    <!-- BLOQUE 4: TRABAJA MODELO WEBCAM -->
     <section class="final-text-section" id="finalSection">
         <div class="text-line line-center" id="line3">TRABAJA</div>
         <div class="text-line line-right" id="line4">MODELO WEBCAM</div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- BLOQUE 5: FOOTER NEGRO -->
     <div class="footer-spacer">
-        <p style="color: #333; font-size: 12px;">End of Page</p>
+        <p>Velvett Agency</p>
     </div>
 
     <script>
@@ -229,36 +227,35 @@
             const windowHeight = window.innerHeight;
 
             // ==========================================
-            // TEXTO 1: VELVETT AGENCY
-            // Entra al inicio, se queda un momento, luego desaparece
+            // BLOQUE 1: VELVETT AGENCY
+            // Entrada → Hold → Salida (se va a los lados)
             // ==========================================
             const heroTop = heroSection.offsetTop;
-            const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.5)));
+            const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.8)));
             
-            // Fase de entrada (0 - 0.3)
-            const heroEnterProgress = Math.min(1, heroProgress / 0.3);
-            const easedEnter = easeOutCubic(heroEnterProgress);
+            // Entrada (0 - 0.25)
+            const heroEnter = Math.min(1, heroProgress / 0.25);
             
-            // Fase de hold (0.3 - 0.5)
+            // Hold (0.25 - 0.45) - letras estáticas
             const holdProgress = heroProgress;
             
-            // Fase de salida (0.5 - 1.0)
-            const heroExitProgress = Math.min(1, Math.max(0, (heroProgress - 0.5) / 0.5));
-            const easedExit = easeInCubic(heroExitProgress);
+            // Salida (0.45 - 1.0) - letras se van a los lados y desaparecen
+            const heroExit = Math.min(1, Math.max(0, (heroProgress - 0.45) / 0.55));
+            const easedExit = easeInCubic(heroExit);
 
-            if (heroProgress <= 0.3) {
-                // Entrada: letras se juntan
-                animateText(chars1, chars2, easedEnter, -1);
-            } else if (heroProgress > 0.5) {
-                // Salida: letras se van a los lados
-                animateText(chars1, chars2, easedExit, 1);
+            if (heroProgress <= 0.25) {
+                // Entrada: letras vienen desde los lados
+                animateEnter(chars1, chars2, easeOutCubic(heroEnter));
+            } else if (heroProgress > 0.45) {
+                // Salida: letras se van a los lados y desaparecen
+                animateExit(chars1, chars2, easedExit);
             } else {
                 // Hold: letras estáticas en el centro
-                animateText(chars1, chars2, 1, 0);
+                animateHold(chars1, chars2);
             }
 
             // ==========================================
-            // PARALLAX PARA LAS 4 IMÁGENES
+            // BLOQUE 2: PARALLAX DE IMÁGENES
             // ==========================================
             const images = document.querySelectorAll('.project-card');
             
@@ -270,29 +267,25 @@
                 if (rect.top < windowHeight && rect.bottom > 0) {
                     const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
                     const parallaxOffset = scrollProgress * 120 * speed;
-                    
                     img.style.transform = `translateY(${parallaxOffset}px)`;
                 }
             });
 
             // ==========================================
-            // TEXTO 2: TRABAJA MODELO WEBCAM
-            // Aparece después de la galería
+            // BLOQUE 4: TRABAJA MODELO WEBCAM
+            // Entra desde los lados como el primero
             // ==========================================
             const finalTop = finalSection.offsetTop;
             const finalProgress = Math.min(1, Math.max(0, (scrollY - finalTop + windowHeight) / (windowHeight * 0.8)));
             const easedFinal = easeOutCubic(finalProgress);
 
-            animateText(chars3, chars4, easedFinal, -1);
+            animateEnter(chars3, chars4, easedFinal);
         });
 
-        // Función auxiliar para animar letras
-        function animateText(charsLeft, charsRight, progress, direction) {
-            // direction: -1 = entrada (vienen a juntarse), 1 = salida (se van a los lados)
-            
+        // Función: Letras entran desde los lados hacia el centro
+        function animateEnter(charsLeft, charsRight, progress) {
             charsLeft.forEach((char, index) => {
-                // Letras de la izquierda vienen desde la izquierda
-                const startX = (-80 - (index * 25)) * direction;
+                const startX = -80 - (index * 25);
                 const currentX = startX * (1 - progress);
                 const scale = 0.5 + (progress * 0.5);
                 
@@ -301,13 +294,43 @@
             });
 
             charsRight.forEach((char, index) => {
-                // Letras de la derecha vienen desde la derecha
-                const startX = (80 + (index * 25)) * direction;
+                const startX = 80 + (index * 25);
                 const currentX = startX * (1 - progress);
                 const scale = 0.5 + (progress * 0.5);
                 
                 char.style.transform = `translateX(${currentX}px) scale(${scale})`;
                 char.style.opacity = progress;
+            });
+        }
+
+        // Función: Letras se van a los lados y desaparecen
+        function animateExit(charsLeft, charsRight, progress) {
+            charsLeft.forEach((char, index) => {
+                // Se van hacia la izquierda
+                const endX = -80 - (index * 25);
+                const currentX = endX * progress;
+                const opacity = 1 - progress;
+                
+                char.style.transform = `translateX(${currentX}px) scale(1)`;
+                char.style.opacity = opacity;
+            });
+
+            charsRight.forEach((char, index) => {
+                // Se van hacia la derecha
+                const endX = 80 + (index * 25);
+                const currentX = endX * progress;
+                const opacity = 1 - progress;
+                
+                char.style.transform = `translateX(${currentX}px) scale(1)`;
+                char.style.opacity = opacity;
+            });
+        }
+
+        // Función: Letras estáticas en el centro
+        function animateHold(charsLeft, charsRight) {
+            [...charsLeft, ...charsRight].forEach(char => {
+                char.style.transform = `translateX(0px) scale(1)`;
+                char.style.opacity = 1;
             });
         }
 
