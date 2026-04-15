@@ -81,25 +81,62 @@
             60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        /* BLOQUE 2 & 4: GALERÍAS FULL WIDTH */
+        /* BLOQUE 2: GALERÍA 8 IMÁGENES (2 COLUMNAS) */
         .gallery-section {
             background-color: #0a0a0a;
-            position: relative;
+            padding: 80px 40px 100px;
+        }
+
+        .gallery-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
         }
 
         .project-card {
             position: relative;
-            width: 100%;
-            height: 75vh;
             overflow: hidden;
+            border-radius: 14px;
+            background-color: #111;
         }
 
         .project-image {
             width: 100%;
-            height: 130%;
+            height: 520px;
             object-fit: cover;
             display: block;
-            will-change: transform;
+            border-radius: 14px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.03);
+        }
+
+        .project-info {
+            padding: 24px 4px 0;
+        }
+
+        .project-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .project-category {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .project-year {
+            font-size: 0.78rem;
+            color: #444;
         }
 
         /* BLOQUE 3: ESPACIO NEGRO SEPARADOR */
@@ -128,12 +165,22 @@
             font-size: 0.8rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .text-line {
                 font-size: 13vw;
             }
-            .project-card {
-                height: 60vh;
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .project-image {
+                height: 380px;
+            }
+            
+            .gallery-section {
+                padding: 60px 20px 80px;
             }
         }
     </style>
@@ -152,13 +199,86 @@
         <div class="scroll-hint">SCROLL</div>
     </section>
 
-    <!-- BLOQUE 2: IMÁGENES 1 & 2 -->
+    <!-- BLOQUE 2: GALERÍA 8 IMÁGENES (4 FILAS x 2 COLUMNAS) -->
     <section class="gallery-section">
-        <div class="project-card" data-speed="0.08">
-            <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1920&q=80" alt="Project 1" class="project-image">
-        </div>
-        <div class="project-card" data-speed="0.10">
-            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1920&q=80" alt="Project 2" class="project-image">
+        <div class="gallery-grid">
+            
+            <!-- FILA 1: Project 1A y 1B -->
+            <div class="project-card" data-speed="0.05">
+                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=900&q=80" alt="Project 1A" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Save Me Saudia</h3>
+                    <p class="project-category">Communication, Social Media</p>
+                    <span class="project-year">(2020)</span>
+                </div>
+            </div>
+
+            <div class="project-card" data-speed="0.08">
+                <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=900&q=80" alt="Project 1B" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Neon Dreams</h3>
+                    <p class="project-category">Visual Identity, Campaign</p>
+                    <span class="project-year">(2021)</span>
+                </div>
+            </div>
+
+            <!-- FILA 2: Project 2A y 2B -->
+            <div class="project-card" data-speed="0.06">
+                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=900&q=80" alt="Project 2A" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Lambax Nanak</h3>
+                    <p class="project-category">Strategy, Visual Identity, Re-branding</p>
+                    <span class="project-year">(2022)</span>
+                </div>
+            </div>
+
+            <div class="project-card" data-speed="0.09">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=900&q=80" alt="Project 2B" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Chromatic Flow</h3>
+                    <p class="project-category">Art Direction, Photography</p>
+                    <span class="project-year">(2023)</span>
+                </div>
+            </div>
+
+            <!-- FILA 3: Project 3A y 3B -->
+            <div class="project-card" data-speed="0.05">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80" alt="Project 3A" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Arrox Digital Agency HTML Template</h3>
+                    <p class="project-category">WordPress, Themeforest</p>
+                    <span class="project-year">(2025)</span>
+                </div>
+            </div>
+
+            <div class="project-card" data-speed="0.08">
+                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=900&q=80" alt="Project 3B" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Abstract Horizons</h3>
+                    <p class="project-category">Design, 3D Render</p>
+                    <span class="project-year">(2024)</span>
+                </div>
+            </div>
+
+            <!-- FILA 4: Project 4A y 4B -->
+            <div class="project-card" data-speed="0.06">
+                <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=900&q=80" alt="Project 4A" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Gradient Pulse</h3>
+                    <p class="project-category">Branding, Motion</p>
+                    <span class="project-year">(2023)</span>
+                </div>
+            </div>
+
+            <div class="project-card" data-speed="0.09">
+                <img src="https://images.unsplash.com/photo-1604871000636-074fa5117945?w=900&q=80" alt="Project 4B" class="project-image">
+                <div class="project-info">
+                    <h3 class="project-title">Luminous Space</h3>
+                    <p class="project-category">Interior, Architecture</p>
+                    <span class="project-year">(2022)</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -166,16 +286,6 @@
     <div class="block-spacer">
         <p>· · ·</p>
     </div>
-
-    <!-- BLOQUE 4: IMÁGENES 3 & 4 -->
-    <section class="gallery-section">
-        <div class="project-card" data-speed="0.08">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="Project 3" class="project-image">
-        </div>
-        <div class="project-card" data-speed="0.10">
-            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1920&q=80" alt="Project 4" class="project-image">
-        </div>
-    </section>
 
     <!-- BLOQUE 5: FOOTER -->
     <div class="footer-spacer">
@@ -212,18 +322,12 @@
             const windowHeight = window.innerHeight;
 
             // ==========================================
-            // ANIMACIÓN TEXTO 1: VELVETT AGENCY
+            // ANIMACIÓN TEXTO: VELVETT AGENCY
             // ==========================================
             const heroTop = heroSection.offsetTop;
             const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.8)));
             
-            // Fase 1: Entrada (0 - 0.25)
             const heroEnter = Math.min(1, heroProgress / 0.25);
-            
-            // Fase 2: Hold (0.25 - 0.45)
-            const holdProgress = heroProgress;
-            
-            // Fase 3: Salida a los lados (0.45 - 1.0)
             const heroExit = Math.min(1, Math.max(0, (heroProgress - 0.45) / 0.55));
             const easedExit = easeInCubic(heroExit);
 
@@ -236,18 +340,18 @@
             }
 
             // ==========================================
-            // PARALLAX PARA TODAS LAS IMÁGENES (1 a 4)
+            // PARALLAX PARA LAS 8 IMÁGENES
             // ==========================================
             const images = document.querySelectorAll('.project-card');
             
             images.forEach((card) => {
                 const rect = card.getBoundingClientRect();
                 const img = card.querySelector('.project-image');
-                const speed = parseFloat(card.dataset.speed) || 0.08;
+                const speed = parseFloat(card.dataset.speed) || 0.05;
                 
                 if (rect.top < windowHeight && rect.bottom > 0) {
                     const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const parallaxOffset = scrollProgress * 120 * speed;
+                    const parallaxOffset = scrollProgress * 80 * speed;
                     img.style.transform = `translateY(${parallaxOffset}px)`;
                 }
             });
