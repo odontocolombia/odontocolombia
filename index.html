@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adon Style - Smooth Flow</title>
+    <title>Adon Style - Professional Flow</title>
     <style>
         * {
             margin: 0;
@@ -56,12 +56,12 @@
             text-transform: uppercase;
             white-space: nowrap;
             position: relative;
-            will-change: transform, opacity;
+            will-change: transform;
         }
 
         .char {
             display: inline-block;
-            will-change: transform, opacity;
+            will-change: transform;
         }
 
         .line-right {
@@ -82,18 +82,15 @@
             opacity: 0;
             pointer-events: none;
             z-index: 5;
-            will-change: opacity, transform;
+            will-change: opacity;
         }
 
         .image-wrapper {
             position: relative;
-            width: 0;
-            height: 0;
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
-            will-change: transform, width, height, opacity;
+            will-change: transform, width, height;
             opacity: 0;
-            transform: translateY(60px);
         }
 
         .image-wrapper img {
@@ -108,11 +105,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 50px 30px 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+            padding: 60px 28px 28px;
+            background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 55%, transparent 100%);
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(15px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .image-info.visible {
@@ -121,23 +118,23 @@
         }
 
         .image-info h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .image-info p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #aaa;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .image-info .year {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 6px;
         }
 
         .final-spacer {
@@ -147,33 +144,17 @@
 
         .scroll-hint {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 11px;
-            color: #666;
+            font-size: 10px;
+            color: #444;
             opacity: 0;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fadeInBounce 2s ease-in-out infinite;
+            letter-spacing: 4px;
         }
 
-        @keyframes fadeInBounce {
-            0%, 20%, 50%, 80%, 100% {
-                opacity: 0.5;
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                opacity: 0.2;
-                transform: translateX(-50%) translateY(-8px);
-            }
-            60% {
-                opacity: 0.3;
-                transform: translateX(-50%) translateY(-4px);
-            }
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .text-line {
                 font-size: 16vw;
             }
@@ -182,11 +163,6 @@
                 flex-direction: column;
                 gap: 16px;
                 padding: 20px;
-            }
-            
-            .image-wrapper {
-                width: 100vw !important;
-                height: 45vh !important;
             }
         }
     </style>
@@ -254,135 +230,141 @@
         const chars1 = line1.querySelectorAll('.char');
         const chars2 = line2.querySelectorAll('.char');
 
-        // Easing functions para transiciones suaves
+        // Professional easing functions
         function easeOutCubic(t) {
             return 1 - Math.pow(1 - t, 3);
+        }
+
+        function easeInCubic(t) {
+            return t * t * t;
         }
 
         function easeInOutCubic(t) {
             return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
 
-        function easeOutExpo(t) {
-            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-        }
-
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
             
-            // Progresso total normalizado (0 a 1)
-            // El efecto completo ocurre en 2x la altura de la ventana
-            const totalProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 2)));
+            // Total scroll para completar todo el efecto: 3x la ventana
+            const totalProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 3)));
             
             // ==========================================
-            // FASE 1: ENTRADA DE LETRAS (0 - 0.35)
-            // Las letras se juntan desde los lados
+            // FASE 1: ENTRADA DE LETRAS (0 - 0.20)
+            // Letras vienen desde los lados y se juntan
             // ==========================================
-            const textEnterProgress = Math.min(1, totalProgress / 0.35);
+            const textEnterProgress = Math.min(1, totalProgress / 0.20);
             const easedEnter = easeOutCubic(textEnterProgress);
             
             [chars1, chars2].forEach((chars, lineIndex) => {
                 const totalChars = chars.length;
                 
                 chars.forEach((char, index) => {
-                    // Calcular posición relativa al centro (-1 a 1)
+                    // Posición relativa: -1 (izquierda) a 1 (derecha)
                     const relativePos = (index / (totalChars - 1)) * 2 - 1;
                     
-                    // Al inicio: muy separadas (200px * posición relativa)
-                    // Al final: juntas (0px)
-                    const spread = 200 * (1 - easedEnter);
+                    // Separación inicial: 250px desde los lados
+                    const spread = 250 * (1 - easedEnter);
                     const translateX = relativePos * spread;
                     
-                    // Scale: empieza pequeño (0.8) y crece a normal (1)
-                    const scale = 0.8 + (0.2 * easedEnter);
-                    
-                    // Opacidad: aparece gradualmente
-                    const opacity = easedEnter;
+                    // Scale sutil: 0.95 a 1
+                    const scale = 0.95 + (0.05 * easedEnter);
                     
                     char.style.transform = `translateX(${translateX}px) scale(${scale})`;
-                    char.style.opacity = opacity;
+                    char.style.opacity = 1; // Sin difuminado
                 });
             });
 
-            // Mostrar hint de scroll cuando las letras estén listas
-            if (textEnterProgress > 0.7 && totalProgress < 0.35) {
-                scrollHint.style.opacity = (textEnterProgress - 0.7) / 0.3 * 0.6;
+            // ==========================================
+            // FASE 2: HOLD - LETRAS ESTÁTICAS (0.20 - 0.40)
+            // Las letras se quedan quietas 2 segundos
+            // ==========================================
+            const holdProgress = totalProgress; // Entre 0.20 y 0.40
+            
+            if (totalProgress >= 0.20 && totalProgress < 0.40) {
+                // Mantener posición final de las letras
+                [chars1, chars2].forEach((chars) => {
+                    const totalChars = chars.length;
+                    
+                    chars.forEach((char, index) => {
+                        const relativePos = (index / (totalChars - 1)) * 2 - 1;
+                        
+                        char.style.transform = `translateX(0px) scale(1)`;
+                        char.style.opacity = 1;
+                    });
+                });
             }
 
             // ==========================================
-            // FASE 2: SALIDA DE LETRAS (0.3 - 0.5)
-            // Las letras se mueven hacia arriba y desaparecen
+            // FASE 3: SALIDA DE LETRAS (0.40 - 0.60)
+            // Las letras vuelven a los lados (mismo camino inverso)
             // ==========================================
-            const textExitProgress = Math.min(1, Math.max(0, (totalProgress - 0.3) / 0.2));
+            const textExitProgress = Math.min(1, Math.max(0, (totalProgress - 0.40) / 0.20));
             
-            if (totalProgress > 0.3) {
-                // Las letras se mueven hacia arriba rápidamente
-                const translateY = -150 * easeOutExpo(textExitProgress);
-                const opacity = 1 - easeOutExpo(textExitProgress);
-                const scale = 1 - (0.3 * textExitProgress);
-                
-                textContainer.style.transform = `translateY(${translateY}px) scale(${scale})`;
-                textContainer.style.opacity = opacity;
-                
-                // Fade out del hint
-                scrollHint.style.opacity = Math.max(0, 0.6 - (textExitProgress * 2));
+            if (totalProgress >= 0.40 && totalProgress < 0.60) {
+                [chars1, chars2].forEach((chars, lineIndex) => {
+                    const totalChars = chars.length;
+                    
+                    chars.forEach((char, index) => {
+                        const relativePos = (index / (totalChars - 1)) * 2 - 1;
+                        
+                        // Vuelven a separarse hacia los lados
+                        const spread = 250 * easeOutCubic(textExitProgress);
+                        const translateX = relativePos * spread;
+                        
+                        // Scale vuelve a 0.95
+                        const scale = 1 - (0.05 * textExitProgress);
+                        
+                        char.style.transform = `translateX(${translateX}px) scale(${scale})`;
+                        char.style.opacity = 1; // Sin difuminado
+                    });
+                });
             }
 
             // ==========================================
-            // FASE 3: ENTRADA DE IMÁGENES (0.4 - 0.85)
-            // Las imágenes aparecen desde abajo y crecen
+            // FASE 4: ENTRADA DE IMÁGENES (0.45 - 0.85)
+            // Aparecen centradas, crecen a tamaño normal
             // ==========================================
-            const imageEnterProgress = Math.min(1, Math.max(0, (totalProgress - 0.4) / 0.45));
-            const easedImage = easeInOutCubic(imageEnterProgress);
+            const imageProgress = Math.min(1, Math.max(0, (totalProgress - 0.45) / 0.40));
+            const easedImage = easeInOutCubic(imageProgress);
             
-            // Mostrar contenedor de imágenes
-            if (totalProgress > 0.35) {
-                imagesContainer.style.opacity = Math.min(1, (totalProgress - 0.35) / 0.15);
+            // Mostrar contenedor
+            if (totalProgress > 0.40) {
+                imagesContainer.style.opacity = Math.min(1, (totalProgress - 0.40) / 0.15);
                 imagesContainer.style.pointerEvents = 'auto';
             }
 
-            // Dimensiones objetivo para las imágenes
-            const targetWidth = 48; // 48vw cada una
-            const targetHeight = 75; // 75vh
+            // Tamaños finales normales para las imágenes
+            const finalWidth = 46; // 46vw cada imagen
+            const finalHeight = 65; // 65vh cada imagen
             
             [img1, img2].forEach((img, index) => {
                 const info = img.querySelector('.image-info');
                 const isLeft = index === 0;
                 
-                // Calcular posición horizontal final
-                // Izquierda: centrada en el cuarto izquierdo
-                // Derecha: centrada en el cuarto derecho
-                const centerX = isLeft ? 25 : 75; // porcentaje del ancho
+                // Progresión de tamaño: desde 0 hasta el tamaño final
+                const currentWidth = finalWidth * easedImage;
+                const currentHeight = finalHeight * easedImage;
                 
-                // Ancho y alto progresivos
-                const currentWidth = targetWidth * easedImage;
-                const currentHeight = targetHeight * easedImage;
-                
-                // Posición Y: viene desde abajo (60px) hasta su posición final
-                const translateY = 60 * (1 - easedImage);
-                
-                // Opacidad: aparece gradualmente
+                // Opacidad progresiva
                 const opacity = easedImage;
                 
-                // Separación horizontal progresiva
-                const translateX = isLeft ? -15 * easedImage : 15 * easedImage;
+                // Sin movimiento horizontal, solo crecimiento desde el centro
+                const translateY = 30 * (1 - easedImage); // Viene ligeramente desde abajo
                 
-                // Border radius: empieza redondeado (30px) y se ajusta
-                const borderRadius = 30 * (1 - easedImage * 0.5);
+                // Border radius progresivo
+                const borderRadius = 20 * (1 - easedImage * 0.3);
                 
                 // Aplicar estilos
                 img.style.width = `${currentWidth}vw`;
                 img.style.height = `${currentHeight}vh`;
                 img.style.opacity = opacity;
-                img.style.transform = `
-                    translateY(${translateY}px) 
-                    translateX(${translateX}vw)
-                `;
+                img.style.transform = `translateY(${translateY}px)`;
                 img.style.borderRadius = `${borderRadius}px`;
                 
-                // Mostrar información cuando las imágenes estén casi completas
-                if (easedImage > 0.6) {
+                // Información aparece al final
+                if (easedImage > 0.7) {
                     info.classList.add('visible');
                 } else {
                     info.classList.remove('visible');
@@ -390,38 +372,37 @@
             });
 
             // ==========================================
-            // FASE 4: AJUSTE FINAL (0.85 - 1.0)
-            // Las imágenes se posicionan perfectamente
+            // FASE 5: AJUSTE FINAL SUTIL (0.85 - 1.0)
+            // Expansión mínima para posicionamiento perfecto
             // ==========================================
             const finalProgress = Math.min(1, Math.max(0, (totalProgress - 0.85) / 0.15));
             const easedFinal = easeOutCubic(finalProgress);
             
             if (finalProgress > 0) {
-                // Ajuste sutil de tamaño y posición
                 [img1, img2].forEach((img, index) => {
-                    const isLeft = index === 0;
+                    // Expansión mínima: solo 2% más grande
+                    const extraWidth = 2 * easedFinal;
+                    const extraHeight = 3 * easedFinal;
                     
-                    // Tamaño final: 50vw x 80vh
-                    const finalWidth = targetWidth + (2 * easedFinal);
-                    const finalHeight = targetHeight + (5 * easedFinal);
-                    
-                    // Posición final separada
-                    const finalX = isLeft ? -15 - (8 * easedFinal) : 15 + (8 * easedFinal);
-                    
-                    img.style.width = `${finalWidth}vw`;
-                    img.style.height = `${finalHeight}vh`;
-                    
-                    // Actualizar translateX manteniendo el translateY
-                    const currentTransform = img.style.transform;
-                    const translateYMatch = currentTransform.match(/translateY\([^)]+\)/);
-                    const translateY = translateYMatch ? translateYMatch[0] : 'translateY(0px)';
-                    
-                    img.style.transform = `${translateY} translateX(${finalX}vw)`;
+                    img.style.width = `${finalWidth + extraWidth}vw`;
+                    img.style.height = `${finalHeight + extraHeight}vh`;
                 });
+            }
+
+            // Scroll hint visible durante el hold
+            if (totalProgress >= 0.15 && totalProgress < 0.45) {
+                const hintOpacity = totalProgress < 0.20 
+                    ? (totalProgress - 0.15) / 0.05 * 0.4
+                    : totalProgress < 0.40 
+                        ? 0.4 
+                        : 0.4 * (1 - (totalProgress - 0.40) / 0.05);
+                scrollHint.style.opacity = Math.max(0, hintOpacity);
+            } else {
+                scrollHint.style.opacity = 0;
             }
         });
 
-        // Inicializar estado
+        // Inicializar
         window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
