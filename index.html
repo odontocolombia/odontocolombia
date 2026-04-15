@@ -11,28 +11,60 @@
       box-sizing: border-box;
     }
 
-    body {
-      background-color: #111;
-      color: #fff;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
+    :root {
+      --card-w: 200px;
+      --card-h: 290px;
+      --gap: 16px;
+      --bg: #0a0a0a;
+      --white: #ffffff;
+      --accent: #c8ff00;
     }
 
-    /* ── TEXTO DE FONDO "EXPERIENCIA VELVETT" ─ */
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 250vh; /* Espacio para scroll */
+    }
+
+    /* ─ FONDO ANIMADO ── */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(200, 255, 0, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── TEXTO DE FONDO ── */
     .bg-brand {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: clamp(60px, 10vw, 140px);
+      font-size: clamp(50px, 9vw, 130px);
       font-weight: 900;
-      color: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.025);
       white-space: nowrap;
       pointer-events: none;
       z-index: 0;
       text-transform: uppercase;
-      letter-spacing: 6px;
+      letter-spacing: 8px;
       user-select: none;
     }
 
@@ -43,21 +75,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 80px 20px 60px;
-      min-height: 100vh;
+      padding: 120px 20px 100px;
     }
 
     /* ── HEADER ── */
     .section-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 0.3s;
     }
 
     .section-header h1 {
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .section-header .explore-link {
@@ -66,61 +104,123 @@
       color: #555;
       text-decoration: none;
       cursor: pointer;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
-      transition: color 0.3s, border-color 0.3s;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .section-header .explore-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: #555;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.3s;
     }
 
     .section-header .explore-link:hover {
       color: #fff;
-      border-bottom-color: #fff;
     }
 
-    /* ── CONTENEDOR DE TARJETAS (con perspectiva para animación) ── */
+    .section-header .explore-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+      background: #fff;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ETAPA DE TARJETAS ── */
     .cards-stage {
       position: relative;
       width: 100%;
-      max-width: 1100px;
-      height: 340px;
+      max-width: 1200px;
+      height: var(--card-h);
       display: flex;
       align-items: center;
       justify-content: center;
-      perspective: 1200px;
+      perspective: 1400px;
     }
 
-    /* ─ TARJETAS ── */
+    /* ── TARJETAS ─ */
     .card {
       position: absolute;
+      width: var(--card-w);
+      height: var(--card-h);
       background: #fff;
       color: #111;
-      width: 190px;
-      min-height: 280px;
-      border-radius: 16px;
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 32px 20px;
+      padding: 36px 22px;
       cursor: pointer;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s ease,
-                  opacity 0.6s ease;
-      opacity: 0;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       will-change: transform, opacity;
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      transition: box-shadow 0.4s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #c8ff00, #00d4ff);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
     .card .card-icon {
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 4px;
+      position: relative;
+    }
+
+    .card .card-icon::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 255, 0, 0.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover .card-icon::after {
+      opacity: 1;
     }
 
     .card .card-icon svg {
       width: 44px;
       height: 44px;
+      position: relative;
+      z-index: 1;
     }
 
     .card .card-title {
@@ -128,117 +228,232 @@
       font-weight: 700;
       text-align: center;
       line-height: 1.35;
+      letter-spacing: -0.2px;
     }
 
     /* ── TARJETA CENTRAL DESTACADA ── */
     .card.center-highlight {
-      border: 2.5px solid transparent;
+      z-index: 10;
     }
 
-    .card.center-highlight::after {
+    .card.center-highlight .card-icon {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c8ff00 0%, #00d4ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(200, 255, 0, 0.3);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    .card.center-highlight .card-icon svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    .card.center-highlight .card-icon::before {
       content: '';
       position: absolute;
-      inset: -3px;
-      border-radius: 19px;
-      padding: 2.5px;
-      background: linear-gradient(135deg, #ffffff, #999999);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(200, 255, 0, 0.3);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+
+    .card.center-highlight .card-title {
+      color: #c8ff00;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(200, 255, 0, 0.3); }
+      50% { box-shadow: 0 0 50px rgba(200, 255, 0, 0.5); }
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.5; }
+    }
+
+    /* ── INDICADOR DE PROGRESO ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #c8ff00, #00d4ff);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── HINT ── */
+    .scroll-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+      color: #555;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .scroll-hint .arrow {
+      width: 20px;
+      height: 30px;
+      border: 2px solid #555;
+      border-radius: 10px;
+      position: relative;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .scroll-hint .arrow::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 8px;
+      background: #555;
+      border-radius: 2px;
+      animation: dotBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    @keyframes dotBounce {
+      0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+    }
+
+    .scroll-hint.hidden {
+      opacity: 0;
+      transform: translateY(20px);
       pointer-events: none;
     }
 
     /* ── PLUS BUTTON ── */
     .plus-btn {
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: #fff;
-      color: #111;
-      border: none;
-      font-size: 26px;
+      background: transparent;
+      color: #555;
+      border: 2px solid #333;
+      font-size: 24px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 30px;
-      transition: transform 0.3s, background 0.3s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 10;
       position: relative;
     }
 
     .plus-btn:hover {
+      color: #c8ff00;
+      border-color: #c8ff00;
       transform: rotate(90deg) scale(1.1);
-      background: #ddd;
+      box-shadow: 0 0 25px rgba(200, 255, 0, 0.2);
     }
 
-    /* ── SCROLL HINT ── */
-    .scroll-hint {
-      margin-top: 20px;
-      color: #444;
-      font-size: 13px;
-      text-align: center;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    .plus-btn:active {
+      transform: rotate(90deg) scale(0.95);
     }
 
     /* ── SCROLL TO TOP ── */
     .scroll-top {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 42px;
-      height: 42px;
+      bottom: 30px;
+      right: 30px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: #333;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       color: #fff;
-      border: 1px solid #444;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transition: opacity 0.3s, background 0.3s;
+      transform: translateY(10px);
+      transition: all 0.3s;
       z-index: 100;
     }
 
     .scroll-top.show {
       opacity: 1;
+      transform: translateY(0);
     }
 
     .scroll-top:hover {
-      background: #555;
+      background: rgba(200, 255, 0, 0.15);
+      border-color: #c8ff00;
+      color: #c8ff00;
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .cards-stage {
-        height: 280px;
+      :root {
+        --card-w: 155px;
+        --card-h: 230px;
       }
       .card {
-        width: 150px;
-        min-height: 220px;
         padding: 24px 14px;
+        border-radius: 16px;
+      }
+      .card .card-icon {
+        width: 46px;
+        height: 46px;
       }
       .card .card-icon svg {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
       }
       .card .card-title {
         font-size: 13px;
+      }
+      .card.center-highlight .card-icon {
+        width: 52px;
+        height: 52px;
+      }
+      .card.center-highlight .card-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+      .main-container {
+        padding: 80px 10px 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --card-w: 140px;
+        --card-h: 200px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- FONDO DECORATIVO -->
+  <!-- FONDO -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
   <div class="bg-brand">Experiencia Velvett</div>
+
+  <!-- BARRA DE PROGRESO -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- CONTENEDOR PRINCIPAL -->
   <div class="main-container">
@@ -255,7 +470,7 @@
       <!-- Card 1 -->
       <div class="card" data-index="0">
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="24" y1="4" x2="24" y2="44"/>
             <line x1="4" y1="24" x2="44" y2="24"/>
             <line x1="8" y1="8" x2="40" y2="40"/>
@@ -268,7 +483,7 @@
       <!-- Card 2 -->
       <div class="card" data-index="1">
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
             <circle cx="24" cy="24" r="18"/>
             <path d="M24 6 C24 6, 6 24, 24 24 C24 24, 42 24, 24 42" fill="#111"/>
             <path d="M24 6 C24 6, 42 24, 24 24 C24 24, 6 24, 24 42" stroke="#111" fill="none"/>
@@ -277,10 +492,10 @@
         <div class="card-title">Excelencia<br>Comprobada</div>
       </div>
 
-      <!-- Card 3 (CENTRO — destacada) -->
+      <!-- Card 3 (CENTRO) -->
       <div class="card center-highlight" data-index="2">
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
             <rect x="6" y="6" width="22" height="22" rx="2"/>
             <rect x="20" y="20" width="22" height="22" rx="2"/>
           </svg>
@@ -291,7 +506,7 @@
       <!-- Card 4 -->
       <div class="card" data-index="3">
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14 Z"/>
             <line x1="24" y1="4" x2="24" y2="44"/>
             <line x1="6" y1="14" x2="24" y2="24"/>
@@ -304,7 +519,7 @@
       <!-- Card 5 -->
       <div class="card" data-index="4">
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
             <circle cx="24" cy="24" r="18"/>
             <path d="M24 6 A18 18 0 0 1 42 24 L24 24 Z" fill="#111"/>
             <rect x="21" y="21" width="6" height="6" fill="#111"/>
@@ -316,7 +531,10 @@
     </div>
 
     <!-- HINT -->
-    <div class="scroll-hint" id="scrollHint">↓ Desliza para desplegar ↓</div>
+    <div class="scroll-hint" id="scrollHint">
+      <div class="arrow"></div>
+      Desliza para desplegar
+    </div>
 
     <!-- PLUS -->
     <button class="plus-btn" id="plusBtn">+</button>
@@ -330,89 +548,122 @@
     const cards = document.querySelectorAll('.card');
     const stage = document.getElementById('cardsStage');
     const scrollHint = document.getElementById('scrollHint');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const scrollTopBtn = document.getElementById('scrollTop');
 
     const totalCards = cards.length;
-    const spreadDistance = 200; // px de separación entre tarjetas
+    const cardW = 200;
+    const gap = 16;
+    const step = cardW + gap;
 
-    // ── POSICIONES FINALES (distribución horizontal) ──
-    const cardWidth = 190;
-    const totalWidth = totalCards * (cardWidth + 12);
-    const startX = -(totalWidth / 2) + cardWidth / 2;
+    // ── EASING FUNCTIONS ──
+    const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    const easeOutBack = t => {
+      const c1 = 1.70158;
+      const c3 = c1 + 1;
+      return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+    };
+    const easeInOutQuart = t => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
 
-    // ── ESTADO INICIAL: TODAS AGRUPADAS EN EL CENTRO ──
-    function setInitialState() {
+    // ── CALCULATE SPREAD POSITIONS ──
+    function getFinalX(i) {
+      return (i - Math.floor(totalCards / 2)) * step;
+    }
+
+    // ── INIT: STACKED DECK ──
+    function initCards() {
       cards.forEach((card, i) => {
-        // Apiladas: todas centradas con ligera rotación y offset vertical escalonado
-        const offsetY = i * -6;
-        const rotation = (i - Math.floor(totalCards / 2)) * 3;
-        card.style.transform = `translate(0px, ${offsetY}px) rotate(${rotation}deg) scale(0.85)`;
+        const fanAngle = (i - Math.floor(totalCards / 2)) * 8;
+        const stackY = i * -4;
+        const stackX = (i - Math.floor(totalCards / 2)) * 6;
+        const scale = 0.92 - Math.abs(i - Math.floor(totalCards / 2)) * 0.03;
+
+        card.style.transform = `translate(${stackX}px, ${stackY}px) rotate(${fanAngle}deg) scale(${scale})`;
+        card.style.opacity = 0.6 + (1 - Math.abs(i - Math.floor(totalCards / 2)) / totalCards) * 0.4;
         card.style.zIndex = i;
       });
     }
 
-    // ── POSICIÓN FINAL DESPLEGADA ──
-    function setFinalState() {
-      cards.forEach((card, i) => {
-        const offsetX = i * (cardWidth + 12) - (totalCards - 1) * (cardWidth + 12) / 2;
-        card.style.transform = `translate(${offsetX}px, 0px) rotate(0deg) scale(1)`;
-        card.style.zIndex = 2;
-      });
-    }
-
-    // ─ ANIMACIÓN BASADA EN SCROLL ──
-    let animating = false;
-
-    function handleScroll() {
+    // ── SCROLL-DRIVEN ANIMATION ──
+    function onScroll() {
       const scrollY = window.scrollY;
-      const viewportH = window.innerHeight;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const rawProgress = Math.min(scrollY / (docH * 0.5), 1);
+      const progress = easeOutExpo(rawProgress);
 
-      // Progreso: 0 = agrupado, 1 = desplegado
-      const progress = Math.min(scrollY / (viewportH * 0.7), 1);
-
-      // Easing suave
-      const eased = easeOutCubic(progress);
+      // Progress bar
+      scrollProgress.style.width = (progress * 100) + '%';
 
       cards.forEach((card, i) => {
-        const startX = -(totalCards - 1) * (cardWidth + 12) / 2;
-        const endX = i * (cardWidth + 12) - (totalCards - 1) * (cardWidth + 12) / 2;
-        const offsetX = startX + (endX - startX) * eased;
+        // Start position (stacked)
+        const fanAngle = (i - Math.floor(totalCards / 2)) * 8;
+        const stackY = i * -4;
+        const stackX = (i - Math.floor(totalCards / 2)) * 6;
+        const startScale = 0.92 - Math.abs(i - Math.floor(totalCards / 2)) * 0.03;
 
-        const startY = i * -6;
-        const endY = 0;
-        const offsetY = startY + (endY - startY) * eased;
-
-        const startRotation = (i - Math.floor(totalCards / 2)) * 3;
-        const rotation = startRotation * (1 - eased);
-
-        const startScale = 0.85;
+        // End position (spread)
+        const endX = getFinalX(i);
+        const endAngle = 0;
         const endScale = 1;
-        const scale = startScale + (endScale - startScale) * eased;
 
-        card.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg) scale(${scale})`;
+        // Interpolate with slight per-card delay
+        const cardDelay = 0.08 * i;
+        const cardProgress = Math.max(0, Math.min(1, (progress - cardDelay) / (1 - cardDelay)));
+        const easedProgress = easeOutBack(cardProgress);
 
-        // Opacidad progresiva
-        card.style.opacity = 0.3 + eased * 0.7;
+        const currentX = stackX + (endX - stackX) * easedProgress;
+        const currentY = stackY * (1 - easedProgress);
+        const currentAngle = fanAngle * (1 - easedProgress);
+        const currentScale = startScale + (endScale - startScale) * easedProgress;
+        const currentOpacity = 0.4 + 0.6 * easedProgress;
+
+        // Add subtle parallax: odd cards move slightly more up
+        const parallaxY = (i % 2 === 0 ? -1 : 1) * 15 * (1 - easedProgress);
+
+        card.style.transform = `translate(${currentX}px, ${currentY + parallaxY}px) rotate(${currentAngle}deg) scale(${currentScale})`;
+        card.style.opacity = currentOpacity;
+        card.style.zIndex = 2 + Math.abs(i - Math.floor(totalCards / 2));
+
+        // Hide hint
+        if (progress > 0.6) {
+          scrollHint.classList.add('hidden');
+        } else {
+          scrollHint.classList.remove('hidden');
+        }
       });
-
-      // Ocultar hint cuando se despliega
-      if (progress > 0.5) {
-        scrollHint.style.opacity = '0';
-        scrollHint.style.pointerEvents = 'none';
-      } else {
-        scrollHint.style.opacity = '1';
-        scrollHint.style.pointerEvents = 'auto';
-      }
     }
 
-    function easeOutCubic(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
+    // ── HOVER: SUBTLE LIFT ON SPREAD CARDS ──
+    let isSpread = false;
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (isSpread) {
+          const currentTransform = card.style.transform;
+          card.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+          card.style.transform = currentTransform.replace(/scale\([^)]+\)/, 'scale(1.06)') + ' translateY(-8px)';
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        if (isSpread) {
+          card.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+          const i = parseInt(card.dataset.index);
+          const endX = getFinalX(i);
+          card.style.transform = `translate(${endX}px, 0px) rotate(0deg) scale(1)`;
+        }
+      });
+    });
+
+    // Check if cards are spread
+    window.addEventListener('scroll', () => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = window.scrollY / (docH * 0.5);
+      isSpread = progress > 0.5;
+    });
 
     // ── SCROLL TO TOP ──
-    const scrollTopBtn = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => {
-      scrollTopBtn.classList.toggle('show', window.scrollY > 100);
-      handleScroll();
+      scrollTopBtn.classList.toggle('show', window.scrollY > 150);
+      onScroll();
     });
 
     scrollTopBtn.addEventListener('click', () => {
@@ -431,7 +682,7 @@
       card.setAttribute('data-index', totalCards + extraIndex);
       card.innerHTML = `
         <div class="card-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
             <circle cx="24" cy="24" r="16"/>
             <line x1="16" y1="24" x2="32" y2="24"/>
             <line x1="24" y1="16" x2="24" y2="32"/>
@@ -439,30 +690,36 @@
         </div>
         <div class="card-title">${name}</div>
       `;
-      card.style.transform = 'translate(0, 0) rotate(0deg) scale(0.5)';
+      card.style.transform = 'translate(0, 0) rotate(0deg) scale(0.3)';
       card.style.opacity = '0';
       stage.appendChild(card);
 
       requestAnimationFrame(() => {
-        card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-        card.style.transform = 'translate(0, -20px) rotate(0deg) scale(1)';
+        card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        card.style.transform = 'translate(0, -10px) rotate(0deg) scale(1)';
         card.style.opacity = '1';
       });
+
+      setTimeout(() => {
+        card.style.transition = '';
+      }, 700);
 
       extraIndex++;
     });
 
-    // ── INICIALIZACIÓN ──
+    // ── INIT ──
     window.addEventListener('DOMContentLoaded', () => {
-      // Empezar agrupadas con opacidad visible
-      cards.forEach((card, i) => {
-        const rotation = (i - Math.floor(totalCards / 2)) * 3;
-        const offsetY = i * -6;
-        card.style.transform = `translate(0px, ${offsetY}px) rotate(${rotation}deg) scale(0.85)`;
-        card.style.opacity = '0.5';
-      });
+      initCards();
+      onScroll();
+    });
 
-      handleScroll();
+    // ── RESIZE HANDLER ──
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        onScroll();
+      }, 100);
     });
   </script>
 </body>
