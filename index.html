@@ -108,6 +108,24 @@
             will-change: transform;
         }
 
+        .final-spacer {
+            height: 50vh;
+            background-color: #0a0a0a;
+        }
+
+        /* SECCIÓN FINAL DE TEXTO */
+        .final-text-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+            background-color: #0a0a0a;
+        }
+
         .footer-spacer {
             height: 100vh;
             background-color: #0a0a0a;
@@ -155,12 +173,19 @@
         </div>
     </section>
 
+    <div class="final-spacer"></div>
+
+    <section class="final-text-section">
+        <div class="text-line line-center" id="line3">TRABAJA</div>
+        <div class="text-line line-right" id="line4">MODELO WEBCAM</div>
+    </section>
+
     <div class="footer-spacer">
-        <p style="color: #333; font-size: 12px;">End of Projects</p>
+        <p style="color: #333; font-size: 12px;">End of Page</p>
     </div>
 
     <script>
-        // SEPARAR LETRAS
+        // SEPARAR LETRAS - PRIMER TEXTO (RECENT WORK)
         const line1 = document.getElementById('line1');
         const line2 = document.getElementById('line2');
 
@@ -183,18 +208,29 @@
         const chars1 = line1.querySelectorAll('.char');
         const chars2 = line2.querySelectorAll('.char');
 
-        // EFECTO DE TEXTO - Letras entran desde los lados
+        // SEPARAR LETRAS - SEGUNDO TEXTO (TRABAJA MODELO WEBCAM)
+        const line3 = document.getElementById('line3');
+        const line4 = document.getElementById('line4');
+
+        splitText(line3);
+        splitText(line4);
+
+        const chars3 = line3.querySelectorAll('.char');
+        const chars4 = line4.querySelectorAll('.char');
+
+        // EFECTO DE TEXTO Y PARALLAX
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
 
-            // Progreso para el texto (primera ventana)
+            // ==========================================
+            // PRIMER TEXTO: RECENT WORK
+            // ==========================================
             const textProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 0.8)));
 
             // RECENT - Letras vienen desde la izquierda
             chars1.forEach((char, index) => {
-                // Cada letra empieza más a la izquierda según su posición
-                const startX = -100 - (index * 30); // Desde la izquierda de la pantalla
+                const startX = -100 - (index * 30);
                 const currentX = startX * (1 - textProgress);
                 const scale = 0.5 + (textProgress * 0.5);
                 
@@ -204,8 +240,7 @@
 
             // WORK - Letras vienen desde la derecha
             chars2.forEach((char, index) => {
-                // Cada letra empieza más a la derecha según su posición
-                const startX = 100 + (index * 30); // Desde la derecha de la pantalla
+                const startX = 100 + (index * 30);
                 const currentX = startX * (1 - textProgress);
                 const scale = 0.5 + (textProgress * 0.5);
                 
@@ -213,22 +248,52 @@
                 char.style.opacity = textProgress;
             });
 
-            // EFECTO PARALLAX PARA LAS IMÁGENES
+            // ==========================================
+            // PARALLAX PARA LAS IMÁGENES
+            // ==========================================
             const images = document.querySelectorAll('.project-card');
             
-            images.forEach((card, index) => {
+            images.forEach((card) => {
                 const rect = card.getBoundingClientRect();
                 const img = card.querySelector('.project-image');
                 const speed = parseFloat(card.dataset.speed) || 0.1;
                 
-                // Solo aplicar parallax si la imagen está visible o cerca
                 if (rect.top < windowHeight && rect.bottom > 0) {
-                    // Calcular cuánto ha scrolleado dentro de la imagen
                     const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
                     const parallaxOffset = scrollProgress * 100 * speed;
                     
                     img.style.transform = `translateY(${parallaxOffset}px)`;
                 }
+            });
+
+            // ==========================================
+            // SEGUNDO TEXTO: TRABAJA MODELO WEBCAM
+            // ==========================================
+            // Calcular posición de la sección final
+            const finalSection = document.querySelector('.final-text-section');
+            const finalRect = finalSection.getBoundingClientRect();
+            
+            // Progreso para el segundo texto (cuando entra en pantalla)
+            const finalTextProgress = Math.min(1, Math.max(0, (windowHeight - finalRect.top) / (windowHeight * 0.8)));
+
+            // TRABAJA - Letras vienen desde la izquierda
+            chars3.forEach((char, index) => {
+                const startX = -100 - (index * 30);
+                const currentX = startX * (1 - finalTextProgress);
+                const scale = 0.5 + (finalTextProgress * 0.5);
+                
+                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.opacity = finalTextProgress;
+            });
+
+            // MODELO WEBCAM - Letras vienen desde la derecha
+            chars4.forEach((char, index) => {
+                const startX = 100 + (index * 30);
+                const currentX = startX * (1 - finalTextProgress);
+                const scale = 0.5 + (finalTextProgress * 0.5);
+                
+                char.style.transform = `translateX(${currentX}px) scale(${scale})`;
+                char.style.opacity = finalTextProgress;
             });
         });
 
