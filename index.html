@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adon Style - Text & Image Expand</title>
+    <title>Adon Style - Full Transition</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            background-color: #111;
+            background-color: #0a0a0a;
             color: #fff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             overflow-x: hidden;
@@ -29,16 +29,27 @@
             letter-spacing: 2px;
         }
 
-        /* SECCIÓN TEXTO RECENT WORK */
-        .hero-section {
+        /* SECCIÓN PRINCIPAL STICKY */
+        .main-section {
+            position: sticky;
+            top: 0;
             height: 100vh;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        /* TEXTO RECENT WORK */
+        .text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: sticky;
-            top: 0;
-            overflow: hidden;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             z-index: 10;
         }
 
@@ -49,62 +60,44 @@
             text-transform: uppercase;
             white-space: nowrap;
             position: relative;
-            will-change: transform, letter-spacing;
+            will-change: transform;
         }
 
         .char {
             display: inline-block;
-            transition: transform 0.1s ease-out;
+            will-change: transform, opacity;
         }
 
         .line-right {
-            justify-content: flex-end;
             text-align: right;
         }
 
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            opacity: 0.5;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
-        }
-
-        /* SECCIÓN IMÁGENES EXPANDIBLES */
-        .images-section {
-            min-height: 300vh; /* Espacio para el scroll */
-            position: relative;
-            background: #0a0a0a;
-        }
-
+        /* CONTENEDOR DE IMÁGENES */
         .images-container {
-            position: sticky;
+            position: absolute;
             top: 0;
-            height: 100vh;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
             padding: 40px;
-            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            will-change: opacity, transform;
         }
 
         .image-wrapper {
             position: relative;
-            width: 40%;
-            height: 60%;
-            border-radius: 12px;
+            width: 40vw;
+            height: 60vh;
+            border-radius: 16px;
             overflow: hidden;
-            will-change: transform, width, height;
-            transition: transform 0.1s ease-out;
+            will-change: transform, width, height, border-radius;
+            transform: scale(0.3);
         }
 
         .image-wrapper img {
@@ -119,12 +112,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px 30px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.3s ease;
-            pointer-events: none;
+            transition: all 0.4s ease;
         }
 
         .image-info.visible {
@@ -133,35 +125,58 @@
         }
 
         .image-info h3 {
-            font-size: 24px;
+            font-size: 1.4vw;
             font-weight: 700;
             margin-bottom: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .image-info p {
-            font-size: 14px;
+            font-size: 0.9vw;
             color: #aaa;
             line-height: 1.4;
         }
 
         .image-info .year {
-            font-size: 12px;
+            font-size: 0.8vw;
             color: #666;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         /* ESPACIO FINAL */
         .final-spacer {
             height: 100vh;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
+            background: #0a0a0a;
         }
 
-        /* Responsive */
+        /* SCROLL INDICATOR */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+            opacity: 0;
+            animation: fadeInBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInBounce {
+            0%, 20%, 50%, 80%, 100% {
+                opacity: 0.6;
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                opacity: 0.3;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                opacity: 0.4;
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
         @media (max-width: 768px) {
             .text-line {
                 font-size: 18vw;
@@ -169,36 +184,49 @@
             
             .images-container {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
                 padding: 20px;
             }
             
             .image-wrapper {
-                width: 100%;
-                height: 40%;
+                width: 90vw;
+                height: 35vh;
+            }
+            
+            .image-info h3 {
+                font-size: 4vw;
+            }
+            
+            .image-info p {
+                font-size: 3vw;
+            }
+            
+            .image-info .year {
+                font-size: 2.5vw;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ESPACIO VACÍO ARRIBA -->
+    <!-- ESPACIO VACÍO ARRIBA PARA ENTRAR -->
     <div class="scroll-spacer">
         <p>↓ Scroll Down ↓</p>
     </div>
 
-    <!-- SECCIÓN 1: TEXTO RECENT WORK -->
-    <section class="hero-section">
-        <div class="text-line line-center">RECENT</div>
-        <div class="text-line line-right">WORK</div>
-        <div class="scroll-hint">SCROLL</div>
-    </section>
+    <!-- SECCIÓN PRINCIPAL CON TODOS LOS EFECTOS -->
+    <section class="main-section">
+        
+        <!-- TEXTO: RECENT WORK -->
+        <div class="text-container" id="textContainer">
+            <div class="text-line" id="line1">RECENT</div>
+            <div class="text-line line-right" id="line2">WORK</div>
+        </div>
 
-    <!-- SECCIÓN 2: IMÁGENES QUE SE EXPANDEN -->
-    <section class="images-section">
-        <div class="images-container">
-            <div class="image-wrapper" data-index="0">
-                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&q=80" alt="Project 1">
+        <!-- IMÁGENES -->
+        <div class="images-container" id="imagesContainer">
+            <div class="image-wrapper" id="img1">
+                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1200&q=80" alt="Project 1">
                 <div class="image-info">
                     <h3>Arrox Digital Agency HTML Template</h3>
                     <p>WordPress, Themeforest</p>
@@ -206,8 +234,8 @@
                 </div>
             </div>
             
-            <div class="image-wrapper" data-index="1">
-                <img src="https://images.unsplash.com/photo-1507643179173-617d6545517d?w=800&q=80" alt="Project 2">
+            <div class="image-wrapper" id="img2">
+                <img src="https://images.unsplash.com/photo-1507643179173-617d6545517d?w=1200&q=80" alt="Project 2">
                 <div class="image-info">
                     <h3>Al Khobar Uptown</h3>
                     <p>Visual Identity, Branding</p>
@@ -215,21 +243,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="scroll-hint" id="scrollHint">SCROLL</div>
     </section>
 
     <!-- ESPACIO FINAL -->
-    <div class="final-spacer">
-        <p>Continue Scrolling...</p>
-    </div>
+    <div class="final-spacer"></div>
 
     <script>
         // ==========================================
-        // EFECTO 1: TEXTO RECENT WORK
+        // CONFIGURACIÓN
         // ==========================================
-        const textLines = document.querySelectorAll('.text-line');
-        
+        const textContainer = document.getElementById('textContainer');
+        const imagesContainer = document.getElementById('imagesContainer');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const img1 = document.getElementById('img1');
+        const img2 = document.getElementById('img2');
+        const scrollHint = document.getElementById('scrollHint');
+        const info1 = img1.querySelector('.image-info');
+        const info2 = img2.querySelector('.image-info');
+
         // Separar letras
-        textLines.forEach(line => {
+        [line1, line2].forEach(line => {
             const text = line.innerText;
             line.innerHTML = '';
             
@@ -242,12 +278,8 @@
             });
         });
 
-        // ==========================================
-        // EFECTO 2: IMÁGENES EXPANDIBLES
-        // ==========================================
-        const imageWrappers = document.querySelectorAll('.image-wrapper');
-        const imagesSection = document.querySelector('.images-section');
-        const imageInfos = document.querySelectorAll('.image-info');
+        const chars1 = line1.querySelectorAll('.char');
+        const chars2 = line2.querySelectorAll('.char');
 
         // ==========================================
         // SCROLL PRINCIPAL
@@ -255,76 +287,137 @@
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
-            const textSection = document.querySelector('.hero-section');
-            const textSectionTop = textSection.offsetTop;
-            const textSectionHeight = textSection.offsetHeight;
             
-            // Calcular progreso del texto (0 a 1)
-            const textProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 0.8)));
+            // Progreso total (0 = inicio, 1 = final del efecto completo)
+            const totalProgress = Math.min(1, Math.max(0, scrollY / (windowHeight * 1.5)));
             
-            // Animar texto
-            textLines.forEach((line, lineIndex) => {
-                const chars = line.querySelectorAll('.char');
+            // ==========================================
+            // FASE 1: TEXTO SE JUNTA (0 - 0.4)
+            // ==========================================
+            const textJoinProgress = Math.min(1, totalProgress / 0.4);
+            
+            // Animar letras - juntándose
+            [chars1, chars2].forEach((chars, lineIdx) => {
                 const totalChars = chars.length;
+                const isLine2 = lineIdx === 1;
                 
                 chars.forEach((char, index) => {
-                    const moveAmount = (textProgress - 1) * -150;
-                    const centerOffset = (index - (totalChars / 2)) * moveAmount;
+                    // Al inicio: separadas (-150px * posición desde el centro)
+                    // Al final del fase 1: juntas (0px)
+                    const spread = (textJoinProgress - 1) * -200;
+                    const centerOffset = (index - (totalChars / 2)) * spread;
                     
-                    char.style.transform = `translateX(${centerOffset}px) scale(${0.5 + (textProgress * 0.5)})`;
-                    char.style.opacity = textProgress;
+                    // Scale: empieza en 0.6 y termina en 1
+                    const scale = 0.6 + (textJoinProgress * 0.4);
+                    
+                    char.style.transform = `translateX(${centerOffset}px) scale(${scale})`;
+                    char.style.opacity = textJoinProgress;
                 });
             });
 
-            // ==========================================
-            // ANIMACIÓN DE IMÁGENES
-            // ==========================================
-            const imagesSectionTop = imagesSection.offsetTop;
-            const imagesSectionHeight = imagesSection.offsetHeight;
-            
-            // Progreso dentro de la sección de imágenes (0 a 1)
-            const imagesProgress = Math.min(1, Math.max(0, 
-                (scrollY - textSectionHeight + windowHeight) / (imagesSectionHeight - windowHeight)
-            ));
+            // Mostrar hint de scroll cuando el texto está listo
+            if (textJoinProgress > 0.8 && totalProgress < 0.4) {
+                scrollHint.style.opacity = (textJoinProgress - 0.8) * 5;
+            } else if (totalProgress >= 0.4) {
+                scrollHint.style.opacity = 0;
+            } else {
+                scrollHint.style.opacity = 0;
+            }
 
-            // Animar cada imagen
-            imageWrappers.forEach((wrapper, index) => {
-                const info = wrapper.querySelector('.image-info');
+            // ==========================================
+            // FASE 2: TEXTO SE CONTRAE RÁPIDO (0.4 - 0.55)
+            // ==========================================
+            const textContractProgress = Math.min(1, Math.max(0, (totalProgress - 0.4) / 0.15));
+            
+            if (totalProgress > 0.4) {
+                // El texto se contrae hacia el centro y desaparece
+                const contractScale = 1 - (textContractProgress * 0.8); // De 1 a 0.2
+                const contractOpacity = 1 - textContractProgress; // De 1 a 0
+                const contractY = textContractProgress * -50; // Se mueve hacia arriba
                 
-                // Calcular escala y posición
-                // Empiezan pequeñas (scale 0.6) y crecen hasta scale 1.2
-                const startScale = 0.6;
-                const endScale = 1.1;
-                const currentScale = startScale + (endScale - startScale) * imagesProgress;
+                textContainer.style.transform = `scale(${contractScale}) translateY(${contractY}px)`;
+                textContainer.style.opacity = contractOpacity;
+            }
+
+            // ==========================================
+            // FASE 3: IMÁGENES SE EXPANDEN (0.45 - 0.9)
+            // ==========================================
+            const imageExpandProgress = Math.min(1, Math.max(0, (totalProgress - 0.45) / 0.45));
+            
+            // Mostrar contenedor de imágenes
+            if (totalProgress > 0.4) {
+                imagesContainer.style.opacity = Math.min(1, (totalProgress - 0.4) / 0.1);
+                imagesContainer.style.pointerEvents = 'auto';
+            }
+
+            // Animar imágenes
+            [img1, img2].forEach((img, index) => {
+                const info = img.querySelector('.image-info');
+                const isLeft = index === 0;
                 
-                // Calcular ancho y alto
-                // Empiezan en 40% width / 60% height y terminan en 50% width / 100% height
-                const startWidth = 40;
-                const endWidth = 50;
-                const currentWidth = startWidth + (endWidth - startWidth) * imagesProgress;
+                // Scale: empieza en 0.3 (pequeño) y termina en 1
+                const imgScale = 0.3 + (imageExpandProgress * 0.7);
                 
-                const startHeight = 60;
-                const endHeight = 100;
-                const currentHeight = startHeight + (endHeight - startHeight) * imagesProgress;
+                // Ancho y alto progresivos
+                // Empiezan: 30vw / 40vh
+                // Terminan: 48vw / 85vh (casi pantalla completa con margen)
+                const startWidth = 30;
+                const endWidth = 48;
+                const currentWidth = startWidth + (endWidth - startWidth) * imageExpandProgress;
                 
-                // Separación: empiezan juntas y se separan
-                const translateX = index === 0 ? -50 * imagesProgress : 50 * imagesProgress;
+                const startHeight = 40;
+                const endHeight = 85;
+                const currentHeight = startHeight + (endHeight - startHeight) * imageExpandProgress;
+                
+                // Border radius: empieza grande (50px) y termina pequeño (16px)
+                const startRadius = 50;
+                const endRadius = 16;
+                const currentRadius = startRadius - (startRadius - endRadius) * imageExpandProgress;
+                
+                // Separación horizontal
+                // Empiezan juntos en el centro, se separan hacia los lados
+                const translateX = isLeft ? -30 * imageExpandProgress : 30 * imageExpandProgress;
                 
                 // Aplicar transformaciones
-                wrapper.style.transform = `
-                    scale(${currentScale}) 
+                img.style.transform = `
+                    scale(${imgScale}) 
                     translateX(${translateX}vw)
                 `;
-                wrapper.style.width = `${currentWidth}%`;
-                wrapper.style.height = `${currentHeight}vh`;
+                img.style.width = `${currentWidth}vw`;
+                img.style.height = `${currentHeight}vh`;
+                img.style.borderRadius = `${currentRadius}px`;
                 
-                // Mostrar información cuando las imágenes estén lo suficientemente grandes
-                if (imagesProgress > 0.6) {
+                // Mostrar información cuando las imágenes estén casi completas
+                if (imageExpandProgress > 0.7) {
                     info.classList.add('visible');
                 } else {
                     info.classList.remove('visible');
                 }
             });
+
+            // ==========================================
+            // FASE 4: IMÁGENES SE EXPANDEN UN POCO MÁS (0.9 - 1.0)
+            // ==========================================
+            const finalExpandProgress = Math.min(1, Math.max(0, (totalProgress - 0.9) / 0.1));
+            
+            if (finalExpandProgress > 0) {
+                // Ajuste final sutil para que queden "perfectamente visibles"
+                [img1, img2].forEach((img, index) => {
+                    const isLeft = index === 0;
+                    const finalWidth = 48 + (2 * finalExpandProgress); // 48vw -> 50vw
+                    const finalHeight = 85 + (5 * finalExpandProgress); // 85vh -> 90vh
+                    
+                    img.style.width = `${finalWidth}vw`;
+                    img.style.height = `${finalHeight}vh`;
+                    
+                    // Separación final
+                    const finalX = isLeft ? -30 - (5 * finalExpandProgress) : 30 + (5 * finalExpandProgress);
+                    img.style.transform = img.style.transform.replace(
+                        /translateX\([^)]+\)/,
+                        `translateX(${finalX}vw)`
+                    );
+                });
+            }
         });
 
         // Disparar scroll al cargar
