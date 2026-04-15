@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="SmileDent - Clínica de odontología estética especializada en blanqueamiento, carillas, implantes y ortodoncia invisible."/>
+  <title>SmileDent - Odontología Estética Profesional</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Smile<span>Dent</span></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+      <nav class="nav" id="navMenu">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="btn-primary" onclick="scrollToSection('contacto')">Agendar Cita</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero">
+    <div class="container hero-content">
+      <h1>Tu Sonrisa, Nuestra Pasión</h1>
+      <p>Transformamos tu sonrisa con tratamientos de odontología estética de alta calidad y tecnología de vanguardia.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="scrollToSection('servicios')">Ver Servicios</button>
+        <button class="btn-secondary" onclick="scrollToSection('contacto')">Contáctanos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="services">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">✨</div>
+          <h3>Blanqueamiento Dental</h3>
+          <p>Logra una sonrisa más blanca y brillante con nuestros tratamientos seguros y efectivos.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">💎</div>
+          <h3>Carillas de Porcelana</h3>
+          <p>Corrige imperfecciones y diseña la sonrisa que siempre soñaste con carillas personalizadas.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🦷</div>
+          <h3>Implantes Dentales</h3>
+          <p>Recupera tu confianza con implantes de alta calidad que se integran naturalmente.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">😁</div>
+          <h3>Ortodoncia Invisible</h3>
+          <p>Alinea tus dientes de forma discreta y cómoda con alineadores transparentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nosotros -->
+  <section id="nosotros" class="about">
+    <div class="container about-content">
+      <div class="about-text">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <p>En <strong>SmileDent</strong>, combinamos experiencia, tecnología avanzada y un trato humano para ofrecerte los mejores resultados en odontología estética.</p>
+        <ul class="about-list">
+          <li>✅ Más de 15 años de experiencia</li>
+          <li>✅ Tecnología de última generación</li>
+          <li>✅ Materiales certificados y seguros</li>
+          <li>✅ Planes de financiamiento flexibles</li>
+        </ul>
+      </div>
+      <div class="about-image">
+        <div class="placeholder-img">🦷 Imagen de la clínica</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>"¡Mi sonrisa cambió por completo! El equipo fue muy profesional."</p>
+          <strong>— María González</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>"El blanqueamiento dental fue rápido y los resultados increíbles."</p>
+          <strong>— Carlos Ramírez</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2 class="section-title">Agenda tu Cita</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" name="nombre" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" required/>
+        </div>
+        <div class="form-group">
+          <label for="servicio">Servicio de interés</label>
+          <select id="servicio" name="servicio">
+            <option value="">Selecciona</option>
+            <option value="blanqueamiento">Blanqueamiento</option>
+            <option value="carillas">Carillas</option>
+            <option value="implantes">Implantes</option>
+            <option value="ortodoncia">Ortodoncia</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary btn-block">Enviar Solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Smile<span>Dent</span></div>
+      <p class="copyright">&copy; <span id="year"></span> SmileDent. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
