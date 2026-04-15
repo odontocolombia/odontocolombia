@@ -11,7 +11,7 @@
   <meta property="og:type" content="website"/>
   <title>SmileDent - Odontología Estética Profesional</title>
   
-  <!-- Favicon con emoji de diente -->
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
   
   <style>
@@ -26,6 +26,7 @@
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       --radius: 12px;
       --transition: all 0.3s ease;
+      --whatsapp: #25d366;
     }
 
     /* ===== RESET Y BASE ===== */
@@ -55,6 +56,9 @@
       cursor: pointer;
       transition: var(--transition);
       font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
     
     .btn-primary {
@@ -79,7 +83,17 @@
       color: white;
     }
     
-    .btn-block { width: 100%; }
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: white;
+    }
+    
+    .btn-whatsapp:hover {
+      background: #128c7e;
+      transform: translateY(-2px);
+    }
+    
+    .btn-block { width: 100%; justify-content: center; }
 
     /* ===== HEADER ===== */
     .header {
@@ -150,9 +164,11 @@
       background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
       padding: 100px 0;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     
-    .hero-content { max-width: 800px; margin: 0 auto; }
+    .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
     
     .hero h1 {
       font-size: 3rem;
@@ -180,9 +196,16 @@
     .section-title {
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
       color: var(--dark);
       position: relative;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 50px;
+      font-size: 1.1rem;
     }
     
     .section-title::after {
@@ -237,6 +260,146 @@
     
     .service-card p { color: var(--gray); }
 
+    /* ===== GALERÍA ===== */
+    .gallery {
+      background: var(--secondary);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+    
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay h4 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .gallery-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .lightbox.active {
+      display: flex;
+    }
+    
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 3rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox-close:hover {
+      color: var(--primary);
+      transform: rotate(90deg);
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: 8px;
+    }
+    
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
     /* ===== NOSOTROS ===== */
     .about-content {
       display: grid;
@@ -258,17 +421,10 @@
       gap: 10px;
     }
     
-    .placeholder-img {
-      background: linear-gradient(135deg, #e0f2fe, #cffafe);
+    .about-image img {
+      width: 100%;
       border-radius: var(--radius);
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: var(--primary-dark);
-      font-weight: 500;
-      border: 3px dashed var(--primary);
+      box-shadow: var(--shadow);
     }
 
     /* ===== TESTIMONIOS ===== */
@@ -306,6 +462,66 @@
     .testimonial-card strong {
       color: var(--primary);
       font-weight: 600;
+    }
+
+    /* ===== UBICACIÓN / MAPA ===== */
+    .location {
+      background: white;
+    }
+    
+    .location-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    
+    .location-info {
+      padding: 30px;
+      background: var(--secondary);
+      border-radius: var(--radius);
+    }
+    
+    .location-info h3 {
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-size: 1.5rem;
+    }
+    
+    .location-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .location-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+      min-width: 30px;
+    }
+    
+    .location-text h4 {
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .location-text p {
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     /* ===== CONTACTO ===== */
@@ -382,22 +598,97 @@
     
     .footer-links a:hover { color: white; }
     
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+    }
+    
+    .social-links a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    
     .copyright {
       color: #94a3b8;
       font-size: 0.9rem;
       margin-top: 20px;
     }
 
-    /* ===== ANIMACIONES ===== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: var(--whatsapp);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 2rem;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+      animation: none;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .whatsapp-tooltip {
+      position: absolute;
+      right: 70px;
+      background: white;
+      color: var(--dark);
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+      right: 75px;
     }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .about-content { grid-template-columns: 1fr; }
+      .about-content,
+      .location-content { grid-template-columns: 1fr; }
       .hero h1 { font-size: 2.5rem; }
+      .map-container { height: 300px; }
     }
     
     @media (max-width: 768px) {
@@ -431,6 +722,28 @@
       section { padding: 60px 0; }
       
       .contact-form { padding: 30px 20px; }
+      
+      .gallery-grid { grid-template-columns: 1fr; }
+      
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+      }
+      
+      .whatsapp-tooltip { display: none; }
+      
+      .lightbox-nav {
+        padding: 10px 15px;
+        font-size: 1.5rem;
+      }
+      .lightbox-close {
+        top: 10px;
+        right: 20px;
+        font-size: 2rem;
+      }
     }
 
     /* ===== ACCESIBILIDAD ===== */
@@ -443,7 +756,6 @@
       html { scroll-behavior: auto; }
     }
     
-    /* Focus visible para navegación con teclado */
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
       outline: 3px solid var(--primary);
       outline-offset: 2px;
@@ -464,12 +776,14 @@
       <nav class="nav" id="navMenu" aria-label="Menú principal">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
         <a href="#nosotros">Nosotros</a>
+        <a href="#ubicacion">Ubicación</a>
         <a href="#contacto">Contacto</a>
       </nav>
       
       <button class="btn-primary" onclick="scrollToSection('contacto')" aria-label="Agendar cita">
-        Agendar Cita
+        📅 Agendar Cita
       </button>
     </div>
   </header>
@@ -481,7 +795,9 @@
       <p>Transformamos tu sonrisa con tratamientos de odontología estética de alta calidad y tecnología de vanguardia. Resultados naturales que enamoran.</p>
       <div class="hero-buttons">
         <button class="btn-primary" onclick="scrollToSection('servicios')">Ver Servicios</button>
-        <button class="btn-secondary" onclick="scrollToSection('contacto')">Contáctanos</button>
+        <a href="https://wa.me/5215512345678?text=Hola%20SmileDent!%20Me%20gustaría%20agendar%20una%20cita%20de%20evaluación" class="btn-whatsapp btn-secondary" target="_blank" rel="noopener">
+          💬 WhatsApp
+        </a>
       </div>
     </div>
   </section>
@@ -490,6 +806,7 @@
   <section id="servicios" class="services">
     <div class="container">
       <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">Ofrecemos soluciones completas para cuidar y embellecer tu sonrisa</p>
       <div class="services-grid">
         
         <article class="service-card">
@@ -520,6 +837,74 @@
     </div>
   </section>
 
+  <!-- ===== GALERÍA DE FOTOS ===== -->
+  <section id="galeria" class="gallery">
+    <div class="container">
+      <h2 class="section-title">Galería de Resultados</h2>
+      <p class="section-subtitle">Conoce algunas de las transformaciones que hemos logrado</p>
+      
+      <div class="gallery-grid">
+        
+        <div class="gallery-item" onclick="openLightbox(0)">
+          <img src="https://images.unsplash.com/photo-1606811971608-47f54944fb3c?w=800&q=80" alt="Sonrisa perfecta - Blanqueamiento dental" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Blanqueamiento Dental</h4>
+            <p>Resultado después del tratamiento</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(1)">
+          <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Carillas de porcelana - Antes y después" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Carillas de Porcelana</h4>
+            <p>Diseño de sonrisa personalizado</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(2)">
+          <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&q=80" alt="Implantes dentales - Sonrisa renovada" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Implantes Dentales</h4>
+            <p>Recuperación completa de la sonrisa</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(3)">
+          <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=800&q=80" alt="Ortodoncia invisible - Alineadores" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Ortodoncia Invisible</h4>
+            <p>Alineación perfecta sin brackets</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(4)">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e1351450a0?w=800&q=80" alt="Consulta dental - Tecnología avanzada" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Tecnología Avanzada</h4>
+            <p>Equipamiento de última generación</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(5)">
+          <img src="https://images.unsplash.com/photo-1606811874615-8f6a84a3a2a7?w=800&q=80" alt="Instalaciones - Clínica dental moderna" loading="lazy">
+          <div class="gallery-overlay">
+            <h4>Nuestras Instalaciones</h4>
+            <p>Ambiente cómodo y seguro</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">×</button>
+    <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)" aria-label="Anterior">‹</button>
+    <img src="" alt="Imagen ampliada" id="lightbox-img">
+    <button class="lightbox-nav lightbox-next" onclick="changeImage(1)" aria-label="Siguiente">›</button>
+  </div>
+
   <!-- ===== NOSOTROS ===== -->
   <section id="nosotros" class="about">
     <div class="container about-content">
@@ -542,8 +927,7 @@
       </div>
       
       <div class="about-image">
-        <!-- Reemplaza este div con: <img src="images/clínica.jpg" alt="Nuestra clínica" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"> -->
-        <div class="placeholder-img">🦷<br><br>Imagen de la clínica<br><small>(Reemplaza con tu foto real)</small></div>
+        <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&q=80" alt="Equipo profesional de SmileDent" loading="lazy">
       </div>
     </div>
   </section>
@@ -552,6 +936,7 @@
   <section class="testimonials">
     <div class="container">
       <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+      <p class="section-subtitle">Historias reales de sonrisas transformadas</p>
       <div class="testimonials-grid">
         
         <article class="testimonial-card">
@@ -573,13 +958,65 @@
     </div>
   </section>
 
+  <!-- ===== UBICACIÓN Y MAPA ===== -->
+  <section id="ubicacion" class="location">
+    <div class="container">
+      <h2 class="section-title">Ubicación</h2>
+      <p class="section-subtitle">Visítanos en nuestras modernas instalaciones</p>
+      
+      <div class="location-content">
+        <div class="location-info">
+          <h3>Información de Contacto</h3>
+          
+          <div class="location-item">
+            <span class="location-icon">📍</span>
+            <div class="location-text">
+              <h4>Dirección</h4>
+              <p>Av. Reforma 123, Piso 5<br>Col. Juárez, Ciudad de México<br>C.P. 06600</p>
+            </div>
+          </div>
+          
+          <div class="location-item">
+            <span class="location-icon">📞</span>
+            <div class="location-text">
+              <h4>Teléfono</h4>
+              <p>+52 (55) 1234-5678<br>Lun - Vie: 9:00 - 19:00<br>Sáb: 10:00 - 14:00</p>
+            </div>
+          </div>
+          
+          <div class="location-item">
+            <span class="location-icon">✉️</span>
+            <div class="location-text">
+              <h4>Email</h4>
+              <p>contacto@smiledent.com<br>citas@smiledent.com</p>
+            </div>
+          </div>
+          
+          <a href="https://wa.me/5215512345678?text=Hola!%20Me%20gustaría%20más%20información%20sobre%20sus%20servicios" class="btn-whatsapp btn-primary" target="_blank" rel="noopener" style="margin-top: 20px; display: inline-flex;">
+            💬 Escríbenos por WhatsApp
+          </a>
+        </div>
+        
+        <div class="map-container">
+          <!-- REEMPLAZA ESTE IFRAME CON TU UBICACIÓN REAL DE GOOGLE MAPS -->
+          <!-- Para obtenerlo: Google Maps → Compartir → Insertar mapa → Copiar HTML -->
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.888153684216!2d-99.1686926850935!3d19.42702098688795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c360f9e16a1f3b3!2sEl%20%C3%81ngel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1234567890123!5m2!1ses-419!2smx" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de SmileDent">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CONTACTO ===== -->
   <section id="contacto" class="contact">
     <div class="container">
       <h2 class="section-title">Agenda tu Cita</h2>
-      <p style="text-align: center; margin-bottom: 30px; color: var(--gray);">
-        Completa el formulario y nos contactaremos contigo en menos de 24 horas.
-      </p>
+      <p class="section-subtitle">Completa el formulario y nos contactaremos contigo en menos de 24 horas</p>
       
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-group">
@@ -616,6 +1053,13 @@
         </div>
         
         <button type="submit" class="btn-primary btn-block">Enviar Solicitud ✉️</button>
+        
+        <p style="text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.9rem;">
+          ¿Prefieres contacto inmediato?<br>
+          <a href="https://wa.me/5215512345678" style="color: var(--whatsapp); font-weight: 600; text-decoration: none;">
+            💬 Escríbenos por WhatsApp
+          </a>
+        </p>
       </form>
     </div>
   </section>
@@ -626,26 +1070,45 @@
       <div class="footer-logo">Smile<span>Dent</span></div>
       <p>Transformando sonrisas con excelencia, tecnología y cuidado humano.</p>
       
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="https://wa.me/5215512345678" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
+        <a href="#" aria-label="YouTube">🎥</a>
+      </div>
+      
       <div class="footer-links">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
         <a href="#nosotros">Nosotros</a>
+        <a href="#ubicacion">Ubicación</a>
         <a href="#contacto">Contacto</a>
       </div>
       
       <p class="copyright">
         &copy; <span id="year"></span> SmileDent. Todos los derechos reservados.<br>
         <small style="color: #64748b; display: block; margin-top: 8px;">
-          Sitio web creado con ❤️ para tu clínica dental
+          📍 Av. Reforma 123, Ciudad de México | 📞 (55) 1234-5678
         </small>
       </p>
     </div>
   </footer>
 
+  <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
+  <a href="https://wa.me/5215512345678?text=Hola%20SmileDent!%20Me%20gustar%C3%ADa%20agendar%20una%20cita%20de%20evaluaci%C3%B3n" 
+     class="whatsapp-float" 
+     target="_blank" 
+     rel="noopener"
+     aria-label="Contactar por WhatsApp">
+    <span class="whatsapp-tooltip">¡Escríbenos!</span>
+    💬
+  </a>
+
   <!-- ===== JAVASCRIPT ===== -->
   <script>
     // ========================================
-    // 🦷 SmileDent - JavaScript Funcional
+    // 🦷 SmileDent - JavaScript Completo
     // ========================================
 
     // 1. SCROLL SUAVE A SECCIONES
@@ -684,7 +1147,54 @@
       }
     });
 
-    // 3. FORMULARIO DE CONTACTO
+    // 3. GALERÍA LIGHTBOX
+    const galleryImages = [
+      "https://images.unsplash.com/photo-1606811971608-47f54944fb3c?w=1200&q=90",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&q=90",
+      "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&q=90",
+      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=1200&q=90",
+      "https://images.unsplash.com/photo-1629909613654-28e1351450a0?w=1200&q=90",
+      "https://images.unsplash.com/photo-1606811874615-8f6a84a3a2a7?w=1200&q=90"
+    ];
+    
+    let currentImageIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(index) {
+      currentImageIndex = index;
+      lightboxImg.src = galleryImages[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function changeImage(direction) {
+      currentImageIndex += direction;
+      if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+      if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+      lightboxImg.src = galleryImages[currentImageIndex];
+    }
+
+    // Navegación con teclado en lightbox
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'ArrowRight') changeImage(1);
+    });
+
+    // Cerrar lightbox al hacer click fuera de la imagen
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // 4. FORMULARIO DE CONTACTO
     const contactForm = document.getElementById('contactForm');
     
     contactForm?.addEventListener('submit', function(e) {
@@ -729,19 +1239,17 @@
       .catch(() => alert('❌ Error de conexión. Verifica tu internet.'));
       */
 
-      // ✅ DEMO: Mensaje de éxito (reemplazar con el fetch de arriba para producción)
-      alert(`✅ ¡Gracias ${nombre.split(' ')[0]}! 🎉\n\nHemos recibido tu solicitud.\nTe contactaremos pronto al correo: ${email}\n\n📍 Próximo paso: Revisa tu bandeja de entrada para confirmar tu cita.`);
+      // ✅ DEMO: Mensaje de éxito
+      alert(`✅ ¡Gracias ${nombre.split(' ')[0]}! 🎉\n\nHemos recibido tu solicitud.\nTe contactaremos pronto al correo: ${email}\n\n📍 También puedes escribirnos por WhatsApp para una respuesta más rápida.`);
       
-      // Resetear formulario
       this.reset();
     });
 
-    // Función auxiliar para validar email
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // 4. EFECTO SCROLL REVEAL (ANIMACIÓN AL HACER SCROLL)
+    // 5. EFECTO SCROLL REVEAL
     const observerOptions = {
       threshold: 0.15,
       rootMargin: '0px 0px -50px 0px'
@@ -751,22 +1259,20 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          scrollObserver.unobserve(entry.target); // Solo animar una vez
+          scrollObserver.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    // Observar tarjetas de servicios y testimonios
-    document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+    document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => {
       scrollObserver.observe(el);
     });
 
-    // 5. AÑO DINÁMICO EN FOOTER
+    // 6. AÑO DINÁMICO EN FOOTER
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 6. ACCESIBILIDAD: NAVEGACIÓN CON TECLADO
+    // 7. ACCESIBILIDAD: NAVEGACIÓN CON TECLADO
     document.addEventListener('keydown', (e) => {
-      // Cerrar menú con tecla Escape
       if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
         navMenu.classList.remove('active');
         menuToggle.setAttribute('aria-expanded', 'false');
@@ -775,20 +1281,10 @@
       }
     });
 
-    // 7. EFECTO PARALLAX SUAVE EN HERO (OPCIONAL)
-    window.addEventListener('scroll', () => {
-      const hero = document.querySelector('.hero');
-      const scrolled = window.pageYOffset;
-      if (hero && scrolled < hero.offsetHeight) {
-        hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
-      }
-    }, { passive: true });
-
-    // 8. INICIALIZAR ANIMACIONES AL CARGAR (para elementos ya visibles)
+    // 8. INICIALIZAR ANIMACIONES AL CARGAR
     document.addEventListener('DOMContentLoaded', () => {
-      // Forzar chequeo inicial para elementos ya en viewport
       setTimeout(() => {
-        document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+        document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => {
           const rect = el.getBoundingClientRect();
           if (rect.top < window.innerHeight * 0.9) {
             el.classList.add('visible');
@@ -798,13 +1294,34 @@
     });
 
     // ========================================
-    // 💡 TIPS PARA PERSONALIZAR:
+    // 📝 INSTRUCCIONES DE PERSONALIZACIÓN:
     // ========================================
-    // 🎨 Cambiar colores: Edita las variables CSS en :root al inicio del <style>
-    // 🖼️ Agregar imágenes: Reemplaza .placeholder-img con <img src="ruta/imagen.jpg" alt="..." style="width:100%;border-radius:12px;">
-    // ✉️ Recibir formularios: Usa Formspree, EmailJS o conecta a tu backend
-    // 🌐 Dominio personalizado: En GitHub Pages: Settings → Pages → Custom domain
-    // 📱 WhatsApp: Agrega un botón flotante con: https://wa.me/5215512345678
+    // 
+    // 1. CAMBIAR NÚMERO DE WHATSAPP:
+    //    Busca "5215512345678" y reemplázalo con tu número
+    //    Formato: CódigodePaís + Número (sin espacios ni guiones)
+    //    Ejemplo México: 5215512345678
+    //
+    // 2. CAMBIAR UBICACIÓN DE GOOGLE MAPS:
+    //    - Ve a Google Maps
+    //    - Busca tu dirección
+    //    - Click en "Compartir" → "Insertar mapa"
+    //    - Copia el HTML del iframe
+    //    - Reemplaza el iframe en la sección #ubicacion
+    //
+    // 3. CAMBIAR IMÁGENES DE LA GALERÍA:
+    //    - Reemplaza las URLs de Unsplash por tus imágenes
+    //    - Puedes subir tus fotos a imgur.com o usar GitHub
+    //    - Actualiza el array galleryImages en el JavaScript
+    //
+    // 4. PERSONALIZAR COLORES:
+    //    - Edita las variables CSS en :root al inicio del <style>
+    //    - --primary: color principal
+    //    - --whatsapp: color del botón de WhatsApp
+    //
+    // 5. RECIBIR FORMULARIOS:
+    //    - Usa Formspree (gratis) siguiendo las instrucciones
+    //    - O conecta a tu propio backend
     // ========================================
   </script>
 </body>
