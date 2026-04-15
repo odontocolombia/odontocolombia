@@ -1,681 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adon · Scroll-Driven CSS</title>
-  
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Swiper CSS (solo para portfolio) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  
-  <!-- GSAP (solo para animación inicial del Hero) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  
-  <style>
-    /* ---------- DESIGN TOKENS ---------- */
-    :root {
-      --bg-primary: #0A0A0A;
-      --bg-secondary: #141414;
-      --bg-glass: rgba(20, 20, 20, 0.8);
-      --text-primary: #FFFFFF;
-      --text-secondary: #A0A0A0;
-      --accent: #00FFCC;
-      --accent-glow: rgba(0, 255, 204, 0.3);
-      --border-color: #2A2A2A;
-      
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      
-      --header-height: 80px;
-      --container-max: 1320px;
-      --transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
-    body {
-      font-family: var(--font-body);
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    /* Custom Cursor (mantenemos el estilo premium) */
-    .cursor { position: fixed; width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: difference; }
-    .cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); }
-    .cursor.hover { width: 56px; height: 56px; background: rgba(0, 255, 204, 0.15); border-color: transparent; }
-    
-    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
-    h1 { font-size: clamp(3rem, 8vw, 5.5rem); letter-spacing: -0.02em; }
-    h2 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
-    p { color: var(--text-secondary); }
-    
-    .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
-    .section { padding: 6rem 0; }
-    
-    /* Botones */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.8rem 2rem; border-radius: 50px;
-      font-family: var(--font-display); font-weight: 500;
-      transition: var(--transition); cursor: pointer;
-      border: 1px solid transparent;
-    }
-    .btn-primary {
-      background: var(--accent); color: var(--bg-primary);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 30px var(--accent); }
-    .btn-outline {
-      background: transparent; border-color: var(--border-color); color: var(--text-primary);
-    }
-    .btn-outline:hover { border-color: var(--accent); background: rgba(0, 255, 204, 0.05); }
-    
-    /* ---------- HEADER (Glass effect) ---------- */
-    .header {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      padding: 1rem 0; transition: var(--transition);
-      background: transparent;
-    }
-    .header.scrolled {
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      padding: 0.75rem 0;
-    }
-    .header-content {
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: var(--container-max); margin: 0 auto; padding: 0 2rem;
-    }
-    .logo { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
-    .logo span { color: var(--accent); }
-    .nav { display: flex; gap: 2.5rem; align-items: center; }
-    .nav-link {
-      font-family: var(--font-display); font-weight: 500; color: var(--text-secondary);
-      position: relative; padding: 0.5rem 0; transition: color 0.2s;
-    }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-      background: var(--accent); transition: width 0.3s;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--text-primary); }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .menu-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.8rem; cursor: pointer; }
-    
-    /* ---------- HERO (con partículas) ---------- */
-    .hero {
-      position: relative; min-height: 100vh; display: flex; align-items: center;
-      padding-top: var(--header-height); overflow: hidden;
-    }
-    #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .hero-content { position: relative; z-index: 2; max-width: 700px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1.2rem;
-      background: rgba(0, 255, 204, 0.1); border: 1px solid rgba(0, 255, 204, 0.3);
-      border-radius: 50px; font-size: 0.8rem; color: var(--accent);
-      margin-bottom: 1.5rem; backdrop-filter: blur(5px);
-    }
-    .hero-title { margin-bottom: 1.5rem; }
-    .hero-title .accent { color: var(--accent); }
-    .hero-subtitle { font-size: 1.2rem; max-width: 550px; margin-bottom: 2.5rem; }
-    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-    
-    /* ---------- CLIENTES ---------- */
-    .clients { background: var(--bg-primary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-    .clients-grid {
-      display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;
-      gap: 2rem; padding: 2rem 0;
-    }
-    .client-logo {
-      font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
-      color: var(--text-secondary); opacity: 0.6; transition: var(--transition);
-    }
-    .client-logo:hover { opacity: 1; color: var(--accent); }
-    
-    /* ---------- SERVICIOS ---------- */
-    .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;
-      margin-top: 3rem;
-    }
-    .service-card {
-      background: var(--bg-secondary); border: 1px solid var(--border-color);
-      border-radius: 20px; padding: 2.5rem 2rem; transition: var(--transition);
-    }
-    .service-card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5); }
-    .service-icon { font-size: 2.8rem; margin-bottom: 1.5rem; color: var(--accent); }
-    .service-card h3 { margin-bottom: 1rem; }
-    .service-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; color: var(--accent); font-weight: 500; }
-    
-    /* ---------- PORTAFOLIO (Swiper) ---------- */
-    .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; }
-    .swiper { width: 100%; padding-bottom: 3rem; }
-    .swiper-slide { height: auto; }
-    .portfolio-card {
-      position: relative; border-radius: 24px; overflow: hidden;
-      background: var(--bg-secondary); border: 1px solid var(--border-color);
-      transition: var(--transition);
-    }
-    .portfolio-card:hover { transform: scale(0.98); border-color: var(--accent); }
-    .portfolio-img {
-      aspect-ratio: 16/10; background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-      display: flex; align-items: center; justify-content: center; font-size: 4rem;
-      color: var(--accent);
-    }
-    .portfolio-info { padding: 1.5rem; }
-    .portfolio-cat { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
-    .portfolio-title { font-size: 1.5rem; margin: 0.5rem 0; }
-    .swiper-button-next, .swiper-button-prev { color: var(--accent) !important; }
-    .swiper-pagination-bullet { background: var(--accent) !important; }
-    
-    /* ---------- TESTIMONIOS ---------- */
-    .testimonials { background: var(--bg-secondary); }
-    .testimonial-card {
-      background: var(--bg-primary); border: 1px solid var(--border-color);
-      border-radius: 30px; padding: 3rem; max-width: 900px; margin: 0 auto;
-    }
-    .quote { font-size: 1.5rem; font-style: italic; margin-bottom: 2rem; position: relative; }
-    .quote::before { content: '“'; font-size: 5rem; color: var(--accent); opacity: 0.2; position: absolute; left: -1rem; top: -1rem; }
-    .author { display: flex; align-items: center; gap: 1rem; }
-    .author-avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); color: var(--bg-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.5rem; }
-    
-    /* ---------- BLOG ---------- */
-    .blog-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
-    }
-    .blog-card {
-      background: var(--bg-secondary); border-radius: 24px; overflow: hidden;
-      border: 1px solid var(--border-color); transition: var(--transition);
-    }
-    .blog-card:hover { border-color: var(--accent); }
-    .blog-img {
-      aspect-ratio: 16/9; background: #1a1a1a; display: flex; align-items: center;
-      justify-content: center; font-size: 3rem; color: var(--accent);
-    }
-    .blog-content { padding: 1.8rem; }
-    .blog-meta { display: flex; gap: 1rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem; }
-    
-    /* ---------- FOOTER ---------- */
-    .footer {
-      background: #050505; border-top: 1px solid var(--border-color);
-      padding: 4rem 0 2rem;
-    }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem;
-    }
-    .footer-logo { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 0.8rem; }
-    .footer-links a { color: var(--text-secondary); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    .social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
-    .social-link { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); transition: var(--transition); }
-    .social-link:hover { background: var(--accent); color: var(--bg-primary); }
-    .footer-bottom { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; color: var(--text-secondary); }
-    
-    /* ========== CSS SCROLL-DRIVEN ANIMATIONS ========== */
-    /* Definimos las keyframes */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes scaleIn {
-      from { opacity: 0; transform: scale(0.92); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    
-    /* Clases base con animation-timeline (soportado en navegadores modernos) */
-    .scroll-reveal {
-      animation: fadeUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-      animation-timeline: view();
-      animation-range: entry 0% entry 100%;
-    }
-    .scroll-reveal-fade {
-      animation: fadeIn 1s ease-out forwards;
-      animation-timeline: view();
-      animation-range: entry 0% entry 100%;
-    }
-    .scroll-reveal-scale {
-      animation: scaleIn 0.8s ease-out forwards;
-      animation-timeline: view();
-      animation-range: entry 0% entry 100%;
-    }
-    
-    /* Stagger simulado con nth-child (no es perfecto, pero ayuda) */
-    .services-grid .service-card:nth-child(1) { animation-range: entry 0% entry 90%; }
-    .services-grid .service-card:nth-child(2) { animation-range: entry 10% entry 100%; }
-    .services-grid .service-card:nth-child(3) { animation-range: entry 20% entry 110%; }
-    .services-grid .service-card:nth-child(4) { animation-range: entry 30% entry 120%; }
-    
-    .blog-grid .blog-card:nth-child(1) { animation-range: entry 0% entry 90%; }
-    .blog-grid .blog-card:nth-child(2) { animation-range: entry 15% entry 105%; }
-    
-    /* Fallback para navegadores sin soporte: mostramos los elementos directamente */
-    @supports not (animation-timeline: view()) {
-      .scroll-reveal,
-      .scroll-reveal-fade,
-      .scroll-reveal-scale {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
-      }
-    }
-    
-    /* Aseguramos que inicialmente estén ocultos (para el efecto de revelado) */
-    .scroll-reveal,
-    .scroll-reveal-fade,
-    .scroll-reveal-scale {
-      opacity: 0; /* Se vuelve 1 con la animación */
-    }
-    
-    /* Ajustes responsive */
-    @media (max-width: 992px) {
-      .menu-toggle { display: block; }
-      .nav { position: fixed; top: var(--header-height); left: 0; width: 100%; background: var(--bg-secondary); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border-color); transform: translateY(-150%); transition: transform 0.4s; z-index: 999; }
-      .nav.active { transform: translateY(0); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .blog-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 576px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .hero-buttons .btn { width: 100%; justify-content: center; }
-      .cursor, .cursor-dot { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adon Style Scroll Effect</title>
+    <style>
+        /* RESET BÁSICO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #111; /* Fondo negro casi puro */
+            color: #fff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ESPACIO PARA HACER SCROLL */
+        /* Necesitamos mucho espacio vacío para que el efecto funcione */
+        .scroll-spacer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .bottom-content {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        /* CONTENEDOR DEL TEXTO GRANDE */
+        .hero-section {
+            height: 100vh; /* Ocupa toda la pantalla */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: sticky; /* Se queda pegado mientras hace efecto */
+            top: 0;
+            overflow: hidden;
+        }
+
+        /* ESTILO DE LAS FILAS DE TEXTO */
+        .text-line {
+            font-size: 14vw; /* Tamaño gigante responsivo */
+            font-weight: 800;
+            line-height: 0.85;
+            text-transform: uppercase;
+            white-space: nowrap;
+            position: relative;
+            will-change: transform, letter-spacing; /* Optimización de rendimiento */
+            mix-blend-mode: difference; /* Efecto artístico si se superponen */
+        }
+
+        /* Estilo para cada letra individual */
+        .char {
+            display: inline-block;
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Pequeño detalle para la segunda línea para que se mueva en sentido contrario o igual */
+        .line-right {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .line-left {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .line-center {
+             justify-content: center;
+             text-align: center;
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
+        }
+    </style>
 </head>
 <body>
-  <!-- Custom Cursor (opcional) -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="header-content">
-      <a href="#" class="logo">Adon<span>.</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
-      <nav class="nav" id="navMenu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
-        <a href="#blog" class="nav-link">Blog</a>
-        <a href="#contact" class="nav-link">Contact</a>
-        <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Get in touch</a>
-      </nav>
+    <!-- ESPACIO VACÍO ARRIBA PARA ENTRAR -->
+    <div class="scroll-spacer">
+        <p>↓ Scrolldown ↓</p>
     </div>
-  </header>
 
-  <!-- Hero Section con Canvas Particles -->
-  <section class="hero" id="home">
-    <canvas id="hero-canvas"></canvas>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">✨ Creative Agency</div>
-        <h1 class="hero-title">We Create <span class="accent">Digital Products</span> That Inspire</h1>
-        <p class="hero-subtitle">Crafting immersive digital experiences with cutting-edge design and technology.</p>
-        <div class="hero-buttons">
-          <a href="#portfolio" class="btn btn-primary">Start a Project →</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Clients / Social Proof -->
-  <section class="clients">
-    <div class="container">
-      <p style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary);" class="scroll-reveal-fade">Trusted by innovative companies</p>
-      <div class="clients-grid">
-        <span class="client-logo scroll-reveal-fade">SLACK</span>
-        <span class="client-logo scroll-reveal-fade">GOOGLE</span>
-        <span class="client-logo scroll-reveal-fade">NETFLIX</span>
-        <span class="client-logo scroll-reveal-fade">SPOTIFY</span>
-        <span class="client-logo scroll-reveal-fade">MICROSOFT</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section class="section" id="services">
-    <div class="container">
-      <h2 class="scroll-reveal">What we <span class="accent">do best</span></h2>
-      <p style="max-width: 600px; margin-bottom: 2rem;" class="scroll-reveal-fade">Strategic solutions tailored to elevate your brand.</p>
-      <div class="services-grid">
-        <div class="service-card scroll-reveal">
-          <div class="service-icon">🎨</div>
-          <h3>Branding</h3>
-          <p>Unique visual identity that resonates with your audience and stands out.</p>
-          <a href="#" class="service-link">Learn more →</a>
-        </div>
-        <div class="service-card scroll-reveal">
-          <div class="service-icon">💻</div>
-          <h3>Web Design</h3>
-          <p>Responsive, high-performance websites with exceptional user experience.</p>
-          <a href="#" class="service-link">Learn more →</a>
-        </div>
-        <div class="service-card scroll-reveal">
-          <div class="service-icon">📱</div>
-          <h3>App Development</h3>
-          <p>Native and cross-platform mobile apps with intuitive interfaces.</p>
-          <a href="#" class="service-link">Learn more →</a>
-        </div>
-        <div class="service-card scroll-reveal">
-          <div class="service-icon">🚀</div>
-          <h3>Strategy</h3>
-          <p>Data-driven digital strategies to accelerate your business growth.</p>
-          <a href="#" class="service-link">Learn more →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Slider (Swiper) -->
-  <section class="section" id="portfolio">
-    <div class="container">
-      <div class="portfolio-header">
-        <div>
-          <h2 class="scroll-reveal">Featured <span class="accent">Work</span></h2>
-          <p class="scroll-reveal-fade">Recent projects we're proud of.</p>
-        </div>
-        <a href="#" class="btn btn-outline scroll-reveal-fade">View all →</a>
-      </div>
-    </div>
-    
-    <div class="swiper portfolio-swiper scroll-reveal-scale">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="portfolio-card">
-            <div class="portfolio-img">🌿</div>
-            <div class="portfolio-info">
-              <span class="portfolio-cat">Branding</span>
-              <h3 class="portfolio-title">EcoSphere</h3>
-              <p>Sustainable brand identity</p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="portfolio-card">
-            <div class="portfolio-img">📊</div>
-            <div class="portfolio-info">
-              <span class="portfolio-cat">Web App</span>
-              <h3 class="portfolio-title">Finwise</h3>
-              <p>Finance dashboard UI</p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="portfolio-card">
-            <div class="portfolio-img">🎧</div>
-            <div class="portfolio-info">
-              <span class="portfolio-cat">Mobile</span>
-              <h3 class="portfolio-title">Wave</h3>
-              <p>Music streaming experience</p>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="portfolio-card">
-            <div class="portfolio-img">🛍️</div>
-            <div class="portfolio-info">
-              <span class="portfolio-cat">E‑commerce</span>
-              <h3 class="portfolio-title">Loom</h3>
-              <p>Fashion retail platform</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section testimonials" id="testimonials">
-    <div class="container">
-      <h2 style="text-align: center;" class="scroll-reveal">Client <span class="accent">Voices</span></h2>
-      <div class="testimonial-card scroll-reveal-scale">
-        <div class="quote">Adon transformed our online presence. Their strategic approach and creative execution exceeded all expectations.</div>
-        <div class="author">
-          <div class="author-avatar">MC</div>
-          <div>
-            <h4>María Castro</h4>
-            <p style="color: var(--text-secondary);">CEO, Nova Finance</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog / Insights -->
-  <section class="section" id="blog">
-    <div class="container">
-      <h2 class="scroll-reveal">Latest <span class="accent">Insights</span></h2>
-      <div class="blog-grid">
-        <article class="blog-card scroll-reveal">
-          <div class="blog-img">📝</div>
-          <div class="blog-content">
-            <div class="blog-meta"><span>Design</span><span>5 min read</span></div>
-            <h3>The future of minimalism in UI</h3>
-            <p>Exploring how less becomes more in digital products.</p>
-          </div>
-        </article>
-        <article class="blog-card scroll-reveal">
-          <div class="blog-img">⚡</div>
-          <div class="blog-content">
-            <div class="blog-meta"><span>Development</span><span>8 min read</span></div>
-            <h3>Optimizing Web Performance</h3>
-            <p>Core Web Vitals and what they mean for your site.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer / Contact -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="scroll-reveal-fade">
-          <div class="footer-logo">Adon<span style="color: var(--accent);">.</span></div>
-          <p style="color: var(--text-secondary);">Creating digital products that inspire and perform.</p>
-          <div class="social-links">
-            <a href="#" class="social-link">in</a>
-            <a href="#" class="social-link">𝕏</a>
-            <a href="#" class="social-link">ig</a>
-          </div>
-        </div>
-        <div class="scroll-reveal-fade">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#blog">Blog</a></li>
-          </ul>
-        </div>
-        <div class="scroll-reveal-fade">
-          <h4>Services</h4>
-          <ul class="footer-links">
-            <li><a href="#">Branding</a></li>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">App Dev</a></li>
-            <li><a href="#">Strategy</a></li>
-          </ul>
-        </div>
-        <div class="scroll-reveal-fade">
-          <h4>Contact</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:hello@adon.agency">hello@adon.agency</a></li>
-            <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
-            <li>123 Design Street, NY</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom scroll-reveal-fade">
-        <span>© 2026 Adon. All rights reserved.</span>
-        <span><a href="#" style="color: var(--text-secondary);">Privacy</a> · <a href="#" style="color: var(--text-secondary);">Terms</a></span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    (function(){
-      "use strict";
-      
-      // Custom Cursor (solo desktop)
-      const cursor = document.getElementById('cursor');
-      const cursorDot = document.getElementById('cursorDot');
-      let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, dotX = 0, dotY = 0;
-      
-      if (window.innerWidth > 576) {
-        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-        document.querySelectorAll('a, button, .service-card, .portfolio-card, .blog-card').forEach(el => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-        function animateCursor() {
-          cursorX += (mouseX - cursorX) * 0.15;
-          cursorY += (mouseY - cursorY) * 0.15;
-          dotX += (mouseX - dotX) * 0.3;
-          dotY += (mouseY - dotY) * 0.3;
-          if (cursor) cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
-          if (cursorDot) cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
-          requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-      }
-      
-      // Canvas Particles (Hero)
-      const canvas = document.getElementById('hero-canvas');
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        const PARTICLE_COUNT = 600;
-        const colors = ['#00FFCC', '#00ccaa', '#009988'];
+    <!-- SECCIÓN PRINCIPAL DEL EFECTO -->
+    <section class="hero-section">
+        <div class="text-line line-center" data-speed="0.5">RECENT</div>
+        <div class="text-line line-right" data-speed="-0.5">WORK</div>
         
-        function resizeCanvas() {
-          width = window.innerWidth;
-          height = window.innerHeight;
-          canvas.width = width;
-          canvas.height = height;
-          initParticles();
-        }
-        function initParticles() {
-          particles = [];
-          for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push({
-              x: Math.random() * width,
-              y: Math.random() * height,
-              vx: (Math.random() - 0.5) * 0.3,
-              vy: (Math.random() - 0.5) * 0.3,
-              size: Math.random() * 2 + 1,
-              color: colors[Math.floor(Math.random() * colors.length)]
+        <div class="scroll-hint">SCROLL</div>
+    </section>
+
+    <!-- ESPACIO VACÍO ABAJO PARA SALIR DEL EFECTO -->
+    <div class="bottom-content">
+        <p style="color: #333; font-size: 12px;">CONTENIDO DE LA PÁGINA...</p>
+    </div>
+
+    <script>
+        // 1. SELECCIONAR ELEMENTOS
+        const textLines = document.querySelectorAll('.text-line');
+        
+        // 2. FUNCIÓN PARA SEPARAR LAS LETRAS
+        // Esto crea un <span> por cada letra para poder animarlas individualmente si quisiéramos,
+        // pero en este caso lo usamos para calcular el centro.
+        textLines.forEach(line => {
+            const text = line.innerText;
+            line.innerHTML = ''; // Limpiar texto original
+            
+            // Crear spans para cada letra
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.innerText = char;
+                span.classList.add('char');
+                // Guardamos el índice para animar luego
+                span.dataset.index = index;
+                line.appendChild(span);
             });
-          }
-        }
-        function drawParticles() {
-          ctx.clearRect(0, 0, width, height);
-          particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = 0.6;
-            ctx.fill();
-          });
-          // Líneas de conexión
-          ctx.strokeStyle = '#00FFCC';
-          ctx.lineWidth = 0.3;
-          ctx.globalAlpha = 0.1;
-          for (let i = 0; i < particles.length; i++) {
-            for (let j = i+1; j < particles.length; j++) {
-              const dx = particles[i].x - particles[j].x;
-              const dy = particles[i].y - particles[j].y;
-              const dist = Math.sqrt(dx*dx + dy*dy);
-              if (dist < 100) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-              }
-            }
-          }
-          requestAnimationFrame(drawParticles);
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        drawParticles();
-      }
-      
-      // Header scroll effect
-      const header = document.getElementById('header');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
-      
-      // Mobile menu
-      const toggle = document.getElementById('menuToggle');
-      const nav = document.getElementById('navMenu');
-      toggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        toggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
-      });
-      
-      // Swiper Portfolio
-      new Swiper('.portfolio-swiper', {
-        slidesPerView: 1.2,
-        spaceBetween: 24,
-        loop: true,
-        centeredSlides: true,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
-      
-      // Smooth scroll para enlaces internos
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href === "#" || href === "") return;
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth' });
-            if (nav.classList.contains('active')) {
-              nav.classList.remove('active');
-              toggle.textContent = '☰';
-            }
-          }
         });
-      });
-      
-      // Animación inicial del Hero con GSAP (suave, sin scroll)
-      gsap.from('.hero-title', { y: 50, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.2 });
-      gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 1, delay: 0.4 });
-      gsap.from('.hero-buttons', { y: 30, opacity: 0, duration: 1, delay: 0.6 });
-      gsap.from('.hero-badge', { opacity: 0, y: -20, duration: 0.8, delay: 0.1 });
-      
-    })();
-  </script>
+
+        // 3. ESCUCHAR EL SCROLL
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+
+            textLines.forEach(line => {
+                // Calculamos la posición del elemento en la pantalla
+                const rect = line.getBoundingClientRect();
+                
+                // Solo animamos si el elemento está visible (o cerca de estarlo)
+                // "Progress" va de 0 (arriba) a 1 (cuando el elemento está centrado)
+                // Ajustamos el cálculo para que el efecto ocurra mientras el elemento entra
+                const progress = 1 - (rect.top / windowHeight);
+                
+                // Limitamos el progreso entre 0 y 1 para que no se rompa
+                const clampedProgress = Math.max(0, Math.min(1, progress));
+
+                const chars = line.querySelectorAll('.char');
+                const totalChars = chars.length;
+
+                // LA MAGIA: MOVER LAS LETRAS
+                chars.forEach((char, index) => {
+                    // Calculamos un valor basado en el scroll
+                    // Si progress es 0 (arriba), el espaciado es grande.
+                    // Si progress es 1 (centro), el espaciado es 0.
+                    
+                    const moveAmount = (clampedProgress - 1) * -200; // 200px de dispersión inicial
+                    
+                    // Movemos cada letra en dirección opuesta a su índice para juntarlas
+                    // Esto centra las letras
+                    const centerOffset = (index - (totalChars / 2)) * moveAmount;
+
+                    // Aplicamos la transformación
+                    // Añadimos un pequeño translateY para que parezca que vienen de lejos
+                    char.style.transform = `translateX(${centerOffset}px) scale(${0.5 + (clampedProgress * 0.5)})`;
+                    char.style.opacity = clampedProgress;
+                });
+            });
+        });
+        
+        // Disparar evento scroll al cargar para colocar las letras si ya estamos en medio de la página
+        window.dispatchEvent(new Event('scroll'));
+    </script>
 </body>
 </html>
