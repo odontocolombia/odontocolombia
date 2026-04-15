@@ -1,406 +1,456 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velvett Agency</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capabilities Section</title>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
 
-        body {
-            background-color: #0a0a0a;
-            color: #fff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            overflow-x: hidden;
-        }
+    /* ── TOP BAR ── */
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: #1a1a1a;
+      border-bottom: 1px solid #2a2a2a;
+    }
 
-        /* ESPACIO INICIAL */
-        .scroll-spacer {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    .top-bar .brand {
+      font-size: 14px;
+      color: #aaa;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
-        /* BLOQUE 1: TEXTO VELVETT AGENCY */
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-color: #0a0a0a;
-            position: sticky;
-            top: 0;
-        }
+    .top-bar .btn-buy {
+      background: #5cb85c;
+      color: #fff;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
 
-        .text-line {
-            font-size: 11.2vw;
-            font-weight: 800;
-            line-height: 0.85;
-            text-transform: uppercase;
-            white-space: nowrap;
-            position: relative;
-            will-change: transform;
-        }
+    .top-bar .btn-buy:hover {
+      background: #4cae4c;
+    }
 
-        .char {
-            display: inline-block;
-            will-change: transform, opacity;
-        }
+    /* ─ HEADER / CAPABILITIES ── */
+    .header {
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      position: relative;
+    }
 
-        .line-right {
-            text-align: right;
-        }
+    .header .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 260px;
+      margin: 0 auto 30px;
+      padding: 12px 20px;
+      border: 1px solid #333;
+      border-radius: 12px;
+      background: #1a1a1a;
+    }
 
-        .scroll-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            opacity: 0.5;
-            animation: bounce 2s infinite;
-        }
+    .header .logo-text {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
-        }
+    .header .logo-text .icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #fff, #888);
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      display: inline-block;
+    }
 
-        /* BLOQUE 2: GALERÍA 8 IMÁGENES (2 COLUMNAS) */
-        .gallery-section {
-            background-color: #0a0a0a;
-            padding: 80px 40px 100px;
-        }
+    .header .menu-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
 
-        .gallery-grid {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-        }
+    .header .menu-icon span {
+      width: 20px;
+      height: 2px;
+      background: #888;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
 
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 14px;
-            background-color: #111;
-        }
+    .header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
 
-        .project-image {
-            width: 100%;
-            height: 520px;
-            object-fit: cover;
-            display: block;
-            border-radius: 14px;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+    .header .subtitle {
+      font-size: 18px;
+      color: #666;
+      text-decoration: none;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, color 0.3s;
+    }
 
-        .project-card:hover .project-image {
-            transform: scale(1.03);
-        }
+    .header .subtitle:hover {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
 
-        .project-info {
-            padding: 24px 4px 0;
-        }
+    /* ── CARDS CONTAINER ── */
+    .cards-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
 
-        .project-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
+    /* ── INDIVIDUAL CARD ── */
+    .card {
+      background: #fff;
+      color: #111;
+      width: 200px;
+      min-height: 260px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 20px;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(.25,.8,.25,1),
+                  box-shadow 0.35s ease;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+    }
 
-        .project-category {
-            font-size: 0.85rem;
-            color: #777;
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .project-year {
-            font-size: 0.78rem;
-            color: #444;
-        }
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255,255,255,0.12);
+    }
 
-        /* BLOQUE 3: ESPACIO NEGRO SEPARADOR */
-        .block-spacer {
-            height: 100vh;
-            background-color: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1a1a1a;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            font-size: 0.75rem;
-        }
+    .card .card-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
 
-        /* BLOQUE 5: FOOTER */
-        .footer-spacer {
-            height: 100vh;
-            background-color: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #222;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 0.8rem;
-        }
+    .card .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+    }
 
-        @media (max-width: 900px) {
-            .text-line {
-                font-size: 13vw;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .project-image {
-                height: 380px;
-            }
-            
-            .gallery-section {
-                padding: 60px 20px 80px;
-            }
-        }
-    </style>
+    /* ─ SVG ICONS INSIDE CARDS ── */
+    .card .card-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    /* ── CENTER CARD HIGHLIGHT RING ── */
+    .card.highlighted {
+      border: 3px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .card.highlighted::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 18px;
+      padding: 3px;
+      background: linear-gradient(135deg, #fff, #aaa);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── PLUS BUTTON ── */
+    .plus-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      color: #111;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .plus-btn:hover {
+      transform: rotate(90deg) scale(1.1);
+      background: #ddd;
+    }
+
+    /* ── SCROLL TO TOP ── */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #333;
+      color: #fff;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s, background 0.3s;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+    }
+
+    .scroll-top:hover {
+      background: #555;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .cards-wrapper {
+        gap: 10px;
+      }
+      .card {
+        width: 150px;
+        min-height: 200px;
+        padding: 20px 14px;
+      }
+      .card .card-icon svg {
+        width: 36px;
+        height: 36px;
+      }
+      .card .card-title {
+        font-size: 14px;
+      }
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- INICIO -->
-    <div class="scroll-spacer">
-        <p>↓ Scroll Down ↓</p>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <span class="brand">envato market</span>
+    <button class="btn-buy">Buy now</button>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-text">
+        <span class="icon"></span>
+        ADON<br>CREATIVE
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <h1>Capabilities</h1>
+    <a class="subtitle">Explore</a>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-wrapper" id="cardsWrapper">
+
+    <!-- Card 1: Interaction Design -->
+    <div class="card" data-delay="0">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
+          <line x1="24" y1="4" x2="24" y2="44"/>
+          <line x1="4" y1="24" x2="44" y2="24"/>
+          <line x1="8" y1="8" x2="40" y2="40"/>
+          <line x1="40" y1="8" x2="8" y2="40"/>
+        </svg>
+      </div>
+      <div class="card-title">Interaction Design</div>
     </div>
 
-    <!-- BLOQUE 1: VELVETT AGENCY -->
-    <section class="hero-section" id="heroSection">
-        <div class="text-line line-center" id="line1">VELVETT</div>
-        <div class="text-line line-right" id="line2">AGENCY</div>
-        <div class="scroll-hint">SCROLL</div>
-    </section>
+    <!-- Card 2: Website Development -->
+    <div class="card" data-delay="100">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <circle cx="24" cy="24" r="18"/>
+          <path d="M24 6 C24 6, 6 24, 24 24 C24 24, 42 24, 24 42" fill="#111"/>
+          <path d="M24 6 C24 6, 42 24, 24 24 C24 24, 6 24, 24 42" stroke="#111" fill="none"/>
+        </svg>
+      </div>
+      <div class="card-title">Website Development</div>
+    </div>
 
-    <!-- BLOQUE 2: GALERÍA 8 IMÁGENES (4 FILAS x 2 COLUMNAS) -->
-    <section class="gallery-section">
-        <div class="gallery-grid">
-            
-            <!-- FILA 1: Project 1A y 1B -->
-            <div class="project-card" data-speed="0.05">
-                <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=900&q=80" alt="Project 1A" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Save Me Saudia</h3>
-                    <p class="project-category">Communication, Social Media</p>
-                    <span class="project-year">(2020)</span>
-                </div>
-            </div>
+    <!-- Card 3: SaaS Product Design (CENTER / highlighted) -->
+    <div class="card highlighted" data-delay="200">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <rect x="6" y="6" width="22" height="22" rx="2"/>
+          <rect x="20" y="20" width="22" height="22" rx="2"/>
+        </svg>
+      </div>
+      <div class="card-title">SaaS Product Design</div>
+    </div>
 
-            <div class="project-card" data-speed="0.08">
-                <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=900&q=80" alt="Project 1B" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Neon Dreams</h3>
-                    <p class="project-category">Visual Identity, Campaign</p>
-                    <span class="project-year">(2021)</span>
-                </div>
-            </div>
+    <!-- Card 4: Digital Marketing -->
+    <div class="card" data-delay="300">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14 Z"/>
+          <line x1="24" y1="4" x2="24" y2="44"/>
+          <line x1="6" y1="14" x2="24" y2="24"/>
+          <line x1="42" y1="14" x2="24" y2="24"/>
+        </svg>
+      </div>
+      <div class="card-title">Digital Marketing</div>
+    </div>
 
-            <!-- FILA 2: Project 2A y 2B -->
-            <div class="project-card" data-speed="0.06">
-                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=900&q=80" alt="Project 2A" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Lambax Nanak</h3>
-                    <p class="project-category">Strategy, Visual Identity, Re-branding</p>
-                    <span class="project-year">(2022)</span>
-                </div>
-            </div>
+    <!-- Card 5: Brand Guidelines -->
+    <div class="card" data-delay="400">
+      <div class="card-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+          <circle cx="24" cy="24" r="18"/>
+          <path d="M24 6 A18 18 0 0 1 42 24 L24 24 Z" fill="#111"/>
+          <rect x="21" y="21" width="6" height="6" fill="#111"/>
+        </svg>
+      </div>
+      <div class="card-title">Brand Guidelines</div>
+    </div>
 
-            <div class="project-card" data-speed="0.09">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=900&q=80" alt="Project 2B" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Chromatic Flow</h3>
-                    <p class="project-category">Art Direction, Photography</p>
-                    <span class="project-year">(2023)</span>
-                </div>
-            </div>
+  </div>
 
-            <!-- FILA 3: Project 3A y 3B -->
-            <div class="project-card" data-speed="0.05">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80" alt="Project 3A" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Arrox Digital Agency HTML Template</h3>
-                    <p class="project-category">WordPress, Themeforest</p>
-                    <span class="project-year">(2025)</span>
-                </div>
-            </div>
+  <!-- PLUS BUTTON -->
+  <button class="plus-btn" id="plusBtn">+</button>
 
-            <div class="project-card" data-speed="0.08">
-                <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=900&q=80" alt="Project 3B" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Abstract Horizons</h3>
-                    <p class="project-category">Design, 3D Render</p>
-                    <span class="project-year">(2024)</span>
-                </div>
-            </div>
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop">↑</button>
 
-            <!-- FILA 4: Project 4A y 4B -->
-            <div class="project-card" data-speed="0.06">
-                <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=900&q=80" alt="Project 4A" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Gradient Pulse</h3>
-                    <p class="project-category">Branding, Motion</p>
-                    <span class="project-year">(2023)</span>
-                </div>
-            </div>
+  <script>
+    // ── ANIMATE CARDS ON LOAD ──
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card');
 
-            <div class="project-card" data-speed="0.09">
-                <img src="https://images.unsplash.com/photo-1604871000636-074fa5117945?w=900&q=80" alt="Project 4B" class="project-image">
-                <div class="project-info">
-                    <h3 class="project-title">Luminous Space</h3>
-                    <p class="project-category">Interior, Architecture</p>
-                    <span class="project-year">(2022)</span>
-                </div>
-            </div>
+      cards.forEach(card => {
+        const delay = parseInt(card.getAttribute('data-delay')) || 0;
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, 300 + delay);
+      });
+    });
 
+    // ── MENU ICON TOGGLE ──
+    const menuIcon = document.getElementById('menuIcon');
+    menuIcon.addEventListener('click', () => {
+      const spans = menuIcon.querySelectorAll('span');
+      spans[0].style.transform = spans[0].style.transform
+        ? '' : 'rotate(45deg) translate(4px, 4px)';
+      spans[1].style.opacity = spans[1].style.opacity === '0' ? '1' : '0';
+      spans[2].style.transform = spans[2].style.transform
+        ? '' : 'rotate(-45deg) translate(4px, -4px)';
+    });
+
+    // ── PLUS BUTTON → ADD CARD ──
+    const plusBtn = document.getElementById('plusBtn');
+    const wrapper = document.getElementById('cardsWrapper');
+    let cardCount = 5;
+
+    const extraServices = [
+      'UI Engineering',
+      'Motion Design',
+      'User Research',
+      'Content Strategy',
+      'App Design'
+    ];
+
+    plusBtn.addEventListener('click', () => {
+      const name = extraServices[cardCount - 5] || `Service ${cardCount + 1}`;
+      const card = document.createElement('div');
+      card.className = 'card visible';
+      card.innerHTML = `
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5">
+            <circle cx="24" cy="24" r="16"/>
+            <line x1="16" y1="24" x2="32" y2="24"/>
+            <line x1="24" y1="16" x2="24" y2="32"/>
+          </svg>
         </div>
-    </section>
+        <div class="card-title">${name}</div>
+      `;
+      wrapper.appendChild(card);
+      card.style.transform = 'translateY(40px) scale(0.8)';
+      card.style.opacity = '0';
+      requestAnimationFrame(() => {
+        card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        card.style.transform = 'translateY(0) scale(1)';
+        card.style.opacity = '1';
+      });
+      cardCount++;
+    });
 
-    <!-- BLOQUE 3: ESPACIO NEGRO -->
-    <div class="block-spacer">
-        <p>· · ·</p>
-    </div>
-
-    <!-- BLOQUE 5: FOOTER -->
-    <div class="footer-spacer">
-        <p>Velvett Agency © 2026</p>
-    </div>
-
-    <script>
-        // FUNCIÓN PARA SEPARAR LETRAS
-        function splitText(line) {
-            const text = line.innerText;
-            line.innerHTML = '';
-            
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.innerText = char === ' ' ? '\u00A0' : char;
-                span.classList.add('char');
-                span.dataset.index = index;
-                line.appendChild(span);
-            });
-        }
-
-        // INICIALIZAR TEXTO PRINCIPAL
-        const line1 = document.getElementById('line1');
-        const line2 = document.getElementById('line2');
-        splitText(line1);
-        splitText(line2);
-
-        const chars1 = line1.querySelectorAll('.char');
-        const chars2 = line2.querySelectorAll('.char');
-        const heroSection = document.getElementById('heroSection');
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const windowHeight = window.innerHeight;
-
-            // ==========================================
-            // ANIMACIÓN TEXTO: VELVETT AGENCY
-            // ==========================================
-            const heroTop = heroSection.offsetTop;
-            const heroProgress = Math.min(1, Math.max(0, (scrollY - heroTop + windowHeight) / (windowHeight * 1.8)));
-            
-            const heroEnter = Math.min(1, heroProgress / 0.25);
-            const heroExit = Math.min(1, Math.max(0, (heroProgress - 0.45) / 0.55));
-            const easedExit = easeInCubic(heroExit);
-
-            if (heroProgress <= 0.25) {
-                animateEnter(chars1, chars2, easeOutCubic(heroEnter));
-            } else if (heroProgress > 0.45) {
-                animateExit(chars1, chars2, easedExit);
-            } else {
-                animateHold(chars1, chars2);
-            }
-
-            // ==========================================
-            // PARALLAX PARA LAS 8 IMÁGENES
-            // ==========================================
-            const images = document.querySelectorAll('.project-card');
-            
-            images.forEach((card) => {
-                const rect = card.getBoundingClientRect();
-                const img = card.querySelector('.project-image');
-                const speed = parseFloat(card.dataset.speed) || 0.05;
-                
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const parallaxOffset = scrollProgress * 80 * speed;
-                    img.style.transform = `translateY(${parallaxOffset}px)`;
-                }
-            });
-        });
-
-        // Función: Letras entran desde los lados
-        function animateEnter(charsLeft, charsRight, progress) {
-            charsLeft.forEach((char, index) => {
-                const startX = -80 - (index * 25);
-                char.style.transform = `translateX(${startX * (1 - progress)}px) scale(${0.5 + (progress * 0.5)})`;
-                char.style.opacity = progress;
-            });
-
-            charsRight.forEach((char, index) => {
-                const startX = 80 + (index * 25);
-                char.style.transform = `translateX(${startX * (1 - progress)}px) scale(${0.5 + (progress * 0.5)})`;
-                char.style.opacity = progress;
-            });
-        }
-
-        // Función: Letras se van a los lados y desaparecen
-        function animateExit(charsLeft, charsRight, progress) {
-            charsLeft.forEach((char, index) => {
-                const endX = -80 - (index * 25);
-                char.style.transform = `translateX(${endX * progress}px) scale(1)`;
-                char.style.opacity = 1 - progress;
-            });
-
-            charsRight.forEach((char, index) => {
-                const endX = 80 + (index * 25);
-                char.style.transform = `translateX(${endX * progress}px) scale(1)`;
-                char.style.opacity = 1 - progress;
-            });
-        }
-
-        // Función: Hold estático
-        function animateHold(charsLeft, charsRight) {
-            [...charsLeft, ...charsRight].forEach(char => {
-                char.style.transform = `translateX(0px) scale(1)`;
-                char.style.opacity = 1;
-            });
-        }
-
-        // Easing functions
-        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-        function easeInCubic(t) { return t * t * t; }
-
-        // Inicializar estado
-        window.dispatchEvent(new Event('scroll'));
-    </script>
+    // ── SCROLL TO TOP BUTTON ─
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 200);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
