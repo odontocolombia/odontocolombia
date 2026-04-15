@@ -1,493 +1,811 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Dra. Laura Méndez · Investigadora 3D</title>
-  <!-- Fuentes & Estilos Base -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="SmileDent - Clínica de odontología estética especializada en blanqueamiento, carillas, implantes y ortodoncia invisible. ¡Agenda tu cita hoy!"/>
+  <meta name="keywords" content="odontología estética, blanqueamiento dental, carillas, implantes, ortodoncia, sonrisa perfecta"/>
+  <meta name="author" content="SmileDent"/>
+  <meta property="og:title" content="SmileDent - Tu Sonrisa, Nuestra Pasión"/>
+  <meta property="og:description" content="Transformamos tu sonrisa con tratamientos de odontología estética de alta calidad."/>
+  <meta property="og:type" content="website"/>
+  <title>SmileDent - Odontología Estética Profesional</title>
+  
+  <!-- Favicon con emoji de diente -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦷</text></svg>">
+  
   <style>
-    /* Reset y estructura principal */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ===== VARIABLES GLOBALES ===== */
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --secondary: #f8fafc;
+      --dark: #1e293b;
+      --light: #ffffff;
+      --gray: #64748b;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
     }
 
+    /* ===== RESET Y BASE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #050b1a;
-      color: #f0f3fa;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: var(--light);
+      scroll-behavior: smooth;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
     }
 
-    /* Canvas Three.js ocupará toda la pantalla fijo */
-    #canvas-container {
-      position: fixed;
+    /* ===== BOTONES ===== */
+    .btn-primary, .btn-secondary {
+      padding: 14px 28px;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.3);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-block { width: 100%; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: white;
+      box-shadow: var(--shadow);
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none; /* Permitir interacción con contenido */
+      z-index: 1000;
+      padding: 15px 0;
     }
-
-    /* Contenido por encima del canvas */
-    .content {
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .logo span { color: var(--primary); }
+    
+    .nav {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 5px 0;
       position: relative;
-      z-index: 10;
-      backdrop-filter: blur(2px);
+    }
+    
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .nav a:hover::after { width: 100%; }
+    .nav a:hover { color: var(--primary); }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dark);
+      padding: 5px;
     }
 
-    /* Navegación glassmorphism */
-    .glass-nav {
-      background: rgba(5, 11, 26, 0.65);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(72, 187, 255, 0.2);
+    /* ===== HERO SECTION ===== */
+    .hero {
+      background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    /* Tarjetas estilo vidrio con borde sutil */
-    .glass-card {
-      background: rgba(15, 25, 45, 0.55);
-      backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    }
-    .glass-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(56, 189, 248, 0.6);
-      box-shadow: 0 25px 40px rgba(0, 150, 255, 0.2);
-    }
-
+    /* ===== SECCIONES GENERALES ===== */
+    section { padding: 80px 0; }
+    
     .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #fff, #7dd3fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: inline-block;
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 50px;
+      color: var(--dark);
+      position: relative;
     }
-    .section-title:after {
+    
+    .section-title::after {
       content: '';
       display: block;
-      width: 70px;
+      width: 60px;
       height: 4px;
-      background: linear-gradient(90deg, #3b82f6, #38bdf8);
-      border-radius: 4px;
-      margin-top: 8px;
+      background: var(--primary);
+      margin: 15px auto 0;
+      border-radius: 2px;
     }
 
-    .btn-3d {
-      background: linear-gradient(95deg, #1e3a8a, #3b82f6);
-      border: none;
-      border-radius: 40px;
-      padding: 12px 28px;
-      font-weight: 600;
-      transition: all 0.2s;
-      box-shadow: 0 5px 15px rgba(59,130,246,0.3);
+    /* ===== SERVICIOS ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
     }
-    .btn-3d:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 25px rgba(59,130,246,0.5);
-    }
-
-    .skill-chip {
-      background: rgba(59,130,246,0.2);
-      backdrop-filter: blur(4px);
-      border-radius: 40px;
-      padding: 6px 18px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid rgba(59,130,246,0.4);
-    }
-
-    /* inputs estilo glass */
-    .glass-input {
-      background: rgba(20, 30, 55, 0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: 1.2rem;
-      padding: 12px 18px;
-      color: white;
-      width: 100%;
-      transition: all 0.2s;
-    }
-    .glass-input:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
-    }
-
-    footer {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
-      border-top: 1px solid rgba(72, 187, 255, 0.2);
-    }
-
-    /* Animaciones scroll (fade-up) */
-    .fade-up {
+    
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.7s ease;
+      transform: translateY(30px);
     }
-    .fade-up.visible {
+    
+    .service-card.visible {
       opacity: 1;
       transform: translateY(0);
     }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .service-card .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .service-card h3 {
+      margin: 15px 0;
+      color: var(--dark);
+      font-size: 1.3rem;
+    }
+    
+    .service-card p { color: var(--gray); }
 
+    /* ===== NOSOTROS ===== */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    
+    .about-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    
+    .about-list li {
+      margin: 12px 0;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .placeholder-img {
+      background: linear-gradient(135deg, #e0f2fe, #cffafe);
+      border-radius: var(--radius);
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      font-weight: 500;
+      border: 3px dashed var(--primary);
+    }
+
+    /* ===== TESTIMONIOS ===== */
+    .testimonials { background: var(--secondary); }
+    
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonial-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+    
+    .testimonial-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .testimonial-card p {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--gray);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    
+    .testimonial-card strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ===== CONTACTO ===== */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .form-group { margin-bottom: 20px; }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+    }
+    
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 50px 0 25px;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .footer-logo span { color: var(--primary); }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .footer-links a:hover { color: white; }
+    
+    .copyright {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
+
+    /* ===== ANIMACIONES ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .about-content { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+    
     @media (max-width: 768px) {
-      .section-title { font-size: 2rem; }
-      .glass-card { padding: 1.25rem; }
+      .menu-toggle { display: block; }
+      
+      .nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-top: 10px;
+      }
+      
+      .nav.active { display: flex; }
+      .nav a { padding: 12px 0; }
+      
+      .header-content { flex-direction: column; text-align: center; }
+      
+      .hero { padding: 70px 0; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+      
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; }
+      
+      .section-title { font-size: 1.8rem; }
+      section { padding: 60px 0; }
+      
+      .contact-form { padding: 30px 20px; }
+    }
+
+    /* ===== ACCESIBILIDAD ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+    
+    /* Focus visible para navegación con teclado */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
 
-  <div id="canvas-container"></div>
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Smile<span>Dent</span></div>
+      
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        ☰
+      </button>
+      
+      <nav class="nav" id="navMenu" aria-label="Menú principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      
+      <button class="btn-primary" onclick="scrollToSection('contacto')" aria-label="Agendar cita">
+        Agendar Cita
+      </button>
+    </div>
+  </header>
 
-  <div class="content">
-    <!-- Barra de navegación glass -->
-    <nav class="glass-nav fixed top-0 w-full z-50 py-4 px-6 md:px-10 transition-all">
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between">
-        <div class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-300 to-indigo-300 bg-clip-text text-transparent">
-          Dra. Laura Méndez
-        </div>
-        <div class="flex space-x-6 md:space-x-8 text-sm md:text-base font-semibold">
-          <a href="#inicio" class="hover:text-cyan-300 transition">Inicio</a>
-          <a href="#investigacion" class="hover:text-cyan-300 transition">Investigación</a>
-          <a href="#publicaciones" class="hover:text-cyan-300 transition">Publicaciones</a>
-          <a href="#docencia" class="hover:text-cyan-300 transition">Docencia</a>
-          <a href="#contacto" class="hover:text-cyan-300 transition">Contacto</a>
-        </div>
+  <!-- ===== HERO ===== -->
+  <section id="inicio" class="hero">
+    <div class="container hero-content">
+      <h1>Tu Sonrisa, Nuestra Pasión ✨</h1>
+      <p>Transformamos tu sonrisa con tratamientos de odontología estética de alta calidad y tecnología de vanguardia. Resultados naturales que enamoran.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="scrollToSection('servicios')">Ver Servicios</button>
+        <button class="btn-secondary" onclick="scrollToSection('contacto')">Contáctanos</button>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <main class="pt-28 md:pt-32 pb-20">
-      <!-- Hero section -->
-      <section id="inicio" class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20 fade-up">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div class="text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 backdrop-blur-sm border border-blue-400/40 text-sm font-semibold mb-5">
-              <i class="fas fa-microscope"></i> Laboratorio de IA Cuántica
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-              <span class="bg-gradient-to-r from-white via-blue-200 to-indigo-300 bg-clip-text text-transparent">Dra. Laura Méndez</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-100/90 mt-4 font-medium">Profesora de IA · Investigadora Principal</p>
-            <p class="text-gray-300 max-w-xl mt-5 leading-relaxed">Pionera en modelos generativos multimodales y ética algorítmica. Directora del Centro de Innovación en Inteligencia Artificial (CIIA).</p>
-            <div class="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
-              <a href="#publicaciones" class="btn-3d text-white inline-flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Producción científica</a>
-              <a href="#contacto" class="border border-cyan-400 text-cyan-300 px-6 py-3 rounded-full font-semibold hover:bg-cyan-500/20 transition"><i class="fas fa-envelope"></i> Colaborar</a>
-            </div>
-          </div>
-          <div class="flex justify-center">
-            <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-4 ring-blue-400/40 shadow-2xl bg-gradient-to-tr from-blue-900/40 to-indigo-900/40 flex items-center justify-center backdrop-blur-sm">
-              <i class="fas fa-brain text-7xl text-cyan-300/80"></i>
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- ===== SERVICIOS ===== -->
+  <section id="servicios" class="services">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="services-grid">
+        
+        <article class="service-card">
+          <span class="icon" aria-hidden="true">✨</span>
+          <h3>Blanqueamiento Dental</h3>
+          <p>Logra una sonrisa más blanca y brillante con nuestros tratamientos seguros, efectivos y sin sensibilidad.</p>
+        </article>
+        
+        <article class="service-card">
+          <span class="icon" aria-hidden="true">💎</span>
+          <h3>Carillas de Porcelana</h3>
+          <p>Corrige imperfecciones, cierra espacios y diseña la sonrisa que siempre soñaste con carillas personalizadas.</p>
+        </article>
+        
+        <article class="service-card">
+          <span class="icon" aria-hidden="true">🦷</span>
+          <h3>Implantes Dentales</h3>
+          <p>Recupera tu confianza y funcionalidad con implantes de alta calidad que se integran naturalmente.</p>
+        </article>
+        
+        <article class="service-card">
+          <span class="icon" aria-hidden="true">😁</span>
+          <h3>Ortodoncia Invisible</h3>
+          <p>Alinea tus dientes de forma discreta y cómoda con alineadores transparentes. Sin brackets metálicos.</p>
+        </article>
+        
+      </div>
+    </div>
+  </section>
 
-      <!-- Investigación -->
-      <section id="investigacion" class="max-w-7xl mx-auto px-6 md:px-8 py-20 fade-up">
-        <div class="grid lg:grid-cols-2 gap-12">
-          <div>
-            <h2 class="section-title text-3xl md:text-4xl mb-6">🔬 Líneas de investigación</h2>
-            <div class="flex flex-wrap gap-3 mb-8">
-              <span class="skill-chip"><i class="fas fa-brain mr-1"></i> Deep Learning</span>
-              <span class="skill-chip"><i class="fas fa-dna mr-1"></i> Genómica computacional</span>
-              <span class="skill-chip"><i class="fas fa-robot mr-1"></i> IA Explicable (XAI)</span>
-              <span class="skill-chip"><i class="fas fa-chart-line mr-1"></i> Inferencia causal</span>
-              <span class="skill-chip"><i class="fas fa-heartbeat mr-1"></i> Diagnóstico médico asistido</span>
-              <span class="skill-chip"><i class="fas fa-balance-scale mr-1"></i> Ética y gobernanza de IA</span>
-            </div>
-            <div class="glass-card p-6">
-              <h3 class="text-xl font-bold flex gap-2 items-center"><i class="fas fa-trophy text-amber-400"></i> Premios recientes</h3>
-              <ul class="mt-3 space-y-3 text-gray-200">
-                <li>🏆 Premio Nacional de Investigación en IA 2024</li>
-                <li>📄 Best Paper Award – NeurIPS 2023 (Causal Representation Learning)</li>
-                <li>🌍 Miembro del Consejo Europeo de IA Responsable</li>
-              </ul>
-            </div>
-          </div>
-          <div>
-            <h2 class="section-title text-3xl md:text-4xl mb-6">⚙️ Stack tecnológico</h2>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="glass-card p-4 text-center"><i class="fab fa-python text-3xl text-cyan-300"></i><p class="mt-1 font-medium">Python / PyTorch</p></div>
-              <div class="glass-card p-4 text-center"><i class="fas fa-chart-simple text-3xl text-cyan-300"></i><p>TensorFlow / JAX</p></div>
-              <div class="glass-card p-4 text-center"><i class="fas fa-cloud text-3xl text-cyan-300"></i><p>AWS / GCP / Kubeflow</p></div>
-              <div class="glass-card p-4 text-center"><i class="fas fa-database text-3xl text-cyan-300"></i><p>Spark / BigQuery</p></div>
-            </div>
-            <div class="mt-8 glass-card p-5 bg-cyan-950/20 border-l-4 border-cyan-400">
-              <i class="fas fa-quote-left text-cyan-400 text-2xl mr-2"></i>
-              <p class="italic">“La IA del futuro será explicable, justa y profundamente conectada con el conocimiento científico.”</p>
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- ===== NOSOTROS ===== -->
+  <section id="nosotros" class="about">
+    <div class="container about-content">
+      <div class="about-text">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <p>En <strong>SmileDent</strong>, combinamos experiencia, tecnología avanzada y un trato humano para ofrecerte los mejores resultados en odontología estética.</p>
+        <p>Nuestro equipo de especialistas está comprometido con tu comodidad y satisfacción, brindando tratamientos personalizados en un ambiente relajado y moderno.</p>
+        
+        <ul class="about-list">
+          <li>✅ Más de 15 años de experiencia</li>
+          <li>✅ Tecnología de última generación</li>
+          <li>✅ Materiales certificados y seguros</li>
+          <li>✅ Planes de financiamiento flexibles</li>
+          <li>✅ Primera consulta de evaluación gratuita</li>
+        </ul>
+        
+        <button class="btn-primary" onclick="scrollToSection('contacto')" style="margin-top: 20px;">
+          Conoce al Equipo
+        </button>
+      </div>
+      
+      <div class="about-image">
+        <!-- Reemplaza este div con: <img src="images/clínica.jpg" alt="Nuestra clínica" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"> -->
+        <div class="placeholder-img">🦷<br><br>Imagen de la clínica<br><small>(Reemplaza con tu foto real)</small></div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Publicaciones destacadas -->
-      <section id="publicaciones" class="max-w-7xl mx-auto px-6 md:px-8 py-20 fade-up">
-        <div class="text-center mb-12">
-          <h2 class="section-title text-3xl md:text-4xl">📄 Publicaciones recientes</h2>
-          <p class="text-gray-300 mt-3 max-w-2xl mx-auto">Investigación de vanguardia en revistas de alto impacto</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="glass-card p-6">
-            <div class="flex justify-between"><span class="bg-blue-600/40 text-cyan-100 text-xs px-3 py-1 rounded-full">2025</span><i class="fas fa-file-alt text-cyan-300/60"></i></div>
-            <h3 class="text-xl font-bold mt-3">Modelos multimodales para diagnóstico clínico</h3>
-            <p class="text-gray-300 text-sm mt-1">Méndez, L., Costa, J., Wang, H.</p>
-            <p class="text-cyan-300/80 text-sm">Nature Machine Intelligence, 7(2), 188–203</p>
-            <div class="flex gap-3 mt-4"><a href="#" class="text-cyan-300 text-sm">DOI →</a><a href="#" class="text-cyan-300 text-sm">Preprint →</a></div>
-          </div>
-          <div class="glass-card p-6">
-            <div class="flex justify-between"><span class="bg-blue-600/40 text-cyan-100 text-xs px-3 py-1 rounded-full">2024</span><i class="fas fa-microchip text-cyan-300/60"></i></div>
-            <h3 class="text-xl font-bold mt-3">IA explicable en entornos de alta incertidumbre médica</h3>
-            <p class="text-gray-300 text-sm">Méndez, L., Zhu, W., García, P.</p>
-            <p class="text-cyan-300/80 text-sm">IEEE TMI, 43(7), 2451–2466</p>
-            <div class="flex gap-3 mt-4"><a href="#" class="text-cyan-300 text-sm">PDF →</a><a href="#" class="text-cyan-300 text-sm">Código →</a></div>
-          </div>
-          <div class="glass-card p-6">
-            <div class="flex justify-between"><span class="bg-blue-600/40 text-cyan-100 text-xs px-3 py-1 rounded-full">2023</span><i class="fas fa-chart-network text-cyan-300/60"></i></div>
-            <h3 class="text-xl font-bold mt-3">Redes causales para predicción de eventos adversos</h3>
-            <p class="text-gray-300 text-sm">Méndez, L., Kovac, A., Serrano, M.</p>
-            <p class="text-cyan-300/80 text-sm">NeurIPS 2023 (Oral), 36, 7901–7915</p>
-            <div class="flex gap-3 mt-4"><a href="#" class="text-cyan-300 text-sm">arXiv →</a><a href="#" class="text-cyan-300 text-sm">Slides →</a></div>
-          </div>
-          <div class="glass-card p-6">
-            <div class="flex justify-between"><span class="bg-blue-600/40 text-cyan-100 text-xs px-3 py-1 rounded-full">2024</span><i class="fas fa-dna text-cyan-300/60"></i></div>
-            <h3 class="text-xl font-bold mt-3">Transferencia de representación en transcriptómica espacial</h3>
-            <p class="text-gray-300 text-sm">Méndez, L., Chen, S., López, C.</p>
-            <p class="text-cyan-300/80 text-sm">Genome Biology, 25(1), 112–129</p>
-            <div class="flex gap-3 mt-4"><a href="#" class="text-cyan-300 text-sm">Texto completo →</a><a href="#" class="text-cyan-300 text-sm">Dataset →</a></div>
-          </div>
-        </div>
-      </section>
+  <!-- ===== TESTIMONIOS ===== -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+      <div class="testimonials-grid">
+        
+        <article class="testimonial-card">
+          <p>"¡Mi sonrisa cambió por completo! El equipo fue muy profesional, me explicaron todo el proceso y el resultado superó mis expectativas. ¡Totalmente recomendado!"</p>
+          <strong>— María González</strong>
+        </article>
+        
+        <article class="testimonial-card">
+          <p>"El blanqueamiento dental fue rápido, indoloro y los resultados son increíbles. Ya no me da vergüenza sonreír en las fotos. ¡Gracias SmileDent!"</p>
+          <strong>— Carlos Ramírez</strong>
+        </article>
+        
+        <article class="testimonial-card">
+          <p>"Me encantó la atención personalizada. Me explicaron cada paso del tratamiento con claridad y paciencia. El ambiente es muy acogedor."</p>
+          <strong>— Ana López</strong>
+        </article>
+        
+      </div>
+    </div>
+  </section>
 
-      <!-- Docencia y mentoría + experiencia -->
-      <section id="docencia" class="max-w-7xl mx-auto px-6 md:px-8 py-20 fade-up">
-        <div class="grid lg:grid-cols-2 gap-12">
-          <div>
-            <h2 class="section-title text-3xl md:text-4xl mb-6">📖 Docencia & Mentoría</h2>
-            <div class="space-y-5">
-              <div class="glass-card p-5"><i class="fas fa-chalkboard-user text-2xl text-cyan-300 mr-3"></i><span class="font-bold">Deep Learning Avanzado</span><p class="text-gray-300 text-sm mt-1">Máster en IA: transformers, modelos generativos, ética.</p></div>
-              <div class="glass-card p-5"><i class="fas fa-chart-line text-2xl text-cyan-300 mr-3"></i><span class="font-bold">Causalidad y Machine Learning</span><p class="text-gray-300 text-sm mt-1">Doctorado: modelos causales, inferencia contrafactual.</p></div>
-              <div class="glass-card p-5"><i class="fas fa-user-graduate text-2xl text-cyan-300 mr-3"></i><span class="font-bold">Dirección de tesis doctorales</span><p class="text-gray-300 text-sm mt-1">9 tesis completadas (IA médica, bioinformática) + 6 en curso.</p></div>
-            </div>
-          </div>
-          <div>
-            <h2 class="section-title text-3xl md:text-4xl mb-6">🏛️ Trayectoria profesional</h2>
-            <div class="space-y-5">
-              <div class="glass-card p-5"><div class="flex justify-between"><span class="font-bold">Profesora Titular</span><span class="text-cyan-300 text-sm">2021–actual</span></div><p class="text-gray-300 text-sm">Universidad de Barcelona · Directora del CIIA.</p></div>
-              <div class="glass-card p-5"><div class="flex justify-between"><span class="font-bold">Investigadora Visitante</span><span class="text-cyan-300 text-sm">2022–2023</span></div><p class="text-gray-300 text-sm">MIT CSAIL · Modelos multimodales.</p></div>
-              <div class="glass-card p-5"><div class="flex justify-between"><span class="font-bold">Postdoctorado Oxford</span><span class="text-cyan-300 text-sm">2018–2021</span></div><p class="text-gray-300 text-sm">IA responsable y salud digital.</p></div>
-            </div>
-          </div>
+  <!-- ===== CONTACTO ===== -->
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2 class="section-title">Agenda tu Cita</h2>
+      <p style="text-align: center; margin-bottom: 30px; color: var(--gray);">
+        Completa el formulario y nos contactaremos contigo en menos de 24 horas.
+      </p>
+      
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Ej: María García"/>
         </div>
-      </section>
-
-      <!-- Contacto -->
-      <section id="contacto" class="max-w-7xl mx-auto px-6 md:px-8 py-20 fade-up">
-        <div class="text-center mb-10">
-          <h2 class="section-title text-3xl md:text-4xl">✉️ Conectemos</h2>
-          <p class="text-gray-300 mt-2">Proyectos, conferencias, dirección de tesis — escríbeme.</p>
+        
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="ejemplo@correo.com"/>
         </div>
-        <div class="grid lg:grid-cols-2 gap-10">
-          <div class="glass-card p-8">
-            <form id="contactForm">
-              <div class="mb-5"><input type="text" id="nombre" placeholder="Nombre completo" class="glass-input" required></div>
-              <div class="mb-5"><input type="email" id="email" placeholder="Correo electrónico" class="glass-input" required></div>
-              <div class="mb-6"><textarea id="mensaje" rows="4" placeholder="Mensaje / colaboración" class="glass-input" required></textarea></div>
-              <button type="submit" class="btn-3d w-full text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
-              <div id="formFeedback" class="mt-4 text-center text-sm"></div>
-            </form>
-          </div>
-          <div class="glass-card p-8 flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-bold mb-4">Información directa</h3>
-              <ul class="space-y-4 text-gray-200">
-                <li><i class="fas fa-envelope text-cyan-300 w-6"></i> l.mendez@ciia.ub.edu</li>
-                <li><i class="fas fa-phone-alt text-cyan-300 w-6"></i> +34 932 541 200 (ext. 478)</li>
-                <li><i class="fas fa-map-marker-alt text-cyan-300 w-6"></i> Facultad de Matemáticas, UB · Barcelona</li>
-              </ul>
-              <div class="flex gap-5 text-2xl mt-6"><a href="#" class="hover:text-cyan-300"><i class="fab fa-twitter"></i></a><a href="#" class="hover:text-cyan-300"><i class="fab fa-github"></i></a><a href="#" class="hover:text-cyan-300"><i class="fab fa-linkedin-in"></i></a><a href="#" class="hover:text-cyan-300"><i class="fab fa-google-scholar"></i></a></div>
-            </div>
-            <div class="text-sm text-gray-400 border-t border-cyan-800/40 pt-4 mt-6"><i class="fas fa-clock"></i> Oficina: lunes a jueves 10–13h (cita previa)</div>
-          </div>
+        
+        <div class="form-group">
+          <label for="telefono">Teléfono (opcional)</label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+52 55 1234 5678"/>
         </div>
-      </section>
-    </main>
+        
+        <div class="form-group">
+          <label for="servicio">Servicio de interés</label>
+          <select id="servicio" name="servicio">
+            <option value="">Selecciona una opción</option>
+            <option value="blanqueamiento">Blanqueamiento Dental</option>
+            <option value="carillas">Carillas de Porcelana</option>
+            <option value="implantes">Implantes Dentales</option>
+            <option value="ortodoncia">Ortodoncia Invisible</option>
+            <option value="evaluacion">Evaluación General</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn-primary btn-block">Enviar Solicitud ✉️</button>
+      </form>
+    </div>
+  </section>
 
-    <footer class="py-6 text-center text-gray-400 text-sm">
-      <p>© 2025 Dra. Laura Méndez — Investigación e innovación en IA</p>
-    </footer>
-  </div>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-logo">Smile<span>Dent</span></div>
+      <p>Transformando sonrisas con excelencia, tecnología y cuidado humano.</p>
+      
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      
+      <p class="copyright">
+        &copy; <span id="year"></span> SmileDent. Todos los derechos reservados.<br>
+        <small style="color: #64748b; display: block; margin-top: 8px;">
+          Sitio web creado con ❤️ para tu clínica dental
+        </small>
+      </p>
+    </div>
+  </footer>
 
-  <!-- Three.js, GSAP, ScrollTrigger -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ========================================
+    // 🦷 SmileDent - JavaScript Funcional
+    // ========================================
+
+    // 1. SCROLL SUAVE A SECCIONES
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script type="module">
-    import * as THREE from 'three';
 
-    // --- Configuración escena 3D avanzada (background dinámico)
-    const container = document.getElementById('canvas-container');
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050b1a);
-    scene.fog = new THREE.FogExp2(0x050b1a, 0.008);
+    // 2. MENÚ RESPONSIVE (MÓVIL)
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 2, 12);
-    camera.lookAt(0, 0, 0);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Luces
-    const ambientLight = new THREE.AmbientLight(0x111122);
-    scene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(2, 5, 3);
-    scene.add(dirLight);
-    const backLight = new THREE.PointLight(0x3366ff, 0.5);
-    backLight.position.set(-2, 1, -4);
-    scene.add(backLight);
-    const fillLight = new THREE.PointLight(0xffaa66, 0.3);
-    fillLight.position.set(1, 2, 2);
-    scene.add(fillLight);
-
-    // Objeto central: torus knot con wireframe + material brillante
-    const geometry = new THREE.TorusKnotGeometry(1.2, 0.32, 180, 24, 3, 4);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x3b82f6,
-      emissive: 0x1e3a8a,
-      roughness: 0.3,
-      metalness: 0.7,
-      wireframe: false
+    menuToggle?.addEventListener('click', () => {
+      const isActive = navMenu.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isActive);
+      menuToggle.innerHTML = isActive ? '✕' : '☰';
     });
-    const knot = new THREE.Mesh(geometry, material);
-    scene.add(knot);
-    
-    // Wireframe adicional superpuesto (efecto high-tech)
-    const wireMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.25 });
-    const knotWire = new THREE.Mesh(geometry, wireMat);
-    scene.add(knotWire);
 
-    // Partículas flotantes (sistema de estrellas/átomos)
-    const particleCount = 1800;
-    const particlesGeometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-      positions[i*3] = (Math.random() - 0.5) * 40;
-      positions[i*3+1] = (Math.random() - 0.5) * 20;
-      positions[i*3+2] = (Math.random() - 0.5) * 25 - 10;
-    }
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particleMat = new THREE.PointsMaterial({
-      color: 0x7dd3fc,
-      size: 0.08,
-      transparent: true,
-      opacity: 0.6,
-      blending: THREE.AdditiveBlending
-    });
-    const particles = new THREE.Points(particlesGeometry, particleMat);
-    scene.add(particles);
-
-    // Anillo orbitante pequeño
-    const ringGeo = new THREE.TorusGeometry(1.6, 0.04, 64, 300);
-    const ringMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0f2b5e });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    scene.add(ring);
-
-    // Animación con GSAP integrada y rotación suave
-    let time = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      time += 0.008;
-      // Rotación principal
-      knot.rotation.x += 0.005;
-      knot.rotation.y += 0.008;
-      knotWire.rotation.x = knot.rotation.x;
-      knotWire.rotation.y = knot.rotation.y;
-      ring.rotation.z += 0.003;
-      ring.rotation.x = Math.sin(time * 0.5) * 0.2;
-      // Movimiento suave de partículas (flotación)
-      particles.rotation.y += 0.0005;
-      particles.rotation.x = Math.sin(time * 0.2) * 0.1;
-      // Efecto de pulsación ligera en knot
-      const scale = 1 + Math.sin(time * 3) * 0.02;
-      knot.scale.set(scale, scale, scale);
-      knotWire.scale.set(scale, scale, scale);
-      
-      camera.position.x += (0 - camera.position.x) * 0.03;
-      camera.lookAt(0, 0.5, 0);
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Resize handler
-    window.addEventListener('resize', onWindowResize, false);
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    // --- GSAP ScrollTrigger animaciones de entrada para secciones
-    gsap.registerPlugin(ScrollTrigger);
-    const fadeItems = document.querySelectorAll('.fade-up');
-    fadeItems.forEach(el => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power2.out",
-        overwrite: true
+    // Cerrar menú al hacer click en un enlace (móvil)
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '☰';
       });
-      // estado inicial
-      gsap.set(el, { opacity: 0, y: 40 });
     });
-    // Aseguramos que el hero se muestre inmediatamente (sin esperar scroll)
-    gsap.set('#inicio', { opacity: 1, y: 0 });
 
-    // Formulario demo interactivo
-    const form = document.getElementById('contactForm');
-    const feedbackDiv = document.getElementById('formFeedback');
-    form.addEventListener('submit', (e) => {
+    // Cerrar menú al hacer click fuera de él
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header') && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '☰';
+      }
+    });
+
+    // 3. FORMULARIO DE CONTACTO
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm?.addEventListener('submit', function(e) {
       e.preventDefault();
+      
       const nombre = document.getElementById('nombre').value.trim();
       const email = document.getElementById('email').value.trim();
-      const mensaje = document.getElementById('mensaje').value.trim();
-      if (!nombre || !email || !mensaje) {
-        feedbackDiv.innerHTML = '<span class="text-red-300"><i class="fas fa-exclamation-circle"></i> Todos los campos son necesarios.</span>';
+      
+      // Validación básica
+      if (!nombre || !email) {
+        alert('⚠️ Por favor, completa los campos obligatorios (Nombre y Email).');
         return;
       }
-      if (!email.includes('@')) {
-        feedbackDiv.innerHTML = '<span class="text-red-300">Email inválido.</span>';
+      
+      if (!isValidEmail(email)) {
+        alert('⚠️ Por favor, ingresa un correo electrónico válido.');
         return;
       }
-      feedbackDiv.innerHTML = '<span class="text-green-300"><i class="fas fa-check-circle"></i> ¡Gracias ' + nombre + '! Pronto recibirás respuesta.</span>';
-      form.reset();
-      setTimeout(() => feedbackDiv.innerHTML = '', 4500);
+
+      // ========================================
+      // 🔧 PARA CONECTAR CON FORMSPREE (GRATIS):
+      // ========================================
+      // 1. Regístrate en https://formspree.io/
+      // 2. Crea un nuevo formulario y copia tu endpoint
+      // 3. Reemplaza la URL en el fetch() de abajo
+      // 4. Descomenta el código del fetch y comenta el alert de abajo
+      
+      /*
+      fetch('https://formspree.io/f/TU_ID_AQUI', {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('✅ ¡Gracias! Hemos recibido tu solicitud. Te contactaremos pronto.');
+          this.reset();
+        } else {
+          alert('❌ Ocurrió un error al enviar. Por favor intenta de nuevo.');
+        }
+      })
+      .catch(() => alert('❌ Error de conexión. Verifica tu internet.'));
+      */
+
+      // ✅ DEMO: Mensaje de éxito (reemplazar con el fetch de arriba para producción)
+      alert(`✅ ¡Gracias ${nombre.split(' ')[0]}! 🎉\n\nHemos recibido tu solicitud.\nTe contactaremos pronto al correo: ${email}\n\n📍 Próximo paso: Revisa tu bandeja de entrada para confirmar tu cita.`);
+      
+      // Resetear formulario
+      this.reset();
     });
+
+    // Función auxiliar para validar email
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // 4. EFECTO SCROLL REVEAL (ANIMACIÓN AL HACER SCROLL)
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target); // Solo animar una vez
+        }
+      });
+    }, observerOptions);
+
+    // Observar tarjetas de servicios y testimonios
+    document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+      scrollObserver.observe(el);
+    });
+
+    // 5. AÑO DINÁMICO EN FOOTER
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 6. ACCESIBILIDAD: NAVEGACIÓN CON TECLADO
+    document.addEventListener('keydown', (e) => {
+      // Cerrar menú con tecla Escape
+      if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '☰';
+        menuToggle.focus();
+      }
+    });
+
+    // 7. EFECTO PARALLAX SUAVE EN HERO (OPCIONAL)
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.hero');
+      const scrolled = window.pageYOffset;
+      if (hero && scrolled < hero.offsetHeight) {
+        hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
+      }
+    }, { passive: true });
+
+    // 8. INICIALIZAR ANIMACIONES AL CARGAR (para elementos ya visibles)
+    document.addEventListener('DOMContentLoaded', () => {
+      // Forzar chequeo inicial para elementos ya en viewport
+      setTimeout(() => {
+        document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) {
+            el.classList.add('visible');
+          }
+        });
+      }, 300);
+    });
+
+    // ========================================
+    // 💡 TIPS PARA PERSONALIZAR:
+    // ========================================
+    // 🎨 Cambiar colores: Edita las variables CSS en :root al inicio del <style>
+    // 🖼️ Agregar imágenes: Reemplaza .placeholder-img con <img src="ruta/imagen.jpg" alt="..." style="width:100%;border-radius:12px;">
+    // ✉️ Recibir formularios: Usa Formspree, EmailJS o conecta a tu backend
+    // 🌐 Dominio personalizado: En GitHub Pages: Settings → Pages → Custom domain
+    // 📱 WhatsApp: Agrega un botón flotante con: https://wa.me/5215512345678
+    // ========================================
   </script>
 </body>
 </html>
