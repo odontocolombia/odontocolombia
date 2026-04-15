@@ -11,14 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Three.js & GSAP CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
   <style>
     /* ========================================
-       DESIGN TOKENS - Sistema de diseño avanzado
+       DESIGN TOKENS - Sistema de diseño profesional
        ======================================== */
     :root {
       /* Colores base */
@@ -417,7 +416,7 @@
     }
     
     .header.scrolled {
-      background: rgba(10, 10, 15, 0.85);
+      background: rgba(10, 10, 15, 0.95);
       backdrop-filter: var(--blur-glass);
       border-bottom: 1px solid var(--color-border);
       padding: var(--space-3) 0;
@@ -525,7 +524,7 @@
     .menu-toggle:active { transform: scale(0.95); }
 
     /* ========================================
-       HERO - Experiencia 3D inmersiva
+       HERO - Experiencia inmersiva
        ======================================== */
     .hero {
       position: relative;
@@ -537,21 +536,44 @@
       background: var(--color-bg);
     }
     
-    /* Canvas para Three.js */
-    #hero-canvas {
+    /* Fondo animado con CSS puro */
+    .hero::before {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: -50%;
+      right: -20%;
+      width: 70%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.15) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 50%;
       height: 100%;
-      z-index: 1;
+      background: radial-gradient(ellipse, rgba(244,114,182,0.1) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: float 25s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(2%, 2%) scale(1.02); }
+      50% { transform: translate(0, 4%) scale(0.98); }
+      75% { transform: translate(-2%, 2%) scale(1.01); }
     }
     
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 750px;
-      padding-left: 5%;
+      max-width: 700px;
     }
     
     .hero-badge {
@@ -577,7 +599,6 @@
       position: relative;
     }
     
-    /* Efecto de distorsión en texto al hover */
     .hero-title:hover {
       animation: textDistort 0.6s ease;
     }
@@ -629,7 +650,7 @@
     }
 
     /* ========================================
-       PORTFOLIO - Grid 3D interactivo
+       PORTFOLIO - Grid interactivo
        ======================================== */
     .portfolio {
       background: var(--color-bg-secondary);
@@ -837,11 +858,6 @@
       inset: 0;
       background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.15), transparent 50%);
       animation: float 8s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(2deg); }
     }
     
     .lightbox-info {
@@ -1617,7 +1633,7 @@
       outline-offset: 2px;
     }
     
-    /* Skip link */
+    /* Skip link for keyboard users */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -1627,7 +1643,6 @@
       padding: var(--space-3) var(--space-5);
       z-index: 10001;
       transition: top var(--transition-fast);
-      border-radius: var(--radius-md);
     }
     
     .skip-link:focus {
@@ -1678,10 +1693,8 @@
     </div>
   </header>
 
-  <!-- ===== HERO CON THREE.JS ===== -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="inicio">
-    <canvas id="hero-canvas"></canvas>
-    
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">
@@ -1689,7 +1702,7 @@
           Agencia creativa premiada
         </div>
         <h1 class="hero-title">Creamos experiencias <span class="text-gradient">digitales</span> que inspiran</h1>
-        <p class="hero-subtitle">Somos un equipo de diseñadores, desarrolladores y estrategas apasionados por transformar ideas en productos digitales excepcionales que marcan la diferencia.</p>
+        <p class="hero-subtitle">Somos un equipo de diseñadores, desarrolladores y estrategas apasionados por transformar ideas en productos digitales excepcionales.</p>
         <div class="hero-buttons">
           <a href="#portfolio" class="btn btn-primary btn-lg btn-glow">Ver nuestro trabajo</a>
           <a href="#contact" class="btn btn-outline btn-lg">Hablemos</a>
@@ -2107,7 +2120,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2026 AETHER Creative Studio. Todos los derechos reservados.</p>
+        <p>&copy; 2026 AETHER Creative Agency. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
           <a href="#">Privacidad</a>
           <a href="#">Términos</a>
@@ -2125,13 +2138,6 @@
 
     // ===== CONFIGURACIÓN GLOBAL =====
     const Config = {
-      three: {
-        particleCount: 1500,
-        particleSize: 0.02,
-        particleSpeed: 0.001,
-        mouseInfluence: 0.5,
-        connectionDistance: 1.5
-      },
       animations: {
         staggerDelay: 100,
         scrollThreshold: 100,
@@ -2213,136 +2219,6 @@
       }
     }
 
-    // ===== THREE.JS PARTICLE SYSTEM =====
-    class ParticleSystem {
-      constructor(canvas) {
-        this.canvas = canvas;
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        this.particles = [];
-        this.mouse = new THREE.Vector2(0, 0);
-        this.targetMouse = new THREE.Vector2(0, 0);
-        
-        this.init();
-      }
-      
-      init() {
-        // Renderer setup
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        
-        // Camera setup
-        this.camera.position.z = 5;
-        
-        // Create particles
-        this.createParticles();
-        
-        // Event listeners
-        window.addEventListener('resize', () => this.onResize());
-        document.addEventListener('mousemove', (e) => this.onMouseMove(e));
-        
-        // Start animation
-        this.animate();
-      }
-      
-      createParticles() {
-        const geometry = new THREE.BufferGeometry();
-        const positions = [];
-        const colors = [];
-        
-        const color1 = new THREE.Color(0x6366f1);
-        const color2 = new THREE.Color(0xf472b6);
-        
-        for (let i = 0; i < Config.three.particleCount; i++) {
-          // Random position in sphere
-          const theta = Math.random() * Math.PI * 2;
-          const phi = Math.acos(2 * Math.random() - 1);
-          const radius = 3 + Math.random() * 2;
-          
-          positions.push(
-            radius * Math.sin(phi) * Math.cos(theta),
-            radius * Math.sin(phi) * Math.sin(theta),
-            radius * Math.cos(phi)
-          );
-          
-          // Gradient colors
-          const mixedColor = color1.clone().lerp(color2, Math.random());
-          colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
-        }
-        
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-        
-        const material = new THREE.PointsMaterial({
-          size: Config.three.particleSize,
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.8,
-          sizeAttenuation: true
-        });
-        
-        this.particleSystem = new THREE.Points(geometry, material);
-        this.scene.add(this.particleSystem);
-      }
-      
-      onMouseMove(event) {
-        // Normalize mouse position
-        this.targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      }
-      
-      onResize() {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-      }
-      
-      animate() {
-        requestAnimationFrame(() => this.animate());
-        
-        // Smooth mouse follow
-        this.mouse.x += (this.targetMouse.x - this.mouse.x) * Config.three.mouseInfluence;
-        this.mouse.y += (this.targetMouse.y - this.mouse.y) * Config.three.mouseInfluence;
-        
-        // Rotate particle system
-        this.particleSystem.rotation.x += 0.0005;
-        this.particleSystem.rotation.y += 0.0008;
-        
-        // Mouse influence on particles
-        const positions = this.particleSystem.geometry.attributes.position;
-        for (let i = 0; i < positions.count; i++) {
-          const x = positions.getX(i);
-          const y = positions.getY(i);
-          const z = positions.getZ(i);
-          
-          // Gentle attraction to mouse
-          const dx = this.mouse.x * 2 - x;
-          const dy = this.mouse.y * 2 - y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < Config.three.connectionDistance) {
-            const force = (Config.three.connectionDistance - distance) / Config.three.connectionDistance;
-            positions.setXYZ(
-              i,
-              x + dx * force * 0.01,
-              y + dy * force * 0.01,
-              z
-            );
-          }
-        }
-        positions.needsUpdate = true;
-        
-        this.renderer.render(this.scene, this.camera);
-      }
-      
-      destroy() {
-        this.renderer.dispose();
-        this.particleSystem.geometry.dispose();
-        this.particleSystem.material.dispose();
-      }
-    }
-
     // ===== PRELOADER =====
     class Preloader {
       constructor() {
@@ -2390,7 +2266,7 @@
       }
       
       init() {
-        // Hero text reveal
+        // Hero text reveal with GSAP
         gsap.from('.hero-title', {
           duration: 1,
           y: 40,
@@ -2415,7 +2291,7 @@
           delay: 0.7
         });
         
-        // Counter animations
+        // Counter animations for stats
         document.querySelectorAll('.stat-value[data-count]').forEach(el => {
           const target = parseInt(el.dataset.count);
           if (target) {
@@ -2435,7 +2311,7 @@
           }
         });
         
-        // Skill bars
+        // Skill bars animation
         document.querySelectorAll('.skill-item').forEach((item, i) => {
           gsap.from(item, {
             scrollTrigger: {
@@ -2452,7 +2328,7 @@
           });
         });
         
-        // Portfolio items stagger
+        // Portfolio items stagger reveal
         gsap.utils.toArray('.portfolio-item').forEach((item, i) => {
           gsap.from(item, {
             scrollTrigger: {
@@ -2469,7 +2345,7 @@
           });
         });
         
-        // Service cards
+        // Service cards stagger
         gsap.utils.toArray('.service-card').forEach((card, i) => {
           gsap.from(card, {
             scrollTrigger: {
@@ -2904,7 +2780,6 @@
         
         // Initialize modules
         new CustomCursor();
-        new ParticleSystem(document.getElementById('hero-canvas'));
         new AnimationManager();
         new PortfolioFilter();
         new Lightbox();
