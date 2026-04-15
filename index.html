@@ -436,86 +436,6 @@
             display: block;
         }
 
-        .servicios-scroll-hint {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 40px;
-            color: #555;
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: opacity 0.4s, transform 0.4s;
-        }
-
-        .servicios-scroll-hint .arrow {
-            width: 20px;
-            height: 30px;
-            border: 2px solid #555;
-            border-radius: 10px;
-            position: relative;
-            animation: scrollBounce 2s ease-in-out infinite;
-        }
-
-        .servicios-scroll-hint .arrow::before {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: #555;
-            border-radius: 2px;
-            animation: dotBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-
-        @keyframes dotBounce {
-            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
-        }
-
-        .servicios-scroll-hint.hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-
-        .servicios-plus-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: transparent;
-            color: #555;
-            border: 2px solid #333;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 30px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 10;
-            position: relative;
-        }
-
-        .servicios-plus-btn:hover {
-            color: #c8ff00;
-            border-color: #c8ff00;
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 0 25px rgba(200, 255, 0, 0.2);
-        }
-
-        .servicios-plus-btn:active {
-            transform: rotate(90deg) scale(0.95);
-        }
-
         .servicios-scroll-top {
             position: fixed;
             bottom: 30px;
@@ -749,13 +669,6 @@
                     <div class="card-title">Ingresos<br>Extraordinarios</div>
                 </div>
             </div>
-
-            <div class="servicios-scroll-hint" id="serviciosHint">
-                <div class="arrow"></div>
-                Desliza para desplegar
-            </div>
-
-            <button class="servicios-plus-btn" id="plusBtn">+</button>
         </div>
 
         <button class="servicios-scroll-top" id="scrollTop">↑</button>
@@ -863,12 +776,11 @@
         }
 
         /* ==========================================
-           SCRIPT 2: SERVICIOS - CARD ANIMATION
+           SCRIPT 2: SERVICIOS - CARD ANIMATION CON PAUSA DE 3 SEGUNDOS
            ========================================== */
         function initServiciosAnimation() {
             const cards = document.querySelectorAll('.servicios-card');
             const stage = document.getElementById('cardsStage');
-            const scrollHint = document.getElementById('serviciosHint');
             const scrollProgress = document.getElementById('serviciosProgress');
             const scrollTopBtn = document.getElementById('scrollTop');
             const serviciosSection = document.getElementById('serviciosSection');
@@ -902,6 +814,9 @@
             }
 
             let isServiciosActive = false;
+            let isPaused = false;
+            let pauseStartTime = 0;
+            const PAUSE_DURATION = 3000; // 3 segundos
 
             function onServiciosScroll() {
                 const sectionRect = serviciosSection.getBoundingClientRect();
@@ -915,18 +830,31 @@
                         scrollProgress.classList.remove('active');
                         isServiciosActive = false;
                     }
+                    isPaused = false;
                     return;
                 }
                 
                 if (!isServiciosActive) {
                     scrollProgress.classList.add('active');
                     isServiciosActive = true;
+                    pauseStartTime = Date.now();
+                    isPaused = true;
+                    
+                    // Desactivar la pausa después de 3 segundos
+                    setTimeout(() => {
+                        isPaused = false;
+                    }, PAUSE_DURATION);
                 }
 
                 // Calcular progreso dentro de la sección
                 const sectionHeight = serviciosSection.scrollHeight;
                 const sectionTop = serviciosSection.offsetTop;
-                const rawProgress = Math.min(1, Math.max(0, (window.scrollY - sectionTop) / (sectionHeight * 0.5)));
+                
+                // Si está en pausa, no actualizar el progreso de scroll
+                let rawProgress = 0;
+                if (!isPaused) {
+                    rawProgress = Math.min(1, Math.max(0, (window.scrollY - sectionTop) / (sectionHeight * 0.5)));
+                }
                 const progress = easeOutExpo(rawProgress);
 
                 scrollProgress.style.width = (progress * 100) + '%';
@@ -954,13 +882,7 @@
                     card.style.zIndex = 2 + Math.abs(i - Math.floor(totalCards / 2));
                 });
 
-                if (progress > 0.6 && scrollHint) {
-                    scrollHint.classList.add('hidden');
-                } else if (scrollHint) {
-                    scrollHint.classList.remove('hidden');
-                }
-
-                scrollTopBtn.classList.toggle('show', window.scrollY > sectionTop + 150);
+                scrollTopBtn.classList.toggle('show', window.scrollY > sectionTop + 150 && !isPaused);
             }
 
             // Hover effects
@@ -993,40 +915,6 @@
             // Scroll to top
             scrollTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: serviciosSection.offsetTop, behavior: 'smooth' });
-            });
-
-            // Plus button
-            const plusBtn = document.getElementById('plusBtn');
-            let extraIndex = 0;
-            const extraNames = ['Mentoría 1-a-1', 'Networking VIP', 'Certificación'];
-
-            plusBtn.addEventListener('click', () => {
-                const name = extraNames[extraIndex % extraNames.length] || 'Nuevo Servicio';
-                const card = document.createElement('div');
-                card.className = 'servicios-card';
-                card.setAttribute('data-index', totalCards + extraIndex);
-                card.innerHTML = `
-                    <div class="card-icon">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round">
-                            <circle cx="24" cy="24" r="16"/>
-                            <line x1="16" y1="24" x2="32" y2="24"/>
-                            <line x1="24" y1="16" x2="24" y2="32"/>
-                        </svg>
-                    </div>
-                    <div class="card-title">${name}</div>
-                `;
-                card.style.transform = 'translate(0, 0) rotate(0deg) scale(0.3)';
-                card.style.opacity = '0';
-                stage.appendChild(card);
-
-                requestAnimationFrame(() => {
-                    card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-                    card.style.transform = 'translate(0, -10px) rotate(0deg) scale(1)';
-                    card.style.opacity = '1';
-                });
-
-                setTimeout(() => { card.style.transition = ''; }, 700);
-                extraIndex++;
             });
 
             // Init
