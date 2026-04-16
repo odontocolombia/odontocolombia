@@ -6,757 +6,664 @@
   <title>DentaVida – Clínica Dental Bogotá</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: 'DM Sans', sans-serif; background: #f9fafb; color: #111827; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
 
-    /* ── VARIABLES ── */
     :root {
-      --primary: #2563eb;
-      --primary-light: #eff6ff;
-      --accent: #0ea5e9;
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --teal-pale: #f0fdfa;
+      --sky: #0ea5e9;
+      --navy: #0f172a;
+      --gray: #64748b;
+      --gray-light: #f8fafc;
+      --gray-border: #e2e8f0;
       --white: #ffffff;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-400: #9ca3af;
-      --gray-500: #6b7280;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --radius: 1rem;
-      --shadow: 0 4px 24px rgba(0,0,0,0.08);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(13,148,136,0.10);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
     }
 
-    /* ── UTILITIES ── */
-    .serif { font-family: 'Playfair Display', serif; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .serif { font-family: 'Lora', serif; }
+    h1,h2,h3,h4 { line-height: 1.2; }
+    p { line-height: 1.75; color: var(--gray); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
     .badge {
-      display: inline-block; font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      background: var(--primary-light); color: var(--primary);
-      border-radius: 999px; padding: 0.35rem 1rem; margin-bottom: 1.1rem;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); background: var(--teal-light);
+      border-radius: 999px; padding: 6px 16px; margin-bottom: 20px;
     }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
     .btn {
-      display: inline-block; padding: 0.75rem 2rem; border-radius: 999px;
-      font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
-      border: none; text-decoration: none; font-family: 'DM Sans', sans-serif;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 999px; font-weight: 700;
+      font-size: 15px; cursor: pointer; transition: all 0.25s;
+      border: none; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
-    .btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.5); }
-    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
-    .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 0.75rem; }
-    .section-header p { color: var(--gray-500); max-width: 520px; margin: 0 auto; font-size: 0.95rem; line-height: 1.65; }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); }
+    .btn-outline { background: transparent; color: var(--teal); border: 2px solid var(--teal); }
+    .btn-outline:hover { background: var(--teal); color: #fff; }
+    .section-header { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+    .section-header h2 { font-size: clamp(28px, 4vw, 42px); color: var(--navy); margin-bottom: 16px; }
 
-    /* ── NAVBAR ── */
+    /* TOPBAR */
+    .topbar { background: #0f172a; color: rgba(255,255,255,0.8); font-size: 13px; padding: 10px 0; }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .topbar-item { display: flex; align-items: center; gap: 6px; }
+    .topbar-item svg { width: 14px; height: 14px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .social-link { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+    .social-link:hover { background: #0d9488; }
+    .social-link svg { width: 14px; height: 14px; fill: white; }
+
+    /* NAVBAR */
     #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.4rem 0; transition: all 0.3s;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e8f0; transition: all 0.3s;
     }
-    #navbar.scrolled {
-      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08); padding: 0.85rem 0;
-    }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-    .nav-logo-icon {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--primary);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.1rem;
-    }
-    .nav-logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; }
-    .nav-logo-sub { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); line-height: 1; }
-    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-    #navbar:not(.scrolled) .nav-links a, #navbar:not(.scrolled) .nav-phone { color: rgba(255,255,255,0.9); }
-    #navbar:not(.scrolled) .nav-links a:hover, #navbar:not(.scrolled) .nav-phone:hover { color: #fff; }
-    #navbar.scrolled .nav-links a { color: var(--gray-700); }
-    #navbar.scrolled .nav-links a:hover { color: var(--primary); }
-    #navbar.scrolled .nav-logo-text { color: var(--gray-900); }
-    #navbar:not(.scrolled) .nav-logo-text { color: #fff; }
-    .nav-cta { display: flex; align-items: center; gap: 1rem; }
-    .nav-phone { font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-    #navbar.scrolled .nav-phone { color: var(--gray-700); }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
-    #navbar.scrolled .hamburger span { background: var(--gray-900); }
-    .mobile-menu {
-      display: none; position: absolute; top: 100%; left: 0; right: 0;
-      background: #fff; border-top: 1px solid var(--gray-200);
-      padding: 1rem 1.5rem; flex-direction: column; gap: 0.85rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 0.9rem; color: var(--gray-700); text-decoration: none; font-weight: 500; }
-    .mobile-menu a:hover { color: var(--primary); }
+    #navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #0d9488, #0ea5e9); display: flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 22px; height: 22px; fill: white; }
+    .logo-text { font-size: 20px; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; }
+    .logo-text span { color: #0d9488; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: #64748b; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: #0d9488; }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #0f172a; }
+    .nav-phone svg { width: 16px; height: 16px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #0f172a; margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+    .mobile-menu { display: none; background: white; border-top: 1px solid #e2e8f0; padding: 24px; }
+    .mobile-menu a { display: block; padding: 12px 0; font-weight: 500; color: #64748b; text-decoration: none; border-bottom: 1px solid #e2e8f0; }
+    .mobile-menu a:hover { color: #0d9488; }
+    .mobile-menu .btn { margin-top: 16px; width: 100%; justify-content: center; }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .hamburger { display: block; } .mobile-menu.open { display: block; } }
 
-    @media (max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-    }
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #f0fdf4 100%); position: relative; overflow: hidden; }
+    .hero-bg-shape { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; pointer-events: none; }
+    .hero-bg-shape-1 { width: 500px; height: 500px; background: #0d9488; top: -100px; right: -100px; }
+    .hero-bg-shape-2 { width: 300px; height: 300px; background: #0ea5e9; bottom: -50px; left: 10%; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(13,148,136,0.1); color: #0d9488; padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(13,148,136,0.2); }
+    .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{ opacity:1; transform: scale(1); } 50%{ opacity:0.5; transform: scale(1.4); } }
+    .hero h1 { font-size: clamp(36px, 5vw, 62px); color: #0f172a; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: #0d9488; }
+    .hero p { font-size: 18px; max-width: 480px; margin-bottom: 40px; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+    .hero-stat strong { display: block; font-size: 32px; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; }
+    .hero-stat span { font-size: 13px; color: #64748b; font-weight: 500; }
+    .hero-image-card { border-radius: 24px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.15); aspect-ratio: 4/5; position: relative; }
+    .hero-image-card img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-float-card { position: absolute; background: white; border-radius: 16px; padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 12px; }
+    .hero-float-card.card-1 { bottom: 32px; left: -32px; }
+    .hero-float-card.card-2 { top: 32px; right: -32px; }
+    .hero-float-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hero-float-card .text strong { display: block; font-size: 15px; font-weight: 700; color: #0f172a; }
+    .hero-float-card .text span { font-size: 12px; color: #64748b; }
+    .hero-badge { position: absolute; top: 24px; left: 24px; background: #0d9488; color: white; border-radius: 12px; padding: 12px 16px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .stars { color: #fbbf24; letter-spacing: -2px; }
+    .hero-image-wrap { position: relative; }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-image-wrap { max-width: 400px; margin: 0 auto; } .hero-float-card.card-1 { left: -8px; } .hero-float-card.card-2 { right: -8px; } }
 
-    /* ── HERO ── */
-    #hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; }
-    .hero-slide {
-      position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease;
-      background-size: cover; background-position: center;
-    }
-    .hero-slide.active { opacity: 1; }
-    .hero-slide::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 60%, transparent 100%);
-    }
-    .hero-content {
-      position: relative; z-index: 2; height: 100%; display: flex; align-items: center;
-    }
-    .hero-text { max-width: 520px; }
-    .hero-tag {
-      display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: #7dd3fc; border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(6px);
-      border-radius: 999px; padding: 0.4rem 1.1rem; margin-bottom: 1.1rem;
-    }
-    .hero-text h1 {
-      font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1.1rem;
-    }
-    .hero-text p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.65; margin-bottom: 1.8rem; max-width: 360px; }
-    .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .hero-rating { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.8rem; }
-    .stars { display: flex; gap: 2px; }
-    .star { color: #facc15; font-size: 0.85rem; }
-    .hero-rating span { color: rgba(255,255,255,0.75); font-size: 0.82rem; }
-    .hero-nav {
-      position: absolute; bottom: 2.5rem; right: 2rem; z-index: 10;
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .hero-nav-btn {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.3); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.2s; font-size: 1rem;
-    }
-    .hero-nav-btn:hover { background: rgba(255,255,255,0.3); }
-    .hero-dots { display: flex; gap: 0.4rem; align-items: center; }
-    .hero-dot {
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s;
-      border: none;
-    }
-    .hero-dot.active { width: 22px; background: #fff; }
-    .scroll-indicator {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
-      animation: bounce 1.8s ease-in-out infinite;
-    }
-    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6)); }
-    .scroll-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    /* BRANDS */
+    .brands-section { padding: 40px 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+    .brands-label { font-size: 13px; font-weight: 600; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-bottom: 28px; }
+    .brands-grid { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
+    .brand-item { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: #94a3b8; transition: color 0.2s; }
+    .brand-item:hover { color: #0d9488; }
 
-    /* ── STATS ── */
-    #stats { background: var(--primary); padding: 4rem 0; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
-    .stat-value { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin-bottom: 0.25rem; }
-    .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); letter-spacing: 0.02em; }
-    @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .service-card { background: white; border-radius: 16px; padding: 36px 32px; border: 1px solid #e2e8f0; transition: all 0.3s; cursor: default; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #f0fdfa, transparent); opacity: 0; transition: opacity 0.3s; }
+    .service-card:hover { border-color: #0d9488; transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon { width: 56px; height: 56px; border-radius: 14px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; position: relative; z-index: 1; transition: background 0.3s; }
+    .service-card:hover .service-icon { background: #0d9488; }
+    .service-icon svg { width: 26px; height: 26px; stroke: #0d9488; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s; }
+    .service-card:hover .service-icon svg { stroke: white; }
+    .service-card h3 { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 12px; position: relative; z-index: 1; }
+    .service-card p { font-size: 15px; margin-bottom: 20px; position: relative; z-index: 1; }
+    .service-link { font-size: 14px; font-weight: 700; color: #0d9488; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; position: relative; z-index: 1; transition: gap 0.2s; }
+    .service-link:hover { gap: 8px; }
+    .service-link::after { content: '→'; }
+    @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
 
-    /* ── SERVICES ── */
-    #services { padding: 6rem 0; background: var(--white); }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .service-card {
-      position: relative; padding: 1.8rem; border-radius: var(--radius);
-      border: 1px solid var(--gray-200); transition: transform 0.25s, box-shadow 0.25s;
-      cursor: default;
-    }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .service-icon {
-      width: 50px; height: 50px; border-radius: 0.75rem; background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08); display: flex; align-items: center;
-      justify-content: center; font-size: 1.4rem; margin-bottom: 1.1rem;
-    }
-    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 0.5rem; transition: color 0.2s; }
-    .service-card:hover h3 { color: var(--primary); }
-    .service-card p { font-size: 0.85rem; color: var(--gray-500); line-height: 1.65; }
-    .service-badge {
-      position: absolute; top: 1rem; right: 1rem;
-      font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-      background: var(--primary); color: #fff; border-radius: 999px; padding: 0.25rem 0.65rem;
-    }
-    .svc-blue { background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(96,165,250,0.03)); }
-    .svc-amber { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(251,191,36,0.03)); }
-    .svc-teal { background: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(45,212,191,0.03)); }
-    .svc-green { background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(74,222,128,0.03)); }
-    .svc-purple { background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(192,132,252,0.03)); }
-    .svc-pink { background: linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.03)); }
-    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } }
+    /* WHY US */
+    .why-section { background: #f8fafc; }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-image-main { border-radius: 24px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+    .why-image-main img { width: 100%; display: block; }
+    .why-image-wrap { position: relative; }
+    .why-image-thumb { position: absolute; bottom: -24px; right: -24px; width: 48%; border-radius: 16px; overflow: hidden; border: 4px solid white; box-shadow: 0 4px 24px rgba(13,148,136,0.10); }
+    .why-image-thumb img { width: 100%; display: block; }
+    .why-experience { position: absolute; top: 24px; left: -24px; background: #0d9488; color: white; border-radius: 16px; padding: 20px 24px; text-align: center; }
+    .why-experience strong { display: block; font-size: 36px; font-weight: 800; }
+    .why-experience span { font-size: 13px; opacity: 0.9; }
+    .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .why-feature { display: flex; align-items: flex-start; gap: 12px; }
+    .why-feature-icon { width: 36px; height: 36px; border-radius: 10px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .why-feature-icon svg { width: 18px; height: 18px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .why-feature h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .why-feature p { font-size: 14px; margin: 0; }
+    @media (max-width: 900px) { .why-inner { grid-template-columns: 1fr; } .why-image-wrap { max-width: 480px; margin: 0 auto; } .why-experience { left: 12px; } .why-image-thumb { right: 0; } }
 
-    /* ── ABOUT ── */
-    #about { padding: 6rem 0; background: #f8fafc; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img-main { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); aspect-ratio: 4/3; object-fit: cover; }
-    .about-badge-box {
-      position: absolute; bottom: 1.25rem; left: 1.25rem;
-      background: #fff; border-radius: 0.75rem; padding: 0.75rem 1rem; box-shadow: var(--shadow-lg);
-    }
-    .about-badge-box .big { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--primary); line-height: 1; }
-    .about-badge-box .small { font-size: 0.72rem; color: var(--gray-500); }
-    .about-float {
-      position: absolute; bottom: -1.5rem; right: -1rem;
-      width: 160px; height: 160px; border-radius: var(--radius);
-      border: 4px solid #fff; box-shadow: var(--shadow-lg); overflow: hidden;
-    }
-    .about-float img { width: 100%; height: 100%; object-fit: cover; }
-    .about-text .badge { margin-bottom: 1.25rem; }
-    .about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem; line-height: 1.25; }
-    .about-text h2 span { color: var(--primary); }
-    .about-text > p { color: var(--gray-500); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem; }
-    .checklist { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.65rem; }
-    .checklist li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.88rem; color: var(--gray-700); }
-    .check-icon { color: var(--primary); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    @media (max-width: 800px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .about-float { display: none; }
-    }
+    /* STATS */
+    .stats-section { background: linear-gradient(135deg, #0f766e, #0369a1); padding: 80px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+    .stat-item { text-align: center; }
+    .stat-item .num { font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: white; letter-spacing: -0.03em; display: block; }
+    .stat-item .label { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 6px; }
+    .stat-divider { width: 1px; background: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat-divider { display: none; } }
 
-    /* ── TEAM ── */
-    #team { padding: 6rem 0; background: var(--white); }
-    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .team-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--gray-200); position: relative; cursor: default; transition: transform 0.25s; }
-    .team-card:hover { transform: translateY(-6px); }
-    .team-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform 0.5s; }
-    .team-card:hover img { transform: scale(1.06); }
-    .team-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.25) 70%, transparent);
-      padding: 1.2rem 1rem 0.85rem;
-    }
-    .team-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #fff; margin-bottom: 0.15rem; }
-    .team-role { font-size: 0.72rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; }
-    .team-meta { display: flex; align-items: center; justify-content: space-between; }
-    .team-exp { font-size: 0.68rem; color: rgba(255,255,255,0.55); }
-    .team-link { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; font-size: 0.65rem; color: #fff; text-decoration: none; }
-    .team-link:hover { background: var(--primary); }
-    @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
+    /* TEAM */
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    .doctor-card { border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s; }
+    .doctor-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); border-color: #0d9488; }
+    .doctor-img { aspect-ratio: 3/4; overflow: hidden; background: #ccfbf1; }
+    .doctor-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .doctor-card:hover .doctor-img img { transform: scale(1.05); }
+    .doctor-info { padding: 20px; }
+    .doctor-info h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .doctor-specialty { font-size: 13px; color: #0d9488; font-weight: 600; display: block; margin-bottom: 12px; }
+    .doctor-social { display: flex; gap: 8px; }
+    .doctor-social a { width: 32px; height: 32px; border-radius: 8px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+    .doctor-social a:hover { background: #0d9488; }
+    .doctor-social a svg { width: 14px; height: 14px; fill: #0d9488; transition: fill 0.2s; }
+    .doctor-social a:hover svg { fill: white; }
+    @media (max-width: 900px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .team-grid { grid-template-columns: 1fr; } }
 
-    /* ── GALLERY ── */
-    #gallery { padding: 6rem 0; background: #f8fafc; }
-    .gallery-grid {
-      display: grid; gap: 0.75rem;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 200px);
-    }
-    .gallery-item { border-radius: 0.75rem; overflow: hidden; cursor: pointer; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; display: block; }
+    /* PROCESS */
+    .process-section { background: #f0fdfa; }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(to right, #0d9488, #0ea5e9); z-index: 0; }
+    .process-step { text-align: center; position: relative; z-index: 1; }
+    .process-num { width: 56px; height: 56px; border-radius: 50%; background: white; border: 3px solid #0d9488; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 18px; font-weight: 800; color: #0d9488; box-shadow: 0 4px 16px rgba(13,148,136,0.2); }
+    .process-step h3 { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .process-step p { font-size: 14px; }
+    @media (max-width: 768px) { .process-steps::before { display: none; } .process-steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .process-steps { grid-template-columns: 1fr; } }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .gallery-item { border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; }
+    .gallery-item:nth-child(1) { grid-row: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
     .gallery-item:hover img { transform: scale(1.08); }
-    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-    .gallery-item:nth-child(6) { grid-column: span 2; }
-    @media (max-width: 700px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-      .gallery-item:nth-child(1), .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
-      .gallery-item { height: 160px; }
-    }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(13,148,136,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay svg { width: 36px; height: 36px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    @media (max-width: 768px) { .gallery-grid { grid-template-columns: 1fr 1fr; } .gallery-item:nth-child(1) { grid-row: span 1; } }
+    @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
 
-    /* ── TESTIMONIALS ── */
-    #testimonials { padding: 6rem 0; background: var(--white); }
-    .testimonials-wrap { position: relative; overflow: hidden; }
-    .testimonials-track { display: flex; transition: transform 0.45s ease; }
-    .testimonial-card {
-      min-width: 380px; max-width: 380px; background: #fff;
-      border: 1px solid var(--gray-200); border-radius: var(--radius);
-      padding: 1.8rem; box-shadow: var(--shadow); flex-shrink: 0; margin-right: 1.25rem;
-    }
-    .quote-icon { font-size: 2rem; color: rgba(37,99,235,0.15); margin-bottom: 0.5rem; line-height: 1; }
-    .testimonial-text { font-size: 0.88rem; color: var(--gray-700); line-height: 1.7; margin-bottom: 1.25rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-    .testimonial-footer { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid var(--gray-200); padding-top: 1rem; }
-    .t-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .t-name { font-weight: 600; font-size: 0.85rem; }
-    .t-location { font-size: 0.72rem; color: var(--gray-400); }
-    .t-right { margin-left: auto; text-align: right; }
-    .t-stars { display: flex; gap: 1px; justify-content: flex-end; }
-    .t-star { color: #facc15; font-size: 0.7rem; }
-    .t-treatment { font-size: 0.65rem; color: var(--gray-400); margin-top: 2px; }
-    .testimonials-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2.5rem; }
-    .t-btn {
-      width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--gray-200);
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
-      background: none; transition: all 0.2s; font-size: 0.9rem; color: var(--gray-700);
-    }
-    .t-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .t-dots { display: flex; gap: 0.4rem; align-items: center; }
-    .t-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--gray-200); cursor: pointer; border: none; transition: all 0.3s; }
-    .t-dot.active { width: 20px; background: var(--primary); }
-    @media (max-width: 600px) { .testimonial-card { min-width: 300px; max-width: 300px; } }
+    /* TESTIMONIALS */
+    .testimonials-section { background: #0f172a; }
+    .testimonials-section .section-header h2 { color: white; }
+    .testimonials-section .section-header p { color: rgba(255,255,255,0.6); }
+    .testimonials-section .badge { background: rgba(13,148,136,0.3); color: #5eead4; }
+    .testimonials-section .badge::before { background: #5eead4; }
+    .testimonials-slider { overflow: hidden; }
+    .testimonials-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .testimonial-card { min-width: calc(33.333% - 16px); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; flex-shrink: 0; transition: all 0.3s; }
+    .testimonial-card:hover { background: rgba(255,255,255,0.1); border-color: #0d9488; }
+    .testimonial-stars { color: #fbbf24; font-size: 18px; margin-bottom: 16px; letter-spacing: -2px; }
+    .testimonial-text { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #0d9488; }
+    .testimonial-author-info strong { display: block; font-size: 15px; color: white; font-weight: 700; }
+    .testimonial-author-info span { font-size: 13px; color: rgba(255,255,255,0.5); }
+    .testimonials-controls { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 40px; }
+    .testimonials-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 18px; }
+    .testimonials-btn:hover { background: #0d9488; border-color: #0d9488; }
+    .testimonials-dots { display: flex; gap: 8px; }
+    .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.2s; }
+    .testimonials-dot.active { background: #0d9488; width: 24px; border-radius: 4px; }
+    @media (max-width: 900px) { .testimonial-card { min-width: calc(50% - 12px); } }
+    @media (max-width: 600px) { .testimonial-card { min-width: 100%; } }
 
-    /* ── APPOINTMENT ── */
-    #appointment { padding: 6rem 0; background: #f8fafc; }
-    .appt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
-    .appt-left .badge { margin-bottom: 1.25rem; }
-    .appt-left h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 1rem; line-height: 1.25; }
-    .appt-left h2 span { color: var(--primary); }
-    .appt-left > p { color: var(--gray-500); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.75rem; }
-    .appt-info { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.75rem; }
-    .appt-info-item { display: flex; align-items: center; gap: 0.85rem; }
-    .appt-info-icon { width: 40px; height: 40px; border-radius: 0.75rem; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .appt-info-label { font-size: 0.7rem; color: var(--gray-400); }
-    .appt-info-value { font-size: 0.88rem; font-weight: 500; color: var(--gray-900); }
-    .appt-map { border-radius: var(--radius); overflow: hidden; height: 180px; position: relative; border: 1px solid var(--gray-200); }
-    .appt-map img { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
-    .appt-map-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .appt-map-label div { background: #fff; border-radius: 0.75rem; padding: 0.5rem 0.85rem; box-shadow: var(--shadow-lg); text-align: center; }
-    .appt-map-label .addr { font-size: 0.78rem; font-weight: 600; }
-    .appt-map-label .city { font-size: 0.68rem; color: var(--gray-400); }
-    .appt-form-card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
-    .appt-form-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.4rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
-    .form-group label { font-size: 0.72rem; font-weight: 500; color: var(--gray-500); }
-    .input-wrap { position: relative; }
-    .input-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: var(--gray-400); pointer-events: none; }
-    .input-wrap input, .input-wrap textarea, .input-wrap select,
-    form input, form textarea, form select {
-      width: 100%; padding: 0.65rem 0.9rem 0.65rem 2.1rem;
-      border: 1.5px solid var(--gray-200); border-radius: 0.6rem;
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gray-900);
-      background: #fff; transition: border-color 0.2s; outline: none;
-    }
-    form select { padding-left: 0.9rem; }
-    form input:focus, form textarea:focus, form select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-    .input-wrap textarea { resize: none; padding-top: 0.65rem; }
-    .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; }
-    .time-btn {
-      padding: 0.45rem 0; border: 1.5px solid var(--gray-200); border-radius: 0.5rem;
-      font-size: 0.72rem; font-family: 'DM Sans', sans-serif; cursor: pointer;
-      background: none; color: var(--gray-700); transition: all 0.2s;
-    }
-    .time-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .time-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .form-submit { width: 100%; padding: 0.85rem; border-radius: 999px; font-size: 0.9rem; margin-top: 0.5rem; }
-    .form-note { font-size: 0.72rem; color: var(--gray-400); text-align: center; margin-top: 0.6rem; }
-    .success-msg { display: none; flex-direction: column; align-items: center; text-align: center; padding: 3rem 1.5rem; gap: 1rem; }
-    .success-msg.show { display: flex; }
-    .success-icon { font-size: 3.5rem; color: var(--primary); }
-    .success-msg h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
-    .success-msg p { font-size: 0.88rem; color: var(--gray-500); max-width: 280px; line-height: 1.6; }
-    @media (max-width: 800px) { .appt-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } .time-grid { grid-template-columns: repeat(3, 1fr); } }
+    /* APPOINTMENT */
+    .appointment-section { background: #f0fdfa; }
+    .appointment-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .appointment-info h2 { font-size: clamp(28px, 4vw, 42px); color: #0f172a; margin-bottom: 16px; }
+    .appointment-info p { font-size: 17px; margin-bottom: 36px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .contact-icon { width: 48px; height: 48px; border-radius: 12px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 22px; height: 22px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-item h4 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .contact-item p { font-size: 15px; margin: 0; }
+    .appointment-form { background: white; border-radius: 24px; padding: 40px; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+    .appointment-form h3 { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border-radius: 8px; border: 1.5px solid #e2e8f0; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; color: #0f172a; background: #f8fafc; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #0d9488; box-shadow: 0 0 0 4px rgba(13,148,136,0.1); background: white; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+    .form-submit { width: 100%; padding: 16px; border-radius: 999px; background: #0d9488; color: white; font-size: 16px; font-weight: 700; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.25s; }
+    .form-submit:hover { background: #0f766e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); }
+    .form-success { display: none; text-align: center; padding: 24px; }
+    .form-success .checkmark { width: 64px; height: 64px; border-radius: 50%; background: #ccfbf1; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .form-success .checkmark svg { width: 32px; height: 32px; stroke: #0d9488; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .form-success h4 { font-size: 20px; color: #0f172a; margin-bottom: 8px; }
+    .form-success p { font-size: 15px; margin: 0; }
+    @media (max-width: 900px) { .appointment-inner { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
 
-    /* ── FOOTER ── */
-    footer { background: #111827; color: rgba(255,255,255,0.85); padding: 4rem 0 0; }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; padding-bottom: 3rem; }
-    .footer-brand { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.85rem; }
-    .footer-logo-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1rem; }
-    .footer-logo-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #fff; }
-    .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.65; margin-bottom: 1.1rem; }
-    .footer-socials { display: flex; gap: 0.6rem; }
-    .footer-social { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: rgba(255,255,255,0.8); text-decoration: none; transition: background 0.2s; cursor: pointer; }
-    .footer-social:hover { background: var(--primary); }
-    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 1rem; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .footer-col ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: #fff; }
-    .footer-contact { display: flex; flex-direction: column; gap: 0.75rem; }
-    .footer-contact-item { display: flex; align-items: flex-start; gap: 0.6rem; }
-    .fc-icon { color: var(--primary); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
-    .fc-text { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
-    .fc-text a { color: inherit; text-decoration: none; }
-    .fc-text a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.25rem 0; display: flex; align-items: center; justify-content: space-between; }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-    .scroll-top { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; color: #fff; font-size: 0.85rem; transition: opacity 0.2s; }
-    .scroll-top:hover { opacity: 0.85; }
+    /* FAQ */
+    .faq-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .faq-item { border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; text-align: left; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 600; color: #0f172a; transition: background 0.2s; }
+    .faq-question:hover { background: #f0fdfa; }
+    .faq-question.open { background: #f0fdfa; color: #0d9488; }
+    .faq-icon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 6px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 14px; color: #0d9488; font-weight: 700; }
+    .faq-question.open .faq-icon { background: #0d9488; color: white; transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer.open { max-height: 300px; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: 15px; color: #64748b; line-height: 1.7; }
+    @media (max-width: 900px) { .faq-inner { grid-template-columns: 1fr; } }
+
+    /* INSURANCE */
+    .insurance-section { background: #f8fafc; padding: 60px 0; }
+    .insurance-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 32px; }
+    .insurance-text h3 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+    .insurance-logos { display: flex; gap: 16px; flex-wrap: wrap; }
+    .insurance-logo { padding: 14px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-weight: 700; color: #64748b; transition: all 0.2s; }
+    .insurance-logo:hover { border-color: #0d9488; color: #0d9488; }
+
+    /* FOOTER */
+    footer { background: #0f172a; color: rgba(255,255,255,0.7); }
+    .footer-main { padding: 80px 0 48px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer-brand p { font-size: 15px; line-height: 1.7; margin-bottom: 24px; margin-top: 16px; }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+    .footer-social a:hover { background: #0d9488; }
+    .footer-social a svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
+    .footer-social a:hover svg { fill: white; }
+    .footer-col h4 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 20px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #0d9488; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 14px; }
+    .footer-contact-item svg { width: 16px; height: 16px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 14px; }
+    .footer-bottom a { color: #0d9488; text-decoration: none; }
     @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
 
-    /* ── ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
-    .fade-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-left.visible { opacity: 1; transform: none; }
-    .fade-right { opacity: 0; transform: translateX(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-right.visible { opacity: 1; transform: none; }
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.3s; }
-    .delay-4 { transition-delay: 0.4s; }
-    .delay-5 { transition-delay: 0.5s; }
+    /* SCROLL TOP */
+    #scroll-top { position: fixed; bottom: 32px; right: 32px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: #0d9488; color: white; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(13,148,136,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: all 0.3s; font-size: 20px; }
+    #scroll-top.visible { opacity: 1; transform: translateY(0); }
+    #scroll-top:hover { background: #0f766e; transform: translateY(-2px); }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
   </style>
 </head>
 <body>
 
-<!-- ══════════════ NAVBAR ══════════════ -->
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <span class="topbar-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Calle 93 #15-23, Bogotá, Colombia
+        </span>
+        <span class="topbar-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Lun–Vie: 8:00am – 7:00pm &nbsp;|&nbsp; Sáb: 8:00am – 2:00pm
+        </span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-item">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16l.2.92z"/></svg>
+          +57 601 234-5678
+        </span>
+        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">
-        <div class="nav-logo-icon">D</div>
-        <div>
-          <div class="nav-logo-text">DentaVida</div>
-          <div class="nav-logo-sub">Clínica Dental · Bogotá</div>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
         </div>
+        <span class="logo-text">Denta<span>Vida</span></span>
       </a>
       <ul class="nav-links">
-        <li><a href="#hero">Inicio</a></li>
-        <li><a href="#services">Servicios</a></li>
-        <li><a href="#about">Nosotros</a></li>
-        <li><a href="#team">Equipo</a></li>
-        <li><a href="#gallery">Galería</a></li>
-        <li><a href="#testimonials">Testimonios</a></li>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="tel:+576011234567" class="nav-phone">📞 +57 601 123 4567</a>
-        <a href="#appointment" class="btn btn-primary">Agendar Cita</a>
+        <span class="nav-phone">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16l.2.92z"/></svg>
+          +57 601 234-5678
+        </span>
+        <a href="#cita" class="btn btn-primary">Pedir Cita</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#hero" onclick="closeMobile()">Inicio</a>
-      <a href="#services" onclick="closeMobile()">Servicios</a>
-      <a href="#about" onclick="closeMobile()">Nosotros</a>
-      <a href="#team" onclick="closeMobile()">Equipo</a>
-      <a href="#gallery" onclick="closeMobile()">Galería</a>
-      <a href="#testimonials" onclick="closeMobile()">Testimonios</a>
-      <a href="#appointment" class="btn btn-primary" style="text-align:center;margin-top:0.25rem" onclick="closeMobile()">Agendar Cita</a>
-    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#galeria">Galería</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cita" class="btn btn-primary">Pedir Cita</a>
   </div>
 </nav>
 
-<!-- ══════════════ HERO ══════════════ -->
-<section id="hero">
-  <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1662837775283-16e2f4bdff85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=80')"></div>
-  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1662837625421-5fd8ed6131a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=80')"></div>
-  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1611690061822-b707a67bfebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=80')"></div>
-
-  <div class="hero-content">
+<!-- HERO -->
+<section id="inicio" style="padding-top:130px;">
+  <div id="hero">
+    <div class="hero-bg-shape hero-bg-shape-1"></div>
+    <div class="hero-bg-shape hero-bg-shape-2"></div>
     <div class="container">
-      <div class="hero-text">
-        <span class="hero-tag" id="heroTag">Tecnología de Vanguardia</span>
-        <h1 id="heroTitle">Tu Sonrisa,<br>Nuestra Pasión</h1>
-        <p id="heroSub">Expertos en odontología con más de 20 años transformando sonrisas en Bogotá.</p>
-        <div class="hero-btns">
-          <a href="#appointment" class="btn btn-primary">Agenda tu Cita Gratis</a>
-          <a href="#services" class="btn btn-ghost">Ver Servicios</a>
-        </div>
-        <div class="hero-rating">
-          <div class="stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      <div class="hero-inner">
+        <div class="hero-content fade-in">
+          <div class="hero-tag"><span class="dot"></span> Bogotá, Colombia</div>
+          <h1 class="serif">Tu sonrisa merece el mejor <em>cuidado dental</em></h1>
+          <p>En DentaVida combinamos tecnología de vanguardia y un equipo de especialistas apasionados para transformar tu salud bucal en Bogotá.</p>
+          <div class="hero-buttons">
+            <a href="#cita" class="btn btn-primary">Agendar Cita →</a>
+            <a href="#servicios" class="btn btn-outline">Ver Servicios</a>
           </div>
-          <span>4.9 · +1,200 pacientes satisfechos</span>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>+5,200</strong><span>Pacientes felices</span></div>
+            <div class="hero-stat"><strong>15+</strong><span>Años de experiencia</span></div>
+            <div class="hero-stat"><strong>12</strong><span>Especialistas</span></div>
+          </div>
+        </div>
+        <div class="hero-image-wrap fade-in fade-in-delay-2">
+          <div class="hero-image-card">
+            <img src="https://images.unsplash.com/photo-1612944095914-33fd0a85fcfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80" alt="Dentista profesional" />
+            <div class="hero-badge"><span class="stars">★★★★★</span> <span>4.9 / 5.0 Calificación</span></div>
+          </div>
+          <div class="hero-float-card card-1">
+            <div class="hero-float-icon" style="background:#dcfce7;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="text"><strong>Cita confirmada</strong><span>Hoy 3:00 PM – Dr. García</span></div>
+          </div>
+          <div class="hero-float-card card-2">
+            <div class="hero-float-icon" style="background:#eff6ff;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="text"><strong>+5,200 Pacientes</strong><span>Confían en nosotros</span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="hero-nav">
-    <button class="hero-nav-btn" onclick="heroPrev()">&#8249;</button>
-    <div class="hero-dots" id="heroDots"></div>
-    <button class="hero-nav-btn" onclick="heroNext()">&#8250;</button>
-  </div>
-
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <div class="scroll-label">Scroll</div>
-  </div>
 </section>
 
-<!-- ══════════════ STATS ══════════════ -->
-<section id="stats">
+<!-- BRANDS -->
+<div class="brands-section">
   <div class="container">
-    <div class="stats-grid">
-      <div class="fade-up"><div class="stat-value" data-target="20" data-suffix="+">0+</div><div class="stat-label">Años de Experiencia</div></div>
-      <div class="fade-up delay-1"><div class="stat-value" data-target="1200" data-suffix="+">0+</div><div class="stat-label">Pacientes Satisfechos</div></div>
-      <div class="fade-up delay-2"><div class="stat-value" data-target="15" data-suffix="">0</div><div class="stat-label">Especialistas</div></div>
-      <div class="fade-up delay-3"><div class="stat-value" data-target="98" data-suffix="%">0%</div><div class="stat-label">Tasa de Éxito</div></div>
+    <p class="brands-label">Certificados y aliados de confianza</p>
+    <div class="brands-grid">
+      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Tribunal Ético</div>
+      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Colgate Pro</div>
+      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>ISO 9001:2015</div>
+      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>ACFO Colombia</div>
+      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Salud Total EPS</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ══════════════ SERVICES ══════════════ -->
-<section id="services">
+<!-- SERVICES -->
+<section id="servicios" class="section">
   <div class="container">
-    <div class="section-header fade-up">
+    <div class="section-header fade-in">
       <span class="badge">Nuestros Servicios</span>
-      <h2>Soluciones Dentales<br><span style="color:var(--primary)">para Toda la Familia</span></h2>
-      <p>Ofrecemos una amplia gama de tratamientos con tecnología de última generación y un equipo de especialistas certificados.</p>
+      <h2 class="serif">Tratamientos para toda la familia</h2>
+      <p>Ofrecemos una gama completa de servicios odontológicos con tecnología de última generación y atención personalizada.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card svc-blue fade-up">
-        <span class="service-badge">Popular</span>
-        <div class="service-icon">🦷</div>
+      <div class="service-card fade-in">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Limpieza y Prevención</h3>
+        <p>Profilaxis profesional, sellantes y fluorización para mantener tus dientes sanos y libres de caries.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
+      </div>
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <h3>Ortodoncia</h3>
+        <p>Brackets metálicos, zafiro e Invisalign para corregir la posición dental y conseguir la sonrisa perfecta.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
+      </div>
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
         <h3>Implantes Dentales</h3>
-        <p>Recupera tu sonrisa completa con implantes de titanio de alta calidad, estéticos y duraderos.</p>
+        <p>Reemplaza dientes perdidos con implantes de titanio de alta calidad, resultado natural y duradero.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
       </div>
-      <div class="service-card svc-amber fade-up delay-1">
-        <div class="service-icon">✨</div>
-        <h3>Blanqueamiento Dental</h3>
-        <p>Tratamiento profesional que elimina manchas y devuelve el brillo natural a tus dientes.</p>
+      <div class="service-card fade-in">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3>Blanqueamiento</h3>
+        <p>Tecnología LED y geles profesionales para aclarar tu sonrisa hasta 8 tonos en una sola sesión.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
       </div>
-      <div class="service-card svc-teal fade-up delay-2">
-        <span class="service-badge">Nuevo</span>
-        <div class="service-icon">📐</div>
-        <h3>Ortodoncia Invisible</h3>
-        <p>Alinea tus dientes discretamente con alineadores Invisalign® adaptados a tu sonrisa.</p>
-      </div>
-      <div class="service-card svc-green fade-up delay-1">
-        <div class="service-icon">🛡️</div>
-        <h3>Periodoncia</h3>
-        <p>Tratamiento especializado de encías para prevenir y curar enfermedades periodontales.</p>
-      </div>
-      <div class="service-card svc-purple fade-up delay-2">
-        <div class="service-icon">🔬</div>
-        <h3>Endodoncia</h3>
-        <p>Procedimientos de conducto realizados con tecnología rotaria para máxima precisión y comodidad.</p>
-      </div>
-      <div class="service-card svc-pink fade-up delay-3">
-        <div class="service-icon">👶</div>
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <h3>Odontopediatría</h3>
-        <p>Cuidado dental especializado para los más pequeños en un ambiente amigable y seguro.</p>
+        <p>Atención especializada y amigable para niños desde los 6 meses hasta los 16 años, primera visita gratis.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
+      </div>
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Cirugía Oral</h3>
+        <p>Extracciones, cordales y cirugías menores con sedación consciente para máximo confort del paciente.</p>
+        <a href="#cita" class="service-link">Agendar consulta</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ ABOUT ══════════════ -->
-<section id="about">
+<!-- WHY US -->
+<section class="section why-section">
   <div class="container">
-    <div class="about-grid">
-      <div class="about-img-wrap fade-left">
-        <img class="about-img-main" src="https://images.unsplash.com/photo-1663182094304-557746ee056e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80" alt="Clínica DentaVida" />
-        <div class="about-badge-box">
-          <div class="big">20+</div>
-          <div class="small">Años de Experiencia</div>
+    <div class="why-inner">
+      <div class="why-image-wrap fade-in">
+        <div class="why-image-main">
+          <img src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Consultorio dental moderno" />
         </div>
-        <div class="about-float">
-          <img src="https://images.unsplash.com/photo-1755189776403-323a2523ca0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Equipo" />
+        <div class="why-image-thumb">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Equipos dentales" />
         </div>
+        <div class="why-experience"><strong>15+</strong><span>Años de experiencia</span></div>
       </div>
-      <div class="about-text fade-right">
-        <span class="badge">Sobre Nosotros</span>
-        <h2>Comprometidos con Tu<br><span>Salud Bucal y Bienestar</span></h2>
-        <p>DentaVida es una clínica dental de referencia en Bogotá, fundada con la misión de ofrecer atención odontológica de la más alta calidad en un ambiente cálido y profesional.</p>
-        <ul class="checklist">
-          <li><span class="check-icon">✓</span> Equipos de diagnóstico digital de última generación</li>
-          <li><span class="check-icon">✓</span> Esterilización con estándares internacionales ISO</li>
-          <li><span class="check-icon">✓</span> Especialistas con certificaciones en el exterior</li>
-          <li><span class="check-icon">✓</span> Atención en horario extendido de lunes a sábado</li>
-          <li><span class="check-icon">✓</span> Financiamiento sin intereses disponible</li>
-        </ul>
-        <a href="#appointment" class="btn btn-primary">Agenda una Consulta</a>
+      <div class="fade-in fade-in-delay-1">
+        <span class="badge">¿Por qué elegirnos?</span>
+        <h2 class="serif" style="font-size:clamp(28px,4vw,42px);color:#0f172a;margin-bottom:16px;">Cuidado dental de <em style="font-style:normal;color:#0d9488;">calidad superior</em> en Bogotá</h2>
+        <p style="font-size:17px;margin-bottom:16px;">En DentaVida nos comprometemos con la excelencia clínica, el confort del paciente y resultados que duran toda la vida.</p>
+        <div class="why-features">
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Tecnología Digital 3D</h4><p>Radiografías digitales, escáneres intraorales y diseño de sonrisa digital.</p></div></div>
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><h4>Equipo Especializado</h4><p>12 odontólogos con subespecialidades y formación internacional.</p></div></div>
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Ambiente Esterilizado</h4><p>Protocolos de bioseguridad certificados y autoclave de última generación.</p></div></div>
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><h4>Citas Flexibles</h4><p>Horarios extendidos de lunes a sábado para adaptarnos a tu agenda.</p></div></div>
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h4>Planes de Pago</h4><p>Financiación sin intereses hasta 36 cuotas. Aceptamos todas las EPS.</p></div></div>
+          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg></div><div><h4>Soporte 24/7</h4><p>Línea de emergencias dental disponible los 365 días del año.</p></div></div>
+        </div>
+        <a href="#cita" class="btn btn-primary" style="margin-top:36px;">Agenda tu consulta gratuita</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ TEAM ══════════════ -->
-<section id="team">
+<!-- STATS -->
+<section class="stats-section">
   <div class="container">
-    <div class="section-header fade-up">
+    <div class="stats-grid">
+      <div class="stat-item fade-in"><span class="num" data-target="5200">0</span><div class="label">Pacientes Atendidos</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item fade-in fade-in-delay-1"><span class="num" data-target="15">0</span><div class="label">Años de Experiencia</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item fade-in fade-in-delay-2"><span class="num" data-target="12">0</span><div class="label">Especialistas</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item fade-in fade-in-delay-3"><span class="num" data-target="98">0</span><div class="label">% Satisfacción</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="badge">Cómo Funciona</span>
+      <h2 class="serif">Tu tratamiento en 4 simples pasos</h2>
+      <p>Un proceso claro y transparente para que disfrutes de la mejor experiencia dental sin estrés.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-in"><div class="process-num">1</div><h3>Agenda tu cita</h3><p>Llámanos, escríbenos por WhatsApp o completa el formulario en línea. Confirmamos en menos de 1 hora.</p></div>
+      <div class="process-step fade-in fade-in-delay-1"><div class="process-num">2</div><h3>Diagnóstico digital</h3><p>Realizamos radiografías digitales y un examen completo para diseñar tu plan de tratamiento personalizado.</p></div>
+      <div class="process-step fade-in fade-in-delay-2"><div class="process-num">3</div><h3>Tratamiento experto</h3><p>Nuestros especialistas aplican las técnicas más modernas con el máximo confort y precisión para ti.</p></div>
+      <div class="process-step fade-in fade-in-delay-3"><div class="process-num">4</div><h3>Sonrisa perfecta</h3><p>Disfruta de tus resultados con seguimiento gratuito y un plan de mantenimiento preventivo a medida.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="equipo" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
       <span class="badge">Nuestro Equipo</span>
-      <h2>Especialistas a Tu Servicio</h2>
-      <p>Un equipo multidisciplinario certificado, apasionado por transformar sonrisas y mejorar la salud bucal de nuestros pacientes.</p>
+      <h2 class="serif">Especialistas apasionados por tu salud</h2>
+      <p>Cada miembro de nuestro equipo tiene formación especializada y un compromiso genuino con el bienestar de los pacientes.</p>
     </div>
     <div class="team-grid">
-      <div class="team-card fade-up">
-        <img src="https://images.unsplash.com/photo-1662837775272-545d8e143ad0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Dra. Valentina Morales" />
-        <div class="team-overlay">
-          <div class="team-name">Dra. Valentina Morales</div>
-          <div class="team-role">Implantología &amp; Cirugía Oral</div>
-          <div class="team-meta"><span class="team-exp">15 años de exp.</span><a href="#" class="team-link">↗</a></div>
-        </div>
+      <div class="doctor-card fade-in">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1756699279298-c89cdef354ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Andrés García" /></div>
+        <div class="doctor-info"><h3>Dr. Andrés García</h3><span class="doctor-specialty">Director Clínico · Implantología</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
       </div>
-      <div class="team-card fade-up delay-1">
-        <img src="https://images.unsplash.com/photo-1663151064065-cb334788f77d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Dr. Andrés Suárez" />
-        <div class="team-overlay">
-          <div class="team-name">Dr. Andrés Suárez</div>
-          <div class="team-role">Ortodoncia &amp; Invisalign®</div>
-          <div class="team-meta"><span class="team-exp">12 años de exp.</span><a href="#" class="team-link">↗</a></div>
-        </div>
+      <div class="doctor-card fade-in fade-in-delay-1">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1650803075918-efbee311735d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Valentina Torres" /></div>
+        <div class="doctor-info"><h3>Dra. Valentina Torres</h3><span class="doctor-specialty">Ortodoncia · Invisalign Certified</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
       </div>
-      <div class="team-card fade-up delay-2">
-        <img src="https://images.unsplash.com/photo-1662837625399-13436d687e8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Dra. Camila Reyes" />
-        <div class="team-overlay">
-          <div class="team-name">Dra. Camila Reyes</div>
-          <div class="team-role">Odontopediatría</div>
-          <div class="team-meta"><span class="team-exp">10 años de exp.</span><a href="#" class="team-link">↗</a></div>
-        </div>
+      <div class="doctor-card fade-in fade-in-delay-2">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1729162128021-f37dca3ff30d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Carlos Mejía" /></div>
+        <div class="doctor-info"><h3>Dr. Carlos Mejía</h3><span class="doctor-specialty">Endodoncia · Cirugía Oral</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
       </div>
-      <div class="team-card fade-up delay-3">
-        <img src="https://images.unsplash.com/photo-1663185551550-f8f56529ac5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Dr. Santiago Pardo" />
-        <div class="team-overlay">
-          <div class="team-name">Dr. Santiago Pardo</div>
-          <div class="team-role">Periodoncia &amp; Endodoncia</div>
-          <div class="team-meta"><span class="team-exp">18 años de exp.</span><a href="#" class="team-link">↗</a></div>
-        </div>
+      <div class="doctor-card fade-in fade-in-delay-3">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1673865641073-4479f93a7776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Sofía Ramírez" /></div>
+        <div class="doctor-info"><h3>Dra. Sofía Ramírez</h3><span class="doctor-specialty">Odontopediatría · Periodoncia</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ GALLERY ══════════════ -->
-<section id="gallery">
+<!-- GALLERY -->
+<section id="galeria" class="section">
   <div class="container">
-    <div class="section-header fade-up">
-      <span class="badge">Galería</span>
-      <h2>Nuestra Clínica y Resultados</h2>
+    <div class="section-header fade-in">
+      <span class="badge">Nuestra Clínica</span>
+      <h2 class="serif">Instalaciones de primer nivel</h2>
+      <p>Espacios diseñados para tu tranquilidad, equipados con la tecnología odontológica más avanzada de Colombia.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item fade-up"><img src="https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Sala de espera" /></div>
-      <div class="gallery-item fade-up delay-1"><img src="https://images.unsplash.com/photo-1663755489920-5e09f66d011a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Tratamiento" /></div>
-      <div class="gallery-item fade-up delay-2"><img src="https://images.unsplash.com/photo-1663182094304-557746ee056e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Dentista" /></div>
-      <div class="gallery-item fade-up delay-1"><img src="https://images.unsplash.com/photo-1758653500342-5476c8ec3da6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Revisión" /></div>
-      <div class="gallery-item fade-up delay-2"><img src="https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Sonrisa" /></div>
-      <div class="gallery-item fade-up delay-3"><img src="https://images.unsplash.com/photo-1662837625421-5fd8ed6131a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Consulta" /></div>
+      <div class="gallery-item" style="min-height:420px;"><img src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Sala dental" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Equipos modernos" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1734518352225-22a52666268c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Consultorio" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1642844771937-23accb161a3d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Sala de espera" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Quirófano" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ TESTIMONIALS ══════════════ -->
-<section id="testimonials">
+<!-- TESTIMONIALS -->
+<section id="testimonios" class="section testimonials-section">
   <div class="container">
-    <div class="section-header fade-up">
+    <div class="section-header fade-in">
       <span class="badge">Testimonios</span>
-      <h2>Lo Que Dicen Nuestros Pacientes</h2>
+      <h2 class="serif">Lo que dicen nuestros pacientes</h2>
+      <p>Miles de bogotanos confían en DentaVida para cuidar su sonrisa.</p>
     </div>
-    <div class="testimonials-wrap fade-up">
+    <div class="testimonials-slider">
       <div class="testimonials-track" id="testimonialsTrack">
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <p class="testimonial-text">Llegué con mucho miedo al dentista y el equipo me hizo sentir completamente tranquila desde el primer momento. Me realizaron el tratamiento de implantes y el resultado es increíble. ¡Totalmente recomendado!</p>
-          <div class="testimonial-footer">
-            <div class="t-avatar">MG</div>
-            <div><div class="t-name">María González</div><div class="t-location">Chapinero, Bogotá</div></div>
-            <div class="t-right"><div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div><div class="t-treatment">Implantes Dentales</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <p class="testimonial-text">El blanqueamiento dental cambió completamente mi confianza. El procedimiento fue rápido, sin dolor y los resultados superaron todas mis expectativas. La clínica es muy moderna y limpia.</p>
-          <div class="testimonial-footer">
-            <div class="t-avatar">CJ</div>
-            <div><div class="t-name">Carlos Jiménez</div><div class="t-location">Usaquén, Bogotá</div></div>
-            <div class="t-right"><div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div><div class="t-treatment">Blanqueamiento Dental</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <p class="testimonial-text">Llevé a mi hija de 7 años y la Dra. Camila fue extraordinaria con ella. La niña salió feliz y sin miedo. La odontopediatría aquí es de primer nivel. Ya somos clientes para toda la vida.</p>
-          <div class="testimonial-footer">
-            <div class="t-avatar">LH</div>
-            <div><div class="t-name">Laura Hernández</div><div class="t-location">Suba, Bogotá</div></div>
-            <div class="t-right"><div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div><div class="t-treatment">Odontopediatría</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <p class="testimonial-text">El tratamiento de ortodoncia con Invisalign ha sido transformador. En menos tiempo del esperado ya veo resultados notables. El equipo siempre está disponible para resolver mis dudas.</p>
-          <div class="testimonial-footer">
-            <div class="t-avatar">RV</div>
-            <div><div class="t-name">Roberto Vargas</div><div class="t-location">Teusaquillo, Bogotá</div></div>
-            <div class="t-right"><div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div><div class="t-treatment">Ortodoncia Invisible</div></div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <p class="testimonial-text">Venía de otra clínica con una mala experiencia y DentaVida me devolvió la confianza. Las instalaciones son impecables y el Dr. Santiago es un experto en su campo. Excelente atención.</p>
-          <div class="testimonial-footer">
-            <div class="t-avatar">AM</div>
-            <div><div class="t-name">Ana Martínez</div><div class="t-location">Chicó, Bogotá</div></div>
-            <div class="t-right"><div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div><div class="t-treatment">Periodoncia</div></div>
-          </div>
-        </div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Después de años con miedo al dentista, DentaVida cambió completamente mi experiencia. El Dr. García es increíblemente habilidoso y el equipo hace todo para que te sientas tranquilo. ¡Mis implantes quedaron perfectos!"</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="María" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>María Fernanda López</strong><span>Bogotá · Implantes dentales</span></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Traje a mis tres hijos y fue una experiencia maravillosa. La Dra. Sofía es excelente con los niños, muy paciente y profesional. El consultorio es moderno y limpio. 100% recomendados en Bogotá."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1607960402358-a5ceb04ebeb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Camila" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Camila Hernández</strong><span>Bogotá · Odontopediatría</span></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"El tratamiento de ortodoncia con Invisalign fue todo un éxito. La Dra. Torres me guió en cada paso y los resultados superaron mis expectativas. Ahora sonrío con total confianza. ¡Gracias!"</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1536785438246-08198ab7dd6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Laura" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Laura Cristina Muñoz</strong><span>Bogotá · Ortodoncia Invisalign</span></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"El blanqueamiento dental fue rápido, sin dolor y el resultado fue espectacular. Aclaré mi sonrisa 8 tonos en solo una hora. El personal es muy amable y las instalaciones de primer nivel."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1758600587683-d86675a2f6e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Andrea" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Andrea Susana Vargas</strong><span>Bogotá · Blanqueamiento</span></div></div></div>
+        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Tenía que hacerme un tratamiento de conducto y estaba muy nervioso. El Dr. Mejía fue fantástico, no sentí nada. El proceso fue rápido y el seguimiento post-tratamiento excelente."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1610547315412-d8812f60cf76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Juan" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Juan Pablo Moreno</strong><span>Bogotá · Endodoncia</span></div></div></div>
       </div>
     </div>
     <div class="testimonials-controls">
-      <button class="t-btn" onclick="tPrev()">&#8249;</button>
-      <div class="t-dots" id="tDots"></div>
-      <button class="t-btn" onclick="tNext()">&#8250;</button>
+      <button class="testimonials-btn" id="prevTestimonial">&#8592;</button>
+      <div class="testimonials-dots" id="testimonialsDots"></div>
+      <button class="testimonials-btn" id="nextTestimonial">&#8594;</button>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ APPOINTMENT ══════════════ -->
-<section id="appointment">
+<!-- APPOINTMENT -->
+<section id="cita" class="section appointment-section">
   <div class="container">
-    <div class="appt-grid">
-      <div class="appt-left fade-left">
-        <span class="badge">Agenda Tu Cita</span>
-        <h2>Tu Primera Consulta<br><span>es Completamente Gratis</span></h2>
-        <p>Agenda hoy tu cita con nuestros especialistas. Te contactaremos en menos de 2 horas para confirmar tu horario.</p>
-        <div class="appt-info">
-          <div class="appt-info-item"><div class="appt-info-icon">📅</div><div><div class="appt-info-label">Lunes a Viernes</div><div class="appt-info-value">7:00 AM – 7:00 PM</div></div></div>
-          <div class="appt-info-item"><div class="appt-info-icon">⏰</div><div><div class="appt-info-label">Sábados</div><div class="appt-info-value">8:00 AM – 2:00 PM</div></div></div>
-          <div class="appt-info-item"><div class="appt-info-icon">📞</div><div><div class="appt-info-label">Teléfono</div><div class="appt-info-value">+57 601 123 4567</div></div></div>
-          <div class="appt-info-item"><div class="appt-info-icon">✉️</div><div><div class="appt-info-label">Email</div><div class="appt-info-value">citas@dentavida.com.co</div></div></div>
-        </div>
-        <div class="appt-map">
-          <img src="https://images.unsplash.com/photo-1745970347652-8f22f5d7d3ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Mapa" />
-          <div class="appt-map-label"><div><div class="addr">Cl. 93 #15-32, Chapinero</div><div class="city">Bogotá D.C., Colombia</div></div></div>
-        </div>
+    <div class="appointment-inner">
+      <div class="appointment-info fade-in">
+        <span class="badge">Contáctenos</span>
+        <h2 class="serif">Agenda tu cita hoy mismo</h2>
+        <p>Primera consulta de diagnóstico completamente <strong>gratuita</strong>. Ubicados en el norte de Bogotá, con parqueadero propio.</p>
+        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Dirección</h4><p>Calle 93 #15-23, Piso 4, Bogotá D.C., Colombia<br><small style="color:#0d9488;">Cerca al Parque de la 93 · Parqueadero gratuito</small></p></div></div>
+        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg></div><div><h4>Teléfono / WhatsApp</h4><p>+57 601 234-5678 · +57 310 567-8901</p></div></div>
+        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Correo Electrónico</h4><p>info@dentavida.com.co</p></div></div>
+        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Horario</h4><p>Lun–Vie: 8:00 AM – 7:00 PM · Sáb: 8:00 AM – 2:00 PM</p></div></div>
       </div>
-      <div class="fade-right">
-        <div class="appt-form-card">
-          <div id="formWrap">
-            <h3>Formulario de Cita</h3>
-            <form id="apptForm" onsubmit="submitForm(event)">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Nombre completo *</label>
-                  <div class="input-wrap"><span class="input-icon">👤</span><input type="text" placeholder="María García" required style="padding-left:2rem" /></div>
-                </div>
-                <div class="form-group">
-                  <label>Teléfono *</label>
-                  <div class="input-wrap"><span class="input-icon">📞</span><input type="tel" placeholder="+57 300 000 0000" required style="padding-left:2rem" /></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Correo electrónico</label>
-                <div class="input-wrap"><span class="input-icon">✉️</span><input type="email" placeholder="tu@email.com" style="padding-left:2rem" /></div>
-              </div>
-              <div class="form-group">
-                <label>Servicio requerido *</label>
-                <select required>
-                  <option value="">Selecciona un servicio</option>
-                  <option>Consulta General</option><option>Implantes Dentales</option>
-                  <option>Blanqueamiento Dental</option><option>Ortodoncia Invisible</option>
-                  <option>Periodoncia</option><option>Endodoncia</option>
-                  <option>Odontopediatría</option><option>Otro</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Horario preferido</label>
-                <div class="time-grid">
-                  <button type="button" class="time-btn" onclick="selectTime(this)">8:00 AM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">9:00 AM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">10:00 AM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">11:00 AM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">2:00 PM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">3:00 PM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">4:00 PM</button>
-                  <button type="button" class="time-btn" onclick="selectTime(this)">5:00 PM</button>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Mensaje adicional</label>
-                <div class="input-wrap"><span class="input-icon" style="top:0.85rem;transform:none">💬</span><textarea rows="3" placeholder="Cuéntanos sobre tu caso..." style="padding-left:2rem"></textarea></div>
-              </div>
-              <button type="submit" class="btn btn-primary form-submit">Solicitar Cita Gratis</button>
-              <p class="form-note">Al enviar, aceptas que te contactemos para confirmar tu cita.</p>
-            </form>
-          </div>
-          <div class="success-msg" id="successMsg">
-            <div class="success-icon">✅</div>
-            <h3>¡Solicitud Enviada!</h3>
-            <p>Hemos recibido tu solicitud. Nos comunicaremos contigo en menos de 2 horas para confirmar tu turno.</p>
-            <button class="btn btn-primary" onclick="resetForm()" style="margin-top:0.5rem">Agendar otra cita</button>
+      <div class="fade-in fade-in-delay-1">
+        <div class="appointment-form" id="appointmentFormWrapper">
+          <h3>Reservar Consulta Gratuita</h3>
+          <form id="appointmentForm" novalidate>
+            <div class="form-row">
+              <div class="form-group"><label>Nombre *</label><input type="text" id="fname" placeholder="Ej: Camila Rodríguez" required /></div>
+              <div class="form-group"><label>Teléfono *</label><input type="tel" id="fphone" placeholder="310 567 8901" required /></div>
+            </div>
+            <div class="form-group"><label>Correo Electrónico *</label><input type="email" id="femail" placeholder="camila@correo.com" required /></div>
+            <div class="form-row">
+              <div class="form-group"><label>Servicio</label><select id="fservice"><option value="none">Seleccionar servicio</option><option>Limpieza y Prevención</option><option>Ortodoncia</option><option>Implantes Dentales</option><option>Blanqueamiento</option><option>Odontopediatría</option><option>Cirugía Oral</option></select></div>
+              <div class="form-group"><label>Fecha Preferida</label><input type="date" id="fdate" /></div>
+            </div>
+            <div class="form-group"><label>Mensaje (opcional)</label><textarea id="fmessage" placeholder="Cuéntanos brevemente tu consulta..."></textarea></div>
+            <button type="submit" class="form-submit">Solicitar Cita Gratuita →</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div class="checkmark"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h4>¡Cita Solicitada!</h4>
+            <p>Nos comunicaremos contigo en menos de 2 horas para confirmar tu consulta. ¡Hasta pronto!</p>
           </div>
         </div>
       </div>
@@ -764,170 +671,188 @@
   </div>
 </section>
 
-<!-- ══════════════ FOOTER ══════════════ -->
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="fade-in">
+        <span class="badge">Preguntas Frecuentes</span>
+        <h2 class="serif" style="font-size:clamp(28px,3.5vw,38px);color:#0f172a;margin-bottom:16px;">Resolvemos tus dudas</h2>
+        <p style="font-size:16px;margin-bottom:28px;">¿Tienes preguntas sobre nuestros tratamientos? Encuentra aquí las respuestas más comunes.</p>
+        <a href="#cita" class="btn btn-primary">Consulta gratuita</a>
+      </div>
+      <div class="faq-list fade-in fade-in-delay-1">
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿La primera consulta es realmente gratuita? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Sí, la primera consulta de diagnóstico no tiene ningún costo. Incluye revisión general, rx digital y un presupuesto detallado del tratamiento recomendado, sin compromiso alguno.</div></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Aceptan EPS y seguros médicos? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Trabajamos con las principales EPS de Colombia: Sanitas, Compensar, Colmédica, Famisanar, Salud Total, Nueva EPS y más. También aceptamos seguros privados y ofrecemos planes de pago propios sin intereses.</div></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cuánto dura un tratamiento de ortodoncia? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Depende de cada paciente. Los casos leves pueden resolverse en 8-12 meses, los moderados entre 12-18 meses. Con Invisalign, los tiempos suelen ser menores que con brackets convencionales.</div></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Tienen servicio de emergencias dentales? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Sí, contamos con una línea de emergencias dental disponible las 24 horas, los 7 días de la semana al +57 310 567-8901.</div></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Los implantes dentales son dolorosos? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">El procedimiento se realiza bajo anestesia local, no sientes dolor durante la cirugía. Posterior puede haber molestias leves los primeros 2-3 días, controladas con analgésicos comunes.</div></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cómo puedo financiar mi tratamiento? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ofrecemos planes de pago propios hasta 36 cuotas sin intereses. Aceptamos todas las tarjetas de crédito, débito, transferencias y efectivo.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSURANCE -->
+<section class="insurance-section">
+  <div class="container">
+    <div class="insurance-inner">
+      <div class="insurance-text fade-in"><h3>Convenios con EPS y Seguros</h3><p>Trabajamos con las principales aseguradoras de Colombia para hacer tu tratamiento más accesible.</p></div>
+      <div class="insurance-logos fade-in fade-in-delay-1">
+        <div class="insurance-logo">Sanitas</div>
+        <div class="insurance-logo">Compensar</div>
+        <div class="insurance-logo">Colmédica</div>
+        <div class="insurance-logo">Famisanar</div>
+        <div class="insurance-logo">Nueva EPS</div>
+        <div class="insurance-logo">Salud Total</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><div class="footer-logo-icon">D</div><span class="footer-logo-name">DentaVida</span></div>
-        <p class="footer-desc">Más de 20 años cuidando sonrisas en Bogotá. Tu salud bucal es nuestra prioridad.</p>
-        <div class="footer-socials">
-          <a href="#" class="footer-social">📷</a>
-          <a href="#" class="footer-social">👍</a>
-          <a href="#" class="footer-social">▶</a>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand fade-in">
+          <a href="#" class="logo">
+            <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+            <span class="logo-text" style="color:white;">Denta<span>Vida</span></span>
+          </a>
+          <p>Clínica dental de referencia en Bogotá, Colombia. Comprometidos con tu salud bucal y tu sonrisa desde 2009.</p>
+          <div class="footer-social">
+            <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          </div>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="#services">Implantes Dentales</a></li>
-          <li><a href="#services">Blanqueamiento</a></li>
-          <li><a href="#services">Ortodoncia</a></li>
-          <li><a href="#services">Periodoncia</a></li>
-          <li><a href="#services">Endodoncia</a></li>
-          <li><a href="#services">Odontopediatría</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Clínica</h4>
-        <ul>
-          <li><a href="#about">Sobre Nosotros</a></li>
-          <li><a href="#team">Nuestro Equipo</a></li>
-          <li><a href="#gallery">Galería</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Trabaja con Nosotros</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col"><h4>Contacto</h4></div>
-        <div class="footer-contact">
-          <div class="footer-contact-item"><span class="fc-icon">📍</span><div class="fc-text">Cl. 93 #15-32, Chapinero<br>Bogotá D.C., Colombia</div></div>
-          <div class="footer-contact-item"><span class="fc-icon">📞</span><div class="fc-text"><a href="tel:+576011234567">+57 601 123 4567</a></div></div>
-          <div class="footer-contact-item"><span class="fc-icon">✉️</span><div class="fc-text"><a href="mailto:citas@dentavida.com.co">citas@dentavida.com.co</a></div></div>
+        <div class="footer-col fade-in fade-in-delay-1">
+          <h4>Servicios</h4>
+          <ul class="footer-links">
+            <li><a href="#servicios">Limpieza y Prevención</a></li>
+            <li><a href="#servicios">Ortodoncia e Invisalign</a></li>
+            <li><a href="#servicios">Implantes Dentales</a></li>
+            <li><a href="#servicios">Blanqueamiento</a></li>
+            <li><a href="#servicios">Odontopediatría</a></li>
+          </ul>
+        </div>
+        <div class="footer-col fade-in fade-in-delay-2">
+          <h4>Clínica</h4>
+          <ul class="footer-links">
+            <li><a href="#equipo">Nuestro Equipo</a></li>
+            <li><a href="#galeria">Instalaciones</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+            <li><a href="#faq">Preguntas Frecuentes</a></li>
+            <li><a href="#">Blog Dental</a></li>
+          </ul>
+        </div>
+        <div class="footer-col fade-in fade-in-delay-3">
+          <h4>Contacto</h4>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Calle 93 #15-23, Piso 4<br>Bogotá D.C., Colombia</span></div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg><span>+57 601 234-5678</span></div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@dentavida.com.co</span></div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="container">
     <div class="footer-bottom">
-      <span class="footer-copy">© <span id="year"></span> DentaVida Clínica Dental. Todos los derechos reservados.</span>
-      <button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+      <span>© <span id="year"></span> DentaVida – Clínica Dental Bogotá. Todos los derechos reservados.</span>
+      <span><a href="#">Política de Privacidad</a> · <a href="#">Términos de Servicio</a></span>
     </div>
   </div>
 </footer>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
   });
 
   document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
   });
-  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
-
-  const heroSlides = document.querySelectorAll('.hero-slide');
-  const heroData = [
-    { tag: 'Tecnología de Vanguardia', title: 'Tu Sonrisa,<br>Nuestra Pasión', sub: 'Expertos en odontología con más de 20 años transformando sonrisas en Bogotá.' },
-    { tag: 'Cuidado Personalizado', title: 'Tratamientos<br>de Alta Precisión', sub: 'Desde ortodoncia invisible hasta implantes dentales — resultados que duran toda la vida.' },
-    { tag: 'Blanqueamiento Dental', title: 'Brilla Con<br>Confianza Total', sub: 'Recupera la blancura natural de tus dientes con nuestros tratamientos profesionales.' },
-  ];
-  let heroIdx = 0;
-  const dotsEl = document.getElementById('heroDots');
-
-  function buildHeroDots() {
-    dotsEl.innerHTML = '';
-    heroData.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'hero-dot' + (i === 0 ? ' active' : '');
-      d.onclick = () => goHero(i);
-      dotsEl.appendChild(d);
-    });
-  }
-  buildHeroDots();
-
-  function goHero(idx) {
-    heroSlides[heroIdx].classList.remove('active');
-    dotsEl.children[heroIdx].classList.remove('active');
-    heroIdx = (idx + heroSlides.length) % heroSlides.length;
-    heroSlides[heroIdx].classList.add('active');
-    dotsEl.children[heroIdx].classList.add('active');
-    const d = heroData[heroIdx];
-    document.getElementById('heroTag').textContent = d.tag;
-    document.getElementById('heroTitle').innerHTML = d.title;
-    document.getElementById('heroSub').textContent = d.sub;
-  }
-  function heroPrev() { goHero(heroIdx - 1); }
-  function heroNext() { goHero(heroIdx + 1); }
-  setInterval(() => heroNext(), 5500);
-
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target);
-    const suffix = el.dataset.suffix || '';
-    let current = 0;
-    const step = Math.ceil(target / 80);
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = current + suffix;
-      if (current >= target) clearInterval(timer);
-    }, 20);
-  }
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  });
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
-        observer.unobserve(entry.target);
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.counted) {
+        e.target.dataset.counted = 'true';
+        const target = +e.target.dataset.target;
+        const suffix = target === 98 ? '%' : '+';
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          e.target.textContent = (target >= 1000 ? Math.floor(current).toLocaleString('es-CO') : Math.floor(current)) + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 25);
       }
     });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.num[data-target]').forEach(el => counterObserver.observe(el));
 
   const track = document.getElementById('testimonialsTrack');
-  const cards = track.querySelectorAll('.testimonial-card');
-  const tDotsEl = document.getElementById('tDots');
-  let tIdx = 0;
-
-  function buildTDots() {
-    tDotsEl.innerHTML = '';
-    cards.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 't-dot' + (i === 0 ? ' active' : '');
-      d.onclick = () => goT(i);
-      tDotsEl.appendChild(d);
-    });
+  const dotsContainer = document.getElementById('testimonialsDots');
+  let currentIdx = 0;
+  let cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
+  const totalCards = track.querySelectorAll('.testimonial-card').length;
+  const totalSlides = Math.ceil(totalCards / cardsPerView);
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'testimonials-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
   }
-  buildTDots();
-
-  function goT(idx) {
-    tDotsEl.children[tIdx].classList.remove('active');
-    tIdx = (idx + cards.length) % cards.length;
-    tDotsEl.children[tIdx].classList.add('active');
-    const cardWidth = cards[0].offsetWidth + 20;
-    track.style.transform = `translateX(-${tIdx * cardWidth}px)`;
+  function goToSlide(idx) {
+    currentIdx = Math.max(0, Math.min(idx, totalSlides - 1));
+    const cardWidth = track.querySelector('.testimonial-card').offsetWidth + 24;
+    track.style.transform = `translateX(-${currentIdx * cardsPerView * cardWidth}px)`;
+    document.querySelectorAll('.testimonials-dot').forEach((d, i) => d.classList.toggle('active', i === currentIdx));
   }
-  function tPrev() { goT(tIdx - 1); }
-  function tNext() { goT(tIdx + 1); }
-  window.addEventListener('resize', () => goT(tIdx));
+  document.getElementById('prevTestimonial').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('nextTestimonial').addEventListener('click', () => goToSlide((currentIdx + 1) % totalSlides));
+  let autoplay = setInterval(() => goToSlide((currentIdx + 1) % totalSlides), 5000);
+  track.addEventListener('mouseenter', () => clearInterval(autoplay));
+  track.addEventListener('mouseleave', () => { autoplay = setInterval(() => goToSlide((currentIdx + 1) % totalSlides), 5000); });
+  window.addEventListener('resize', () => { cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1; goToSlide(0); });
 
-  function selectTime(btn) {
-    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-question').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
   }
 
-  function submitForm(e) {
+  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    document.getElementById('formWrap').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
-  }
-  function resetForm() {
-    document.getElementById('apptForm').reset();
-    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('formWrap').style.display = 'block';
-    document.getElementById('successMsg').classList.remove('show');
-  }
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    if (!name || !phone || !email) { alert('Por favor completa los campos obligatorios (*)'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Por favor ingresa un correo válido.'); return; }
+    this.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
 </script>
 </body>
 </html>
