@@ -3,325 +3,316 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DentaVida – Clínica Dental Bogotá</title>
+  <title>Clínica Salud Vital – Bogotá, Colombia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Nunito Sans', sans-serif; color: #444; background: #fff; overflow-x: hidden; }
 
     :root {
-      --teal: #0d9488;
-      --teal-dark: #0f766e;
-      --teal-light: #ccfbf1;
-      --teal-pale: #f0fdfa;
-      --sky: #0ea5e9;
-      --navy: #0f172a;
-      --gray: #64748b;
-      --gray-light: #f8fafc;
-      --gray-border: #e2e8f0;
-      --white: #ffffff;
-      --radius: 16px;
-      --radius-sm: 8px;
-      --shadow: 0 4px 24px rgba(13,148,136,0.10);
-      --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+      --blue: #1565C0;
+      --blue-dark: #0D47A1;
+      --blue-mid: #1976D2;
+      --blue-light: #E3F2FD;
+      --cyan: #00ACC1;
+      --white: #fff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --dark: #1a1a2e;
+      --radius: 8px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
     }
 
-    .serif { font-family: 'Lora', serif; }
-    h1,h2,h3,h4 { line-height: 1.2; }
-    p { line-height: 1.75; color: var(--gray); }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 96px 0; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--teal); background: var(--teal-light);
-      border-radius: 999px; padding: 6px 16px; margin-bottom: 20px;
-    }
-    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px; border-radius: 999px; font-weight: 700;
-      font-size: 15px; cursor: pointer; transition: all 0.25s;
-      border: none; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .btn-primary { background: var(--teal); color: #fff; }
-    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); }
-    .btn-outline { background: transparent; color: var(--teal); border: 2px solid var(--teal); }
-    .btn-outline:hover { background: var(--teal); color: #fff; }
-    .section-header { text-align: center; max-width: 640px; margin: 0 auto 60px; }
-    .section-header h2 { font-size: clamp(28px, 4vw, 42px); color: var(--navy); margin-bottom: 16px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 90px 0; }
+    .section-title { text-align: center; margin-bottom: 50px; }
+    .section-label { display: inline-block; background: #E3F2FD; color: #1565C0; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; margin-bottom: 12px; }
+    .section-title h2 { font-family: 'Nunito', sans-serif; font-size: clamp(26px, 4vw, 40px); color: #1a1a2e; font-weight: 800; margin-bottom: 14px; line-height: 1.2; }
+    .section-title p { font-size: 16px; color: #6b7280; max-width: 580px; margin: 0 auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.25s; border: none; text-decoration: none; font-family: 'Nunito Sans', sans-serif; }
+    .btn-blue { background: #1565C0; color: #fff; }
+    .btn-blue:hover { background: #0D47A1; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21,101,192,0.35); }
+    .btn-white { background: #fff; color: #1565C0; }
+    .btn-white:hover { background: #E3F2FD; }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.7); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+    a { text-decoration: none; }
 
     /* TOPBAR */
-    .topbar { background: #0f172a; color: rgba(255,255,255,0.8); font-size: 13px; padding: 10px 0; }
+    .topbar { background: #0D47A1; padding: 9px 0; font-size: 13px; color: rgba(255,255,255,0.85); }
     .topbar-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .topbar-left { display: flex; gap: 24px; flex-wrap: wrap; }
     .topbar-item { display: flex; align-items: center; gap: 6px; }
-    .topbar-item svg { width: 14px; height: 14px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-    .topbar-right { display: flex; align-items: center; gap: 16px; }
-    .social-link { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
-    .social-link:hover { background: #0d9488; }
-    .social-link svg { width: 14px; height: 14px; fill: white; }
+    .topbar-item svg { width: 14px; height: 14px; stroke: #00ACC1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .social-icon { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .social-icon:hover { background: #00ACC1; }
+    .social-icon svg { width: 13px; height: 13px; fill: white; }
 
     /* NAVBAR */
-    #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e2e8f0; transition: all 0.3s;
-    }
-    #navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #0d9488, #0ea5e9); display: flex; align-items: center; justify-content: center; }
-    .logo-icon svg { width: 22px; height: 22px; fill: white; }
-    .logo-text { font-size: 20px; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; }
-    .logo-text span { color: #0d9488; }
-    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 15px; font-weight: 500; color: #64748b; text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: #0d9488; }
-    .nav-cta { display: flex; align-items: center; gap: 12px; }
-    .nav-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #0f172a; }
-    .nav-phone svg { width: 16px; height: 16px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #0f172a; margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
-    .mobile-menu { display: none; background: white; border-top: 1px solid #e2e8f0; padding: 24px; }
-    .mobile-menu a { display: block; padding: 12px 0; font-weight: 500; color: #64748b; text-decoration: none; border-bottom: 1px solid #e2e8f0; }
-    .mobile-menu a:hover { color: #0d9488; }
-    .mobile-menu .btn { margin-top: 16px; width: 100%; justify-content: center; }
-    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .hamburger { display: block; } .mobile-menu.open { display: block; } }
+    #navbar { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, #1565C0, #00ACC1); display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 24px; height: 24px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-name strong { display: block; font-size: 18px; font-weight: 800; color: #1a1a2e; line-height: 1.1; font-family: 'Nunito', sans-serif; }
+    .logo-name span { font-size: 11px; color: #6b7280; font-weight: 600; letter-spacing: 0.05em; }
+    .nav-menu { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-menu a { font-size: 14px; font-weight: 700; color: #374151; transition: color 0.2s; }
+    .nav-menu a:hover { color: #1565C0; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-phone { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #1a1a2e; }
+    .nav-phone svg { width: 15px; height: 15px; stroke: #1565C0; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #1a1a2e; border-radius: 2px; }
+    .mobile-nav { display: none; background: #fff; border-top: 1px solid #e5e7eb; padding: 20px; }
+    .mobile-nav a { display: block; padding: 10px 0; font-weight: 700; font-size: 15px; color: #374151; border-bottom: 1px solid #e5e7eb; }
+    .mobile-nav .btn { margin-top: 16px; width: 100%; justify-content: center; }
+    @media (max-width: 900px) { .nav-menu, .nav-right { display: none; } .hamburger { display: flex; } .mobile-nav.open { display: block; } }
 
     /* HERO */
-    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #f0fdf4 100%); position: relative; overflow: hidden; }
-    .hero-bg-shape { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; pointer-events: none; }
-    .hero-bg-shape-1 { width: 500px; height: 500px; background: #0d9488; top: -100px; right: -100px; }
-    .hero-bg-shape-2 { width: 300px; height: 300px; background: #0ea5e9; bottom: -50px; left: 10%; }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
-    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(13,148,136,0.1); color: #0d9488; padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(13,148,136,0.2); }
-    .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse-dot 2s infinite; }
-    @keyframes pulse-dot { 0%,100%{ opacity:1; transform: scale(1); } 50%{ opacity:0.5; transform: scale(1.4); } }
-    .hero h1 { font-size: clamp(36px, 5vw, 62px); color: #0f172a; letter-spacing: -0.03em; margin-bottom: 20px; }
-    .hero h1 em { font-style: normal; color: #0d9488; }
-    .hero p { font-size: 18px; max-width: 480px; margin-bottom: 40px; }
-    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
-    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
-    .hero-stat strong { display: block; font-size: 32px; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; }
-    .hero-stat span { font-size: 13px; color: #64748b; font-weight: 500; }
-    .hero-image-card { border-radius: 24px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.15); aspect-ratio: 4/5; position: relative; }
-    .hero-image-card img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-float-card { position: absolute; background: white; border-radius: 16px; padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 12px; }
-    .hero-float-card.card-1 { bottom: 32px; left: -32px; }
-    .hero-float-card.card-2 { top: 32px; right: -32px; }
-    .hero-float-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .hero-float-card .text strong { display: block; font-size: 15px; font-weight: 700; color: #0f172a; }
-    .hero-float-card .text span { font-size: 12px; color: #64748b; }
-    .hero-badge { position: absolute; top: 24px; left: 24px; background: #0d9488; color: white; border-radius: 12px; padding: 12px 16px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-    .stars { color: #fbbf24; letter-spacing: -2px; }
-    .hero-image-wrap { position: relative; }
-    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-image-wrap { max-width: 400px; margin: 0 auto; } .hero-float-card.card-1 { left: -8px; } .hero-float-card.card-2 { right: -8px; } }
+    #hero { position: relative; overflow: hidden; height: 620px; }
+    .hero-slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+    .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; }
+    .hero-slide::before { content: ''; position: absolute; inset: 0; z-index: 1; }
+    .hero-slide-1::before { background: linear-gradient(90deg, rgba(13,71,161,0.88) 40%, rgba(13,71,161,0.3) 100%); }
+    .hero-slide-2::before { background: linear-gradient(90deg, rgba(0,100,120,0.88) 40%, rgba(0,100,120,0.3) 100%); }
+    .hero-slide-3::before { background: linear-gradient(90deg, rgba(21,101,192,0.85) 40%, rgba(21,101,192,0.2) 100%); }
+    .hero-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-content { position: relative; z-index: 2; max-width: 620px; padding: 0 40px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.25); }
+    .hero-content h1 { font-family: 'Nunito', sans-serif; font-size: clamp(28px, 4.5vw, 56px); color: #fff; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+    .hero-content p { font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 32px; line-height: 1.7; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-nav { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 8px; }
+    .hero-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; border: none; }
+    .hero-dot.active { background: #fff; width: 28px; border-radius: 5px; }
+    .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .hero-arrow:hover { background: #1565C0; }
+    .hero-arrow-left { left: 20px; }
+    .hero-arrow-right { right: 20px; }
+    @media (max-width: 600px) { #hero { height: 520px; } .hero-content { padding: 0 20px; } }
 
-    /* BRANDS */
-    .brands-section { padding: 40px 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
-    .brands-label { font-size: 13px; font-weight: 600; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-bottom: 28px; }
-    .brands-grid { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
-    .brand-item { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: #94a3b8; transition: color 0.2s; }
-    .brand-item:hover { color: #0d9488; }
+    /* ABOUT */
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .about-image-main { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .about-image-main img { width: 100%; display: block; height: 480px; object-fit: cover; }
+    .about-image-wrap { position: relative; }
+    .about-image-badge { position: absolute; bottom: -20px; right: -20px; background: #1565C0; color: #fff; border-radius: 14px; padding: 22px 26px; text-align: center; box-shadow: 0 8px 28px rgba(21,101,192,0.3); }
+    .about-image-badge strong { display: block; font-size: 38px; font-weight: 800; font-family: 'Nunito', sans-serif; }
+    .about-image-badge span { font-size: 12px; opacity: 0.9; font-weight: 600; }
+    .skill-item { margin-bottom: 18px; }
+    .skill-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 7px; }
+    .skill-bar { height: 7px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+    .skill-fill { height: 100%; background: linear-gradient(90deg, #1565C0, #00ACC1); border-radius: 4px; width: 0; transition: width 1.4s ease; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+    .about-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #374151; }
+    .about-feat::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: #E3F2FD; color: #1565C0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+    @media (max-width: 900px) { .about-inner { grid-template-columns: 1fr; } .about-image-badge { right: 10px; } }
 
     /* SERVICES */
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .service-card { background: white; border-radius: 16px; padding: 36px 32px; border: 1px solid #e2e8f0; transition: all 0.3s; cursor: default; position: relative; overflow: hidden; }
-    .service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #f0fdfa, transparent); opacity: 0; transition: opacity 0.3s; }
-    .service-card:hover { border-color: #0d9488; transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
-    .service-card:hover::before { opacity: 1; }
-    .service-icon { width: 56px; height: 56px; border-radius: 14px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; position: relative; z-index: 1; transition: background 0.3s; }
-    .service-card:hover .service-icon { background: #0d9488; }
-    .service-icon svg { width: 26px; height: 26px; stroke: #0d9488; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s; }
-    .service-card:hover .service-icon svg { stroke: white; }
-    .service-card h3 { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 12px; position: relative; z-index: 1; }
-    .service-card p { font-size: 15px; margin-bottom: 20px; position: relative; z-index: 1; }
-    .service-link { font-size: 14px; font-weight: 700; color: #0d9488; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; position: relative; z-index: 1; transition: gap 0.2s; }
+    .services-section { background: #f9fafb; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card { background: #fff; border-radius: 8px; padding: 32px 28px; border: 1px solid #e5e7eb; transition: all 0.3s; text-align: center; }
+    .service-card:hover { border-color: #1565C0; transform: translateY(-6px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .service-icon-wrap { width: 70px; height: 70px; border-radius: 50%; background: #E3F2FD; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: background 0.3s; }
+    .service-card:hover .service-icon-wrap { background: #1565C0; }
+    .service-icon-wrap svg { width: 32px; height: 32px; stroke: #1565C0; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s; }
+    .service-card:hover .service-icon-wrap svg { stroke: white; }
+    .service-card h3 { font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 800; color: #1a1a2e; margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: #6b7280; line-height: 1.7; margin-bottom: 18px; }
+    .service-link { font-size: 13px; font-weight: 700; color: #1565C0; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s; }
     .service-link:hover { gap: 8px; }
     .service-link::after { content: '→'; }
     @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
-
-    /* WHY US */
-    .why-section { background: #f8fafc; }
-    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .why-image-main { border-radius: 24px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
-    .why-image-main img { width: 100%; display: block; }
-    .why-image-wrap { position: relative; }
-    .why-image-thumb { position: absolute; bottom: -24px; right: -24px; width: 48%; border-radius: 16px; overflow: hidden; border: 4px solid white; box-shadow: 0 4px 24px rgba(13,148,136,0.10); }
-    .why-image-thumb img { width: 100%; display: block; }
-    .why-experience { position: absolute; top: 24px; left: -24px; background: #0d9488; color: white; border-radius: 16px; padding: 20px 24px; text-align: center; }
-    .why-experience strong { display: block; font-size: 36px; font-weight: 800; }
-    .why-experience span { font-size: 13px; opacity: 0.9; }
-    .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
-    .why-feature { display: flex; align-items: flex-start; gap: 12px; }
-    .why-feature-icon { width: 36px; height: 36px; border-radius: 10px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .why-feature-icon svg { width: 18px; height: 18px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .why-feature h4 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-    .why-feature p { font-size: 14px; margin: 0; }
-    @media (max-width: 900px) { .why-inner { grid-template-columns: 1fr; } .why-image-wrap { max-width: 480px; margin: 0 auto; } .why-experience { left: 12px; } .why-image-thumb { right: 0; } }
+    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
 
     /* STATS */
-    .stats-section { background: linear-gradient(135deg, #0f766e, #0369a1); padding: 80px 0; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
-    .stat-item { text-align: center; }
-    .stat-item .num { font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: white; letter-spacing: -0.03em; display: block; }
-    .stat-item .label { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 6px; }
-    .stat-divider { width: 1px; background: rgba(255,255,255,0.2); }
-    @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat-divider { display: none; } }
-
-    /* TEAM */
-    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-    .doctor-card { border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s; }
-    .doctor-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); border-color: #0d9488; }
-    .doctor-img { aspect-ratio: 3/4; overflow: hidden; background: #ccfbf1; }
-    .doctor-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-    .doctor-card:hover .doctor-img img { transform: scale(1.05); }
-    .doctor-info { padding: 20px; }
-    .doctor-info h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-    .doctor-specialty { font-size: 13px; color: #0d9488; font-weight: 600; display: block; margin-bottom: 12px; }
-    .doctor-social { display: flex; gap: 8px; }
-    .doctor-social a { width: 32px; height: 32px; border-radius: 8px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
-    .doctor-social a:hover { background: #0d9488; }
-    .doctor-social a svg { width: 14px; height: 14px; fill: #0d9488; transition: fill 0.2s; }
-    .doctor-social a:hover svg { fill: white; }
-    @media (max-width: 900px) { .team-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 500px) { .team-grid { grid-template-columns: 1fr; } }
-
-    /* PROCESS */
-    .process-section { background: #f0fdfa; }
-    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; }
-    .process-steps::before { content: ''; position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(to right, #0d9488, #0ea5e9); z-index: 0; }
-    .process-step { text-align: center; position: relative; z-index: 1; }
-    .process-num { width: 56px; height: 56px; border-radius: 50%; background: white; border: 3px solid #0d9488; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 18px; font-weight: 800; color: #0d9488; box-shadow: 0 4px 16px rgba(13,148,136,0.2); }
-    .process-step h3 { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .process-step p { font-size: 14px; }
-    @media (max-width: 768px) { .process-steps::before { display: none; } .process-steps { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .process-steps { grid-template-columns: 1fr; } }
-
-    /* GALLERY */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .gallery-item { border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; }
-    .gallery-item:nth-child(1) { grid-row: span 2; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
-    .gallery-item:hover img { transform: scale(1.08); }
-    .gallery-overlay { position: absolute; inset: 0; background: rgba(13,148,136,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay svg { width: 36px; height: 36px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    @media (max-width: 768px) { .gallery-grid { grid-template-columns: 1fr 1fr; } .gallery-item:nth-child(1) { grid-row: span 1; } }
-    @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
-
-    /* TESTIMONIALS */
-    .testimonials-section { background: #0f172a; }
-    .testimonials-section .section-header h2 { color: white; }
-    .testimonials-section .section-header p { color: rgba(255,255,255,0.6); }
-    .testimonials-section .badge { background: rgba(13,148,136,0.3); color: #5eead4; }
-    .testimonials-section .badge::before { background: #5eead4; }
-    .testimonials-slider { overflow: hidden; }
-    .testimonials-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .testimonial-card { min-width: calc(33.333% - 16px); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px; flex-shrink: 0; transition: all 0.3s; }
-    .testimonial-card:hover { background: rgba(255,255,255,0.1); border-color: #0d9488; }
-    .testimonial-stars { color: #fbbf24; font-size: 18px; margin-bottom: 16px; letter-spacing: -2px; }
-    .testimonial-text { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 24px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 14px; }
-    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #0d9488; }
-    .testimonial-author-info strong { display: block; font-size: 15px; color: white; font-weight: 700; }
-    .testimonial-author-info span { font-size: 13px; color: rgba(255,255,255,0.5); }
-    .testimonials-controls { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 40px; }
-    .testimonials-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 18px; }
-    .testimonials-btn:hover { background: #0d9488; border-color: #0d9488; }
-    .testimonials-dots { display: flex; gap: 8px; }
-    .testimonials-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.2s; }
-    .testimonials-dot.active { background: #0d9488; width: 24px; border-radius: 4px; }
-    @media (max-width: 900px) { .testimonial-card { min-width: calc(50% - 12px); } }
-    @media (max-width: 600px) { .testimonial-card { min-width: 100%; } }
+    .stats-section { background: linear-gradient(135deg, #0D47A1 0%, #006064 100%); padding: 80px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat-card { text-align: center; padding: 32px 20px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+    .stat-card .icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .stat-card .icon svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stat-card .num { font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #fff; font-family: 'Nunito', sans-serif; display: block; letter-spacing: -0.03em; }
+    .stat-card .label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; font-weight: 600; }
+    .stat-emergency { grid-column: span 4; background: rgba(0,172,193,0.2); border-color: rgba(0,172,193,0.4); display: flex; align-items: center; justify-content: center; gap: 20px; padding: 24px; flex-wrap: wrap; }
+    .stat-emergency .emer-num { font-size: 40px; font-weight: 800; color: #00ACC1; font-family: 'Nunito', sans-serif; }
+    .stat-emergency .emer-text h4 { font-size: 18px; font-weight: 800; color: #fff; }
+    .stat-emergency .emer-text p { font-size: 14px; color: rgba(255,255,255,0.7); margin: 0; }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat-emergency { grid-column: span 2; } }
 
     /* APPOINTMENT */
-    .appointment-section { background: #f0fdfa; }
-    .appointment-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .appointment-info h2 { font-size: clamp(28px, 4vw, 42px); color: #0f172a; margin-bottom: 16px; }
-    .appointment-info p { font-size: 17px; margin-bottom: 36px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-    .contact-icon { width: 48px; height: 48px; border-radius: 12px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .contact-icon svg { width: 22px; height: 22px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .contact-item h4 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-    .contact-item p { font-size: 15px; margin: 0; }
-    .appointment-form { background: white; border-radius: 24px; padding: 40px; box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
-    .appointment-form h3 { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 28px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border-radius: 8px; border: 1.5px solid #e2e8f0; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif; color: #0f172a; background: #f8fafc; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #0d9488; box-shadow: 0 0 0 4px rgba(13,148,136,0.1); background: white; }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-    .form-submit { width: 100%; padding: 16px; border-radius: 999px; background: #0d9488; color: white; font-size: 16px; font-weight: 700; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.25s; }
-    .form-submit:hover { background: #0f766e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); }
-    .form-success { display: none; text-align: center; padding: 24px; }
-    .form-success .checkmark { width: 64px; height: 64px; border-radius: 50%; background: #ccfbf1; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .form-success .checkmark svg { width: 32px; height: 32px; stroke: #0d9488; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-    .form-success h4 { font-size: 20px; color: #0f172a; margin-bottom: 8px; }
-    .form-success p { font-size: 15px; margin: 0; }
-    @media (max-width: 900px) { .appointment-inner { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+    .appointment-section { background: linear-gradient(135deg, #1565C0 0%, #00ACC1 100%); padding: 80px 0; }
+    .appointment-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+    .appointment-info h2 { font-family: 'Nunito', sans-serif; font-size: clamp(26px, 3.5vw, 38px); color: #fff; font-weight: 800; margin-bottom: 14px; }
+    .appointment-info p { font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 28px; line-height: 1.7; }
+    .appt-contact { display: flex; flex-direction: column; gap: 16px; }
+    .appt-contact-item { display: flex; align-items: flex-start; gap: 14px; }
+    .appt-contact-icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .appt-contact-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .appt-contact-item h5 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+    .appt-contact-item p { font-size: 14px; color: rgba(255,255,255,0.9); margin: 0; }
+    .appt-form { background: #fff; border-radius: 16px; padding: 36px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .appt-form h3 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 24px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { margin-bottom: 14px; }
+    .form-field label { display: block; font-size: 12px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: 'Nunito Sans', sans-serif; color: #1a1a2e; background: #f9fafb; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: #1565C0; box-shadow: 0 0 0 3px rgba(21,101,192,0.1); background: #fff; }
+    .form-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; padding: 14px; border-radius: 50px; background: #1565C0; color: #fff; font-size: 15px; font-weight: 700; border: none; cursor: pointer; font-family: 'Nunito Sans', sans-serif; transition: all 0.25s; }
+    .form-submit:hover { background: #0D47A1; transform: translateY(-2px); }
+    .form-success { display: none; text-align: center; padding: 20px 0; }
+    .form-success .check { width: 60px; height: 60px; border-radius: 50%; background: #E3F2FD; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .form-success .check svg { width: 28px; height: 28px; stroke: #1565C0; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .form-success h4 { font-size: 20px; color: #1a1a2e; font-weight: 800; margin-bottom: 8px; }
+    @media (max-width: 900px) { .appointment-inner { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } }
+
+    /* PRICING */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .pricing-card { border-radius: 14px; border: 1px solid #e5e7eb; padding: 36px 30px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
+    .pricing-card.featured { background: #1565C0; border-color: #1565C0; transform: scale(1.04); box-shadow: 0 16px 48px rgba(21,101,192,0.25); }
+    .pricing-card.featured .badge-pop { display: block; }
+    .badge-pop { display: none; position: absolute; top: 16px; right: -28px; background: #00ACC1; color: white; font-size: 11px; font-weight: 700; padding: 4px 40px; transform: rotate(40deg); }
+    .pricing-card:not(.featured):hover { transform: translateY(-6px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-color: #1565C0; }
+    .pricing-icon { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+    .pricing-card:not(.featured) .pricing-icon { background: #E3F2FD; }
+    .pricing-card.featured .pricing-icon { background: rgba(255,255,255,0.15); }
+    .pricing-icon svg { width: 28px; height: 28px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pricing-card:not(.featured) .pricing-icon svg { stroke: #1565C0; }
+    .pricing-card.featured .pricing-icon svg { stroke: white; }
+    .pricing-card h3 { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .pricing-card:not(.featured) h3 { color: #1a1a2e; }
+    .pricing-card.featured h3 { color: white; }
+    .price { margin: 20px 0; }
+    .price .amount { font-size: 44px; font-weight: 800; font-family: 'Nunito', sans-serif; letter-spacing: -0.03em; }
+    .pricing-card:not(.featured) .amount { color: #1565C0; }
+    .pricing-card.featured .amount { color: white; }
+    .price .period { font-size: 14px; }
+    .pricing-card:not(.featured) .period { color: #6b7280; }
+    .pricing-card.featured .period { color: rgba(255,255,255,0.7); }
+    .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+    .pricing-features li { display: flex; align-items: center; gap: 8px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid; }
+    .pricing-card:not(.featured) .pricing-features li { border-color: #e5e7eb; color: #374151; }
+    .pricing-card.featured .pricing-features li { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+    .pricing-features li::before { content: '✓'; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
+    .pricing-card:not(.featured) .pricing-features li::before { background: #E3F2FD; color: #1565C0; }
+    .pricing-card.featured .pricing-features li::before { background: rgba(255,255,255,0.2); color: white; }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } .pricing-card.featured { transform: none; } }
+
+    /* TESTIMONIALS */
+    .testimonials-section { background: #f9fafb; }
+    .testi-slider { overflow: hidden; }
+    .testi-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .testi-card { min-width: calc(33.333% - 16px); background: #fff; border-radius: 14px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); flex-shrink: 0; border: 1px solid #e5e7eb; transition: all 0.3s; }
+    .testi-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-color: #1565C0; }
+    .testi-quote { font-size: 40px; color: #1565C0; line-height: 1; margin-bottom: 12px; font-family: Georgia, serif; }
+    .testi-text { font-size: 15px; color: #6b7280; line-height: 1.8; font-style: italic; margin-bottom: 24px; }
+    .testi-stars { color: #f59e0b; font-size: 16px; margin-bottom: 16px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #E3F2FD; }
+    .testi-author-info strong { display: block; font-size: 15px; font-weight: 800; color: #1a1a2e; }
+    .testi-author-info span { font-size: 12px; color: #1565C0; font-weight: 600; }
+    .testi-controls { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 36px; }
+    .testi-btn { width: 40px; height: 40px; border-radius: 50%; background: #E3F2FD; border: none; cursor: pointer; color: #1565C0; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .testi-btn:hover { background: #1565C0; color: white; }
+    .testi-dots { display: flex; gap: 6px; }
+    .testi-dot { width: 8px; height: 8px; border-radius: 50%; background: #e5e7eb; cursor: pointer; transition: all 0.2s; border: none; }
+    .testi-dot.active { background: #1565C0; width: 20px; border-radius: 4px; }
+    @media (max-width: 900px) { .testi-card { min-width: calc(50% - 12px); } }
+    @media (max-width: 580px) { .testi-card { min-width: 100%; } }
+
+    /* DOCTORS */
+    .doctors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .doctor-card { border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; transition: all 0.3s; }
+    .doctor-card:hover { transform: translateY(-6px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-color: #1565C0; }
+    .doctor-photo { aspect-ratio: 3/4; overflow: hidden; background: #E3F2FD; position: relative; }
+    .doctor-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .doctor-card:hover .doctor-photo img { transform: scale(1.06); }
+    .doctor-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,71,161,0.8) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; justify-content: center; padding: 20px; gap: 10px; }
+    .doctor-card:hover .doctor-overlay { opacity: 1; }
+    .doc-soc { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.4); transition: background 0.2s; }
+    .doc-soc:hover { background: #00ACC1; }
+    .doc-soc svg { width: 15px; height: 15px; fill: white; }
+    .doctor-info { padding: 18px; text-align: center; }
+    .doctor-info h3 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
+    .doctor-spec { font-size: 13px; color: #1565C0; font-weight: 600; display: block; }
+    @media (max-width: 900px) { .doctors-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .doctors-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; } }
 
     /* FAQ */
-    .faq-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-    .faq-item { border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
-    .faq-question { width: 100%; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; text-align: left; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 600; color: #0f172a; transition: background 0.2s; }
-    .faq-question:hover { background: #f0fdfa; }
-    .faq-question.open { background: #f0fdfa; color: #0d9488; }
-    .faq-icon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 6px; background: #ccfbf1; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 14px; color: #0d9488; font-weight: 700; }
-    .faq-question.open .faq-icon { background: #0d9488; color: white; transform: rotate(45deg); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-    .faq-answer.open { max-height: 300px; }
-    .faq-answer-inner { padding: 0 24px 20px; font-size: 15px; color: #64748b; line-height: 1.7; }
+    .faq-section { background: #f9fafb; }
+    .faq-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 70px; align-items: start; }
+    .faq-image { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .faq-image img { width: 100%; display: block; max-height: 500px; object-fit: cover; }
+    .faq-item { border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 12px; overflow: hidden; background: #fff; }
+    .faq-q { width: 100%; background: none; border: none; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 14px; cursor: pointer; text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 15px; font-weight: 700; color: #1a1a2e; transition: background 0.2s; }
+    .faq-q:hover, .faq-q.open { background: #E3F2FD; }
+    .faq-q.open { color: #1565C0; }
+    .faq-icon { width: 24px; height: 24px; border-radius: 6px; background: #E3F2FD; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #1565C0; font-weight: 700; flex-shrink: 0; transition: all 0.3s; }
+    .faq-q.open .faq-icon { background: #1565C0; color: white; transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-a.open { max-height: 300px; }
+    .faq-a-inner { padding: 0 20px 18px; font-size: 14px; color: #6b7280; line-height: 1.75; }
     @media (max-width: 900px) { .faq-inner { grid-template-columns: 1fr; } }
 
-    /* INSURANCE */
-    .insurance-section { background: #f8fafc; padding: 60px 0; }
-    .insurance-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 32px; }
-    .insurance-text h3 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
-    .insurance-logos { display: flex; gap: 16px; flex-wrap: wrap; }
-    .insurance-logo { padding: 14px 24px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-weight: 700; color: #64748b; transition: all 0.2s; }
-    .insurance-logo:hover { border-color: #0d9488; color: #0d9488; }
+    /* BLOG */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .blog-card { border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; transition: all 0.3s; }
+    .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-color: #1565C0; }
+    .blog-img { aspect-ratio: 16/10; overflow: hidden; }
+    .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
+    .blog-card:hover .blog-img img { transform: scale(1.06); }
+    .blog-body { padding: 22px; }
+    .blog-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; font-weight: 600; margin-bottom: 10px; }
+    .blog-cat { background: #E3F2FD; color: #1565C0; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+    .blog-card h3 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; color: #1a1a2e; margin-bottom: 10px; line-height: 1.4; }
+    .blog-card p { font-size: 14px; color: #6b7280; line-height: 1.7; margin-bottom: 16px; }
+    .blog-link { font-size: 13px; font-weight: 700; color: #1565C0; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+    .blog-link:hover { gap: 8px; }
+    .blog-link::after { content: '→'; }
+    @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
 
     /* FOOTER */
-    footer { background: #0f172a; color: rgba(255,255,255,0.7); }
-    .footer-main { padding: 80px 0 48px; }
+    footer { background: #1a1a2e; }
+    .footer-top { padding: 70px 0 48px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
-    .footer-brand p { font-size: 15px; line-height: 1.7; margin-bottom: 24px; margin-top: 16px; }
-    .footer-social { display: flex; gap: 12px; }
-    .footer-social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
-    .footer-social a:hover { background: #0d9488; }
-    .footer-social a svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
-    .footer-social a:hover svg { fill: white; }
-    .footer-col h4 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 20px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 20px; margin-top: 14px; }
+    .footer-social { display: flex; gap: 8px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .footer-social a:hover { background: #1565C0; }
+    .footer-social a svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.7); }
+    .footer-col h4 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 18px; font-family: 'Nunito', sans-serif; }
     .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 12px; }
-    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: #0d9488; }
-    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 14px; }
-    .footer-contact-item svg { width: 16px; height: 16px; stroke: #0d9488; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 14px; }
-    .footer-bottom a { color: #0d9488; text-decoration: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    .footer-links a:hover { color: #00ACC1; }
+    .footer-contact-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .footer-contact-row svg { width: 15px; height: 15px; stroke: #00ACC1; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
+    .footer-contact-row span { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.5); }
+    .footer-bottom a { color: #00ACC1; }
     @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
 
-    /* SCROLL TOP */
-    #scroll-top { position: fixed; bottom: 32px; right: 32px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: #0d9488; color: white; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(13,148,136,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: all 0.3s; font-size: 20px; }
+    #scroll-top { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 44px; height: 44px; border-radius: 50%; background: #1565C0; color: white; border: none; cursor: pointer; box-shadow: 0 4px 14px rgba(21,101,192,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(14px); transition: all 0.3s; font-size: 18px; }
     #scroll-top.visible { opacity: 1; transform: translateY(0); }
-    #scroll-top:hover { background: #0f766e; transform: translateY(-2px); }
 
-    /* ANIMATIONS */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .fade-in-delay-1 { transition-delay: 0.1s; }
-    .fade-in-delay-2 { transition-delay: 0.2s; }
-    .fade-in-delay-3 { transition-delay: 0.3s; }
-    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
   </style>
 </head>
 <body>
@@ -330,23 +321,20 @@
 <div class="topbar">
   <div class="container">
     <div class="topbar-inner">
-      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+      <div class="topbar-left">
         <span class="topbar-item">
           <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Calle 93 #15-23, Bogotá, Colombia
+          Carrera 7 #32-16, Chapinero, Bogotá
         </span>
         <span class="topbar-item">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Lun–Vie: 8:00am – 7:00pm &nbsp;|&nbsp; Sáb: 8:00am – 2:00pm
+          Lun – Vie: 7:00 AM – 8:00 PM &nbsp;|&nbsp; Sáb – Dom: 8:00 AM – 4:00 PM
         </span>
       </div>
       <div class="topbar-right">
-        <span class="topbar-item">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16l.2.92z"/></svg>
-          +57 601 234-5678
-        </span>
-        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="#" class="social-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5z"/></svg></a>
       </div>
     </div>
   </div>
@@ -356,314 +344,174 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      <div class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="logo-name">
+          <strong>Salud Vital</strong>
+          <span>Clínica Médica · Bogotá</span>
         </div>
-        <span class="logo-text">Denta<span>Vida</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#equipo">Equipo</a></li>
-        <li><a href="#galeria">Galería</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <div class="nav-cta">
-        <span class="nav-phone">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16l.2.92z"/></svg>
-          +57 601 234-5678
-        </span>
-        <a href="#cita" class="btn btn-primary">Pedir Cita</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
+      <ul class="nav-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#medicos">Médicos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#blog">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <span class="nav-phone">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
+          +57 601 345-6789
+        </span>
+        <a href="#cita" class="btn btn-blue">Agendar Cita</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
   </div>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#inicio">Inicio</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#equipo">Equipo</a>
-    <a href="#galeria">Galería</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#faq">FAQ</a>
-    <a href="#cita" class="btn btn-primary">Pedir Cita</a>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a>
+    <a href="#medicos">Médicos</a><a href="#faq">FAQ</a><a href="#blog">Blog</a>
+    <a href="#cita" class="btn btn-blue">Agendar Cita</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="inicio" style="padding-top:130px;">
+<!-- HERO SLIDER -->
+<section id="inicio">
   <div id="hero">
-    <div class="hero-bg-shape hero-bg-shape-1"></div>
-    <div class="hero-bg-shape hero-bg-shape-2"></div>
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-content fade-in">
-          <div class="hero-tag"><span class="dot"></span> Bogotá, Colombia</div>
-          <h1 class="serif">Tu sonrisa merece el mejor <em>cuidado dental</em></h1>
-          <p>En DentaVida combinamos tecnología de vanguardia y un equipo de especialistas apasionados para transformar tu salud bucal en Bogotá.</p>
-          <div class="hero-buttons">
-            <a href="#cita" class="btn btn-primary">Agendar Cita →</a>
-            <a href="#servicios" class="btn btn-outline">Ver Servicios</a>
-          </div>
-          <div class="hero-stats">
-            <div class="hero-stat"><strong>+5,200</strong><span>Pacientes felices</span></div>
-            <div class="hero-stat"><strong>15+</strong><span>Años de experiencia</span></div>
-            <div class="hero-stat"><strong>12</strong><span>Especialistas</span></div>
-          </div>
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide hero-slide-1">
+        <img src="https://images.unsplash.com/photo-1758691463582-11aea602cd4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1400&q=80" alt="Doctor" />
+        <div class="hero-content">
+          <div class="hero-tag">Bogotá, Colombia</div>
+          <h1>Hola, soy el Dr. Alejandro Gómez y seré tu médico de familia</h1>
+          <p>Atención médica integral con calidez humana y tecnología de punta para toda tu familia en Bogotá.</p>
+          <div class="hero-buttons"><a href="#cita" class="btn btn-white">Agendar Cita</a><a href="#nosotros" class="btn btn-outline-white">Conocernos</a></div>
         </div>
-        <div class="hero-image-wrap fade-in fade-in-delay-2">
-          <div class="hero-image-card">
-            <img src="https://images.unsplash.com/photo-1612944095914-33fd0a85fcfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80" alt="Dentista profesional" />
-            <div class="hero-badge"><span class="stars">★★★★★</span> <span>4.9 / 5.0 Calificación</span></div>
-          </div>
-          <div class="hero-float-card card-1">
-            <div class="hero-float-icon" style="background:#dcfce7;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="text"><strong>Cita confirmada</strong><span>Hoy 3:00 PM – Dr. García</span></div>
-          </div>
-          <div class="hero-float-card card-2">
-            <div class="hero-float-icon" style="background:#eff6ff;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-            <div class="text"><strong>+5,200 Pacientes</strong><span>Confían en nosotros</span></div>
-          </div>
+      </div>
+      <div class="hero-slide hero-slide-2">
+        <img src="https://images.unsplash.com/photo-1758691461957-474a7686e388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1400&q=80" alt="Atención médica" />
+        <div class="hero-content">
+          <div class="hero-tag">Servicios de Salud</div>
+          <h1>Amplia variedad de servicios médicos para tu familia</h1>
+          <p>Desde pediatría hasta geriatría, contamos con especialistas para cada etapa de tu vida.</p>
+          <div class="hero-buttons"><a href="#cita" class="btn btn-white">Agendar Cita</a><a href="#servicios" class="btn btn-outline-white">Ver Servicios</a></div>
         </div>
+      </div>
+      <div class="hero-slide hero-slide-3">
+        <img src="https://images.unsplash.com/photo-1758691463393-a2aa9900af8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1400&q=80" alt="Doctora" />
+        <div class="hero-content">
+          <div class="hero-tag">Salud Vital</div>
+          <h1>Hola, soy la Dra. Carolina Mesa, Médica Familiar</h1>
+          <p>Atención personalizada con un enfoque humano, preventivo y de excelencia clínica en Bogotá.</p>
+          <div class="hero-buttons"><a href="#cita" class="btn btn-white">Agendar Cita</a><a href="#medicos" class="btn btn-outline-white">Nuestros Médicos</a></div>
+        </div>
+      </div>
+    </div>
+    <button class="hero-arrow hero-arrow-left" id="heroPrev">&#8592;</button>
+    <button class="hero-arrow hero-arrow-right" id="heroNext">&#8594;</button>
+    <div class="hero-nav" id="heroNav"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="nosotros" class="section">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-image-wrap fade-up">
+        <div class="about-image-main"><img src="https://images.unsplash.com/photo-1758691463354-055e4d72e5fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Médico paciente" /></div>
+        <div class="about-image-badge"><strong>18+</strong><span>Años de experiencia</span></div>
+      </div>
+      <div class="fade-up delay-1">
+        <span class="section-label">Sobre Nosotros</span>
+        <h2 style="font-family:'Nunito',sans-serif;font-size:clamp(26px,3.5vw,38px);color:#1a1a2e;font-weight:800;margin-bottom:14px;line-height:1.2;">Sobre la Clínica Salud Vital<br><em style="font-style:normal;color:#1565C0;">Historia Médica</em></h2>
+        <p style="color:#6b7280;font-size:16px;line-height:1.8;margin-bottom:24px;">Fundada en 2006 en el corazón de Bogotá, la Clínica Salud Vital ha atendido a más de 35.000 pacientes con un enfoque integral que combina medicina familiar, especialidades clínicas y atención preventiva de alta calidad.</p>
+        <div class="about-skills">
+          <div class="skill-item"><div class="skill-header"><span>Medicina Familiar</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>Pediatría y Neonatología</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>Cardiología Preventiva</span><span>82%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
+        </div>
+        <div class="about-features">
+          <div class="about-feat">Médicos especialistas certificados</div>
+          <div class="about-feat">Equipos de diagnóstico digital</div>
+          <div class="about-feat">Convenios con todas las EPS</div>
+          <div class="about-feat">Urgencias 24 horas</div>
+          <div class="about-feat">Telemedicina disponible</div>
+          <div class="about-feat">Resultados en línea</div>
+        </div>
+        <a href="#cita" class="btn btn-blue">Leer Más →</a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- BRANDS -->
-<div class="brands-section">
-  <div class="container">
-    <p class="brands-label">Certificados y aliados de confianza</p>
-    <div class="brands-grid">
-      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Tribunal Ético</div>
-      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Colgate Pro</div>
-      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>ISO 9001:2015</div>
-      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>ACFO Colombia</div>
-      <div class="brand-item"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Salud Total EPS</div>
-    </div>
-  </div>
-</div>
 
 <!-- SERVICES -->
-<section id="servicios" class="section">
+<section id="servicios" class="section services-section">
   <div class="container">
-    <div class="section-header fade-in">
-      <span class="badge">Nuestros Servicios</span>
-      <h2 class="serif">Tratamientos para toda la familia</h2>
-      <p>Ofrecemos una gama completa de servicios odontológicos con tecnología de última generación y atención personalizada.</p>
+    <div class="section-title fade-up">
+      <span class="section-label">Nuestros Servicios</span>
+      <h2>Los Mejores Servicios Médicos</h2>
+      <p>Contamos con una amplia gama de especialidades médicas atendidas por profesionales certificados en Bogotá.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card fade-in">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Limpieza y Prevención</h3>
-        <p>Profilaxis profesional, sellantes y fluorización para mantener tus dientes sanos y libres de caries.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-      <div class="service-card fade-in fade-in-delay-1">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-        <h3>Ortodoncia</h3>
-        <p>Brackets metálicos, zafiro e Invisalign para corregir la posición dental y conseguir la sonrisa perfecta.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-      <div class="service-card fade-in fade-in-delay-2">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <h3>Implantes Dentales</h3>
-        <p>Reemplaza dientes perdidos con implantes de titanio de alta calidad, resultado natural y duradero.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-        <h3>Blanqueamiento</h3>
-        <p>Tecnología LED y geles profesionales para aclarar tu sonrisa hasta 8 tonos en una sola sesión.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-      <div class="service-card fade-in fade-in-delay-1">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3>Odontopediatría</h3>
-        <p>Atención especializada y amigable para niños desde los 6 meses hasta los 16 años, primera visita gratis.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-      <div class="service-card fade-in fade-in-delay-2">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <h3>Cirugía Oral</h3>
-        <p>Extracciones, cordales y cirugías menores con sedación consciente para máximo confort del paciente.</p>
-        <a href="#cita" class="service-link">Agendar consulta</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section class="section why-section">
-  <div class="container">
-    <div class="why-inner">
-      <div class="why-image-wrap fade-in">
-        <div class="why-image-main">
-          <img src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Consultorio dental moderno" />
-        </div>
-        <div class="why-image-thumb">
-          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Equipos dentales" />
-        </div>
-        <div class="why-experience"><strong>15+</strong><span>Años de experiencia</span></div>
-      </div>
-      <div class="fade-in fade-in-delay-1">
-        <span class="badge">¿Por qué elegirnos?</span>
-        <h2 class="serif" style="font-size:clamp(28px,4vw,42px);color:#0f172a;margin-bottom:16px;">Cuidado dental de <em style="font-style:normal;color:#0d9488;">calidad superior</em> en Bogotá</h2>
-        <p style="font-size:17px;margin-bottom:16px;">En DentaVida nos comprometemos con la excelencia clínica, el confort del paciente y resultados que duran toda la vida.</p>
-        <div class="why-features">
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>Tecnología Digital 3D</h4><p>Radiografías digitales, escáneres intraorales y diseño de sonrisa digital.</p></div></div>
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><h4>Equipo Especializado</h4><p>12 odontólogos con subespecialidades y formación internacional.</p></div></div>
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Ambiente Esterilizado</h4><p>Protocolos de bioseguridad certificados y autoclave de última generación.</p></div></div>
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><h4>Citas Flexibles</h4><p>Horarios extendidos de lunes a sábado para adaptarnos a tu agenda.</p></div></div>
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h4>Planes de Pago</h4><p>Financiación sin intereses hasta 36 cuotas. Aceptamos todas las EPS.</p></div></div>
-          <div class="why-feature"><div class="why-feature-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg></div><div><h4>Soporte 24/7</h4><p>Línea de emergencias dental disponible los 365 días del año.</p></div></div>
-        </div>
-        <a href="#cita" class="btn btn-primary" style="margin-top:36px;">Agenda tu consulta gratuita</a>
-      </div>
+      <div class="service-card fade-up"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9a12.02 12.02 0 0 0-.382-3.016z"/></svg></div><h3>Servicios de Pediatría</h3><p>Control de crecimiento, vacunación y atención integral para niños desde recién nacidos hasta adolescentes.</p><a href="#cita" class="service-link">Ver más</a></div>
+      <div class="service-card fade-up delay-1"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0h10m-10 0H5m4 0v4m6-15v15M5 7h4M5 12h4"/></svg></div><h3>Centro de Diagnóstico</h3><p>Laboratorio clínico, radiología digital, ecografías y toma de muestras con resultados disponibles en línea.</p><a href="#cita" class="service-link">Ver más</a></div>
+      <div class="service-card fade-up delay-2"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Atención Inmediata</h3><p>Urgencias y consultas disponibles 24/7 para emergencias médicas de baja y mediana complejidad en Bogotá.</p><a href="#cita" class="service-link">Ver más</a></div>
+      <div class="service-card fade-up"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Cardiología</h3><p>Electrocardiograma, ecocardiograma, holter y consulta con cardiólogo para prevención de enfermedades del corazón.</p><a href="#cita" class="service-link">Ver más</a></div>
+      <div class="service-card fade-up delay-1"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Oftalmología</h3><p>Examen visual, tratamiento de enfermedades oculares, cirugía refractiva y control de glaucoma y cataratas.</p><a href="#cita" class="service-link">Ver más</a></div>
+      <div class="service-card fade-up delay-2"><div class="service-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Neurología</h3><p>Diagnóstico y tratamiento de cefaleas, epilepsia, trastornos del sueño y enfermedades neurodegenerativas.</p><a href="#cita" class="service-link">Ver más</a></div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<section class="stats-section">
+<section style="background:linear-gradient(135deg,#0D47A1 0%,#006064 100%);padding:80px 0;">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item fade-in"><span class="num" data-target="5200">0</span><div class="label">Pacientes Atendidos</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item fade-in fade-in-delay-1"><span class="num" data-target="15">0</span><div class="label">Años de Experiencia</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item fade-in fade-in-delay-2"><span class="num" data-target="12">0</span><div class="label">Especialistas</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item fade-in fade-in-delay-3"><span class="num" data-target="98">0</span><div class="label">% Satisfacción</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="section process-section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="badge">Cómo Funciona</span>
-      <h2 class="serif">Tu tratamiento en 4 simples pasos</h2>
-      <p>Un proceso claro y transparente para que disfrutes de la mejor experiencia dental sin estrés.</p>
-    </div>
-    <div class="process-steps">
-      <div class="process-step fade-in"><div class="process-num">1</div><h3>Agenda tu cita</h3><p>Llámanos, escríbenos por WhatsApp o completa el formulario en línea. Confirmamos en menos de 1 hora.</p></div>
-      <div class="process-step fade-in fade-in-delay-1"><div class="process-num">2</div><h3>Diagnóstico digital</h3><p>Realizamos radiografías digitales y un examen completo para diseñar tu plan de tratamiento personalizado.</p></div>
-      <div class="process-step fade-in fade-in-delay-2"><div class="process-num">3</div><h3>Tratamiento experto</h3><p>Nuestros especialistas aplican las técnicas más modernas con el máximo confort y precisión para ti.</p></div>
-      <div class="process-step fade-in fade-in-delay-3"><div class="process-num">4</div><h3>Sonrisa perfecta</h3><p>Disfruta de tus resultados con seguimiento gratuito y un plan de mantenimiento preventivo a medida.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="equipo" class="section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="badge">Nuestro Equipo</span>
-      <h2 class="serif">Especialistas apasionados por tu salud</h2>
-      <p>Cada miembro de nuestro equipo tiene formación especializada y un compromiso genuino con el bienestar de los pacientes.</p>
-    </div>
-    <div class="team-grid">
-      <div class="doctor-card fade-in">
-        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1756699279298-c89cdef354ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Andrés García" /></div>
-        <div class="doctor-info"><h3>Dr. Andrés García</h3><span class="doctor-specialty">Director Clínico · Implantología</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
-      </div>
-      <div class="doctor-card fade-in fade-in-delay-1">
-        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1650803075918-efbee311735d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Valentina Torres" /></div>
-        <div class="doctor-info"><h3>Dra. Valentina Torres</h3><span class="doctor-specialty">Ortodoncia · Invisalign Certified</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
-      </div>
-      <div class="doctor-card fade-in fade-in-delay-2">
-        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1729162128021-f37dca3ff30d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Carlos Mejía" /></div>
-        <div class="doctor-info"><h3>Dr. Carlos Mejía</h3><span class="doctor-specialty">Endodoncia · Cirugía Oral</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
-      </div>
-      <div class="doctor-card fade-in fade-in-delay-3">
-        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1673865641073-4479f93a7776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Sofía Ramírez" /></div>
-        <div class="doctor-info"><h3>Dra. Sofía Ramírez</h3><span class="doctor-specialty">Odontopediatría · Periodoncia</span><div class="doctor-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="galeria" class="section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="badge">Nuestra Clínica</span>
-      <h2 class="serif">Instalaciones de primer nivel</h2>
-      <p>Espacios diseñados para tu tranquilidad, equipados con la tecnología odontológica más avanzada de Colombia.</p>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item" style="min-height:420px;"><img src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80" alt="Sala dental" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Equipos modernos" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1734518352225-22a52666268c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Consultorio" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1642844771937-23accb161a3d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Sala de espera" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="gallery-item" style="min-height:200px;"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=500&q=80" alt="Quirófano" /><div class="gallery-overlay"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonios" class="section testimonials-section">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="badge">Testimonios</span>
-      <h2 class="serif">Lo que dicen nuestros pacientes</h2>
-      <p>Miles de bogotanos confían en DentaVida para cuidar su sonrisa.</p>
-    </div>
-    <div class="testimonials-slider">
-      <div class="testimonials-track" id="testimonialsTrack">
-        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Después de años con miedo al dentista, DentaVida cambió completamente mi experiencia. El Dr. García es increíblemente habilidoso y el equipo hace todo para que te sientas tranquilo. ¡Mis implantes quedaron perfectos!"</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="María" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>María Fernanda López</strong><span>Bogotá · Implantes dentales</span></div></div></div>
-        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Traje a mis tres hijos y fue una experiencia maravillosa. La Dra. Sofía es excelente con los niños, muy paciente y profesional. El consultorio es moderno y limpio. 100% recomendados en Bogotá."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1607960402358-a5ceb04ebeb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Camila" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Camila Hernández</strong><span>Bogotá · Odontopediatría</span></div></div></div>
-        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"El tratamiento de ortodoncia con Invisalign fue todo un éxito. La Dra. Torres me guió en cada paso y los resultados superaron mis expectativas. Ahora sonrío con total confianza. ¡Gracias!"</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1536785438246-08198ab7dd6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Laura" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Laura Cristina Muñoz</strong><span>Bogotá · Ortodoncia Invisalign</span></div></div></div>
-        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"El blanqueamiento dental fue rápido, sin dolor y el resultado fue espectacular. Aclaré mi sonrisa 8 tonos en solo una hora. El personal es muy amable y las instalaciones de primer nivel."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1758600587683-d86675a2f6e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Andrea" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Andrea Susana Vargas</strong><span>Bogotá · Blanqueamiento</span></div></div></div>
-        <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Tenía que hacerme un tratamiento de conducto y estaba muy nervioso. El Dr. Mejía fue fantástico, no sentí nada. El proceso fue rápido y el seguimiento post-tratamiento excelente."</p><div class="testimonial-author"><img src="https://images.unsplash.com/photo-1610547315412-d8812f60cf76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Juan" class="testimonial-avatar" /><div class="testimonial-author-info"><strong>Juan Pablo Moreno</strong><span>Bogotá · Endodoncia</span></div></div></div>
-      </div>
-    </div>
-    <div class="testimonials-controls">
-      <button class="testimonials-btn" id="prevTestimonial">&#8592;</button>
-      <div class="testimonials-dots" id="testimonialsDots"></div>
-      <button class="testimonials-btn" id="nextTestimonial">&#8594;</button>
+      <div class="stat-card fade-up"><div class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><span class="num" data-target="35000">0</span><div class="label">Pacientes Satisfechos</div></div>
+      <div class="stat-card fade-up delay-1"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="num" data-target="8200">0</span><div class="label">Familias Nos Confían</div></div>
+      <div class="stat-card fade-up delay-2"><div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="num" data-target="18">0</span><div class="label">Años de Experiencia</div></div>
+      <div class="stat-card fade-up delay-3"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="num" data-target="24">0</span><div class="label">Especialidades Médicas</div></div>
+      <div class="stat-card stat-emergency fade-up"><div class="emer-num">24/7</div><div class="emer-text"><h4>Ayuda de Emergencia</h4><p>Carrera 7 #32-16, Chapinero, Bogotá &nbsp;|&nbsp; citas@saludvital.com.co &nbsp;|&nbsp; +57 601 345-6789</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- APPOINTMENT -->
-<section id="cita" class="section appointment-section">
+<section id="cita" style="background:linear-gradient(135deg,#1565C0 0%,#00ACC1 100%);padding:80px 0;">
   <div class="container">
     <div class="appointment-inner">
-      <div class="appointment-info fade-in">
-        <span class="badge">Contáctenos</span>
-        <h2 class="serif">Agenda tu cita hoy mismo</h2>
-        <p>Primera consulta de diagnóstico completamente <strong>gratuita</strong>. Ubicados en el norte de Bogotá, con parqueadero propio.</p>
-        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Dirección</h4><p>Calle 93 #15-23, Piso 4, Bogotá D.C., Colombia<br><small style="color:#0d9488;">Cerca al Parque de la 93 · Parqueadero gratuito</small></p></div></div>
-        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg></div><div><h4>Teléfono / WhatsApp</h4><p>+57 601 234-5678 · +57 310 567-8901</p></div></div>
-        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Correo Electrónico</h4><p>info@dentavida.com.co</p></div></div>
-        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Horario</h4><p>Lun–Vie: 8:00 AM – 7:00 PM · Sáb: 8:00 AM – 2:00 PM</p></div></div>
+      <div class="fade-up">
+        <h2>Reserva tu Cita Médica</h2>
+        <p>Primera consulta con descuento del 30%. Nuestro equipo te contactará en menos de 2 horas para confirmar.</p>
+        <div class="appt-contact">
+          <div class="appt-contact-item"><div class="appt-contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h5>Dirección</h5><p>Carrera 7 #32-16, Chapinero, Bogotá D.C.</p></div></div>
+          <div class="appt-contact-item"><div class="appt-contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg></div><div><h5>Teléfono</h5><p>+57 601 345-6789 · +57 311 234-5678</p></div></div>
+          <div class="appt-contact-item"><div class="appt-contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h5>Correo</h5><p>citas@saludvital.com.co</p></div></div>
+          <div class="appt-contact-item"><div class="appt-contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h5>Horario</h5><p>Lun–Vie: 7:00 AM – 8:00 PM · Sáb–Dom: 8:00 AM – 4:00 PM</p></div></div>
+        </div>
       </div>
-      <div class="fade-in fade-in-delay-1">
-        <div class="appointment-form" id="appointmentFormWrapper">
-          <h3>Reservar Consulta Gratuita</h3>
-          <form id="appointmentForm" novalidate>
-            <div class="form-row">
-              <div class="form-group"><label>Nombre *</label><input type="text" id="fname" placeholder="Ej: Camila Rodríguez" required /></div>
-              <div class="form-group"><label>Teléfono *</label><input type="tel" id="fphone" placeholder="310 567 8901" required /></div>
+      <div class="fade-up delay-1">
+        <div class="appt-form">
+          <h3>Reservar Cita</h3>
+          <form id="apptForm" novalidate>
+            <div class="form-grid">
+              <div class="form-field"><label>Nombre *</label><input type="text" id="ap-name" placeholder="Andrés" required /></div>
+              <div class="form-field"><label>Apellido *</label><input type="text" id="ap-last" placeholder="Martínez" required /></div>
             </div>
-            <div class="form-group"><label>Correo Electrónico *</label><input type="email" id="femail" placeholder="camila@correo.com" required /></div>
-            <div class="form-row">
-              <div class="form-group"><label>Servicio</label><select id="fservice"><option value="none">Seleccionar servicio</option><option>Limpieza y Prevención</option><option>Ortodoncia</option><option>Implantes Dentales</option><option>Blanqueamiento</option><option>Odontopediatría</option><option>Cirugía Oral</option></select></div>
-              <div class="form-group"><label>Fecha Preferida</label><input type="date" id="fdate" /></div>
+            <div class="form-field"><label>Correo *</label><input type="email" id="ap-email" placeholder="andres@correo.com" required /></div>
+            <div class="form-grid">
+              <div class="form-field"><label>Teléfono *</label><input type="tel" id="ap-phone" placeholder="+57 310 567 8901" required /></div>
+              <div class="form-field"><label>Fecha Preferida</label><input type="date" id="ap-date" /></div>
             </div>
-            <div class="form-group"><label>Mensaje (opcional)</label><textarea id="fmessage" placeholder="Cuéntanos brevemente tu consulta..."></textarea></div>
-            <button type="submit" class="form-submit">Solicitar Cita Gratuita →</button>
+            <div class="form-field"><label>Especialidad</label><select id="ap-service"><option value="none">Seleccionar especialidad</option><option>Medicina General</option><option>Pediatría</option><option>Cardiología</option><option>Neurología</option><option>Oftalmología</option><option>Urgencias</option></select></div>
+            <div class="form-field"><label>Mensaje</label><textarea id="ap-msg" placeholder="Describe brevemente tu consulta..."></textarea></div>
+            <button type="submit" class="form-submit">Reservar Cita →</button>
           </form>
-          <div class="form-success" id="formSuccess">
-            <div class="checkmark"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <h4>¡Cita Solicitada!</h4>
-            <p>Nos comunicaremos contigo en menos de 2 horas para confirmar tu consulta. ¡Hasta pronto!</p>
+          <div class="form-success" id="apptSuccess">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h4>¡Cita Reservada!</h4>
+            <p>Te contactaremos en menos de 2 horas. ¡Gracias!</p>
           </div>
         </div>
       </div>
@@ -671,95 +519,134 @@
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="section">
+<!-- PRICING -->
+<section class="section" style="background:#fff;">
   <div class="container">
-    <div class="faq-inner">
-      <div class="fade-in">
-        <span class="badge">Preguntas Frecuentes</span>
-        <h2 class="serif" style="font-size:clamp(28px,3.5vw,38px);color:#0f172a;margin-bottom:16px;">Resolvemos tus dudas</h2>
-        <p style="font-size:16px;margin-bottom:28px;">¿Tienes preguntas sobre nuestros tratamientos? Encuentra aquí las respuestas más comunes.</p>
-        <a href="#cita" class="btn btn-primary">Consulta gratuita</a>
+    <div class="section-title fade-up">
+      <span class="section-label">Planes de Precios</span>
+      <h2>Nuestros Paquetes de Salud</h2>
+      <p>Planes diseñados para proteger a toda tu familia con la mejor cobertura médica a un precio accesible.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up"><div class="pricing-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Plan Medicare</h3><div class="price"><span class="amount">$250.000</span><span class="period"> /mes</span></div><ul class="pricing-features"><li>Consultas médicas ilimitadas</li><li>Laboratorios y diagnósticos</li><li>2 visitas domiciliarias al año</li><li>Descuento en medicamentos</li></ul><a href="#cita" class="btn btn-blue" style="width:100%;justify-content:center;">Contratar Ahora</a></div>
+      <div class="pricing-card featured fade-up delay-1"><span class="badge-pop">Popular</span><div class="pricing-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Plan Chequeo Familiar</h3><div class="price"><span class="amount">$180.000</span><span class="period"> /mes</span></div><ul class="pricing-features"><li>Consultas para toda la familia</li><li>Laboratorios básicos incluidos</li><li>Control nutricional mensual</li><li>Vacunación anual</li></ul><a href="#cita" class="btn btn-white" style="width:100%;justify-content:center;">Contratar Ahora</a></div>
+      <div class="pricing-card fade-up delay-2"><div class="pricing-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Plan Urgencias</h3><div class="price"><span class="amount">$95.000</span><span class="period"> /mes</span></div><ul class="pricing-features"><li>Urgencias 24/7 sin copago</li><li>Telemedicina incluida</li><li>Enfermería a domicilio</li><li>Descuento en especialistas</li></ul><a href="#cita" class="btn btn-blue" style="width:100%;justify-content:center;">Contratar Ahora</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-title fade-up">
+      <span class="section-label">Testimonios</span>
+      <h2>Lo Que Dicen Nuestros Pacientes</h2>
+      <p>Miles de familias bogotanas confían su salud a Salud Vital. Estas son algunas de sus experiencias.</p>
+    </div>
+    <div class="testi-slider">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">La atención en Salud Vital es excepcional. El Dr. Gómez me diagnosticó correctamente cuando otros médicos no habían podido. El trato humano y la rapidez de los resultados me sorprendieron gratamente.</p><div class="testi-stars">★★★★★</div><div class="testi-author"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Celeste" class="testi-avatar" /><div class="testi-author-info"><strong>Celeste Estrada</strong><span>Paciente – Chapinero</span></div></div></div>
+        <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Llevé a mis hijos a pediatría y la experiencia fue maravillosa. Los médicos son muy pacientes y el consultorio está perfectamente equipado. Ya somos pacientes permanentes de la clínica.</p><div class="testi-stars">★★★★★</div><div class="testi-author"><img src="https://images.unsplash.com/photo-1607960402358-a5ceb04ebeb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Rosa" class="testi-avatar" /><div class="testi-author-info"><strong>Rosa Suárez</strong><span>Paciente – Usaquén</span></div></div></div>
+        <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">El servicio de telemedicina me salvó en plena pandemia. Consulté desde casa y recibí el tratamiento sin salir. Recomiendo 100% la Clínica Salud Vital en Bogotá.</p><div class="testi-stars">★★★★★</div><div class="testi-author"><img src="https://images.unsplash.com/photo-1758600587683-d86675a2f6e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Percy" class="testi-avatar" /><div class="testi-author-info"><strong>Percy Kewshun</strong><span>Paciente – Suba</span></div></div></div>
+        <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Me realizaron un chequeo cardíaco completo y los resultados llegaron ese mismo día por correo. La calidad del equipo médico es de primer nivel. Sin duda la mejor clínica del norte de Bogotá.</p><div class="testi-stars">★★★★★</div><div class="testi-author"><img src="https://images.unsplash.com/photo-1610547315412-d8812f60cf76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Juan" class="testi-avatar" /><div class="testi-author-info"><strong>Juan Morales</strong><span>Paciente – Teusaquillo</span></div></div></div>
+        <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">La Dra. Mesa es increíble como médica familiar. Siempre disponible, muy empática y sus diagnósticos son muy precisos. Toda mi familia tiene cita con ella. ¡Gracias Salud Vital!</p><div class="testi-stars">★★★★★</div><div class="testi-author"><img src="https://images.unsplash.com/photo-1536785438246-08198ab7dd6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=100&q=80" alt="Fay" class="testi-avatar" /><div class="testi-author-info"><strong>Fay Villamizar</strong><span>Paciente – Kennedy</span></div></div></div>
       </div>
-      <div class="faq-list fade-in fade-in-delay-1">
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿La primera consulta es realmente gratuita? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Sí, la primera consulta de diagnóstico no tiene ningún costo. Incluye revisión general, rx digital y un presupuesto detallado del tratamiento recomendado, sin compromiso alguno.</div></div></div>
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Aceptan EPS y seguros médicos? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Trabajamos con las principales EPS de Colombia: Sanitas, Compensar, Colmédica, Famisanar, Salud Total, Nueva EPS y más. También aceptamos seguros privados y ofrecemos planes de pago propios sin intereses.</div></div></div>
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cuánto dura un tratamiento de ortodoncia? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Depende de cada paciente. Los casos leves pueden resolverse en 8-12 meses, los moderados entre 12-18 meses. Con Invisalign, los tiempos suelen ser menores que con brackets convencionales.</div></div></div>
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Tienen servicio de emergencias dentales? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Sí, contamos con una línea de emergencias dental disponible las 24 horas, los 7 días de la semana al +57 310 567-8901.</div></div></div>
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Los implantes dentales son dolorosos? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">El procedimiento se realiza bajo anestesia local, no sientes dolor durante la cirugía. Posterior puede haber molestias leves los primeros 2-3 días, controladas con analgésicos comunes.</div></div></div>
-        <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">¿Cómo puedo financiar mi tratamiento? <span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Ofrecemos planes de pago propios hasta 36 cuotas sin intereses. Aceptamos todas las tarjetas de crédito, débito, transferencias y efectivo.</div></div></div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" id="testiPrev">&#8592;</button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-btn" id="testiNext">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section id="medicos" class="section" style="background:#fff;">
+  <div class="container">
+    <div class="section-title fade-up">
+      <span class="section-label">Nuestro Equipo</span>
+      <h2>Nuestros Médicos Especialistas</h2>
+      <p>Profesionales apasionados por la medicina, formados en las mejores universidades de Colombia y el exterior.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card fade-up"><div class="doctor-photo"><img src="https://images.unsplash.com/photo-1758691463582-11aea602cd4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Gómez" /><div class="doctor-overlay"><a href="#" class="doc-soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div><div class="doctor-info"><h3>Dr. Alejandro Gómez</h3><span class="doctor-spec">Medicina Familiar</span></div></div>
+      <div class="doctor-card fade-up delay-1"><div class="doctor-photo"><img src="https://images.unsplash.com/photo-1758691462651-611d730c5272?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Mesa" /><div class="doctor-overlay"><a href="#" class="doc-soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div><div class="doctor-info"><h3>Dra. Carolina Mesa</h3><span class="doctor-spec">Médica Familiar</span></div></div>
+      <div class="doctor-card fade-up delay-2"><div class="doctor-photo"><img src="https://images.unsplash.com/photo-1758691461916-dc7894eb8f94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dr. Herrera" /><div class="doctor-overlay"><a href="#" class="doc-soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div><div class="doctor-info"><h3>Dr. Mauricio Herrera</h3><span class="doctor-spec">Cardiólogo</span></div></div>
+      <div class="doctor-card fade-up delay-3"><div class="doctor-photo"><img src="https://images.unsplash.com/photo-1758691461530-b215ed4ede6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="Dra. Ríos" /><div class="doctor-overlay"><a href="#" class="doc-soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div></div><div class="doctor-info"><h3>Dra. Patricia Ríos</h3><span class="doctor-spec">Neuróloga</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section faq-section">
+  <div class="container">
+    <div class="section-title fade-up">
+      <span class="section-label">Preguntas Frecuentes</span>
+      <h2>Preguntas Frecuentes</h2>
+      <p>Respuestas a las dudas más comunes de nuestros pacientes en Bogotá.</p>
+    </div>
+    <div class="faq-inner">
+      <div class="faq-image fade-up"><img src="https://images.unsplash.com/photo-1758691463198-dc663b8a64e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Médico" /></div>
+      <div class="fade-up delay-1">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Aceptan convenios con EPS? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Sí, tenemos convenios con Sanitas, Compensar, Colmédica, Famisanar, Nueva EPS, Salud Total y más. Consulta con nuestra recepción para verificar la tuya.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué servicios ofrece Salud Vital? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Medicina general, pediatría, cardiología, neurología, oftalmología, laboratorio, radiología, urgencias 24/7, telemedicina y más de 24 especialidades en Bogotá.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué debo traer a mi primera cita? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Documento de identidad, carnet de la EPS si aplica, historial médico previo y resultados de exámenes anteriores relacionados con tu consulta.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo solicito renovación de fórmula médica? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Puedes solicitarla llamando, por WhatsApp al +57 311 234-5678 o a través de nuestra plataforma de telemedicina, sin necesidad de acudir presencialmente.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Tienen servicio de telemedicina? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Sí, consultas por videollamada de lunes a sábado de 7:00 AM a 9:00 PM. Solo necesitas internet y dispositivo con cámara. Agenda por WhatsApp.</div></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda un resultado de laboratorio? <span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Resultados de rutina disponibles el mismo día en 4 a 6 horas. Especializados en 24 a 48 horas. Te notificamos por correo y WhatsApp cuando estén listos.</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INSURANCE -->
-<section class="insurance-section">
+<!-- BLOG -->
+<section id="blog" class="section" style="background:#fff;">
   <div class="container">
-    <div class="insurance-inner">
-      <div class="insurance-text fade-in"><h3>Convenios con EPS y Seguros</h3><p>Trabajamos con las principales aseguradoras de Colombia para hacer tu tratamiento más accesible.</p></div>
-      <div class="insurance-logos fade-in fade-in-delay-1">
-        <div class="insurance-logo">Sanitas</div>
-        <div class="insurance-logo">Compensar</div>
-        <div class="insurance-logo">Colmédica</div>
-        <div class="insurance-logo">Famisanar</div>
-        <div class="insurance-logo">Nueva EPS</div>
-        <div class="insurance-logo">Salud Total</div>
-      </div>
+    <div class="section-title fade-up">
+      <span class="section-label">Blog de Salud</span>
+      <h2>Últimas Noticias y Consejos</h2>
+      <p>Mantente al día con artículos de salud, consejos médicos y novedades de nuestra clínica en Bogotá.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card fade-up"><div class="blog-img"><img src="https://images.unsplash.com/photo-1758691462954-e6fa5005474b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Blog 1" /></div><div class="blog-body"><div class="blog-meta"><span class="blog-cat">Cardiología</span><span>15 Abr 2026</span></div><h3>5 hábitos para mantener tu corazón sano en Bogotá</h3><p>La altitud y el estilo de vida capitalino pueden afectar tu salud cardiovascular. Conoce los mejores hábitos recomendados.</p><a href="#" class="blog-link">Leer artículo</a></div></div>
+      <div class="blog-card fade-up delay-1"><div class="blog-img"><img src="https://images.unsplash.com/photo-1758691463331-2ac00e6f676f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Blog 2" /></div><div class="blog-body"><div class="blog-meta"><span class="blog-cat">Pediatría</span><span>10 Abr 2026</span></div><h3>Guía de vacunación infantil 2026: lo que necesitas saber</h3><p>El esquema actualizado para Colombia 2026. Todo lo que padres deben saber sobre vacunas obligatorias y opcionales.</p><a href="#" class="blog-link">Leer artículo</a></div></div>
+      <div class="blog-card fade-up delay-2"><div class="blog-img"><img src="https://images.unsplash.com/photo-1758691461888-b74515208d7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Blog 3" /></div><div class="blog-body"><div class="blog-meta"><span class="blog-cat">Bienestar</span><span>5 Abr 2026</span></div><h3>Telemedicina: cómo aprovechar las consultas virtuales</h3><p>Descubre cómo sacar el máximo provecho a tus consultas virtuales con nuestros especialistas desde casa.</p><a href="#" class="blog-link">Leer artículo</a></div></div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-main">
+  <div style="padding:70px 0 48px;">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand fade-in">
-          <a href="#" class="logo">
-            <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
-            <span class="logo-text" style="color:white;">Denta<span>Vida</span></span>
-          </a>
-          <p>Clínica dental de referencia en Bogotá, Colombia. Comprometidos con tu salud bucal y tu sonrisa desde 2009.</p>
+        <div class="footer-brand fade-up">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div><strong style="display:block;font-size:18px;font-weight:800;color:white;font-family:'Nunito',sans-serif;">Salud Vital</strong><span style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;">Clínica Médica · Bogotá</span></div>
+          </div>
+          <p>Atención médica integral para toda tu familia en Bogotá, Colombia. Comprometidos con tu bienestar desde 2006.</p>
           <div class="footer-social">
             <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5z"/></svg></a>
           </div>
         </div>
-        <div class="footer-col fade-in fade-in-delay-1">
-          <h4>Servicios</h4>
-          <ul class="footer-links">
-            <li><a href="#servicios">Limpieza y Prevención</a></li>
-            <li><a href="#servicios">Ortodoncia e Invisalign</a></li>
-            <li><a href="#servicios">Implantes Dentales</a></li>
-            <li><a href="#servicios">Blanqueamiento</a></li>
-            <li><a href="#servicios">Odontopediatría</a></li>
-          </ul>
-        </div>
-        <div class="footer-col fade-in fade-in-delay-2">
-          <h4>Clínica</h4>
-          <ul class="footer-links">
-            <li><a href="#equipo">Nuestro Equipo</a></li>
-            <li><a href="#galeria">Instalaciones</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#faq">Preguntas Frecuentes</a></li>
-            <li><a href="#">Blog Dental</a></li>
-          </ul>
-        </div>
-        <div class="footer-col fade-in fade-in-delay-3">
-          <h4>Contacto</h4>
-          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Calle 93 #15-23, Piso 4<br>Bogotá D.C., Colombia</span></div>
-          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg><span>+57 601 234-5678</span></div>
-          <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@dentavida.com.co</span></div>
+        <div class="footer-col fade-up delay-1"><h4>Servicios</h4><ul class="footer-links"><li><a href="#servicios">Medicina General</a></li><li><a href="#servicios">Pediatría</a></li><li><a href="#servicios">Cardiología</a></li><li><a href="#servicios">Neurología</a></li><li><a href="#servicios">Oftalmología</a></li><li><a href="#servicios">Urgencias 24/7</a></li></ul></div>
+        <div class="footer-col fade-up delay-2"><h4>Clínica</h4><ul class="footer-links"><li><a href="#nosotros">Sobre Nosotros</a></li><li><a href="#medicos">Nuestros Médicos</a></li><li><a href="#faq">Preguntas Frecuentes</a></li><li><a href="#blog">Blog de Salud</a></li><li><a href="#">Telemedicina</a></li><li><a href="#">Trabaja con Nosotros</a></li></ul></div>
+        <div class="footer-col fade-up delay-3"><h4>Contacto</h4>
+          <div class="footer-contact-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Carrera 7 #32-16, Chapinero<br>Bogotá D.C., Colombia</span></div>
+          <div class="footer-contact-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2"/></svg><span>+57 601 345-6789</span></div>
+          <div class="footer-contact-row"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>citas@saludvital.com.co</span></div>
+          <div class="footer-contact-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie: 7:00 AM – 8:00 PM<br>Sáb–Dom: 8:00 AM – 4:00 PM</span></div>
         </div>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="footer-bottom">
-      <span>© <span id="year"></span> DentaVida – Clínica Dental Bogotá. Todos los derechos reservados.</span>
-      <span><a href="#">Política de Privacidad</a> · <a href="#">Términos de Servicio</a></span>
+      <span>© <span id="year"></span> Salud Vital – Clínica Médica Bogotá. Todos los derechos reservados.</span>
+      <span><a href="#">Política de Privacidad</a> · <a href="#">Términos de Uso</a></span>
     </div>
   </div>
 </footer>
@@ -770,81 +657,117 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
   });
 
   document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('open');
+    document.getElementById('mobileNav').classList.toggle('open');
   });
-  document.querySelectorAll('#mobile-menu a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  document.querySelectorAll('#mobileNav a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  // HERO SLIDER
+  const heroSlides = document.getElementById('heroSlides');
+  const heroNavEl = document.getElementById('heroNav');
+  let heroIdx = 0;
+  const totalHero = heroSlides.children.length;
+  for (let i = 0; i < totalHero; i++) {
+    const d = document.createElement('button');
+    d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goHero(i));
+    heroNavEl.appendChild(d);
+  }
+  function goHero(idx) {
+    heroIdx = (idx + totalHero) % totalHero;
+    heroSlides.style.transform = `translateX(-${heroIdx * 100}%)`;
+    document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIdx));
+  }
+  document.getElementById('heroPrev').addEventListener('click', () => goHero(heroIdx - 1));
+  document.getElementById('heroNext').addEventListener('click', () => goHero(heroIdx + 1));
+  setInterval(() => goHero(heroIdx + 1), 5500);
+
+  // FADE UP
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
-  const counterObserver = new IntersectionObserver((entries) => {
+  // SKILL BARS
+  const skillObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.width = e.target.dataset.width + '%'; skillObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-fill').forEach(el => skillObs.observe(el));
+
+  // COUNTERS
+  const counterObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting && !e.target.dataset.counted) {
         e.target.dataset.counted = 'true';
         const target = +e.target.dataset.target;
-        const suffix = target === 98 ? '%' : '+';
-        let current = 0;
-        const step = target / 60;
+        let cur = 0;
+        const step = target / 70;
         const timer = setInterval(() => {
-          current = Math.min(current + step, target);
-          e.target.textContent = (target >= 1000 ? Math.floor(current).toLocaleString('es-CO') : Math.floor(current)) + suffix;
-          if (current >= target) clearInterval(timer);
-        }, 25);
+          cur = Math.min(cur + step, target);
+          e.target.textContent = (target >= 1000 ? Math.floor(cur).toLocaleString('es-CO') : Math.floor(cur)) + '+';
+          if (cur >= target) clearInterval(timer);
+        }, 22);
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.num[data-target]').forEach(el => counterObserver.observe(el));
+  document.querySelectorAll('.num[data-target]').forEach(el => counterObs.observe(el));
 
-  const track = document.getElementById('testimonialsTrack');
-  const dotsContainer = document.getElementById('testimonialsDots');
-  let currentIdx = 0;
-  let cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1;
-  const totalCards = track.querySelectorAll('.testimonial-card').length;
-  const totalSlides = Math.ceil(totalCards / cardsPerView);
-  for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'testimonials-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
+  // TESTIMONIALS
+  const testiTrack = document.getElementById('testiTrack');
+  const testiDotsEl = document.getElementById('testiDots');
+  let testiIdx = 0;
+  let tpv = window.innerWidth > 900 ? 3 : window.innerWidth > 580 ? 2 : 1;
+  const totalT = testiTrack.children.length;
+  function buildDots() {
+    testiDotsEl.innerHTML = '';
+    const slides = Math.ceil(totalT / tpv);
+    for (let i = 0; i < slides; i++) {
+      const d = document.createElement('button');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goT(i));
+      testiDotsEl.appendChild(d);
+    }
   }
-  function goToSlide(idx) {
-    currentIdx = Math.max(0, Math.min(idx, totalSlides - 1));
-    const cardWidth = track.querySelector('.testimonial-card').offsetWidth + 24;
-    track.style.transform = `translateX(-${currentIdx * cardsPerView * cardWidth}px)`;
-    document.querySelectorAll('.testimonials-dot').forEach((d, i) => d.classList.toggle('active', i === currentIdx));
+  function goT(idx) {
+    const slides = Math.ceil(totalT / tpv);
+    testiIdx = Math.max(0, Math.min(idx, slides - 1));
+    const cw = testiTrack.querySelector('.testi-card').offsetWidth + 24;
+    testiTrack.style.transform = `translateX(-${testiIdx * tpv * cw}px)`;
+    document.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === testiIdx));
   }
-  document.getElementById('prevTestimonial').addEventListener('click', () => goToSlide(currentIdx - 1));
-  document.getElementById('nextTestimonial').addEventListener('click', () => goToSlide((currentIdx + 1) % totalSlides));
-  let autoplay = setInterval(() => goToSlide((currentIdx + 1) % totalSlides), 5000);
-  track.addEventListener('mouseenter', () => clearInterval(autoplay));
-  track.addEventListener('mouseleave', () => { autoplay = setInterval(() => goToSlide((currentIdx + 1) % totalSlides), 5000); });
-  window.addEventListener('resize', () => { cardsPerView = window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1; goToSlide(0); });
+  buildDots();
+  document.getElementById('testiPrev').addEventListener('click', () => goT(testiIdx - 1));
+  document.getElementById('testiNext').addEventListener('click', () => goT(testiIdx + 1));
+  let ta = setInterval(() => goT(testiIdx + 1), 4800);
+  testiTrack.addEventListener('mouseenter', () => clearInterval(ta));
+  testiTrack.addEventListener('mouseleave', () => { ta = setInterval(() => goT(testiIdx + 1), 4800); });
+  window.addEventListener('resize', () => { tpv = window.innerWidth > 900 ? 3 : window.innerWidth > 580 ? 2 : 1; buildDots(); goT(0); });
 
+  // FAQ
   function toggleFaq(btn) {
-    const answer = btn.nextElementSibling;
+    const ans = btn.nextElementSibling;
     const isOpen = btn.classList.contains('open');
-    document.querySelectorAll('.faq-question').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
-    if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+    document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
   }
 
-  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+  // FORM
+  document.getElementById('apptForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const name = document.getElementById('fname').value.trim();
-    const phone = document.getElementById('fphone').value.trim();
-    const email = document.getElementById('femail').value.trim();
+    const name = document.getElementById('ap-name').value.trim();
+    const phone = document.getElementById('ap-phone').value.trim();
+    const email = document.getElementById('ap-email').value.trim();
     if (!name || !phone || !email) { alert('Por favor completa los campos obligatorios (*)'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Por favor ingresa un correo válido.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Ingresa un correo electrónico válido.'); return; }
     this.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('apptSuccess').style.display = 'block';
   });
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
