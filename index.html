@@ -1,1491 +1,406 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>Guerr Tattoo · Julián Guerrero · Bogotá</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>
-        :root {
-            --bg-deep: #050508;
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #0f0f18;
-            --bg-card: rgba(15,15,25,0.7);
-            --cyan: #00f0ff;
-            --cyan-dim: #00a8b3;
-            --magenta: #ff006e;
-            --violet: #8b5cf6;
-            --gold: #c6a43f;
-            --cyan-glow: rgba(0,240,255,0.3);
-            --magenta-glow: rgba(255,0,110,0.3);
-            --text-primary: #e8e8f0;
-            --text-secondary: #8888a0;
-            --text-dim: #55556a;
-            --border-subtle: rgba(255,255,255,0.06);
-            --transition: 200ms cubic-bezier(0.4,0,0.2,1);
-        }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        html{scroll-behavior:smooth;}
-        body{
-            font-family:'Rajdhani',sans-serif;
-            background-color:var(--bg-deep);
-            color:var(--text-primary);
-            line-height:1.5;
-            overflow-x:hidden;
-        }
-        body::before{
-            content:'';position:fixed;inset:0;
-            background:linear-gradient(rgba(0,240,255,.025)1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.025)1px,transparent 1px);
-            background-size:60px 60px;
-            pointer-events:none;z-index:0;
-            animation:gridMove 25s linear infinite;
-        }
-        @keyframes gridMove{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
-        body::after{
-            content:'';position:fixed;inset:0;
-            background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04)2px,rgba(0,0,0,.04)4px);
-            pointer-events:none;z-index:1;
-        }
-        ::-webkit-scrollbar{width:4px;}
-        ::-webkit-scrollbar-track{background:var(--bg-primary);}
-        ::-webkit-scrollbar-thumb{background:rgba(0,240,255,.3);border-radius:2px;}
-        /* PARTICLES */
-        .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-        .particle{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;opacity:0;animation:particleFloat linear infinite;}
-        @keyframes particleFloat{0%{opacity:0;transform:translateY(100vh)scale(0)}10%{opacity:.5}90%{opacity:.5}100%{opacity:0;transform:translateY(-100px)scale(1)}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Stencil</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* ─── DESKTOP NAV ─── */
-        .desktop-nav{
-            display:none;position:fixed;top:0;left:0;right:0;height:64px;
-            background:rgba(5,5,10,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-            border-bottom:1px solid rgba(0,240,255,.08);
-            z-index:1000;align-items:center;justify-content:space-between;padding:0 2.5rem;
-        }
-        .desktop-nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan)20%,var(--magenta)50%,var(--violet)80%,transparent);opacity:.3;}
-        .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-        .nav-brand-text{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text-primary);}
-        .nav-brand-text span{color:var(--cyan);font-weight:400;text-shadow:0 0 12px var(--cyan-glow);}
-        .nav-links{display:flex;align-items:center;gap:2px;}
-        .nav-link{
-            display:flex;align-items:center;gap:6px;padding:8px 14px;
-            color:var(--text-secondary);text-decoration:none;
-            font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
-            border-radius:4px;transition:all var(--transition);border:1px solid transparent;white-space:nowrap;
-        }
-        .nav-link:hover{color:var(--text-primary);background:rgba(0,240,255,.05);border-color:rgba(0,240,255,.1);}
-        .nav-link.active{color:var(--cyan);background:rgba(0,240,255,.08);border-color:rgba(0,240,255,.2);}
-        .nav-link i{font-size:13px;}
-        .nav-link.ar-link{color:var(--magenta);border-color:rgba(255,0,110,.15);}
-        .nav-link.ar-link:hover{background:rgba(255,0,110,.08);border-color:rgba(255,0,110,.3);}
-        .nav-link.ar-link.active{background:rgba(255,0,110,.1);border-color:var(--magenta);}
-        .nav-cta{
-            padding:8px 22px;background:linear-gradient(135deg,var(--cyan),#00b8d4);
-            color:var(--bg-deep);border:none;border-radius:4px;
-            font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-            cursor:pointer;transition:all var(--transition);text-decoration:none;margin-left:12px;
-        }
-        .nav-cta:hover{box-shadow:0 0 20px var(--cyan-glow);transform:translateY(-1px);}
-        .desktop-content{display:none;}
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #141414;
+      color: #f2f2f2;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
 
-        /* ─── HERO ─── */
-        .hero-section{
-            min-height:100vh;display:flex;align-items:center;justify-content:center;
-            position:relative;padding:120px 3rem 80px;
-        }
-        .hero-section::before{
-            content:'';position:absolute;inset:0;
-            background:radial-gradient(ellipse at 20% 50%,rgba(0,240,255,.07)0%,transparent 50%),
-                        radial-gradient(ellipse at 80% 50%,rgba(255,0,110,.05)0%,transparent 50%),
-                        radial-gradient(ellipse at 50% 90%,rgba(139,92,246,.04)0%,transparent 50%);
-        }
-        .hero-inner{
-            max-width:1200px;width:100%;
-            display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
-            position:relative;z-index:1;
-        }
-        .hero-left{display:flex;flex-direction:column;gap:1.5rem;}
-        .hero-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;opacity:.8;}
-        .hero-title{
-            font-family:'Orbitron',sans-serif;
-            font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:4px;text-transform:uppercase;line-height:1.1;
-            background:linear-gradient(135deg,var(--text-primary)0%,var(--cyan)60%,var(--magenta)100%);
-            -webkit-background-clip:text;background-clip:text;color:transparent;position:relative;
-        }
-        .hero-title::after{content:'';position:absolute;bottom:-8px;left:0;width:80px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);}
-        .hero-desc{color:var(--text-secondary);font-size:1.1rem;line-height:1.8;letter-spacing:.5px;max-width:480px;}
-        .hero-buttons{display:flex;gap:12px;flex-wrap:wrap;}
-        .hero-stats{display:flex;gap:2rem;margin-top:1rem;}
-        .hero-stat{text-align:center;}
-        .hero-stat-num{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:800;color:var(--cyan);text-shadow:0 0 10px var(--cyan-glow);}
-        .hero-stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
-        .hero-right{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-        .hero-card{
-            border-radius:6px;overflow:hidden;
-            border:1px solid rgba(0,240,255,.08);
-            position:relative;aspect-ratio:3/4;
-            transition:all var(--transition);background:var(--bg-secondary);
-        }
-        .hero-card:nth-child(2){margin-top:2rem;}
-        .hero-card:nth-child(3){margin-top:-1rem;}
-        .hero-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(5,5,8,.9));z-index:1;}
-        .hero-card:hover{border-color:var(--cyan);box-shadow:0 0 24px rgba(0,240,255,.15);transform:translateY(-4px);}
-        .hero-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
-        .hero-card:hover img{transform:scale(1.06);}
-        .hero-card-overlay{position:absolute;bottom:12px;left:12px;z-index:2;}
-        .hero-card-overlay h4{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:white;}
-        .hero-card-overlay p{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.5px;}
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
 
-        /* ─── SECTIONS ─── */
-        .desktop-section{padding:80px 3rem;position:relative;z-index:2;}
-        .desktop-section::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.08),transparent);}
-        .section-container{max-width:1200px;margin:0 auto;}
-        .section-header{text-align:center;margin-bottom:3rem;}
-        .section-header .section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;opacity:.6;margin-bottom:.5rem;}
-        .section-header h2{
-            font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);
-            font-weight:800;letter-spacing:3px;text-transform:uppercase;
-            color:var(--text-primary);position:relative;display:inline-block;
-        }
-        .section-header h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:50px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta));}
-        .section-header p{color:var(--text-secondary);font-size:1rem;margin-top:1.25rem;letter-spacing:.5px;max-width:600px;margin-left:auto;margin-right:auto;}
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
 
-        /* ─── BUTTONS ─── */
-        .btn{
-            background:linear-gradient(135deg,var(--cyan),#00b8d4);
-            color:var(--bg-deep);border:none;padding:14px 24px;border-radius:4px;
-            font-weight:700;font-size:13px;font-family:'Orbitron',sans-serif;
-            letter-spacing:1.5px;text-transform:uppercase;
-            display:inline-flex;align-items:center;justify-content:center;gap:8px;
-            cursor:pointer;transition:all var(--transition);position:relative;overflow:hidden;
-            -webkit-tap-highlight-color:transparent;
-        }
-        .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .4s ease;}
-        .btn:hover::before{transform:translateX(100%);}
-        .btn:hover{box-shadow:0 0 20px var(--cyan-glow),0 4px 20px rgba(0,240,255,.3);transform:translateY(-1px);}
-        .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;}
-        .btn-outline{background:transparent;border:1px solid rgba(0,240,255,.3);color:var(--cyan);}
-        .btn-outline:hover{background:rgba(0,240,255,.08);border-color:var(--cyan);box-shadow:0 0 15px rgba(0,240,255,.15);}
-        .btn-full{width:100%;}
+    .tag {
+      display: block;
+      text-align: center;
+      color: #c9a96e;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
 
-        /* ─── GALLERY ─── */
-        .gallery-filter-bar{display:flex;justify-content:center;gap:10px;margin-bottom:2rem;flex-wrap:wrap;}
-        .category-btn{
-            background:rgba(0,240,255,.04);border:1px solid rgba(0,240,255,.1);
-            color:var(--text-secondary);padding:8px 18px;border-radius:4px;
-            font-weight:500;cursor:pointer;font-family:'JetBrains Mono',monospace;
-            font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:all var(--transition);
-        }
-        .category-btn:hover{border-color:rgba(0,240,255,.3);color:var(--text-primary);}
-        .category-btn.active{background:rgba(0,240,255,.1);color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 10px rgba(0,240,255,.1);}
-        .gallery-grid-desktop{
-            display:grid;grid-template-columns:repeat(4,1fr);
-            gap:10px;
-        }
-        .gallery-item-desktop{
-            position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;
-            border:1px solid var(--border-subtle);transition:all var(--transition);cursor:pointer;
-        }
-        .gallery-item-desktop::after{
-            content:'';position:absolute;inset:0;
-            background:linear-gradient(180deg,transparent 50%,rgba(5,5,8,.75));
-            opacity:0;transition:opacity var(--transition);
-        }
-        .gallery-item-desktop:hover{border-color:rgba(0,240,255,.35);box-shadow:0 0 20px rgba(0,240,255,.1);transform:translateY(-3px);}
-        .gallery-item-desktop:hover::after{opacity:1;}
-        .gallery-item-desktop img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block;}
-        .gallery-item-desktop:hover img{transform:scale(1.07);}
-        .gallery-item-label{
-            position:absolute;bottom:0;left:0;right:0;padding:10px 12px;
-            z-index:2;opacity:0;transition:opacity var(--transition);
-        }
-        .gallery-item-desktop:hover .gallery-item-label{opacity:1;}
-        .gallery-item-label span{
-            font-family:'JetBrains Mono',monospace;font-size:10px;
-            color:var(--cyan);letter-spacing:1px;text-transform:uppercase;
-        }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        /* ─── LIGHTBOX ─── */
-        .lightbox{
-            position:fixed;inset:0;z-index:9000;
-            background:rgba(3,3,10,.96);backdrop-filter:blur(20px);
-            display:flex;align-items:center;justify-content:center;
-            opacity:0;pointer-events:none;transition:opacity .3s ease;
-        }
-        .lightbox.open{opacity:1;pointer-events:auto;}
-        .lightbox-img{max-width:90vw;max-height:88vh;border-radius:6px;border:1px solid rgba(0,240,255,.15);display:block;}
-        .lightbox-close{
-            position:absolute;top:20px;right:20px;width:42px;height:42px;
-            background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.2);
-            border-radius:50%;color:var(--cyan);font-size:16px;
-            display:flex;align-items:center;justify-content:center;
-            cursor:pointer;transition:all var(--transition);
-        }
-        .lightbox-close:hover{background:var(--cyan);color:var(--bg-deep);}
-        .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.2);border-radius:50%;color:var(--cyan);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition);}
-        .lightbox-nav:hover{background:rgba(0,240,255,.2);}
-        .lightbox-prev{left:20px;}
-        .lightbox-next{right:20px;}
-        .lightbox-info{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);letter-spacing:1px;}
+    @media (max-width: 700px) {
+      .layout { grid-template-columns: 1fr; }
+    }
 
-        /* ─── STENCIL ─── */
-        .stencil-section{padding:80px 3rem;position:relative;z-index:2;background:rgba(255,0,110,.015);}
-        .stencil-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent);opacity:.25;}
-        .stencil-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1200px;margin:0 auto;}
-        .stencil-card{
-            background:var(--bg-card);border-radius:8px;padding:1.75rem;
-            border:1px solid rgba(255,0,110,.08);position:relative;overflow:hidden;
-            backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-            transition:border-color var(--transition),box-shadow var(--transition);
-        }
-        .stencil-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--magenta),var(--violet),transparent);opacity:0;transition:opacity var(--transition);}
-        .stencil-card:hover{border-color:rgba(255,0,110,.2);box-shadow:0 0 30px rgba(255,0,110,.05);}
-        .stencil-card:hover::before{opacity:1;}
-        .stencil-card h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:600;margin-bottom:1.25rem;color:var(--text-primary);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
-        .stencil-card h3 i{color:var(--magenta);}
-        .stencil-upload-area{border:1px dashed rgba(255,0,110,.25);border-radius:6px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all var(--transition);background:rgba(255,0,110,.02);position:relative;}
-        .stencil-upload-area:hover,.stencil-drag-over{border-color:var(--magenta);border-style:solid;background:rgba(255,0,110,.05);box-shadow:0 0 20px rgba(255,0,110,.1);}
-        .stencil-upload-icon{font-size:2.5rem;margin-bottom:.75rem;filter:drop-shadow(0 0 8px rgba(255,0,110,.3));}
-        .stencil-upload-area p{margin:.25rem 0;color:var(--text-primary);font-weight:500;font-size:1rem;}
-        input[type="file"]{display:none;}
-        .stencil-style-options{display:flex;flex-direction:column;gap:.4rem;margin:.75rem 0;}
-        .stencil-style-option{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;border-radius:4px;cursor:pointer;transition:all var(--transition);border:1px solid transparent;position:relative;overflow:hidden;}
-        .stencil-style-option::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--magenta);opacity:0;transition:opacity var(--transition);}
-        .stencil-style-option:hover{background:rgba(255,0,110,.04);border-color:rgba(255,0,110,.1);}
-        .stencil-style-option.selected{background:rgba(255,0,110,.06);border-color:rgba(255,0,110,.2);}
-        .stencil-style-option.selected::before{opacity:1;}
-        .stencil-check-mark{width:18px;height:18px;border:1px solid var(--text-dim);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:white;transition:all var(--transition);flex-shrink:0;}
-        .stencil-style-option.selected .stencil-check-mark{background:var(--magenta);border-color:var(--magenta);box-shadow:0 0 10px rgba(255,0,110,.4);color:var(--bg-deep);}
-        .stencil-style-name{font-weight:500;flex:1;font-size:.9rem;color:var(--text-primary);letter-spacing:.5px;}
-        .stencil-style-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;background:rgba(255,0,110,.08);padding:.15rem .5rem;border-radius:2px;color:var(--magenta);border:1px solid rgba(255,0,110,.15);letter-spacing:1px;text-transform:uppercase;}
-        .stencil-setting-row{margin-bottom:1.25rem;}
-        .stencil-setting-label{font-family:'Orbitron',sans-serif;font-weight:500;margin-bottom:.6rem;display:block;font-size:.75rem;color:var(--text-secondary);letter-spacing:1.5px;text-transform:uppercase;}
-        .stencil-info-badge{background:rgba(255,0,110,.04);border:1px solid rgba(255,0,110,.1);border-radius:4px;padding:.75rem 1rem;font-size:.85rem;color:var(--text-secondary);margin-bottom:1rem;line-height:1.5;}
-        .stencil-color-quick-buttons{display:flex;gap:.75rem;margin-bottom:.85rem;flex-wrap:wrap;}
-        .stencil-color-btn{width:34px;height:34px;border-radius:2px;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all var(--transition);box-shadow:0 2px 8px rgba(0,0,0,.4);}
-        .stencil-color-btn.active{border-color:var(--magenta);box-shadow:0 0 0 2px var(--bg-deep),0 0 0 4px var(--magenta),0 0 12px rgba(255,0,110,.3);transform:scale(1.05);}
-        .stencil-color-btn:hover{transform:scale(1.05);border-color:rgba(255,0,110,.5);}
-        input[type="color"]{width:100%;height:38px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:var(--bg-secondary);cursor:pointer;padding:3px;transition:border-color var(--transition);}
-        input[type="color"]:hover{border-color:rgba(255,0,110,.3);}
-        .stencil-toggle-switch{display:flex;align-items:center;justify-content:space-between;background:rgba(255,0,110,.04);border:1px solid rgba(255,0,110,.1);border-radius:4px;padding:.6rem 1rem;margin-bottom:1rem;transition:all var(--transition);}
-        .stencil-toggle-switch:hover{background:rgba(255,0,110,.06);}
-        .stencil-toggle-switch label{font-weight:500;margin:0;font-size:.9rem;letter-spacing:.5px;}
-        .stencil-switch{position:relative;display:inline-block;width:44px;height:22px;flex-shrink:0;}
-        .stencil-switch input{opacity:0;width:0;height:0;}
-        .stencil-slider{position:absolute;cursor:pointer;inset:0;background-color:var(--bg-secondary);transition:var(--transition);border-radius:2px;border:1px solid rgba(255,255,255,.1);}
-        .stencil-slider:before{position:absolute;content:"";height:16px;width:16px;left:2px;bottom:2px;background-color:var(--text-secondary);transition:var(--transition);border-radius:2px;}
-        input:checked+.stencil-slider{background-color:rgba(255,0,110,.3);border-color:var(--magenta);box-shadow:0 0 8px rgba(255,0,110,.3);}
-        input:checked+.stencil-slider:before{transform:translateX(22px);background-color:var(--magenta);}
-        .stencil-preview-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem;}
-        .stencil-zoom-control{display:flex;align-items:center;gap:.25rem;background:rgba(255,0,110,.05);padding:.25rem .5rem;border-radius:4px;border:1px solid rgba(255,0,110,.1);}
-        .stencil-zoom-control button{background:transparent;color:var(--magenta);font-size:1rem;border:none;border-radius:2px;padding:.2rem .55rem;cursor:pointer;font-family:'JetBrains Mono',monospace;}
-        .stencil-zoom-control button:hover{background:rgba(255,0,110,.1);}
-        #stencilZoomPercent{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:500;color:var(--magenta);min-width:32px;text-align:center;}
-        .stencil-preview-container{
-            background:repeating-linear-gradient(0deg,transparent,transparent 15px,rgba(255,0,110,.02)15px,rgba(255,0,110,.02)16px),repeating-linear-gradient(90deg,transparent,transparent 15px,rgba(255,0,110,.02)15px,rgba(255,0,110,.02)16px);
-            border-radius:6px;display:flex;justify-content:center;align-items:center;
-            min-height:260px;border:1px solid rgba(255,0,110,.08);overflow:auto;padding:1.5rem;position:relative;
-        }
-        .stencil-preview-container::before{content:'STENCIL OUTPUT';position:absolute;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--text-dim);letter-spacing:2px;top:8px;right:12px;opacity:.5;}
-        #stencilPreviewCanvas{max-width:100%;height:auto;display:block;transition:transform var(--transition);image-rendering:pixelated;border:1px solid rgba(255,0,110,.05);}
-        .stencil-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border:2px solid rgba(255,0,110,.1);border-radius:50%;border-top-color:var(--magenta);animation:spin .6s linear infinite;}
-        @keyframes spin{to{transform:translate(-50%,-50%)rotate(360deg)}}
-        .stencil-procreate-note{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-dim);text-align:center;margin-top:1rem;background:rgba(255,0,110,.03);padding:.75rem 1rem;border-radius:4px;border:1px solid rgba(255,0,110,.08);line-height:1.6;letter-spacing:.5px;}
-        .stencil-recent-section{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,0,110,.08);}
-        .stencil-recent-section h4{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:.75rem;}
-        .stencil-recent-grid{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:4px;}
-        .stencil-recent-grid::-webkit-scrollbar{height:3px;}
-        .stencil-recent-grid::-webkit-scrollbar-thumb{background:rgba(255,0,110,.3);border-radius:2px;}
-        .stencil-recent-item{flex:0 0 auto;width:60px;cursor:pointer;border-radius:4px;border:1px solid transparent;transition:all var(--transition);overflow:hidden;}
-        .stencil-recent-item:hover{border-color:var(--magenta);}
-        .stencil-recent-item img{width:100%;height:60px;object-fit:cover;border-radius:4px;display:block;}
+    .panel {
+      background: #1c1c1c;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.2rem;
+    }
 
-        /* ─── AR SECTION ─── */
-        .ar-section{padding:80px 3rem;position:relative;z-index:2;background:rgba(139,92,246,.015);}
-        .ar-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--violet),transparent);opacity:.25;}
-        .ar-container{max-width:1200px;margin:0 auto;}
-        .ar-intro-card{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;margin-bottom:2rem;}
-        .ar-info{display:flex;flex-direction:column;gap:1.5rem;}
-        .ar-steps{display:flex;flex-direction:column;gap:.75rem;}
-        .ar-step{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.1);border-radius:6px;transition:all var(--transition);}
-        .ar-step:hover{background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.2);}
-        .ar-step-num{width:28px;height:28px;background:var(--violet);color:var(--bg-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;flex-shrink:0;}
-        .ar-step p{font-size:14px;color:var(--text-secondary);letter-spacing:.5px;}
-        .ar-preview-panel{background:var(--bg-card);border:1px solid rgba(139,92,246,.08);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;}
-        .ar-preview-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),var(--magenta),transparent);}
-        .ar-preview-panel h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;color:var(--text-primary);display:flex;align-items:center;gap:8px;}
-        .ar-preview-panel h3 i{color:var(--violet);}
-        .ar-warrior-svg{width:100%;max-width:280px;margin:0 auto;display:block;filter:drop-shadow(0 0 15px rgba(185,103,255,.3));}
-        .ar-warrior-svg path{stroke:#b967ff;stroke-width:60;fill:black;stroke-linecap:round;stroke-linejoin:round;}
-        .ar-launch-btn{background:linear-gradient(135deg,var(--violet),#7c3aed);color:white;border:none;padding:14px 24px;border-radius:4px;font-weight:700;font-size:13px;font-family:'Orbitron',sans-serif;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--transition);width:100%;margin-top:1.5rem;position:relative;overflow:hidden;}
-        .ar-launch-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .4s ease;}
-        .ar-launch-btn:hover::before{transform:translateX(100%);}
-        .ar-launch-btn:hover{box-shadow:0 0 25px rgba(139,92,246,.4);transform:translateY(-2px);}
+    .panel-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
 
-        /* ─── AR FULLSCREEN ─── */
-        .ar-fullscreen-overlay{position:fixed;inset:0;z-index:10000;background:#000;display:none;}
-        .ar-fullscreen-overlay.active{display:block;}
-        .ar-fullscreen-scene{width:100vw;height:100vh;position:absolute;top:0;left:0;z-index:1;}
-        .ar-fullscreen-scene .a-canvas{width:100%!important;height:100%!important;}
-        .ar-hud-overlay{position:absolute;inset:0;z-index:100;pointer-events:none;}
-        .ar-hud-top{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;background:rgba(5,5,10,.88);backdrop-filter:blur(16px);padding:8px 20px;border-radius:40px;border:1px solid rgba(139,92,246,.2);pointer-events:auto;}
-        .ar-hud-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--violet);}
-        .ar-marker-status{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-secondary);letter-spacing:1px;}
-        .ar-status-dot{width:8px;height:8px;border-radius:50%;background:#f44336;transition:all var(--transition);}
-        .ar-status-dot.active{background:#4caf50;box-shadow:0 0 8px #4caf50;}
-        .ar-hud-close{width:36px;height:36px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--violet);font-size:14px;transition:all var(--transition);pointer-events:auto;}
-        .ar-hud-close:hover{background:var(--violet);color:white;}
-        .ar-camera-error{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(211,47,47,.9);padding:16px 24px;border-radius:8px;text-align:center;z-index:2000;display:none;pointer-events:auto;font-family:'JetBrains Mono',monospace;font-size:12px;}
-        .ar-controls-panel{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:min(420px,calc(100vw - 24px));background:rgba(15,15,25,.94);backdrop-filter:blur(20px);border-radius:10px;padding:16px;border:1px solid rgba(139,92,246,.15);box-shadow:0 10px 30px rgba(0,0,0,.6);z-index:200;pointer-events:auto;transition:transform .3s ease,opacity .3s ease;}
-        .ar-controls-panel.hidden{transform:translateX(-50%)translateY(calc(100% + 30px));opacity:0;pointer-events:none;}
-        .ar-controls-toggle{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:rgba(15,15,25,.92);backdrop-filter:blur(12px);border:2px solid var(--violet);color:var(--violet);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:150;pointer-events:auto;transition:all var(--transition);}
-        .ar-controls-toggle:hover{background:var(--violet);color:white;}
-        .ar-upload-btn-large{background:rgba(185,103,255,.15);border:2px solid #b967ff;color:#b967ff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;margin:0 auto 14px;transition:all var(--transition);}
-        .ar-upload-btn-large:hover{background:#b967ff;color:var(--bg-deep);}
-        .ar-size-row{margin-bottom:12px;}
-        .ar-size-label{display:flex;justify-content:space-between;margin-bottom:6px;color:#b967ff;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:1px;}
-        #arSizeSlider{width:100%;height:6px;background:#2b2b44;border-radius:10px;-webkit-appearance:none;appearance:none;}
-        #arSizeSlider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;background:#b967ff;border-radius:50%;cursor:pointer;border:2px solid white;box-shadow:0 2px 8px rgba(0,0,0,.5);}
-        #arSizeSlider::-moz-range-thumb{width:24px;height:24px;background:#b967ff;border-radius:50%;border:2px solid white;}
-        .ar-rotation-row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(0,0,0,.3);padding:8px 10px;border-radius:6px;margin-bottom:6px;}
-        .ar-rotation-label{width:20px;font-weight:bold;color:#b967ff;font-family:'Orbitron',sans-serif;font-size:11px;}
-        .ar-rotation-buttons{display:flex;gap:8px;align-items:center;}
-        .ar-rotation-btn{background:#2b2b44;border:2px solid #b967ff;color:white;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;font-weight:bold;transition:all var(--transition);}
-        .ar-rotation-btn:hover{background:#b967ff;color:var(--bg-deep);}
-        .ar-rotation-value{min-width:52px;text-align:center;background:#151525;padding:5px 8px;border-radius:6px;font-size:.85rem;border:1px solid #b967ff;font-family:'JetBrains Mono',monospace;}
-        .ar-action-buttons{display:flex;gap:10px;justify-content:center;margin-top:8px;}
-        .ar-action-btn{background:none;border:2px solid #b967ff;color:#b967ff;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition);font-size:1.2rem;}
-        .ar-action-btn:hover{background:#b967ff;color:var(--bg-deep);}
-        .ar-marker-thumb{position:absolute;top:80px;left:16px;background:rgba(5,5,10,.8);backdrop-filter:blur(8px);border-radius:8px;padding:6px;border:1px solid rgba(139,92,246,.2);z-index:200;pointer-events:auto;}
-        .ar-marker-thumb img{width:44px;border-radius:6px;display:block;}
+    .upload-btn {
+      width: 100%;
+      border: 2px dashed rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      color: #666;
+      background: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-size: 0.85rem;
+    }
 
-        /* ─── PRICING ─── */
-        .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;}
-        .price-card-desktop{background:rgba(0,240,255,.03);border-radius:8px;padding:2.5rem 1.5rem;text-align:center;border:1px solid var(--border-subtle);transition:all var(--transition);position:relative;overflow:hidden;}
-        .price-card-desktop::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity var(--transition);}
-        .price-card-desktop:hover{border-color:rgba(0,240,255,.2);transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.3);}
-        .price-card-desktop:hover::before{opacity:1;}
-        .price-card-desktop h3{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:600;margin-bottom:1rem;letter-spacing:2px;text-transform:uppercase;}
-        .price-card-desktop .price{font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);text-shadow:0 0 15px var(--cyan-glow);margin-bottom:.5rem;}
-        .price-card-desktop small{color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px;display:block;}
+    .upload-btn:hover {
+      border-color: #c9a96e;
+      color: #c9a96e;
+    }
 
-        /* ─── FORMS ─── */
-        .form-group{margin-bottom:18px;}
-        label{display:block;font-size:11px;font-weight:500;margin-bottom:6px;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;}
-        input[type="date"],input[type="text"],select,textarea{
-            width:100%;padding:14px 16px;background:rgba(0,240,255,.03);
-            border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-primary);
-            font-family:'Rajdhani',sans-serif;font-size:14px;letter-spacing:.5px;transition:all var(--transition);
-        }
-        input[type="date"]:focus,input[type="text"]:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,240,255,.1);background:rgba(0,240,255,.05);}
-        select option{background:var(--bg-secondary);}
+    .upload-btn svg { width: 28px; height: 28px; }
 
-        /* ─── FOOTER ─── */
-        .desktop-footer{padding:2.5rem 3rem;border-top:1px solid var(--border-subtle);text-align:center;position:relative;z-index:2;}
-        .desktop-footer p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;}
-        .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.75rem;}
-        .footer-links a{color:var(--text-dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:color var(--transition);}
-        .footer-links a:hover{color:var(--cyan);}
+    .presets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
 
-        /* ─── MOBILE ─── */
-        .mobile-content{display:block;max-width:480px;width:100%;margin:0 auto;background-color:rgba(10,10,18,.95);min-height:100vh;position:relative;z-index:2;border-left:1px solid rgba(0,240,255,.05);border-right:1px solid rgba(0,240,255,.05);padding-bottom:70px;}
-        .mobile-header{padding:20px 18px 14px;border-bottom:1px solid rgba(0,240,255,.08);background:rgba(10,10,18,.98);position:relative;}
-        .mobile-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.3;}
-        .mobile-header-tag{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;opacity:.5;margin-bottom:.4rem;}
-        .mobile-header h1{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;letter-spacing:2px;text-transform:uppercase;}
-        .mobile-header h1 span{color:var(--cyan);font-weight:400;text-shadow:0 0 12px var(--cyan-glow);}
-        .mobile-header p{color:var(--text-secondary);font-size:12px;margin-top:4px;display:flex;align-items:center;gap:6px;}
-        .mobile-header p i{color:var(--cyan);font-size:10px;}
-        .mobile-section{padding:22px 18px;border-bottom:1px solid var(--border-subtle);}
-        .mobile-section-title{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;}
-        .mobile-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,240,255,.15),transparent);}
-        .mobile-section-title i{color:var(--cyan);font-size:14px;}
-        /* Mobile gallery */
-        .mobile-gallery-scroll{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-        .mobile-gallery-scroll::-webkit-scrollbar{display:none;}
-        /* Mobile stencil */
-        .mobile-stencil-section{padding:22px 18px;border-bottom:1px solid var(--border-subtle);}
-        .mobile-stencil-section .mobile-section-title{color:var(--magenta);}
-        .mobile-stencil-section .mobile-section-title i{color:var(--magenta);}
-        .mobile-stencil-card{background:rgba(255,0,110,.02);border:1px solid rgba(255,0,110,.08);border-radius:6px;padding:1.25rem;margin-bottom:1rem;}
-        .mobile-stencil-card h4{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:600;margin-bottom:1rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-primary);display:flex;align-items:center;gap:6px;}
-        .mobile-stencil-card h4 i{color:var(--magenta);}
-        .mobile-stencil-upload{border:1px dashed rgba(255,0,110,.25);border-radius:4px;padding:2rem 1rem;text-align:center;cursor:pointer;transition:all var(--transition);background:rgba(255,0,110,.02);}
-        .mobile-stencil-upload:hover,.mobile-stencil-drag-over{border-color:var(--magenta);border-style:solid;background:rgba(255,0,110,.05);}
-        .mobile-stencil-style-options{display:flex;flex-direction:column;gap:.3rem;}
-        .mobile-stencil-style-option{display:flex;align-items:center;gap:.6rem;padding:.6rem .7rem;border-radius:4px;cursor:pointer;transition:all var(--transition);border:1px solid transparent;}
-        .mobile-stencil-style-option.selected{background:rgba(255,0,110,.06);border-color:rgba(255,0,110,.2);}
-        .mobile-stencil-check-mark{width:16px;height:16px;border:1px solid var(--text-dim);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;color:white;transition:all var(--transition);flex-shrink:0;}
-        .mobile-stencil-style-option.selected .mobile-stencil-check-mark{background:var(--magenta);border-color:var(--magenta);color:var(--bg-deep);}
-        .mobile-stencil-toggle{display:flex;align-items:center;justify-content:space-between;background:rgba(255,0,110,.04);border:1px solid rgba(255,0,110,.1);border-radius:4px;padding:.5rem .85rem;margin-bottom:.75rem;}
-        .mobile-stencil-toggle label{font-weight:500;margin:0;font-size:.85rem;}
-        .mobile-stencil-preview-container{background:repeating-linear-gradient(0deg,transparent,transparent 15px,rgba(255,0,110,.02)15px,rgba(255,0,110,.02)16px),repeating-linear-gradient(90deg,transparent,transparent 15px,rgba(255,0,110,.02)15px,rgba(255,0,110,.02)16px);border-radius:6px;display:flex;justify-content:center;align-items:center;min-height:200px;border:1px solid rgba(255,0,110,.08);overflow:auto;padding:1rem;position:relative;}
-        #mobileStencilCanvas{max-width:100%;height:auto;display:block;image-rendering:pixelated;}
-        .mobile-stencil-spinner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border:2px solid rgba(255,0,110,.1);border-radius:50%;border-top-color:var(--magenta);animation:spin .6s linear infinite;}
-        /* Mobile AR */
-        .mobile-ar-section{padding:22px 18px;border-bottom:1px solid var(--border-subtle);}
-        .mobile-ar-section .mobile-section-title{color:var(--violet);}
-        .mobile-ar-section .mobile-section-title i{color:var(--violet);}
-        .mobile-ar-steps{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;}
-        .mobile-ar-step{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.1);border-radius:4px;}
-        .mobile-ar-step-num{width:24px;height:24px;background:var(--violet);color:var(--bg-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;flex-shrink:0;}
-        .mobile-ar-step p{font-size:13px;color:var(--text-secondary);}
-        .mobile-ar-launch{background:linear-gradient(135deg,var(--violet),#7c3aed);color:white;border:none;padding:14px;border-radius:4px;font-weight:700;font-size:12px;font-family:'Orbitron',sans-serif;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--transition);width:100%;}
-        .mobile-ar-launch:hover{box-shadow:0 0 20px rgba(139,92,246,.4);}
-        .mobile-warrior-svg{width:80%;max-width:180px;margin:1rem auto;display:block;filter:drop-shadow(0 0 12px rgba(185,103,255,.3));}
-        .mobile-warrior-svg path{stroke:#b967ff;stroke-width:60;fill:black;stroke-linecap:round;stroke-linejoin:round;}
-        /* Mobile bottom nav */
-        .mobile-bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,18,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(0,240,255,.08);display:flex;justify-content:space-around;padding:6px 0 max(10px,env(safe-area-inset-bottom));z-index:1000;}
-        .mobile-bottom-nav::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.15),transparent);}
-        .mobile-nav-item{display:flex;flex-direction:column;align-items:center;color:var(--text-dim);font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;transition:color var(--transition);cursor:pointer;text-decoration:none;background:transparent;border:none;padding:4px 6px;}
-        .mobile-nav-item i{font-size:17px;margin-bottom:2px;transition:all var(--transition);}
-        .mobile-nav-item.active{color:var(--cyan);}
-        .mobile-nav-item.active i{text-shadow:0 0 8px var(--cyan-glow);}
-        .mobile-footer-note{text-align:center;padding:18px;color:var(--text-dim);font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;text-transform:uppercase;}
+    .preset-btn {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: none;
+      color: #888;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s, color 0.2s;
+    }
 
-        /* ─── TOAST ─── */
-        .toast-container{position:fixed;top:max(72px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:99999;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:340px;}
-        .toast{background:rgba(6,6,18,.96);backdrop-filter:blur(20px);border:1px solid var(--border-subtle);border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:500;animation:toastIn .28s cubic-bezier(.34,1.56,.64,1);}
-        .toast.success{border-color:rgba(34,211,160,.35);}
-        .toast.error{border-color:rgba(255,71,87,.35);}
-        .toast.info{border-color:rgba(0,240,255,.25);}
-        .toast-icon{font-size:.95rem;flex-shrink:0;}
-        .toast.success .toast-icon{color:#22d3a0;}
-        .toast.error .toast-icon{color:#ff4757;}
-        .toast.info .toast-icon{color:var(--cyan);}
-        @keyframes toastIn{from{opacity:0;transform:translateY(-8px)scale(.94)}to{opacity:1;transform:translateY(0)scale(1)}}
-        @keyframes toastOut{to{opacity:0;transform:translateY(-8px)scale(.94)}}
+    .preset-btn:hover {
+      border-color: #c9a96e;
+      color: #c9a96e;
+    }
 
-        /* ─── RESPONSIVE ─── */
-        @media(min-width:1024px){.desktop-nav{display:flex;}.desktop-content{display:block;}.mobile-content{display:none;}.mobile-bottom-nav{display:none;}}
-        @media(max-width:1023px){.desktop-nav{display:none;}.desktop-content{display:none;}.mobile-content{display:block;}.mobile-bottom-nav{display:flex;}}
-        @media(max-width:500px){.mobile-content{max-width:100%;}}
-        .note-text{margin-top:14px;font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
-        .text-center{text-align:center;}
-        .mt-4{margin-top:1rem;}
-        .mt-6{margin-top:1.5rem;}
-        textarea{resize:vertical;}
-        .copy-btn{background:transparent;color:var(--cyan);margin-top:.5rem;border:1px solid rgba(0,240,255,.2);}
-        .copy-btn:hover{background:rgba(0,240,255,.08);border-color:var(--cyan);}
-    </style>
+    .controls-section { space-y: 1rem; }
+
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .slider-row span {
+      font-size: 0.75rem;
+      color: #c9a96e;
+      font-family: monospace;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #c9a96e;
+      cursor: pointer;
+    }
+
+    .color-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .color-field {
+      flex: 1;
+    }
+
+    .color-field label {
+      font-size: 0.72rem;
+      color: #888;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    input[type="color"] {
+      width: 100%;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: none;
+      cursor: pointer;
+      padding: 2px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border-radius: 12px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary {
+      background: #c9a96e;
+      color: #111;
+    }
+
+    .btn-secondary {
+      background: #2a2a2a;
+      color: #ccc;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .preview-panel {
+      background: #1c1c1c;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .preview-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: #555;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .preview-empty svg { width: 42px; height: 42px; color: rgba(201,169,110,0.3); }
+    .preview-empty p { font-size: 0.85rem; }
+    .preview-empty small { font-size: 0.72rem; opacity: 0.5; }
+
+    canvas {
+      max-width: 100%;
+      max-height: 580px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .gap { margin-top: 1rem; }
+  </style>
 </head>
 <body>
 
-<!-- TOAST CONTAINER -->
-<div class="toast-container" id="toastContainer"></div>
+  <span class="tag">Herramienta</span>
+  <h1>Generador de Stencil</h1>
+  <p class="subtitle">Convierte cualquier imagen en una plantilla de tatuaje. Ajusta el umbral, colores y descarga tu stencil.</p>
 
-<!-- PARTICLES -->
-<div class="particles" id="particles"></div>
+  <div class="layout">
+    <!-- Controls -->
+    <div style="display:flex;flex-direction:column;gap:1rem;">
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-    <div class="lightbox-close" id="lbClose"><i class="fas fa-times"></i></div>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev"><i class="fas fa-chevron-left"></i></button>
-    <img class="lightbox-img" id="lbImg" src="" alt="">
-    <button class="lightbox-nav lightbox-next" id="lbNext"><i class="fas fa-chevron-right"></i></button>
-    <div class="lightbox-info" id="lbInfo"></div>
-</div>
+      <!-- Upload -->
+      <div class="panel">
+        <span class="panel-label">Imagen</span>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" />
+        <button class="upload-btn" id="uploadBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span id="uploadLabel">Subir imagen</span>
+        </button>
+      </div>
 
-<!-- ══════════════════════════════════════════
-     DESKTOP
-══════════════════════════════════════════ -->
-<nav class="desktop-nav">
-    <a href="#hero" class="nav-brand"><div class="nav-brand-text">Guerr <span>Tattoo</span></div></a>
-    <div class="nav-links">
-        <a href="#hero"    class="nav-link active" data-section="hero"><i class="fas fa-home"></i> Inicio</a>
-        <a href="#gallery" class="nav-link" data-section="gallery"><i class="fas fa-images"></i> Galería</a>
-        <a href="#stencil" class="nav-link" style="color:var(--magenta);" data-section="stencil"><i class="fas fa-fingerprint"></i> Stencil</a>
-        <a href="#ar"      class="nav-link ar-link" data-section="ar"><i class="fas fa-vr-cardboard"></i> AR</a>
-        <a href="#pricing" class="nav-link" data-section="pricing"><i class="fas fa-tag"></i> Precios</a>
-        <a href="#booking" class="nav-link" data-section="booking"><i class="fas fa-calendar"></i> Reservas</a>
-        <a href="#location" class="nav-link" data-section="location"><i class="fas fa-map"></i> Ubicación</a>
-    </div>
-    <a href="#booking" class="nav-cta">Reservar</a>
-</nav>
+      <!-- Presets -->
+      <div class="panel">
+        <span class="panel-label">Presets</span>
+        <div class="presets">
+          <button class="preset-btn" onclick="applyPreset('#ffffff','#000000',128)">Clásico B/N</button>
+          <button class="preset-btn" onclick="applyPreset('#f5e6c8','#3b1a0a',140)">Sepia</button>
+          <button class="preset-btn" onclick="applyPreset('#e8f0fe','#1a237e',120)">Azul acero</button>
+          <button class="preset-btn" onclick="applyPreset('#fce4ec','#8b0000',115)">Rojo sangre</button>
+        </div>
+      </div>
 
-<div class="desktop-content">
+      <!-- Sliders + Colors -->
+      <div class="panel">
+        <div class="slider-row">
+          <span class="panel-label" style="margin:0">Umbral</span>
+          <span id="thresholdVal">128</span>
+        </div>
+        <input type="range" id="threshold" min="0" max="255" value="128" />
 
-<!-- ── HERO ── -->
-<section class="hero-section" id="hero">
-    <div class="hero-inner">
-        <div class="hero-left">
-            <div class="hero-tag">v2.0 // artist portfolio & booking</div>
-            <h1 class="hero-title">Guerr<br>Tattoo</h1>
-            <p class="hero-desc">Especialista en blackwork, realismo y minimalismo. Más de 8 años creando arte sobre la piel en Suba, Bogotá. Cada diseño es una pieza única e irrepetible.</p>
-            <div class="hero-buttons">
-                <button class="btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})"><i class="fas fa-calendar-check"></i> Reservar cita</button>
-                <button class="btn btn-outline" onclick="document.getElementById('stencil').scrollIntoView({behavior:'smooth'})"><i class="fas fa-fingerprint"></i> Crear Stencil</button>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat"><div class="hero-stat-num">8+</div><div class="hero-stat-label">Años exp.</div></div>
-                <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Tatuajes</div></div>
-                <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Rating</div></div>
-            </div>
+        <div class="color-row">
+          <div class="color-field">
+            <label>Fondo</label>
+            <input type="color" id="bgColor" value="#ffffff" />
+          </div>
+          <div class="color-field">
+            <label>Tinta</label>
+            <input type="color" id="inkColor" value="#000000" />
+          </div>
         </div>
-        <div class="hero-right">
-            <!-- ★ REEMPLAZA ESTAS URLs CON TUS FOTOS REALES ★ -->
-            <div class="hero-card"><img src="https://images.unsplash.com/photo-1775135360402-bac00cc921c2?w=600&q=80" alt="Blackwork"><div class="hero-card-overlay"><h4>Blackwork</h4><p>Espalda completa</p></div></div>
-            <div class="hero-card"><img src="https://images.unsplash.com/photo-1714787283995-3dba3caf1cc4?w=600&q=80" alt="Realismo"><div class="hero-card-overlay"><h4>Realismo</h4><p>Detalle · Sombras</p></div></div>
-            <div class="hero-card"><img src="https://images.unsplash.com/photo-1577357922830-eae2e1c7b4de?w=600&q=80" alt="Minimal"><div class="hero-card-overlay"><h4>Minimal</h4><p>Fine Line</p></div></div>
-            <div class="hero-card"><img src="https://images.unsplash.com/photo-1540885418945-9744611689ff?w=600&q=80" alt="Blackwork"><div class="hero-card-overlay"><h4>Blackwork</h4><p>Full Sleeve</p></div></div>
-        </div>
-    </div>
-</section>
+      </div>
 
-<!-- ── GALLERY ── -->
-<section class="desktop-section" id="gallery">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-tag">// portfolio</div>
-            <h2>Galería</h2>
-            <p>Explora los trabajos realizados en diferentes estilos</p>
-        </div>
-        <div class="gallery-filter-bar">
-            <button class="category-btn active" data-filter="all">Todos</button>
-            <button class="category-btn" data-filter="blackwork">Blackwork</button>
-            <button class="category-btn" data-filter="realismo">Realismo</button>
-            <button class="category-btn" data-filter="minimal">Minimal</button>
-        </div>
-        <!-- ★ REEMPLAZA LAS URLs DE IMÁGENES CON TUS FOTOS REALES ★
-             Formato de URL de Unsplash para placeholder:
-             https://images.unsplash.com/photo-XXXXX?w=600&q=80
-        -->
-        <div class="gallery-grid-desktop" id="gallery-grid-desktop">
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1775135360402-bac00cc921c2?w=1200&q=90" data-label="Blackwork · Espalda">
-                <img src="https://images.unsplash.com/photo-1775135360402-bac00cc921c2?w=600&q=80" alt="Blackwork espalda" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1775135332562-9ff99e65a616?w=1200&q=90" data-label="Blackwork · Detalle">
-                <img src="https://images.unsplash.com/photo-1775135332562-9ff99e65a616?w=600&q=80" alt="Blackwork detalle" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1775135786145-7073d65228a1?w=1200&q=90" data-label="Blackwork · Brazo">
-                <img src="https://images.unsplash.com/photo-1775135786145-7073d65228a1?w=600&q=80" alt="Blackwork brazo" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1775135424139-114485c2ae43?w=1200&q=90" data-label="Blackwork · Pecho">
-                <img src="https://images.unsplash.com/photo-1775135424139-114485c2ae43?w=600&q=80" alt="Blackwork pecho" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1714787283995-3dba3caf1cc4?w=1200&q=90" data-label="Realismo · Brazo">
-                <img src="https://images.unsplash.com/photo-1714787283995-3dba3caf1cc4?w=600&q=80" alt="Realismo brazo" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1637966498163-d9d61261fdfe?w=1200&q=90" data-label="Realismo · Detalle">
-                <img src="https://images.unsplash.com/photo-1637966498163-d9d61261fdfe?w=600&q=80" alt="Realismo detalle" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1668631635967-d3cd878135bb?w=1200&q=90" data-label="Realismo · Sombras">
-                <img src="https://images.unsplash.com/photo-1668631635967-d3cd878135bb?w=600&q=80" alt="Realismo sombras" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1519822356-4853be4346a8?w=1200&q=90" data-label="Realismo · Antebrazo">
-                <img src="https://images.unsplash.com/photo-1519822356-4853be4346a8?w=600&q=80" alt="Realismo antebrazo" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="minimal" data-src="https://images.unsplash.com/photo-1547754145-ef9ff306e3f3?w=1200&q=90" data-label="Minimal · Fine Line">
-                <img src="https://images.unsplash.com/photo-1547754145-ef9ff306e3f3?w=600&q=80" alt="Minimal fine line" loading="lazy">
-                <div class="gallery-item-label"><span>Minimal</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="minimal" data-src="https://images.unsplash.com/photo-1577357922830-eae2e1c7b4de?w=1200&q=90" data-label="Minimal · Brazo">
-                <img src="https://images.unsplash.com/photo-1577357922830-eae2e1c7b4de?w=600&q=80" alt="Minimal brazo" loading="lazy">
-                <div class="gallery-item-label"><span>Minimal</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="minimal" data-src="https://images.unsplash.com/photo-1687825495498-1bb4c92dbb19?w=1200&q=90" data-label="Minimal · Muñeca">
-                <img src="https://images.unsplash.com/photo-1687825495498-1bb4c92dbb19?w=600&q=80" alt="Minimal muñeca" loading="lazy">
-                <div class="gallery-item-label"><span>Minimal</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1540885418945-9744611689ff?w=1200&q=90" data-label="Blackwork · Torso">
-                <img src="https://images.unsplash.com/photo-1540885418945-9744611689ff?w=600&q=80" alt="Blackwork torso" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1573208425302-e94dd243fa91?w=1200&q=90" data-label="Realismo · Proceso">
-                <img src="https://images.unsplash.com/photo-1573208425302-e94dd243fa91?w=600&q=80" alt="Realismo proceso" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="minimal" data-src="https://images.unsplash.com/photo-1729552953322-47f491a7f7f3?w=1200&q=90" data-label="Minimal · Brazo 2">
-                <img src="https://images.unsplash.com/photo-1729552953322-47f491a7f7f3?w=600&q=80" alt="Minimal" loading="lazy">
-                <div class="gallery-item-label"><span>Minimal</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="blackwork" data-src="https://images.unsplash.com/photo-1640202430303-a71359ade259?w=1200&q=90" data-label="Blackwork · Mano">
-                <img src="https://images.unsplash.com/photo-1640202430303-a71359ade259?w=600&q=80" alt="Blackwork mano" loading="lazy">
-                <div class="gallery-item-label"><span>Blackwork</span></div>
-            </div>
-            <div class="gallery-item-desktop" data-category="realismo" data-src="https://images.unsplash.com/photo-1645318588650-f0fb322cd740?w=1200&q=90" data-label="Realismo · Sesión">
-                <img src="https://images.unsplash.com/photo-1645318588650-f0fb322cd740?w=600&q=80" alt="Realismo sesión" loading="lazy">
-                <div class="gallery-item-label"><span>Realismo</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── STENCIL ── -->
-<section class="stencil-section" id="stencil">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-tag" style="color:var(--magenta);">// stencil generator</div>
-            <h2>Generador de Stencil</h2>
-            <p>Crea plantillas profesionales para tus tatuajes con un solo clic</p>
-        </div>
-        <div class="stencil-grid">
-            <div class="stencil-card">
-                <h3><i class="fas fa-upload"></i> Sube tu imagen</h3>
-                <div class="stencil-upload-area" id="stencilUploadArea">
-                    <div class="stencil-upload-icon">🖼</div>
-                    <p>Arrastra tu imagen o haz clic para buscar</p>
-                    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:4px;">JPG · PNG · GIF — max 10MB</p>
-                    <input type="file" id="stencilFileInput" accept="image/jpeg,image/png,image/gif">
-                </div>
-            </div>
-            <div class="stencil-card">
-                <h3><i class="fas fa-palette"></i> Estilo de stencil</h3>
-                <div class="stencil-style-options" id="stencilStyleOptions">
-                    <div class="stencil-style-option" data-style="ultra_detailed"><span class="stencil-check-mark"></span><span class="stencil-style-name">Ultra detallado</span><span class="stencil-style-badge">Más líneas</span></div>
-                    <div class="stencil-style-option" data-style="detailed"><span class="stencil-check-mark"></span><span class="stencil-style-name">Mejores detalles finos</span><span class="stencil-style-badge">Fino</span></div>
-                    <div class="stencil-style-option selected" data-style="standard"><span class="stencil-check-mark">✓</span><span class="stencil-style-name">Modelo anterior</span><span class="stencil-style-badge">Estándar</span></div>
-                    <div class="stencil-style-option" data-style="bold"><span class="stencil-check-mark"></span><span class="stencil-style-name">Líneas gruesas</span><span class="stencil-style-badge">Grueso</span></div>
-                    <div class="stencil-style-option" data-style="silhouette"><span class="stencil-check-mark"></span><span class="stencil-style-name">Silueta</span><span class="stencil-style-badge">Alto contraste</span></div>
-                </div>
-            </div>
-            <div class="stencil-card">
-                <h3><i class="fas fa-sliders-h"></i> Configuración</h3>
-                <div class="stencil-toggle-switch">
-                    <label>Contorno PNG (Sin fondo)</label>
-                    <label class="stencil-switch"><input type="checkbox" id="stencilTransparentToggle" checked><span class="stencil-slider"></span></label>
-                </div>
-                <div class="stencil-info-badge" id="stencilBackgroundHint">Solo líneas — para transferencia fácil</div>
-                <div class="stencil-setting-row">
-                    <label class="stencil-setting-label">Color de línea</label>
-                    <div class="stencil-color-quick-buttons" id="stencilQuickColors">
-                        <div class="stencil-color-btn active" style="background:#000000;" data-color="#000000"></div>
-                        <div class="stencil-color-btn" style="background:#007aff;" data-color="#007aff"></div>
-                        <div class="stencil-color-btn" style="background:#ff3b30;" data-color="#ff3b30"></div>
-                        <div class="stencil-color-btn" style="background:#34c759;" data-color="#34c759"></div>
-                    </div>
-                    <input type="color" id="stencilLineColor" value="#000000">
-                </div>
-            </div>
-            <div class="stencil-card">
-                <h3><i class="fas fa-eye"></i> Vista previa</h3>
-                <div class="stencil-preview-header">
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-dim);letter-spacing:1px;">MODE: <span id="stencilCurrentStyleLabel" style="color:var(--magenta);">Estándar</span></span>
-                    <div class="stencil-zoom-control">
-                        <button id="stencilZoomOutBtn">−</button>
-                        <span id="stencilZoomPercent">100</span>%
-                        <button id="stencilZoomInBtn">+</button>
-                    </div>
-                </div>
-                <div class="stencil-preview-container" id="stencilPreviewContainer">
-                    <canvas id="stencilPreviewCanvas"></canvas>
-                </div>
-                <div class="stencil-procreate-note">💡 Para editar en Procreate: mantén presionada la imagen → "Copiar" → pegar en Procreate.</div>
-                <button id="stencilDownloadBtn" class="btn btn-full" disabled style="background:linear-gradient(135deg,var(--magenta),#cc0058);margin-top:.75rem;">Descargar stencil</button>
-                <button id="stencilCopyBtn" class="btn btn-full copy-btn" disabled>Copiar al portapapeles</button>
-                <div class="stencil-recent-section">
-                    <h4>// Trabajos recientes</h4>
-                    <div class="stencil-recent-grid" id="stencilRecentGrid"><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);">[ Sin trabajos recientes ]</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── AR ── -->
-<section class="ar-section" id="ar">
-    <div class="ar-container">
-        <div class="section-header">
-            <div class="section-tag" style="color:var(--violet);">// augmented reality</div>
-            <h2>Tatuajes AR</h2>
-            <p>Visualiza diseños de tatuaje en tiempo real con realidad aumentada</p>
-        </div>
-        <div class="ar-intro-card">
-            <div class="ar-info">
-                <div class="ar-steps">
-                    <div class="ar-step"><div class="ar-step-num">1</div><p>Apunta la cámara a la imagen marcador</p></div>
-                    <div class="ar-step"><div class="ar-step-num">2</div><p>Sube tu propio diseño de tatuaje</p></div>
-                    <div class="ar-step"><div class="ar-step-num">3</div><p>Ajusta tamaño y rotación en tiempo real</p></div>
-                    <div class="ar-step"><div class="ar-step-num">4</div><p>Captura la pantalla y comparte</p></div>
-                </div>
-                <button class="ar-launch-btn" onclick="openARFullscreen()"><i class="fas fa-vr-cardboard"></i> Iniciar Experiencia AR</button>
-            </div>
-            <div class="ar-preview-panel">
-                <h3><i class="fas fa-fingerprint"></i> Guerrero Tattoo</h3>
-                <svg class="ar-warrior-svg" viewBox="0 0 21590 27940" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8550 19311c13,-22 11,-34 -6,-36 -159,65 -267,34 -324,-93 -48,-120 -19,-258 86,-414 78,-81 174,-131 289,-150 -5,-770 7,-1204 35,-1302 -387,167 -631,240 -730,216 -11,204 -313,508 -905,913 -91,89 -200,177 -327,266 -393,565 -529,1195 -408,1890 143,672 557,1064 1242,1176 153,-329 246,-516 278,-562 -455,-56 -802,-290 -1039,-703 -271,-674 -222,-1301 148,-1881 143,-148 211,-165 206,-50 -30,513 -89,1193 -176,2040 20,219 157,317 412,295 125,-37 196,-120 213,-250 -109,-91 -115,-188 -17,-290 345,-35 710,-65 1094,-90 114,-131 211,-265 291,-401 -64,33 -300,52 -708,55 -136,6 -303,12 -503,20 -157,121 -249,272 -274,451 -7,91 9,172 46,243 19,116 -31,190 -151,222 -190,19 -294,-67 -313,-260 1,-239 136,-446 407,-620 48,-547 100,-1164 157,-1849 152,-67 347,-149 586,-246 -45,522 -51,948 -19,1278 122,190 259,234 410,132z"/>
-                    <path d="M14256 9345c-34,-145 -58,-87 -156,-135 -46,-237 139,-225 157,-332 12,-68 -12,-145 -4,-238 8,-92 0,-140 -52,-184 -86,37 -24,74 -107,141 -160,131 -273,-106 -139,-132 86,-16 88,41 99,-114 -39,-20 -96,-38 -140,-61 7,-183 91,-109 134,-135 149,-90 106,-712 -289,-562l7 145c58,-9 68,-107 85,9 23,156 -23,347 -167,423 -84,45 -217,-20 -221,-126 -6,-145 73,-65 -36,-293 -79,2 -104,33 -145,80 26,142 72,301 -47,431 -2,1 -64,51 -65,51 -99,45 -114,5 -128,-60 42,-27 72,-4 153,-62 -4,-46 -21,-101 -18,-123 11,-59 36,-35 49,-106 -19,-204 -423,-119 -334,148 -83,44 -126,-5 -205,31l-43 -83c-56,-178 53,-478 243,-506 72,-11 154,-6 195,-49l23 -42c36,-59 117,-108 184,-130 151,-50 115,-19 218,-140l-43 -85c-97,19 -124,76 -206,25 -64,-40 -91,-101 -47,-171 121,-193 232,-90 369,-61 19,-89 51,-158 -23,-215 -257,-196 -447,182 -523,242 -145,-44 -198,-152 -125,-286 117,-217 37,-146 -5,-241 -21,-48 51,-14 -35,-66 -57,89 -38,136 -61,241 -181,61 -113,39 -251,-23l26 -70c-42,-41 -94,-48 -120,-83 -46,-62 -2,-71 -25,-155 -127,-71 -93,16 -193,-2 -176,-32 -225,-251 -32,-263 140,-8 121,45 151,143 115,-47 144,-142 31,-229 -171,-133 -370,-229 -583,-284 -494,-128 -1214,-238 -1687,-164 -114,17 -200,40 -327,49 -126,9 -278,43 -404,74 -132,33 -239,40 -351,112 -63,41 -91,48 -167,78 -114,46 -207,128 -310,182 -149,78 -245,155 -376,250l-192 167c-43,34 -104,68 -138,109l-226 266c-206,261 -509,845 -578,1212l-62 315c-49,310 46,723 119,1033 95,409 165,725 332,1109 175,404 102,357 175,566 29,86 61,66 26,176 -56,176 3,401 -80,593 -91,212 -158,322 -116,562 32,177 109,375 262,478 74,50 475,198 529,184 16,-33 -1,-60 -12,-102 81,37 138,130 233,152 -51,70 -34,1 -85,90 61,75 204,84 304,105l373 31c88,-140 48,-86 145,-152 -1,-64 -39,3 -12,-85 169,-56 215,224 36,280 -97,31 -43,-12 -135,11 -5,66 5,60 26,119 79,3 143,-24 183,-16 66,14 132,47 159,101 4,37 -20,36 -38,60l-41 63c22,34 49,97 92,109 147,42 77,-126 181,-152 53,-13 107,3 144,24 87,49 129,150 59,245 -87,116 -201,40 -261,82 -63,44 -2,111 0,137 5,58 -14,30 -33,93 -19,65 -2,15 9,85 11,69 8,466 164,397 11,-48 -3,-27 -2,-42 7,-55 -15,-10 16,-50 25,115 28,271 43,380 22,159 76,213 164,267 -38,54 -97,47 -105,136 -4,42 169,416 190,487l131 527c1,6 4,23 5,28l17 66c4,19 5,31 10,51l7 26c0,-2 2,9 4,13 33,44 29,20 43,26 15,7 35,11 50,16l425 69c176,-86 166,-208 300,-484 65,-132 51,-119 133,-162 26,-13 35,-18 65,-34 91,-49 164,-114 258,-142z"/>
-                </svg>
-                <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:.75rem;">// Marcador AR listo para detectar</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── PRICING ── -->
-<section class="desktop-section" id="pricing">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-tag">// pricing guide</div>
-            <h2>Guía de Precios</h2>
-            <p>Referencia orientativa en pesos colombianos</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="price-card-desktop"><h3>Pequeño</h3><div class="price">$200k</div><small>hasta 10cm · 1-2h</small></div>
-            <div class="price-card-desktop"><h3>Mediano</h3><div class="price">$400k</div><small>10-20cm · 2-4h</small></div>
-            <div class="price-card-desktop"><h3>Grande</h3><div class="price">$800k+</div><small>+20cm · sesiones múltiples</small></div>
-        </div>
-        <p class="note-text text-center mt-6">*Precios incluyen asesoría. El precio final se confirma en consulta.</p>
-    </div>
-</section>
-
-<!-- ── BOOKING ── -->
-<section class="desktop-section" id="booking">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-tag">// book & request</div>
-            <h2>Reservas & Diseños</h2>
-        </div>
-        <div style="max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
-            <div style="background:rgba(0,240,255,.02);border:1px solid var(--border-subtle);border-radius:8px;padding:2rem;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;color:var(--text-primary);display:flex;align-items:center;gap:8px;"><i class="fas fa-calendar-alt" style="color:var(--cyan);"></i> Reserva tu cita</h3>
-                <div class="form-group"><label>Fecha</label><input type="date" id="fecha-cita-desktop" min="2025-04-01"></div>
-                <div class="form-group"><label>Hora</label><select id="hora-cita-desktop"><option>10:00 AM (2h)</option><option>12:00 PM (2h)</option><option>2:00 PM (3h)</option><option>4:00 PM (2h)</option></select></div>
-                <button class="btn" style="width:100%;" onclick="simularPagoDesktop()"><i class="fas fa-lock"></i> Pagar depósito · $40.000</button>
-                <p class="note-text">Depósito no reembolsable. Confirma vía WhatsApp.</p>
-            </div>
-            <div style="background:rgba(0,240,255,.02);border:1px solid var(--border-subtle);border-radius:8px;padding:2rem;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;color:var(--text-primary);display:flex;align-items:center;gap:8px;"><i class="fas fa-pencil-alt" style="color:var(--cyan);"></i> Solicitar diseño</h3>
-                <form id="tattooFormDesktop" onsubmit="event.preventDefault();enviarSolicitudDesktop()">
-                    <div class="form-group"><label>Estilo</label><select required><option>Blackwork</option><option>Realismo</option><option>Minimal</option><option>Geométrico</option></select></div>
-                    <div class="form-group"><label>Ubicación</label><input type="text" placeholder="ej. antebrazo derecho..." required></div>
-                    <div class="form-group"><label>Descripción</label><textarea rows="3" placeholder="Cuéntame tu idea..." required></textarea></div>
-                    <button type="submit" class="btn" style="width:100%;">Enviar solicitud</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── LOCATION ── -->
-<section class="desktop-section" id="location">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-tag">// studio location</div>
-            <h2>Estudio en Suba</h2>
-        </div>
-        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:center;">
-            <div style="width:100%;height:350px;border-radius:8px;overflow:hidden;border:1px solid var(--border-subtle);">
-                <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-74.1130%2C4.7600%2C-74.0930%2C4.7800&layer=mapnik&marker=4.7700%2C-74.1030" style="width:100%;height:100%;filter:grayscale(1)invert(1)hue-rotate(180deg)saturate(.5)brightness(.7)contrast(1.2);border:0;" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:1.5rem;">
-                <div style="background:rgba(0,240,255,.03);border:1px solid var(--border-subtle);padding:1.5rem;border-radius:6px;">
-                    <i class="fas fa-location-dot" style="color:var(--cyan);font-size:24px;margin-bottom:12px;display:block;text-shadow:0 0 10px var(--cyan-glow);"></i>
-                    <h4 style="font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Dirección</h4>
-                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.7;">Cra. 107 #143-22, piso 2<br>Suba, Bogotá, Colombia</p>
-                    <a href="https://maps.google.com/?q=Cra.+107+%23143-22+Bogot%C3%A1" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:var(--cyan);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:12px;">Cómo llegar <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div style="background:rgba(0,240,255,.03);border:1px solid var(--border-subtle);padding:1.5rem;border-radius:6px;">
-                    <i class="fab fa-whatsapp" style="color:#25d366;font-size:24px;margin-bottom:12px;display:block;"></i>
-                    <h4 style="font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Contacto</h4>
-                    <p style="color:var(--text-secondary);font-size:14px;line-height:1.7;">301 280 2733<br>Lun–Sáb: 10am–7pm</p>
-                    <a href="https://wa.me/573012802733" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:#25d366;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:12px;">Escribir por WhatsApp <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer class="desktop-footer">
-    <div class="footer-links">
-        <a href="#gallery">Galería</a>
-        <a href="#stencil">Stencil</a>
-        <a href="#ar">AR</a>
-        <a href="https://www.instagram.com/guerrtattoo" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/573012802733" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-    <p>Guerr Tattoo · Julián Guerrero · Suba, Bogotá · © <span id="year"></span></p>
-</footer>
-
-</div><!-- /desktop-content -->
-
-<!-- ══════════════════════════════════════════
-     AR FULLSCREEN
-══════════════════════════════════════════ -->
-<div class="ar-fullscreen-overlay" id="arFullscreenOverlay">
-    <div class="ar-fullscreen-scene">
-        <a-scene id="arScene"
-            mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind; filterMinCF: 0.005; filterBeta: 2000;"
-            color-space="sRGB"
-            renderer="colorManagement: true, physicallyCorrectLights"
-            vr-mode-ui="enabled: false"
-            device-orientation-permission-ui="enabled: false"
-            embedded
-            style="width:100%;height:100%;">
-            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-            <a-entity mindar-image-target="targetIndex: 0">
-                <a-image id="arTatuaje" src="" position="0 0.2 0" rotation="0 0 0" width="1.2" height="1.2" material="transparent:true;depthTest:false;side:double;" scale="1.5 1.5 1.5"></a-image>
-            </a-entity>
-        </a-scene>
-    </div>
-    <div class="ar-hud-overlay">
-        <div class="ar-hud-top">
-            <div class="ar-hud-title">GuerrTattooAR</div>
-            <div class="ar-marker-status"><div class="ar-status-dot" id="arStatusDot"></div><span id="arStatusText">Buscando...</span></div>
-            <div class="ar-hud-close" id="arCloseBtn"><i class="fas fa-times"></i></div>
-        </div>
-        <div class="ar-marker-thumb"><img src="https://github.com/hiukim/mind-ar-js/raw/master/examples/image-tracking/assets/card-example/card.png" alt="Marcador"></div>
-        <div class="ar-camera-error" id="arCameraError"><i class="fas fa-exclamation-triangle" style="margin-right:8px;"></i> No se pudo acceder a la cámara.</div>
-    </div>
-    <div class="ar-controls-toggle" id="arToggleBtn"><i class="fas fa-chevron-down"></i></div>
-    <div class="ar-controls-panel" id="arControlsPanel">
-        <div class="ar-upload-btn-large" id="arUploadBtn"><i class="fas fa-upload"></i></div>
-        <div class="ar-size-row"><div class="ar-size-label"><span><i class="fas fa-expand-alt"></i> Tamaño</span><span id="arSizeValue">1.5</span></div><input type="range" id="arSizeSlider" min="0.5" max="2.5" step="0.1" value="1.5"></div>
-        <div class="ar-rotation-row"><span class="ar-rotation-label">X</span><div class="ar-rotation-buttons"><button class="ar-rotation-btn" id="arRotXMinus">−</button><span class="ar-rotation-value" id="arRotXVal">-180°</span><button class="ar-rotation-btn" id="arRotXPlus">+</button></div></div>
-        <div class="ar-rotation-row"><span class="ar-rotation-label">Y</span><div class="ar-rotation-buttons"><button class="ar-rotation-btn" id="arRotYMinus">−</button><span class="ar-rotation-value" id="arRotYVal">180°</span><button class="ar-rotation-btn" id="arRotYPlus">+</button></div></div>
-        <div class="ar-rotation-row"><span class="ar-rotation-label">Z</span><div class="ar-rotation-buttons"><button class="ar-rotation-btn" id="arRotZMinus">−</button><span class="ar-rotation-value" id="arRotZVal">270°</span><button class="ar-rotation-btn" id="arRotZPlus">+</button></div></div>
-        <div class="ar-action-buttons">
-            <button class="ar-action-btn" id="arResetRotation"><i class="fas fa-sync-alt"></i></button>
-            <button class="ar-action-btn" id="arCaptureBtn"><i class="fas fa-camera"></i></button>
-            <button class="ar-action-btn" id="arClearCustomBtn"><i class="fas fa-trash-alt"></i></button>
-        </div>
-    </div>
-    <input type="file" id="arFileInput" accept="image/*">
-</div>
-
-<!-- ══════════════════════════════════════════
-     MOBILE
-══════════════════════════════════════════ -->
-<div class="mobile-content">
-    <div class="mobile-header">
-        <div class="mobile-header-tag">v2.0 // artist portfolio</div>
-        <h1>Guerr <span>Tattoo</span></h1>
-        <p><i class="fas fa-map-pin"></i> Suba, Bogotá · Julián Guerrero</p>
+      <!-- Buttons -->
+      <div>
+        <button class="btn btn-primary" onclick="downloadStencil()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar stencil
+        </button>
+        <button class="btn btn-secondary" onclick="resetAll()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+          Reiniciar
+        </button>
+      </div>
     </div>
 
-    <!-- Inicio -->
-    <div class="mobile-section" id="inicio">
-        <div class="mobile-section-title"><i class="fas fa-home"></i> Inicio</div>
-        <div class="mobile-gallery-scroll" style="margin-bottom:14px;">
-            <!-- Tarjetas de hero mobile con imágenes reales -->
-            <div style="min-width:135px;height:175px;border-radius:6px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;background:linear-gradient(180deg,transparent 40%,rgba(5,5,8,.95)),url('https://images.unsplash.com/photo-1775135360402-bac00cc921c2?w=300&q=80')center/cover;border:1px solid rgba(0,240,255,.1);overflow:hidden;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:12px;color:white;letter-spacing:1px;">Blackwork</h3>
-                <p style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-top:2px;">Espalda completa</p>
-            </div>
-            <div style="min-width:135px;height:175px;border-radius:6px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;background:linear-gradient(180deg,transparent 40%,rgba(5,5,8,.95)),url('https://images.unsplash.com/photo-1714787283995-3dba3caf1cc4?w=300&q=80')center/cover;border:1px solid rgba(0,240,255,.1);overflow:hidden;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:12px;color:white;letter-spacing:1px;">Realismo</h3>
-                <p style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-top:2px;">Detalle · Sombras</p>
-            </div>
-            <div style="min-width:135px;height:175px;border-radius:6px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;background:linear-gradient(180deg,transparent 40%,rgba(5,5,8,.95)),url('https://images.unsplash.com/photo-1577357922830-eae2e1c7b4de?w=300&q=80')center/cover;border:1px solid rgba(0,240,255,.1);overflow:hidden;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:12px;color:white;letter-spacing:1px;">Minimal</h3>
-                <p style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-top:2px;">Fine Line</p>
-            </div>
-            <div style="min-width:135px;height:175px;border-radius:6px;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;background:linear-gradient(180deg,transparent 40%,rgba(5,5,8,.95)),url('https://images.unsplash.com/photo-1540885418945-9744611689ff?w=300&q=80')center/cover;border:1px solid rgba(0,240,255,.1);overflow:hidden;">
-                <h3 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:12px;color:white;letter-spacing:1px;">Blackwork</h3>
-                <p style="font-size:10px;color:var(--cyan);font-family:'JetBrains Mono',monospace;margin-top:2px;">Full sleeve</p>
-            </div>
-        </div>
-        <div style="display:flex;gap:8px;">
-            <button class="btn" style="flex:1;" onclick="document.getElementById('reservas').scrollIntoView({behavior:'smooth'})"><i class="fas fa-calendar-check"></i> Reservar</button>
-            <a href="https://wa.me/573012802733" target="_blank" class="btn btn-outline" style="flex:1;text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        </div>
+    <!-- Preview -->
+    <div class="preview-panel" id="previewPanel">
+      <div class="preview-empty" id="previewEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        <p>Sube una imagen para generar el stencil</p>
+        <small>Acepta JPG, PNG, WebP</small>
+      </div>
+      <canvas id="canvas"></canvas>
     </div>
+  </div>
 
-    <!-- Galería mobile -->
-    <div class="mobile-section" id="galeria">
-        <div class="mobile-section-title"><i class="fas fa-images"></i> Galería</div>
-        <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;scrollbar-width:none;">
-            <button class="category-btn active" data-filter="all" style="font-size:10px;padding:6px 12px;flex-shrink:0;">Todos</button>
-            <button class="category-btn" data-filter="blackwork" style="font-size:10px;padding:6px 12px;flex-shrink:0;">Blackwork</button>
-            <button class="category-btn" data-filter="realismo" style="font-size:10px;padding:6px 12px;flex-shrink:0;">Realismo</button>
-            <button class="category-btn" data-filter="minimal" style="font-size:10px;padding:6px 12px;flex-shrink:0;">Minimal</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;" id="mobile-gallery-grid">
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="blackwork"><img src="https://images.unsplash.com/photo-1775135360402-bac00cc921c2?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="blackwork"><img src="https://images.unsplash.com/photo-1775135332562-9ff99e65a616?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="blackwork"><img src="https://images.unsplash.com/photo-1775135786145-7073d65228a1?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="realismo"><img src="https://images.unsplash.com/photo-1714787283995-3dba3caf1cc4?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="realismo"><img src="https://images.unsplash.com/photo-1637966498163-d9d61261fdfe?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="realismo"><img src="https://images.unsplash.com/photo-1519822356-4853be4346a8?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="minimal"><img src="https://images.unsplash.com/photo-1547754145-ef9ff306e3f3?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="minimal"><img src="https://images.unsplash.com/photo-1577357922830-eae2e1c7b4de?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="minimal"><img src="https://images.unsplash.com/photo-1687825495498-1bb4c92dbb19?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="blackwork"><img src="https://images.unsplash.com/photo-1540885418945-9744611689ff?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="realismo"><img src="https://images.unsplash.com/photo-1573208425302-e94dd243fa91?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-            <div style="aspect-ratio:1;border-radius:4px;overflow:hidden;border:1px solid var(--border-subtle);" data-category="minimal"><img src="https://images.unsplash.com/photo-1729552953322-47f491a7f7f3?w=200&q=75" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"></div>
-        </div>
-    </div>
+  <script>
+    let imageData = null;
 
-    <!-- Stencil mobile -->
-    <div class="mobile-stencil-section" id="stencil-mobile">
-        <div class="mobile-section-title"><i class="fas fa-fingerprint"></i> Generador de Stencil</div>
-        <div class="mobile-stencil-card">
-            <h4><i class="fas fa-upload"></i> Sube tu imagen</h4>
-            <div class="mobile-stencil-upload" id="mobileStencilUpload">
-                <div style="font-size:2rem;margin-bottom:.5rem;">🖼</div>
-                <p style="color:var(--text-primary);font-weight:500;font-size:.9rem;">Toca para buscar</p>
-                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:4px;">JPG · PNG · GIF</p>
-                <input type="file" id="mobileStencilFileInput" accept="image/jpeg,image/png,image/gif">
-            </div>
-        </div>
-        <div class="mobile-stencil-card">
-            <h4><i class="fas fa-palette"></i> Estilo</h4>
-            <div class="mobile-stencil-style-options" id="mobileStencilStyleOptions">
-                <div class="mobile-stencil-style-option" data-style="ultra_detailed"><span class="mobile-stencil-check-mark"></span><span style="flex:1;font-size:.85rem;">Ultra detallado</span><span class="stencil-style-badge" style="font-size:.55rem;">Más líneas</span></div>
-                <div class="mobile-stencil-style-option" data-style="detailed"><span class="mobile-stencil-check-mark"></span><span style="flex:1;font-size:.85rem;">Detalles finos</span><span class="stencil-style-badge" style="font-size:.55rem;">Fino</span></div>
-                <div class="mobile-stencil-style-option selected" data-style="standard"><span class="mobile-stencil-check-mark">✓</span><span style="flex:1;font-size:.85rem;">Estándar</span><span class="stencil-style-badge" style="font-size:.55rem;">Normal</span></div>
-                <div class="mobile-stencil-style-option" data-style="bold"><span class="mobile-stencil-check-mark"></span><span style="flex:1;font-size:.85rem;">Líneas gruesas</span><span class="stencil-style-badge" style="font-size:.55rem;">Grueso</span></div>
-                <div class="mobile-stencil-style-option" data-style="silhouette"><span class="mobile-stencil-check-mark"></span><span style="flex:1;font-size:.85rem;">Silueta</span><span class="stencil-style-badge" style="font-size:.55rem;">Contraste</span></div>
-            </div>
-        </div>
-        <div class="mobile-stencil-card">
-            <h4><i class="fas fa-sliders-h"></i> Configuración</h4>
-            <div class="mobile-stencil-toggle"><label>Contorno PNG</label><label class="stencil-switch"><input type="checkbox" id="mobileStencilTransparentToggle" checked><span class="stencil-slider"></span></label></div>
-            <div style="background:rgba(255,0,110,.04);border:1px solid rgba(255,0,110,.1);border-radius:4px;padding:.65rem .85rem;font-size:.8rem;color:var(--text-secondary);margin-bottom:.85rem;" id="mobileStencilBgHint">Solo líneas — para transferencia fácil</div>
-            <div style="margin-bottom:1rem;">
-                <label class="stencil-setting-label" style="margin-bottom:.5rem;">Color de línea</label>
-                <div class="stencil-color-quick-buttons" id="mobileStencilQuickColors" style="margin-bottom:.6rem;">
-                    <div class="stencil-color-btn active" style="background:#000000;" data-color="#000000"></div>
-                    <div class="stencil-color-btn" style="background:#007aff;" data-color="#007aff"></div>
-                    <div class="stencil-color-btn" style="background:#ff3b30;" data-color="#ff3b30"></div>
-                    <div class="stencil-color-btn" style="background:#34c759;" data-color="#34c759"></div>
-                </div>
-                <input type="color" id="mobileStencilLineColor" value="#000000">
-            </div>
-        </div>
-        <div class="mobile-stencil-card">
-            <h4><i class="fas fa-eye"></i> Vista previa</h4>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;">
-                <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-dim);">MODE: <span id="mobileStencilCurrentStyleLabel" style="color:var(--magenta);">Estándar</span></span>
-            </div>
-            <div class="mobile-stencil-preview-container" id="mobileStencilPreviewContainer"><canvas id="mobileStencilCanvas"></canvas></div>
-            <p style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-dim);text-align:center;margin-top:.75rem;background:rgba(255,0,110,.03);padding:.6rem .75rem;border-radius:4px;border:1px solid rgba(255,0,110,.08);line-height:1.5;">💡 Mantén presionada la imagen → "Copiar" → pegar en Procreate</p>
-            <button id="mobileStencilDownloadBtn" class="btn btn-full" disabled style="background:linear-gradient(135deg,var(--magenta),#cc0058);margin-top:.6rem;">Descargar stencil</button>
-            <button id="mobileStencilCopyBtn" class="btn btn-full copy-btn" disabled>Copiar al portapapeles</button>
-        </div>
-    </div>
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadLabel = document.getElementById('uploadLabel');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const thresholdSlider = document.getElementById('threshold');
+    const thresholdVal = document.getElementById('thresholdVal');
+    const bgColorInput = document.getElementById('bgColor');
+    const inkColorInput = document.getElementById('inkColor');
+    const previewEmpty = document.getElementById('previewEmpty');
 
-    <!-- AR mobile -->
-    <div class="mobile-ar-section" id="ar-mobile">
-        <div class="mobile-section-title"><i class="fas fa-vr-cardboard"></i> AR Experience</div>
-        <svg class="mobile-warrior-svg" viewBox="0 0 21590 27940" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8550 19311c13,-22 11,-34 -6,-36 -159,65 -267,34 -324,-93 -48,-120 -19,-258 86,-414 78,-81 174,-131 289,-150 -5,-770 7,-1204 35,-1302 -387,167 -631,240 -730,216 -11,204 -313,508 -905,913 -91,89 -200,177 -327,266 -393,565 -529,1195 -408,1890 143,672 557,1064 1242,1176 153,-329 246,-516 278,-562 -455,-56 -802,-290 -1039,-703 -271,-674 -222,-1301 148,-1881 143,-148 211,-165 206,-50 -30,513 -89,1193 -176,2040 20,219 157,317 412,295 125,-37 196,-120 213,-250 -109,-91 -115,-188 -17,-290 345,-35 710,-65 1094,-90 114,-131 211,-265 291,-401 -64,33 -300,52 -708,55 -136,6 -303,12 -503,20 -157,121 -249,272 -274,451 -7,91 9,172 46,243 19,116 -31,190 -151,222 -190,19 -294,-67 -313,-260 1,-239 136,-446 407,-620 48,-547 100,-1164 157,-1849 152,-67 347,-149 586,-246 -45,522 -51,948 -19,1278 122,190 259,234 410,132z"/>
-        </svg>
-        <div class="mobile-ar-steps">
-            <div class="mobile-ar-step"><div class="mobile-ar-step-num">1</div><p>Apunta al marcador</p></div>
-            <div class="mobile-ar-step"><div class="mobile-ar-step-num">2</div><p>Sube tu diseño</p></div>
-            <div class="mobile-ar-step"><div class="mobile-ar-step-num">3</div><p>Ajusta tamaño y rotación</p></div>
-            <div class="mobile-ar-step"><div class="mobile-ar-step-num">4</div><p>Captura y comparte</p></div>
-        </div>
-        <button class="mobile-ar-launch" onclick="openARFullscreen()"><i class="fas fa-vr-cardboard"></i> Iniciar AR</button>
-    </div>
+    uploadBtn.addEventListener('click', () => fileInput.click());
 
-    <!-- Precios mobile -->
-    <div class="mobile-section" id="precios">
-        <div class="mobile-section-title"><i class="fas fa-tag"></i> Precios</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <div style="flex:1 1 100px;background:rgba(0,240,255,.03);border-radius:6px;padding:16px 10px;text-align:center;border:1px solid var(--border-subtle);">
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:600;margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase;">Pequeño</h3>
-                <div style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;color:var(--cyan);">$200k</div>
-                <small style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:9px;display:block;margin-top:4px;">hasta 10cm</small>
-            </div>
-            <div style="flex:1 1 100px;background:rgba(0,240,255,.03);border-radius:6px;padding:16px 10px;text-align:center;border:1px solid var(--border-subtle);">
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:600;margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase;">Mediano</h3>
-                <div style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;color:var(--cyan);">$400k</div>
-                <small style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:9px;display:block;margin-top:4px;">10-20cm</small>
-            </div>
-            <div style="flex:1 1 100px;background:rgba(0,240,255,.03);border-radius:6px;padding:16px 10px;text-align:center;border:1px solid var(--border-subtle);">
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:600;margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase;">Grande</h3>
-                <div style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;color:var(--cyan);">$800k+</div>
-                <small style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:9px;display:block;margin-top:4px;">+20cm</small>
-            </div>
-        </div>
-        <p style="margin-top:14px;font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">*Precios en COP, incluye asesoría.</p>
-    </div>
-
-    <!-- Reservas mobile -->
-    <div class="mobile-section" id="reservas">
-        <div class="mobile-section-title"><i class="fas fa-calendar-alt"></i> Reserva</div>
-        <div class="form-group"><label>Fecha</label><input type="date" id="fecha-cita" min="2025-04-01"></div>
-        <div class="form-group"><label>Hora</label><select id="hora-cita"><option>10:00 AM (2h)</option><option>12:00 PM (2h)</option><option>2:00 PM (3h)</option><option>4:00 PM (2h)</option></select></div>
-        <button class="btn" style="width:100%;" onclick="simularPago()"><i class="fas fa-lock"></i> Pagar depósito · $40.000</button>
-        <p style="margin-top:12px;font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">Depósito no reembolsable.</p>
-    </div>
-
-    <!-- Ubicación mobile -->
-    <div class="mobile-section" id="ubicacion">
-        <div class="mobile-section-title"><i class="fas fa-map-marker-alt"></i> Estudio</div>
-        <div style="width:100%;height:170px;border-radius:6px;overflow:hidden;margin-bottom:12px;border:1px solid var(--border-subtle);">
-            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-74.1130%2C4.7600%2C-74.0930%2C4.7800&layer=mapnik&marker=4.7700%2C-74.1030" style="width:100%;height:100%;filter:grayscale(1)invert(1)hue-rotate(180deg)saturate(.5)brightness(.7)contrast(1.2);border:0;" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;">
-            <div style="flex:1;background:rgba(0,240,255,.03);border:1px solid var(--border-subtle);padding:12px;border-radius:6px;">
-                <i class="fas fa-location-dot" style="color:var(--cyan);font-size:16px;margin-bottom:8px;display:block;"></i>
-                <p style="font-size:12px;color:var(--text-secondary);"><strong style="color:var(--text-primary);">Cra. 107 #143-22</strong><br>Suba, Bogotá</p>
-                <a href="https://maps.google.com/?q=Cra.+107+%23143-22+Bogot%C3%A1" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:10px;display:inline-block;margin-top:6px;">Ver en Maps →</a>
-            </div>
-            <div style="flex:1;background:rgba(0,240,255,.03);border:1px solid var(--border-subtle);padding:12px;border-radius:6px;">
-                <i class="fab fa-whatsapp" style="color:#25d366;font-size:16px;margin-bottom:8px;display:block;"></i>
-                <p style="font-size:12px;color:var(--text-secondary);"><strong style="color:var(--text-primary);">301 280 2733</strong><br>Lun–Sáb 10am–7pm</p>
-                <a href="https://wa.me/573012802733" target="_blank" rel="noopener" style="color:#25d366;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:10px;display:inline-block;margin-top:6px;">Escribir →</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="mobile-footer-note">Guerr Tattoo · © <span class="year-span"></span></div>
-</div>
-
-<!-- Mobile Bottom Nav -->
-<nav class="mobile-bottom-nav">
-    <a href="#inicio"     class="mobile-nav-item active"><i class="fas fa-home"></i><span>Inicio</span></a>
-    <a href="#galeria"    class="mobile-nav-item"><i class="fas fa-images"></i><span>Galería</span></a>
-    <a href="#stencil-mobile" class="mobile-nav-item"><i class="fas fa-fingerprint"></i><span>Stencil</span></a>
-    <a href="#ar-mobile"  class="mobile-nav-item"><i class="fas fa-vr-cardboard"></i><span>AR</span></a>
-    <a href="#reservas"   class="mobile-nav-item"><i class="fas fa-calendar"></i><span>Reservas</span></a>
-</nav>
-
-<script>
-(function(){
-'use strict';
-
-/* ── YEAR ── */
-const yr = new Date().getFullYear();
-document.getElementById('year').textContent = yr;
-document.querySelectorAll('.year-span').forEach(el => el.textContent = yr);
-
-/* ── TOAST ── */
-function showToast(msg, type='info', ms=3000){
-    const icons = {info:'fa-info-circle', success:'fa-check-circle', error:'fa-exclamation-circle'};
-    const el = document.createElement('div');
-    el.className = `toast ${type}`;
-    el.innerHTML = `<i class="fas ${icons[type]||'fa-info-circle'} toast-icon"></i><span>${msg}</span>`;
-    document.getElementById('toastContainer').appendChild(el);
-    setTimeout(()=>{
-        el.style.animation='toastOut .25s ease forwards';
-        setTimeout(()=>el.remove(),250);
-    }, ms);
-}
-
-/* ── PARTICLES ── */
-const pc = document.getElementById('particles');
-for(let i=0;i<22;i++){
-    const p = document.createElement('div');
-    p.className='particle';
-    p.style.left = Math.random()*100+'%';
-    p.style.animationDuration = (10+Math.random()*15)+'s';
-    p.style.animationDelay = Math.random()*12+'s';
-    const s=1+Math.random()*2;
-    p.style.width=s+'px'; p.style.height=s+'px';
-    pc.appendChild(p);
-}
-
-/* ── LIGHTBOX ── */
-const lightbox  = document.getElementById('lightbox');
-const lbImg     = document.getElementById('lbImg');
-const lbInfo    = document.getElementById('lbInfo');
-let lbItems = [], lbIdx = 0;
-
-function openLightbox(items, idx){
-    lbItems = items; lbIdx = idx;
-    lbImg.src = items[idx].src;
-    lbInfo.textContent = (items[idx].label||'') + ` · ${idx+1}/${items.length}`;
-    lightbox.classList.add('open');
-    document.body.style.overflow='hidden';
-}
-function closeLightbox(){
-    lightbox.classList.remove('open');
-    document.body.style.overflow='';
-}
-function lbNavigate(dir){
-    lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
-    lbImg.src = lbItems[lbIdx].src;
-    lbInfo.textContent = (lbItems[lbIdx].label||'') + ` · ${lbIdx+1}/${lbItems.length}`;
-}
-document.getElementById('lbClose').addEventListener('click', closeLightbox);
-document.getElementById('lbPrev').addEventListener('click', ()=>lbNavigate(-1));
-document.getElementById('lbNext').addEventListener('click', ()=>lbNavigate(1));
-lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeLightbox(); });
-document.addEventListener('keydown', e=>{
-    if(!lightbox.classList.contains('open')) return;
-    if(e.key==='ArrowLeft') lbNavigate(-1);
-    if(e.key==='ArrowRight') lbNavigate(1);
-    if(e.key==='Escape') closeLightbox();
-});
-
-/* Bind gallery items to lightbox */
-function bindGallery(selector){
-    const items = [];
-    document.querySelectorAll(selector).forEach(el=>{
-        items.push({ src: el.dataset.src || el.querySelector('img')?.src, label: el.dataset.label||'' });
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        imageData = ev.target.result;
+        uploadLabel.textContent = 'Cambiar imagen';
+        processImage();
+      };
+      reader.readAsDataURL(file);
     });
-    document.querySelectorAll(selector).forEach((el, i)=>{
-        el.style.cursor='zoom-in';
-        el.addEventListener('click', ()=>openLightbox(items, i));
+
+    thresholdSlider.addEventListener('input', () => {
+      thresholdVal.textContent = thresholdSlider.value;
+      processImage();
     });
-}
-bindGallery('.gallery-item-desktop');
 
-/* ── SCROLL SPY ── */
-function makeScrollSpy(navSelector, sectionSelector){
-    const navEls   = document.querySelectorAll(navSelector);
-    const sections = document.querySelectorAll(sectionSelector);
-    window.addEventListener('scroll', ()=>{
-        let idx = sections.length;
-        while(--idx && window.scrollY + 100 < sections[idx].offsetTop){}
-        navEls.forEach((el,i)=>el.classList.toggle('active', i===idx));
-    }, {passive:true});
-}
-makeScrollSpy('.nav-link', '.desktop-section,.hero-section,.stencil-section,.ar-section');
-makeScrollSpy('.mobile-nav-item', '.mobile-section,.mobile-stencil-section,.mobile-ar-section');
+    bgColorInput.addEventListener('input', processImage);
+    inkColorInput.addEventListener('input', processImage);
 
-/* ── GALLERY FILTERS ── */
-function initFilter(btnsSelector, itemsSelector){
-    const btns  = document.querySelectorAll(btnsSelector);
-    const items = document.querySelectorAll(itemsSelector);
-    btns.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-            btns.forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            const f = btn.dataset.filter;
-            items.forEach(it=>{
-                it.style.display=(f==='all'||it.dataset.category===f)?'':'none';
-            });
-        });
-    });
-}
-initFilter('.gallery-filter-bar .category-btn', '.gallery-item-desktop');
-initFilter('#galeria .category-btn', '#mobile-gallery-grid > div');
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result
+        ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+        : { r: 0, g: 0, b: 0 };
+    }
 
-/* ── SMOOTH SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', e=>{
-        const target = document.querySelector(a.getAttribute('href'));
-        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
-    });
-});
+    function processImage() {
+      if (!imageData) return;
+      const img = new Image();
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
 
-/* ── FORMS ── */
-function simularPago(){
-    const f=document.getElementById('fecha-cita')?.value;
-    if(!f){ showToast('Selecciona una fecha','error'); return; }
-    showToast(`Depósito simulado para el ${f}`,'success');
-}
-function simularPagoDesktop(){
-    const f=document.getElementById('fecha-cita-desktop')?.value;
-    if(!f){ showToast('Selecciona una fecha','error'); return; }
-    showToast(`Depósito simulado para el ${f}`,'success');
-}
-window.enviarSolicitudDesktop = function(){
-    showToast('Solicitud enviada correctamente','success');
-    document.getElementById('tattooFormDesktop').reset();
-};
-window.simularPago = simularPago;
-window.simularPagoDesktop = simularPagoDesktop;
+        const imgDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgDataObj.data;
+        const threshold = parseInt(thresholdSlider.value);
+        const bg = hexToRgb(bgColorInput.value);
+        const ink = hexToRgb(inkColorInput.value);
 
-/* ══════════════════════════════════════════
-   STENCIL ENGINE
-══════════════════════════════════════════ */
-const STYLE_NAMES = {ultra_detailed:'Ultra detallado',detailed:'Detalles finos',standard:'Estándar',bold:'Líneas gruesas',silhouette:'Silueta'};
-const THRESHOLDS  = {ultra_detailed:15,detailed:25,standard:38,bold:55,silhouette:85};
-
-async function processStencil(img, style, lineColor, transparent){
-    return new Promise(resolve=>{
-        let w=img.width, h=img.height;
-        const max=1200;
-        if(w>max||h>max){ const s=Math.min(max/w,max/h); w=Math.floor(w*s); h=Math.floor(h*s); }
-        const off=document.createElement('canvas'); off.width=w; off.height=h;
-        const ctx=off.getContext('2d');
-        ctx.drawImage(img,0,0,w,h);
-        const id=ctx.getImageData(0,0,w,h), d=id.data;
-        for(let i=0;i<d.length;i+=4){ const g=.299*d[i]+.587*d[i+1]+.114*d[i+2]; d[i]=d[i+1]=d[i+2]=g; }
-        ctx.putImageData(id,0,0);
-        const px=ctx.getImageData(0,0,w,h).data;
-        const kx=[[-1,0,1],[-2,0,2],[-1,0,1]], ky=[[-1,-2,-1],[0,0,0],[1,2,1]];
-        const thr=THRESHOLDS[style]??38;
-        const res=document.createElement('canvas'); res.width=w; res.height=h;
-        const rc=res.getContext('2d');
-        if(!transparent){ rc.fillStyle='#fff'; rc.fillRect(0,0,w,h); }
-        const hex=lineColor.startsWith('#')?lineColor:'#'+lineColor;
-        const r=parseInt(hex.slice(1,3),16), g2=parseInt(hex.slice(3,5),16), b2=parseInt(hex.slice(5,7),16);
-        rc.fillStyle=`rgb(${r},${g2},${b2})`;
-        for(let y=1;y<h-1;y++){
-            for(let x=1;x<w-1;x++){
-                let gxv=0, gyv=0;
-                for(let ky2=-1;ky2<=1;ky2++) for(let kx2=-1;kx2<=1;kx2++){
-                    const v=px[((y+ky2)*w+(x+kx2))*4];
-                    gxv+=v*kx[ky2+1][kx2+1]; gyv+=v*ky[ky2+1][kx2+1];
-                }
-                if(Math.sqrt(gxv*gxv+gyv*gyv)>thr) rc.fillRect(x,y,1,1);
-            }
+        for (let i = 0; i < data.length; i += 4) {
+          const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+          const isInk = gray < threshold;
+          data[i]     = isInk ? ink.r : bg.r;
+          data[i + 1] = isInk ? ink.g : bg.g;
+          data[i + 2] = isInk ? ink.b : bg.b;
+          data[i + 3] = 255;
         }
-        resolve(res);
-    });
-}
 
-/* ── Desktop Stencil ── */
-function initStencil(cfg){
-    const {
-        uploadId, fileId, styleOptsSel, lineColorId, downloadId, copyId,
-        canvasId, containerId, transparentId, bgHintId, quickColorsId,
-        styleLabelId, zoomInId, zoomOutId, zoomPctId, recentId, isMobile
-    } = cfg;
-
-    let origImg=null, curCanvas=null, isProc=false, zoom=100;
-
-    const upload   = document.getElementById(uploadId);
-    const fileInp  = document.getElementById(fileId);
-    const dlBtn    = document.getElementById(downloadId);
-    const cpBtn    = document.getElementById(copyId);
-    const canvas   = document.getElementById(canvasId);
-    const ctx      = canvas.getContext('2d');
-    const toggle   = document.getElementById(transparentId);
-    const bgHint   = document.getElementById(bgHintId);
-    const styleOpts= document.querySelectorAll(`${styleOptsSel} [data-style]`);
-    const lineColor= document.getElementById(lineColorId);
-    const quickClrs= document.querySelectorAll(`#${quickColorsId} .stencil-color-btn`);
-    const styleLabel=document.getElementById(styleLabelId);
-    const zoomIn   = zoomInId  ? document.getElementById(zoomInId)  : null;
-    const zoomOut  = zoomOutId ? document.getElementById(zoomOutId) : null;
-    const zoomPct  = zoomPctId ? document.getElementById(zoomPctId) : null;
-    const recentEl = recentId  ? document.getElementById(recentId)  : null;
-
-    function getStyle(){ return document.querySelector(`${styleOptsSel} [data-style].selected`)?.dataset.style||'standard'; }
-
-    function updateStyleUI(style){
-        styleOpts.forEach(o=>{
-            const sel=o.dataset.style===style;
-            o.classList.toggle('selected',sel);
-            const cm=o.querySelector('.stencil-check-mark,.mobile-stencil-check-mark');
-            if(cm) cm.innerHTML=sel?'✓':'';
-        });
-        if(styleLabel) styleLabel.textContent=STYLE_NAMES[style]||'Estándar';
+        ctx.putImageData(imgDataObj, 0, 0);
+        previewEmpty.style.display = 'none';
+        canvas.style.display = 'block';
+      };
+      img.src = imageData;
     }
 
-    function updateBgHint(){
-        if(bgHint) bgHint.innerHTML=toggle.checked?'Solo líneas — para transferencia fácil':'Fondo blanco — ideal para impresión';
+    function applyPreset(bg, ink, threshold) {
+      bgColorInput.value = bg;
+      inkColorInput.value = ink;
+      thresholdSlider.value = threshold;
+      thresholdVal.textContent = threshold;
+      processImage();
     }
 
-    function showSpinner(show){
-        const cont=document.getElementById(containerId);
-        let sp=cont.querySelector('.stencil-spinner,.mobile-stencil-spinner');
-        if(show&&!sp){ sp=document.createElement('div'); sp.className=isMobile?'mobile-stencil-spinner':'stencil-spinner'; cont.appendChild(sp); }
-        else if(!show&&sp) sp.remove();
+    function downloadStencil() {
+      if (!imageData) { alert('Primero sube una imagen'); return; }
+      const link = document.createElement('a');
+      link.download = 'stencil.png';
+      link.href = canvas.toDataURL();
+      link.click();
     }
 
-    function applyZoom(){
-        if(!curCanvas) return;
-        const s=zoom/100;
-        canvas.width=curCanvas.width*s;
-        canvas.height=curCanvas.height*s;
-        ctx.drawImage(curCanvas,0,0,canvas.width,canvas.height);
+    function resetAll() {
+      imageData = null;
+      fileInput.value = '';
+      uploadLabel.textContent = 'Subir imagen';
+      thresholdSlider.value = 128;
+      thresholdVal.textContent = 128;
+      bgColorInput.value = '#ffffff';
+      inkColorInput.value = '#000000';
+      canvas.style.display = 'none';
+      previewEmpty.style.display = 'flex';
     }
-
-    async function update(){
-        if(!origImg||isProc) return;
-        isProc=true; dlBtn.disabled=true; cpBtn.disabled=true; showSpinner(true);
-        try{
-            curCanvas=await processStencil(origImg,getStyle(),lineColor.value,toggle.checked);
-            applyZoom();
-            dlBtn.disabled=false; cpBtn.disabled=false;
-            if(recentEl) saveRecent(curCanvas.toDataURL());
-        }catch(e){ console.error(e); }
-        finally{ isProc=false; showSpinner(false); }
-    }
-
-    function loadFile(file){
-        if(!file||!file.type.startsWith('image/')){ showToast('Formato no válido','error'); return; }
-        const fr=new FileReader();
-        fr.onload=ev=>{ const img=new Image(); img.onload=()=>{ origImg=img; update(); }; img.src=ev.target.result; };
-        fr.readAsDataURL(file);
-    }
-
-    /* Upload events */
-    upload.addEventListener('click',()=>fileInp.click());
-    fileInp.addEventListener('change',e=>{ loadFile(e.target.files[0]); e.target.value=''; });
-    upload.addEventListener('dragover',e=>{ e.preventDefault(); upload.classList.add('stencil-drag-over','mobile-stencil-drag-over'); });
-    upload.addEventListener('dragleave',()=>{ upload.classList.remove('stencil-drag-over','mobile-stencil-drag-over'); });
-    upload.addEventListener('drop',e=>{ e.preventDefault(); upload.classList.remove('stencil-drag-over','mobile-stencil-drag-over'); loadFile(e.dataTransfer.files[0]); });
-
-    /* Style clicks */
-    styleOpts.forEach(o=>o.addEventListener('click',()=>{ if(isProc)return; updateStyleUI(o.dataset.style); update(); }));
-
-    /* Color */
-    lineColor.addEventListener('input',()=>{ quickClrs.forEach(b=>b.classList.toggle('active',b.dataset.color===lineColor.value)); if(origImg)update(); });
-    quickClrs.forEach(b=>b.addEventListener('click',()=>{ lineColor.value=b.dataset.color; quickClrs.forEach(x=>x.classList.remove('active')); b.classList.add('active'); if(origImg)update(); }));
-
-    /* Toggle */
-    toggle.addEventListener('change',()=>{ updateBgHint(); if(origImg)update(); });
-
-    /* Zoom */
-    if(zoomIn) zoomIn.addEventListener('click',()=>{ if(zoom<200){ zoom=Math.min(200,zoom+10); if(zoomPct)zoomPct.textContent=zoom; applyZoom(); } });
-    if(zoomOut) zoomOut.addEventListener('click',()=>{ if(zoom>50){ zoom=Math.max(50,zoom-10); if(zoomPct)zoomPct.textContent=zoom; applyZoom(); } });
-
-    /* Download */
-    dlBtn.addEventListener('click',()=>{ if(!curCanvas)return; const a=document.createElement('a'); a.download='guerr_stencil.png'; a.href=curCanvas.toDataURL(); a.click(); showToast('Stencil descargado','success'); });
-
-    /* Copy */
-    cpBtn.addEventListener('click',async()=>{
-        if(!curCanvas)return;
-        try{
-            const blob=await new Promise(r=>curCanvas.toBlob(r));
-            await navigator.clipboard.write([new ClipboardItem({[blob.type]:blob})]);
-            showToast('Copiado al portapapeles','success');
-        }catch{ showToast('No se pudo copiar. Mantén presionada la imagen.','error'); }
-    });
-
-    /* Recent */
-    function saveRecent(url){
-        if(!recentEl)return;
-        let r=JSON.parse(localStorage.getItem('gt_recent')||'[]');
-        r=[url,...r.filter(u=>u!==url)].slice(0,6);
-        localStorage.setItem('gt_recent',JSON.stringify(r));
-        renderRecent();
-    }
-    function renderRecent(){
-        if(!recentEl)return;
-        const r=JSON.parse(localStorage.getItem('gt_recent')||'[]');
-        if(!r.length){ recentEl.innerHTML='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-dim);">[ Sin trabajos recientes ]</div>'; return; }
-        recentEl.innerHTML='';
-        r.forEach(url=>{
-            const d=document.createElement('div'); d.className='stencil-recent-item';
-            const img=document.createElement('img'); img.src=url;
-            img.addEventListener('click',()=>{ const l=new Image(); l.onload=()=>{ const t=document.createElement('canvas'); t.width=l.width; t.height=l.height; t.getContext('2d').drawImage(l,0,0); curCanvas=t; applyZoom(); dlBtn.disabled=false; cpBtn.disabled=false; }; l.src=url; });
-            d.appendChild(img); recentEl.appendChild(d);
-        });
-    }
-
-    updateStyleUI('standard');
-    updateBgHint();
-    if(recentEl) renderRecent();
-}
-
-/* Init desktop stencil */
-initStencil({
-    uploadId:'stencilUploadArea', fileId:'stencilFileInput',
-    styleOptsSel:'#stencilStyleOptions', lineColorId:'stencilLineColor',
-    downloadId:'stencilDownloadBtn', copyId:'stencilCopyBtn',
-    canvasId:'stencilPreviewCanvas', containerId:'stencilPreviewContainer',
-    transparentId:'stencilTransparentToggle', bgHintId:'stencilBackgroundHint',
-    quickColorsId:'stencilQuickColors', styleLabelId:'stencilCurrentStyleLabel',
-    zoomInId:'stencilZoomInBtn', zoomOutId:'stencilZoomOutBtn', zoomPctId:'stencilZoomPercent',
-    recentId:'stencilRecentGrid', isMobile:false
-});
-
-/* Init mobile stencil */
-initStencil({
-    uploadId:'mobileStencilUpload', fileId:'mobileStencilFileInput',
-    styleOptsSel:'#mobileStencilStyleOptions', lineColorId:'mobileStencilLineColor',
-    downloadId:'mobileStencilDownloadBtn', copyId:'mobileStencilCopyBtn',
-    canvasId:'mobileStencilCanvas', containerId:'mobileStencilPreviewContainer',
-    transparentId:'mobileStencilTransparentToggle', bgHintId:'mobileStencilBgHint',
-    quickColorsId:'mobileStencilQuickColors', styleLabelId:'mobileStencilCurrentStyleLabel',
-    zoomInId:null, zoomOutId:null, zoomPctId:null, recentId:null, isMobile:true
-});
-
-/* ══════════════════════════════════════════
-   AR FULLSCREEN
-══════════════════════════════════════════ */
-function buildDefaultSVG(){
-    const d='M8550 19311c13,-22 11,-34 -6,-36 -159,65 -267,34 -324,-93 -48,-120 -19,-258 86,-414 78,-81 174,-131 289,-150 -5,-770 7,-1204 35,-1302 -387,167 -631,240 -730,216 -11,204 -313,508 -905,913 -91,89 -200,177 -327,266 -393,565 -529,1195 -408,1890 143,672 557,1064 1242,1176 153,-329 246,-516 278,-562 -455,-56 -802,-290 -1039,-703 -271,-674 -222,-1301 148,-1881 143,-148 211,-165 206,-50 -30,513 -89,1193 -176,2040 20,219 157,317 412,295 125,-37 196,-120 213,-250 -109,-91 -115,-188 -17,-290 345,-35 710,-65 1094,-90 114,-131 211,-265 291,-401 -64,33 -300,52 -708,55 -136,6 -303,12 -503,20 -157,121 -249,272 -274,451 -7,91 9,172 46,243 19,116 -31,190 -151,222 -190,19 -294,-67 -313,-260 1,-239 136,-446 407,-620 48,-547 100,-1164 157,-1849 152,-67 347,-149 586,-246 -45,522 -51,948 -19,1278 122,190 259,234 410,132z';
-    const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21590 27940"><path d="${d}" stroke="#b967ff" stroke-width="60" fill="black"/></svg>`;
-    return 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
-}
-const DEFAULT_SVG=buildDefaultSVG();
-
-let arScale=1.5, arRx=-180, arRy=180, arRz=270, arCustom=DEFAULT_SVG;
-
-function applyAR(){
-    const t=document.getElementById('arTatuaje');
-    if(!t)return;
-    t.setAttribute('scale',`${arScale} ${arScale} ${arScale}`);
-    t.setAttribute('rotation',`${arRx} ${arRy} ${arRz}`);
-    document.getElementById('arRotXVal').textContent=arRx+'°';
-    document.getElementById('arRotYVal').textContent=arRy+'°';
-    document.getElementById('arRotZVal').textContent=arRz+'°';
-    localStorage.setItem('gt_ar',JSON.stringify({scale:arScale,rx:arRx,ry:arRy,rz:arRz}));
-}
-
-function openARFullscreen(){
-    navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}})
-        .then(()=>{
-            document.getElementById('arFullscreenOverlay').classList.add('active');
-            document.body.style.overflow='hidden';
-            try{ const s=JSON.parse(localStorage.getItem('gt_ar')||'{}'); if(s.scale){arScale=s.scale;arRx=s.rx??-180;arRy=s.ry??180;arRz=s.rz??270;} }catch{}
-            document.getElementById('arSizeSlider').value=arScale;
-            document.getElementById('arSizeValue').textContent=arScale.toFixed(1);
-            const t=document.getElementById('arTatuaje');
-            if(t){ t.setAttribute('src',arCustom); applyAR(); }
-        })
-        .catch(()=>{ showToast('Habilita el acceso a la cámara','error',5000); });
-}
-window.openARFullscreen=openARFullscreen;
-
-function closeARFullscreen(){
-    document.getElementById('arFullscreenOverlay').classList.remove('active');
-    document.body.style.overflow='';
-}
-
-document.getElementById('arCloseBtn').addEventListener('click',closeARFullscreen);
-document.getElementById('arSizeSlider').addEventListener('input',e=>{ arScale=parseFloat(e.target.value); document.getElementById('arSizeValue').textContent=arScale.toFixed(1); applyAR(); });
-
-[['arRotXPlus',15,'x'],['arRotXMinus',-15,'x'],['arRotYPlus',15,'y'],['arRotYMinus',-15,'y'],['arRotZPlus',15,'z'],['arRotZMinus',-15,'z']].forEach(([id,d,ax])=>{
-    document.getElementById(id).addEventListener('click',()=>{
-        if(ax==='x')arRx=(arRx+d)%360;
-        if(ax==='y')arRy=(arRy+d)%360;
-        if(ax==='z')arRz=(arRz+d)%360;
-        applyAR();
-    });
-});
-
-document.getElementById('arResetRotation').addEventListener('click',()=>{ arRx=-180;arRy=180;arRz=270; applyAR(); showToast('Rotación reiniciada','info'); });
-
-document.getElementById('arCaptureBtn').addEventListener('click',async()=>{
-    const c=document.querySelector('#arScene canvas');
-    if(!c){ showToast('No se pudo capturar','error'); return; }
-    const dataURL=c.toDataURL('image/png');
-    /* Flash */
-    const fl=document.createElement('div');
-    Object.assign(fl.style,{position:'fixed',inset:'0',background:'white',zIndex:'99999',opacity:'.7',pointerEvents:'none',transition:'opacity .3s'});
-    document.body.appendChild(fl);
-    requestAnimationFrame(()=>{ fl.style.opacity='0'; setTimeout(()=>fl.remove(),320); });
-    /* Share or download */
-    if(navigator.share){
-        try{
-            const blob=await (await fetch(dataURL)).blob();
-            const file=new File([blob],'GuerrTattooAR.png',{type:'image/png'});
-            if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'GuerrTattooAR'}); return; }
-        }catch{}
-    }
-    const a=document.createElement('a'); a.download='GuerrTattooAR.png'; a.href=dataURL; a.click();
-    showToast('Imagen guardada','success');
-});
-
-document.getElementById('arClearCustomBtn').addEventListener('click',()=>{ arCustom=DEFAULT_SVG; document.getElementById('arTatuaje')?.setAttribute('src',DEFAULT_SVG); showToast('Diseño restaurado','info'); });
-document.getElementById('arUploadBtn').addEventListener('click',()=>document.getElementById('arFileInput').click());
-document.getElementById('arFileInput').addEventListener('change',e=>{
-    const file=e.target.files[0]; if(!file)return;
-    if(!file.type.startsWith('image/')){ showToast('Formato no válido','error'); return; }
-    const fr=new FileReader(); fr.onload=ev=>{ arCustom=ev.target.result; document.getElementById('arTatuaje')?.setAttribute('src',ev.target.result); showToast('Diseño cargado','success'); }; fr.readAsDataURL(file);
-    e.target.value='';
-});
-
-document.getElementById('arToggleBtn').addEventListener('click',()=>{
-    const panel=document.getElementById('arControlsPanel');
-    const btn  =document.getElementById('arToggleBtn');
-    panel.classList.toggle('hidden');
-    btn.querySelector('i').className=panel.classList.contains('hidden')?'fas fa-chevron-up':'fas fa-chevron-down';
-});
-
-const targetEntity=document.querySelector('[mindar-image-target]');
-if(targetEntity){
-    targetEntity.addEventListener('targetFound',()=>{ document.getElementById('arStatusDot').classList.add('active'); document.getElementById('arStatusText').textContent='Detectado'; });
-    targetEntity.addEventListener('targetLost', ()=>{ document.getElementById('arStatusDot').classList.remove('active'); document.getElementById('arStatusText').textContent='Buscando...'; });
-}
-
-})();
-</script>
+  </script>
 </body>
 </html>
