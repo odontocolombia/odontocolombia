@@ -11,7 +11,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'Nunito Sans', sans-serif; color: #444; background: #fff; overflow-x: hidden; }
-
     :root {
       --blue: #1565C0;
       --blue-dark: #0D47A1;
@@ -29,7 +28,6 @@
       --shadow: 0 4px 20px rgba(0,0,0,0.08);
       --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
     }
-
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .section { padding: 90px 0; }
     .section-title { text-align: center; margin-bottom: 50px; }
@@ -44,7 +42,6 @@
     .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.7); }
     .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
     a { text-decoration: none; }
-
     /* TOPBAR */
     .topbar { background: #0D47A1; padding: 9px 0; font-size: 13px; color: rgba(255,255,255,0.85); }
     .topbar-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
@@ -55,7 +52,6 @@
     .social-icon { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
     .social-icon:hover { background: #00ACC1; }
     .social-icon svg { width: 13px; height: 13px; fill: white; }
-
     /* NAVBAR */
     #navbar { position: sticky; top: 0; z-index: 1000; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
@@ -76,7 +72,6 @@
     .mobile-nav a { display: block; padding: 10px 0; font-weight: 700; font-size: 15px; color: #374151; border-bottom: 1px solid #e5e7eb; }
     .mobile-nav .btn { margin-top: 16px; width: 100%; justify-content: center; }
     @media (max-width: 900px) { .nav-menu, .nav-right { display: none; } .hamburger { display: flex; } .mobile-nav.open { display: block; } }
-
     /* HERO */
     #hero { position: relative; overflow: hidden; height: 620px; }
     .hero-slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -99,7 +94,6 @@
     .hero-arrow-left { left: 20px; }
     .hero-arrow-right { right: 20px; }
     @media (max-width: 600px) { #hero { height: 520px; } .hero-content { padding: 0 20px; } }
-
     /* ABOUT */
     .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
     .about-image-main { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
@@ -116,7 +110,6 @@
     .about-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #374151; }
     .about-feat::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: #E3F2FD; color: #1565C0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
     @media (max-width: 900px) { .about-inner { grid-template-columns: 1fr; } .about-image-badge { right: 10px; } }
-
     /* SERVICES */
     .services-section { background: #f9fafb; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -133,7 +126,6 @@
     .service-link::after { content: '→'; }
     @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
-
     /* STATS */
     .stats-section { background: linear-gradient(135deg, #0D47A1 0%, #006064 100%); padding: 80px 0; }
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -147,7 +139,6 @@
     .stat-emergency .emer-text h4 { font-size: 18px; font-weight: 800; color: #fff; }
     .stat-emergency .emer-text p { font-size: 14px; color: rgba(255,255,255,0.7); margin: 0; }
     @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } .stat-emergency { grid-column: span 2; } }
-
     /* APPOINTMENT */
     .appointment-section { background: linear-gradient(135deg, #1565C0 0%, #00ACC1 100%); padding: 80px 0; }
     .appointment-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
@@ -175,7 +166,6 @@
     .form-success .check svg { width: 28px; height: 28px; stroke: #1565C0; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     .form-success h4 { font-size: 20px; color: #1a1a2e; font-weight: 800; margin-bottom: 8px; }
     @media (max-width: 900px) { .appointment-inner { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } }
-
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .pricing-card { border-radius: 14px; border: 1px solid #e5e7eb; padding: 36px 30px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
@@ -207,7 +197,6 @@
     .pricing-card:not(.featured) .pricing-features li::before { background: #E3F2FD; color: #1565C0; }
     .pricing-card.featured .pricing-features li::before { background: rgba(255,255,255,0.2); color: white; }
     @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } .pricing-card.featured { transform: none; } }
-
     /* TESTIMONIALS */
     .testimonials-section { background: #f9fafb; }
     .testi-slider { overflow: hidden; }
@@ -229,7 +218,6 @@
     .testi-dot.active { background: #1565C0; width: 20px; border-radius: 4px; }
     @media (max-width: 900px) { .testi-card { min-width: calc(50% - 12px); } }
     @media (max-width: 580px) { .testi-card { min-width: 100%; } }
-
     /* DOCTORS */
     .doctors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .doctor-card { border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; transition: all 0.3s; }
@@ -247,7 +235,6 @@
     .doctor-spec { font-size: 13px; color: #1565C0; font-weight: 600; display: block; }
     @media (max-width: 900px) { .doctors-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 480px) { .doctors-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; } }
-
     /* FAQ */
     .faq-section { background: #f9fafb; }
     .faq-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 70px; align-items: start; }
@@ -263,7 +250,6 @@
     .faq-a.open { max-height: 300px; }
     .faq-a-inner { padding: 0 20px 18px; font-size: 14px; color: #6b7280; line-height: 1.75; }
     @media (max-width: 900px) { .faq-inner { grid-template-columns: 1fr; } }
-
     /* BLOG */
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .blog-card { border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; transition: all 0.3s; }
@@ -281,7 +267,6 @@
     .blog-link::after { content: '→'; }
     @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
-
     /* FOOTER */
     footer { background: #1a1a2e; }
     .footer-top { padding: 70px 0 48px; }
@@ -303,10 +288,8 @@
     .footer-bottom a { color: #00ACC1; }
     @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
-
     #scroll-top { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 44px; height: 44px; border-radius: 50%; background: #1565C0; color: white; border: none; cursor: pointer; box-shadow: 0 4px 14px rgba(21,101,192,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(14px); transition: all 0.3s; font-size: 18px; }
     #scroll-top.visible { opacity: 1; transform: translateY(0); }
-
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
     .fade-up.in { opacity: 1; transform: translateY(0); }
     .delay-1 { transition-delay: 0.1s; }
@@ -316,7 +299,6 @@
   </style>
 </head>
 <body>
-
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="container">
@@ -339,7 +321,6 @@
     </div>
   </div>
 </div>
-
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="container">
@@ -375,7 +356,6 @@
     <a href="#cita" class="btn btn-blue">Agendar Cita</a>
   </div>
 </nav>
-
 <!-- HERO SLIDER -->
 <section id="inicio">
   <div id="hero">
@@ -413,7 +393,6 @@
     <div class="hero-nav" id="heroNav"></div>
   </div>
 </section>
-
 <!-- ABOUT -->
 <section id="nosotros" class="section">
   <div class="container">
@@ -444,7 +423,6 @@
     </div>
   </div>
 </section>
-
 <!-- SERVICES -->
 <section id="servicios" class="section services-section">
   <div class="container">
@@ -463,7 +441,6 @@
     </div>
   </div>
 </section>
-
 <!-- STATS -->
 <section style="background:linear-gradient(135deg,#0D47A1 0%,#006064 100%);padding:80px 0;">
   <div class="container">
@@ -476,7 +453,6 @@
     </div>
   </div>
 </section>
-
 <!-- APPOINTMENT -->
 <section id="cita" style="background:linear-gradient(135deg,#1565C0 0%,#00ACC1 100%);padding:80px 0;">
   <div class="container">
@@ -518,7 +494,6 @@
     </div>
   </div>
 </section>
-
 <!-- PRICING -->
 <section class="section" style="background:#fff;">
   <div class="container">
@@ -534,7 +509,6 @@
     </div>
   </div>
 </section>
-
 <!-- TESTIMONIALS -->
 <section class="section testimonials-section">
   <div class="container">
@@ -559,7 +533,6 @@
     </div>
   </div>
 </section>
-
 <!-- DOCTORS -->
 <section id="medicos" class="section" style="background:#fff;">
   <div class="container">
@@ -576,7 +549,6 @@
     </div>
   </div>
 </section>
-
 <!-- FAQ -->
 <section id="faq" class="section faq-section">
   <div class="container">
@@ -598,7 +570,6 @@
     </div>
   </div>
 </section>
-
 <!-- BLOG -->
 <section id="blog" class="section" style="background:#fff;">
   <div class="container">
@@ -614,7 +585,6 @@
     </div>
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div style="padding:70px 0 48px;">
@@ -650,23 +620,18 @@
     </div>
   </div>
 </footer>
-
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
   window.addEventListener('scroll', () => {
     document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
   });
-
   document.getElementById('hamburger').addEventListener('click', () => {
     document.getElementById('mobileNav').classList.toggle('open');
   });
   document.querySelectorAll('#mobileNav a').forEach(a => {
     a.addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
   });
-
   // HERO SLIDER
   const heroSlides = document.getElementById('heroSlides');
   const heroNavEl = document.getElementById('heroNav');
@@ -686,13 +651,11 @@
   document.getElementById('heroPrev').addEventListener('click', () => goHero(heroIdx - 1));
   document.getElementById('heroNext').addEventListener('click', () => goHero(heroIdx + 1));
   setInterval(() => goHero(heroIdx + 1), 5500);
-
   // FADE UP
   const fadeObs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
-
   // SKILL BARS
   const skillObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -700,7 +663,6 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.skill-fill').forEach(el => skillObs.observe(el));
-
   // COUNTERS
   const counterObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -718,7 +680,6 @@
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('.num[data-target]').forEach(el => counterObs.observe(el));
-
   // TESTIMONIALS
   const testiTrack = document.getElementById('testiTrack');
   const testiDotsEl = document.getElementById('testiDots');
@@ -749,7 +710,6 @@
   testiTrack.addEventListener('mouseenter', () => clearInterval(ta));
   testiTrack.addEventListener('mouseleave', () => { ta = setInterval(() => goT(testiIdx + 1), 4800); });
   window.addEventListener('resize', () => { tpv = window.innerWidth > 900 ? 3 : window.innerWidth > 580 ? 2 : 1; buildDots(); goT(0); });
-
   // FAQ
   function toggleFaq(btn) {
     const ans = btn.nextElementSibling;
@@ -757,7 +717,6 @@
     document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
     if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
   }
-
   // FORM
   document.getElementById('apptForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -769,7 +728,6 @@
     this.style.display = 'none';
     document.getElementById('apptSuccess').style.display = 'block';
   });
-
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function(e) {
       const target = document.querySelector(this.getAttribute('href'));
