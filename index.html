@@ -2,318 +2,357 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Techno – Soluciones TI y Servicios Tecnológicos | Bogotá, Colombia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DentaSonrisa – Clínica Dental Bogotá</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0e7490;
+      --primary-dark: #0c616d;
+      --accent: #22d3ee;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --secondary-bg: #f1f5f9;
+    }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #f7f8fc; color: #1a2340; line-height: 1.6; }
 
-    /* ── UTILIDADES ── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; text-decoration: none; transition: all .25s; }
-    .btn-primary { background: #2563eb; color: #fff; }
-    .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,.35); }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
-    .btn-outline:hover { background: rgba(255,255,255,.1); }
-    .badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; padding: 5px 14px; border-radius: 999px; background: rgba(37,99,235,.12); color: #2563eb; margin-bottom: 16px; }
-    .badge-light { background: rgba(147,197,253,.12); color: #93c5fd; border: 1px solid rgba(147,197,253,.2); }
-    .section-title { font-size: clamp(28px,4vw,40px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
-    .section-sub { color: #64748b; max-width: 560px; margin: 0 auto; }
-
-    /* ── ANIMACIONES ── */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.4)} 70%{box-shadow:0 0 0 12px rgba(37,99,235,0)} }
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    .stagger > * { opacity: 0; transform: translateY(25px); transition: opacity .5s ease, transform .5s ease; }
-    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
-    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.12s; }
-    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.19s; }
-    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.26s; }
-    .stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:.33s; }
-    .stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:.40s; }
-    .stagger.visible > *:nth-child(7) { opacity:1; transform:none; transition-delay:.47s; }
-    .stagger.visible > *:nth-child(8) { opacity:1; transform:none; transition-delay:.54s; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
 
     /* ── NAVBAR ── */
-    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background .35s, box-shadow .35s; }
-    #navbar.scrolled { background: #0b1d3a; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo-icon { width: 34px; height: 34px; background: #2563eb; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-    .nav-logo-icon svg { width: 20px; height: 20px; color: #fff; }
-    .nav-logo-text { font-size: 20px; font-weight: 800; color: #fff; }
-    .nav-logo-text span { color: #60a5fa; }
-    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .nav-links a { color: #cbd5e1; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 5px; text-decoration: none; transition: color .2s, background .2s; display: flex; align-items: center; gap: 4px; }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
-    .nav-links .has-dropdown { position: relative; }
-    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,.15); padding: 8px 0; min-width: 200px; z-index: 200; animation: slideDown .18s ease; }
-    .has-dropdown:hover .dropdown-menu { display: block; }
-    .dropdown-menu a { color: #374151; font-size: 13.5px; font-weight: 500; padding: 9px 18px; display: block; border-radius: 0; transition: background .15s, color .15s; }
-    .dropdown-menu a:hover { background: #2563eb; color: #fff; }
-    .nav-cta { background: #2563eb; color: #fff; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all .2s; }
-    .nav-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all .3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-    #mobile-menu { display: none; background: #0b1d3a; padding: 16px 24px 20px; }
-    #mobile-menu.open { display: block; animation: slideDown .25s ease; }
-    #mobile-menu a { display: block; color: #cbd5e1; font-size: 14px; font-weight: 500; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); text-decoration: none; transition: color .2s; }
-    #mobile-menu a:hover { color: #fff; }
-    #mobile-menu .mob-cta { display: inline-block; margin-top: 14px; background: #2563eb; color: #fff; padding: 11px 24px; border-radius: 6px; font-weight: 600; border-bottom: none; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all .3s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 12px rgba(0,0,0,.08);
+      padding: .75rem 2rem;
+    }
+    .nav-logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--primary); display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem;
+    }
+    .nav-logo-text p:first-child {
+      font-weight: 800; font-size: 1.1rem; line-height: 1.2;
+      color: white; transition: color .3s;
+    }
+    nav.scrolled .nav-logo-text p:first-child { color: var(--text); }
+    .nav-logo-text p:last-child {
+      font-size: .6rem; letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(255,255,255,.7); transition: color .3s;
+    }
+    nav.scrolled .nav-logo-text p:last-child { color: var(--primary); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .9rem; font-weight: 500;
+      color: rgba(255,255,255,.88); transition: color .3s;
+    }
+    nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-phone {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .88rem; font-weight: 700;
+      color: white; text-decoration: none; transition: color .3s;
+    }
+    nav.scrolled .nav-phone { color: var(--primary); }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .55rem 1.4rem; border-radius: 999px;
+      font-size: .9rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; border: none; transition: all .2s;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-accent { background: #22d3ee; color: white; }
+    .btn-accent:hover { background: #06b6d4; }
+    .btn-ghost {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,.4);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); }
+    .btn-sm { padding: .4rem 1.1rem; font-size: .82rem; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: white; margin: 5px 0; border-radius: 2px; transition: .3s;
+    }
+    nav.scrolled .hamburger span { background: var(--text); }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: .75rem;
+      padding: 1rem 2rem; background: white; box-shadow: 0 4px 20px rgba(0,0,0,.1);
+    }
+    .mobile-menu a {
+      text-decoration: none; font-weight: 600; color: var(--text);
+      font-size: .95rem; padding: .4rem 0; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
 
     /* ── HERO ── */
-    #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 68px; background: linear-gradient(135deg,#0b1d3a 0%,#0d2f5e 50%,#0a3d7a 100%); }
-    .hero-grid { position: absolute; inset: 0; opacity: .08; background-image: linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px); background-size: 60px 60px; }
-    .hero-glow1 { position: absolute; top: 20%; right: 20%; width: 350px; height: 350px; border-radius: 50%; background: rgba(37,99,235,.18); filter: blur(80px); }
-    .hero-glow2 { position: absolute; bottom: 20%; right: 30%; width: 200px; height: 200px; border-radius: 50%; background: rgba(96,165,250,.12); filter: blur(60px); }
-    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 80px 0; }
-    .hero-left { animation: fadeUp .7s ease forwards; }
-    .hero-right { animation: fadeIn .7s .2s ease both; }
-    .hero-sub { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: #93c5fd; background: rgba(147,197,253,.1); border: 1px solid rgba(147,197,253,.2); padding: 6px 16px; border-radius: 999px; display: inline-block; margin-bottom: 22px; }
-    .hero-title { font-size: clamp(38px,5vw,60px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 22px; }
-    .hero-title .grad { background: linear-gradient(90deg,#60a5fa,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-desc { color: #94a3b8; font-size: 17px; line-height: 1.7; margin-bottom: 30px; max-width: 520px; }
-    .hero-checks { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 36px; }
-    .hero-check { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #cbd5e1; }
-    .hero-check svg { color: #34d399; width: 16px; height: 16px; flex-shrink: 0; }
-    .hero-btns { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-    .play-btn { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; background: none; border: none; text-decoration: none; transition: opacity .2s; }
-    .play-btn:hover { opacity: .8; }
-    .play-circle { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; animation: pulse 2.5s infinite; }
-    .play-circle svg { width: 16px; height: 16px; margin-left: 2px; }
-    .hero-img-wrap { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.1); }
-    .hero-img { width: 100%; height: 420px; object-fit: cover; display: block; }
-    .hero-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(11,29,58,.5),transparent); }
-    .hero-card1 { position: absolute; bottom: -20px; left: -24px; background: #fff; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.2); animation: float 3s ease-in-out infinite; }
-    .hero-card1-icon { width: 38px; height: 38px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .hero-card1-icon svg { width: 20px; height: 20px; color: #10b981; }
-    .hero-card1 p { font-size: 11px; color: #64748b; }
-    .hero-card1 b { font-size: 18px; color: #0f172a; font-weight: 800; }
-    .hero-card2 { position: absolute; top: -20px; right: -12px; background: #2563eb; border-radius: 14px; padding: 14px 18px; box-shadow: 0 12px 40px rgba(37,99,235,.4); animation: float 3.5s .5s ease-in-out infinite; }
-    .hero-card2 p { font-size: 11px; color: rgba(255,255,255,.75); }
-    .hero-card2 b { font-size: 24px; color: #fff; font-weight: 800; display: block; }
-    .wave { display: block; position: absolute; bottom: -1px; left: 0; width: 100%; }
+    #inicio {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+    }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,40,60,.92) 0%,
+        rgba(14,60,85,.78) 45%,
+        rgba(10,30,50,.3) 100%
+      );
+    }
+    .hero-content {
+      position: relative; max-width: 1200px; margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18); color: white;
+      font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; padding: .45rem 1.1rem;
+      border-radius: 999px; border: 1px solid rgba(255,255,255,.28);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 800; color: white; line-height: 1.12;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title span { color: #67e8f9; display: block; }
+    .hero-desc {
+      color: rgba(255,255,255,.78); font-size: 1.05rem;
+      max-width: 440px; margin-bottom: 2rem; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: .85rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .hero-social {
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .hero-avatars { display: flex; }
+    .hero-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--primary); border: 2px solid white;
+      margin-right: -10px; display: flex; align-items: center;
+      justify-content: center; font-size: .7rem; font-weight: 700; color: white;
+    }
+    .hero-stars { display: flex; gap: 2px; margin-bottom: .2rem; }
+    .hero-stars span { color: #fbbf24; font-size: 1rem; }
+    .hero-rating p { color: rgba(255,255,255,.75); font-size: .82rem; }
+    .hero-card {
+      background: rgba(255,255,255,.12); backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.22); border-radius: 1.5rem;
+      padding: 2rem; color: white; max-width: 340px; margin-left: auto;
+    }
+    .hero-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; }
+    .hero-card p { color: rgba(255,255,255,.65); font-size: .88rem; margin-bottom: 1.2rem; }
+    .hero-card-info { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.4rem; }
+    .hero-card-item { display: flex; align-items: center; gap: .75rem; font-size: .88rem; color: rgba(255,255,255,.8); }
+    .hero-card-item span:first-child { font-size: 1.2rem; }
+    .hero-card .btn { width: 100%; justify-content: center; background: white; color: var(--primary); }
+    .hero-card .btn:hover { background: #f0f9ff; }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      animation: bounce 1.6s infinite;
+    }
+    .scroll-mouse {
+      width: 24px; height: 40px; border: 2px solid rgba(255,255,255,.4);
+      border-radius: 12px; display: flex; justify-content: center; padding-top: 6px;
+    }
+    .scroll-dot { width: 4px; height: 8px; background: rgba(255,255,255,.6); border-radius: 2px; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
-    /* ── CLIENTES ── */
-    #clients { padding: 52px 0; background: #fff; border-bottom: 1px solid #e5e7eb; }
-    .clients-label { text-align: center; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: #94a3b8; margin-bottom: 28px; }
-    .clients-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 36px; }
-    .clients-logos span { font-size: 18px; font-weight: 800; color: #cbd5e1; letter-spacing: .04em; transition: color .25s; cursor: default; }
-    .clients-logos span:hover { color: #2563eb; }
+    /* ── SECTION COMMONS ── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      display: block; text-align: center;
+      font-size: .8rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--primary); margin-bottom: .6rem;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 800; margin-bottom: 1rem; color: var(--text);
+    }
+    .section-desc { text-align: center; color: var(--muted); max-width: 600px; margin: 0 auto 3rem; font-size: 1.02rem; }
 
     /* ── SERVICIOS ── */
-    #services { padding: 96px 0; background: #f7f8fc; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
-    .svc-card { background: #fff; border-radius: 14px; padding: 28px; border: 1px solid #e5e7eb; box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: all .3s; cursor: pointer; }
-    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 45px rgba(0,0,0,.1); border-color: rgba(37,99,235,.2); }
-    .svc-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-    .svc-icon svg { width: 26px; height: 26px; }
-    .svc-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; transition: color .2s; }
-    .svc-card:hover h3 { color: #2563eb; }
-    .svc-card p { font-size: 13.5px; color: #64748b; line-height: 1.65; }
+    #servicios { background: white; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.4rem; }
+    .service-card {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 1.2rem; padding: 1.8rem;
+      transition: all .3s; cursor: pointer;
+    }
+    .service-card:hover { border-color: var(--primary); box-shadow: 0 8px 30px rgba(14,116,144,.12); transform: translateY(-3px); }
+    .service-icon {
+      width: 52px; height: 52px; background: rgba(14,116,144,.1);
+      border-radius: .9rem; display: flex; align-items: center;
+      justify-content: center; font-size: 1.5rem; margin-bottom: 1.1rem;
+      transition: background .3s;
+    }
+    .service-card:hover .service-icon { background: rgba(14,116,144,.2); }
+    .service-card h3 { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
+    .service-card p { color: var(--muted); font-size: .9rem; line-height: 1.65; margin-bottom: 1rem; }
+    .service-link { color: var(--primary); font-size: .88rem; font-weight: 700; display: inline-flex; align-items: center; gap: .3rem; transition: gap .2s; }
+    .service-card:hover .service-link { gap: .6rem; }
 
     /* ── NOSOTROS ── */
-    #about { padding: 96px 0; background: linear-gradient(135deg,#0b1d3a 0%,#0d2f5e 100%); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    #nosotros { background: var(--secondary-bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img { width: 100%; height: 440px; object-fit: cover; border-radius: 18px; display: block; box-shadow: 0 30px 80px rgba(0,0,0,.4); }
-    .about-badge { position: absolute; bottom: -24px; right: -24px; background: #2563eb; border-radius: 14px; padding: 20px 24px; text-align: center; color: #fff; box-shadow: 0 12px 40px rgba(37,99,235,.45); }
-    .about-badge b { font-size: 36px; font-weight: 900; display: block; line-height: 1; }
-    .about-badge p { font-size: 12px; opacity: .85; margin-top: 4px; }
-    .about-text { color: #cbd5e1; }
-    .about-text h2 { color: #fff; font-size: clamp(28px,3.5vw,40px); font-weight: 800; margin-bottom: 18px; line-height: 1.2; }
-    .about-text p { font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
-    .about-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 36px; }
-    .about-check { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; color: #e2e8f0; }
-    .about-check svg { width: 15px; height: 15px; color: #34d399; margin-top: 3px; flex-shrink: 0; }
+    .about-img-wrap img { width: 100%; border-radius: 1.5rem; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--primary); color: white; border-radius: 1rem;
+      padding: 1.2rem 1.5rem; box-shadow: 0 8px 24px rgba(14,116,144,.4);
+    }
+    .about-badge p:first-child { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+    .about-badge p:last-child { font-size: .78rem; color: rgba(255,255,255,.75); margin-top: .2rem; }
+    .about-content { padding-bottom: 2rem; }
+    .about-content h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.25; }
+    .about-content > p { color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; }
+    .about-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: .95rem; font-weight: 500; }
+    .about-list li::before { content: "✓"; color: var(--primary); font-weight: 800; margin-top: .05rem; }
 
-    /* ── POR QUÉ NOSOTROS ── */
-    #why { padding: 96px 0; background: #fff; }
-    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
-    .why-item { display: flex; gap: 20px; }
-    .why-icon { width: 50px; height: 50px; background: rgba(37,99,235,.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .why-icon svg { width: 24px; height: 24px; color: #2563eb; }
-    .why-item h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .why-item p { font-size: 13.5px; color: #64748b; line-height: 1.65; }
-
-    /* ── CIFRAS ── */
-    #stats { padding: 72px 0; background: linear-gradient(90deg,#0b1d3a 0%,#0a3d7a 100%); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; text-align: center; }
-    .stat-num { font-size: clamp(36px,4vw,52px); font-weight: 900; color: #fff; line-height: 1; margin-bottom: 8px; }
-    .stat-label { font-size: 14px; color: #93c5fd; font-weight: 500; }
+    /* ── STATS ── */
+    #stats { background: var(--primary); padding: 4rem 2rem; }
+    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    .stat p:first-child { font-size: 2.6rem; font-weight: 800; color: white; }
+    .stat p:last-child { font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-top: .3rem; }
 
     /* ── EQUIPO ── */
-    #team { padding: 96px 0; background: #f7f8fc; }
-    .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
-    .team-card { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: all .3s; }
-    .team-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
-    .team-img-wrap { overflow: hidden; }
-    .team-img { width: 100%; height: 210px; object-fit: cover; object-position: top; display: block; transition: transform .5s; }
-    .team-card:hover .team-img { transform: scale(1.06); }
-    .team-info { padding: 20px; text-align: center; }
-    .team-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .team-info p { font-size: 13px; color: #2563eb; font-weight: 500; margin-bottom: 14px; }
-    .team-socials { display: flex; justify-content: center; gap: 10px; }
-    .social-btn { width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: all .2s; }
-    .social-btn:hover { background: #2563eb; color: #fff; }
-    .social-btn svg { width: 15px; height: 15px; }
+    #equipo { background: white; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; }
+    .team-card { border-radius: 1.2rem; overflow: hidden; border: 1px solid var(--border); background: white; transition: box-shadow .3s; }
+    .team-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+    .team-card-img { height: 220px; overflow: hidden; }
+    .team-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; }
+    .team-card:hover .team-card-img img { transform: scale(1.06); }
+    .team-card-body { padding: 1.1rem 1.3rem; }
+    .team-card-body h3 { font-weight: 700; font-size: .98rem; margin-bottom: .2rem; }
+    .team-card-body p { color: var(--primary); font-size: .85rem; font-weight: 600; margin-bottom: .8rem; }
+    .team-socials { display: flex; gap: .5rem; }
+    .team-social-btn {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--secondary-bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; color: var(--muted); transition: all .2s;
+    }
+    .team-social-btn:hover { background: rgba(14,116,144,.12); color: var(--primary); }
 
     /* ── TESTIMONIOS ── */
-    #testimonials { padding: 96px 0; background: linear-gradient(135deg,#0b1d3a 0%,#0d2f5e 100%); }
-    .testi-wrap { max-width: 760px; margin: 0 auto; text-align: center; }
-    .testi-slide { display: none; }
-    .testi-slide.active { display: block; animation: fadeUp .4s ease; }
-    .testi-box { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 48px 52px; }
-    .quote-icon { font-size: 60px; color: #2563eb; line-height: 1; margin-bottom: 20px; opacity: .6; font-family: Georgia,serif; }
-    .testi-text { font-size: 17px; color: #e2e8f0; line-height: 1.75; font-style: italic; margin-bottom: 28px; }
-    .testi-stars { display: flex; justify-content: center; gap: 4px; margin-bottom: 18px; }
-    .testi-stars svg { width: 20px; height: 20px; color: #fbbf24; fill: #fbbf24; }
-    .testi-name { font-size: 16px; font-weight: 700; color: #fff; }
-    .testi-role { font-size: 13px; color: #93c5fd; margin-top: 2px; }
-    .testi-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 32px; }
-    .testi-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); background: transparent; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
-    .testi-btn:hover { background: rgba(255,255,255,.1); }
-    .testi-btn svg { width: 18px; height: 18px; }
-    .testi-dots { display: flex; gap: 8px; }
-    .testi-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,.25); cursor: pointer; transition: all .25s; border: none; }
-    .testi-dot.active { background: #2563eb; width: 24px; }
-
-    /* ── PLANES ── */
-    #pricing { padding: 96px 0; background: #fff; }
-    .pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 52px; }
-    .toggle-label { font-size: 14px; font-weight: 500; color: #64748b; transition: color .2s; }
-    .toggle-label.active { color: #0f172a; }
-    .toggle-track { width: 48px; height: 26px; border-radius: 999px; background: #e2e8f0; cursor: pointer; border: none; position: relative; transition: background .25s; }
-    .toggle-track.on { background: #2563eb; }
-    .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); transition: left .25s; }
-    .toggle-track.on .toggle-thumb { left: 25px; }
-    .save-badge { font-size: 11px; font-weight: 700; color: #16a34a; background: #dcfce7; padding: 3px 10px; border-radius: 999px; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; max-width: 1000px; margin: 0 auto; }
-    .price-card { border-radius: 18px; padding: 36px 32px; border: 1px solid #e5e7eb; transition: all .3s; }
-    .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
-    .price-card.popular { border-color: transparent; background: linear-gradient(160deg,#0b1d3a,#0d2f5e); color: #fff; position: relative; transform: scale(1.04); box-shadow: 0 24px 60px rgba(11,29,58,.4); }
-    .popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 18px; border-radius: 999px; white-space: nowrap; }
-    .price-name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-    .price-desc { font-size: 13.5px; color: #64748b; margin-bottom: 28px; }
-    .price-card.popular .price-desc { color: #93c5fd; }
-    .price-amount { margin-bottom: 32px; }
-    .price-amount .currency { font-size: 22px; font-weight: 700; vertical-align: top; margin-top: 8px; display: inline-block; }
-    .price-amount .amount { font-size: 52px; font-weight: 900; line-height: 1; }
-    .price-amount .period { font-size: 14px; color: #64748b; margin-left: 4px; }
-    .price-card.popular .price-amount .period { color: #93c5fd; }
-    .price-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
-    .price-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-    .price-features li svg { width: 16px; height: 16px; color: #2563eb; flex-shrink: 0; }
-    .price-card.popular .price-features li svg { color: #34d399; }
-    .price-card.popular .price-features li { color: #e2e8f0; }
-    .price-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; transition: all .25s; }
-    .price-btn-dark { background: #0f172a; color: #fff; }
-    .price-btn-dark:hover { background: #1e293b; }
-    .price-btn-blue { background: #2563eb; color: #fff; }
-    .price-btn-blue:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(37,99,235,.4); }
+    #testimonios { background: var(--secondary-bg); }
+    .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
+    .testimonio-card { background: white; border-radius: 1.2rem; padding: 1.8rem; border: 1px solid var(--border); }
+    .stars { display: flex; gap: 2px; margin-bottom: 1rem; }
+    .stars span { color: #fbbf24; font-size: .9rem; }
+    .testimonio-card blockquote { color: var(--text); font-size: .93rem; line-height: 1.7; font-style: italic; margin-bottom: 1.2rem; }
+    .testimonio-author { display: flex; align-items: center; gap: .75rem; }
+    .author-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(14,116,144,.15); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: .82rem; color: var(--primary);
+    }
+    .author-name { font-weight: 700; font-size: .88rem; }
+    .author-role { font-size: .78rem; color: var(--muted); }
 
     /* ── BLOG ── */
-    #blog { padding: 96px 0; background: #f7f8fc; }
-    .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-    .blog-card { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: all .3s; cursor: pointer; }
-    .blog-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
-    .blog-img-wrap { overflow: hidden; }
-    .blog-img { width: 100%; height: 180px; object-fit: cover; display: block; transition: transform .5s; }
-    .blog-card:hover .blog-img { transform: scale(1.06); }
-    .blog-body { padding: 22px; }
-    .blog-cat { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
-    .cat-cloud { background: #dbeafe; color: #1d4ed8; }
-    .cat-ai { background: #ede9fe; color: #7c3aed; }
-    .cat-sec { background: #fee2e2; color: #dc2626; }
-    .blog-card h3 { font-size: 15.5px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; transition: color .2s; }
-    .blog-card:hover h3 { color: #2563eb; }
-    .blog-card p { font-size: 13px; color: #64748b; line-height: 1.65; margin-bottom: 18px; }
-    .blog-meta { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #94a3b8; }
-    .blog-meta-left { display: flex; align-items: center; gap: 14px; }
-    .blog-arrow { transition: transform .2s; }
-    .blog-card:hover .blog-arrow { transform: translateX(4px); }
+    #blog { background: white; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.6rem; }
+    .blog-card { border-radius: 1.2rem; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: box-shadow .3s; background: white; }
+    .blog-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+    .blog-img { height: 190px; overflow: hidden; }
+    .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .blog-card:hover .blog-img img { transform: scale(1.05); }
+    .blog-body { padding: 1.3rem 1.5rem; }
+    .blog-meta { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: var(--muted); margin-bottom: .6rem; }
+    .blog-meta span.author { color: var(--primary); font-weight: 600; }
+    .blog-body h3 { font-weight: 700; font-size: 1rem; margin-bottom: .7rem; line-height: 1.4; transition: color .2s; }
+    .blog-card:hover .blog-body h3 { color: var(--primary); }
+    .blog-link { color: var(--primary); font-size: .85rem; font-weight: 700; display: inline-flex; align-items: center; gap: .3rem; }
 
     /* ── CONTACTO ── */
-    #contact { padding: 96px 0; background: #fff; }
-    .contact-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 48px; }
-    .contact-info-box { background: linear-gradient(135deg,#0b1d3a,#0a3d7a); border-radius: 18px; padding: 36px; color: #fff; }
-    .contact-info-box h3 { font-size: 22px; font-weight: 800; margin-bottom: 28px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-    .ci-icon { width: 38px; height: 38px; background: rgba(37,99,235,.35); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ci-icon svg { width: 16px; height: 16px; color: #93c5fd; }
-    .ci-label { font-size: 11px; color: #93c5fd; font-weight: 600; margin-bottom: 2px; }
-    .ci-val { font-size: 13.5px; color: #e2e8f0; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 7px; color: #374151; }
-    .form-group input, .form-group textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-family: 'Inter',sans-serif; color: #0f172a; background: #fff; outline: none; transition: border-color .2s, box-shadow .2s; }
-    .form-group input:focus, .form-group textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-submit { display: flex; align-items: center; gap: 10px; padding: 14px 32px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .25s; }
-    .form-submit:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,.35); }
-    .form-submit svg { width: 18px; height: 18px; }
-    .toast { position: fixed; bottom: 28px; right: 28px; background: #0f172a; color: #fff; padding: 14px 22px; border-radius: 10px; font-size: 14px; font-weight: 500; box-shadow: 0 12px 40px rgba(0,0,0,.3); z-index: 999; opacity: 0; transform: translateY(20px); transition: all .35s; display: flex; align-items: center; gap: 10px; }
-    .toast.show { opacity: 1; transform: none; }
-    .toast svg { width: 18px; height: 18px; color: #34d399; }
+    #contacto { background: var(--secondary-bg); }
+    .contacto-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; align-items: start; }
+    .contacto-info h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); font-weight: 800; margin-bottom: .75rem; }
+    .contacto-info > p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+    .info-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .info-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .info-icon { width: 40px; height: 40px; background: rgba(14,116,144,.1); border-radius: .7rem; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .info-item strong { display: block; font-size: .88rem; font-weight: 700; margin-bottom: .15rem; }
+    .info-item span { font-size: .85rem; color: var(--muted); }
+    .contacto-form { background: white; border-radius: 1.5rem; padding: 2.2rem; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+    .contacto-form h3 { font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: .85rem; font-weight: 600; color: var(--text); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: .75rem 1rem; border-radius: .7rem;
+      border: 1.5px solid var(--border); font-family: inherit; font-size: .9rem;
+      color: var(--text); background: var(--bg); outline: none; transition: border .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .form-group textarea { resize: none; }
+    .form-submit { width: 100%; justify-content: center; padding: .85rem; font-size: 1rem; }
 
-    /* ── PIE DE PÁGINA ── */
-    footer { background: #04101f; color: #64748b; padding: 72px 0 32px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
-    .footer-brand p { font-size: 13.5px; line-height: 1.75; max-width: 300px; margin: 16px 0 24px; }
-    .footer-socials { display: flex; gap: 10px; }
-    .footer-social { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.05); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; color: #64748b; transition: all .2s; }
-    .footer-social:hover { background: rgba(37,99,235,.5); color: #fff; }
-    .footer-social svg { width: 16px; height: 16px; }
-    .footer-col h4 { color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 18px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a { color: #64748b; font-size: 13.5px; text-decoration: none; transition: color .2s; }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; }
-    .footer-bottom-links { display: flex; gap: 24px; }
-    .footer-bottom a { color: #64748b; text-decoration: none; transition: color .2s; }
-    .footer-bottom a:hover { color: #fff; }
+    /* ── FOOTER ── */
+    footer { background: #0a1929; color: rgba(255,255,255,.72); }
+    .footer-top { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-brand p.desc { font-size: .88rem; line-height: 1.7; color: rgba(255,255,255,.5); margin: .9rem 0 1.2rem; }
+    .footer-logo { display: flex; align-items: center; gap: .6rem; margin-bottom: .4rem; }
+    .footer-logo-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .footer-logo-name { font-weight: 800; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .footer-logo-sub { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    .footer-col h4 { color: white; font-weight: 700; margin-bottom: 1.1rem; font-size: .95rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .footer-col ul li a { text-decoration: none; font-size: .88rem; color: rgba(255,255,255,.55); transition: color .2s; }
+    .footer-col ul li a:hover { color: white; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .85rem; margin-bottom: .65rem; }
+    .footer-contact-icon { color: var(--accent); margin-top: .1rem; }
+    .footer-socials { display: flex; gap: .6rem; }
+    .footer-social { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.08); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: .75rem; color: rgba(255,255,255,.6); transition: background .2s; }
+    .footer-social:hover { background: var(--primary); color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 1.2rem 2rem; text-align: center; font-size: .78rem; color: rgba(255,255,255,.3); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2,1fr); }
-      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 36px; }
-    }
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-right { display: none; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; }
-      .about-img-wrap { display: none; }
-      .why-grid { grid-template-columns: repeat(2,1fr); }
-      .team-grid { grid-template-columns: repeat(2,1fr); }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
-      .price-card.popular { transform: none; }
-      .blog-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: block; }
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .about-grid, .contacto-grid { grid-template-columns: 1fr; }
+      .about-badge { right: 1rem; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 640px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .hero-inner { padding: 60px 0; }
-      .section-header { margin-bottom: 40px; }
-      .services-grid, .why-grid, .team-grid, .stats-grid { grid-template-columns: 1fr; }
-      .testi-box { padding: 32px 24px; }
+    @media (max-width: 540px) {
+      section { padding: 3.5rem 1.2rem; }
       .form-row { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -321,372 +360,156 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">
-        <div class="nav-logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 12h10M12 7v10"/></svg>
-        </div>
-        <span class="nav-logo-text">Techno<span>.</span></span>
-      </a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#hero">Inicio</a></li>
-        <li><a href="#about">Nosotros</a></li>
-        <li class="has-dropdown">
-          <a href="#services">Servicios ▾</a>
-          <div class="dropdown-menu">
-            <a href="#services">Consultoría TI</a>
-            <a href="#services">Soluciones en la Nube</a>
-            <a href="#services">Ciberseguridad</a>
-            <a href="#services">Analítica de Datos</a>
-            <a href="#services">Desarrollo de Software</a>
-            <a href="#services">Redes y Conectividad</a>
-          </div>
-        </li>
-        <li><a href="#team">Equipo</a></li>
-        <li><a href="#pricing">Planes</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
-      <a href="#contact" class="nav-cta">Solicitar Cotización</a>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
+  <a href="#inicio" class="nav-logo">
+    <div class="nav-logo-icon">🦷</div>
+    <div class="nav-logo-text">
+      <p>DentaSonrisa</p>
+      <p>Clínica Dental</p>
     </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+576014567890" class="nav-phone">📞 (601) 456-7890</a>
+    <a href="#contacto" class="btn btn-primary btn-sm">Agendar Cita</a>
   </div>
-  <div id="mobile-menu">
-    <a href="#hero">Inicio</a>
-    <a href="#about">Nosotros</a>
-    <a href="#services">Servicios</a>
-    <a href="#team">Equipo</a>
-    <a href="#pricing">Planes</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Contacto</a>
-    <a href="#contact" class="mob-cta">Solicitar Cotización</a>
-  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" onclick="closeMenu()">Inicio</a>
+  <a href="#servicios" onclick="closeMenu()">Servicios</a>
+  <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
+  <a href="#equipo" onclick="closeMenu()">Equipo</a>
+  <a href="#testimonios" onclick="closeMenu()">Testimonios</a>
+  <a href="#contacto" onclick="closeMenu()">Contacto</a>
+  <a href="#contacto" class="btn btn-primary" style="text-align:center;margin-top:.5rem" onclick="closeMenu()">Agendar Cita</a>
+</div>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow1"></div>
-  <div class="hero-glow2"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <span class="hero-sub">Soluciones TI y Servicios Tecnológicos · Bogotá, Colombia</span>
-        <h1 class="hero-title">Soluciones <span class="grad">Tecnológicas</span> para tu Empresa</h1>
-        <p class="hero-desc">Ofrecemos servicios de tecnología de vanguardia para impulsar el crecimiento de tu negocio. Desde computación en la nube hasta ciberseguridad, tenemos la experiencia que tu empresa necesita.</p>
-        <div class="hero-checks">
-          <div class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>99,9% de Disponibilidad Garantizada</div>
-          <div class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soporte Especializado 24/7</div>
-          <div class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Certificados ISO 27001</div>
-        </div>
-        <div class="hero-btns">
-          <a href="#contact" class="btn btn-primary">Comenzar Ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          <a href="#about" class="play-btn">
-            <div class="play-circle">
-              <svg viewBox="0 0 24 24" fill="white"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-            </div>
-            Ver Video
-          </a>
-        </div>
+<section id="inicio">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1758204054849-bf9e809aa92d?w=1800&q=80" alt="Dentista atendiendo paciente"/>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div>
+      <span class="hero-badge">✨ La sonrisa perfecta te espera</span>
+      <h1 class="hero-title">Cuidamos la salud <span>de tu sonrisa</span></h1>
+      <p class="hero-desc">Somos una clínica dental especializada en Bogotá con más de 25 años de experiencia, dedicados a brindar atención preventiva, curativa y estética de la más alta calidad.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn btn-accent">Agendar Cita Gratis →</a>
+        <a href="#servicios" class="btn btn-ghost">Ver Servicios</a>
       </div>
-      <div class="hero-right">
-        <div class="hero-img-wrap">
-          <img src="https://images.unsplash.com/photo-1580894899378-92e56886cd4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Equipo de TI" class="hero-img" />
-          <div class="hero-img-overlay"></div>
-          <div class="hero-card1">
-            <div class="hero-card1-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <div><p>Proyectos Completados</p><b>2.500+</b></div>
-          </div>
-          <div class="hero-card2">
-            <p>Satisfacción del Cliente</p>
-            <b>98%</b>
-          </div>
+      <div class="hero-social">
+        <div class="hero-avatars">
+          <div class="hero-avatar">VR</div>
+          <div class="hero-avatar">AM</div>
+          <div class="hero-avatar">CO</div>
+          <div class="hero-avatar">FG</div>
+        </div>
+        <div class="hero-rating">
+          <div class="hero-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p>+9.800 pacientes satisfechos</p>
         </div>
       </div>
     </div>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="#f7f8fc"><path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z"/></svg>
-</section>
-
-<!-- CLIENTES -->
-<section id="clients">
-  <div class="container">
-    <p class="clients-label">Empresas líderes que confían en nosotros</p>
-    <div class="clients-logos stagger">
-      <span>Microsoft</span><span>Google</span><span>Amazon</span><span>IBM</span>
-      <span>Cisco</span><span>Oracle</span><span>SAP</span><span>Dell</span>
+    <div class="hero-card">
+      <h3>Agenda tu primera cita</h3>
+      <p>Consulta de diagnóstico gratuita para nuevos pacientes</p>
+      <div class="hero-card-info">
+        <div class="hero-card-item"><span>📍</span><span>Chapinero, Bogotá D.C.</span></div>
+        <div class="hero-card-item"><span>📞</span><span>(601) 456-7890</span></div>
+        <div class="hero-card-item"><span>⏰</span><span>Lun–Sáb: 7:00 am – 7:00 pm</span></div>
+      </div>
+      <a href="#contacto" class="btn">Reservar Ahora</a>
     </div>
   </div>
+  <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
 </section>
 
 <!-- SERVICIOS -->
-<section id="services">
+<section id="servicios">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Lo Que Ofrecemos</span>
-      <h2 class="section-title">Nuestros Servicios de TI</h2>
-      <p class="section-sub">Brindamos soluciones tecnológicas integrales que permiten a las empresas innovar, crecer y mantenerse competitivas en el mercado colombiano y global.</p>
-    </div>
-    <div class="services-grid stagger">
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#dbeafe"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
-        <h3>Soluciones en la Nube</h3><p>Migra y gestiona tu infraestructura en la nube de forma segura, escalable y con reducción de costos operativos.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#fee2e2"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Ciberseguridad</h3><p>Protege los activos digitales de tu empresa con protocolos de seguridad empresarial, detección de amenazas y monitoreo 24/7.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#d1fae5"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
-        <h3>Analítica de Datos</h3><p>Transforma tus datos en información accionable con analítica avanzada, dashboards de BI e informes con inteligencia artificial.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#ede9fe"><svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-        <h3>Desarrollo de Software</h3><p>Construimos aplicaciones web y móviles robustas y escalables, adaptadas a los requerimientos únicos de tu negocio.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#ffedd5"><svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg></div>
-        <h3>Redes y Conectividad</h3><p>Diseñamos y mantenemos infraestructura de red de alto rendimiento garantizando máxima disponibilidad y confiabilidad.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#cffafe"><svg viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
-        <h3>Soporte TI y Mesa de Ayuda</h3><p>Soporte técnico las 24 horas con tiempos de respuesta rápidos para mantener tus operaciones funcionando sin interrupciones.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#e0e7ff"><svg viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></div>
-        <h3>Gestión de Bases de Datos</h3><p>Optimizamos, aseguramos y escalamos tus bases de datos con servicios DBA especializados para SQL, NoSQL y bases en la nube.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:#fce7f3"><svg viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-        <h3>Transformación Digital</h3><p>Moderniza los procesos de tu empresa con las últimas tecnologías digitales para obtener una ventaja competitiva sostenible.</p>
-      </div>
+    <span class="section-label">Nuestros Servicios</span>
+    <h2 class="section-title">Cuidamos cada aspecto de tu sonrisa</h2>
+    <p class="section-desc">Ofrecemos tratamientos dentales completos con tecnología de última generación y un equipo de especialistas certificados.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🦷</div><h3>Prótesis Dental</h3><p>Restauramos la funcionalidad y estética de tu sonrisa con prótesis de alta calidad adaptadas a ti.</p><span class="service-link">Saber más →</span></div>
+      <div class="service-card"><div class="service-icon">😁</div><h3>Ortodoncia</h3><p>Alineamos tus dientes con brackets o alineadores invisibles para una sonrisa perfecta.</p><span class="service-link">Saber más →</span></div>
+      <div class="service-card"><div class="service-icon">🔬</div><h3>Endodoncia</h3><p>Tratamientos de conducto con tecnología de punta para salvar tus dientes naturales.</p><span class="service-link">Saber más →</span></div>
+      <div class="service-card"><div class="service-icon">👨‍👩‍👧</div><h3>Odontología Familiar</h3><p>Atención integral para toda la familia en un ambiente cálido y de confianza.</p><span class="service-link">Saber más →</span></div>
+      <div class="service-card"><div class="service-icon">✨</div><h3>Blanqueamiento</h3><p>Recupera el brillo de tus dientes con nuestros tratamientos de blanqueamiento profesional.</p><span class="service-link">Saber más →</span></div>
+      <div class="service-card"><div class="service-icon">🏥</div><h3>Cirugía Maxilofacial</h3><p>Procedimientos quirúrgicos especializados realizados por nuestros expertos certificados.</p><span class="service-link">Saber más →</span></div>
     </div>
   </div>
 </section>
 
 <!-- NOSOTROS -->
-<section id="about">
+<section id="nosotros">
   <div class="container">
     <div class="about-grid">
-      <div class="about-img-wrap reveal-left">
-        <img src="https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Nuestro equipo" class="about-img" />
-        <div class="about-badge"><b>15+</b><p>Años de Experiencia</p></div>
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1685022036567-0b91b29276e1?w=700&q=80" alt="Especialista dental"/>
+        <div class="about-badge"><p>25+</p><p>Años de experiencia</p></div>
       </div>
-      <div class="about-text reveal-right">
-        <span class="badge badge-light">Quiénes Somos</span>
-        <h2>Brindamos las Mejores Soluciones TI para tu Empresa en Colombia</h2>
-        <p>Techno es un proveedor líder de soluciones TI con sede en Bogotá, dedicado a ayudar a las empresas colombianas a aprovechar la tecnología para crecer y ser más competitivas. Nuestro equipo de expertos certificados ofrece servicios tecnológicos innovadores, escalables y seguros.</p>
-        <p>Desde startups hasta grandes corporaciones, adaptamos nuestro enfoque a los desafíos únicos de cada cliente, garantizando resultados medibles y alianzas a largo plazo.</p>
-        <div class="about-checks">
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Más de 15 años en el mercado</div>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Equipo de 200+ profesionales certificados</div>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Certificados ISO 27001 y SOC 2 Tipo II</div>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Más de 1.200 clientes en Colombia y LATAM</div>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soluciones personalizadas para cada empresa</div>
-          <div class="about-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Entrega ágil con garantía de cumplimiento</div>
-        </div>
-        <a href="#contact" class="btn btn-primary">Más Información <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <div class="about-content">
+        <span class="section-label" style="text-align:left">¿Por qué elegirnos?</span>
+        <h2>La clínica dental en la que puedes confiar</h2>
+        <p>Somos un centro odontológico especializado en la salud y estética dental de nuestros pacientes, con servicios de odontología general y especializada a través de un equipo altamente profesional con recursos tecnológicos de última generación.</p>
+        <ul class="about-list">
+          <li>Tecnología digital de última generación</li>
+          <li>Especialistas certificados con experiencia internacional</li>
+          <li>Ambiente cómodo y libre de estrés</li>
+          <li>Planes de financiación accesibles</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary">Conoce más sobre nosotros →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- POR QUÉ NOSOTROS -->
-<section id="why">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Por Qué Elegirnos</span>
-      <h2 class="section-title">Razones para Trabajar con Techno</h2>
-      <p class="section-sub">Combinamos excelencia técnica y visión de negocio para entregar soluciones que realmente marcan la diferencia en las empresas colombianas.</p>
-    </div>
-    <div class="why-grid stagger">
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div><h3>Entrega Rápida y Ágil</h3><p>Entregamos proyectos a tiempo, siempre, utilizando metodologías ágiles para iteración y despliegue rápidos.</p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div><h3>Equipo Experto</h3><p>Más de 200 profesionales TI certificados con profunda experiencia en todas las principales tecnologías del mercado.</p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-        <div><h3>Servicio Premiado</h3><p>Reconocidos como el proveedor TI #1 en Colombia por 5 años consecutivos según las principales organizaciones del sector.</p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div><h3>Soporte 24/7</h3><p>Nuestro equipo de soporte dedicado está disponible las 24 horas para resolver cualquier inconveniente de forma inmediata.</p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-        <div><h3>Enfoque en el Cliente</h3><p>Escuchamos, entendemos y adaptamos cada solución a las necesidades específicas y objetivos de tu empresa.</p></div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div><h3>Orientados a Resultados</h3><p>Cada proyecto está enfocado en entregar un ROI medible y resultados tangibles para tu negocio.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CIFRAS -->
+<!-- STATS -->
 <section id="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="reveal"><div class="stat-num" data-target="2500" data-suffix="+">0</div><div class="stat-label">Proyectos Completados</div></div>
-      <div class="reveal"><div class="stat-num" data-target="1200" data-suffix="+">0</div><div class="stat-label">Clientes Satisfechos</div></div>
-      <div class="reveal"><div class="stat-num" data-target="200" data-suffix="+">0</div><div class="stat-label">Profesionales TI</div></div>
-      <div class="reveal"><div class="stat-num" data-target="15" data-suffix="+">0</div><div class="stat-label">Años de Experiencia</div></div>
-    </div>
+  <div class="stats-grid">
+    <div class="stat"><p>12.500+</p><p>Dientes Salvados</p></div>
+    <div class="stat"><p>18</p><p>Especialistas</p></div>
+    <div class="stat"><p>9.800+</p><p>Pacientes Felices</p></div>
+    <div class="stat"><p>3</p><p>Sedes en Bogotá</p></div>
   </div>
 </section>
 
 <!-- EQUIPO -->
-<section id="team">
+<section id="equipo">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Nuestro Equipo</span>
-      <h2 class="section-title">Conoce a Nuestros Expertos</h2>
-      <p class="section-sub">Un equipo diverso de apasionados tecnólogos comprometidos con entregar resultados excepcionales para nuestros clientes.</p>
-    </div>
-    <div class="team-grid stagger">
-      <div class="team-card">
-        <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1580982324076-d95230549339?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Andrés Martínez" class="team-img" /></div>
-        <div class="team-info"><h3>Andrés Martínez</h3><p>CEO y Fundador</p><div class="team-socials"><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></button></div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1573496130141-209d200cebd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Camila Rodríguez" class="team-img" /></div>
-        <div class="team-info"><h3>Camila Rodríguez</h3><p>Directora de Tecnología (CTO)</p><div class="team-socials"><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></button></div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1616344787254-d4575aa102ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="David Gómez" class="team-img" /></div>
-        <div class="team-info"><h3>David Gómez</h3><p>Líder de Cloud &amp; Infraestructura</p><div class="team-socials"><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></button></div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1581087724844-037b13e16b0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Laura Vargas" class="team-img" /></div>
-        <div class="team-info"><h3>Laura Vargas</h3><p>Líder de Ciberseguridad</p><div class="team-socials"><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></button><button class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></button></div></div>
-      </div>
+    <span class="section-label">Nuestro Equipo</span>
+    <h2 class="section-title">Conoce a nuestros especialistas</h2>
+    <p class="section-desc">Un equipo de profesionales comprometidos a ofrecerte la mejor atención y calidad de servicio.</p>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-card-img"><img src="https://images.unsplash.com/photo-1650803075918-efbee311735d?w=400&q=80" alt="Dra. Valentina Rueda"/></div><div class="team-card-body"><h3>Dra. Valentina Rueda</h3><p>Periodontista</p><div class="team-socials"><button class="team-social-btn">fb</button><button class="team-social-btn">ig</button><button class="team-social-btn">tw</button></div></div></div>
+      <div class="team-card"><div class="team-card-img"><img src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?w=400&q=80" alt="Dr. Andrés Morales"/></div><div class="team-card-body"><h3>Dr. Andrés Morales</h3><p>Ortodoncista</p><div class="team-socials"><button class="team-social-btn">fb</button><button class="team-social-btn">ig</button><button class="team-social-btn">tw</button></div></div></div>
+      <div class="team-card"><div class="team-card-img"><img src="https://images.unsplash.com/photo-1669998966162-9837617177cd?w=400&q=80" alt="Dra. Camila Ospina"/></div><div class="team-card-body"><h3>Dra. Camila Ospina</h3><p>Endodoncista</p><div class="team-socials"><button class="team-social-btn">fb</button><button class="team-social-btn">ig</button><button class="team-social-btn">tw</button></div></div></div>
+      <div class="team-card"><div class="team-card-img"><img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?w=400&q=80" alt="Dr. Felipe Gutiérrez"/></div><div class="team-card-body"><h3>Dr. Felipe Gutiérrez</h3><p>Cirujano Maxilofacial</p><div class="team-socials"><button class="team-social-btn">fb</button><button class="team-social-btn">ig</button><button class="team-social-btn">tw</button></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIOS -->
-<section id="testimonials">
+<section id="testimonios">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="badge badge-light">Testimonios</span>
-      <h2 class="section-title" style="color:#fff">Lo Que Dicen Nuestros Clientes</h2>
-    </div>
-    <div class="testi-wrap">
-      <div id="testi-container">
-        <div class="testi-slide active">
-          <div class="testi-box">
-            <div class="quote-icon">"</div>
-            <p class="testi-text">Techno transformó toda nuestra infraestructura TI en solo 6 meses. La migración a la nube fue impecable y nuestros costos bajaron un 40%. Equipo excepcional, resultados excepcionales.</p>
-            <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <div class="testi-name">Roberto Ospina</div><div class="testi-role">Director de TI, Grupo Empresarial Andino</div>
-          </div>
-        </div>
-        <div class="testi-slide">
-          <div class="testi-box">
-            <div class="quote-icon">"</div>
-            <p class="testi-text">La auditoría de ciberseguridad reveló vulnerabilidades críticas que desconocíamos. Su plan de remediación fue integral y ejecutado a la perfección. Ahora nos sentimos verdaderamente seguros.</p>
-            <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <div class="testi-name">Jennifer Morales</div><div class="testi-role">Gerente de TI, Bancolombia Regional</div>
-          </div>
-        </div>
-        <div class="testi-slide">
-          <div class="testi-box">
-            <div class="quote-icon">"</div>
-            <p class="testi-text">Contratamos a Techno para una transformación digital completa y superaron cada expectativa. Su equipo es receptivo, conocedor y verdaderamente comprometido con nuestro éxito empresarial.</p>
-            <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <div class="testi-name">Marcos Herrera</div><div class="testi-role">CEO, Retail Colombia S.A.S.</div>
-          </div>
-        </div>
-        <div class="testi-slide">
-          <div class="testi-box">
-            <div class="quote-icon">"</div>
-            <p class="testi-text">Equipo de desarrollo de software sobresaliente. Construyeron nuestra plataforma cumpliendo a cabalidad con los estándares de seguridad, en tiempo y dentro del presupuesto. La calidad del código es de clase mundial.</p>
-            <div class="testi-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <div class="testi-name">Priya Gutiérrez</div><div class="testi-role">VP de Ingeniería, HealthTech Colombia</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-controls">
-        <button class="testi-btn" id="testi-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <div class="testi-dots" id="testi-dots">
-          <button class="testi-dot active" data-i="0"></button>
-          <button class="testi-dot" data-i="1"></button>
-          <button class="testi-dot" data-i="2"></button>
-          <button class="testi-dot" data-i="3"></button>
-        </div>
-        <button class="testi-btn" id="testi-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLANES -->
-<section id="pricing">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Planes y Precios</span>
-      <h2 class="section-title">Precios Claros y Transparentes</h2>
-      <p class="section-sub">Elige el plan que mejor se adapte a tu empresa. Actualiza o cambia de plan cuando quieras. Sin costos ocultos.</p>
-    </div>
-    <div class="pricing-toggle">
-      <span class="toggle-label active" id="monthly-lbl">Mensual</span>
-      <button class="toggle-track" id="pricing-toggle"><div class="toggle-thumb"></div></button>
-      <span class="toggle-label" id="annual-lbl">Anual <span class="save-badge">Ahorra 20%</span></span>
-    </div>
-    <div class="pricing-grid stagger">
-      <div class="price-card">
-        <div class="price-name">Básico</div>
-        <div class="price-desc">Ideal para pequeñas empresas que inician su camino en servicios TI.</div>
-        <div class="price-amount"><span class="currency">$</span><span class="amount price-val" data-monthly="899" data-annual="749">899</span><span class="period">/mes</span></div>
-        <ul class="price-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Hasta 10 usuarios</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Almacenamiento en la nube (100 GB)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soporte por correo y chat</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Escaneo de seguridad mensual</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Monitoreo básico</li>
-        </ul>
-        <button class="price-btn price-btn-dark">Comenzar</button>
-      </div>
-      <div class="price-card popular">
-        <div class="popular-badge">Más Popular</div>
-        <div class="price-name">Empresarial</div>
-        <div class="price-desc">Perfecto para empresas en crecimiento con necesidades TI avanzadas.</div>
-        <div class="price-amount"><span class="currency">$</span><span class="amount price-val" data-monthly="2.499" data-annual="1.999">2.499</span><span class="period">/mes</span></div>
-        <ul class="price-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Hasta 50 usuarios</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Almacenamiento en la nube (1 TB)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soporte prioritario 24/7</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Auditorías de seguridad semanales</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Monitoreo avanzado</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Configuración VPN y firewall</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Gerente de cuenta dedicado</li>
-        </ul>
-        <button class="price-btn price-btn-blue">Comenzar</button>
-      </div>
-      <div class="price-card">
-        <div class="price-name">Corporativo</div>
-        <div class="price-desc">Soluciones TI completas para grandes organizaciones colombianas.</div>
-        <div class="price-amount"><span class="currency">$</span><span class="amount price-val" data-monthly="5.999" data-annual="4.999">5.999</span><span class="period">/mes</span></div>
-        <ul class="price-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Usuarios ilimitados</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Almacenamiento ilimitado</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soporte dedicado 24/7</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Auditorías de seguridad diarias</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Gestión completa de infraestructura</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Integraciones personalizadas</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Soporte presencial en Bogotá</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Acuerdo de nivel de servicio (SLA)</li>
-        </ul>
-        <button class="price-btn price-btn-dark">Comenzar</button>
-      </div>
+    <span class="section-label">Testimonios</span>
+    <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+    <div class="testimonios-grid">
+      <div class="testimonio-card"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><blockquote>"Excelente atención desde el primer momento. El Dr. Morales fue muy paciente y profesional. Mi ortodoncia quedó perfecta."</blockquote><div class="testimonio-author"><div class="author-avatar">MF</div><div><p class="author-name">María Fernanda López</p><p class="author-role">Ortodoncia</p></div></div></div>
+      <div class="testimonio-card"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><blockquote>"Llevaba años con miedo al dentista y aquí me hicieron sentir completamente cómodo. La tecnología que usan es impresionante."</blockquote><div class="testimonio-author"><div class="author-avatar">CH</div><div><p class="author-name">Carlos Herrera</p><p class="author-role">Endodoncia</p></div></div></div>
+      <div class="testimonio-card"><div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><blockquote>"El blanqueamiento superó mis expectativas. Me atendieron con mucho cuidado y los resultados son espectaculares."</blockquote><div class="testimonio-author"><div class="author-avatar">SM</div><div><p class="author-name">Sofía Martínez</p><p class="author-role">Blanqueamiento</p></div></div></div>
     </div>
   </div>
 </section>
@@ -694,182 +517,105 @@
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Blog</span>
-      <h2 class="section-title">Noticias y Artículos Recientes</h2>
-      <p class="section-sub">Mantente actualizado con las últimas tendencias en TI, ciberseguridad y transformación digital en Colombia y el mundo.</p>
-    </div>
-    <div class="blog-grid stagger">
-      <article class="blog-card">
-        <div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1667984390527-850f63192709?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="" class="blog-img" /></div>
-        <div class="blog-body"><span class="blog-cat cat-cloud">Nube</span><h3>10 Mejores Prácticas de Seguridad en la Nube para 2026</h3><p>Protege tu infraestructura en la nube con estas estrategias de seguridad probadas que toda empresa colombiana debería implementar hoy.</p><div class="blog-meta"><div class="blog-meta-left"><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Andrés Martínez</span><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 Abr 2026</span></div><svg class="blog-arrow" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
-      </article>
-      <article class="blog-card">
-        <div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1667372283545-1261fb5c427a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="" class="blog-img" /></div>
-        <div class="blog-body"><span class="blog-cat cat-ai">IA y Tecnología</span><h3>El Futuro de la Inteligencia Artificial en la Gestión de Infraestructura TI</h3><p>Cómo la inteligencia artificial está revolucionando la forma en que las empresas gestionan, monitorean y optimizan sus sistemas TI.</p><div class="blog-meta"><div class="blog-meta-left"><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Camila Rodríguez</span><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>5 Abr 2026</span></div><svg class="blog-arrow" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
-      </article>
-      <article class="blog-card">
-        <div class="blog-img-wrap"><img src="https://images.unsplash.com/photo-1667264501379-c1537934c7ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="" class="blog-img" /></div>
-        <div class="blog-body"><span class="blog-cat cat-sec">Seguridad</span><h3>Por Qué Toda Empresa en Colombia Necesita una Auditoría de Ciberseguridad en 2026</h3><p>Las amenazas cibernéticas evolucionan a un ritmo sin precedentes. Descubre por qué las auditorías de seguridad proactivas son ahora una necesidad empresarial.</p><div class="blog-meta"><div class="blog-meta-left"><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Laura Vargas</span><span style="display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>28 Mar 2026</span></div><svg class="blog-arrow" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
-      </article>
+    <span class="section-label">Blog y Noticias</span>
+    <h2 class="section-title">Últimas noticias</h2>
+    <p class="section-desc">Visita nuestro blog y mantente actualizado con las últimas tendencias en odontología.</p>
+    <div class="blog-grid">
+      <article class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1611690061822-b707a67bfebb?w=600&q=80" alt=""/></div><div class="blog-body"><div class="blog-meta"><span class="author">Dra. Valentina Rueda</span><span>•</span><span>15 Abr 2026</span></div><h3>¿Cómo prevenir la gingivitis?</h3><span class="blog-link">Leer más →</span></div></article>
+      <article class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=600&q=80" alt=""/></div><div class="blog-body"><div class="blog-meta"><span class="author">Dr. Andrés Morales</span><span>•</span><span>8 Abr 2026</span></div><h3>Beneficios de los alineadores invisibles</h3><span class="blog-link">Leer más →</span></div></article>
+      <article class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1684607633080-df59e6874367?w=600&q=80" alt=""/></div><div class="blog-body"><div class="blog-meta"><span class="author">Dra. Camila Ospina</span><span>•</span><span>1 Abr 2026</span></div><h3>Tecnología láser en odontología moderna</h3><span class="blog-link">Leer más →</span></div></article>
     </div>
   </div>
 </section>
 
 <!-- CONTACTO -->
-<section id="contact">
+<section id="contacto">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="badge">Contáctanos</span>
-      <h2 class="section-title">Ponte en Contacto con Nosotros</h2>
-      <p class="section-sub">¿Listo para transformar la tecnología de tu empresa? Hablemos. Nuestros expertos en Bogotá están listos para ayudarte.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info-box reveal-left">
-        <h3>Información de Contacto</h3>
-        <div class="contact-item"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-label">Dirección</div><div class="ci-val">Cra. 11 # 93-53, Oficina 502, Bogotá D.C., Colombia</div></div></div>
-        <div class="contact-item"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div><div><div class="ci-label">Teléfono</div><div class="ci-val">+57 (601) 234-5678</div></div></div>
-        <div class="contact-item"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-label">Correo Electrónico</div><div class="ci-val">hola@techno-ti.com.co</div></div></div>
-        <div class="contact-item"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ci-label">Horario de Atención</div><div class="ci-val">Lunes a Viernes: 8am–6pm (COT)</div></div></div>
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <span class="section-label" style="text-align:left">Contáctanos</span>
+        <h2>Agenda tu cita hoy</h2>
+        <p>Tu primera consulta de diagnóstico es completamente gratuita. Estamos aquí para ayudarte a conseguir la sonrisa que mereces.</p>
+        <div class="info-items">
+          <div class="info-item"><div class="info-icon">📍</div><div><strong>Dirección</strong><span>Cra. 7 #67-42, Chapinero, Bogotá D.C.</span></div></div>
+          <div class="info-item"><div class="info-icon">📞</div><div><strong>Teléfono</strong><span>(601) 456-7890 | 320 876 5432</span></div></div>
+          <div class="info-item"><div class="info-icon">✉️</div><div><strong>Correo</strong><span>info@dentasonrisa.com.co</span></div></div>
+          <div class="info-item"><div class="info-icon">🕐</div><div><strong>Horario</strong><span>Lunes a Sábado: 7:00 am – 7:00 pm</span></div></div>
+        </div>
       </div>
-      <div class="reveal-right">
-        <form id="contact-form">
+      <div class="contacto-form">
+        <h3>Solicitar Cita</h3>
+        <form onsubmit="return false;">
           <div class="form-row">
-            <div class="form-group"><label>Tu Nombre</label><input type="text" placeholder="Juan Pérez" required /></div>
-            <div class="form-group"><label>Correo Electrónico</label><input type="email" placeholder="ejemplo@empresa.com.co" required /></div>
+            <div class="form-group"><label>Nombre</label><input type="text" placeholder="María García"/></div>
+            <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="320 000 0000"/></div>
           </div>
-          <div class="form-group"><label>Asunto</label><input type="text" placeholder="¿En qué podemos ayudarte?" required /></div>
-          <div class="form-group"><label>Mensaje</label><textarea placeholder="Cuéntanos sobre tu empresa y lo que necesitas..." required></textarea></div>
-          <button type="submit" class="form-submit">Enviar Mensaje <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+          <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="ejemplo@correo.com"/></div>
+          <div class="form-group">
+            <label>Servicio de interés</label>
+            <select>
+              <option value="none">Selecciona un servicio</option>
+              <option>Prótesis Dental</option>
+              <option>Ortodoncia</option>
+              <option>Endodoncia</option>
+              <option>Odontología Familiar</option>
+              <option>Blanqueamiento</option>
+              <option>Cirugía Maxilofacial</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Mensaje (opcional)</label><textarea rows="3" placeholder="Cuéntanos sobre tu consulta..."></textarea></div>
+          <button type="submit" class="btn btn-primary form-submit">Enviar Solicitud →</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PIE DE PÁGINA -->
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:34px;height:34px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 12h10M12 7v10"/></svg></div>
-          <span style="font-size:20px;font-weight:800;color:#fff">Techno<span style="color:#60a5fa">.</span></span>
-        </div>
-        <p>Potenciando empresas colombianas con soluciones TI innovadoras desde 2010. Impulsamos el crecimiento y la transformación tecnológica en Bogotá y toda Colombia.</p>
-        <div class="footer-socials">
-          <button class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></button>
-          <button class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></button>
-          <button class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></button>
-          <button class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>
-        </div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">🦷</div>
+        <div><p class="footer-logo-name">DentaSonrisa</p><p class="footer-logo-sub">Clínica Dental</p></div>
       </div>
-      <div class="footer-col"><h4>Servicios</h4><ul><li><a href="#services">Consultoría TI</a></li><li><a href="#services">Soluciones en la Nube</a></li><li><a href="#services">Ciberseguridad</a></li><li><a href="#services">Analítica de Datos</a></li><li><a href="#services">Desarrollo de Software</a></li><li><a href="#services">Redes y Conectividad</a></li></ul></div>
-      <div class="footer-col"><h4>Empresa</h4><ul><li><a href="#about">Quiénes Somos</a></li><li><a href="#team">Nuestro Equipo</a></li><li><a href="#">Trabaja con Nosotros</a></li><li><a href="#blog">Blog</a></li><li><a href="#">Alianzas</a></li></ul></div>
-      <div class="footer-col"><h4>Soporte</h4><ul><li><a href="#">Centro de Ayuda</a></li><li><a href="#">Documentación</a></li><li><a href="#">Comunidad</a></li><li><a href="#contact">Contáctanos</a></li><li><a href="#">Política de Privacidad</a></li></ul></div>
+      <p class="desc">Cuidamos tu sonrisa con pasión y experiencia desde 2000 en Bogotá.</p>
+      <div class="footer-socials">
+        <button class="footer-social">fb</button>
+        <button class="footer-social">ig</button>
+        <button class="footer-social">tw</button>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Techno Soluciones TI S.A.S. Todos los derechos reservados. Bogotá, Colombia.</p>
-      <div class="footer-bottom-links"><a href="#">Política de Privacidad</a><a href="#">Términos de Uso</a><a href="#">Política de Cookies</a></div>
+    <div class="footer-col"><h4>Servicios</h4><ul><li><a href="#servicios">Prótesis Dental</a></li><li><a href="#servicios">Ortodoncia</a></li><li><a href="#servicios">Endodoncia</a></li><li><a href="#servicios">Odontología Familiar</a></li><li><a href="#servicios">Blanqueamiento</a></li><li><a href="#servicios">Cirugía Maxilofacial</a></li></ul></div>
+    <div class="footer-col"><h4>Navegación</h4><ul><li><a href="#inicio">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="#equipo">Equipo</a></li><li><a href="#testimonios">Testimonios</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4>
+      <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Cra. 7 #67-42, Chapinero, Bogotá</span></div>
+      <div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>(601) 456-7890</span></div>
+      <div class="footer-contact-item"><span class="footer-contact-icon">✉️</span><span>info@dentasonrisa.com.co</span></div>
+      <div class="footer-contact-item"><span class="footer-contact-icon">🕐</span><span>Lun–Sáb: 7am – 7pm</span></div>
     </div>
+  </div>
+  <div class="footer-bottom">
+    © <span id="year"></span> DentaSonrisa Clínica Dental — Bogotá, Colombia. Todos los derechos reservados.
   </div>
 </footer>
 
-<!-- NOTIFICACIÓN -->
-<div class="toast" id="toast">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-  <span>¡Mensaje enviado! Te responderemos en menos de 24 horas.</span>
-</div>
-
 <script>
-  // ── AÑO ──
+  // Año dinámico
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // ── NAVBAR ──
-  const navbar = document.getElementById('navbar');
+  // Navbar scroll
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // ── MENÚ MÓVIL ──
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
-  });
-
-  // ── ANIMACIONES AL HACER SCROLL ──
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger').forEach(el => revealObserver.observe(el));
-
-  // ── CONTADORES ANIMADOS ──
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = parseInt(el.dataset.target);
-      const suffix = el.dataset.suffix || '';
-      let current = 0;
-      const duration = 1800;
-      const step = target / (duration / 16);
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = Math.floor(current).toLocaleString('es-CO') + suffix;
-      }, 16);
-      counterObserver.unobserve(el);
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObserver.observe(el));
-
-  // ── TESTIMONIOS ──
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.testi-slide');
-  const dots = document.querySelectorAll('.testi-dot');
-  function goToSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = (n + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+  // Menú móvil
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
   }
-  document.getElementById('testi-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
-  document.getElementById('testi-next').addEventListener('click', () => goToSlide(currentSlide + 1));
-  dots.forEach(d => d.addEventListener('click', () => goToSlide(parseInt(d.dataset.i))));
-  setInterval(() => goToSlide(currentSlide + 1), 5000);
-
-  // ── TOGGLE DE PRECIOS ──
-  let isAnnual = false;
-  const toggleBtn = document.getElementById('pricing-toggle');
-  const monthlyLbl = document.getElementById('monthly-lbl');
-  const annualLbl = document.getElementById('annual-lbl');
-  toggleBtn.addEventListener('click', () => {
-    isAnnual = !isAnnual;
-    toggleBtn.classList.toggle('on', isAnnual);
-    monthlyLbl.classList.toggle('active', !isAnnual);
-    annualLbl.classList.toggle('active', isAnnual);
-    document.querySelectorAll('.price-val').forEach(el => {
-      el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
-    });
-  });
-
-  // ── FORMULARIO DE CONTACTO ──
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4500);
-    this.reset();
-  });
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
 </script>
 </body>
 </html>
