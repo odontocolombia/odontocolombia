@@ -4,277 +4,396 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DentaSonrisa – Clínica Dental Bogotá</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    /* ── RESET & BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
+    body { font-family: 'Space Grotesk', sans-serif; background: #fff; color: #1a2535; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
     /* ── VARIABLES ── */
     :root {
-      --primary: #1a7a8a;
-      --primary-light: #e0f4f7;
-      --primary-dark: #145f6e;
-      --accent: #4dc9d8;
-      --text: #1a1a2e;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg-soft: #f3fafb;
-      --dark-bg: #0d1f25;
-      --white: #ffffff;
+      --navy:    #0d1b2a;
+      --navy2:   #112233;
+      --teal:    #00c8d4;
+      --teal2:   #00a8b4;
+      --white:   #ffffff;
+      --light:   #f4f8fb;
+      --text:    #1a2535;
+      --muted:   #6b7f96;
+      --border:  #dde4ec;
     }
 
     /* ── UTILITIES ── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    .sec-label {
+      display: inline-block; font-family: 'Space Mono', monospace;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: .6rem;
+    }
+    .sec-title {
+      font-size: 2.4rem; font-weight: 800; line-height: 1.15;
+    }
+    .sec-title span { color: var(--teal); display: block; }
+    .sec-desc { font-size: .98rem; color: var(--muted); line-height: 1.75; margin-top: .85rem; max-width: 540px; }
     .btn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.75rem; border-radius: 9999px; font-weight: 600;
-      font-size: .95rem; cursor: pointer; border: none; transition: all .2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .78rem 1.8rem; border-radius: 6px; font-weight: 700;
+      font-size: .9rem; cursor: pointer; border: none; transition: all .22s;
+      font-family: 'Space Grotesk', sans-serif; letter-spacing: .02em;
     }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
-    .btn-outline:hover { background: rgba(255,255,255,.12); }
-    .btn-white { background: #fff; color: var(--primary); }
-    .btn-white:hover { background: #f0fafb; }
-    .section-label {
-      display: inline-block; color: var(--primary); font-size: .78rem;
-      font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .5rem;
+    .btn-teal  { background: var(--teal); color: var(--navy); }
+    .btn-teal:hover { background: var(--teal2); transform: translateY(-2px); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: var(--teal); color: var(--teal); }
+    .btn-outline-teal { background: transparent; color: var(--teal); border: 2px solid var(--teal); }
+    .btn-outline-teal:hover { background: var(--teal); color: var(--navy); }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--navy2); padding: .55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    .section-title { font-size: 2.25rem; font-weight: 900; line-height: 1.2; color: var(--text); }
-    .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 560px; margin: .75rem auto 0; }
+    .top-bar .inner { display: flex; align-items: center; justify-content: space-between; }
+    .top-bar-left { display: flex; gap: 1.5rem; align-items: center; }
+    .top-bar-left a, .top-bar-left span {
+      color: rgba(255,255,255,.65); font-size: .8rem;
+      font-family: 'Space Mono', monospace; transition: color .2s;
+    }
+    .top-bar-left a:hover { color: var(--teal); }
+    .top-bar-right { display: flex; gap: .75rem; }
+    .top-bar-right a {
+      width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.55); font-size: .75rem; transition: all .2s;
+    }
+    .top-bar-right a:hover { background: var(--teal); color: var(--navy); border-color: var(--teal); }
+    @media (max-width: 640px) { .top-bar { display: none; } }
 
     /* ── NAVBAR ── */
     #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      transition: all .3s; padding: 1.25rem 0;
+      background: var(--navy); position: sticky; top: 0; z-index: 100;
+      padding: 1rem 0; transition: box-shadow .3s;
     }
-    #navbar.scrolled { background: rgba(255,255,255,.97); backdrop-filter: blur(12px); box-shadow: 0 1px 12px rgba(0,0,0,.08); padding: .75rem 0; }
+    #navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.35); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
-    .nav-logo-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    .nav-logo-name { font-size: 1.1rem; font-weight: 800; color: #fff; line-height: 1.2; transition: color .3s; }
-    .nav-logo-sub { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.65); transition: color .3s; }
-    #navbar.scrolled .nav-logo-name { color: var(--text); }
-    #navbar.scrolled .nav-logo-sub { color: var(--primary); }
-    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-    .nav-links a { font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.88); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover { color: var(--accent); }
-    #navbar.scrolled .nav-links a { color: var(--text); }
-    #navbar.scrolled .nav-links a:hover { color: var(--primary); }
-    .nav-right { display: flex; align-items: center; gap: .75rem; }
-    .nav-phone { font-size: .85rem; font-weight: 600; color: #fff; text-decoration: none; display: flex; align-items: center; gap: .35rem; transition: color .3s; }
-    #navbar.scrolled .nav-phone { color: var(--primary); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all .3s; }
-    #navbar.scrolled .hamburger span { background: var(--text); }
+    .nav-logo { display: flex; align-items: center; gap: .65rem; }
+    .nav-logo-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; }
+    .nav-logo-name { font-size: 1.1rem; font-weight: 800; color: #fff; line-height: 1.2; }
+    .nav-logo-sub { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.75); transition: color .2s; letter-spacing: .03em; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta { display: flex; align-items: center; gap: .85rem; }
+    .nav-phone { font-family: 'Space Mono', monospace; font-size: .8rem; color: rgba(255,255,255,.65); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
     .mobile-menu {
-      display: none; position: absolute; top: 100%; left: 0; right: 0;
-      background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.12); padding: 1rem 1.5rem 1.5rem;
+      display: none; background: var(--navy2); padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.08);
     }
     .mobile-menu.open { display: block; }
-    .mobile-menu a { display: block; padding: .6rem 0; font-size: .9rem; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
-    .mobile-menu a:last-of-type { border: none; }
-    .mobile-menu .btn { margin-top: .75rem; width: 100%; justify-content: center; }
-
-    @media (max-width: 768px) {
-      .nav-links, .nav-right { display: none; }
-      .hamburger { display: flex; }
-    }
+    .mobile-menu a { display: block; padding: .65rem 0; font-size: .9rem; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .mobile-menu .btn { margin-top: .85rem; width: 100%; justify-content: center; }
+    @media (max-width: 900px) { .nav-links { display: none; } .nav-cta .nav-phone { display: none; } }
+    @media (max-width: 640px) { .hamburger { display: flex; } }
 
     /* ── HERO ── */
-    #hero {
-      min-height: 100vh; display: flex; align-items: center;
+    .hero {
+      background: var(--navy); min-height: 100vh; display: flex; align-items: center;
       position: relative; overflow: hidden;
     }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,212,.12) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -150px; left: -100px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,212,.07) 0%, transparent 70%);
+    }
     .hero-img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: .18; object-position: center;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(13,31,37,.93) 0%, rgba(13,31,37,.75) 55%, rgba(13,31,37,.32) 100%);
+    .hero-inner {
+      position: relative; z-index: 2; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
+      padding: 6rem 0 5rem; width: 100%;
     }
-    .hero-content { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; width: 100%; padding: 8rem 0 4rem; }
     .hero-badge {
-      display: inline-block; background: rgba(255,255,255,.18); color: #fff;
-      font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      padding: .45rem 1rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.28); margin-bottom: 1.25rem;
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(0,200,212,.12); border: 1px solid rgba(0,200,212,.3);
+      color: var(--teal); font-family: 'Space Mono', monospace;
+      font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+      padding: .4rem .9rem; border-radius: 4px; margin-bottom: 1.5rem;
     }
-    .hero-title { font-size: 3.5rem; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
-    .hero-title span { color: var(--accent); display: block; }
-    .hero-desc { color: rgba(255,255,255,.78); font-size: 1.05rem; line-height: 1.75; max-width: 440px; margin-bottom: 2rem; }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
-    .hero-social-proof { display: flex; align-items: center; gap: 1rem; }
+    .hero-title {
+      font-size: 3.8rem; font-weight: 900; color: #fff; line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .accent { color: var(--teal); }
+    .hero-desc { color: rgba(255,255,255,.65); font-size: 1rem; line-height: 1.8; max-width: 460px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; gap: .85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-proof { display: flex; align-items: center; gap: 1rem; }
     .avatars { display: flex; }
     .avatars span {
-      width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fff;
-      background: var(--primary); color: #fff; font-size: .68rem; font-weight: 700;
+      width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--navy);
+      background: var(--teal); color: var(--navy); font-weight: 800; font-size: .65rem;
       display: flex; align-items: center; justify-content: center; margin-left: -10px;
     }
     .avatars span:first-child { margin-left: 0; }
-    .stars { color: #facc15; font-size: .95rem; }
-    .proof-text { font-size: .82rem; color: rgba(255,255,255,.75); }
+    .proof-stars { color: #facc15; font-size: .9rem; margin-bottom: .1rem; }
+    .proof-text { font-size: .8rem; color: rgba(255,255,255,.55); font-family: 'Space Mono', monospace; }
     .hero-card {
-      background: rgba(255,255,255,.12); backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,.22); border-radius: 1.5rem;
-      padding: 2rem; max-width: 340px; margin-left: auto;
+      background: rgba(255,255,255,.07); backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,200,212,.2); border-radius: 12px; padding: 2rem;
     }
-    .hero-card h3 { color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; }
-    .hero-card p { color: rgba(255,255,255,.65); font-size: .85rem; margin-bottom: 1.25rem; }
-    .hero-card-item { display: flex; align-items: center; gap: .75rem; margin-bottom: .9rem; color: rgba(255,255,255,.8); font-size: .85rem; }
-    .hero-card-item .icon { font-size: 1.15rem; }
+    .hero-card h3 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .4rem; }
+    .hero-card p { color: rgba(255,255,255,.5); font-size: .83rem; margin-bottom: 1.5rem; font-family: 'Space Mono', monospace; }
+    .hc-item { display: flex; align-items: center; gap: .85rem; margin-bottom: 1rem; }
+    .hc-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(0,200,212,.15); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .hc-text { font-size: .85rem; color: rgba(255,255,255,.75); }
     .scroll-hint {
       position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; animation: bounce 1.6s infinite;
+      display: flex; align-items: center; justify-content: center;
+      animation: bounceY 1.7s infinite;
     }
-    .scroll-mouse { width: 24px; height: 40px; border: 2px solid rgba(255,255,255,.4); border-radius: 12px; display: flex; align-items: flex-start; justify-content: center; padding-top: 6px; }
-    .scroll-dot { width: 4px; height: 8px; background: rgba(255,255,255,.6); border-radius: 2px; }
-    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    .scroll-mouse { width: 22px; height: 36px; border: 2px solid rgba(0,200,212,.45); border-radius: 12px; display: flex; justify-content: center; padding-top: 5px; }
+    .scroll-dot { width: 3px; height: 7px; background: var(--teal); border-radius: 2px; }
+    @keyframes bounceY { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+    @media (max-width: 860px) { .hero-inner { grid-template-columns: 1fr; } .hero-card { display: none; } .hero-title { font-size: 2.6rem; } }
 
-    @media (max-width: 768px) {
-      .hero-content { grid-template-columns: 1fr; }
-      .hero-title { font-size: 2.4rem; }
-      .hero-card { display: none; }
-    }
-
-    /* ── SERVICIOS ── */
-    #servicios { padding: 6rem 0; background: #fff; }
-    #servicios .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .service-card {
-      background: #fff; border: 1.5px solid var(--border); border-radius: 1.25rem;
-      padding: 1.75rem; cursor: pointer; transition: all .3s;
-    }
-    .service-card:hover { border-color: var(--primary); box-shadow: 0 8px 28px rgba(26,122,138,.15); transform: translateY(-3px); }
-    .service-icon { width: 54px; height: 54px; background: var(--primary-light); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; transition: background .3s; }
-    .service-card:hover .service-icon { background: rgba(26,122,138,.2); }
-    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; color: var(--text); }
-    .service-card p { font-size: .875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
-    .service-more { color: var(--primary); font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: .25rem; }
-    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
-
-    /* ── NOSOTROS ── */
-    #nosotros { padding: 6rem 0; background: var(--bg-soft); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    /* ── ABOUT ── */
+    .about-section { padding: 6rem 0; background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-img-wrap { position: relative; }
-    .about-img { width: 100%; border-radius: 1.5rem; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 20px 50px rgba(0,0,0,.14); }
+    .about-img { width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 20px 60px rgba(13,27,42,.15); }
     .about-badge {
       position: absolute; bottom: -1.5rem; right: -1.5rem;
-      background: var(--primary); border-radius: 1rem; padding: 1.25rem 1.5rem; color: #fff; box-shadow: 0 10px 28px rgba(26,122,138,.35);
+      background: var(--teal); border-radius: 10px; padding: 1.25rem 1.5rem;
+      color: var(--navy); box-shadow: 0 10px 30px rgba(0,200,212,.35);
     }
     .about-badge p:first-child { font-size: 2.5rem; font-weight: 900; }
-    .about-badge p:last-child { font-size: .8rem; opacity: .8; }
-    .about-text .section-sub { margin-left: 0; text-align: left; }
-    .check-list { list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: .9rem; }
-    .check-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: .9rem; font-weight: 500; }
-    .check-list li::before { content: "✓"; color: #fff; background: var(--primary); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } .about-badge { bottom: 1rem; right: 1rem; } }
+    .about-badge p:last-child { font-size: .75rem; font-weight: 700; letter-spacing: .08em; }
+    .about-text .sec-desc { margin-left: 0; }
+    .check-list { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: .75rem; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: .75rem;
+      font-size: .9rem; font-weight: 500; color: var(--text);
+    }
+    .check-list li::before {
+      content: '✓'; background: var(--teal); color: var(--navy);
+      width: 20px; height: 20px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-size: .7rem;
+      font-weight: 900; flex-shrink: 0; margin-top: 1px;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } .about-badge { bottom: .5rem; right: .5rem; } }
+
+    /* ── SERVICES ── */
+    .services-section { padding: 6rem 0; background: var(--navy); }
+    .services-section .sec-title { color: #fff; }
+    .services-section .sec-desc { color: rgba(255,255,255,.55); }
+    .services-header { text-align: center; margin-bottom: 4rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .service-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 2rem; transition: all .3s; cursor: pointer;
+    }
+    .service-card:hover { background: rgba(0,200,212,.08); border-color: rgba(0,200,212,.35); transform: translateY(-4px); }
+    .srv-icon {
+      width: 56px; height: 56px; border-radius: 10px;
+      background: rgba(0,200,212,.12); display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.25rem; transition: background .3s;
+    }
+    .service-card:hover .srv-icon { background: rgba(0,200,212,.22); }
+    .service-card h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .service-card p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.7; margin-bottom: 1rem; }
+    .srv-more { color: var(--teal); font-size: .83rem; font-weight: 700; display: flex; align-items: center; gap: .3rem; font-family: 'Space Mono', monospace; }
+    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 540px) { .services-grid { grid-template-columns: 1fr; } }
 
     /* ── STATS ── */
-    #stats { background: var(--primary); padding: 5rem 0; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center; }
-    .stat-item p:first-child { font-size: 2.75rem; font-weight: 900; color: #fff; }
-    .stat-item p:last-child { font-size: .75rem; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin-top: .25rem; }
+    .stats-section { padding: 5rem 0; background: var(--teal); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    .stat-icon { font-size: 2rem; margin-bottom: .6rem; }
+    .stat-num { font-size: 3rem; font-weight: 900; color: var(--navy); font-family: 'Space Mono', monospace; line-height: 1; }
+    .stat-label { font-size: .75rem; font-weight: 700; color: var(--navy); opacity: .7; text-transform: uppercase; letter-spacing: .1em; margin-top: .35rem; }
     @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
 
     /* ── EQUIPO ── */
-    #equipo { padding: 6rem 0; background: #fff; }
-    #equipo .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .team-section { padding: 6rem 0; background: var(--light); }
+    .team-header { text-align: center; margin-bottom: 4rem; }
     .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
-    .team-card { background: #fff; border: 1.5px solid var(--border); border-radius: 1.25rem; overflow: hidden; transition: box-shadow .3s; }
-    .team-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.12); }
-    .team-card img { width: 100%; height: 220px; object-fit: cover; object-position: top; transition: transform .5s; }
-    .team-card:hover img { transform: scale(1.05); }
-    .team-info { padding: 1.25rem; }
-    .team-info h3 { font-weight: 700; font-size: .95rem; margin-bottom: .2rem; }
-    .team-info p { color: var(--primary); font-size: .85rem; font-weight: 500; margin-bottom: .75rem; }
+    .team-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.07); transition: box-shadow .3s; }
+    .team-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.14); }
+    .team-img-wrap { overflow: hidden; height: 220px; }
+    .team-img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s; }
+    .team-card:hover .team-img { transform: scale(1.06); }
+    .team-info { padding: 1.25rem; border-top: 3px solid transparent; transition: border-color .3s; }
+    .team-card:hover .team-info { border-color: var(--teal); }
+    .team-info h3 { font-weight: 700; font-size: .95rem; margin-bottom: .2rem; color: var(--text); }
+    .team-info p { color: var(--teal); font-size: .82rem; font-weight: 600; font-family: 'Space Mono', monospace; margin-bottom: .85rem; }
     .team-socials { display: flex; gap: .5rem; }
-    .team-socials button { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-soft); border: none; cursor: pointer; font-size: .8rem; transition: all .2s; }
-    .team-socials button:hover { background: var(--primary-light); color: var(--primary); }
+    .team-socials button {
+      width: 30px; height: 30px; border-radius: 6px;
+      background: var(--light); border: none; cursor: pointer;
+      font-size: .78rem; color: var(--muted); transition: all .2s;
+    }
+    .team-socials button:hover { background: var(--teal); color: var(--navy); }
     @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
     @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
 
     /* ── TESTIMONIOS ── */
-    #testimonios { padding: 6rem 0; background: var(--bg-soft); }
-    #testimonios .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .testimonial-card { background: #fff; border: 1.5px solid var(--border); border-radius: 1.25rem; padding: 1.75rem; }
-    .stars-row { display: flex; gap: 3px; color: #facc15; margin-bottom: .75rem; }
-    .testimonial-card blockquote { font-size: .9rem; color: var(--text); font-style: italic; line-height: 1.7; margin-bottom: 1.25rem; }
-    .testimonial-author { display: flex; align-items: center; gap: .75rem; }
-    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-weight: 700; font-size: .85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .author-name { font-weight: 600; font-size: .88rem; }
-    .author-treatment { font-size: .78rem; color: var(--muted); }
-    @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonials-section { padding: 6rem 0; background: var(--navy); }
+    .testi-split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .testi-left .sec-title { color: #fff; margin-bottom: .85rem; }
+    .testi-left .sec-desc { color: rgba(255,255,255,.55); max-width: 420px; margin-bottom: 2rem; }
+    .testi-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .testi-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 1.5rem; position: relative; transition: border-color .3s;
+    }
+    .testi-card:hover { border-color: rgba(0,200,212,.35); }
+    .testi-stars { color: #facc15; font-size: .85rem; margin-bottom: .75rem; }
+    .testi-card blockquote { font-size: .88rem; color: rgba(255,255,255,.7); font-style: italic; line-height: 1.7; margin-bottom: 1rem; }
+    .testi-author { display: flex; align-items: center; gap: .75rem; }
+    .testi-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(0,200,212,.2); color: var(--teal); font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid rgba(0,200,212,.3); }
+    .testi-name { font-weight: 700; font-size: .85rem; color: #fff; }
+    .testi-treatment { font-size: .75rem; color: var(--teal); font-family: 'Space Mono', monospace; }
+    .quote-mark { position: absolute; top: 1rem; right: 1.25rem; font-size: 3rem; color: rgba(0,200,212,.12); font-family: Georgia, serif; line-height: 1; }
+    @media (max-width: 860px) { .testi-split { grid-template-columns: 1fr; } .testi-left .sec-desc { max-width: 100%; } }
 
     /* ── BLOG ── */
-    #blog { padding: 6rem 0; background: #fff; }
-    #blog .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .blog-section { padding: 6rem 0; background: #fff; }
+    .blog-header { text-align: center; margin-bottom: 4rem; }
     .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
-    .blog-card { background: #fff; border: 1.5px solid var(--border); border-radius: 1.25rem; overflow: hidden; cursor: pointer; transition: box-shadow .3s; }
-    .blog-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.12); }
-    .blog-img { width: 100%; height: 180px; object-fit: cover; transition: transform .5s; display: block; }
-    .blog-card:hover .blog-img { transform: scale(1.05); }
-    .blog-body { padding: 1.25rem; }
-    .blog-meta { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--muted); margin-bottom: .5rem; }
-    .blog-meta span:first-child { color: var(--primary); font-weight: 500; }
-    .blog-card h3 { font-size: .95rem; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: .75rem; transition: color .2s; }
-    .blog-card:hover h3 { color: var(--primary); }
-    .blog-more { color: var(--primary); font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: .25rem; }
+    .blog-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .3s, transform .3s; cursor: pointer; }
+    .blog-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .blog-img-wrap { height: 190px; overflow: hidden; }
+    .blog-img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .blog-card:hover .blog-img { transform: scale(1.06); }
+    .blog-body { padding: 1.5rem; }
+    .blog-meta { display: flex; gap: .4rem; align-items: center; font-size: .75rem; margin-bottom: .65rem; }
+    .blog-meta .author { color: var(--teal); font-weight: 600; font-family: 'Space Mono', monospace; }
+    .blog-meta .sep { color: var(--border); }
+    .blog-meta .date { color: var(--muted); }
+    .blog-card h3 { font-weight: 700; font-size: .95rem; color: var(--text); line-height: 1.45; margin-bottom: .85rem; transition: color .2s; }
+    .blog-card:hover h3 { color: var(--teal2); }
+    .blog-more { display: flex; align-items: center; gap: .3rem; color: var(--teal); font-size: .82rem; font-weight: 700; font-family: 'Space Mono', monospace; }
     @media (max-width: 768px) { .blog-grid { grid-template-columns: 1fr; } }
 
     /* ── CONTACTO ── */
-    #contacto { padding: 6rem 0; background: var(--bg-soft); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .contact-info .section-sub { margin-left: 0; text-align: left; margin-bottom: 2rem; }
+    .contact-section { padding: 6rem 0; background: var(--navy2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-left .sec-title { color: #fff; margin-bottom: .85rem; }
+    .contact-left .sec-desc { color: rgba(255,255,255,.55); max-width: 100%; margin-bottom: 2.5rem; }
     .contact-items { display: flex; flex-direction: column; gap: 1.25rem; }
     .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
-    .contact-item-icon { width: 40px; height: 40px; background: var(--primary-light); border-radius: .75rem; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .contact-item-text p:first-child { font-weight: 600; font-size: .875rem; color: var(--text); }
-    .contact-item-text p:last-child { font-size: .85rem; color: var(--muted); }
-    .contact-form-card { background: #fff; border: 1.5px solid var(--border); border-radius: 1.5rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-    .contact-form-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .ci-icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(0,200,212,.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .ci-title { font-weight: 700; font-size: .85rem; color: var(--teal); font-family: 'Space Mono', monospace; }
+    .ci-val { font-size: .9rem; color: rgba(255,255,255,.65); margin-top: .15rem; }
+    .contact-form-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 2rem; }
+    .contact-form-box h3 { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1rem; }
-    .form-group label { font-size: .85rem; font-weight: 500; color: var(--text); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; border: 1.5px solid var(--border); border-radius: .75rem;
-      padding: .75rem 1rem; font-size: .875rem; font-family: inherit; background: #fff;
-      transition: border-color .2s; outline: none; color: var(--text);
+    .form-group label { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.65); font-family: 'Space Mono', monospace; letter-spacing: .06em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px; padding: .75rem 1rem; font-size: .875rem;
+      font-family: 'Space Grotesk', sans-serif; color: #fff; outline: none; transition: border-color .2s;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,122,138,.12); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+    .form-group select option { background: var(--navy2); color: #fff; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,200,212,.12); }
     .form-group textarea { resize: none; }
-    .btn-submit { width: 100%; border-radius: 9999px; padding: .85rem; font-size: .95rem; justify-content: center; }
+    .btn-submit { width: 100%; justify-content: center; padding: .9rem; font-size: .95rem; }
     @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
 
     /* ── FOOTER ── */
-    footer { background: var(--dark-bg); color: rgba(255,255,255,.75); }
-    .footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; padding: 4rem 0; }
-    .footer-logo { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
-    .footer-logo-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    footer { background: var(--navy); color: rgba(255,255,255,.65); }
+    .footer-subscribe { background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.07); padding: 1.5rem 0; }
+    .footer-sub-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-sub-links { display: flex; gap: 2rem; }
+    .footer-sub-links a { font-size: .85rem; color: rgba(255,255,255,.6); transition: color .2s; font-weight: 500; }
+    .footer-sub-links a:hover { color: var(--teal); }
+    .footer-sub-form { display: flex; gap: 0; }
+    .footer-sub-form input {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      border-right: none; padding: .55rem 1rem; border-radius: 6px 0 0 6px;
+      font-size: .85rem; color: #fff; font-family: 'Space Grotesk', sans-serif;
+      outline: none; min-width: 200px;
+    }
+    .footer-sub-form input::placeholder { color: rgba(255,255,255,.35); }
+    .footer-sub-form button {
+      background: var(--teal); border: none; color: var(--navy); padding: .55rem 1.2rem;
+      border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 700; font-size: .85rem;
+      font-family: 'Space Grotesk', sans-serif; transition: background .2s;
+    }
+    .footer-sub-form button:hover { background: var(--teal2); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 3rem; padding: 4rem 0 3rem; }
+    .footer-logo-wrap { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+    .footer-logo-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
     .footer-logo-name { font-size: 1rem; font-weight: 800; color: #fff; }
-    .footer-logo-sub { font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.4); }
-    .footer-desc { font-size: .85rem; line-height: 1.65; color: rgba(255,255,255,.55); margin-bottom: 1.25rem; }
-    .footer-socials { display: flex; gap: .6rem; }
-    .footer-socials button { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.1); border: none; cursor: pointer; color: rgba(255,255,255,.7); font-size: .85rem; transition: background .2s; }
-    .footer-socials button:hover { background: var(--primary); }
-    .footer-col h4 { color: #fff; font-weight: 600; font-size: .9rem; margin-bottom: 1rem; }
+    .footer-logo-sub { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+    .footer-desc { font-size: .85rem; line-height: 1.7; color: rgba(255,255,255,.5); margin-bottom: 1.25rem; }
+    .footer-socials { display: flex; gap: .5rem; }
+    .footer-socials a { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55); font-size: .85rem; transition: all .2s; }
+    .footer-socials a:hover { background: var(--teal); color: var(--navy); }
+    .footer-col h4 { font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 1.25rem; letter-spacing: .04em; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
-    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s; }
-    .footer-col ul li a:hover { color: #fff; }
-    .footer-contact-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .85rem; margin-bottom: .75rem; color: rgba(255,255,255,.6); }
-    .footer-contact-item .ico { color: var(--primary); flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 1.25rem 0; text-align: center; font-size: .78rem; color: rgba(255,255,255,.3); }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.55); transition: color .2s; display: flex; align-items: center; gap: .4rem; }
+    .footer-col ul li a::before { content: '→'; color: var(--teal); font-size: .75rem; }
+    .footer-col ul li a:hover { color: var(--teal); }
+    .footer-ci { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: .85rem; font-size: .85rem; color: rgba(255,255,255,.55); }
+    .footer-ci .ico { color: var(--teal); flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding: 1.25rem 0; text-align: center; font-size: .78rem; color: rgba(255,255,255,.3); font-family: 'Space Mono', monospace; }
     @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-sub-inner { flex-direction: column; } }
+
+    /* ── BACK TO TOP ── */
+    #back-top {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; width: 44px; height: 44px;
+      background: var(--teal); color: var(--navy); border: none; border-radius: 10px;
+      font-size: 1.1rem; cursor: pointer; display: none; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,200,212,.35); transition: transform .2s;
+      z-index: 200;
+    }
+    #back-top.visible { display: flex; }
+    #back-top:hover { transform: translateY(-3px); }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     NAVBAR
-══════════════════════════════ -->
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="inner">
+      <div class="top-bar-left">
+        <a href="tel:+576014567890">📞 (601) 456-7890</a>
+        <span>|</span>
+        <a href="mailto:info@dentasonrisa.com.co">✉ info@dentasonrisa.com.co</a>
+        <span>|</span>
+        <span>Lun–Sáb: 7am – 7pm</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">in</a>
+        <a href="#" title="WhatsApp">w</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="container">
     <div class="nav-inner">
@@ -293,143 +412,96 @@
         <li><a href="#testimonios">Testimonios</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <div class="nav-right">
-        <a href="tel:+576014567890" class="nav-phone">📞 (601) 456-7890</a>
-        <a href="#contacto" class="btn btn-primary" style="padding:.55rem 1.25rem;font-size:.85rem;">Agendar Cita</a>
+      <div class="nav-cta">
+        <span class="nav-phone">(601) 456-7890</span>
+        <a href="#contacto" class="btn btn-teal">Agendar Cita</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <button class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#inicio" class="nav-mobile-link">Inicio</a>
-      <a href="#servicios" class="nav-mobile-link">Servicios</a>
-      <a href="#nosotros" class="nav-mobile-link">Nosotros</a>
-      <a href="#equipo" class="nav-mobile-link">Equipo</a>
-      <a href="#testimonios" class="nav-mobile-link">Testimonios</a>
-      <a href="#contacto" class="nav-mobile-link">Contacto</a>
-      <a href="#contacto" class="btn btn-primary">Agendar Cita</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#contacto" class="btn btn-teal">Agendar Cita</a>
     </div>
   </div>
 </nav>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
-<section id="inicio">
-  <div id="hero">
-    <img
-      class="hero-img"
-      src="https://images.unsplash.com/photo-1683349370055-7eba66a404c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800"
-      alt="Odontóloga profesional en clínica dental"
-    />
-    <div class="hero-overlay"></div>
-    <div class="container" style="position:relative;width:100%;">
-      <div class="hero-content">
-        <div>
-          <span class="hero-badge">✨ La sonrisa perfecta te espera</span>
-          <h1 class="hero-title">
-            Cuidamos la salud
-            <span>de tu sonrisa</span>
-          </h1>
-          <p class="hero-desc">
-            Somos una clínica dental especializada en Bogotá con más de 25 años de experiencia,
-            dedicados a brindar atención preventiva, curativa y estética de la más alta calidad.
-          </p>
-          <div class="hero-ctas">
-            <a href="#contacto" class="btn btn-primary">Agendar Cita Gratis →</a>
-            <a href="#servicios" class="btn btn-outline">Ver Servicios</a>
-          </div>
-          <div class="hero-social-proof">
-            <div class="avatars">
-              <span>VR</span><span>AM</span><span>CO</span><span>FG</span>
-            </div>
-            <div>
-              <div class="stars">★★★★★</div>
-              <p class="proof-text">+9.800 pacientes satisfechos</p>
-            </div>
-          </div>
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <img
+    class="hero-img"
+    src="https://images.unsplash.com/photo-1683349370055-7eba66a404c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800"
+    alt="Odontóloga profesional"
+  />
+  <div class="container" style="position:relative;z-index:2;width:100%;">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">✦ La sonrisa perfecta te espera</div>
+        <h1 class="hero-title">
+          Cuidamos la salud<br>
+          <span class="accent">de tu sonrisa</span>
+        </h1>
+        <p class="hero-desc">
+          Somos una clínica dental especializada en Bogotá con más de 25 años de experiencia,
+          dedicados a brindar atención preventiva, curativa y estética de la más alta calidad.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contacto" class="btn btn-teal">Agendar Cita Gratis →</a>
+          <a href="#servicios" class="btn btn-outline-white">Ver Servicios</a>
         </div>
-        <div>
-          <div class="hero-card">
-            <h3>Agenda tu primera cita</h3>
-            <p>Consulta de diagnóstico gratuita para nuevos pacientes</p>
-            <div class="hero-card-item"><span class="icon">📍</span> Chapinero, Bogotá D.C.</div>
-            <div class="hero-card-item"><span class="icon">📞</span> (601) 456-7890</div>
-            <div class="hero-card-item"><span class="icon">⏰</span> Lun–Sáb: 7:00 am – 7:00 pm</div>
-            <a href="#contacto" class="btn btn-white" style="width:100%;margin-top:.75rem;justify-content:center;">Reservar Ahora</a>
+        <div class="hero-proof">
+          <div class="avatars">
+            <span>VR</span><span>AM</span><span>CO</span><span>FG</span>
+          </div>
+          <div>
+            <div class="proof-stars">★★★★★</div>
+            <p class="proof-text">+9.800 pacientes satisfechos</p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-mouse"><div class="scroll-dot"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════
-     SERVICIOS
-══════════════════════════════ -->
-<section id="servicios">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">Nuestros Servicios</span>
-      <h2 class="section-title">Cuidamos cada aspecto de tu sonrisa</h2>
-      <p class="section-sub">Ofrecemos tratamientos dentales completos con tecnología de última generación y un equipo de especialistas certificados.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🦷</div>
-        <h3>Prótesis Dental</h3>
-        <p>Restauramos la funcionalidad y estética de tu sonrisa con prótesis de alta calidad adaptadas a ti.</p>
-        <span class="service-more">Saber más →</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">😁</div>
-        <h3>Ortodoncia</h3>
-        <p>Alineamos tus dientes con brackets o alineadores invisibles para una sonrisa perfecta.</p>
-        <span class="service-more">Saber más →</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔬</div>
-        <h3>Endodoncia</h3>
-        <p>Tratamientos de conducto con tecnología de punta para salvar tus dientes naturales.</p>
-        <span class="service-more">Saber más →</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">👨‍👩‍👧</div>
-        <h3>Odontología Familiar</h3>
-        <p>Atención integral para toda la familia en un ambiente cálido y de confianza.</p>
-        <span class="service-more">Saber más →</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">✨</div>
-        <h3>Blanqueamiento</h3>
-        <p>Recupera el brillo de tus dientes con nuestros tratamientos de blanqueamiento profesional.</p>
-        <span class="service-more">Saber más →</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🏥</div>
-        <h3>Cirugía Maxilofacial</h3>
-        <p>Procedimientos quirúrgicos especializados realizados por nuestros expertos certificados.</p>
-        <span class="service-more">Saber más →</span>
+      <div>
+        <div class="hero-card">
+          <h3>Agenda tu primera cita</h3>
+          <p>Consulta de diagnóstico gratuita</p>
+          <div class="hc-item">
+            <div class="hc-icon">📍</div>
+            <div class="hc-text">Cra. 7 #67-42, Chapinero, Bogotá D.C.</div>
+          </div>
+          <div class="hc-item">
+            <div class="hc-icon">📞</div>
+            <div class="hc-text">(601) 456-7890</div>
+          </div>
+          <div class="hc-item">
+            <div class="hc-icon">⏰</div>
+            <div class="hc-text">Lun–Sáb: 7:00 am – 7:00 pm</div>
+          </div>
+          <a href="#contacto" class="btn btn-teal" style="width:100%;justify-content:center;margin-top:1rem;">
+            Reservar Ahora →
+          </a>
+        </div>
       </div>
     </div>
   </div>
+  <div class="scroll-hint">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+  </div>
 </section>
 
-<!-- ══════════════════════════════
-     NOSOTROS
-══════════════════════════════ -->
-<section id="nosotros">
+<!-- NOSOTROS -->
+<section id="nosotros" class="about-section">
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap">
         <img
           class="about-img"
           src="https://images.unsplash.com/photo-1685022036567-0b91b29276e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700"
-          alt="Especialista dental"
+          alt="Especialista dental DentaSonrisa"
         />
         <div class="about-badge">
           <p>25+</p>
@@ -437,60 +509,133 @@
         </div>
       </div>
       <div class="about-text">
-        <span class="section-label">¿Por qué elegirnos?</span>
-        <h2 class="section-title">La clínica dental en la que puedes confiar</h2>
-        <p class="section-sub">Somos un centro odontológico especializado en la salud y estética dental de nuestros pacientes, con servicios de odontología general y especializada a través de un equipo altamente profesional con recursos tecnológicos de última generación.</p>
+        <span class="sec-label">¿Por qué elegirnos?</span>
+        <h2 class="sec-title">La clínica dental en la que<span>puedes confiar</span></h2>
+        <p class="sec-desc">
+          Somos un centro odontológico especializado en la salud y estética dental de nuestros
+          pacientes, con servicios de odontología general y especializada a través de un equipo
+          altamente profesional con recursos tecnológicos de última generación.
+        </p>
         <ul class="check-list">
           <li>Tecnología digital de última generación</li>
           <li>Especialistas certificados con experiencia internacional</li>
           <li>Ambiente cómodo y libre de estrés</li>
           <li>Planes de financiación accesibles</li>
         </ul>
-        <a href="#contacto" class="btn btn-primary">Conoce más sobre nosotros →</a>
+        <a href="#contacto" class="btn btn-teal">Conoce más sobre nosotros →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     STATS
-══════════════════════════════ -->
-<section id="stats">
+<!-- SERVICIOS -->
+<section id="servicios" class="services-section">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item"><p>12.500+</p><p>Dientes Salvados</p></div>
-      <div class="stat-item"><p>18</p><p>Especialistas</p></div>
-      <div class="stat-item"><p>9.800+</p><p>Pacientes Felices</p></div>
-      <div class="stat-item"><p>3</p><p>Sedes en Bogotá</p></div>
+    <div class="services-header">
+      <span class="sec-label">Nuestros Servicios</span>
+      <h2 class="sec-title" style="color:#fff;">Cuidamos cada aspecto<span>de tu sonrisa</span></h2>
+      <p class="sec-desc" style="margin:0 auto;">
+        Ofrecemos tratamientos dentales completos con tecnología de última generación y un equipo de especialistas certificados.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="srv-icon">🦷</div>
+        <h3>Prótesis Dental</h3>
+        <p>Restauramos la funcionalidad y estética de tu sonrisa con prótesis de alta calidad adaptadas a ti.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
+      <div class="service-card">
+        <div class="srv-icon">😁</div>
+        <h3>Ortodoncia</h3>
+        <p>Alineamos tus dientes con brackets o alineadores invisibles para una sonrisa perfecta.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
+      <div class="service-card">
+        <div class="srv-icon">🔬</div>
+        <h3>Endodoncia</h3>
+        <p>Tratamientos de conducto con tecnología de punta para salvar tus dientes naturales.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
+      <div class="service-card">
+        <div class="srv-icon">👨‍👩‍👧</div>
+        <h3>Odontología Familiar</h3>
+        <p>Atención integral para toda la familia en un ambiente cálido y de confianza.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
+      <div class="service-card">
+        <div class="srv-icon">✨</div>
+        <h3>Blanqueamiento</h3>
+        <p>Recupera el brillo de tus dientes con nuestros tratamientos de blanqueamiento profesional.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
+      <div class="service-card">
+        <div class="srv-icon">🏥</div>
+        <h3>Cirugía Maxilofacial</h3>
+        <p>Procedimientos quirúrgicos especializados realizados por nuestros expertos certificados.</p>
+        <span class="srv-more">Saber más →</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     EQUIPO
-══════════════════════════════ -->
-<section id="equipo">
+<!-- STATS -->
+<section class="stats-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">Nuestro Equipo</span>
-      <h2 class="section-title">Conoce a nuestros especialistas</h2>
-      <p class="section-sub">Un equipo de profesionales comprometidos a ofrecerte la mejor atención y calidad de servicio.</p>
+    <div class="stats-grid">
+      <div>
+        <div class="stat-icon">🦷</div>
+        <div class="stat-num">12.500+</div>
+        <div class="stat-label">Dientes Salvados</div>
+      </div>
+      <div>
+        <div class="stat-icon">👩‍⚕️</div>
+        <div class="stat-num">18</div>
+        <div class="stat-label">Especialistas</div>
+      </div>
+      <div>
+        <div class="stat-icon">😊</div>
+        <div class="stat-num">9.800+</div>
+        <div class="stat-label">Pacientes Felices</div>
+      </div>
+      <div>
+        <div class="stat-icon">📍</div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Sedes en Bogotá</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo" class="team-section">
+  <div class="container">
+    <div class="team-header">
+      <span class="sec-label">Nuestro Equipo</span>
+      <h2 class="sec-title">Conoce a nuestros<span style="color:var(--teal);display:inline;"> especialistas</span></h2>
+      <p class="sec-desc" style="margin:0 auto;">
+        Un equipo de profesionales comprometidos a ofrecerte la mejor atención y calidad de servicio.
+      </p>
     </div>
     <div class="team-grid">
       <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1650803075918-efbee311735d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dra. Valentina Rueda" />
+        <div class="team-img-wrap">
+          <img class="team-img" src="https://images.unsplash.com/photo-1650803075918-efbee311735d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dra. Valentina Rueda" />
+        </div>
         <div class="team-info">
           <h3>Dra. Valentina Rueda</h3>
           <p>Periodontista</p>
           <div class="team-socials">
             <button title="Compartir">🔗</button>
-            <button title="Email">@</button>
+            <button title="Correo">@</button>
             <button title="Mensaje">💬</button>
           </div>
         </div>
       </div>
       <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dr. Andrés Morales" />
+        <div class="team-img-wrap">
+          <img class="team-img" src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dr. Andrés Morales" />
+        </div>
         <div class="team-info">
           <h3>Dr. Andrés Morales</h3>
           <p>Ortodoncista</p>
@@ -500,7 +645,9 @@
         </div>
       </div>
       <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1669998966162-9837617177cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dra. Camila Ospina" />
+        <div class="team-img-wrap">
+          <img class="team-img" src="https://images.unsplash.com/photo-1669998966162-9837617177cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dra. Camila Ospina" />
+        </div>
         <div class="team-info">
           <h3>Dra. Camila Ospina</h3>
           <p>Endodoncista</p>
@@ -510,7 +657,9 @@
         </div>
       </div>
       <div class="team-card">
-        <img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dr. Felipe Gutiérrez" />
+        <div class="team-img-wrap">
+          <img class="team-img" src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400" alt="Dr. Felipe Gutiérrez" />
+        </div>
         <div class="team-info">
           <h3>Dr. Felipe Gutiérrez</h3>
           <p>Cirujano Maxilofacial</p>
@@ -523,46 +672,54 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     TESTIMONIOS
-══════════════════════════════ -->
-<section id="testimonios">
+<!-- TESTIMONIOS -->
+<section id="testimonios" class="testimonials-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">Testimonios</span>
-      <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="stars-row">★★★★★</div>
-        <blockquote>"Excelente atención desde el primer momento. El Dr. Morales fue muy paciente y profesional. Mi ortodoncia quedó perfecta."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">MF</div>
-          <div>
-            <div class="author-name">María Fernanda López</div>
-            <div class="author-treatment">Ortodoncia</div>
+    <div class="testi-split">
+      <div class="testi-left">
+        <span class="sec-label">Testimonios</span>
+        <h2 class="sec-title">Lo que dicen<span>nuestros pacientes</span></h2>
+        <p class="sec-desc">
+          Más de 9.800 pacientes han confiado en nosotros su salud dental. Su satisfacción
+          es nuestra mayor motivación para seguir mejorando cada día.
+        </p>
+        <a href="#contacto" class="btn btn-teal">Agendar mi consulta →</a>
+      </div>
+      <div class="testi-cards">
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"Excelente atención desde el primer momento. El Dr. Morales fue muy paciente y profesional. Mi ortodoncia quedó perfecta."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">MF</div>
+            <div>
+              <div class="testi-name">María Fernanda López</div>
+              <div class="testi-treatment">Ortodoncia</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars-row">★★★★★</div>
-        <blockquote>"Llevaba años con miedo al dentista y aquí me hicieron sentir completamente cómodo. La tecnología que usan es impresionante."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">CH</div>
-          <div>
-            <div class="author-name">Carlos Herrera</div>
-            <div class="author-treatment">Endodoncia</div>
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"Llevaba años con miedo al dentista y aquí me hicieron sentir completamente cómodo. La tecnología que usan es impresionante."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">CH</div>
+            <div>
+              <div class="testi-name">Carlos Herrera</div>
+              <div class="testi-treatment">Endodoncia</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars-row">★★★★★</div>
-        <blockquote>"El blanqueamiento superó mis expectativas. Me atendieron con mucho cuidado y los resultados son espectaculares."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">SM</div>
-          <div>
-            <div class="author-name">Sofía Martínez</div>
-            <div class="author-treatment">Blanqueamiento</div>
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <div class="testi-stars">★★★★★</div>
+          <blockquote>"El blanqueamiento superó mis expectativas. Me atendieron con mucho cuidado y los resultados son espectaculares."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">SM</div>
+            <div>
+              <div class="testi-name">Sofía Martínez</div>
+              <div class="testi-treatment">Blanqueamiento</div>
+            </div>
           </div>
         </div>
       </div>
@@ -570,37 +727,53 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     BLOG
-══════════════════════════════ -->
-<section id="blog">
+<!-- BLOG -->
+<section class="blog-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">Blog y Noticias</span>
-      <h2 class="section-title">Últimas noticias</h2>
-      <p class="section-sub">Visita nuestro blog y mantente actualizado con las últimas tendencias en odontología.</p>
+    <div class="blog-header">
+      <span class="sec-label">Blog y Noticias</span>
+      <h2 class="sec-title">Últimas noticias<span style="color:var(--teal);display:inline;"> de odontología</span></h2>
+      <p class="sec-desc" style="margin:0 auto;">Mantente actualizado con las últimas tendencias y consejos para tu salud dental.</p>
     </div>
     <div class="blog-grid">
       <article class="blog-card">
-        <img class="blog-img" src="https://images.unsplash.com/photo-1611690061822-b707a67bfebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="¿Cómo prevenir la gingivitis?" />
+        <div class="blog-img-wrap">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1611690061822-b707a67bfebb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="¿Cómo prevenir la gingivitis?" />
+        </div>
         <div class="blog-body">
-          <div class="blog-meta"><span>Dra. Valentina Rueda</span> <span>•</span> <span>15 Abr 2026</span></div>
+          <div class="blog-meta">
+            <span class="author">Dra. Valentina Rueda</span>
+            <span class="sep">•</span>
+            <span class="date">15 Abr 2026</span>
+          </div>
           <h3>¿Cómo prevenir la gingivitis?</h3>
           <span class="blog-more">Leer más →</span>
         </div>
       </article>
       <article class="blog-card">
-        <img class="blog-img" src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="Beneficios de los alineadores invisibles" />
+        <div class="blog-img-wrap">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="Beneficios de los alineadores invisibles" />
+        </div>
         <div class="blog-body">
-          <div class="blog-meta"><span>Dr. Andrés Morales</span> <span>•</span> <span>8 Abr 2026</span></div>
+          <div class="blog-meta">
+            <span class="author">Dr. Andrés Morales</span>
+            <span class="sep">•</span>
+            <span class="date">8 Abr 2026</span>
+          </div>
           <h3>Beneficios de los alineadores invisibles</h3>
           <span class="blog-more">Leer más →</span>
         </div>
       </article>
       <article class="blog-card">
-        <img class="blog-img" src="https://images.unsplash.com/photo-1684607633080-df59e6874367?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="Tecnología láser en odontología moderna" />
+        <div class="blog-img-wrap">
+          <img class="blog-img" src="https://images.unsplash.com/photo-1684607633080-df59e6874367?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600" alt="Tecnología láser en odontología moderna" />
+        </div>
         <div class="blog-body">
-          <div class="blog-meta"><span>Dra. Camila Ospina</span> <span>•</span> <span>1 Abr 2026</span></div>
+          <div class="blog-meta">
+            <span class="author">Dra. Camila Ospina</span>
+            <span class="sep">•</span>
+            <span class="date">1 Abr 2026</span>
+          </div>
           <h3>Tecnología láser en odontología moderna</h3>
           <span class="blog-more">Leer más →</span>
         </div>
@@ -609,62 +782,64 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     CONTACTO
-══════════════════════════════ -->
-<section id="contacto">
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
   <div class="container">
     <div class="contact-grid">
-      <div class="contact-info">
-        <span class="section-label">Contáctanos</span>
-        <h2 class="section-title">Agenda tu cita hoy</h2>
-        <p class="section-sub" style="margin-left:0;text-align:left;">Tu primera consulta de diagnóstico es completamente gratuita. Estamos aquí para ayudarte a conseguir la sonrisa que mereces.</p>
+      <div class="contact-left">
+        <span class="sec-label">Contáctanos</span>
+        <h2 class="sec-title">Agenda tu cita hoy<span>y consigue tu sonrisa ideal</span></h2>
+        <p class="sec-desc">Tu primera consulta de diagnóstico es completamente gratuita. Estamos aquí para ayudarte a conseguir la sonrisa que mereces.</p>
         <div class="contact-items">
           <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            <div class="contact-item-text">
-              <p>Dirección</p><p>Cra. 7 #67-42, Chapinero, Bogotá D.C.</p>
+            <div class="ci-icon">📍</div>
+            <div>
+              <div class="ci-title">Dirección</div>
+              <div class="ci-val">Cra. 7 #67-42, Chapinero, Bogotá D.C.</div>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon">📞</div>
-            <div class="contact-item-text">
-              <p>Teléfono</p><p>(601) 456-7890 | 320 876 5432</p>
+            <div class="ci-icon">📞</div>
+            <div>
+              <div class="ci-title">Teléfono</div>
+              <div class="ci-val">(601) 456-7890 | 320 876 5432</div>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon">✉️</div>
-            <div class="contact-item-text">
-              <p>Correo</p><p>info@dentasonrisa.com.co</p>
+            <div class="ci-icon">✉️</div>
+            <div>
+              <div class="ci-title">Correo</div>
+              <div class="ci-val">info@dentasonrisa.com.co</div>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon">⏰</div>
-            <div class="contact-item-text">
-              <p>Horario</p><p>Lunes a Sábado: 7:00 am – 7:00 pm</p>
+            <div class="ci-icon">⏰</div>
+            <div>
+              <div class="ci-title">Horario</div>
+              <div class="ci-val">Lunes a Sábado: 7:00 am – 7:00 pm</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="contact-form-card">
+      <div class="contact-form-box">
         <h3>Solicitar Cita</h3>
         <form onsubmit="return false;">
           <div class="form-row">
             <div class="form-group">
-              <label>Nombre</label>
+              <label>NOMBRE</label>
               <input type="text" placeholder="María García" />
             </div>
             <div class="form-group">
-              <label>Teléfono</label>
+              <label>TELÉFONO</label>
               <input type="tel" placeholder="320 000 0000" />
             </div>
           </div>
           <div class="form-group">
-            <label>Correo electrónico</label>
+            <label>CORREO ELECTRÓNICO</label>
             <input type="email" placeholder="ejemplo@correo.com" />
           </div>
           <div class="form-group">
-            <label>Servicio de interés</label>
+            <label>SERVICIO DE INTERÉS</label>
             <select>
               <option value="none">Selecciona un servicio</option>
               <option>Prótesis Dental</option>
@@ -676,35 +851,49 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Mensaje (opcional)</label>
+            <label>MENSAJE (OPCIONAL)</label>
             <textarea rows="3" placeholder="Cuéntanos sobre tu consulta..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-submit">Enviar Solicitud →</button>
+          <button type="submit" class="btn btn-teal btn-submit">Enviar Solicitud →</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     FOOTER
-══════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
+  <div class="footer-subscribe">
+    <div class="container">
+      <div class="footer-sub-inner">
+        <div class="footer-sub-links">
+          <a href="#nosotros">Nosotros</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-sub-form">
+          <input type="email" placeholder="Tu correo electrónico..." />
+          <button type="button">Suscribirse</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo">
+        <div class="footer-logo-wrap">
           <div class="footer-logo-icon">🦷</div>
           <div>
             <div class="footer-logo-name">DentaSonrisa</div>
             <div class="footer-logo-sub">Clínica Dental</div>
           </div>
         </div>
-        <p class="footer-desc">Cuidamos tu sonrisa con pasión y experiencia desde 2000 en Bogotá.</p>
+        <p class="footer-desc">Cuidamos tu sonrisa con pasión y experiencia desde el año 2000 en Bogotá, Colombia.</p>
         <div class="footer-socials">
-          <button title="Compartir">🔗</button>
-          <button title="Instagram">@</button>
-          <button title="WhatsApp">💬</button>
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="WhatsApp">w</a>
+          <a href="#" title="LinkedIn">in</a>
         </div>
       </div>
       <div class="footer-col">
@@ -731,37 +920,69 @@
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <div class="footer-contact-item"><span class="ico">📍</span> Cra. 7 #67-42, Chapinero, Bogotá</div>
-        <div class="footer-contact-item"><span class="ico">📞</span> (601) 456-7890</div>
-        <div class="footer-contact-item"><span class="ico">✉️</span> info@dentasonrisa.com.co</div>
-        <div class="footer-contact-item"><span class="ico">⏰</span> Lun–Sáb: 7am – 7pm</div>
+        <div class="footer-ci"><span class="ico">📍</span> Cra. 7 #67-42, Chapinero, Bogotá</div>
+        <div class="footer-ci"><span class="ico">📞</span> (601) 456-7890</div>
+        <div class="footer-ci"><span class="ico">✉️</span> info@dentasonrisa.com.co</div>
+        <div class="footer-ci"><span class="ico">⏰</span> Lun–Sáb: 7:00 am – 7:00 pm</div>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; <span id="year"></span> DentaSonrisa Clínica Dental — Bogotá, Colombia. Todos los derechos reservados.
+    Copyright © <span id="year"></span> DentaSonrisa Clínica Dental — Bogotá, Colombia. Todos los derechos reservados.
   </div>
 </footer>
+
+<!-- BACK TO TOP -->
+<button id="back-top" title="Volver arriba">↑</button>
 
 <script>
   // Año dinámico
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Navbar scroll
+  // Navbar scroll shadow
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const btn = document.getElementById('back-top');
+    btn.classList.toggle('visible', window.scrollY > 400);
   });
 
-  // Menú hamburguesa
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
   });
-  document.querySelectorAll('.nav-mobile-link').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
   });
+
+  // Back to top
+  document.getElementById('back-top').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Counter animation
+  function animateCounter(el, target) {
+    const raw = target.replace(/[^0-9]/g, '');
+    const num = parseInt(raw, 10);
+    const suffix = target.replace(/[0-9]/g, '').replace('.', '');
+    let start = 0;
+    const step = Math.ceil(num / 60);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, num);
+      el.textContent = start.toLocaleString('es-CO').replace(',', '.') + (target.includes('+') ? '+' : '');
+      if (start >= num) clearInterval(timer);
+    }, 24);
+  }
+  const counters = document.querySelectorAll('.stat-num');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.done) {
+        entry.target.dataset.done = '1';
+        animateCounter(entry.target, entry.target.textContent.trim());
+      }
+    });
+  }, { threshold: .5 });
+  counters.forEach(c => counterObserver.observe(c));
 </script>
 </body>
 </html>
