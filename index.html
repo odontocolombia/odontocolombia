@@ -3,1072 +3,1315 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MEKÁNIKA — Taller Automotriz Bogotá</title>
-<meta name="description" content="Taller mecánico de alto rendimiento en Bogotá. Precisión alemana, atención colombiana."/>
+<title>IRON GARAGE — Custom Shop · Bogotá</title>
+<meta name="description" content="Custom shop y taller de modificación automotriz en Bogotá. Hot rods, resto-mods, tuning y builds a medida desde 2005."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+
 <style>
-/* ══════════════════════════════════════
-   RESET & BASE
-══════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
 :root{
-  --yellow:#EEFF00;
-  --yellow-dim:#d4e600;
-  --black:#080808;
-  --white:#F4F4F0;
-  --gray:#9A9A8E;
-  --gray-light:#E8E8E2;
-  --card-bg:#111110;
-  --border:rgba(244,244,240,0.1);
-  --font-main:'Space Grotesk',sans-serif;
-  --font-mono:'Space Mono',monospace;
+  --cream:     #F2EBD9;
+  --cream-dk:  #E4D8C0;
+  --cream-dkr: #C9BA9B;
+  --red:       #C0261A;
+  --red-dk:    #9A1E10;
+  --black:     #1A1410;
+  --ink:       #2E2520;
+  --gray:      #7A6F62;
+  --rust:      #8B4513;
+  --gold:      #C8952A;
+
+  --f-display: 'Bebas Neue', sans-serif;
+  --f-serif:   'Playfair Display', serif;
+  --f-body:    'Libre Baskerville', serif;
+  --f-mono:    'IBM Plex Mono', monospace;
 }
-html{scroll-behavior:smooth;cursor:none;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{
-  font-family:var(--font-main);
-  background:var(--black);
-  color:var(--white);
-  line-height:1.5;
+  font-family:var(--f-body);
+  background:var(--cream);
+  color:var(--ink);
   overflow-x:hidden;
+  /* Subtle paper texture via CSS */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
-/* ══ CUSTOM CURSOR ══ */
-#cursor{
-  position:fixed;width:12px;height:12px;background:var(--yellow);
-  border-radius:50%;pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s,background 0.2s;
-  mix-blend-mode:difference;
-}
-#cursor-ring{
-  position:fixed;width:40px;height:40px;border:1px solid rgba(238,255,0,0.4);
-  border-radius:50%;pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.25s,height 0.25s;
-}
-body:hover #cursor{opacity:1;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--cream-dk);}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:0;}
 
-/* ══ SCROLLBAR ══ */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--black);}
-::-webkit-scrollbar-thumb{background:var(--yellow);border-radius:2px;}
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+.divider-line{
+  height:2px;background:var(--ink);
+  border:none;margin:0;
+}
+.divider-thick{
+  height:6px;background:var(--red);
+  border:none;margin:0;
+}
+.stamp{
+  display:inline-block;
+  border:3px solid currentColor;
+  padding:4px 12px;
+  font-family:var(--f-mono);
+  font-size:0.65rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  transform:rotate(-1.5deg);
+}
+.tag-pill{
+  display:inline-block;
+  background:var(--red);
+  color:var(--cream);
+  font-family:var(--f-mono);
+  font-size:0.6rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  padding:3px 10px;
+}
 
-/* ══════════════════════════════════════
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
+.topbar{
+  background:var(--black);
+  color:var(--cream-dkr);
+  font-family:var(--f-mono);
+  font-size:0.62rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  padding:8px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.topbar span{display:flex;align-items:center;gap:8px;}
+.topbar-dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+
+/* ═══════════════════════════════════════════
    NAVBAR
-══════════════════════════════════════ */
+═══════════════════════════════════════════ */
 #nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 40px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  background:rgba(8,8,8,0.92);
-  backdrop-filter:blur(16px);
-  transition:border-color 0.3s;
+  position:sticky;top:0;z-index:100;
+  background:var(--cream);
+  border-bottom:2px solid var(--ink);
 }
-.nav-logo{
-  font-family:var(--font-mono);font-weight:700;font-size:1.05rem;
-  letter-spacing:0.06em;color:var(--white);text-decoration:none;
-  display:flex;align-items:center;gap:10px;
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;height:70px;
+  gap:24px;
 }
-.nav-logo-dot{
-  width:10px;height:10px;border-radius:50%;background:var(--yellow);
-  animation:pulse-dot 2s infinite;
+.logo{
+  display:flex;flex-direction:column;gap:0;text-decoration:none;
+  line-height:1;
 }
-@keyframes pulse-dot{
-  0%,100%{box-shadow:0 0 0 0 rgba(238,255,0,0.5);}
-  50%{box-shadow:0 0 0 6px rgba(238,255,0,0);}
+.logo-top{
+  font-family:var(--f-display);
+  font-size:2rem;
+  letter-spacing:0.05em;
+  color:var(--black);
+  line-height:0.9;
 }
-.nav-links{display:flex;gap:36px;list-style:none;}
+.logo-sub{
+  font-family:var(--f-mono);
+  font-size:0.52rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gray);
+  padding-left:2px;
+}
+.logo-rule{height:3px;background:var(--red);margin-top:3px;}
+.nav-links{
+  display:flex;gap:36px;list-style:none;
+}
 .nav-links a{
-  font-size:0.75rem;font-weight:600;letter-spacing:0.14em;
-  text-transform:uppercase;color:var(--gray);text-decoration:none;
-  transition:color 0.2s;cursor:none;
+  font-family:var(--f-mono);font-size:0.7rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gray);text-decoration:none;
+  transition:color 0.2s;
+  border-bottom:2px solid transparent;
+  padding-bottom:2px;
 }
-.nav-links a:hover{color:var(--white);}
-.nav-cta{
-  font-family:var(--font-mono);font-size:0.72rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;
-  background:var(--yellow);color:var(--black);
-  border:none;padding:10px 22px;cursor:none;
-  transition:transform 0.2s,background 0.2s;
+.nav-links a:hover{color:var(--red);border-bottom-color:var(--red);}
+.btn-nav{
+  font-family:var(--f-display);font-size:1rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--red);color:var(--cream);
+  border:none;padding:10px 24px;cursor:pointer;
+  transition:background 0.2s;text-decoration:none;
+  border:2px solid var(--red);
 }
-.nav-cta:hover{background:var(--yellow-dim);transform:translateY(-1px);}
-.ham{display:none;background:none;border:none;cursor:none;color:var(--white);padding:4px;}
+.btn-nav:hover{background:var(--red-dk);border-color:var(--red-dk);}
+.ham-btn{
+  display:none;background:none;border:2px solid var(--ink);
+  padding:7px 9px;cursor:pointer;color:var(--ink);
+}
 .mob-menu{
-  display:none;position:fixed;inset:64px 0 0;background:var(--black);
-  z-index:99;padding:32px 40px;flex-direction:column;gap:24px;
-  border-top:1px solid var(--border);
+  display:none;background:var(--cream);
+  border-bottom:2px solid var(--ink);
+  padding:20px 40px 28px;
+  flex-direction:column;gap:16px;
 }
 .mob-menu a{
-  font-size:1.4rem;font-weight:700;text-transform:uppercase;
-  color:var(--gray);text-decoration:none;letter-spacing:0.06em;
-  border-bottom:1px solid var(--border);padding-bottom:20px;
+  font-family:var(--f-display);font-size:1.6rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--cream-dkr);padding-bottom:14px;
   transition:color 0.2s;
 }
-.mob-menu a:hover{color:var(--yellow);}
-.mob-menu .nav-cta{margin-top:8px;display:inline-block;text-decoration:none;}
+.mob-menu a:hover{color:var(--red);}
+.mob-menu .btn-nav{margin-top:8px;display:inline-block;text-align:center;}
 
-/* ══════════════════════════════════════
-   HERO — full-screen split
-══════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   HERO — editorial newspaper layout
+═══════════════════════════════════════════ */
 #hero{
-  min-height:100vh;display:grid;
-  grid-template-columns:1fr 1fr;
-  padding-top:64px;
-  border-bottom:1px solid var(--border);
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:64px 56px 64px 56px;
-  border-right:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.hero-left::before{
-  content:'';position:absolute;top:-120px;left:-120px;
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(238,255,0,0.06),transparent 70%);
-  pointer-events:none;
-}
-.hero-number{
-  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.2em;
-  color:var(--yellow);text-transform:uppercase;margin-bottom:28px;
-}
-.hero-title{
-  font-family:var(--font-main);font-size:clamp(3.5rem,6.5vw,6.5rem);
-  font-weight:700;line-height:1;letter-spacing:-0.03em;margin-bottom:36px;
-}
-.hero-title .outline{
-  -webkit-text-stroke:1px var(--white);color:transparent;
-}
-.hero-title .yellow{color:var(--yellow);}
-.hero-body{
-  font-size:1rem;color:var(--gray);max-width:420px;
-  line-height:1.7;margin-bottom:48px;font-weight:400;
-}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-primary{
-  font-family:var(--font-mono);font-size:0.78rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;
-  background:var(--yellow);color:var(--black);
-  border:none;padding:14px 32px;cursor:none;
-  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
-  transition:transform 0.2s,background 0.2s;
-}
-.btn-primary:hover{transform:translateY(-2px);background:var(--yellow-dim);}
-.btn-primary svg{width:16px;height:16px;flex-shrink:0;}
-.btn-outline{
-  font-family:var(--font-mono);font-size:0.78rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;
-  background:transparent;color:var(--white);
-  border:1px solid rgba(244,244,240,0.3);padding:14px 32px;cursor:none;
-  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
-  transition:border-color 0.2s,color 0.2s;
-}
-.btn-outline:hover{border-color:var(--yellow);color:var(--yellow);}
-.hero-right{
-  position:relative;overflow:hidden;
-}
-.hero-right img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  filter:grayscale(20%);transition:transform 8s ease;
-}
-.hero-right:hover img{transform:scale(1.04);}
-.hero-right-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(8,8,8,0.4) 0%,transparent 60%),
-             linear-gradient(to top,rgba(8,8,8,0.6) 0%,transparent 40%);
-}
-.hero-tags{
-  position:absolute;bottom:32px;left:32px;
-  display:flex;flex-direction:column;gap:8px;
-}
-.hero-tag{
-  font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;
-  text-transform:uppercase;color:var(--white);
-  background:rgba(8,8,8,0.7);border:1px solid var(--border);
-  padding:5px 12px;backdrop-filter:blur(8px);
-  display:inline-block;width:fit-content;
-}
-.hero-scroll{
-  position:absolute;bottom:40px;right:56px;
-  font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.2em;
-  color:var(--gray);text-transform:uppercase;
-  writing-mode:vertical-rl;
-  display:flex;align-items:center;gap:12px;
-}
-.hero-scroll::after{
-  content:'';width:1px;height:48px;background:var(--gray);
-  display:block;animation:scrollline 1.8s ease-in-out infinite;
-}
-@keyframes scrollline{
-  0%,100%{transform:scaleY(1);transform-origin:top;}
-  50%{transform:scaleY(0.4);transform-origin:bottom;}
-}
-
-/* ══════════════════════════════════════
-   TICKER
-══════════════════════════════════════ */
-.ticker-wrap{
-  overflow:hidden;background:var(--yellow);padding:14px 0;
-  border-bottom:1px solid var(--black);
-}
-.ticker-inner{
-  display:flex;white-space:nowrap;
-  animation:ticker 20s linear infinite;
-}
-.ticker-inner:hover{animation-play-state:paused;}
-.ticker-item{
-  font-family:var(--font-mono);font-size:0.78rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:0.14em;color:var(--black);
-  padding:0 40px;display:flex;align-items:center;gap:16px;
-}
-.ticker-item::after{
-  content:'◆';font-size:0.6rem;color:rgba(0,0,0,0.4);
-}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-/* ══════════════════════════════════════
-   STATS — horizontal strip
-══════════════════════════════════════ */
-#stats{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-bottom:1px solid var(--border);
-}
-.stat-block{
-  padding:56px 40px;border-right:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.stat-block:last-child{border-right:none;}
-.stat-block::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--yellow);transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s ease;
-}
-.stat-block:hover::before{transform:scaleX(1);}
-.stat-num{
-  font-family:var(--font-mono);
-  font-size:clamp(2.4rem,4vw,3.8rem);
-  font-weight:700;color:var(--yellow);
-  line-height:1;margin-bottom:10px;
-}
-.stat-label{
-  font-size:0.78rem;font-weight:600;
-  text-transform:uppercase;letter-spacing:0.14em;color:var(--gray);
-}
-
-/* ══════════════════════════════════════
-   SERVICES — asymmetric grid
-══════════════════════════════════════ */
-#servicios{padding:120px 40px;}
-.services-header{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  margin-bottom:72px;gap:40px;flex-wrap:wrap;
-}
-.section-num{
-  font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.2em;
-  color:var(--yellow);text-transform:uppercase;margin-bottom:12px;
-}
-.section-title{
-  font-size:clamp(2rem,4vw,3.4rem);font-weight:700;
-  line-height:1.05;letter-spacing:-0.02em;
-}
-.section-title em{font-style:normal;color:var(--yellow);}
-.services-sub{
-  max-width:360px;font-size:0.95rem;color:var(--gray);line-height:1.7;
-  align-self:flex-end;
-}
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);
-}
-.svc{
-  background:var(--black);padding:40px 36px;
-  position:relative;overflow:hidden;
-  transition:background 0.25s;
-  cursor:none;
-}
-.svc::after{
-  content:'';position:absolute;inset:0;
-  background:var(--yellow);
-  transform:translateY(100%);transition:transform 0.35s cubic-bezier(.77,0,.18,1);
-  z-index:0;
-}
-.svc:hover::after{transform:translateY(0);}
-.svc-inner{position:relative;z-index:1;}
-.svc-num{
-  font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;
-  color:var(--gray);text-transform:uppercase;margin-bottom:28px;
-  transition:color 0.25s;
-}
-.svc:hover .svc-num{color:var(--black);}
-.svc-icon{margin-bottom:20px;}
-.svc-icon svg{width:28px;height:28px;stroke:var(--yellow);transition:stroke 0.25s;}
-.svc:hover .svc-icon svg{stroke:var(--black);}
-.svc-title{
-  font-size:1.05rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.04em;margin-bottom:14px;
-  transition:color 0.25s;
-}
-.svc:hover .svc-title{color:var(--black);}
-.svc-desc{
-  font-size:0.85rem;color:var(--gray);line-height:1.65;
-  transition:color 0.25s;
-}
-.svc:hover .svc-desc{color:rgba(8,8,8,0.7);}
-.svc-arrow{
-  position:absolute;bottom:28px;right:28px;
-  width:36px;height:36px;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color 0.25s,background 0.25s;z-index:1;
-}
-.svc:hover .svc-arrow{border-color:var(--black);background:var(--black);}
-.svc-arrow svg{width:16px;height:16px;stroke:var(--gray);transition:stroke 0.25s;}
-.svc:hover .svc-arrow svg{stroke:var(--yellow);}
-
-/* ══════════════════════════════════════
-   ABOUT — editorial two-col
-══════════════════════════════════════ */
-#nosotros{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  min-height:70vh;
-}
-.about-img{overflow:hidden;position:relative;}
-.about-img img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  filter:grayscale(30%);transition:transform 6s ease;
-}
-.about-img:hover img{transform:scale(1.05);}
-.about-year-badge{
-  position:absolute;top:32px;left:32px;
-  background:var(--yellow);color:var(--black);
-  font-family:var(--font-mono);font-weight:700;font-size:1rem;
-  padding:10px 18px;letter-spacing:0.05em;
-}
-.about-text{
-  padding:80px 64px;display:flex;flex-direction:column;justify-content:center;
-  border-left:1px solid var(--border);
-}
-.about-text .section-title{margin-bottom:28px;}
-.about-text p{
-  font-size:0.95rem;color:var(--gray);line-height:1.8;margin-bottom:20px;
-}
-.about-checks{
-  list-style:none;margin:32px 0;display:flex;flex-direction:column;gap:14px;
-}
-.about-checks li{
-  display:flex;align-items:center;gap:14px;
-  font-size:0.88rem;font-weight:600;letter-spacing:0.02em;
-  border-bottom:1px solid var(--border);padding-bottom:14px;
-}
-.check-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;
-}
-
-/* ══════════════════════════════════════
-   PROCESS
-══════════════════════════════════════ */
-#proceso{padding:120px 40px;border-bottom:1px solid var(--border);}
-.process-header{margin-bottom:80px;}
-.process-steps{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;border:1px solid var(--border);
-}
-.step{
-  padding:48px 36px;border-right:1px solid var(--border);
-  position:relative;
-}
-.step:last-child{border-right:none;}
-.step-num{
-  font-family:var(--font-mono);font-size:2.8rem;font-weight:700;
-  color:rgba(244,244,240,0.07);line-height:1;margin-bottom:24px;
-}
-.step-icon{margin-bottom:20px;}
-.step-icon svg{width:26px;height:26px;stroke:var(--yellow);}
-.step-title{
-  font-size:1rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.06em;margin-bottom:12px;
-}
-.step-desc{font-size:0.84rem;color:var(--gray);line-height:1.65;}
-.step-connector{
-  position:absolute;top:60px;right:-1px;
-  width:24px;height:2px;background:var(--yellow);
-  display:none;
-}
-
-/* ══════════════════════════════════════
-   TESTIMONIALS — horizontal scroll
-══════════════════════════════════════ */
-#testimonios{padding:120px 0;border-bottom:1px solid var(--border);overflow:hidden;}
-.testi-header{padding:0 40px;margin-bottom:64px;}
-.testi-track{
-  display:flex;gap:24px;padding:0 40px;
-  animation:testi-scroll 30s linear infinite;
-  width:max-content;
-}
-.testi-track:hover{animation-play-state:paused;}
-@keyframes testi-scroll{
-  from{transform:translateX(0);}to{transform:translateX(-50%);}
-}
-.testi-card{
-  width:380px;flex-shrink:0;
-  background:var(--card-bg);border:1px solid var(--border);
-  padding:36px;
-}
-.testi-quote{
-  font-size:2.4rem;font-family:var(--font-mono);
-  color:var(--yellow);line-height:1;margin-bottom:20px;
-}
-.testi-text{
-  font-size:0.9rem;color:var(--gray);line-height:1.75;margin-bottom:28px;
-}
-.testi-author{
-  display:flex;flex-direction:column;gap:4px;
-  border-top:1px solid var(--border);padding-top:20px;
-}
-.testi-name{font-weight:700;font-size:0.88rem;letter-spacing:0.02em;}
-.testi-car{
-  font-family:var(--font-mono);font-size:0.7rem;
-  letter-spacing:0.1em;color:var(--yellow);text-transform:uppercase;
-}
-
-/* ══════════════════════════════════════
-   CONTACT — bold CTA
-══════════════════════════════════════ */
-#contacto{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--border);
-  min-height:90vh;
-}
-.contact-left{
-  background:var(--yellow);padding:80px 64px;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.contact-eyebrow{
-  font-family:var(--font-mono);font-size:0.72rem;font-weight:700;
-  letter-spacing:0.18em;text-transform:uppercase;color:rgba(8,8,8,0.5);
-  margin-bottom:16px;
-}
-.contact-big-title{
-  font-size:clamp(2.4rem,5vw,5rem);font-weight:700;
-  line-height:1;letter-spacing:-0.03em;color:var(--black);
-}
-.contact-info-list{
-  list-style:none;display:flex;flex-direction:column;gap:20px;
-}
-.contact-info-item{
-  display:flex;align-items:flex-start;gap:16px;
-  border-top:1px solid rgba(8,8,8,0.15);padding-top:20px;
-}
-.contact-info-item svg{
-  width:18px;height:18px;stroke:var(--black);flex-shrink:0;margin-top:2px;
-}
-.contact-info-label{
-  font-size:0.68rem;font-weight:700;letter-spacing:0.16em;
-  text-transform:uppercase;color:rgba(8,8,8,0.5);margin-bottom:4px;
-}
-.contact-info-val{
-  font-weight:700;font-size:0.95rem;color:var(--black);
-}
-.contact-info-sub{
-  font-size:0.8rem;color:rgba(8,8,8,0.55);margin-top:2px;
-}
-.contact-right{
-  padding:80px 64px;display:flex;flex-direction:column;justify-content:center;
-  background:var(--card-bg);border-left:1px solid var(--border);
-}
-.form-label{
-  display:block;font-family:var(--font-mono);font-size:0.65rem;
-  font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  max-width:1200px;margin:0 auto;
+  padding:48px 40px 0;
+  border-left:1px solid var(--cream-dkr);
+  border-right:1px solid var(--cream-dkr);
+}
+.hero-masthead{
+  text-align:center;
+  border-bottom:6px double var(--ink);
+  padding-bottom:16px;
+  margin-bottom:20px;
+}
+.hero-masthead-sub{
+  font-family:var(--f-mono);font-size:0.65rem;
+  letter-spacing:0.25em;text-transform:uppercase;
   color:var(--gray);margin-bottom:8px;
 }
-.form-input{
-  width:100%;background:transparent;
-  border:none;border-bottom:1px solid var(--border);
-  padding:12px 0;font-family:var(--font-main);font-size:0.95rem;
-  color:var(--white);outline:none;transition:border-color 0.2s;margin-bottom:28px;
+.hero-masthead-title{
+  font-family:var(--f-display);
+  font-size:clamp(4rem,10vw,10rem);
+  line-height:0.88;
+  letter-spacing:0.02em;
+  color:var(--black);
 }
-.form-input:focus{border-color:var(--yellow);}
-.form-input::placeholder{color:rgba(154,154,142,0.4);}
-.form-select{
-  width:100%;background:var(--black);border:none;border-bottom:1px solid var(--border);
-  padding:12px 0;font-family:var(--font-main);font-size:0.95rem;
-  color:var(--white);outline:none;transition:border-color 0.2s;margin-bottom:28px;
-  cursor:none;
+.hero-masthead-title span{color:var(--red);}
+.hero-masthead-rule{
+  display:flex;align-items:center;gap:16px;
+  margin-top:12px;
+  font-family:var(--f-mono);font-size:0.6rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);
 }
-.form-select:focus{border-color:var(--yellow);}
-.form-select option{background:var(--card-bg);}
-.form-textarea{
-  width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);
-  padding:12px 0;font-family:var(--font-main);font-size:0.95rem;
-  color:var(--white);outline:none;resize:none;transition:border-color 0.2s;margin-bottom:36px;
+.hero-masthead-rule::before,
+.hero-masthead-rule::after{content:'';flex:1;height:1px;background:var(--gray);}
+.hero-cols{
+  display:grid;grid-template-columns:1fr 2fr 1fr;
+  gap:0;border-top:1px solid var(--ink);
 }
-.form-textarea:focus{border-color:var(--yellow);}
-.form-textarea::placeholder{color:rgba(154,154,142,0.4);}
-.form-submit{
-  font-family:var(--font-mono);font-size:0.78rem;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  background:var(--yellow);color:var(--black);border:none;
-  padding:16px 40px;cursor:none;width:100%;
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  transition:background 0.2s,transform 0.2s;
+.hero-col-l,.hero-col-r{padding:24px 20px;}
+.hero-col-l{border-right:1px solid var(--ink);}
+.hero-col-r{border-left:1px solid var(--ink);}
+.hero-col-c{position:relative;overflow:hidden;}
+.hero-col-c img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  min-height:420px;
+  filter:sepia(30%) contrast(1.1);
 }
-.form-submit:hover{background:var(--yellow-dim);transform:translateY(-2px);}
-.form-submit svg{width:16px;height:16px;}
-.success-state{
-  display:none;flex-direction:column;align-items:center;
-  justify-content:center;text-align:center;gap:20px;padding:48px 0;
+.hero-img-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(26,20,16,0.82);
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--cream-dkr);padding:10px 16px;
 }
-.success-icon-wrap{
-  width:72px;height:72px;background:var(--yellow);
-  display:flex;align-items:center;justify-content:center;
+.hero-col-label{
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:12px;
 }
-.success-icon-wrap svg{width:32px;height:32px;stroke:var(--black);stroke-width:2.5;}
-.success-title{
-  font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;
+.hero-kicker{
+  font-family:var(--f-display);font-size:1.5rem;
+  line-height:1;color:var(--black);margin-bottom:12px;
 }
-.success-desc{font-size:0.9rem;color:var(--gray);}
-.success-back{
-  font-family:var(--font-mono);font-size:0.72rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;
-  background:transparent;color:var(--gray);border:1px solid var(--border);
-  padding:10px 24px;cursor:none;transition:border-color 0.2s,color 0.2s;
+.hero-body-text{
+  font-size:0.8rem;color:var(--gray);
+  line-height:1.8;
 }
-.success-back:hover{border-color:var(--yellow);color:var(--yellow);}
+.hero-body-text + .hero-body-text{margin-top:12px;}
+.hero-stat-block{
+  margin-top:20px;
+  border-top:2px solid var(--ink);
+  padding-top:14px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.hero-stat{display:flex;flex-direction:column;gap:0;}
+.hero-stat-num{
+  font-family:var(--f-display);font-size:2.2rem;
+  line-height:1;color:var(--red);
+}
+.hero-stat-lbl{
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);
+}
+.hero-cta-block{
+  margin-top:20px;border-top:2px solid var(--red);padding-top:16px;
+}
+.hero-cta-text{
+  font-family:var(--f-serif);font-style:italic;
+  font-size:0.85rem;color:var(--ink);margin-bottom:14px;line-height:1.5;
+}
+.btn-hero{
+  display:block;font-family:var(--f-display);font-size:1.05rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--red);color:var(--cream);border:none;
+  padding:12px 0;text-align:center;cursor:pointer;
+  text-decoration:none;transition:background 0.2s;
+  border:2px solid var(--red);
+}
+.btn-hero:hover{background:var(--red-dk);}
+.btn-ghost{
+  display:block;font-family:var(--f-display);font-size:1.05rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:transparent;color:var(--ink);
+  border:2px solid var(--ink);
+  padding:12px 0;text-align:center;cursor:pointer;
+  text-decoration:none;transition:all 0.2s;margin-top:8px;
+}
+.btn-ghost:hover{background:var(--ink);color:var(--cream);}
+.hero-marquee-wrap{
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  overflow:hidden;background:var(--black);padding:10px 0;
+  margin:0 -40px;
+}
+.hero-marquee{
+  display:flex;white-space:nowrap;
+  animation:marquee 18s linear infinite;
+}
+.hero-marquee span{
+  font-family:var(--f-display);font-size:1.2rem;
+  letter-spacing:0.12em;color:var(--cream-dkr);
+  padding:0 32px;
+}
+.hero-marquee span.red{color:var(--red);}
+@keyframes marquee{
+  from{transform:translateX(0);}to{transform:translateX(-50%);}
+}
 
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
-footer{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-top:1px solid var(--border);
+/* ═══════════════════════════════════════════
+   BUILDS SECTION — featured projects
+═══════════════════════════════════════════ */
+#builds{
+  max-width:1200px;margin:0 auto;padding:64px 40px;
+  border-left:1px solid var(--cream-dkr);
+  border-right:1px solid var(--cream-dkr);
 }
-.foot-col{
-  padding:40px 40px;border-right:1px solid var(--border);
+.builds-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  border-bottom:4px double var(--ink);padding-bottom:16px;margin-bottom:40px;
+  flex-wrap:wrap;gap:16px;
 }
-.foot-col:last-child{border-right:none;}
-.foot-logo{
-  font-family:var(--font-mono);font-weight:700;font-size:1rem;
-  letter-spacing:0.08em;color:var(--white);display:flex;align-items:center;gap:10px;
+.section-eyebrow{
+  font-family:var(--f-mono);font-size:0.62rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--red);margin-bottom:6px;
+}
+.section-heading{
+  font-family:var(--f-display);
+  font-size:clamp(2.4rem,5vw,5rem);
+  line-height:0.9;letter-spacing:0.02em;
+  color:var(--black);
+}
+.section-heading em{font-style:italic;color:var(--red);}
+.builds-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border:2px solid var(--ink);
+}
+.build-card{
+  border-right:1px solid var(--cream-dkr);
+  overflow:hidden;
+  transition:background 0.2s;
+}
+.build-card:last-child{border-right:none;}
+.build-card-img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  display:block;filter:sepia(25%) contrast(1.05);
+  transition:transform 0.5s ease,filter 0.3s;
+}
+.build-card:hover .build-card-img{transform:scale(1.03);filter:sepia(0%) contrast(1.1);}
+.build-card-body{
+  padding:20px 22px 24px;
+  border-top:2px solid var(--ink);
+}
+.build-card-type{
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--red);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.build-card-type::before{
+  content:'';width:20px;height:2px;background:var(--red);
+}
+.build-card-title{
+  font-family:var(--f-display);font-size:1.6rem;
+  line-height:1;color:var(--black);margin-bottom:8px;
+}
+.build-card-desc{
+  font-size:0.78rem;color:var(--gray);
+  line-height:1.7;
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES — typewriter list style
+═══════════════════════════════════════════ */
+#servicios{
+  background:var(--black);color:var(--cream);
+  padding:0;
+  border-top:6px solid var(--red);
+}
+.services-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.services-left{
+  padding:72px 56px;
+  border-right:1px solid rgba(242,235,217,0.12);
+}
+.services-left .section-eyebrow{color:var(--gold);}
+.services-left .section-heading{color:var(--cream);}
+.services-left p{
+  font-size:0.88rem;color:rgba(242,235,217,0.55);
+  line-height:1.85;margin-top:24px;max-width:340px;
+}
+.services-badge{
+  margin-top:40px;
+  display:inline-block;
+  background:var(--red);
+  padding:24px 28px;
+}
+.services-badge-num{
+  font-family:var(--f-display);font-size:3.5rem;
+  line-height:1;color:var(--cream);
+}
+.services-badge-txt{
+  font-family:var(--f-mono);font-size:0.6rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(242,235,217,0.65);margin-top:4px;
+}
+.services-right{
+  padding:72px 56px;
+  display:flex;flex-direction:column;gap:0;
+}
+.svc-row{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:20px 0;
+  border-bottom:1px solid rgba(242,235,217,0.1);
+  cursor:default;
+  transition:padding-left 0.25s;
+  position:relative;
+}
+.svc-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:0;background:var(--red);
+  transition:width 0.25s;
+  z-index:0;
+}
+.svc-row:hover{padding-left:14px;}
+.svc-row:hover::before{width:3px;}
+.svc-row-num{
+  font-family:var(--f-display);font-size:1.2rem;
+  color:var(--red);line-height:1;
+  flex-shrink:0;padding-top:2px;
+  position:relative;z-index:1;
+}
+.svc-row-content{position:relative;z-index:1;}
+.svc-row-title{
+  font-family:var(--f-display);font-size:1.4rem;
+  letter-spacing:0.04em;color:var(--cream);
+  line-height:1;margin-bottom:6px;
+}
+.svc-row-desc{
+  font-size:0.78rem;color:rgba(242,235,217,0.5);
+  line-height:1.65;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT — Broadsheet style
+═══════════════════════════════════════════ */
+#nosotros{
+  max-width:1200px;margin:0 auto;padding:72px 40px;
+  border-left:1px solid var(--cream-dkr);
+  border-right:1px solid var(--cream-dkr);
+  border-top:1px solid var(--cream-dkr);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1px 1fr;
+  gap:0;align-items:start;
+}
+.about-col-divider{background:var(--ink);}
+.about-left{padding-right:48px;}
+.about-right{padding-left:48px;}
+.about-pull-quote{
+  font-family:var(--f-serif);font-size:1.5rem;font-style:italic;
+  line-height:1.4;color:var(--red);
+  border-left:5px solid var(--red);
+  padding-left:20px;margin:28px 0;
+}
+.about-body{
+  font-size:0.9rem;line-height:1.9;
+  color:var(--ink);margin-bottom:20px;
+}
+.about-img-frame{
+  width:100%;aspect-ratio:4/3;overflow:hidden;
+  border:8px solid var(--cream-dk);
+  outline:2px solid var(--ink);
+  outline-offset:-10px;
   margin-bottom:16px;
 }
-.foot-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);}
-.foot-desc{font-size:0.82rem;color:var(--gray);line-height:1.65;}
-.foot-heading{
-  font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--gray);margin-bottom:20px;
+.about-img-frame img{
+  width:100%;height:100%;object-fit:cover;
+  filter:sepia(20%);transition:transform 5s ease;
 }
-.foot-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.foot-links a{
-  font-size:0.85rem;font-weight:500;color:var(--gray);
-  text-decoration:none;transition:color 0.2s;cursor:none;
+.about-img-frame:hover img{transform:scale(1.04);}
+.about-caption{
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gray);text-align:center;
 }
-.foot-links a:hover{color:var(--yellow);}
-.foot-copy{
-  font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;
-  color:var(--gray);margin-top:24px;
+.about-list{
+  list-style:none;display:flex;flex-direction:column;gap:10px;
+  margin-top:24px;
+}
+.about-list li{
+  display:flex;align-items:center;gap:12px;
+  font-size:0.85rem;font-weight:700;
+  border-bottom:1px solid var(--cream-dkr);padding-bottom:10px;
+}
+.about-list li::before{
+  content:'✦';color:var(--red);font-size:0.7rem;flex-shrink:0;
 }
 
-/* ══════════════════════════════════════
-   REVEAL ANIMATIONS
-══════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal-left.visible{opacity:1;transform:translateX(0);}
-.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal-right.visible{opacity:1;transform:translateX(0);}
+/* ═══════════════════════════════════════════
+   PROCESS — numbered checklist
+═══════════════════════════════════════════ */
+#proceso{
+  background:var(--cream-dk);
+  border-top:6px double var(--ink);
+  border-bottom:6px double var(--ink);
+  padding:72px 0;
+}
+.process-inner{max-width:1200px;margin:0 auto;padding:0 40px;}
+.process-header{
+  text-align:center;margin-bottom:56px;
+}
+.process-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:2px solid var(--ink);
+  background:var(--ink);
+}
+.proc-step{
+  background:var(--cream);padding:36px 28px;
+  border-right:2px solid var(--ink);
+  position:relative;
+}
+.proc-step:last-child{border-right:none;}
+.proc-big-num{
+  font-family:var(--f-display);font-size:5rem;
+  line-height:1;color:var(--cream-dk);
+  margin-bottom:-8px;
+}
+.proc-title{
+  font-family:var(--f-display);font-size:1.4rem;
+  letter-spacing:0.04em;color:var(--black);
+  margin-bottom:10px;
+}
+.proc-desc{
+  font-size:0.8rem;color:var(--gray);line-height:1.7;
+}
+.proc-icon{
+  position:absolute;top:24px;right:24px;
+  width:36px;height:36px;
+  border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+}
+.proc-icon svg{width:18px;height:18px;stroke:var(--red);}
 
-/* ══════════════════════════════════════
+/* ═══════════════════════════════════════════
+   GALLERY — collage strip
+═══════════════════════════════════════════ */
+#galeria{
+  border-top:2px solid var(--ink);
+  padding:64px 0 0;
+  max-width:1200px;margin:0 auto;
+  padding-left:40px;padding-right:40px;
+  border-left:1px solid var(--cream-dkr);
+  border-right:1px solid var(--cream-dkr);
+}
+.gallery-header{margin-bottom:36px;}
+.gallery-strip{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:240px 240px;
+  gap:4px;
+}
+.gallery-item{overflow:hidden;position:relative;}
+.gallery-item.tall{grid-row:1/3;}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:sepia(30%);transition:transform 0.5s ease,filter 0.3s;
+}
+.gallery-item:hover img{transform:scale(1.06);filter:sepia(0%);}
+.gallery-item-label{
+  position:absolute;bottom:10px;left:10px;
+  font-family:var(--f-mono);font-size:0.55rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--cream);background:rgba(26,20,16,0.75);
+  padding:4px 10px;
+}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS — press clippings
+═══════════════════════════════════════════ */
+#clientes{
+  max-width:1200px;margin:0 auto;
+  padding:72px 40px;
+  border-left:1px solid var(--cream-dkr);
+  border-right:1px solid var(--cream-dkr);
+  border-top:1px solid var(--cream-dkr);
+}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:40px;
+}
+.testi-clip{
+  background:var(--cream-dk);
+  border:1px solid var(--cream-dkr);
+  outline:4px solid transparent;
+  padding:28px 26px;
+  position:relative;
+  transition:outline-color 0.2s;
+}
+.testi-clip:hover{outline-color:var(--red);}
+.testi-clip::before{
+  content:'\201C';
+  font-family:var(--f-serif);font-size:5rem;
+  line-height:0.6;color:var(--red);
+  opacity:0.25;position:absolute;top:16px;left:16px;
+}
+.testi-text{
+  font-family:var(--f-serif);font-style:italic;
+  font-size:0.88rem;line-height:1.8;
+  color:var(--ink);margin-bottom:20px;position:relative;z-index:1;
+}
+.testi-sig{
+  border-top:1px solid var(--cream-dkr);padding-top:14px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.testi-name{
+  font-family:var(--f-display);font-size:1.1rem;
+  letter-spacing:0.04em;color:var(--black);
+}
+.testi-vehicle{
+  font-family:var(--f-mono);font-size:0.6rem;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contacto{
+  background:var(--black);
+  border-top:6px solid var(--red);
+}
+.contact-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.contact-left-panel{
+  padding:80px 56px;
+  border-right:1px solid rgba(242,235,217,0.1);
+  display:flex;flex-direction:column;gap:40px;
+}
+.contact-big{
+  font-family:var(--f-display);
+  font-size:clamp(3rem,6vw,7rem);
+  line-height:0.88;letter-spacing:0.02em;
+  color:var(--cream);
+}
+.contact-big span{color:var(--red);}
+.contact-info-list{list-style:none;display:flex;flex-direction:column;gap:20px;}
+.cinfo{
+  display:flex;align-items:flex-start;gap:14px;
+  padding-bottom:20px;
+  border-bottom:1px solid rgba(242,235,217,0.1);
+}
+.cinfo-icon{
+  width:36px;height:36px;border:1px solid rgba(242,235,217,0.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cinfo-icon svg{width:16px;height:16px;stroke:var(--gold);}
+.cinfo-label{
+  font-family:var(--f-mono);font-size:0.58rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(242,235,217,0.35);margin-bottom:4px;
+}
+.cinfo-val{font-family:var(--f-display);font-size:1.15rem;color:var(--cream);}
+.cinfo-sub{font-size:0.75rem;color:rgba(242,235,217,0.4);margin-top:2px;}
+.contact-right-panel{
+  padding:80px 56px;
+}
+.form-eyebrow{
+  font-family:var(--f-mono);font-size:0.62rem;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;
+  display:flex;align-items:center;gap:14px;
+}
+.form-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.form-row{margin-bottom:22px;}
+.form-label-retro{
+  display:block;
+  font-family:var(--f-mono);font-size:0.6rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(242,235,217,0.4);margin-bottom:8px;
+}
+.form-input-retro{
+  width:100%;
+  background:rgba(242,235,217,0.06);
+  border:none;border-bottom:1px solid rgba(242,235,217,0.2);
+  padding:12px 0;
+  font-family:var(--f-body);font-size:0.9rem;
+  color:var(--cream);outline:none;
+  transition:border-color 0.2s;
+}
+.form-input-retro:focus{border-color:var(--gold);}
+.form-input-retro::placeholder{color:rgba(242,235,217,0.18);}
+.form-select-retro{
+  width:100%;
+  background:rgba(242,235,217,0.06);
+  border:none;border-bottom:1px solid rgba(242,235,217,0.2);
+  padding:12px 0;
+  font-family:var(--f-body);font-size:0.9rem;
+  color:var(--cream);outline:none;cursor:pointer;
+  transition:border-color 0.2s;
+}
+.form-select-retro:focus{border-color:var(--gold);}
+.form-select-retro option{background:#1A1410;}
+.form-textarea-retro{
+  width:100%;
+  background:rgba(242,235,217,0.06);
+  border:none;border-bottom:1px solid rgba(242,235,217,0.2);
+  padding:12px 0;
+  font-family:var(--f-body);font-size:0.9rem;
+  color:var(--cream);outline:none;resize:none;
+  transition:border-color 0.2s;
+  margin-bottom:28px;
+}
+.form-textarea-retro:focus{border-color:var(--gold);}
+.form-textarea-retro::placeholder{color:rgba(242,235,217,0.18);}
+.btn-submit-retro{
+  width:100%;
+  font-family:var(--f-display);font-size:1.2rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--red);color:var(--cream);
+  border:2px solid var(--red);
+  padding:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  transition:all 0.2s;
+}
+.btn-submit-retro:hover{background:transparent;color:var(--red);}
+.btn-submit-retro svg{width:18px;height:18px;stroke:currentColor;}
+.success-retro{
+  display:none;
+  flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;
+  gap:20px;padding:60px 0;
+}
+.success-stamp-wrap{
+  font-family:var(--f-display);font-size:4rem;
+  line-height:1;color:var(--red);
+  border:4px solid var(--red);padding:8px 24px;
+  transform:rotate(-4deg);letter-spacing:0.08em;
+}
+.success-retro h3{
+  font-family:var(--f-display);font-size:2rem;
+  letter-spacing:0.06em;color:var(--cream);
+}
+.success-retro p{
+  font-size:0.85rem;color:rgba(242,235,217,0.5);max-width:280px;
+}
+.btn-back-retro{
+  font-family:var(--f-mono);font-size:0.65rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  background:transparent;color:rgba(242,235,217,0.4);
+  border:1px solid rgba(242,235,217,0.2);
+  padding:10px 24px;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-back-retro:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  background:var(--black);
+  border-top:2px solid rgba(242,235,217,0.1);
+  padding:40px;
+  max-width:none;
+}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.footer-logo-wrap{display:flex;flex-direction:column;}
+.footer-logo{
+  font-family:var(--f-display);font-size:1.6rem;
+  letter-spacing:0.08em;color:var(--cream);
+}
+.footer-logo span{color:var(--red);}
+.footer-tagline{
+  font-family:var(--f-mono);font-size:0.55rem;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(242,235,217,0.3);margin-top:2px;
+}
+.footer-links{
+  display:flex;gap:28px;list-style:none;
+  flex-wrap:wrap;
+}
+.footer-links a{
+  font-family:var(--f-mono);font-size:0.62rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(242,235,217,0.35);text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--red);}
+.footer-copy{
+  font-family:var(--f-mono);font-size:0.6rem;
+  letter-spacing:0.12em;color:rgba(242,235,217,0.2);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.in{opacity:1;transform:none;}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-l.in{opacity:1;transform:none;}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-r.in{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
-══════════════════════════════════════ */
+═══════════════════════════════════════════ */
 @media(max-width:1024px){
-  #hero{grid-template-columns:1fr;}
-  .hero-right{height:50vh;}
-  .hero-scroll{display:none;}
-  #nosotros{grid-template-columns:1fr;}
-  .about-img{height:50vh;}
-  #contacto{grid-template-columns:1fr;}
-  footer{grid-template-columns:1fr;}
-  .foot-col{border-right:none;border-bottom:1px solid var(--border);}
-  .foot-col:last-child{border-bottom:none;}
+  .hero-cols{grid-template-columns:1fr;}
+  .hero-col-l,.hero-col-r{border:none;border-top:1px solid var(--ink);}
+  .hero-col-r{border-left:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-col-divider{height:2px;width:auto;}
+  .about-left{padding-right:0;margin-bottom:48px;}
+  .about-right{padding-left:0;}
+  .builds-grid{grid-template-columns:1fr 1fr;}
+  .build-card:last-child{grid-column:1/3;border-right:none;}
+  .build-card:nth-child(2){border-right:none;}
+  .services-inner{grid-template-columns:1fr;}
+  .services-left{border-right:none;padding-bottom:0;}
+  .contact-inner{grid-template-columns:1fr;}
+  .contact-left-panel{border-right:none;padding-bottom:40px;}
+  .gallery-strip{grid-template-rows:200px 200px;}
   .process-steps{grid-template-columns:1fr 1fr;}
-  .step{border-bottom:1px solid var(--border);}
-  .step:nth-child(even){border-right:none;}
-  #stats{grid-template-columns:1fr 1fr;}
-  .stat-block{border-bottom:1px solid var(--border);}
-  .services-grid{grid-template-columns:1fr 1fr;}
+  .proc-step{border-bottom:2px solid var(--ink);}
+  .proc-step:nth-child(odd){border-right:2px solid var(--ink);}
+  .proc-step:nth-child(even){border-right:none;}
 }
 @media(max-width:700px){
-  #nav{padding:0 20px;}
-  .nav-links,.nav-cta{display:none;}
-  .ham{display:block;}
-  .hero-left{padding:48px 24px;}
-  .about-text{padding:48px 24px;}
-  .contact-left,.contact-right{padding:56px 24px;}
-  #servicios,#proceso,#testimonios{padding:80px 20px;}
-  .testi-header{padding:0 20px;}
-  .testi-track{padding:0 20px;}
-  .services-grid{grid-template-columns:1fr;}
+  .topbar{display:none;}
+  #nav .nav-inner{padding:0 20px;}
+  .nav-links,.btn-nav{display:none;}
+  .ham-btn{display:block;}
+  .mob-menu{padding:20px;}
+  #hero{padding:32px 20px 0;}
+  .hero-masthead-title{font-size:clamp(3rem,16vw,10rem);}
+  .hero-marquee-wrap{margin:0 -20px;}
+  #builds,#nosotros,#galeria,#clientes{padding:48px 20px;}
+  .builds-grid{grid-template-columns:1fr;}
+  .build-card:last-child{grid-column:auto;}
+  .testi-grid{grid-template-columns:1fr;}
   .process-steps{grid-template-columns:1fr;}
-  .step{border-right:1px solid var(--border) !important;}
-  #stats{grid-template-columns:1fr 1fr;}
-  .stat-block{padding:36px 24px;}
-  .foot-col{padding:32px 24px;}
-  .mob-menu{padding:24px 20px;}
+  .proc-step{border-right:none !important;}
+  .services-left,.services-right{padding:48px 24px;}
+  .contact-left-panel,.contact-right-panel{padding:48px 24px;}
+  .gallery-strip{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px;}
+  .gallery-item.tall{grid-row:auto;}
+  footer{padding:32px 20px;}
+  .footer-links{gap:16px;}
+  .process-inner{padding:0 20px;}
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><span class="topbar-dot"></span> Iron Garage · Custom Shop · Bogotá, Colombia</span>
+  <span>Lun–Vie 8am–6pm · Sáb 8am–2pm · +57 310 456 7890</span>
+</div>
 
-<!-- ═══════════ NAVBAR ═══════════ -->
+<!-- NAVBAR -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-dot"></span>
-    MEKÁNIKA
-  </a>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#testimonios">Clientes</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
-    Agendar →
-  </button>
-  <button class="ham" id="ham" onclick="toggleMob()" aria-label="Menú">
-    <svg id="ham-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
-</nav>
-<div class="mob-menu" id="mob-menu">
-  <a href="#servicios" onclick="closeMob()">Servicios</a>
-  <a href="#nosotros" onclick="closeMob()">Nosotros</a>
-  <a href="#proceso" onclick="closeMob()">Proceso</a>
-  <a href="#testimonios" onclick="closeMob()">Clientes</a>
-  <a href="#contacto" class="nav-cta" onclick="closeMob()">Agendar →</a>
-</div>
-
-<!-- ═══════════ HERO ═══════════ -->
-<section id="hero">
-  <div class="hero-left">
-    <p class="hero-number reveal">— 01 / BOGOTÁ, COLOMBIA</p>
-    <h1 class="hero-title reveal">
-      <span class="outline">MECÁ</span><br>
-      <span>NICA</span><br>
-      <span class="yellow">DE ÉLITE.</span>
-    </h1>
-    <p class="hero-body reveal">
-      Diagnóstico computarizado, manos expertas y garantía por escrito. 
-      Más de 15 años siendo el taller de referencia en Bogotá.
-    </p>
-    <div class="hero-btns reveal">
-      <a href="#contacto" class="btn-primary">
-        Agendar cita
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
-      <a href="#servicios" class="btn-outline">Ver servicios</a>
-    </div>
-    <div class="hero-scroll reveal">SCROLL</div>
-  </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1760688966119-ac3896340f25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200" alt="Taller MEKÁNIKA"/>
-    <div class="hero-right-overlay"></div>
-    <div class="hero-tags">
-      <span class="hero-tag">✓ Diagnóstico OBD-II</span>
-      <span class="hero-tag">✓ Repuestos originales</span>
-      <span class="hero-tag">✓ Garantía escrita</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ TICKER ═══════════ -->
-<div class="ticker-wrap">
-  <div class="ticker-inner" id="ticker">
-    <span class="ticker-item">Mantenimiento Preventivo</span>
-    <span class="ticker-item">Diagnóstico Computarizado</span>
-    <span class="ticker-item">Sistema Eléctrico</span>
-    <span class="ticker-item">Frenos y Suspensión</span>
-    <span class="ticker-item">Motor y Transmisión</span>
-    <span class="ticker-item">Aire Acondicionado</span>
-    <span class="ticker-item">Alineación y Balanceo</span>
-    <span class="ticker-item">Mantenimiento Preventivo</span>
-    <span class="ticker-item">Diagnóstico Computarizado</span>
-    <span class="ticker-item">Sistema Eléctrico</span>
-    <span class="ticker-item">Frenos y Suspensión</span>
-    <span class="ticker-item">Motor y Transmisión</span>
-    <span class="ticker-item">Aire Acondicionado</span>
-    <span class="ticker-item">Alineación y Balanceo</span>
-  </div>
-</div>
-
-<!-- ═══════════ STATS ═══════════ -->
-<section id="stats">
-  <div class="stat-block reveal">
-    <div class="stat-num" data-target="15" data-suffix="+">0+</div>
-    <div class="stat-label">Años de experiencia</div>
-  </div>
-  <div class="stat-block reveal">
-    <div class="stat-num" data-target="8000" data-suffix="+">0+</div>
-    <div class="stat-label">Vehículos atendidos</div>
-  </div>
-  <div class="stat-block reveal">
-    <div class="stat-num" data-target="98" data-suffix="%">0%</div>
-    <div class="stat-label">Clientes satisfechos</div>
-  </div>
-  <div class="stat-block reveal">
-    <div class="stat-num" data-target="24" data-suffix="h">0h</div>
-    <div class="stat-label">Tiempo de respuesta</div>
-  </div>
-</section>
-
-<!-- ═══════════ SERVICIOS ═══════════ -->
-<section id="servicios">
-  <div class="services-header">
-    <div>
-      <p class="section-num reveal">— 02 / SERVICIOS</p>
-      <h2 class="section-title reveal">Lo que <em>hacemos</em><br>muy bien.</h2>
-    </div>
-    <p class="services-sub reveal">Cada trabajo sale del taller con garantía por escrito y revisión final sin cargo adicional.</p>
-  </div>
-
-  <div class="services-grid">
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">01</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3 class="svc-title">Mantenimiento Preventivo</h3>
-        <p class="svc-desc">Cambio de aceite, filtros, correas, bujías y líquidos. Todo según el plan del fabricante.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">02</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-        <h3 class="svc-title">Diagnóstico Computarizado</h3>
-        <p class="svc-desc">Escáner OBD-II multi-marca. Leemos los códigos de error y te explicamos cada falla con claridad.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">03</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3 class="svc-title">Sistema Eléctrico</h3>
-        <p class="svc-desc">Alternadores, arranques, cableado, sensores y módulos ECU. Reparación y certificación.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">04</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 class="svc-title">Frenos y Suspensión</h3>
-        <p class="svc-desc">Pastillas, discos, amortiguadores y brazos de suspensión. Frenado preciso y confort garantizado.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">05</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
-        <h3 class="svc-title">Motor y Transmisión</h3>
-        <p class="svc-desc">Rectificación, overhaul y reconstrucción de motores. Cajas automáticas y manuales.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-
-    <div class="svc reveal">
-      <div class="svc-inner">
-        <p class="svc-num">06</p>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <h3 class="svc-title">Aire Acondicionado</h3>
-        <p class="svc-desc">Recarga de refrigerante, reparación de compresores y revisión completa del sistema A/C.</p>
-      </div>
-      <div class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ NOSOTROS ═══════════ -->
-<section id="nosotros">
-  <div class="about-img">
-    <img src="https://images.unsplash.com/photo-1756575527484-2839c593ed84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000" alt="Taller MEKÁNIKA Bogotá"/>
-    <div class="about-year-badge">EST. 2009</div>
-  </div>
-  <div class="about-text">
-    <p class="section-num reveal-right">— 03 / NOSOTROS</p>
-    <h2 class="section-title reveal-right">Precisión<br>en cada<br><em>detalle.</em></h2>
-    <p class="reveal-right">Somos un equipo de ingenieros y técnicos automotrices con formación internacional. No somos el taller más barato de Bogotá — somos el que hace las cosas bien desde la primera vez.</p>
-    <p class="reveal-right">Cada vehículo recibe un informe de estado digitalizado antes y después del servicio. Sin sorpresas en la factura.</p>
-    <ul class="about-checks reveal-right">
-      <li><span class="check-dot"></span>Técnicos certificados por fabricantes OEM</li>
-      <li><span class="check-dot"></span>Repuestos originales con factura</li>
-      <li><span class="check-dot"></span>Presupuesto 100% gratuito y sin compromiso</li>
-      <li><span class="check-dot"></span>Garantía escrita en todas las reparaciones</li>
-      <li><span class="check-dot"></span>Servicio de cortesía para clientes frecuentes</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════ PROCESO ═══════════ -->
-<section id="proceso">
-  <div class="process-header">
-    <p class="section-num reveal">— 04 / PROCESO</p>
-    <h2 class="section-title reveal">Así trabajamos.<br><em>Sin complicaciones.</em></h2>
-  </div>
-  <div class="process-steps">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.21 3.22 2 2 0 0 1 3.22 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg></div>
-      <h3 class="step-title">Agendar</h3>
-      <p class="step-desc">Llámanos, escríbenos por WhatsApp o completa el formulario. Te confirmamos en menos de 2 horas.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">02</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-      <h3 class="step-title">Diagnóstico</h3>
-      <p class="step-desc">Revisamos tu vehículo con escáner y revisión física. Te entregamos un informe detallado sin cargo.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">03</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-      <h3 class="step-title">Reparación</h3>
-      <p class="step-desc">Solo empezamos después de tu aprobación. Tiempo estimado transparente desde el inicio.</p>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">04</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <h3 class="step-title">Entrega</h3>
-      <p class="step-desc">Revisión final sin costo. Te entregamos con informe, factura y garantía por escrito.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ TESTIMONIOS ═══════════ -->
-<section id="testimonios">
-  <div class="testi-header">
-    <p class="section-num reveal">— 05 / CLIENTES</p>
-    <h2 class="section-title reveal">Ellos ya <em>confían</em> en nosotros.</h2>
-  </div>
-  <div class="testi-track" id="testi-track">
-    <!-- Duplicated for infinite loop -->
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Llevé mi Mazda con una falla que otros tres talleres no pudieron resolver. En MEKÁNIKA la detectaron en 40 minutos y me entregaron el carro al día siguiente. Precio exactamente como dijeron.</p><div class="testi-author"><span class="testi-name">Andrés Morales</span><span class="testi-car">Mazda CX-5 · 2021</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Por fin un taller que te explica qué tiene tu carro antes de cobrar. Me enviaron fotos del proceso en tiempo real. Nunca había tenido esa experiencia en Bogotá.</p><div class="testi-author"><span class="testi-name">Camila Rodríguez</span><span class="testi-car">Toyota Corolla · 2019</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">El aire acondicionado de mi Duster llevaba meses fallando. Lo revisaron completo, me dieron presupuesto en el momento y quedó perfecto. Son muy profesionales y amables.</p><div class="testi-author"><span class="testi-name">Patricia Gómez</span><span class="testi-car">Renault Duster · 2020</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Tenía miedo de que el overhaul del motor fuera carísimo. El presupuesto fue justo y la calidad del trabajo es impresionante. Mi Hilux quedó como recién salida de fábrica.</p><div class="testi-author"><span class="testi-name">Jorge Acevedo</span><span class="testi-car">Toyota Hilux · 2018</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Soy cliente hace 6 años. He probado otros talleres y siempre vuelvo. La diferencia está en los detalles: puntualidad, comunicación y garantía real.</p><div class="testi-author"><span class="testi-name">María Fernanda López</span><span class="testi-car">Chevrolet Spark GT · 2022</span></div></div>
-    <!-- Duplicates for loop -->
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Llevé mi Mazda con una falla que otros tres talleres no pudieron resolver. En MEKÁNIKA la detectaron en 40 minutos y me entregaron el carro al día siguiente. Precio exactamente como dijeron.</p><div class="testi-author"><span class="testi-name">Andrés Morales</span><span class="testi-car">Mazda CX-5 · 2021</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Por fin un taller que te explica qué tiene tu carro antes de cobrar. Me enviaron fotos del proceso en tiempo real. Nunca había tenido esa experiencia en Bogotá.</p><div class="testi-author"><span class="testi-name">Camila Rodríguez</span><span class="testi-car">Toyota Corolla · 2019</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">El aire acondicionado de mi Duster llevaba meses fallando. Lo revisaron completo, me dieron presupuesto en el momento y quedó perfecto. Son muy profesionales y amables.</p><div class="testi-author"><span class="testi-name">Patricia Gómez</span><span class="testi-car">Renault Duster · 2020</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Tenía miedo de que el overhaul del motor fuera carísimo. El presupuesto fue justo y la calidad del trabajo es impresionante. Mi Hilux quedó como recién salida de fábrica.</p><div class="testi-author"><span class="testi-name">Jorge Acevedo</span><span class="testi-car">Toyota Hilux · 2018</span></div></div>
-    <div class="testi-card"><div class="testi-quote">"</div><p class="testi-text">Soy cliente hace 6 años. He probado otros talleres y siempre vuelvo. La diferencia está en los detalles: puntualidad, comunicación y garantía real.</p><div class="testi-author"><span class="testi-name">María Fernanda López</span><span class="testi-car">Chevrolet Spark GT · 2022</span></div></div>
-  </div>
-</section>
-
-<!-- ═══════════ CONTACTO ═══════════ -->
-<section id="contacto">
-  <div class="contact-left">
-    <div>
-      <p class="contact-eyebrow">— 06 / Contacto</p>
-      <h2 class="contact-big-title">Agenda<br>tu cita<br>hoy.</h2>
-    </div>
-    <ul class="contact-info-list">
-      <li class="contact-info-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.21 3.22 2 2 0 0 1 3.22 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
-        <div><div class="contact-info-label">Teléfono</div><div class="contact-info-val">+57 300 123 4567</div><div class="contact-info-sub">WhatsApp disponible 7am–6pm</div></div>
-      </li>
-      <li class="contact-info-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <div><div class="contact-info-label">Dirección</div><div class="contact-info-val">Calle 80 #15-32</div><div class="contact-info-sub">Barrio Normandía, Bogotá</div></div>
-      </li>
-      <li class="contact-info-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <div><div class="contact-info-label">Horario</div><div class="contact-info-val">Lun–Vie 7am–6pm</div><div class="contact-info-sub">Sábado 8am–2pm · Dom cerrado</div></div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="contact-right">
-    <div id="form-wrap">
-      <p style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);margin-bottom:36px;">— Solicitud de cita</p>
-      <form onsubmit="handleSubmit(event)">
-        <label class="form-label">Nombre completo</label>
-        <input class="form-input" type="text" placeholder="Carlos Martínez" required/>
-        <label class="form-label">Teléfono / WhatsApp</label>
-        <input class="form-input" type="tel" placeholder="+57 300 000 0000" required/>
-        <label class="form-label">Vehículo</label>
-        <input class="form-input" type="text" placeholder="Toyota Corolla 2019" required/>
-        <label class="form-label">Servicio requerido</label>
-        <select class="form-select" required>
-          <option value="" disabled selected>Selecciona —</option>
-          <option>Mantenimiento Preventivo</option>
-          <option>Diagnóstico Computarizado</option>
-          <option>Sistema Eléctrico</option>
-          <option>Frenos y Suspensión</option>
-          <option>Motor y Transmisión</option>
-          <option>Aire Acondicionado</option>
-          <option>Otro</option>
-        </select>
-        <label class="form-label">Descripción (opcional)</label>
-        <textarea class="form-textarea" rows="3" placeholder="Cuéntanos sobre el problema..."></textarea>
-        <button type="submit" class="form-submit">
-          Enviar solicitud
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </button>
-      </form>
-    </div>
-    <div class="success-state" id="success-state">
-      <div class="success-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <h3 class="success-title">¡Solicitud enviada!</h3>
-      <p class="success-desc">Te contactamos en menos de 24 horas para confirmar tu cita.</p>
-      <button class="success-back" onclick="resetForm()">← Nueva solicitud</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer>
-  <div class="foot-col">
-    <div class="foot-logo">
-      <span class="foot-logo-dot"></span>
-      MEKÁNIKA
-    </div>
-    <p class="foot-desc">Taller mecánico automotriz de alto rendimiento. Bogotá, Colombia. Desde 2009.</p>
-    <p class="foot-copy" id="foot-copy"></p>
-  </div>
-  <div class="foot-col">
-    <p class="foot-heading">Navegación</p>
-    <ul class="foot-links">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <span class="logo-top">IRON GARAGE</span>
+      <span class="logo-sub">Custom Shop · Est. 2005</span>
+      <div class="logo-rule"></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#builds">Builds</a></li>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#nosotros">Nosotros</a></li>
-      <li><a href="#proceso">Nuestro Proceso</a></li>
-      <li><a href="#testimonios">Clientes</a></li>
+      <li><a href="#nosotros">Historia</a></li>
+      <li><a href="#clientes">Reviews</a></li>
+    </ul>
+    <a href="#contacto" class="btn-nav">Cotizar Build</a>
+    <button class="ham-btn" id="ham" onclick="toggleMob()" aria-label="Menú">
+      <svg id="ham-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="mob-menu" id="mob-menu">
+    <a href="#builds" onclick="closeMob()">Builds</a>
+    <a href="#servicios" onclick="closeMob()">Servicios</a>
+    <a href="#nosotros" onclick="closeMob()">Historia</a>
+    <a href="#clientes" onclick="closeMob()">Reviews</a>
+    <a href="#contacto" class="btn-nav" onclick="closeMob()">Cotizar Build</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO — Newspaper layout ═══ -->
+<section id="hero">
+
+  <div class="hero-masthead reveal">
+    <p class="hero-masthead-sub">Bogotá · Colombia · Custom Automotive Shop</p>
+    <h1 class="hero-masthead-title">IRON<span> GA</span>RAGE</h1>
+    <div class="hero-masthead-rule">Custom Builds · Resto-Mods · Tuning · Hot Rods · Desde 2005</div>
+  </div>
+
+  <div class="hero-cols">
+    <!-- LEFT COL -->
+    <div class="hero-col-l reveal-l">
+      <p class="hero-col-label">Manifiesto</p>
+      <h2 class="hero-kicker">No hacemos carros normales.</h2>
+      <p class="hero-body-text">Tu vehículo merece más que un cambio de aceite. Merece ser exactamente lo que siempre quisiste que fuera.</p>
+      <p class="hero-body-text">Somos el taller para los que entienden que un carro es una declaración personal.</p>
+      <div class="hero-stat-block">
+        <div class="hero-stat"><span class="hero-stat-num">20+</span><span class="hero-stat-lbl">Años de oficio</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">340+</span><span class="hero-stat-lbl">Builds completados</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">100%</span><span class="hero-stat-lbl">A medida</span></div>
+      </div>
+    </div>
+
+    <!-- CENTER IMAGE -->
+    <div class="hero-col-c">
+      <img src="https://images.unsplash.com/photo-1748312483710-0db9d24234f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200" alt="Hot rod en Iron Garage Bogotá"/>
+      <p class="hero-img-caption">◆ Iron Garage · Bogotá · Foto del taller, 2024</p>
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="hero-col-r reveal-r">
+      <p class="hero-col-label">¿Por qué nosotros?</p>
+      <h2 class="hero-kicker">Veinte años construyendo leyendas.</h2>
+      <p class="hero-body-text">Desde hot rods clásicos hasta resto-mods modernos, cada proyecto sale del garaje con carácter único y ejecución impecable.</p>
+      <div class="hero-cta-block">
+        <p class="hero-cta-text">"El primer paso es una conversación. Cuéntanos tu visión."</p>
+        <a href="#contacto" class="btn-hero">Cotizar mi build →</a>
+        <a href="#builds" class="btn-ghost">Ver trabajos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="hero-marquee-wrap">
+    <div class="hero-marquee" id="marquee">
+      <span>Hot Rods</span><span class="red">✦</span>
+      <span>Resto-Mods</span><span class="red">✦</span>
+      <span>Engine Swaps</span><span class="red">✦</span>
+      <span>Custom Paint</span><span class="red">✦</span>
+      <span>Suspension Builds</span><span class="red">✦</span>
+      <span>Turbo Kits</span><span class="red">✦</span>
+      <span>Interior Custom</span><span class="red">✦</span>
+      <span>Widebody Kits</span><span class="red">✦</span>
+      <span>Hot Rods</span><span class="red">✦</span>
+      <span>Resto-Mods</span><span class="red">✦</span>
+      <span>Engine Swaps</span><span class="red">✦</span>
+      <span>Custom Paint</span><span class="red">✦</span>
+      <span>Suspension Builds</span><span class="red">✦</span>
+      <span>Turbo Kits</span><span class="red">✦</span>
+      <span>Interior Custom</span><span class="red">✦</span>
+      <span>Widebody Kits</span><span class="red">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUILDS ═══ -->
+<section id="builds">
+  <div class="builds-header">
+    <div>
+      <p class="section-eyebrow reveal">Proyectos Destacados</p>
+      <h2 class="section-heading reveal">Nuestros<br><em>Builds.</em></h2>
+    </div>
+    <a href="#contacto" class="btn-nav reveal">Iniciar un proyecto</a>
+  </div>
+  <div class="builds-grid">
+    <div class="build-card reveal">
+      <img class="build-card-img" src="https://images.unsplash.com/photo-1758767355046-1986dda2d967?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=700" alt="Resto-mod naranja"/>
+      <div class="build-card-body">
+        <p class="build-card-type">Resto-Mod</p>
+        <h3 class="build-card-title">Project Naranja '68</h3>
+        <p class="build-card-desc">Carrocería restaurada, LS3 swap, suspensión coilover, pintura naranja Tango metalizado.</p>
+      </div>
+    </div>
+    <div class="build-card reveal">
+      <img class="build-card-img" src="https://images.unsplash.com/photo-1654167535598-86dfc149efa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=700" alt="Build clásico garaje"/>
+      <div class="build-card-body">
+        <p class="build-card-type">Full Custom</p>
+        <h3 class="build-card-title">The Phantom Build</h3>
+        <p class="build-card-desc">Frame-off restoration con motor turboalimentado, interior en cuero y detalles en aluminio pulido.</p>
+      </div>
+    </div>
+    <div class="build-card reveal">
+      <img class="build-card-img" src="https://images.unsplash.com/photo-1759189206823-70ae395571bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=700" alt="Engine bay Porsche"/>
+      <div class="build-card-body">
+        <p class="build-card-type">Engine Build</p>
+        <h3 class="build-card-title">Flat-Six Revival</h3>
+        <p class="build-card-desc">Reconstrucción completa de motor Porsche 911 con carburación Weber y acabados heritage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICIOS ═══ -->
+<section id="servicios">
+  <div class="services-inner">
+    <div class="services-left">
+      <p class="section-eyebrow reveal">Lo que hacemos</p>
+      <h2 class="section-heading reveal">Servicios<br><em>Iron</em><br>Garage.</h2>
+      <p class="reveal">No somos un taller convencional. Cada servicio está diseñado para llevarte más cerca del carro de tus sueños. Sin compromiso en la calidad.</p>
+      <div class="services-badge reveal">
+        <div class="services-badge-num">20+</div>
+        <div class="services-badge-txt">Años construyendo<br>carros únicos en Bogotá</div>
+      </div>
+    </div>
+    <div class="services-right">
+      <div class="svc-row reveal"><div class="svc-row-num">01</div><div class="svc-row-content"><div class="svc-row-title">Custom Builds Completos</div><div class="svc-row-desc">De la idea a la llave. Diseño, ingeniería y ejecución de tu build desde cero. Cada detalle acordado contigo.</div></div></div>
+      <div class="svc-row reveal"><div class="svc-row-num">02</div><div class="svc-row-content"><div class="svc-row-title">Engine Swaps & Performance</div><div class="svc-row-desc">Cambios de motor, preparación de cabezas, sistemas turbo/supercharger, inducción y escape personalizado.</div></div></div>
+      <div class="svc-row reveal"><div class="svc-row-num">03</div><div class="svc-row-content"><div class="svc-row-title">Suspensión & Chassis</div><div class="svc-row-desc">Coilovers, barras estabilizadoras, alineaciones de competencia, lowering y builds de pista.</div></div></div>
+      <div class="svc-row reveal"><div class="svc-row-num">04</div><div class="svc-row-content"><div class="svc-row-title">Pintura & Bodywork</div><div class="svc-row-desc">Widebody kits, reparación de carrocería, preparación y pintura custom con efectos especiales.</div></div></div>
+      <div class="svc-row reveal"><div class="svc-row-num">05</div><div class="svc-row-content"><div class="svc-row-title">Interior Custom</div><div class="svc-row-desc">Tapicería en cuero, jaulas de seguridad, paneles en fibra de carbono, audio y tecnología integrada.</div></div></div>
+      <div class="svc-row reveal"><div class="svc-row-num">06</div><div class="svc-row-content"><div class="svc-row-title">Mantenimiento de Clásicos</div><div class="svc-row-desc">Servicio especializado en vehículos vintage: carburación, sistemas eléctricos clásicos y restauración.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NOSOTROS ═══ -->
+<section id="nosotros">
+  <div class="about-grid">
+    <div class="about-left">
+      <p class="section-eyebrow reveal">Historia</p>
+      <h2 class="section-heading reveal">Veinte años<br>de <em>oficio.</em></h2>
+      <blockquote class="about-pull-quote reveal">
+        "Nunca construimos dos carros iguales. Eso no es accidente — es política de la casa."
+      </blockquote>
+      <p class="about-body reveal">Iron Garage nació en 2005 en un garaje de dos puestos en Chapinero. Empezamos con un Mustang '67 que tardó tres años en estar listo. Valió cada minuto.</p>
+      <p class="about-body reveal">Hoy somos un equipo de doce personas — ingenieros, soldadores, pintores y tapiceros — con un taller de 800 metros cuadrados en Engativá. Pero seguimos operando con la misma filosofía: calidad por encima de velocidad.</p>
+      <ul class="about-list reveal">
+        <li>Taller equipado con banco de trabajo CNC</li>
+        <li>Cabina de pintura climatizada y filtrada</li>
+        <li>Banco de pruebas de motor propio</li>
+        <li>Acceso a red de proveedores USA y Europa</li>
+        <li>Garantía de por vida en estructura soldada</li>
+      </ul>
+    </div>
+    <div class="about-col-divider"></div>
+    <div class="about-right">
+      <div class="about-img-frame reveal-r">
+        <img src="https://images.unsplash.com/photo-1577801622187-9a1076d049da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900" alt="Taller Iron Garage"/>
+      </div>
+      <p class="about-caption reveal-r">El taller principal · Engativá, Bogotá · 800m²</p>
+      <div style="margin-top:32px" class="reveal-r">
+        <p class="section-eyebrow">Formas de trabajo</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+          <div style="background:var(--cream-dk);padding:20px 18px;border-left:4px solid var(--red);">
+            <div style="font-family:var(--f-display);font-size:1.15rem;color:var(--black);margin-bottom:6px;">FULL BUILD</div>
+            <div style="font-size:0.75rem;color:var(--gray);line-height:1.6;">De la carrocería al último perno. Nosotros manejamos todo.</div>
+          </div>
+          <div style="background:var(--cream-dk);padding:20px 18px;border-left:4px solid var(--red);">
+            <div style="font-family:var(--f-display);font-size:1.15rem;color:var(--black);margin-bottom:6px;">STAGE BUILD</div>
+            <div style="font-size:0.75rem;color:var(--gray);line-height:1.6;">Transformamos tu carro por etapas según tu presupuesto.</div>
+          </div>
+          <div style="background:var(--cream-dk);padding:20px 18px;border-left:4px solid var(--rust);">
+            <div style="font-family:var(--f-display);font-size:1.15rem;color:var(--black);margin-bottom:6px;">CONSULT</div>
+            <div style="font-size:0.75rem;color:var(--gray);line-height:1.6;">Te asesoramos en tu propio build. Know-how sin fronteras.</div>
+          </div>
+          <div style="background:var(--cream-dk);padding:20px 18px;border-left:4px solid var(--rust);">
+            <div style="font-family:var(--f-display);font-size:1.15rem;color:var(--black);margin-bottom:6px;">RESTORATION</div>
+            <div style="font-size:0.75rem;color:var(--gray);line-height:1.6;">Clásicos devueltos a su gloria original o mejor que nunca.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESO ═══ -->
+<section id="proceso">
+  <div class="process-inner">
+    <div class="process-header">
+      <p class="section-eyebrow reveal">Cómo trabajamos</p>
+      <h2 class="section-heading reveal">El proceso.<br><em>Sin rodeos.</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step reveal">
+        <div class="proc-big-num">01</div>
+        <h3 class="proc-title">La Conversación</h3>
+        <p class="proc-desc">Nos cuentas tu visión, tu presupuesto y tu plazo. Sin compromiso. Sin formularios interminables.</p>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-big-num">02</div>
+        <h3 class="proc-title">El Diseño</h3>
+        <p class="proc-desc">Dibujamos el plan de trabajo, especificaciones técnicas y cronograma. Tú apruebas cada decisión.</p>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-big-num">03</div>
+        <h3 class="proc-title">La Ejecución</h3>
+        <p class="proc-desc">El equipo trabaja mientras tú recibes fotos y actualizaciones semanales. Tu carro, tu seguimiento.</p>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      </div>
+      <div class="proc-step reveal">
+        <div class="proc-big-num">04</div>
+        <h3 class="proc-title">La Entrega</h3>
+        <p class="proc-desc">Revisión final contigo presente. Te explicamos cada modificación. Sales con el carro que imaginaste.</p>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALERÍA ═══ -->
+<section id="galeria">
+  <div class="gallery-header">
+    <p class="section-eyebrow reveal">Galería</p>
+    <h2 class="section-heading reveal">Del <em>taller</em> a la calle.</h2>
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-item tall reveal">
+      <img src="https://images.unsplash.com/photo-1679271568734-0cc6b50615c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900" alt="Garaje clásico"/>
+      <div class="gallery-item-label">Garage Collection</div>
+    </div>
+    <div class="gallery-item reveal-r">
+      <img src="https://images.unsplash.com/photo-1547774446-4eda965ab8b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Soldadura"/>
+      <div class="gallery-item-label">Bodywork & Weld</div>
+    </div>
+    <div class="gallery-item reveal-r">
+      <img src="https://images.unsplash.com/photo-1763848843613-f8c2ca3a31a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Motor clásico"/>
+      <div class="gallery-item-label">Engine Bay</div>
+    </div>
+    <div class="gallery-item reveal-r">
+      <img src="https://images.unsplash.com/photo-1599017795227-abc2381c5798?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Carro clásico b&w"/>
+      <div class="gallery-item-label">Classic Build</div>
+    </div>
+    <div class="gallery-item reveal-r">
+      <img src="https://images.unsplash.com/photo-1591278169757-deac26e49555?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Vintage blanco"/>
+      <div class="gallery-item-label">Resto-Mod</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLIENTES ═══ -->
+<section id="clientes">
+  <p class="section-eyebrow reveal">Reviews</p>
+  <h2 class="section-heading reveal">Ellos ya <em>rodaron.</em></h2>
+  <div class="testi-grid">
+    <div class="testi-clip reveal">
+      <p class="testi-text">Le confié mi Mustang '69 — el carro de mi vida — a Iron Garage. No solo lo restauraron: lo volvieron mejor de lo que nunca fue. Cada semana me mandaban fotos. Transparencia total.</p>
+      <div class="testi-sig"><span class="testi-name">Ricardo Fuentes</span><span class="testi-vehicle">Ford Mustang '69 · Resto-Mod</span></div>
+    </div>
+    <div class="testi-clip reveal">
+      <p class="testi-text">Hice un engine swap de LS3 en mi pickup clásica. El proceso duró 5 meses pero cada peso valió. El carro arranca como debe arrancar: con carácter y sin excusas.</p>
+      <div class="testi-sig"><span class="testi-name">Diego Castañeda</span><span class="testi-vehicle">Chevy C10 '72 · LS3 Swap</span></div>
+    </div>
+    <div class="testi-clip reveal">
+      <p class="testi-text">Me asesoraron en construir mi propio build por etapas. No intentaron venderme más de lo que necesitaba. Eso dice mucho. En 18 meses tengo el carro que llevo 10 años imaginando.</p>
+      <div class="testi-sig"><span class="testi-name">Laura Bermúdez</span><span class="testi-vehicle">Volkswagen Beetle '74 · Custom Build</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACTO ═══ -->
+<section id="contacto">
+  <div class="contact-inner">
+    <div class="contact-left-panel">
+      <div>
+        <p style="font-family:var(--f-mono);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">— Hablemos de tu build</p>
+        <h2 class="contact-big">CUÉN<span>TANOS</span><br>TU<br>VISIÓN.</h2>
+      </div>
+      <ul class="contact-info-list">
+        <li class="cinfo">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.21 3.22 2 2 0 0 1 3.22 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg></div>
+          <div><div class="cinfo-label">Teléfono · WhatsApp</div><div class="cinfo-val">+57 310 456 7890</div><div class="cinfo-sub">Respuesta en menos de 2 horas</div></div>
+        </li>
+        <li class="cinfo">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="cinfo-label">Email</div><div class="cinfo-val">builds@irongarage.co</div><div class="cinfo-sub">Para cotizaciones detalladas</div></div>
+        </li>
+        <li class="cinfo">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="cinfo-label">Taller</div><div class="cinfo-val">Cra. 96 #22-45, Engativá</div><div class="cinfo-sub">Bogotá · Visitas con cita previa</div></div>
+        </li>
+        <li class="cinfo">
+          <div class="cinfo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="cinfo-label">Horario</div><div class="cinfo-val">Lun–Vie 8am–6pm</div><div class="cinfo-sub">Sáb 8am–2pm · Dom cerrado</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="contact-right-panel">
+      <div id="form-wrap">
+        <p class="form-eyebrow">Formulario de contacto</p>
+        <form onsubmit="handleSend(event)">
+          <div class="form-row">
+            <label class="form-label-retro">Tu nombre</label>
+            <input class="form-input-retro" type="text" placeholder="Ricardo Fuentes" required/>
+          </div>
+          <div class="form-row">
+            <label class="form-label-retro">Teléfono · WhatsApp</label>
+            <input class="form-input-retro" type="tel" placeholder="+57 310 000 0000" required/>
+          </div>
+          <div class="form-row">
+            <label class="form-label-retro">Tu vehículo</label>
+            <input class="form-input-retro" type="text" placeholder="Mustang '69, C10 '72, Golf GTI..." required/>
+          </div>
+          <div class="form-row">
+            <label class="form-label-retro">Tipo de proyecto</label>
+            <select class="form-select-retro" required>
+              <option value="" disabled selected>Selecciona —</option>
+              <option>Full Custom Build</option>
+              <option>Resto-Mod</option>
+              <option>Engine Swap / Performance</option>
+              <option>Suspensión & Chassis</option>
+              <option>Pintura & Bodywork</option>
+              <option>Interior Custom</option>
+              <option>Mantenimiento de Clásico</option>
+              <option>Consultoría de Build</option>
+            </select>
+          </div>
+          <label class="form-label-retro">Cuéntanos tu visión</label>
+          <textarea class="form-textarea-retro" rows="4" placeholder="Describe lo que imaginas para tu carro. Mientras más detalles, mejor podemos cotizarte..."></textarea>
+          <button type="submit" class="btn-submit-retro">
+            Enviar cotización
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="success-retro" id="success-box">
+        <div class="success-stamp-wrap">RECIBIDO</div>
+        <h3>¡Mensaje enviado!</h3>
+        <p>Te contactamos en menos de 2 horas para hablar de tu build.</p>
+        <button class="btn-back-retro" onclick="resetForm()">← Nuevo mensaje</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-wrap">
+      <div class="footer-logo">IRON <span>GARAGE</span></div>
+      <div class="footer-tagline">Custom Shop · Bogotá · Est. 2005</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#builds">Builds</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Historia</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#clientes">Reviews</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
-  </div>
-  <div class="foot-col">
-    <p class="foot-heading">Contacto</p>
-    <ul class="foot-links">
-      <li><a href="tel:+573001234567">+57 300 123 4567</a></li>
-      <li><a href="mailto:info@mekanika.co">info@mekanika.co</a></li>
-      <li><a href="#">Calle 80 #15-32, Bogotá</a></li>
-      <li><a href="#">Lun–Vie: 7am–6pm</a></li>
-      <li><a href="#">Sábado: 8am–2pm</a></li>
-    </ul>
+    <div class="footer-copy" id="footer-copy"></div>
   </div>
 </footer>
 
 <script>
-/* ── CURSOR ── */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX; my=e.clientY;
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-});
-function animRing(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
-}
-animRing();
-document.querySelectorAll('a,button,.svc,.stat-block').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{
-    cur.style.width='20px'; cur.style.height='20px';
-    ring.style.width='60px'; ring.style.height='60px';
-  });
-  el.addEventListener('mouseleave',()=>{
-    cur.style.width='12px'; cur.style.height='12px';
-    ring.style.width='40px'; ring.style.height='40px';
-  });
-});
-
 /* ── MOBILE MENU ── */
-let mobOpen=false;
+let isOpen=false;
 function toggleMob(){
-  mobOpen=!mobOpen;
+  isOpen=!isOpen;
   const m=document.getElementById('mob-menu');
-  const icon=document.getElementById('ham-icon');
-  m.style.display=mobOpen?'flex':'none';
-  icon.innerHTML=mobOpen
+  const ico=document.getElementById('ham-ico');
+  m.style.display=isOpen?'flex':'none';
+  ico.innerHTML=isOpen
     ?'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
     :'<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
 }
-function closeMob(){mobOpen=false;document.getElementById('mob-menu').style.display='none';}
+function closeMob(){
+  isOpen=false;
+  document.getElementById('mob-menu').style.display='none';
+  document.getElementById('ham-ico').innerHTML=
+    '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+}
 
 /* ── SCROLL REVEAL ── */
-const obs=new IntersectionObserver(entries=>{
+const io = new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*90);
-      obs.unobserve(e.target);
+      setTimeout(()=>e.target.classList.add('in'), i*80);
+      io.unobserve(e.target);
     }
   });
 },{threshold:0.1});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
-
-/* ── COUNTER ANIMATION ── */
-function animCount(el){
-  const target=+el.dataset.target;
-  const suffix=el.dataset.suffix||'';
-  const dur=1800;
-  const start=performance.now();
-  const step=ts=>{
-    const p=Math.min((ts-start)/dur,1);
-    const ease=1-Math.pow(1-p,3);
-    const cur=Math.round(ease*target);
-    el.textContent=(cur>=1000?cur.toLocaleString('es-CO'):cur)+suffix;
-    if(p<1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-const countObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      animCount(e.target);
-      countObs.unobserve(e.target);
-    }
-  });
-},{threshold:0.5});
-document.querySelectorAll('.stat-num[data-target]').forEach(el=>countObs.observe(el));
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
 
 /* ── FORM ── */
-function handleSubmit(e){
+function handleSend(e){
   e.preventDefault();
   document.getElementById('form-wrap').style.display='none';
-  const s=document.getElementById('success-state');
+  const s=document.getElementById('success-box');
   s.style.display='flex';
 }
 function resetForm(){
-  document.getElementById('form-wrap').style.display='block';
   document.querySelector('form').reset();
-  document.getElementById('success-state').style.display='none';
+  document.getElementById('form-wrap').style.display='block';
+  document.getElementById('success-box').style.display='none';
 }
 
 /* ── FOOTER YEAR ── */
-document.getElementById('foot-copy').textContent=
-  '© '+new Date().getFullYear()+' MEKÁNIKA. Todos los derechos reservados.';
+document.getElementById('footer-copy').textContent=
+  '© '+new Date().getFullYear()+' Iron Garage. Bogotá, Colombia. Todos los derechos reservados.';
+
+/* ── NAVBAR ACTIVE STATE ON SCROLL ── */
+const sections=['builds','servicios','nosotros','proceso','clientes','contacto'];
+window.addEventListener('scroll',()=>{
+  const scrollY=window.scrollY+100;
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const link=document.querySelector(`.nav-links a[href="#${id}"]`);
+    if(!link)return;
+    if(scrollY>=el.offsetTop && scrollY<el.offsetTop+el.offsetHeight){
+      document.querySelectorAll('.nav-links a').forEach(a=>a.style.color='');
+      link.style.color='var(--red)';
+      link.style.borderBottomColor='var(--red)';
+    }
+  });
+},{passive:true});
 </script>
 </body>
 </html>
