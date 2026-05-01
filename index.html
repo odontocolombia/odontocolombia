@@ -93,7 +93,6 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="tel"],
         input[type="url"],
         input[type="date"],
         textarea,
@@ -103,7 +102,7 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 14px;
-            box-sizing: border-box; /* Para que el padding no rompa el ancho */
+            box-sizing: border-box;
             transition: border-color 0.3s;
         }
 
@@ -186,14 +185,9 @@
         <p style="font-size: 12px; color: #666;">Por favor completa este formulario para que podamos definir la dirección visual de tus patrones.</p>
     </header>
 
-    <!-- 
-      IMPORTANTE: Para que este formulario envíe correos de verdad, 
-      regístrate gratis en https://formspree.io/ 
-      Crea un "New Form", copia tu URL única y pégala abajo en action="..."
-    -->
-    <form action="https://formspree.io/f/TU_CODIGO_AQUI" method="POST">
+    <form action="https://formspree.io/f/mkoygbgd" method="POST">
         
-        <!-- SECCIÓN 1 -->
+        <!-- SECCIÓN 1: DATOS DE LA MARCA -->
         <fieldset>
             <legend>1. Datos de la Marca</legend>
             
@@ -213,11 +207,6 @@
             </div>
 
             <div class="form-group">
-                <label>Teléfono / WhatsApp</label>
-                <input type="tel" name="telefono">
-            </div>
-
-            <div class="form-group">
                 <label>¿La marca ya tiene identidad visual? (Logo, colores)</label>
                 <div class="radio-group">
                     <label><input type="radio" name="identidad_visual" value="si"> Sí, completa</label>
@@ -232,7 +221,7 @@
             </div>
         </fieldset>
 
-        <!-- SECCIÓN 2 -->
+        <!-- SECCIÓN 2: PROPÓSITO Y DIRECCIÓN -->
         <fieldset>
             <legend>2. Propósito y Dirección</legend>
             
@@ -260,7 +249,7 @@
             </div>
         </fieldset>
 
-        <!-- SECCIÓN 3 -->
+        <!-- SECCIÓN 3: ESTÉTICA Y REFERENCIAS -->
         <fieldset>
             <legend>3. Estética y Referencias</legend>
             
@@ -293,7 +282,7 @@
             </div>
         </fieldset>
 
-        <!-- SECCIÓN 4 -->
+        <!-- SECCIÓN 4: ESPECIFICACIONES DEL PATRÓN -->
         <fieldset>
             <legend>4. Especificaciones del Patrón</legend>
             
@@ -337,7 +326,7 @@
             </div>
         </fieldset>
 
-        <!-- SECCIÓN 5 -->
+        <!-- SECCIÓN 5: ASPECTOS TÉCNICOS -->
         <fieldset>
             <legend>5. Aspectos Técnicos</legend>
             
@@ -373,7 +362,7 @@
             </div>
         </fieldset>
 
-        <!-- CIERRE -->
+        <!-- CIERRE Y ENVÍO -->
         <div class="form-group">
             <label>
                 <input type="checkbox" name="aceptacion" required>
@@ -383,7 +372,6 @@
 
         <button type="submit" class="btn-submit">Enviar Brief</button>
         
-        <p class="footer-note">Si tienes problemas al enviar, toma capturas de pantalla y envíalas a [tu-email@dominio.com]</p>
     </form>
 </div>
 
