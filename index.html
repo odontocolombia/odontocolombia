@@ -118,10 +118,10 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* ─── PARTÍCULAS MÁGICAS (canvas) ─── */
+        /* ── PARTÍCULAS MÁGICAS (canvas) ─── */
         #magic-canvas { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 
-        /* ═══════════ SPLASH (APERTURA DE LIBRO) ═══════════ */
+        /* ══════════ SPLASH (APERTURA DE LIBRO) ═══════════ */
         #splash {
             position: fixed; inset: 0; z-index: 9999;
             background: linear-gradient(180deg, #d4e8f4 0%, #e8f0f8 100%);
@@ -273,7 +273,7 @@
             text-transform: uppercase; color: var(--sky-blue); margin-bottom: 8px;
         }
         .hero-illustration {
-            width: 200px; height: 200px; margin: 0 auto 20px; position: relative;
+            width: 320px; height: 320px; margin: 0 auto 20px; position: relative;
         }
         .hero-illustration svg { width: 100%; height: 100%; }
         .hero-halo {
@@ -293,14 +293,19 @@
             to { transform: rotate(0deg); }
         }
         .hero-photo-mask {
-            width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
+            width: 220px; height: 220px; border-radius: 50%; overflow: hidden;
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            border: 4px solid var(--white);
-            animation: photoGlow 3s ease-in-out infinite;
+            border: 6px solid var(--white);
+            box-shadow: 0 0 0 4px var(--sky-blue), 0 8px 30px rgba(184,212,232,0.4);
+            animation: photoFloat 4s ease-in-out infinite, photoGlow 3s ease-in-out infinite;
+        }
+        @keyframes photoFloat {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-10px); }
         }
         @keyframes photoGlow {
-            0%,100% { box-shadow: 0 0 8px rgba(184,212,232,0.3); }
-            50% { box-shadow: 0 0 20px rgba(184,212,232,0.6), 0 0 40px rgba(212,165,160,0.3); }
+            0%,100% { box-shadow: 0 0 0 4px var(--sky-blue), 0 8px 30px rgba(184,212,232,0.4); }
+            50% { box-shadow: 0 0 0 6px var(--sky-light), 0 12px 40px rgba(184,212,232,0.6), 0 0 60px rgba(212,165,160,0.3); }
         }
         .hero-photo-mask img { width: 100%; height: 100%; object-fit: cover; }
         .hero-name {
@@ -331,7 +336,7 @@
         .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(184,212,232,0.5); }
         .hero-cta:hover::after { transform: translateX(100%); }
 
-        /* ─── CHAPTER HEADER ── */
+        /* ─── CHAPTER HEADER ─ */
         .chapter-header { text-align: center; margin-bottom: 20px; }
         .chapter-label {
             font-family: 'Raleway', sans-serif; font-size: 0.5rem; letter-spacing: 6px;
@@ -407,7 +412,7 @@
             color: var(--ink-light); line-height: 1.4; white-space: pre-line;
         }
 
-        /* ─── PROGRAMA ─── */
+        /* ── PROGRAMA ─── */
         .program-list { max-width: 340px; margin: 0 auto; }
         .program-item {
             display: flex; gap: 10px; margin-bottom: 10px; padding-bottom: 10px;
@@ -596,11 +601,11 @@
                 border-radius: 80px 80px 15px 15px;
             }
             .hero-illustration {
-                width: 160px; height: 160px;
+                width: 240px; height: 240px;
             }
             .hero-photo-mask {
-                width: 110px; height: 110px;
-                border-width: 3px;
+                width: 160px; height: 160px;
+                border-width: 5px;
             }
             .hot-air-balloon { 
                 width: 90px; 
@@ -724,16 +729,16 @@
             <section class="hero-section" id="inicio">
                 <p class="hero-chapter">Capítulo Uno</p>
                 <div class="hero-illustration">
-                    <svg viewBox="0 0 200 200">
+                    <svg viewBox="0 0 320 320">
                         <defs>
                             <radialGradient id="halo" cx="50%" cy="50%" r="50%">
                                 <stop offset="0%" stop-color="#d4e8f4" stop-opacity="0.9"/>
                                 <stop offset="100%" stop-color="#d4e8f4" stop-opacity="0"/>
                             </radialGradient>
                         </defs>
-                        <circle cx="100" cy="100" r="90" fill="url(#halo)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#b8d4e8" stroke-width="2" stroke-dasharray="5 4" class="hero-halo-dashed"/>
-                        <circle cx="100" cy="100" r="58" fill="none" stroke="#8bb8d4" stroke-width="1.5" class="hero-halo"/>
+                        <circle cx="160" cy="160" r="150" fill="url(#halo)"/>
+                        <circle cx="160" cy="160" r="120" fill="none" stroke="#b8d4e8" stroke-width="3" stroke-dasharray="8 6" class="hero-halo-dashed"/>
+                        <circle cx="160" cy="160" r="100" fill="none" stroke="#8bb8d4" stroke-width="2" class="hero-halo"/>
                     </svg>
                     <div class="hero-photo-mask">
                         <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&q=80" alt="Emilio André" crossorigin="anonymous">
@@ -814,7 +819,7 @@
             <div class="info-grid">
                 <div class="info-tile"><div class="info-icon">🎈</div><div class="info-label">Fecha</div><div class="info-value">8 · Marzo · 2026</div></div>
                 <div class="info-tile"><div class="info-icon">🕊️</div><div class="info-label">Hora</div><div class="info-value">11:00 de la mañana</div></div>
-                <div class="info-tile"><div class="info-icon"></div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
+                <div class="info-tile"><div class="info-icon">⛪</div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
                 <div class="info-tile"><div class="info-icon">👔</div><div class="info-label">Vestimenta</div><div class="info-value">Elegante<br>Colores claros</div></div>
             </div>
             <div class="chapter-header" style="margin-top:20px;"><p class="chapter-label">El Itinerario</p></div>
@@ -841,7 +846,7 @@
             </p>
         </div>
 
-        <!-- ─── PÁGINA 6: GALERÍA ─── -->
+        <!-- ── PÁGINA 6: GALERÍA ─── -->
         <div class="book-page stagger" id="page-gallery">
             <div class="chapter-header">
                 <p class="chapter-label">Capítulo Seis</p>
@@ -881,7 +886,7 @@
 
         <!-- ─── PÁGINA 8: FOOTER ─── -->
         <div class="footer-section book-page stagger" id="page-footer">
-            <div class="footer-ornament"><span></span></div>
+            <div class="footer-ornament"><span>✦</span></div>
             <div class="footer-name">Emilio André</div>
             <div class="footer-date">8 · Marzo · 2026 · Tepoztlán, Morelos</div>
             <p class="footer-verse">&ldquo;Dejad que los niños vengan a mí.&rdquo;</p>
@@ -930,7 +935,7 @@
             ],
         };
 
-        // ═══════════ PARTÍCULAS MÁGICAS ══════════
+        // ═══════════ PARTÍCULAS MÁGICAS ═══════════
         (function() {
             const canvas = document.getElementById('magic-canvas');
             const ctx = canvas.getContext('2d');
@@ -1036,7 +1041,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // ═══════════ CARRUSEL ══════════
+        // ═══════════ CARRUSEL ═══════════
         let carouselIdx = 0;
         function buildCarousel() {
             const track = document.getElementById('carousel-track');
@@ -1087,7 +1092,7 @@
             document.getElementById('rsvp-thanks').classList.add('show');
         }
 
-        // ═══════════ INTERSECTION OBSERVER ══════════
+        // ═══════════ INTERSECTION OBSERVER ═══════════
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
