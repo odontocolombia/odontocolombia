@@ -7,61 +7,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #e8a0b8;
-            --pink-light: #f5d0e0;
-            --pink-dark: #c87898;
-            --pink-soft: #fdf0f5;
-            --rose: #d4899f;
-            --cream: #fff8fa;
-            --cream-dark: #f8e8f0;
-            --brown: #5a3848;
-            --brown-light: #7a5868;
-            --green: #a8b898;
-            --green-light: #c8d8b8;
-            --green-dark: #889878;
+            --blue: #7ba3d4;
+            --blue-light: #a8c8e8;
+            --blue-dark: #5a8ab8;
+            --blue-soft: #d4e4f4;
+            --gold: #d4af37;
+            --gold-light: #f0d860;
+            --gold-dark: #b8941f;
             --white: #ffffff;
-            --shadow: 0 4px 20px rgba(200,120,152,0.12);
+            --cream: #faf8f0;
+            --brown: #4a3820;
+            --shadow: 0 4px 20px rgba(90,138,184,0.2);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Cormorant Garamond', serif;
-            background: linear-gradient(180deg, #fdf0f5 0%, #fff8fa 50%, #fdf0f5 100%);
+            background: var(--blue-soft);
             color: var(--brown);
             overflow-x: hidden;
             min-height: 100vh;
         }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--pink-soft); }
-        ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: var(--blue-soft); }
+        ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
-        /* ─── FONDO FLORAL SUTIL ─── */
-        .bg-pattern {
+        /* ─── FONDO CON POLKA DOTS ─── */
+        .bg-dots {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.04;
+            background-color: var(--blue-light);
             background-image: 
-                radial-gradient(circle at 20% 30%, var(--pink-light) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, var(--pink-light) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, var(--pink-soft) 0%, transparent 50%);
+                radial-gradient(circle, var(--white) 2px, transparent 2px);
+            background-size: 30px 30px;
+            animation: dotsMove 20s linear infinite;
+        }
+        @keyframes dotsMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
         }
 
-        /* ─── PÉTALOS FLOTANTES (canvas) ─── */
-        #petals-canvas {
+        /* ─── PARTÍCULAS DORADAS ─── */
+        #gold-canvas {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
         }
 
-        /* ═══════════ SPLASH FLORAL ═══════════ */
+        /* ═══════════ SPLASH ═══════════ */
         #splash {
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: linear-gradient(180deg, #fdf0f5 0%, #fff8fa 100%);
+            background: var(--blue-soft);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -81,84 +82,99 @@
             animation: splashReveal 2s ease forwards;
             position: relative;
             z-index: 2;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 0 0 4px var(--gold), 0 0 0 8px var(--blue-light);
         }
         @keyframes splashReveal {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ─── CRUZ CON MOÑO ─── */
-        .cross-container {
-            width: 120px;
-            height: 160px;
-            margin: 0 auto 30px;
+        /* ─── PALOMAS ANIMADAS ─── */
+        .dove {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            animation: doveFloat 4s ease-in-out infinite;
+        }
+        .dove-left { top: 20px; left: 20px; animation-delay: 0s; }
+        .dove-right { top: 20px; right: 20px; animation-delay: 1s; transform: scaleX(-1); }
+        @keyframes doveFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(5px) rotate(5deg); }
+        }
+        .dove-right {
+            animation: doveFloatRight 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        @keyframes doveFloatRight {
+            0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+            25% { transform: scaleX(-1) translateY(-10px) rotate(-5deg); }
+            75% { transform: scaleX(-1) translateY(5px) rotate(5deg); }
+        }
+
+        .splash-cross {
+            width: 50px;
+            height: 70px;
+            margin: 20px auto 20px;
             position: relative;
-            animation: crossFloat 4s ease-in-out infinite;
+            animation: crossGlow 2s ease-in-out infinite;
         }
-        @keyframes crossFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        @keyframes crossGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(212,175,55,1)); }
         }
-        .cross-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 4px 12px rgba(200,120,152,0.2));
-        }
-        .cross-shine {
-            animation: crossShine 3s ease-in-out infinite;
-        }
-        @keyframes crossShine {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-        }
-        .bow-ribbon {
-            animation: bowSway 3s ease-in-out infinite;
-            transform-origin: center top;
-        }
-        @keyframes bowSway {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
-        }
-
-        /* ─── FLORES DECORATIVAS SPLASH ── */
-        .splash-flowers {
+        .splash-cross::before {
+            content: '';
             position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 70px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
         }
-        .flower-cluster {
+        .splash-cross::after {
+            content: '';
             position: absolute;
-            opacity: 0.6;
-            animation: flowerSway 6s ease-in-out infinite;
-        }
-        .flower-cluster:nth-child(1) { top: -20px; left: -20px; animation-delay: 0s; }
-        .flower-cluster:nth-child(2) { top: -20px; right: -20px; animation-delay: 1s; transform: scaleX(-1); }
-        .flower-cluster:nth-child(3) { bottom: -20px; left: -20px; animation-delay: 2s; transform: scaleY(-1); }
-        .flower-cluster:nth-child(4) { bottom: -20px; right: -20px; animation-delay: 3s; transform: scale(-1, -1); }
-        @keyframes flowerSway {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(3deg); }
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 10px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
         }
 
         .splash-text {
             font-family: 'Cinzel', serif;
             font-size: 0.75rem;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            color: var(--pink);
-            margin-bottom: 20px;
+            color: var(--blue-dark);
+            margin-bottom: 15px;
+        }
+        .splash-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(212,175,55,0.3);
         }
         .splash-name {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: var(--brown);
-            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 20px;
         }
         .splash-hint {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            color: var(--brown-light);
+            font-size: 0.9rem;
+            color: var(--blue);
             letter-spacing: 2px;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -176,240 +192,261 @@
             padding: 20px;
         }
 
-        /* ─── INVITACIÓN ─── */
+        /* ─── INVITACIÓN CON MARCO DORADO ─── */
         .invitation {
             background: var(--white);
-            border-radius: 200px 200px 20px 20px;
-            padding: 80px 40px 60px;
+            border-radius: 30px;
+            padding: 60px 40px;
             margin: 40px 0;
             position: relative;
-            box-shadow: 
-                var(--shadow),
-                0 0 0 8px var(--white),
-                0 0 0 10px var(--pink-light);
             opacity: 0;
             transform: translateY(40px);
-            overflow: visible;
+            /* Marco dorado brillante */
+            box-shadow: 
+                0 0 0 3px var(--gold),
+                0 0 0 6px var(--white),
+                0 0 0 9px var(--blue),
+                0 0 0 12px var(--white),
+                0 0 0 15px var(--gold),
+                0 10px 40px rgba(90,138,184,0.3);
         }
         .invitation.visible {
             animation: cardReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
         @keyframes cardReveal {
-            0% { opacity: 0; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ─── FLORES DE ESQUINA ─── */
-        .corner-flower {
+        /* ─── BRILLO DORADO EN BORDES ─── */
+        .invitation::before {
+            content: '';
             position: absolute;
-            width: 140px;
-            height: 140px;
-            opacity: 0;
-            z-index: 5;
+            inset: -15px;
+            border-radius: 35px;
+            background: linear-gradient(45deg, 
+                var(--gold) 0%, 
+                var(--gold-light) 25%, 
+                var(--gold) 50%, 
+                var(--gold-dark) 75%, 
+                var(--gold) 100%);
+            z-index: -1;
+            animation: borderShimmer 3s linear infinite;
+            background-size: 200% 200%;
         }
-        .corner-flower.visible {
-            animation: flowerReveal 1.2s ease forwards;
-        }
-        @keyframes flowerReveal {
-            0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
-        .corner-tl { top: -30px; left: -30px; }
-        .corner-tr { top: -30px; right: -30px; transform: scaleX(-1); }
-        .corner-tr.visible { animation: flowerRevealTR 1.2s ease forwards; }
-        @keyframes flowerRevealTR {
-            0% { opacity: 0; transform: scaleX(-1) scale(0.3) rotate(-20deg); }
-            100% { opacity: 1; transform: scaleX(-1) scale(1) rotate(0deg); }
-        }
-        .corner-bl { bottom: -30px; left: -30px; transform: scaleY(-1); }
-        .corner-bl.visible { animation: flowerRevealBL 1.2s ease forwards; }
-        @keyframes flowerRevealBL {
-            0% { opacity: 0; transform: scaleY(-1) scale(0.3) rotate(-20deg); }
-            100% { opacity: 1; transform: scaleY(-1) scale(1) rotate(0deg); }
-        }
-        .corner-br { bottom: -30px; right: -30px; transform: scale(-1, -1); }
-        .corner-br.visible { animation: flowerRevealBR 1.2s ease forwards; }
-        @keyframes flowerRevealBR {
-            0% { opacity: 0; transform: scale(-1, -1) scale(0.3) rotate(-20deg); }
-            100% { opacity: 1; transform: scale(-1, -1) scale(1) rotate(0deg); }
+        @keyframes borderShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
-        .corner-flower svg { width: 100%; height: 100%; }
-
-        /* ─── FLORES LATERALES ─── */
-        .side-flower {
+        /* ── PALOMAS EN INVITACIÓN ── */
+        .invitation-doves {
             position: absolute;
-            width: 80px;
-            height: 120px;
+            top: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            pointer-events: none;
+        }
+        .invitation-dove {
+            width: 50px;
+            height: 50px;
             opacity: 0;
-            z-index: 5;
         }
-        .side-flower.visible {
-            animation: sideFlowerReveal 1s ease forwards;
+        .invitation-dove.visible {
+            animation: doveReveal 1s ease forwards;
         }
-        @keyframes sideFlowerReveal {
-            0% { opacity: 0; transform: translateX(-20px); }
-            100% { opacity: 0.7; transform: translateX(0); }
+        @keyframes doveReveal {
+            0% { opacity: 0; transform: translateY(-20px) scale(0.5); }
+            100% { opacity: 0.6; transform: translateY(0) scale(1); }
         }
-        .side-left { left: -50px; top: 50%; transform: translateY(-50%); }
-        .side-left.visible { animation: sideFlowerRevealLeft 1s ease 0.5s forwards; }
-        @keyframes sideFlowerRevealLeft {
-            0% { opacity: 0; transform: translateY(-50%) translateX(-20px); }
-            100% { opacity: 0.7; transform: translateY(-50%) translateX(0); }
+        .invitation-dove-right {
+            animation: doveRevealRight 1s ease 0.2s forwards;
         }
-        .side-right { right: -50px; top: 50%; transform: translateY(-50%) scaleX(-1); }
-        .side-right.visible { animation: sideFlowerRevealRight 1s ease 0.7s forwards; }
-        @keyframes sideFlowerRevealRight {
-            0% { opacity: 0; transform: translateY(-50%) scaleX(-1) translateX(-20px); }
-            100% { opacity: 0.7; transform: translateY(-50%) scaleX(-1) translateX(0); }
+        @keyframes doveRevealRight {
+            0% { opacity: 0; transform: translateY(-20px) scale(0.5) scaleX(-1); }
+            100% { opacity: 0.6; transform: translateY(0) scale(1) scaleX(-1); }
         }
 
-        /* ─── CRUZ EN INVITACIÓN ─── */
-        .invitation-cross {
-            text-align: center;
-            margin-bottom: 30px;
+        /* ─── CINTA AZUL ─── */
+        .ribbon-container {
+            position: relative;
+            margin: 30px 0;
             opacity: 0;
-            transform: translateY(-20px);
         }
-        .invitation-cross.visible {
-            animation: crossReveal 1.2s ease 0.3s forwards;
+        .ribbon-container.visible {
+            animation: ribbonReveal 1s ease 0.5s forwards;
         }
-        @keyframes crossReveal {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes ribbonReveal {
+            0% { opacity: 0; transform: scaleX(0); }
+            100% { opacity: 1; transform: scaleX(1); }
         }
-        .invitation-cross-svg {
-            width: 80px;
-            height: 110px;
-            margin: 0 auto;
-            filter: drop-shadow(0 4px 12px rgba(200,120,152,0.25));
+        .ribbon {
+            background: linear-gradient(135deg, var(--blue-light), var(--blue), var(--blue-dark));
+            padding: 15px 40px;
+            position: relative;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(90,138,184,0.4);
+        }
+        .ribbon::before,
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 40px;
+            background: var(--blue-dark);
+            transform: translateY(-50%);
+        }
+        .ribbon::before {
+            left: -25px;
+            clip-path: polygon(100% 0, 100% 100%, 0 50%);
+        }
+        .ribbon::after {
+            right: -25px;
+            clip-path: polygon(0 0, 0 100%, 100% 50%);
+        }
+        .ribbon-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--white);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            white-space: nowrap;
         }
 
         /* ─── TEXTOS ─── */
         .text-intro {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--brown-light);
-            text-align: center;
-            margin-bottom: 15px;
-            font-style: italic;
-            opacity: 0;
-        }
-        .text-intro.visible { animation: fadeInUp 1s ease 0.5s forwards; }
-        .text-title {
             font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 0.9rem;
             color: var(--brown);
             text-align: center;
-            letter-spacing: 8px;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+        .text-intro.visible { animation: fadeInUp 1s ease 0.3s forwards; }
+        .text-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            text-align: center;
             margin-bottom: 10px;
             opacity: 0;
+            text-shadow: 0 2px 4px rgba(212,175,55,0.3);
         }
-        .text-title.visible { animation: fadeInUp 1s ease 0.7s forwards; }
-        .text-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--brown-light);
-            text-align: center;
-            margin-bottom: 20px;
-            opacity: 0;
-        }
-        .text-subtitle.visible { animation: fadeInUp 1s ease 0.9s forwards; }
-        .text-name {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--pink-dark);
-            text-align: center;
-            margin-bottom: 5px;
-            opacity: 0;
-            text-shadow: 0 2px 4px rgba(200,120,152,0.2);
-        }
-        .text-name.visible { animation: nameReveal 1.2s ease 1.1s forwards; }
-        @keyframes nameReveal {
+        .text-title.visible { animation: titleReveal 1.2s ease 0.5s forwards; }
+        @keyframes titleReveal {
             0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
             100% { opacity: 1; transform: scale(1); filter: blur(0); }
         }
-        .text-surname {
+        .text-subtitle {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--brown);
             text-align: center;
+            margin-bottom: 20px;
             letter-spacing: 4px;
-            margin-bottom: 40px;
+            text-transform: uppercase;
             opacity: 0;
         }
-        .text-surname.visible { animation: fadeInUp 1s ease 1.3s forwards; }
+        .text-subtitle.visible { animation: fadeInUp 1s ease 0.7s forwards; }
 
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ─── FECHA ── */
-        .date-section {
+        /* ─── CRUZ DORADA ─── */
+        .cross-section {
             text-align: center;
-            margin: 40px 0;
-            padding: 30px 0;
-            border-top: 1px solid var(--pink-light);
-            border-bottom: 1px solid var(--pink-light);
+            margin: 30px 0;
             opacity: 0;
         }
-        .date-section.visible { animation: fadeIn 1s ease 1.5s forwards; }
+        .cross-section.visible {
+            animation: fadeIn 1s ease 0.9s forwards;
+        }
         @keyframes fadeIn { to { opacity: 1; } }
-        .date-day {
+        .cross-gold {
+            width: 40px;
+            height: 60px;
+            margin: 0 auto;
+            position: relative;
+            animation: crossFloat 3s ease-in-out infinite;
+        }
+        @keyframes crossFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .cross-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+        .cross-gold::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 8px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+
+        /* ─── FECHA Y HORA ─── */
+        .datetime-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 2px dotted var(--blue-light);
+            border-bottom: 2px dotted var(--blue-light);
+            opacity: 0;
+        }
+        .datetime-section.visible { animation: fadeIn 1s ease 1.1s forwards; }
+        .datetime-block {
+            text-align: center;
+        }
+        .datetime-label {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
             color: var(--brown);
             letter-spacing: 3px;
+            text-transform: uppercase;
             margin-bottom: 10px;
         }
-        .date-number {
+        .datetime-value {
             font-family: 'Cinzel', serif;
             font-size: 3rem;
             font-weight: 700;
-            color: var(--pink-dark);
-            margin: 10px 0;
+            color: var(--blue-dark);
+            line-height: 1;
         }
-        .date-month {
+        .datetime-sub {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--brown);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
-
-        /* ─── PADRES Y PADRINOS ─── */
-        .family-section {
-            margin: 40px 0;
-            opacity: 0;
-        }
-        .family-section.visible { animation: fadeIn 1s ease 1.7s forwards; }
-        .family-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-            padding: 15px 0;
-        }
-        .family-label {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            color: var(--pink-dark);
-            flex: 0 0 120px;
-            text-align: center;
-        }
-        .family-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--brown);
-            flex: 1;
-            text-align: center;
-            line-height: 1.6;
-        }
-        .family-name strong {
-            display: block;
-            font-weight: 600;
-            color: var(--brown);
+        .datetime-divider {
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, var(--blue), transparent);
         }
 
         /* ─── IGLESIA ─── */
@@ -418,70 +455,130 @@
             margin: 40px 0;
             opacity: 0;
         }
-        .church-section.visible { animation: fadeIn 1s ease 1.9s forwards; }
-        .church-icon {
-            width: 60px;
-            height: 80px;
-            margin: 0 auto 20px;
-            opacity: 0.8;
-        }
-        .church-icon svg { width: 100%; height: 100%; }
-        .church-time {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--brown);
-            margin-bottom: 15px;
-        }
+        .church-section.visible { animation: fadeIn 1s ease 1.3s forwards; }
         .church-name {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Cinzel', serif;
             font-size: 1.3rem;
             color: var(--brown);
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .church-reference {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            color: var(--brown-light);
-            font-style: italic;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.6;
         }
 
-        /* ─── SEPARADOR ── */
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* ─── PADRINOS ─── */
+        .godparents-section {
+            text-align: center;
             margin: 40px 0;
             opacity: 0;
         }
-        .divider.visible { animation: fadeIn 1s ease 2.1s forwards; }
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--pink), transparent);
+        .godparents-section.visible { animation: fadeIn 1s ease 1.5s forwards; }
+        .godparents-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
-        .divider-icon {
-            width: 30px;
-            height: 30px;
-            margin: 0 15px;
-            position: relative;
-        }
-        .divider-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--pink);
-            font-size: 1.2rem;
+        .godparents-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--brown);
+            line-height: 1.8;
         }
 
-        /* ─── COUNTDOWN ── */
+        /* ─── BOTONES DORADOS ─── */
+        .buttons-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin: 40px 0;
+            opacity: 0;
+        }
+        .buttons-section.visible { animation: fadeIn 1s ease 1.7s forwards; }
+        .gold-button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .gold-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        .gold-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212,175,55,0.6);
+        }
+        .gold-button:hover::before {
+            left: 100%;
+        }
+
+        /* ─── ÁNGEL Y CÁLIZ ─── */
+        .bottom-decoration {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin: 40px 0 20px;
+            opacity: 0;
+        }
+        .bottom-decoration.visible { animation: fadeIn 1s ease 1.9s forwards; }
+        .angel-figure {
+            width: 100px;
+            height: 120px;
+            animation: angelBounce 3s ease-in-out infinite;
+        }
+        @keyframes angelBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .chalice-figure {
+            width: 80px;
+            height: 100px;
+            animation: chaliceGlow 2s ease-in-out infinite;
+        }
+        @keyframes chaliceGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(212,175,55,1)); }
+        }
+
+        .waiting-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--blue-dark);
+            text-align: center;
+            margin: 20px 0;
+            opacity: 0;
+        }
+        .waiting-text.visible { animation: fadeIn 1s ease 2.1s forwards; }
+
+        /* ─── COUNTDOWN ─── */
         .countdown-section {
             text-align: center;
             margin: 40px 0;
+            padding: 30px;
+            background: var(--blue-soft);
+            border-radius: 20px;
+            border: 2px solid var(--gold);
             opacity: 0;
         }
         .countdown-section.visible { animation: fadeIn 1s ease 2.3s forwards; }
@@ -489,7 +586,7 @@
             font-family: 'Cinzel', serif;
             font-size: 1rem;
             letter-spacing: 4px;
-            color: var(--pink-dark);
+            color: var(--gold-dark);
             margin-bottom: 20px;
             text-transform: uppercase;
         }
@@ -497,31 +594,29 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            max-width: 400px;
-            margin: 0 auto;
         }
         .countdown-item {
-            background: var(--pink-soft);
-            border: 1px solid var(--pink-light);
-            border-radius: 4px;
+            background: var(--white);
+            border: 2px solid var(--gold-light);
+            border-radius: 10px;
             padding: 15px 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .countdown-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(200,120,152,0.2);
+            box-shadow: 0 8px 20px rgba(212,175,55,0.3);
         }
         .countdown-number {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--pink-dark);
+            color: var(--blue-dark);
             display: block;
         }
         .countdown-label {
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.85rem;
-            color: var(--brown-light);
+            color: var(--brown);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -536,15 +631,15 @@
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             letter-spacing: 4px;
-            color: var(--brown);
+            color: var(--gold-dark);
             text-align: center;
             margin-bottom: 25px;
             text-transform: uppercase;
         }
         .carousel-wrap {
             position: relative;
-            border: 2px solid var(--pink-light);
-            border-radius: 4px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
             overflow: hidden;
             background: var(--white);
         }
@@ -561,15 +656,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.1) saturate(1.1);
         }
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: 1px solid var(--pink);
-            color: var(--brown);
+            background: var(--gold);
+            border: 2px solid var(--white);
+            color: var(--white);
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -582,8 +676,7 @@
             font-size: 1.2rem;
         }
         .carousel-btn:hover {
-            background: var(--pink);
-            color: var(--white);
+            background: var(--gold-dark);
             transform: translateY(-50%) scale(1.1);
         }
         .carousel-prev { left: 10px; }
@@ -593,21 +686,21 @@
             justify-content: center;
             gap: 8px;
             padding: 15px;
-            background: var(--pink-soft);
+            background: var(--blue-soft);
         }
         .carousel-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--pink-light);
+            background: var(--blue-light);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
         .carousel-dot.active {
-            background: var(--pink);
+            background: var(--gold);
             transform: scale(1.3);
-            border-color: var(--pink-dark);
+            border-color: var(--gold-dark);
         }
 
         /* ─── MAPA ─── */
@@ -620,14 +713,14 @@
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             letter-spacing: 4px;
-            color: var(--brown);
+            color: var(--gold-dark);
             text-align: center;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
         .map-wrap {
-            border: 2px solid var(--pink-light);
-            border-radius: 4px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
             overflow: hidden;
             margin-bottom: 15px;
         }
@@ -637,32 +730,15 @@
             border: 0;
             display: block;
         }
-        .map-link {
-            display: inline-block;
-            padding: 10px 25px;
-            background: linear-gradient(135deg, var(--pink-light), var(--pink));
-            color: var(--white);
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-        .map-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(200,120,152,0.3);
-        }
 
-        /* ─── RSVP / WHATSAPP ─── */
+        /* ─── RSVP / WHATSAPP ── */
         .rsvp-section {
             text-align: center;
             margin: 40px 0;
             padding: 40px 20px;
-            background: var(--pink-soft);
-            border: 1px solid var(--pink-light);
-            border-radius: 4px;
+            background: var(--blue-soft);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
             opacity: 0;
         }
         .rsvp-section.visible { animation: fadeIn 1s ease 2.9s forwards; }
@@ -670,14 +746,14 @@
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             letter-spacing: 4px;
-            color: var(--brown);
+            color: var(--gold-dark);
             margin-bottom: 10px;
             text-transform: uppercase;
         }
         .rsvp-subtitle {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
-            color: var(--brown-light);
+            color: var(--brown);
             margin-bottom: 25px;
             font-style: italic;
         }
@@ -687,8 +763,8 @@
             padding: 12px 15px;
             margin-bottom: 15px;
             background: var(--white);
-            border: 1px solid var(--pink-light);
-            border-radius: 4px;
+            border: 2px solid var(--blue-light);
+            border-radius: 25px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
             color: var(--brown);
@@ -696,20 +772,20 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .rsvp-input:focus {
-            border-color: var(--pink);
-            box-shadow: 0 0 0 3px rgba(200,120,152,0.1);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
         }
         .rsvp-input::placeholder {
-            color: var(--brown-light);
-            opacity: 0.6;
+            color: var(--blue);
+            opacity: 0.7;
         }
         .rsvp-button {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--pink-light), var(--pink), var(--pink-dark));
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
             color: var(--white);
             border: none;
-            border-radius: 4px;
+            border-radius: 25px;
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
             letter-spacing: 3px;
@@ -718,6 +794,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
         }
         .rsvp-button::before {
             content: '';
@@ -726,12 +803,12 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s ease;
         }
         .rsvp-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(200,120,152,0.3);
+            box-shadow: 0 8px 25px rgba(212,175,55,0.6);
         }
         .rsvp-button:hover::before { left: 100%; }
 
@@ -745,7 +822,7 @@
         .footer-verse {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: var(--brown-light);
+            color: var(--brown);
             font-style: italic;
             margin-bottom: 10px;
         }
@@ -753,148 +830,44 @@
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
             letter-spacing: 3px;
-            color: var(--pink-dark);
+            color: var(--gold-dark);
         }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 600px) {
-            .invitation { padding: 60px 25px 40px; margin: 20px 0; border-radius: 150px 150px 15px 15px; }
-            .corner-flower { width: 100px; height: 100px; }
-            .corner-tl { top: -20px; left: -20px; }
-            .corner-tr { top: -20px; right: -20px; }
-            .corner-bl { bottom: -20px; left: -20px; }
-            .corner-br { bottom: -20px; right: -20px; }
-            .side-flower { display: none; }
-            .text-title { font-size: 2rem; letter-spacing: 4px; }
-            .text-name { font-size: 2.5rem; }
-            .family-row { flex-direction: column; gap: 10px; }
+            .invitation { padding: 50px 25px; margin: 20px 0; }
+            .text-title { font-size: 3rem; }
+            .ribbon-text { font-size: 2rem; }
+            .ribbon { padding: 12px 30px; }
+            .datetime-value { font-size: 2.5rem; }
             .countdown-grid { grid-template-columns: repeat(2, 1fr); }
             .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
-            .cross-container { width: 90px; height: 120px; }
-            .invitation-cross-svg { width: 60px; height: 85px; }
+            .angel-figure { width: 80px; height: 100px; }
+            .chalice-figure { width: 60px; height: 80px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
-    <canvas id="petals-canvas"></canvas>
+    <div class="bg-dots"></div>
+    <canvas id="gold-canvas"></canvas>
 
-    <!-- SPLASH FLORAL -->
+    <!-- SPLASH -->
     <div id="splash">
-        <div class="splash-flowers">
-            <div class="flower-cluster">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <g opacity="0.7">
-                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
-                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
-                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
-                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
-                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
-                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
-                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
-                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
-                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="flower-cluster">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <g opacity="0.7">
-                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
-                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
-                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
-                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
-                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
-                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
-                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
-                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
-                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="flower-cluster">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <g opacity="0.7">
-                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
-                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
-                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
-                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
-                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
-                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
-                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
-                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
-                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="flower-cluster">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <g opacity="0.7">
-                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
-                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
-                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
-                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
-                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
-                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
-                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
-                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
-                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
-                    </g>
-                </svg>
-            </div>
-        </div>
         <div class="splash-content">
-            <!-- CRUZ CON MOÑO -->
-            <div class="cross-container">
-                <svg class="cross-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Cruz de madera blanca -->
-                    <rect x="42" y="10" width="16" height="120" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
-                    <rect x="20" y="35" width="60" height="16" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
-                    <!-- Textura de madera -->
-                    <line x1="45" y1="15" x2="45" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="50" y1="15" x2="50" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
-                    <line x1="55" y1="15" x2="55" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="25" y1="40" x2="75" y2="40" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="25" y1="45" x2="75" y2="45" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
-                    <!-- Brillo -->
-                    <rect class="cross-shine" x="44" y="12" width="4" height="116" rx="1" fill="white" opacity="0.3"/>
-                    
-                    <!-- Moño rosa -->
-                    <g class="bow-ribbon">
-                        <!-- Cinta horizontal -->
-                        <path d="M 30 38 Q 50 35 70 38 Q 72 42 70 45 Q 50 42 30 45 Q 28 42 30 38" fill="#f0c0d0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <!-- Ala izquierda del moño -->
-                        <path d="M 50 40 Q 30 30 20 35 Q 15 40 20 45 Q 30 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 45 40 Q 32 35 25 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <!-- Ala derecha del moño -->
-                        <path d="M 50 40 Q 70 30 80 35 Q 85 40 80 45 Q 70 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 55 40 Q 68 35 75 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <!-- Centro del moño -->
-                        <ellipse cx="50" cy="41" rx="6" ry="5" fill="#e8a0b8" stroke="#d4899f" stroke-width="0.8"/>
-                        <ellipse cx="49" cy="40" rx="2" ry="1.5" fill="#f5d0e0" opacity="0.6"/>
-                        <!-- Colgantes del moño -->
-                        <path d="M 44 45 Q 40 60 35 75 Q 33 80 36 82 Q 40 80 42 75 Q 45 60 47 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 56 45 Q 60 60 65 75 Q 67 80 64 82 Q 60 80 58 75 Q 55 60 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <!-- Pliegues en colgantes -->
-                        <path d="M 40 55 Q 42 58 44 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 38 65 Q 40 68 42 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 60 55 Q 58 58 56 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 62 65 Q 60 68 58 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                    </g>
-                </svg>
-            </div>
+            <!-- Palomas -->
+            <svg class="dove dove-left" viewBox="0 0 60 60">
+                <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="28" cy="32" r="1" fill="#d4af37"/>
+            </svg>
+            <svg class="dove dove-right" viewBox="0 0 60 60">
+                <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="28" cy="32" r="1" fill="#d4af37"/>
+            </svg>
             
+            <div class="splash-cross"></div>
             <div class="splash-text">Bautizo</div>
-            <div class="splash-name">Emilio André</div>
+            <div class="splash-title">Emilio André</div>
             <div class="splash-hint">Toca para abrir la invitación</div>
         </div>
     </div>
@@ -903,284 +876,123 @@
     <div class="main-container">
         <div class="invitation" id="invitation">
             
-            <!-- FLORES DE ESQUINA -->
-            <div class="corner-flower corner-tl">
-                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <!-- Ramas -->
-                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 25 40 Q 45 50 65 55" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        
-                        <!-- Flores grandes -->
-                        <g>
-                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
-                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
-                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
-                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
-                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
-                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
-                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
-                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
-                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
-                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="95" cy="50" r="9" fill="#f5d0e0"/>
-                            <circle cx="92" cy="47" r="6" fill="#e8a0b8"/>
-                            <circle cx="98" cy="49" r="5" fill="#f0c0d0"/>
-                            <circle cx="95" cy="50" r="3" fill="#d4899f"/>
-                        </g>
-                        
-                        <!-- Flores pequeñas / brotes -->
-                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
-                        <circle cx="53" cy="28" r="3" fill="#e8a0b8"/>
-                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
-                        <circle cx="78" cy="36" r="4" fill="#e8a0b8"/>
-                        <circle cx="110" cy="52" r="5" fill="#f5d0e0"/>
-                        <circle cx="108" cy="50" r="3" fill="#e8a0b8"/>
-                        
-                        <!-- Hojas -->
-                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
-                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
-                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
-                        <ellipse cx="90" cy="58" rx="4" ry="8" fill="#c8d8b8" transform="rotate(0 90 58)"/>
-                        
-                        <!-- Puntos decorativos -->
-                        <circle cx="45" cy="25" r="1.5" fill="#a8b898"/>
-                        <circle cx="60" cy="35" r="1" fill="#a8b898"/>
-                        <circle cx="85" cy="45" r="1.5" fill="#a8b898"/>
-                    </g>
+            <!-- Palomas en invitación -->
+            <div class="invitation-doves">
+                <svg class="invitation-dove" viewBox="0 0 60 60">
+                    <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                    <circle cx="28" cy="32" r="1" fill="#d4af37"/>
                 </svg>
-            </div>
-            <div class="corner-flower corner-tr">
-                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 25 40 Q 45 50 65 55" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <g>
-                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
-                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
-                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
-                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
-                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
-                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
-                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
-                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
-                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
-                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="95" cy="50" r="9" fill="#f5d0e0"/>
-                            <circle cx="92" cy="47" r="6" fill="#e8a0b8"/>
-                            <circle cx="98" cy="49" r="5" fill="#f0c0d0"/>
-                            <circle cx="95" cy="50" r="3" fill="#d4899f"/>
-                        </g>
-                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
-                        <circle cx="53" cy="28" r="3" fill="#e8a0b8"/>
-                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
-                        <circle cx="78" cy="36" r="4" fill="#e8a0b8"/>
-                        <circle cx="110" cy="52" r="5" fill="#f5d0e0"/>
-                        <circle cx="108" cy="50" r="3" fill="#e8a0b8"/>
-                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
-                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
-                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
-                        <ellipse cx="90" cy="58" rx="4" ry="8" fill="#c8d8b8" transform="rotate(0 90 58)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="corner-flower corner-bl">
-                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <g>
-                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
-                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
-                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
-                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
-                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
-                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
-                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
-                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
-                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
-                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
-                        </g>
-                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
-                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
-                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
-                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
-                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="corner-flower corner-br">
-                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <g>
-                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
-                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
-                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
-                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
-                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
-                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
-                        </g>
-                        <g>
-                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
-                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
-                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
-                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
-                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
-                        </g>
-                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
-                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
-                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
-                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
-                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
-                    </g>
+                <svg class="invitation-dove invitation-dove-right" viewBox="0 0 60 60">
+                    <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                    <circle cx="28" cy="32" r="1" fill="#d4af37"/>
                 </svg>
             </div>
 
-            <!-- FLORES LATERALES -->
-            <div class="side-flower side-left">
-                <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path d="M 40 120 Q 35 90 30 70 Q 25 50 20 30" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 70 Q 20 65 15 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 25 50 Q 15 48 10 45" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <circle cx="20" cy="25" r="8" fill="#f5d0e0"/>
-                        <circle cx="17" cy="22" r="5" fill="#e8a0b8"/>
-                        <circle cx="23" cy="24" r="4" fill="#f0c0d0"/>
-                        <circle cx="20" cy="25" r="2.5" fill="#d4899f"/>
-                        <circle cx="15" cy="40" r="6" fill="#f5d0e0"/>
-                        <circle cx="13" cy="38" r="4" fill="#e8a0b8"/>
-                        <circle cx="15" cy="40" r="2" fill="#d4899f"/>
-                        <circle cx="10" cy="55" r="5" fill="#f5d0e0"/>
-                        <circle cx="8" cy="53" r="3" fill="#e8a0b8"/>
-                        <ellipse cx="25" cy="80" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 25 80)"/>
-                        <ellipse cx="18" cy="65" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-30 18 65)"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="side-flower side-right">
-                <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path d="M 40 120 Q 35 90 30 70 Q 25 50 20 30" stroke="#a8b898" stroke-width="2" fill="none"/>
-                        <path d="M 30 70 Q 20 65 15 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <path d="M 25 50 Q 15 48 10 45" stroke="#a8b898" stroke-width="1.5" fill="none"/>
-                        <circle cx="20" cy="25" r="8" fill="#f5d0e0"/>
-                        <circle cx="17" cy="22" r="5" fill="#e8a0b8"/>
-                        <circle cx="23" cy="24" r="4" fill="#f0c0d0"/>
-                        <circle cx="20" cy="25" r="2.5" fill="#d4899f"/>
-                        <circle cx="15" cy="40" r="6" fill="#f5d0e0"/>
-                        <circle cx="13" cy="38" r="4" fill="#e8a0b8"/>
-                        <circle cx="15" cy="40" r="2" fill="#d4899f"/>
-                        <circle cx="10" cy="55" r="5" fill="#f5d0e0"/>
-                        <circle cx="8" cy="53" r="3" fill="#e8a0b8"/>
-                        <ellipse cx="25" cy="80" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 25 80)"/>
-                        <ellipse cx="18" cy="65" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-30 18 65)"/>
-                    </g>
-                </svg>
-            </div>
+            <div class="text-intro">Papá Andy y Mamá Brestaneth</div>
+            <div class="text-intro" style="margin-top: -5px;">invitan al</div>
+            <div class="text-title">Bautizo</div>
+            <div class="text-subtitle">de su hijo</div>
 
-            <!-- CRUZ EN INVITACIÓN -->
-            <div class="invitation-cross">
-                <svg class="invitation-cross-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="42" y="10" width="16" height="120" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
-                    <rect x="20" y="35" width="60" height="16" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
-                    <line x1="45" y1="15" x2="45" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="50" y1="15" x2="50" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
-                    <line x1="55" y1="15" x2="55" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="25" y1="40" x2="75" y2="40" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
-                    <line x1="25" y1="45" x2="75" y2="45" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
-                    <rect class="cross-shine" x="44" y="12" width="4" height="116" rx="1" fill="white" opacity="0.3"/>
-                    <g class="bow-ribbon">
-                        <path d="M 30 38 Q 50 35 70 38 Q 72 42 70 45 Q 50 42 30 45 Q 28 42 30 38" fill="#f0c0d0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 50 40 Q 30 30 20 35 Q 15 40 20 45 Q 30 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 45 40 Q 32 35 25 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 50 40 Q 70 30 80 35 Q 85 40 80 45 Q 70 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 55 40 Q 68 35 75 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <ellipse cx="50" cy="41" rx="6" ry="5" fill="#e8a0b8" stroke="#d4899f" stroke-width="0.8"/>
-                        <ellipse cx="49" cy="40" rx="2" ry="1.5" fill="#f5d0e0" opacity="0.6"/>
-                        <path d="M 44 45 Q 40 60 35 75 Q 33 80 36 82 Q 40 80 42 75 Q 45 60 47 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 56 45 Q 60 60 65 75 Q 67 80 64 82 Q 60 80 58 75 Q 55 60 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
-                        <path d="M 40 55 Q 42 58 44 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 38 65 Q 40 68 42 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 60 55 Q 58 58 56 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                        <path d="M 62 65 Q 60 68 58 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
-                    </g>
-                </svg>
-            </div>
-
-            <div class="text-intro">Acompáñanos a ser parte del</div>
-            <div class="text-title">BAUTIZO</div>
-            <div class="text-subtitle">De nuestro hijo</div>
-            <div class="text-name">Emilio André</div>
-            <div class="text-surname">ARIAS SERRANO</div>
-
-            <div class="date-section">
-                <div class="date-day">Domingo</div>
-                <div class="date-number">08</div>
-                <div class="date-month">Febrero</div>
-            </div>
-
-            <div class="family-section">
-                <div class="family-row">
-                    <div class="family-name">
-                        <strong>Andy R.</strong>
-                        Arias Jaramillo
-                    </div>
-                    <div class="family-label">Padres</div>
-                    <div class="family-name">
-                        <strong>Brestaneth R.</strong>
-                        Serrano Chong
-                    </div>
-                </div>
-                <div class="family-row">
-                    <div class="family-name">
-                        <strong>Isaac García</strong>
-                    </div>
-                    <div class="family-label">Padrinos</div>
-                    <div class="family-name">
-                        <strong>Ashly González</strong>
-                    </div>
+            <!-- Cinta con nombre -->
+            <div class="ribbon-container" style="text-align: center;">
+                <div class="ribbon">
+                    <div class="ribbon-text">Emilio André Arias</div>
                 </div>
             </div>
 
+            <!-- Cruz dorada -->
+            <div class="cross-section">
+                <div class="cross-gold"></div>
+            </div>
+
+            <!-- Fecha y Hora -->
+            <div class="datetime-section">
+                <div class="datetime-block">
+                    <div class="datetime-label">Sábado</div>
+                    <div class="datetime-value">08</div>
+                    <div class="datetime-sub">Febrero</div>
+                </div>
+                <div class="datetime-divider"></div>
+                <div class="datetime-block">
+                    <div class="datetime-label">A las</div>
+                    <div class="datetime-value">10:00</div>
+                    <div class="datetime-sub">AM</div>
+                </div>
+            </div>
+
+            <!-- Iglesia -->
             <div class="church-section">
-                <div class="church-icon">
-                    <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="30" width="20" height="40" fill="#5a3848" opacity="0.7"/>
-                        <polygon points="30,10 15,30 45,30" fill="#5a3848" opacity="0.7"/>
-                        <rect x="28" y="5" width="4" height="10" fill="#5a3848" opacity="0.7"/>
-                        <rect x="25" y="50" width="10" height="20" fill="#fff8fa" opacity="0.6"/>
-                        <circle cx="30" cy="20" r="2" fill="#e8a0b8"/>
-                    </svg>
-                </div>
-                <div class="church-time">10:00 a.m.</div>
-                <div class="church-name">Capilla San Juan Pablo II</div>
-                <div class="church-reference">
-                    Referencia:<br>
-                    En los estacionamientos de Albrook Mall
+                <div class="church-name">
+                    Capilla San Juan Pablo II<br>
+                    <span style="font-size: 0.9rem; color: var(--blue);">En los estacionamientos de Albrook Mall</span>
                 </div>
             </div>
 
-            <div class="divider">
-                <div class="divider-icon"></div>
+            <!-- Padrinos -->
+            <div class="godparents-section">
+                <div class="godparents-title">Padrinos</div>
+                <div class="godparents-names">
+                    Isaac García<br>
+                    Ashly González
+                </div>
             </div>
 
+            <!-- Botones dorados -->
+            <div class="buttons-section">
+                <a href="https://www.google.com/maps" target="_blank" class="gold-button">Mapa - Ver Ubicación</a>
+                <a href="#rsvp" class="gold-button">Confirmar Asistencia</a>
+            </div>
+
+            <!-- Ángel y Cáliz -->
+            <div class="bottom-decoration">
+                <!-- Ángel -->
+                <svg class="angel-figure" viewBox="0 0 100 120">
+                    <!-- Halo -->
+                    <ellipse cx="50" cy="15" rx="15" ry="5" fill="none" stroke="#d4af37" stroke-width="2"/>
+                    <!-- Alas -->
+                    <path d="M 35 40 Q 20 35 15 45 Q 10 55 20 60 Q 30 65 40 55 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
+                    <path d="M 65 40 Q 80 35 85 45 Q 90 55 80 60 Q 70 65 60 55 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
+                    <!-- Cabeza -->
+                    <circle cx="50" cy="30" r="12" fill="#fde8d0" stroke="#d4af37" stroke-width="1"/>
+                    <!-- Cabello -->
+                    <path d="M 38 28 Q 40 20 50 18 Q 60 20 62 28 Q 60 25 55 24 Q 50 23 45 24 Q 40 25 38 28" fill="#8b4513"/>
+                    <!-- Ojos -->
+                    <circle cx="46" cy="30" r="2" fill="#4a3820"/>
+                    <circle cx="54" cy="30" r="2" fill="#4a3820"/>
+                    <!-- Sonrisa -->
+                    <path d="M 47 35 Q 50 37 53 35" fill="none" stroke="#4a3820" stroke-width="1"/>
+                    <!-- Cuerpo/Vestido -->
+                    <path d="M 40 42 Q 40 70 35 90 Q 33 100 50 105 Q 67 100 65 90 Q 60 70 60 42 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
+                    <!-- Cinturón dorado -->
+                    <line x1="42" y1="60" x2="58" y2="60" stroke="#d4af37" stroke-width="2"/>
+                    <!-- Manos -->
+                    <circle cx="42" cy="70" r="3" fill="#fde8d0"/>
+                    <circle cx="58" cy="70" r="3" fill="#fde8d0"/>
+                </svg>
+
+                <!-- Cáliz -->
+                <svg class="chalice-figure" viewBox="0 0 80 100">
+                    <!-- Rayos de luz -->
+                    <line x1="40" y1="10" x2="40" y2="0" stroke="#d4af37" stroke-width="1"/>
+                    <line x1="30" y1="12" x2="25" y2="5" stroke="#d4af37" stroke-width="1"/>
+                    <line x1="50" y1="12" x2="55" y2="5" stroke="#d4af37" stroke-width="1"/>
+                    <line x1="25" y1="18" x2="18" y2="13" stroke="#d4af37" stroke-width="1"/>
+                    <line x1="55" y1="18" x2="62" y2="13" stroke="#d4af37" stroke-width="1"/>
+                    <!-- Copa -->
+                    <path d="M 25 30 Q 25 50 40 55 Q 55 50 55 30 Z" fill="#d4af37" stroke="#b8941f" stroke-width="1"/>
+                    <ellipse cx="40" cy="30" rx="15" ry="5" fill="#f0d860" stroke="#b8941f" stroke-width="1"/>
+                    <!-- Hostia -->
+                    <circle cx="40" cy="28" r="6" fill="#fff" stroke="#d4af37" stroke-width="1"/>
+                    <!-- Base -->
+                    <rect x="37" y="55" width="6" height="20" fill="#d4af37"/>
+                    <ellipse cx="40" cy="75" rx="12" ry="4" fill="#d4af37" stroke="#b8941f" stroke-width="1"/>
+                    <ellipse cx="40" cy="78" rx="15" ry="5" fill="#b8941f"/>
+                </svg>
+            </div>
+
+            <div class="waiting-text">¡Te esperamos!</div>
+
+            <!-- Countdown -->
             <div class="countdown-section">
                 <div class="countdown-title">Cuenta Regresiva</div>
                 <div class="countdown-grid">
@@ -1203,6 +1015,7 @@
                 </div>
             </div>
 
+            <!-- Galería -->
             <div class="gallery-section">
                 <div class="gallery-title">Galería de Recuerdos</div>
                 <div class="carousel-wrap" id="carousel">
@@ -1213,15 +1026,16 @@
                 <div class="carousel-dots" id="carousel-dots"></div>
             </div>
 
+            <!-- Mapa -->
             <div class="map-section">
                 <div class="map-title">Ubicación</div>
                 <div class="map-wrap">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <a href="https://www.google.com/maps" target="_blank" class="map-link">Ver en Google Maps</a>
             </div>
 
-            <div class="rsvp-section">
+            <!-- RSVP -->
+            <div class="rsvp-section" id="rsvp">
                 <div class="rsvp-title">Confirmar Asistencia</div>
                 <div class="rsvp-subtitle">Por favor confirma antes del 1 de febrero</div>
                 <form class="rsvp-form" onsubmit="handleRSVP(event)">
@@ -1255,30 +1069,26 @@
             invitation.classList.add('visible');
             
             setTimeout(() => {
-                document.querySelectorAll('.corner-flower').forEach(el => el.classList.add('visible'));
+                document.querySelectorAll('.invitation-dove').forEach(el => el.classList.add('visible'));
             }, 200);
             
             setTimeout(() => {
-                document.querySelectorAll('.side-flower').forEach(el => el.classList.add('visible'));
+                document.querySelectorAll('.text-intro, .text-title, .text-subtitle').forEach(el => el.classList.add('visible'));
             }, 400);
             
-            setTimeout(() => {
-                document.querySelector('.invitation-cross').classList.add('visible');
-            }, 500);
-            
-            setTimeout(() => {
-                document.querySelectorAll('.text-intro, .text-title, .text-subtitle, .text-name, .text-surname').forEach(el => el.classList.add('visible'));
-            }, 600);
-            
-            setTimeout(() => { document.querySelector('.date-section').classList.add('visible'); }, 1000);
-            setTimeout(() => { document.querySelector('.family-section').classList.add('visible'); }, 1200);
-            setTimeout(() => { document.querySelector('.church-section').classList.add('visible'); }, 1400);
-            setTimeout(() => { document.querySelector('.divider').classList.add('visible'); }, 1600);
-            setTimeout(() => { document.querySelector('.countdown-section').classList.add('visible'); }, 1800);
-            setTimeout(() => { document.querySelector('.gallery-section').classList.add('visible'); }, 2000);
-            setTimeout(() => { document.querySelector('.map-section').classList.add('visible'); }, 2200);
-            setTimeout(() => { document.querySelector('.rsvp-section').classList.add('visible'); }, 2400);
-            setTimeout(() => { document.querySelector('.footer').classList.add('visible'); }, 2600);
+            setTimeout(() => { document.querySelector('.ribbon-container').classList.add('visible'); }, 600);
+            setTimeout(() => { document.querySelector('.cross-section').classList.add('visible'); }, 800);
+            setTimeout(() => { document.querySelector('.datetime-section').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.querySelector('.church-section').classList.add('visible'); }, 1200);
+            setTimeout(() => { document.querySelector('.godparents-section').classList.add('visible'); }, 1400);
+            setTimeout(() => { document.querySelector('.buttons-section').classList.add('visible'); }, 1600);
+            setTimeout(() => { document.querySelector('.bottom-decoration').classList.add('visible'); }, 1800);
+            setTimeout(() => { document.querySelector('.waiting-text').classList.add('visible'); }, 2000);
+            setTimeout(() => { document.querySelector('.countdown-section').classList.add('visible'); }, 2200);
+            setTimeout(() => { document.querySelector('.gallery-section').classList.add('visible'); }, 2400);
+            setTimeout(() => { document.querySelector('.map-section').classList.add('visible'); }, 2600);
+            setTimeout(() => { document.querySelector('.rsvp-section').classList.add('visible'); }, 2800);
+            setTimeout(() => { document.querySelector('.footer').classList.add('visible'); }, 3000);
         }
 
         const eventDate = new Date('2026-02-08T10:00:00').getTime();
@@ -1359,7 +1169,7 @@
             const button = e.target.querySelector('.rsvp-button');
             const originalText = button.textContent;
             button.textContent = '✓ Enviado';
-            button.style.background = 'linear-gradient(135deg, #a8b898, #889878)';
+            button.style.background = 'linear-gradient(135deg, #a8c8e8, #7ba3d4)';
             setTimeout(() => {
                 button.textContent = originalText;
                 button.style.background = '';
@@ -1367,10 +1177,9 @@
             }, 3000);
         }
 
-        // PÉTALOS FLOTANTES
-        const canvas = document.getElementById('petals-canvas');
+        const canvas = document.getElementById('gold-canvas');
         const ctx = canvas.getContext('2d');
-        let petals = [];
+        let particles = [];
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -1378,44 +1187,44 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        class Petal {
+        class Particle {
             constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 4 + 2;
-                this.speedY = Math.random() * 0.5 + 0.2;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
                 this.speedX = (Math.random() - 0.5) * 0.3;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
-                this.opacity = Math.random() * 0.4 + 0.2;
-                this.color = Math.random() > 0.5 ? '#f5d0e0' : '#e8a0b8';
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.3 + 0.1;
+                this.fadeSpeed = Math.random() * 0.01 + 0.005;
+                this.growing = Math.random() > 0.5;
             }
             update() {
-                this.x += this.speedX + Math.sin(this.y * 0.01) * 0.3;
+                this.x += this.speedX;
                 this.y += this.speedY;
-                this.rotation += this.rotationSpeed;
-                if (this.y > canvas.height + 20) this.reset();
+                if (this.growing) {
+                    this.opacity += this.fadeSpeed;
+                    if (this.opacity >= 0.4) this.growing = false;
+                } else {
+                    this.opacity -= this.fadeSpeed;
+                    if (this.opacity <= 0.1) this.growing = true;
+                }
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
             }
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
                 ctx.beginPath();
-                ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
                 ctx.fill();
-                ctx.restore();
             }
         }
-        for (let i = 0; i < 25; i++) petals.push(new Petal());
-        function animatePetals() {
+        for (let i = 0; i < 30; i++) particles.push(new Particle());
+        function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            petals.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animatePetals);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
         }
-        animatePetals();
+        animateParticles();
 
         buildCarousel();
     </script>
