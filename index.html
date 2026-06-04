@@ -14,8 +14,10 @@
             --gold: #d4af37;
             --gold-light: #f0d860;
             --gold-dark: #b8941f;
+            --gold-soft: #f5e6b8;
             --white: #ffffff;
             --cream: #faf8f0;
+            --beige: #f5f0e0;
             --brown: #4a3820;
             --shadow: 0 4px 20px rgba(90,138,184,0.2);
         }
@@ -32,15 +34,13 @@
         ::-webkit-scrollbar-track { background: var(--blue-soft); }
         ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
 
-        /* ─── FONDO CON POLKA DOTS ─── */
         .bg-dots {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
             background-color: var(--blue-light);
-            background-image: 
-                radial-gradient(circle, var(--white) 2px, transparent 2px);
+            background-image: radial-gradient(circle, var(--white) 2px, transparent 2px);
             background-size: 30px 30px;
             animation: dotsMove 20s linear infinite;
         }
@@ -49,7 +49,6 @@
             100% { background-position: 30px 30px; }
         }
 
-        /* ─── PARTÍCULAS DORADAS ─── */
         #gold-canvas {
             position: fixed;
             inset: 0;
@@ -92,23 +91,17 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ─── PALOMAS ANIMADAS ─── */
         .dove {
             position: absolute;
             width: 60px;
             height: 60px;
-            animation: doveFloat 4s ease-in-out infinite;
         }
-        .dove-left { top: 20px; left: 20px; animation-delay: 0s; }
-        .dove-right { top: 20px; right: 20px; animation-delay: 1s; transform: scaleX(-1); }
+        .dove-left { top: 20px; left: 20px; animation: doveFloat 4s ease-in-out infinite; }
+        .dove-right { top: 20px; right: 20px; animation: doveFloatRight 4s ease-in-out infinite; animation-delay: 1s; }
         @keyframes doveFloat {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             25% { transform: translateY(-10px) rotate(-5deg); }
             75% { transform: translateY(5px) rotate(5deg); }
-        }
-        .dove-right {
-            animation: doveFloatRight 4s ease-in-out infinite;
-            animation-delay: 1s;
         }
         @keyframes doveFloatRight {
             0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
@@ -192,7 +185,6 @@
             padding: 20px;
         }
 
-        /* ─── INVITACIÓN CON MARCO DORADO ─── */
         .invitation {
             background: var(--white);
             border-radius: 30px;
@@ -201,7 +193,6 @@
             position: relative;
             opacity: 0;
             transform: translateY(40px);
-            /* Marco dorado brillante */
             box-shadow: 
                 0 0 0 3px var(--gold),
                 0 0 0 6px var(--white),
@@ -218,7 +209,6 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ─── BRILLO DORADO EN BORDES ─── */
         .invitation::before {
             content: '';
             position: absolute;
@@ -239,35 +229,169 @@
             100% { background-position: 200% 50%; }
         }
 
-        /* ── PALOMAS EN INVITACIÓN ── */
-        .invitation-doves {
-            position: absolute;
-            top: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 40px;
-            pointer-events: none;
-        }
-        .invitation-dove {
-            width: 50px;
-            height: 50px;
+        /* ═══════════ MARCO DE FOTO ESTILO REFERENCIA ═══════════ */
+        .photo-frame-section {
+            position: relative;
+            text-align: center;
+            margin-bottom: 40px;
             opacity: 0;
         }
-        .invitation-dove.visible {
-            animation: doveReveal 1s ease forwards;
+        .photo-frame-section.visible {
+            animation: frameReveal 1.5s ease 0.3s forwards;
         }
-        @keyframes doveReveal {
-            0% { opacity: 0; transform: translateY(-20px) scale(0.5); }
-            100% { opacity: 0.6; transform: translateY(0) scale(1); }
+        @keyframes frameReveal {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
-        .invitation-dove-right {
-            animation: doveRevealRight 1s ease 0.2s forwards;
+
+        /* Cinta superior "Mi Bautizo" */
+        .top-ribbon {
+            position: relative;
+            display: inline-block;
+            margin-bottom: -20px;
+            z-index: 10;
         }
-        @keyframes doveRevealRight {
-            0% { opacity: 0; transform: translateY(-20px) scale(0.5) scaleX(-1); }
-            100% { opacity: 0.6; transform: translateY(0) scale(1) scaleX(-1); }
+        .top-ribbon-svg {
+            width: 280px;
+            height: 80px;
+            filter: drop-shadow(0 4px 8px rgba(212,175,55,0.3));
+        }
+        .top-ribbon-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            fill: var(--brown);
+        }
+
+        /* Contenedor del marco circular */
+        .circular-frame-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        /* Anillos dorados concéntricos */
+        .frame-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+        }
+        .ring-outer {
+            inset: 0;
+            border-width: 4px;
+            border-color: var(--gold-dark);
+            animation: ringRotate 20s linear infinite;
+        }
+        .ring-middle {
+            inset: 10px;
+            border-width: 3px;
+            border-color: var(--gold);
+        }
+        .ring-inner {
+            inset: 18px;
+            border-width: 2px;
+            border-color: var(--gold-light);
+        }
+        @keyframes ringRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estrellas doradas alrededor del marco */
+        .frame-stars {
+            position: absolute;
+            inset: -20px;
+            pointer-events: none;
+        }
+        .frame-star {
+            position: absolute;
+            color: var(--gold);
+            font-size: 12px;
+            animation: starTwinkle 2s ease-in-out infinite;
+        }
+        .frame-star:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .frame-star:nth-child(2) { top: 5%; left: 30%; animation-delay: 0.3s; }
+        .frame-star:nth-child(3) { top: 15%; right: 10%; animation-delay: 0.6s; }
+        .frame-star:nth-child(4) { top: 40%; left: 0%; animation-delay: 0.9s; }
+        .frame-star:nth-child(5) { top: 40%; right: 0%; animation-delay: 1.2s; }
+        .frame-star:nth-child(6) { bottom: 20%; left: 5%; animation-delay: 1.5s; }
+        .frame-star:nth-child(7) { bottom: 10%; right: 8%; animation-delay: 1.8s; }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Foto dentro del círculo */
+        .photo-circle {
+            position: absolute;
+            inset: 25px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--gold);
+            box-shadow: 
+                0 0 0 3px var(--gold-light),
+                0 0 0 6px var(--gold),
+                inset 0 0 20px rgba(212,175,55,0.2),
+                0 8px 30px rgba(212,175,55,0.3);
+        }
+        .photo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: photoZoom 8s ease-in-out infinite alternate;
+        }
+        @keyframes photoZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        /* Laurel dorado inferior */
+        .laurel-wreath {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 120px;
+            pointer-events: none;
+        }
+        .laurel-wreath svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(212,175,55,0.3));
+        }
+
+        /* Palomas a los lados */
+        .side-doves {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            pointer-events: none;
+        }
+        .side-dove {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .side-dove-left {
+            left: -60px;
+            animation: doveLeftFloat 4s ease-in-out infinite;
+        }
+        .side-dove-right {
+            right: -60px;
+            animation: doveRightFloat 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        @keyframes doveLeftFloat {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(calc(-50% - 8px)) translateX(5px); }
+        }
+        @keyframes doveRightFloat {
+            0%, 100% { transform: translateY(-50%) translateX(0) scaleX(-1); }
+            50% { transform: translateY(calc(-50% - 8px)) translateX(-5px) scaleX(-1); }
         }
 
         /* ─── CINTA AZUL ─── */
@@ -275,6 +399,7 @@
             position: relative;
             margin: 30px 0;
             opacity: 0;
+            text-align: center;
         }
         .ribbon-container.visible {
             animation: ribbonReveal 1s ease 0.5s forwards;
@@ -316,7 +441,6 @@
             white-space: nowrap;
         }
 
-        /* ─── TEXTOS ─── */
         .text-intro {
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
@@ -359,15 +483,12 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ─── CRUZ DORADA ─── */
         .cross-section {
             text-align: center;
             margin: 30px 0;
             opacity: 0;
         }
-        .cross-section.visible {
-            animation: fadeIn 1s ease 0.9s forwards;
-        }
+        .cross-section.visible { animation: fadeIn 1s ease 0.9s forwards; }
         @keyframes fadeIn { to { opacity: 1; } }
         .cross-gold {
             width: 40px;
@@ -405,7 +526,6 @@
             box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
 
-        /* ─── FECHA Y HORA ─── */
         .datetime-section {
             display: flex;
             justify-content: space-around;
@@ -417,9 +537,7 @@
             opacity: 0;
         }
         .datetime-section.visible { animation: fadeIn 1s ease 1.1s forwards; }
-        .datetime-block {
-            text-align: center;
-        }
+        .datetime-block { text-align: center; }
         .datetime-label {
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
@@ -449,7 +567,6 @@
             background: linear-gradient(180deg, transparent, var(--blue), transparent);
         }
 
-        /* ─── IGLESIA ─── */
         .church-section {
             text-align: center;
             margin: 40px 0;
@@ -465,7 +582,6 @@
             line-height: 1.6;
         }
 
-        /* ─── PADRINOS ─── */
         .godparents-section {
             text-align: center;
             margin: 40px 0;
@@ -487,7 +603,6 @@
             line-height: 1.8;
         }
 
-        /* ─── BOTONES DORADOS ─── */
         .buttons-section {
             display: flex;
             flex-direction: column;
@@ -529,11 +644,8 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(212,175,55,0.6);
         }
-        .gold-button:hover::before {
-            left: 100%;
-        }
+        .gold-button:hover::before { left: 100%; }
 
-        /* ─── ÁNGEL Y CÁLIZ ─── */
         .bottom-decoration {
             display: flex;
             justify-content: space-between;
@@ -571,7 +683,6 @@
         }
         .waiting-text.visible { animation: fadeIn 1s ease 2.1s forwards; }
 
-        /* ─── COUNTDOWN ─── */
         .countdown-section {
             text-align: center;
             margin: 40px 0;
@@ -621,7 +732,6 @@
             letter-spacing: 2px;
         }
 
-        /* ─── GALERÍA ─── */
         .gallery-section {
             margin: 40px 0;
             opacity: 0;
@@ -703,7 +813,6 @@
             border-color: var(--gold-dark);
         }
 
-        /* ─── MAPA ─── */
         .map-section {
             margin: 40px 0;
             opacity: 0;
@@ -731,7 +840,6 @@
             display: block;
         }
 
-        /* ─── RSVP / WHATSAPP ── */
         .rsvp-section {
             text-align: center;
             margin: 40px 0;
@@ -812,7 +920,6 @@
         }
         .rsvp-button:hover::before { left: 100%; }
 
-        /* ─── FOOTER ─── */
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -833,7 +940,6 @@
             color: var(--gold-dark);
         }
 
-        /* ─── RESPONSIVE ─── */
         @media (max-width: 600px) {
             .invitation { padding: 50px 25px; margin: 20px 0; }
             .text-title { font-size: 3rem; }
@@ -844,6 +950,13 @@
             .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
             .angel-figure { width: 80px; height: 100px; }
             .chalice-figure { width: 60px; height: 80px; }
+            .circular-frame-container { width: 260px; height: 260px; }
+            .laurel-wreath { width: 300px; height: 100px; bottom: -25px; }
+            .side-dove { width: 60px; height: 60px; }
+            .side-dove-left { left: -40px; }
+            .side-dove-right { right: -40px; }
+            .top-ribbon-svg { width: 220px; height: 65px; }
+            .top-ribbon-text { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -855,7 +968,6 @@
     <!-- SPLASH -->
     <div id="splash">
         <div class="splash-content">
-            <!-- Palomas -->
             <svg class="dove dove-left" viewBox="0 0 60 60">
                 <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
                 <circle cx="28" cy="32" r="1" fill="#d4af37"/>
@@ -876,16 +988,123 @@
     <div class="main-container">
         <div class="invitation" id="invitation">
             
-            <!-- Palomas en invitación -->
-            <div class="invitation-doves">
-                <svg class="invitation-dove" viewBox="0 0 60 60">
-                    <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                    <circle cx="28" cy="32" r="1" fill="#d4af37"/>
-                </svg>
-                <svg class="invitation-dove invitation-dove-right" viewBox="0 0 60 60">
-                    <path d="M 30 30 Q 20 20 10 25 Q 5 30 10 35 Q 15 40 25 35 Q 20 45 15 50 Q 20 48 25 45 Q 28 42 30 40 Q 35 45 40 50 Q 45 48 50 45 Q 45 40 40 35 Q 50 30 55 25 Q 50 20 40 25 Q 35 28 30 30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                    <circle cx="28" cy="32" r="1" fill="#d4af37"/>
-                </svg>
+            <!-- ═══════════ MARCO DE FOTO ESTILO REFERENCIA ═══════════ -->
+            <div class="photo-frame-section">
+                
+                <!-- Cinta superior "Mi Bautizo" -->
+                <div class="top-ribbon">
+                    <svg class="top-ribbon-svg" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cinta beige con bordes dorados -->
+                        <path d="M 20 10 Q 140 0 260 10 L 270 40 L 260 70 Q 140 60 20 70 L 10 40 Z" 
+                              fill="#f5f0e0" stroke="#d4af37" stroke-width="2"/>
+                        <path d="M 20 10 Q 140 0 260 10 L 270 40 L 260 70 Q 140 60 20 70 L 10 40 Z" 
+                              fill="none" stroke="#b8941f" stroke-width="1" opacity="0.5"/>
+                        <!-- Extremos de la cinta -->
+                        <path d="M 10 40 L 0 35 L 5 40 L 0 45 Z" fill="#d4af37"/>
+                        <path d="M 270 40 L 280 35 L 275 40 L 280 45 Z" fill="#d4af37"/>
+                        <!-- Texto -->
+                        <text x="140" y="48" text-anchor="middle" class="top-ribbon-text">Mi Bautizo</text>
+                    </svg>
+                </div>
+
+                <!-- Contenedor del marco circular -->
+                <div class="circular-frame-container">
+                    
+                    <!-- Estrellas doradas alrededor -->
+                    <div class="frame-stars">
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                        <span class="frame-star">✦</span>
+                    </div>
+
+                    <!-- Anillos dorados concéntricos -->
+                    <div class="frame-ring ring-outer"></div>
+                    <div class="frame-ring ring-middle"></div>
+                    <div class="frame-ring ring-inner"></div>
+
+                    <!-- Foto dentro del círculo -->
+                    <div class="photo-circle">
+                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80" alt="Emilio André" crossorigin="anonymous">
+                    </div>
+
+                    <!-- Palomas a los lados -->
+                    <div class="side-doves">
+                        <svg class="side-dove side-dove-left" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" stroke="#d4af37" stroke-width="1.5">
+                                <!-- Cuerpo -->
+                                <path d="M 40 40 Q 30 30 20 35 Q 10 40 15 50 Q 20 55 30 50 Q 25 60 20 65 Q 25 63 30 58 Q 35 55 40 50"/>
+                                <!-- Ala -->
+                                <path d="M 35 45 Q 25 35 15 38 Q 10 42 15 48 Q 20 52 30 48"/>
+                                <!-- Cola -->
+                                <path d="M 40 50 Q 45 55 50 60 Q 55 58 60 55 Q 55 52 50 50"/>
+                                <!-- Cabeza -->
+                                <circle cx="22" cy="38" r="3"/>
+                                <!-- Pico -->
+                                <path d="M 19 38 L 15 37 L 19 39"/>
+                                <!-- Ojo -->
+                                <circle cx="21" cy="37" r="0.8" fill="#d4af37"/>
+                            </g>
+                        </svg>
+                        <svg class="side-dove side-dove-right" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" stroke="#d4af37" stroke-width="1.5">
+                                <path d="M 40 40 Q 30 30 20 35 Q 10 40 15 50 Q 20 55 30 50 Q 25 60 20 65 Q 25 63 30 58 Q 35 55 40 50"/>
+                                <path d="M 35 45 Q 25 35 15 38 Q 10 42 15 48 Q 20 52 30 48"/>
+                                <path d="M 40 50 Q 45 55 50 60 Q 55 58 60 55 Q 55 52 50 50"/>
+                                <circle cx="22" cy="38" r="3"/>
+                                <path d="M 19 38 L 15 37 L 19 39"/>
+                                <circle cx="21" cy="37" r="0.8" fill="#d4af37"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Laurel dorado inferior -->
+                    <div class="laurel-wreath">
+                        <svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="laurelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f0d860;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#b8941f;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Rama izquierda -->
+                            <g fill="url(#laurelGrad)" stroke="#b8941f" stroke-width="0.5">
+                                <!-- Tallo izquierdo -->
+                                <path d="M 190 110 Q 150 100 100 80 Q 60 60 30 30" fill="none" stroke="#b8941f" stroke-width="2"/>
+                                <!-- Hojas izquierda -->
+                                <ellipse cx="170" cy="100" rx="15" ry="6" transform="rotate(-20 170 100)"/>
+                                <ellipse cx="150" cy="92" rx="14" ry="5.5" transform="rotate(-30 150 92)"/>
+                                <ellipse cx="130" cy="85" rx="13" ry="5" transform="rotate(-40 130 85)"/>
+                                <ellipse cx="110" cy="78" rx="12" ry="5" transform="rotate(-50 110 78)"/>
+                                <ellipse cx="90" cy="70" rx="11" ry="4.5" transform="rotate(-55 90 70)"/>
+                                <ellipse cx="72" cy="60" rx="10" ry="4" transform="rotate(-60 72 60)"/>
+                                <ellipse cx="55" cy="48" rx="9" ry="3.5" transform="rotate(-65 55 48)"/>
+                                <ellipse cx="40" cy="35" rx="8" ry="3" transform="rotate(-70 40 35)"/>
+                            </g>
+                            <!-- Rama derecha -->
+                            <g fill="url(#laurelGrad)" stroke="#b8941f" stroke-width="0.5">
+                                <!-- Tallo derecho -->
+                                <path d="M 190 110 Q 230 100 280 80 Q 320 60 350 30" fill="none" stroke="#b8941f" stroke-width="2"/>
+                                <!-- Hojas derecha -->
+                                <ellipse cx="210" cy="100" rx="15" ry="6" transform="rotate(20 210 100)"/>
+                                <ellipse cx="230" cy="92" rx="14" ry="5.5" transform="rotate(30 230 92)"/>
+                                <ellipse cx="250" cy="85" rx="13" ry="5" transform="rotate(40 250 85)"/>
+                                <ellipse cx="270" cy="78" rx="12" ry="5" transform="rotate(50 270 78)"/>
+                                <ellipse cx="290" cy="70" rx="11" ry="4.5" transform="rotate(55 290 70)"/>
+                                <ellipse cx="308" cy="60" rx="10" ry="4" transform="rotate(60 308 60)"/>
+                                <ellipse cx="325" cy="48" rx="9" ry="3.5" transform="rotate(65 325 48)"/>
+                                <ellipse cx="340" cy="35" rx="8" ry="3" transform="rotate(70 340 35)"/>
+                            </g>
+                            <!-- Centro decorativo -->
+                            <circle cx="190" cy="108" r="5" fill="#d4af37" stroke="#b8941f" stroke-width="1"/>
+                            <circle cx="190" cy="108" r="2" fill="#f0d860"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
 
             <div class="text-intro">Papá Andy y Mamá Brestaneth</div>
@@ -894,7 +1113,7 @@
             <div class="text-subtitle">de su hijo</div>
 
             <!-- Cinta con nombre -->
-            <div class="ribbon-container" style="text-align: center;">
+            <div class="ribbon-container">
                 <div class="ribbon">
                     <div class="ribbon-text">Emilio André Arias</div>
                 </div>
@@ -945,45 +1164,30 @@
 
             <!-- Ángel y Cáliz -->
             <div class="bottom-decoration">
-                <!-- Ángel -->
                 <svg class="angel-figure" viewBox="0 0 100 120">
-                    <!-- Halo -->
                     <ellipse cx="50" cy="15" rx="15" ry="5" fill="none" stroke="#d4af37" stroke-width="2"/>
-                    <!-- Alas -->
                     <path d="M 35 40 Q 20 35 15 45 Q 10 55 20 60 Q 30 65 40 55 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
                     <path d="M 65 40 Q 80 35 85 45 Q 90 55 80 60 Q 70 65 60 55 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
-                    <!-- Cabeza -->
                     <circle cx="50" cy="30" r="12" fill="#fde8d0" stroke="#d4af37" stroke-width="1"/>
-                    <!-- Cabello -->
                     <path d="M 38 28 Q 40 20 50 18 Q 60 20 62 28 Q 60 25 55 24 Q 50 23 45 24 Q 40 25 38 28" fill="#8b4513"/>
-                    <!-- Ojos -->
                     <circle cx="46" cy="30" r="2" fill="#4a3820"/>
                     <circle cx="54" cy="30" r="2" fill="#4a3820"/>
-                    <!-- Sonrisa -->
                     <path d="M 47 35 Q 50 37 53 35" fill="none" stroke="#4a3820" stroke-width="1"/>
-                    <!-- Cuerpo/Vestido -->
                     <path d="M 40 42 Q 40 70 35 90 Q 33 100 50 105 Q 67 100 65 90 Q 60 70 60 42 Z" fill="#fff" stroke="#d4af37" stroke-width="1"/>
-                    <!-- Cinturón dorado -->
                     <line x1="42" y1="60" x2="58" y2="60" stroke="#d4af37" stroke-width="2"/>
-                    <!-- Manos -->
                     <circle cx="42" cy="70" r="3" fill="#fde8d0"/>
                     <circle cx="58" cy="70" r="3" fill="#fde8d0"/>
                 </svg>
 
-                <!-- Cáliz -->
                 <svg class="chalice-figure" viewBox="0 0 80 100">
-                    <!-- Rayos de luz -->
                     <line x1="40" y1="10" x2="40" y2="0" stroke="#d4af37" stroke-width="1"/>
                     <line x1="30" y1="12" x2="25" y2="5" stroke="#d4af37" stroke-width="1"/>
                     <line x1="50" y1="12" x2="55" y2="5" stroke="#d4af37" stroke-width="1"/>
                     <line x1="25" y1="18" x2="18" y2="13" stroke="#d4af37" stroke-width="1"/>
                     <line x1="55" y1="18" x2="62" y2="13" stroke="#d4af37" stroke-width="1"/>
-                    <!-- Copa -->
                     <path d="M 25 30 Q 25 50 40 55 Q 55 50 55 30 Z" fill="#d4af37" stroke="#b8941f" stroke-width="1"/>
                     <ellipse cx="40" cy="30" rx="15" ry="5" fill="#f0d860" stroke="#b8941f" stroke-width="1"/>
-                    <!-- Hostia -->
                     <circle cx="40" cy="28" r="6" fill="#fff" stroke="#d4af37" stroke-width="1"/>
-                    <!-- Base -->
                     <rect x="37" y="55" width="6" height="20" fill="#d4af37"/>
                     <ellipse cx="40" cy="75" rx="12" ry="4" fill="#d4af37" stroke="#b8941f" stroke-width="1"/>
                     <ellipse cx="40" cy="78" rx="15" ry="5" fill="#b8941f"/>
@@ -1069,7 +1273,7 @@
             invitation.classList.add('visible');
             
             setTimeout(() => {
-                document.querySelectorAll('.invitation-dove').forEach(el => el.classList.add('visible'));
+                document.querySelector('.photo-frame-section').classList.add('visible');
             }, 200);
             
             setTimeout(() => {
