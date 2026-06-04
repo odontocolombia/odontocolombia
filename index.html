@@ -3,140 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bautizo de María Emilia — Cuento Animado</title>
+    <title>Bautizo de Emilio André — Cuento Animado</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&family=Uncial+Antiqua&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
             --parchment: #fdf8f0;
             --parchment-dark: #f5ecd7;
-            --lavender: #d4a5b8;
-            --lavender-light: #f0e0e8;
-            --rose: #e8a5b8;
-            --rose-light: #f5d5e0;
-            --rose-soft: #f8e0e8;
-            --blush: #f0c5d0;
-            --peach: #f5d5c5;
-            --gold: #d4b89e;
-            --ink: #4a3a3a;
-            --ink-light: #7a6a6a;
-            --cloud-cream: #faf7f5;
-            --cloud-blush: #f8e8ec;
-            --cloud-peach: #f8ece5;
-            --balloon-rose: #d4a5b0;
-            --balloon-peach: #e8c5b8;
-            --shadow-soft: 0 4px 20px rgba(0,0,0,0.06);
+            --sky-blue: #b8d4e8;
+            --sky-light: #d4e8f4;
+            --sky-soft: #e8f0f8;
+            --beige: #d4c8b8;
+            --beige-light: #e8e0d4;
+            --beige-dark: #c4b8a8;
+            --rose: #d4a5a0;
+            --rose-light: #e8c5c0;
+            --brown: #a08070;
+            --brown-light: #c4a898;
+            --white: #ffffff;
+            --ink: #3d3d3d;
+            --ink-light: #6b6b6b;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Cormorant Garamond', serif;
-            background: linear-gradient(180deg, #faf5f5 0%, #f8e8ec 50%, #f5ece5 100%);
+            background: linear-gradient(180deg, #d4e8f4 0%, #e8f0f8 40%, #f0f4f8 100%);
             color: var(--ink); overflow-x: hidden; min-height: 100vh;
             display: flex; justify-content: center; position: relative;
         }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--sky-blue); border-radius: 4px; }
 
-        /* ─── FONDO DE NUBES DE ACUARELA ─── */
-        .watercolor-bg {
+        /* ─── FONDO DE CIELO CON NUBES ─── */
+        .sky-bg {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
         }
-        .watercolor-cloud {
+        .cloud {
             position: absolute;
-            opacity: 0.6;
-            filter: blur(1px);
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 50%, transparent 70%);
+            filter: blur(2px);
         }
         .cloud-1 {
             top: 5%;
-            left: -5%;
-            width: 300px;
+            left: -10%;
+            width: 400px;
             height: 200px;
-            background: radial-gradient(ellipse at 30% 50%, var(--cloud-blush) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 40%, var(--cloud-cream) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 60%, var(--rose-light) 0%, transparent 60%);
-            animation: floatCloud 20s ease-in-out infinite;
+            animation: floatCloud 25s ease-in-out infinite;
         }
         .cloud-2 {
             top: 15%;
-            right: -8%;
-            width: 350px;
-            height: 220px;
-            background: radial-gradient(ellipse at 40% 50%, var(--cloud-peach) 0%, transparent 50%),
-                        radial-gradient(ellipse at 60% 45%, var(--cloud-cream) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 55%, var(--peach) 0%, transparent 60%);
-            animation: floatCloud 25s ease-in-out infinite reverse;
+            right: -15%;
+            width: 500px;
+            height: 250px;
+            animation: floatCloud 30s ease-in-out infinite reverse;
         }
         .cloud-3 {
-            bottom: 20%;
-            left: -10%;
-            width: 280px;
+            bottom: 30%;
+            left: -5%;
+            width: 350px;
             height: 180px;
-            background: radial-gradient(ellipse at 35% 50%, var(--cloud-cream) 0%, transparent 50%),
-                        radial-gradient(ellipse at 65% 45%, var(--cloud-blush) 0%, transparent 50%);
             animation: floatCloud 22s ease-in-out infinite;
         }
         .cloud-4 {
             bottom: 10%;
-            right: -5%;
-            width: 320px;
-            height: 200px;
-            background: radial-gradient(ellipse at 45% 50%, var(--rose-light) 0%, transparent 50%),
-                        radial-gradient(ellipse at 55% 50%, var(--cloud-cream) 0%, transparent 50%);
+            right: -10%;
+            width: 450px;
+            height: 220px;
             animation: floatCloud 28s ease-in-out infinite reverse;
         }
         @keyframes floatCloud {
             0%, 100% { transform: translateX(0) translateY(0); }
-            33% { transform: translateX(20px) translateY(-10px); }
-            66% { transform: translateX(-10px) translateY(10px); }
+            50% { transform: translateX(30px) translateY(-15px); }
         }
 
-        /* ─── GLOBOS AEROSTÁTICOS ─── */
+        /* ─── GLOBO AEROSTÁTICO ─── */
         .hot-air-balloon {
             position: fixed;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.9;
         }
         .balloon-1 {
-            top: 8%;
-            right: 8%;
-            width: 80px;
-            height: 120px;
-            animation: floatBalloon 15s ease-in-out infinite;
-        }
-        .balloon-2 {
-            top: 25%;
-            left: 3%;
-            width: 60px;
-            height: 90px;
-            animation: floatBalloon 18s ease-in-out infinite reverse;
-        }
-        @keyframes floatBalloon {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        /* ─── CABALLITO DE JUGUETE ─── */
-        .rocking-horse {
-            position: fixed;
-            bottom: 5%;
+            top: 5%;
             right: 5%;
             width: 120px;
-            height: 100px;
+            height: 180px;
+            animation: floatBalloon 18s ease-in-out infinite;
+        }
+        @keyframes floatBalloon {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-25px) rotate(3deg); }
+        }
+
+        /* ─── CARRITO DE JUGUETE ─── */
+        .toy-car {
+            position: fixed;
+            bottom: 3%;
+            left: 3%;
+            width: 160px;
+            height: 120px;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.7;
-            animation: rockHorse 4s ease-in-out infinite;
-            transform-origin: bottom center;
+            opacity: 0.9;
+            animation: carBounce 3s ease-in-out infinite;
         }
-        @keyframes rockHorse {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
+        @keyframes carBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         /* ─── PARTÍCULAS MÁGICAS (canvas) ─── */
@@ -145,48 +124,46 @@
         /* ═══════════ SPLASH (APERTURA DE LIBRO) ═══════════ */
         #splash {
             position: fixed; inset: 0; z-index: 9999;
-            background: linear-gradient(135deg, #f5e5e8 0%, #f0e0e8 40%, #f5e8e0 100%);
+            background: linear-gradient(180deg, #d4e8f4 0%, #e8f0f8 100%);
             display: flex; align-items: center; justify-content: center; cursor: pointer;
             perspective: 1200px;
         }
         #splash.hide { animation: splashClose 1s ease forwards; pointer-events: none; }
         @keyframes splashClose {
             0% { opacity: 1; transform: scale(1); }
-            60% { opacity: 0.5; transform: scale(1.05); }
-            100% { opacity: 0; transform: scale(1.1) rotateY(15deg); }
+            100% { opacity: 0; transform: scale(1.1); }
         }
         .splash-book {
-            background: var(--parchment); border-radius: 8px 20px 20px 8px;
-            padding: 50px 36px; text-align: center; max-width: 440px; width: 90%;
-            position: relative; box-shadow: 8px 8px 30px rgba(0,0,0,0.12), -2px 0 0 var(--rose-light), -4px 0 0 var(--peach);
-            border-left: 6px solid var(--lavender);
+            background: var(--beige-light); 
+            border-radius: 100px 100px 20px 20px;
+            padding: 50px 36px; 
+            text-align: center; 
+            max-width: 440px; 
+            width: 90%;
+            position: relative; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            border: 8px solid var(--white);
             animation: bookOpen 1.2s ease forwards;
-            transform-origin: left center;
         }
         @keyframes bookOpen {
-            0% { transform: rotateY(-20deg) scale(0.95); opacity: 0; }
-            60% { transform: rotateY(3deg) scale(1.01); opacity: 1; }
-            100% { transform: rotateY(0deg) scale(1); opacity: 1; }
-        }
-        .splash-book::after {
-            content: ''; position: absolute; top: 20px; bottom: 20px; left: -6px;
-            width: 1px; background: rgba(255,255,255,0.5);
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         .splash-ornament-top {
             display: flex; align-items: center; gap: 12px; margin-bottom: 20px; justify-content: center;
         }
         .splash-ornament-top::before, .splash-ornament-top::after {
             content: ''; flex: 1; height: 1px;
-            background: linear-gradient(to right, transparent, var(--rose), transparent);
+            background: linear-gradient(to right, transparent, var(--sky-blue), transparent);
         }
-        .splash-ornament-top span { color: var(--rose); font-size: 1.4rem; animation: twinkleStar 2s infinite; }
+        .splash-ornament-top span { color: var(--sky-blue); font-size: 1.4rem; animation: twinkleStar 2s infinite; }
         @keyframes twinkleStar {
             0%,100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.3); }
         }
         .splash-eyebrow {
             font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 0.65rem;
-            letter-spacing: 10px; text-transform: uppercase; color: var(--lavender); margin-bottom: 20px;
+            letter-spacing: 10px; text-transform: uppercase; color: var(--sky-blue); margin-bottom: 20px;
             animation: fadeSlideUp 0.8s 0.3s ease both;
         }
         .splash-name {
@@ -200,7 +177,7 @@
             animation: fadeSlideUp 0.8s 0.7s ease both;
         }
         .splash-ornament-bottom {
-            width: 80px; height: 1px; background: var(--gold); margin: 0 auto 16px;
+            width: 80px; height: 1px; background: var(--brown-light); margin: 0 auto 16px;
             animation: expandLine 1s 0.8s ease both;
         }
         @keyframes expandLine {
@@ -231,46 +208,28 @@
             margin: 20px auto 60px;
         }
 
-        /* ─── PÁGINA DEL LIBRO ─── */
+        /* ─── PÁGINA DEL LIBRO (ARCO) ─── */
         .book-page {
-            background: rgba(253, 248, 240, 0.95); border-radius: 6px 20px 20px 6px;
-            padding: 36px 24px 36px 20px; margin-bottom: 28px; position: relative;
-            box-shadow: var(--shadow-soft), -2px 0 0 var(--rose-light), -5px 0 0 var(--peach);
-            border-left: 4px solid var(--lavender);
+            background: var(--beige-light); 
+            border-radius: 100px 100px 20px 20px;
+            padding: 50px 24px 36px 20px; 
+            margin-bottom: 28px; 
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            border: 8px solid var(--white);
             transition: transform 0.5s, box-shadow 0.5s;
             opacity: 0;
-            backdrop-filter: blur(5px);
         }
         .book-page.visible {
             animation: pageEnter 0.9s ease forwards;
         }
-        .book-page:nth-child(odd).visible { animation-name: pageEnterLeft; }
-        .book-page:nth-child(even).visible { animation-name: pageEnterRight; }
         @keyframes pageEnter {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pageEnterLeft {
-            from { opacity: 0; transform: translateX(-30px) rotate(-1deg); }
-            to { opacity: 1; transform: translateX(0) rotate(0deg); }
-        }
-        @keyframes pageEnterRight {
-            from { opacity: 0; transform: translateX(30px) rotate(1deg); }
-            to { opacity: 1; transform: translateX(0) rotate(0deg); }
-        }
         .book-page:hover {
-            transform: translateY(-3px) scale(1.005);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.1), -2px 0 0 var(--rose-light), -5px 0 0 var(--peach);
-        }
-        .book-page::before {
-            content: ''; position: absolute; top: 16px; bottom: 16px; left: -4px;
-            width: 1px; background: rgba(255,255,255,0.6); pointer-events: none;
-        }
-        .book-page::after {
-            content: ''; position: absolute; top: 0; right: 0;
-            width: 28px; height: 28px;
-            background: linear-gradient(135deg, transparent 50%, var(--parchment-dark) 50%);
-            border-radius: 0 20px 0 0;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
         }
 
         /* ─── STAGGER ANIMATIONS ─── */
@@ -291,9 +250,9 @@
         }
         .page-ornament-top::before, .page-ornament-top::after {
             content: ''; flex: 1; height: 1px;
-            background: linear-gradient(to right, transparent, var(--rose), transparent);
+            background: linear-gradient(to right, transparent, var(--sky-blue), transparent);
         }
-        .page-ornament-top span { color: var(--rose); font-size: 1rem; }
+        .page-ornament-top span { color: var(--sky-blue); font-size: 1rem; }
 
         /* ─── CAPITULAR ─── */
         .drop-cap {
@@ -311,7 +270,7 @@
         .hero-section { text-align: center; }
         .hero-chapter {
             font-family: 'Raleway', sans-serif; font-size: 0.5rem; letter-spacing: 6px;
-            text-transform: uppercase; color: var(--lavender); margin-bottom: 8px;
+            text-transform: uppercase; color: var(--sky-blue); margin-bottom: 8px;
         }
         .hero-illustration {
             width: 200px; height: 200px; margin: 0 auto 20px; position: relative;
@@ -336,12 +295,12 @@
         .hero-photo-mask {
             width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            border: 4px solid var(--rose-light);
+            border: 4px solid var(--white);
             animation: photoGlow 3s ease-in-out infinite;
         }
         @keyframes photoGlow {
-            0%,100% { box-shadow: 0 0 8px rgba(232,165,184,0.3); }
-            50% { box-shadow: 0 0 20px rgba(232,165,184,0.6), 0 0 40px rgba(240,197,208,0.4); }
+            0%,100% { box-shadow: 0 0 8px rgba(184,212,232,0.3); }
+            50% { box-shadow: 0 0 20px rgba(184,212,232,0.6), 0 0 40px rgba(212,165,160,0.3); }
         }
         .hero-photo-mask img { width: 100%; height: 100%; object-fit: cover; }
         .hero-name {
@@ -357,8 +316,8 @@
         }
         .hero-cta {
             display: inline-block; margin-top: 18px; padding: 10px 26px;
-            background: linear-gradient(135deg, var(--rose-light), var(--rose));
-            color: #fff; font-family: 'Raleway', sans-serif; font-weight: 600;
+            background: linear-gradient(135deg, var(--sky-blue), var(--sky-light));
+            color: var(--white); font-family: 'Raleway', sans-serif; font-weight: 600;
             font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase;
             border-radius: 20px; cursor: pointer; transition: all 0.4s;
             position: relative; overflow: hidden;
@@ -369,14 +328,14 @@
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
-        .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(232,165,184,0.5); }
+        .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(184,212,232,0.5); }
         .hero-cta:hover::after { transform: translateX(100%); }
 
-        /* ─── CHAPTER HEADER ─── */
+        /* ─── CHAPTER HEADER ── */
         .chapter-header { text-align: center; margin-bottom: 20px; }
         .chapter-label {
             font-family: 'Raleway', sans-serif; font-size: 0.5rem; letter-spacing: 6px;
-            text-transform: uppercase; color: var(--lavender); margin-bottom: 4px;
+            text-transform: uppercase; color: var(--sky-blue); margin-bottom: 4px;
         }
         .chapter-title {
             font-family: 'Uncial Antiqua', cursive; font-size: clamp(1.4rem, 4vw, 1.8rem);
@@ -387,9 +346,9 @@
             border-radius: 1px; animation: expandLine 1s ease both;
         }
 
-        /* ─── MENSAJE ─── */
+        /* ── MENSAJE ─── */
         .message-block {
-            background: linear-gradient(135deg, var(--rose-light), var(--peach));
+            background: linear-gradient(135deg, var(--sky-light), var(--beige-light));
             border-radius: 12px; padding: 24px 20px; text-align: center; margin: 16px 0;
             position: relative; overflow: hidden;
         }
@@ -409,13 +368,13 @@
             text-transform: uppercase; color: var(--ink-light); margin-top: 2px;
         }
 
-        /* ─── COUNTDOWN ─── */
+        /* ─── COUNTDOWN ── */
         .countdown-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .countdown-unit {
-            text-align: center; background: #fff; border-radius: 8px;
+            text-align: center; background: var(--white); border-radius: 8px;
             padding: 12px 8px; min-width: 56px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid var(--rose-light);
+            border: 1px solid var(--sky-light);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .countdown-unit:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
@@ -432,8 +391,8 @@
         /* ─── INFO TILES ─── */
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 12px 0; }
         .info-tile {
-            background: #fff; border-radius: 8px; padding: 14px 10px; text-align: center;
-            border: 1px solid var(--rose-light);
+            background: var(--white); border-radius: 8px; padding: 14px 10px; text-align: center;
+            border: 1px solid var(--sky-light);
             transition: transform 0.4s, box-shadow 0.4s;
         }
         .info-tile:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
@@ -441,7 +400,7 @@
         .info-tile:hover .info-icon { transform: scale(1.3) rotate(-10deg); }
         .info-label {
             font-family: 'Raleway', sans-serif; font-size: 0.45rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--lavender); margin-bottom: 2px;
+            text-transform: uppercase; color: var(--sky-blue); margin-bottom: 2px;
         }
         .info-value {
             font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.72rem;
@@ -452,23 +411,23 @@
         .program-list { max-width: 340px; margin: 0 auto; }
         .program-item {
             display: flex; gap: 10px; margin-bottom: 10px; padding-bottom: 10px;
-            border-bottom: 1px dotted var(--rose-light); align-items: baseline;
+            border-bottom: 1px dotted var(--sky-light); align-items: baseline;
             transition: transform 0.3s, padding-left 0.3s;
         }
         .program-item:hover { transform: translateX(4px); }
         .program-badge {
-            width: 28px; height: 28px; background: var(--rose-light); border-radius: 50%;
+            width: 28px; height: 28px; background: var(--sky-light); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-            font-family: 'Uncial Antiqua', cursive; font-size: 0.7rem; color: var(--rose);
+            font-family: 'Uncial Antiqua', cursive; font-size: 0.7rem; color: var(--sky-blue);
             transition: transform 0.3s, background 0.3s;
         }
         .program-item:hover .program-badge {
-            transform: scale(1.2); background: var(--lavender-light); color: var(--lavender);
+            transform: scale(1.2); background: var(--beige-light); color: var(--beige-dark);
         }
         .program-content { flex: 1; }
         .program-time {
             font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.65rem;
-            color: var(--lavender); letter-spacing: 2px; margin-bottom: 1px;
+            color: var(--sky-blue); letter-spacing: 2px; margin-bottom: 1px;
         }
         .program-title {
             font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.85rem;
@@ -479,25 +438,25 @@
             text-transform: uppercase; color: var(--ink-light); margin-top: 1px;
         }
 
-        /* ─── MAP ── */
+        /* ─── MAP ─── */
         .map-wrap {
-            border-radius: 12px; overflow: hidden; border: 1px solid var(--rose-light);
+            border-radius: 12px; overflow: hidden; border: 1px solid var(--sky-light);
             margin: 8px 0; transition: box-shadow 0.4s;
         }
         .map-wrap:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
         .map-wrap iframe { width: 100%; height: 180px; border: 0; display: block; }
         .map-link {
-            display: inline-block; padding: 6px 14px; background: var(--rose-light);
+            display: inline-block; padding: 6px 14px; background: var(--sky-light);
             color: var(--ink); font-family: 'Raleway', sans-serif; font-size: 0.45rem;
             letter-spacing: 3px; text-transform: uppercase; border-radius: 12px;
             transition: background 0.3s, transform 0.3s;
         }
-        .map-link:hover { background: var(--peach); transform: translateY(-2px); }
+        .map-link:hover { background: var(--beige-light); transform: translateY(-2px); }
 
         /* ─── CARRUSEL ─── */
         .carousel-wrap {
             position: relative; overflow: hidden; border-radius: 12px;
-            border: 1px solid var(--rose-light); margin: 8px 0;
+            border: 1px solid var(--sky-light); margin: 8px 0;
         }
         .carousel-track {
             display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -519,7 +478,7 @@
         .carousel-slide:hover .carousel-caption { transform: translateY(0); }
         .carousel-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.7); border: 1px solid var(--rose);
+            background: rgba(255,255,255,0.7); border: 1px solid var(--sky-blue);
             color: var(--ink); width: 32px; height: 32px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; cursor: pointer;
             z-index: 5; transition: background 0.3s, transform 0.3s; font-size: 0.9rem;
@@ -530,22 +489,22 @@
         .carousel-prev { left: 8px; } .carousel-next { right: 8px; }
         .carousel-dots { display: flex; justify-content: center; gap: 6px; padding: 8px 0; }
         .carousel-dot {
-            width: 7px; height: 7px; border-radius: 50%; background: var(--rose-light);
+            width: 7px; height: 7px; border-radius: 50%; background: var(--sky-light);
             cursor: pointer; transition: background 0.3s, transform 0.3s;
         }
-        .carousel-dot.active { background: var(--rose); transform: scale(1.5); }
+        .carousel-dot.active { background: var(--sky-blue); transform: scale(1.5); }
 
         /* ─── MÚSICA ─── */
         .music-player {
-            display: flex; align-items: center; gap: 8px; background: #fff;
-            border: 1px solid var(--rose-light); border-radius: 20px;
+            display: flex; align-items: center; gap: 8px; background: var(--white);
+            border: 1px solid var(--sky-light); border-radius: 20px;
             padding: 6px 14px 6px 8px; max-width: 240px; margin: 0 auto 16px;
             cursor: pointer; transition: box-shadow 0.3s, transform 0.3s;
         }
         .music-player:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: scale(1.03); }
         .music-btn {
-            width: 30px; height: 30px; border-radius: 50%; background: var(--rose);
-            border: none; color: #fff; font-size: 0.8rem; display: flex;
+            width: 30px; height: 30px; border-radius: 50%; background: var(--sky-blue);
+            border: none; color: var(--white); font-size: 0.8rem; display: flex;
             align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
             transition: transform 0.3s, background 0.3s;
         }
@@ -558,7 +517,7 @@
         }
         .music-wave { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
         .music-wave span {
-            width: 2px; background: var(--rose); border-radius: 1px;
+            width: 2px; background: var(--sky-blue); border-radius: 1px;
             animation: wave 0.7s ease-in-out infinite; animation-delay: var(--wdelay);
         }
         @keyframes wave {
@@ -568,23 +527,23 @@
 
         /* ─── RSVP ─── */
         .rsvp-card {
-            background: #fff; border-radius: 12px; padding: 24px 18px;
-            border: 1px solid var(--rose-light); box-shadow: var(--shadow-soft);
+            background: var(--white); border-radius: 12px; padding: 24px 18px;
+            border: 1px solid var(--sky-light); box-shadow: var(--shadow-soft);
             transition: box-shadow 0.4s;
         }
         .rsvp-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
         .rsvp-input {
             width: 100%; padding: 8px 10px; margin-bottom: 10px; background: transparent;
-            border: none; border-bottom: 1px solid var(--rose-light);
+            border: none; border-bottom: 1px solid var(--sky-light);
             font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem;
             color: var(--ink); outline: none; transition: border-color 0.3s, padding-left 0.3s;
         }
-        .rsvp-input:focus { border-bottom-color: var(--rose); padding-left: 4px; }
+        .rsvp-input:focus { border-bottom-color: var(--sky-blue); padding-left: 4px; }
         .rsvp-input::placeholder { color: var(--ink-light); font-style: italic; }
         .rsvp-btn {
             width: 100%; padding: 12px;
-            background: linear-gradient(135deg, var(--rose), var(--lavender));
-            color: #fff; font-family: 'Raleway', sans-serif; font-weight: 600;
+            background: linear-gradient(135deg, var(--sky-blue), var(--rose));
+            color: var(--white); font-family: 'Raleway', sans-serif; font-weight: 600;
             font-size: 0.5rem; letter-spacing: 4px; text-transform: uppercase;
             cursor: pointer; border: none; border-radius: 16px; transition: opacity 0.3s, transform 0.3s;
             position: relative; overflow: hidden;
@@ -608,7 +567,7 @@
         }
         .footer-ornament::before, .footer-ornament::after {
             content: ''; flex: 1; max-width: 60px; height: 1px;
-            background: linear-gradient(to right, transparent, var(--rose), transparent);
+            background: linear-gradient(to right, transparent, var(--sky-blue), transparent);
         }
         .footer-name {
             font-family: 'Uncial Antiqua', cursive; font-size: 1.6rem; color: var(--ink);
@@ -631,7 +590,11 @@
                 margin: 10px 6px 40px; 
                 z-index: 5;
             }
-            .book-page { padding: 24px 14px 24px 12px; margin-bottom: 20px; }
+            .book-page { 
+                padding: 40px 14px 24px 12px; 
+                margin-bottom: 20px;
+                border-radius: 80px 80px 15px 15px;
+            }
             .hero-illustration {
                 width: 160px; height: 160px;
             }
@@ -640,18 +603,18 @@
                 border-width: 3px;
             }
             .hot-air-balloon { 
-                width: 60px; 
-                height: 90px; 
+                width: 90px; 
+                height: 140px; 
                 z-index: 10;
-                opacity: 0.6;
+                opacity: 0.7;
             }
-            .rocking-horse { 
-                width: 80px; 
-                height: 70px; 
-                bottom: 3%; 
-                right: 3%; 
+            .toy-car { 
+                width: 120px; 
+                height: 90px; 
+                bottom: 2%; 
+                left: 2%;
                 z-index: 10;
-                opacity: 0.5;
+                opacity: 0.7;
             }
         }
     </style>
@@ -661,111 +624,98 @@
     <!-- Canvas de partículas mágicas -->
     <canvas id="magic-canvas"></canvas>
 
-    <!-- ─── FONDO DE NUBES DE ACUARELA ─── -->
-    <div class="watercolor-bg">
-        <div class="watercolor-cloud cloud-1"></div>
-        <div class="watercolor-cloud cloud-2"></div>
-        <div class="watercolor-cloud cloud-3"></div>
-        <div class="watercolor-cloud cloud-4"></div>
+    <!-- ─── FONDO DE CIELO CON NUBES ─── -->
+    <div class="sky-bg">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
     </div>
 
-    <!-- ─── GLOBOS AEROSTÁTICOS ─── -->
-    <svg class="hot-air-balloon balloon-1" viewBox="0 0 80 120">
+    <!-- ─── GLOBO AEROSTÁTICO ─── -->
+    <svg class="hot-air-balloon balloon-1" viewBox="0 0 120 180">
         <defs>
-            <linearGradient id="balloonGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#d4a5b0;stop-opacity:0.8" />
-                <stop offset="50%" style="stop-color:#e8c5b8;stop-opacity:0.9" />
-                <stop offset="100%" style="stop-color:#d4a5b0;stop-opacity:0.8" />
+            <linearGradient id="balloonStripes" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#b8d4e8;stop-opacity:0.9" />
+                <stop offset="25%" style="stop-color:#ffffff;stop-opacity:0.95" />
+                <stop offset="50%" style="stop-color:#b8d4e8;stop-opacity:0.9" />
+                <stop offset="75%" style="stop-color:#ffffff;stop-opacity:0.95" />
+                <stop offset="100%" style="stop-color:#b8d4e8;stop-opacity:0.9" />
             </linearGradient>
         </defs>
         <!-- Globo -->
-        <ellipse cx="40" cy="35" rx="30" ry="35" fill="url(#balloonGrad1)" stroke="#b88a90" stroke-width="1.5"/>
-        <path d="M 40 0 L 40 70" stroke="#b88a90" stroke-width="1" fill="none"/>
-        <path d="M 25 15 Q 40 25 55 15" stroke="#b88a90" stroke-width="0.8" fill="none" opacity="0.5"/>
-        <path d="M 20 30 Q 40 40 60 30" stroke="#b88a90" stroke-width="0.8" fill="none" opacity="0.5"/>
-        <path d="M 25 50 Q 40 55 55 50" stroke="#b88a90" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <ellipse cx="60" cy="55" rx="50" ry="60" fill="url(#balloonStripes)" stroke="#8bb8d4" stroke-width="2"/>
+        <!-- Líneas verticales -->
+        <path d="M 60 0 L 60 110" stroke="#8bb8d4" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <path d="M 35 10 Q 40 55 45 105" stroke="#8bb8d4" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M 85 10 Q 80 55 75 105" stroke="#8bb8d4" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M 20 25 Q 30 55 35 105" stroke="#8bb8d4" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <path d="M 100 25 Q 90 55 85 105" stroke="#8bb8d4" stroke-width="0.8" fill="none" opacity="0.4"/>
         <!-- Cuerdas -->
-        <line x1="28" y1="68" x2="32" y2="85" stroke="#d4b89e" stroke-width="1"/>
-        <line x1="52" y1="68" x2="48" y2="85" stroke="#d4b89e" stroke-width="1"/>
+        <line x1="45" y1="110" x2="50" y2="135" stroke="#a08070" stroke-width="1"/>
+        <line x1="75" y1="110" x2="70" y2="135" stroke="#a08070" stroke-width="1"/>
         <!-- Canasta -->
-        <rect x="30" y="85" width="20" height="12" fill="#e8d5c5" stroke="#c8b8a8" stroke-width="1"/>
-        <rect x="32" y="87" width="16" height="8" fill="#f0e5d5" opacity="0.6"/>
+        <rect x="48" y="135" width="24" height="16" fill="#c4a898" stroke="#a08070" stroke-width="1.5"/>
+        <rect x="50" y="137" width="20" height="12" fill="#d4b8a8" opacity="0.6"/>
+        <line x1="54" y1="135" x2="54" y2="151" stroke="#a08070" stroke-width="0.8"/>
+        <line x1="60" y1="135" x2="60" y2="151" stroke="#a08070" stroke-width="0.8"/>
+        <line x1="66" y1="135" x2="66" y2="151" stroke="#a08070" stroke-width="0.8"/>
     </svg>
 
-    <svg class="hot-air-balloon balloon-2" viewBox="0 0 60 90">
+    <!-- ─── CARRITO DE JUGUETE ─── -->
+    <svg class="toy-car" viewBox="0 0 160 120">
         <defs>
-            <linearGradient id="balloonGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#e8c5d0;stop-opacity:0.8" />
-                <stop offset="50%" style="stop-color:#f0d5c5;stop-opacity:0.9" />
-                <stop offset="100%" style="stop-color:#e8c5d0;stop-opacity:0.8" />
+            <linearGradient id="carBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#b8d4e8" />
+                <stop offset="100%" style="stop-color:#8bb8d4" />
             </linearGradient>
         </defs>
-        <!-- Globo -->
-        <ellipse cx="30" cy="28" rx="23" ry="27" fill="url(#balloonGrad2)" stroke="#d4a5b0" stroke-width="1.2"/>
-        <path d="M 30 0 L 30 54" stroke="#d4a5b0" stroke-width="0.8" fill="none"/>
-        <path d="M 20 12 Q 30 19 40 12" stroke="#d4a5b0" stroke-width="0.6" fill="none" opacity="0.5"/>
-        <path d="M 16 23 Q 30 30 44 23" stroke="#d4a5b0" stroke-width="0.6" fill="none" opacity="0.5"/>
-        <!-- Cuerdas -->
-        <line x1="22" y1="53" x2="25" y2="66" stroke="#d4b89e" stroke-width="0.8"/>
-        <line x1="38" y1="53" x2="35" y2="66" stroke="#d4b89e" stroke-width="0.8"/>
-        <!-- Canasta -->
-        <rect x="23" y="66" width="14" height="9" fill="#e8d5c5" stroke="#c8b8a8" stroke-width="0.8"/>
-        <rect x="25" y="68" width="10" height="5" fill="#f0e5d5" opacity="0.6"/>
+        <!-- Globos atados al carrito -->
+        <line x1="110" y1="60" x2="120" y2="30" stroke="#a08070" stroke-width="1"/>
+        <line x1="115" y1="60" x2="135" y2="25" stroke="#a08070" stroke-width="1"/>
+        <line x1="120" y1="60" x2="145" y2="35" stroke="#a08070" stroke-width="1"/>
+        <!-- Globo rosa -->
+        <ellipse cx="120" cy="25" rx="10" ry="13" fill="#e8c5c0" stroke="#d4a5a0" stroke-width="1"/>
+        <!-- Globo azul -->
+        <ellipse cx="135" cy="20" rx="11" ry="14" fill="#b8d4e8" stroke="#8bb8d4" stroke-width="1"/>
+        <!-- Globo marrón -->
+        <ellipse cx="148" cy="32" rx="10" ry="12" fill="#c4a898" stroke="#a08070" stroke-width="1"/>
+        
+        <!-- Cuerpo del carrito -->
+        <path d="M 20 70 L 100 70 Q 110 70 110 80 L 110 90 L 20 90 Z" fill="url(#carBody)" stroke="#8bb8d4" stroke-width="1.5"/>
+        <path d="M 30 70 L 30 60 Q 30 55 35 55 L 70 55 Q 75 55 75 60 L 75 70" fill="url(#carBody)" stroke="#8bb8d4" stroke-width="1.5"/>
+        <!-- Ventana -->
+        <rect x="35" y="58" width="35" height="10" fill="#d4e8f4" stroke="#8bb8d4" stroke-width="0.8"/>
+        <!-- Volante -->
+        <circle cx="50" cy="65" r="5" fill="none" stroke="#a08070" stroke-width="1.5"/>
+        <line x1="50" y1="65" x2="50" y2="70" stroke="#a08070" stroke-width="1"/>
+        <!-- Rueda trasera -->
+        <circle cx="35" cy="95" r="14" fill="#d4b8a8" stroke="#a08070" stroke-width="2"/>
+        <circle cx="35" cy="95" r="6" fill="#e8d4c8" stroke="#a08070" stroke-width="1"/>
+        <!-- Rueda delantera -->
+        <circle cx="95" cy="95" r="14" fill="#d4b8a8" stroke="#a08070" stroke-width="2"/>
+        <circle cx="95" cy="95" r="6" fill="#e8d4c8" stroke="#a08070" stroke-width="1"/>
+        <!-- Detalles -->
+        <circle cx="60" cy="80" r="4" fill="#ffffff" opacity="0.6"/>
+        <line x1="25" y1="75" x2="30" y2="75" stroke="#8bb8d4" stroke-width="1"/>
+        <line x1="25" y1="78" x2="30" y2="78" stroke="#8bb8d4" stroke-width="1"/>
+        <line x1="25" y1="81" x2="30" y2="81" stroke="#8bb8d4" stroke-width="1"/>
     </svg>
 
-    <!-- ─── CABALLITO DE JUGUETE ─── -->
-    <svg class="rocking-horse" viewBox="0 0 120 100">
-        <defs>
-            <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#f0d5d0" />
-                <stop offset="100%" style="stop-color:#e8c5c0" />
-            </linearGradient>
-        </defs>
-        <!-- Base de balancín -->
-        <path d="M 10 85 Q 60 95 110 85" fill="none" stroke="#d4a5a0" stroke-width="8" stroke-linecap="round"/>
-        <rect x="15" y="80" width="12" height="10" fill="#e8b5b0"/>
-        <rect x="93" y="80" width="12" height="10" fill="#e8b5b0"/>
-        <!-- Cuerpo del caballo -->
-        <ellipse cx="60" cy="60" rx="28" ry="18" fill="url(#woodGrad)" stroke="#d4a5a0" stroke-width="1"/>
-        <!-- Cuello -->
-        <path d="M 80 55 Q 90 50 92 40 Q 93 35 88 33 Q 83 31 82 36 Q 81 42 78 48" fill="url(#woodGrad)" stroke="#d4a5a0" stroke-width="1"/>
-        <!-- Cabeza -->
-        <ellipse cx="90" cy="32" rx="8" ry="6" fill="url(#woodGrad)" stroke="#d4a5a0" stroke-width="1"/>
-        <!-- Orejas -->
-        <path d="M 88 26 L 86 20 L 90 25" fill="#f8e0e0" stroke="#d4a5a0" stroke-width="0.8"/>
-        <path d="M 92 26 L 96 21 L 93 25" fill="#f8e0e0" stroke="#d4a5a0" stroke-width="0.8"/>
-        <!-- Crin -->
-        <path d="M 85 38 Q 82 35 80 32 Q 78 30 79 28" fill="none" stroke="#e8b5b0" stroke-width="2" stroke-linecap="round"/>
-        <!-- Patas -->
-        <line x1="45" y1="72" x2="42" y2="85" stroke="#f0c5c0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="55" y1="74" x2="55" y2="85" stroke="#f0c5c0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="70" y1="74" x2="72" y2="85" stroke="#f0c5c0" stroke-width="4" stroke-linecap="round"/>
-        <line x1="78" y1="70" x2="82" y2="82" stroke="#f0c5c0" stroke-width="4" stroke-linecap="round"/>
-        <!-- Silla de montar -->
-        <ellipse cx="62" cy="58" rx="12" ry="6" fill="#e8c5d0" stroke="#d4a5b8" stroke-width="0.8"/>
-        <rect x="58" y="52" width="8" height="8" fill="#f0d5e0" stroke="#d4a5b8" stroke-width="0.6"/>
-        <!-- Rienda -->
-        <line x1="85" y1="35" x2="75" y2="50" stroke="#d4a5b8" stroke-width="0.8"/>
-        <!-- Cola -->
-        <path d="M 33 60 Q 25 62 22 68 Q 20 72 23 75" fill="none" stroke="#e8b5b0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Ojo -->
-        <circle cx="92" cy="31" r="1.5" fill="#4a3a3a"/>
-    </svg>
-
-    <!-- ═══════════ SPLASH (APERTURA DE LIBRO) ═══════════ -->
+    <!-- ═══════════ SPLASH (APERTURA) ═══════════ -->
     <div id="splash" onclick="closeSplash()">
         <div class="splash-book">
             <div class="splash-ornament-top"><span>✦</span></div>
             <p class="splash-eyebrow">Érase una vez...</p>
-            <h1 class="splash-name">María Emilia</h1>
+            <h1 class="splash-name">Emilio André</h1>
             <p class="splash-sub">Un cuento de Bautizo</p>
             <div class="splash-ornament-bottom"></div>
             <p class="splash-date">8 · Marzo · 2026</p>
-            <p class="splash-cta">✧ Abre el libro ✧</p>
+            <p class="splash-cta"> Abre el libro ✧</p>
         </div>
     </div>
 
-    <!-- ═══════════ CONTENEDOR PRINCIPAL ═══════════ -->
+    <!-- ══════════ CONTENEDOR PRINCIPAL ══════════ -->
     <div class="main-wrapper">
 
         <!-- ─── PÁGINA 1: HÉROE ─── -->
@@ -777,19 +727,19 @@
                     <svg viewBox="0 0 200 200">
                         <defs>
                             <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#f8e0e8" stop-opacity="0.9"/>
-                                <stop offset="100%" stop-color="#f8e0e8" stop-opacity="0"/>
+                                <stop offset="0%" stop-color="#d4e8f4" stop-opacity="0.9"/>
+                                <stop offset="100%" stop-color="#d4e8f4" stop-opacity="0"/>
                             </radialGradient>
                         </defs>
                         <circle cx="100" cy="100" r="90" fill="url(#halo)"/>
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#f5d5e0" stroke-width="2" stroke-dasharray="5 4" class="hero-halo-dashed"/>
-                        <circle cx="100" cy="100" r="58" fill="none" stroke="#e8a5b8" stroke-width="1.5" class="hero-halo"/>
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#b8d4e8" stroke-width="2" stroke-dasharray="5 4" class="hero-halo-dashed"/>
+                        <circle cx="100" cy="100" r="58" fill="none" stroke="#8bb8d4" stroke-width="1.5" class="hero-halo"/>
                     </svg>
                     <div class="hero-photo-mask">
-                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&q=80" alt="María Emilia" crossorigin="anonymous">
+                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&q=80" alt="Emilio André" crossorigin="anonymous">
                     </div>
                 </div>
-                <h1 class="hero-name">María Emilia</h1>
+                <h1 class="hero-name">Emilio André</h1>
                 <p class="hero-sub">Bautizo</p>
                 <p class="hero-info">8 · Marzo · 2026 · 11:00 am</p>
                 <p class="hero-info">Parroquia de San Juan · Tepoztlán, Morelos</p>
@@ -799,15 +749,15 @@
 
         <!-- ─── PÁGINA 2: MENSAJE ─── -->
         <div class="book-page stagger" id="page-message">
-            <div class="page-ornament-top"><span>🌸</span></div>
+            <div class="page-ornament-top"><span>☁️</span></div>
             <div class="chapter-header">
                 <p class="chapter-label">Capítulo Dos</p>
-                <h2 class="chapter-title">Una Princesa Llegó</h2>
+                <h2 class="chapter-title">Un Ángel Llegó</h2>
                 <div class="chapter-rule"></div>
             </div>
             <div class="message-block">
                 <p class="message-text">
-                    <span class="drop-cap">C</span>on su llegada, el mundo se llenó de amor y ternura. Hoy la presentamos ante Dios y celebramos su vida junto a nuestra familia, en un día que quedará grabado en nuestros corazones para siempre.
+                    <span class="drop-cap">C</span>on su llegada, el mundo se llenó de amor y ternura. Hoy lo presentamos ante Dios y celebramos su vida junto a nuestra familia, en un día que quedará grabado en nuestros corazones para siempre.
                 </p>
                 <div class="milestones-row">
                     <div>
@@ -862,10 +812,10 @@
                 <div class="chapter-rule"></div>
             </div>
             <div class="info-grid">
-                <div class="info-tile"><div class="info-icon">🌸</div><div class="info-label">Fecha</div><div class="info-value">8 · Marzo · 2026</div></div>
+                <div class="info-tile"><div class="info-icon">🎈</div><div class="info-label">Fecha</div><div class="info-value">8 · Marzo · 2026</div></div>
                 <div class="info-tile"><div class="info-icon">🕊️</div><div class="info-label">Hora</div><div class="info-value">11:00 de la mañana</div></div>
-                <div class="info-tile"><div class="info-icon">⛪</div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
-                <div class="info-tile"><div class="info-icon">👗</div><div class="info-label">Vestimenta</div><div class="info-value">Elegante<br>Colores claros</div></div>
+                <div class="info-tile"><div class="info-icon"></div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
+                <div class="info-tile"><div class="info-icon">👔</div><div class="info-label">Vestimenta</div><div class="info-value">Elegante<br>Colores claros</div></div>
             </div>
             <div class="chapter-header" style="margin-top:20px;"><p class="chapter-label">El Itinerario</p></div>
             <div class="program-list">
@@ -922,7 +872,7 @@
                     <button type="submit" class="rsvp-btn">Enviar por WhatsApp</button>
                 </form>
                 <div class="rsvp-thanks" id="rsvp-thanks">
-                    <div style="font-size:2.5rem;">🌸</div>
+                    <div style="font-size:2.5rem;">🎈</div>
                     <h3 style="font-family:'Uncial Antiqua',cursive;font-size:1.4rem;color:var(--ink);">¡Gracias!</h3>
                     <p style="font-family:'Raleway',sans-serif;color:var(--ink-light);">Tu confirmación ha sido enviada.</p>
                 </div>
@@ -931,8 +881,8 @@
 
         <!-- ─── PÁGINA 8: FOOTER ─── -->
         <div class="footer-section book-page stagger" id="page-footer">
-            <div class="footer-ornament"><span>✦</span></div>
-            <div class="footer-name">María Emilia</div>
+            <div class="footer-ornament"><span></span></div>
+            <div class="footer-name">Emilio André</div>
             <div class="footer-date">8 · Marzo · 2026 · Tepoztlán, Morelos</div>
             <p class="footer-verse">&ldquo;Dejad que los niños vengan a mí.&rdquo;</p>
             <p class="footer-end">Colorín colorado...</p>
@@ -945,7 +895,7 @@
         // CONFIGURACIÓN — Edita estos valores
         // ═══════════════════════════════════════════
         const CFG = {
-            person1: 'María Emilia',
+            person1: 'Emilio André',
             eventType: 'Bautizo',
             eventDate: '2026-03-08T11:00:00',
             eventDateDisplay: '8 · Marzo · 2026',
@@ -953,7 +903,7 @@
             venue: 'Parroquia de San Juan',
             address: 'Plaza Principal s/n',
             city: 'Tepoztlán, Morelos',
-            storyText: 'Con su llegada, el mundo se llenó de amor y ternura. Hoy la presentamos ante Dios y celebramos su vida junto a nuestra familia.',
+            storyText: 'Con su llegada, el mundo se llenó de amor y ternura. Hoy lo presentamos ante Dios y celebramos su vida junto a nuestra familia.',
             milestones: [
                 { year: '2025', event: 'Llegó al mundo' },
                 { year: '2025', event: 'Primeras sonrisas' },
@@ -973,14 +923,14 @@
             gallery: [
                 { src: 'https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80', cap: 'Familia unida' },
                 { src: 'https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80', cap: 'Momento sagrado' },
-                { src: 'https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80', cap: 'Llena de amor' },
-                { src: 'https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80', cap: 'Una princesa' },
+                { src: 'https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80', cap: 'Lleno de amor' },
+                { src: 'https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80', cap: 'Un ángel' },
                 { src: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?w=600&q=80', cap: 'La familia crece' },
                 { src: 'https://images.unsplash.com/photo-1607357910286-1ff94ac13c24?w=600&q=80', cap: 'Bendición' },
             ],
         };
 
-        // ═══════════ PARTÍCULAS MÁGICAS (mejoradas) ═══════════
+        // ═══════════ PARTÍCULAS MÁGICAS ══════════
         (function() {
             const canvas = document.getElementById('magic-canvas');
             const ctx = canvas.getContext('2d');
@@ -989,7 +939,7 @@
             function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
             resize();
             window.addEventListener('resize', resize);
-            const colors = ['#f8e0e8', '#f0d5e0', '#f5d5e0', '#ffffff', '#d4b89e', '#e8a5b8', '#f0c5d0'];
+            const colors = ['#d4e8f4', '#e8f0f8', '#b8d4e8', '#ffffff', '#e8c5c0', '#c4a898'];
             for (let i = 0; i < 50; i++) {
                 sparkles.push({
                     x: Math.random() * W, y: Math.random() * H,
@@ -1086,7 +1036,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // ═══════════ CARRUSEL ═══════════
+        // ═══════════ CARRUSEL ══════════
         let carouselIdx = 0;
         function buildCarousel() {
             const track = document.getElementById('carousel-track');
@@ -1137,7 +1087,7 @@
             document.getElementById('rsvp-thanks').classList.add('show');
         }
 
-        // ═══════════ INTERSECTION OBSERVER (anima páginas al entrar) ═══════════
+        // ═══════════ INTERSECTION OBSERVER ══════════
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
