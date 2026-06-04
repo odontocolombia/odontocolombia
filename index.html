@@ -3,1279 +3,1007 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bautizo de Emilio André — Aventura en la Selva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&family=Uncial+Antiqua&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <title>Bautizo de Emilio André</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #faf8f5;
-            --beige: #f0e8dc;
-            --sage: #a8b5a0;
-            --sage-light: #c5d4be;
-            --sage-dark: #8a9985;
-            --peach: #f5d5c5;
-            --peach-light: #fae8e0;
-            --brown: #8b7355;
-            --brown-light: #b8a898;
-            --gold: #c9a96e;
-            --gold-light: #e8d5a8;
-            --coral: #e8a595;
-            --ink: #4a4a4a;
-            --ink-light: #7a7a7a;
-            --shadow-soft: 0 4px 20px rgba(139,115,85,0.1);
+            --gold: #b8943e;
+            --gold-light: #d4af6a;
+            --gold-dark: #8b6f2e;
+            --cream: #faf6ed;
+            --cream-dark: #f0e8d0;
+            --brown: #4a3820;
+            --brown-light: #6b5438;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(74,56,32,0.08);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Cormorant Garamond', serif;
-            background: linear-gradient(135deg, #f5f0e8 0%, #e8f0e8 50%, #f0e8e0 100%);
-            color: var(--ink); overflow-x: hidden; min-height: 100vh;
-            display: flex; justify-content: center; position: relative;
+            background: linear-gradient(180deg, #f5f0e0 0%, #faf6ed 50%, #f5f0e0 100%);
+            color: var(--brown);
+            overflow-x: hidden;
+            min-height: 100vh;
         }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 4px; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-        /* ─── FONDO CON HOJAS TROPICALES ── */
-        .jungle-bg {
+        /* ─── PATRÓN DE FONDO SUTIL ─── */
+        .bg-pattern {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            overflow: hidden;
-        }
-        .tropical-leaf {
-            position: absolute;
-            opacity: 0.15;
-            animation: leafSway 8s ease-in-out infinite;
-        }
-        .leaf-1 {
-            top: 5%;
-            left: -5%;
-            width: 200px;
-            height: 300px;
-            background: linear-gradient(135deg, var(--sage) 0%, transparent 100%);
-            border-radius: 0 100% 0 100%;
-            transform: rotate(-15deg);
-        }
-        .leaf-2 {
-            top: 10%;
-            right: -8%;
-            width: 180px;
-            height: 280px;
-            background: linear-gradient(135deg, var(--sage-light) 0%, transparent 100%);
-            border-radius: 100% 0 100% 0;
-            transform: rotate(15deg);
-            animation-delay: 2s;
-        }
-        .leaf-3 {
-            bottom: 20%;
-            left: -10%;
-            width: 220px;
-            height: 250px;
-            background: linear-gradient(135deg, var(--sage) 0%, transparent 100%);
-            border-radius: 100% 0 0 100%;
-            transform: rotate(10deg);
-            animation-delay: 4s;
-        }
-        .leaf-4 {
-            bottom: 10%;
-            right: -5%;
-            width: 200px;
-            height: 300px;
-            background: linear-gradient(135deg, var(--sage-light) 0%, transparent 100%);
-            border-radius: 0 100% 100% 0;
-            transform: rotate(-10deg);
-            animation-delay: 6s;
-        }
-        @keyframes leafSway {
-            0%, 100% { transform: rotate(var(--rotation, 0deg)) translateX(0); }
-            50% { transform: rotate(var(--rotation, 0deg)) translateX(10px); }
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
         }
 
-        /* ─── ANIMALES DE LA SELVA ─── */
-        .jungle-animal {
+        /* ─── PARTÍCULAS DORADAS ─── */
+        #gold-canvas {
             position: fixed;
+            inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.9;
-        }
-        .animal-1 {
-            top: 3%;
-            left: 3%;
-            width: 100px;
-            height: 100px;
-            animation: peekLeft 6s ease-in-out infinite;
-        }
-        .animal-2 {
-            top: 3%;
-            right: 3%;
-            width: 100px;
-            height: 100px;
-            animation: peekRight 6s ease-in-out infinite;
-        }
-        .animal-3 {
-            bottom: 3%;
-            left: 3%;
-            width: 90px;
-            height: 90px;
-            animation: bounceGentle 4s ease-in-out infinite;
-        }
-        .animal-4 {
-            bottom: 3%;
-            right: 3%;
-            width: 95px;
-            height: 95px;
-            animation: bounceGentle 4s ease-in-out infinite 1s;
-        }
-        @keyframes peekLeft {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(15px); }
-        }
-        @keyframes peekRight {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-15px); }
-        }
-        @keyframes bounceGentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
-        /* ─── PARTÍCULAS MÁGICAS (canvas) ── */
-        #magic-canvas { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
-
-        /* ═══════════ SPLASH (APERTURA) ═══════════ */
+        /* ═══════════ SPLASH ═══════════ */
         #splash {
-            position: fixed; inset: 0; z-index: 9999;
-            background: linear-gradient(135deg, #f0e8dc 0%, #e8f0e8 100%);
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            perspective: 1200px;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
-        #splash.hide { animation: splashClose 1s ease forwards; pointer-events: none; }
-        @keyframes splashClose {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.1); }
+        #splash.hide {
+            animation: splashFade 1.5s ease forwards;
+            pointer-events: none;
         }
-        .splash-book {
-            background: var(--cream); 
-            border-radius: 20px;
-            padding: 50px 36px; 
-            text-align: center; 
-            max-width: 440px; 
-            width: 90%;
-            position: relative; 
-            box-shadow: 0 8px 30px rgba(139,115,85,0.2);
-            border: 4px dashed var(--sage-light);
-            animation: bookOpen 1.2s ease forwards;
+        @keyframes splashFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
         }
-        @keyframes bookOpen {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .splash-content {
+            text-align: center;
+            animation: splashReveal 2s ease forwards;
         }
-        .splash-ornament-top {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 20px; justify-content: center;
+        @keyframes splashReveal {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        .splash-ornament-top::before, .splash-ornament-top::after {
-            content: ''; flex: 1; height: 1px;
-            background: linear-gradient(to right, transparent, var(--sage), transparent);
+        .splash-cross {
+            width: 60px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
         }
-        .splash-ornament-top span { color: var(--sage); font-size: 1.4rem; animation: twinkleStar 2s infinite; }
-        @keyframes twinkleStar {
-            0%,100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+        .splash-cross::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
         }
-        .splash-eyebrow {
-            font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 0.65rem;
-            letter-spacing: 10px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px;
-            animation: fadeSlideUp 0.8s 0.3s ease both;
+        .splash-cross::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 12px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 2px;
+        }
+        .splash-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
         }
         .splash-name {
-            font-family: 'Uncial Antiqua', cursive; font-size: clamp(2.6rem, 7vw, 3.6rem);
-            color: var(--ink); line-height: 1.1; letter-spacing: 2px;
-            animation: fadeSlideUp 0.8s 0.5s ease both;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--brown);
+            margin-bottom: 30px;
         }
-        .splash-sub {
-            font-family: 'Great Vibes', cursive; font-size: 1.6rem;
-            color: var(--coral); margin: 12px 0 20px;
-            animation: fadeSlideUp 0.8s 0.7s ease both;
+        .splash-hint {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--brown-light);
+            letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
         }
-        .splash-ornament-bottom {
-            width: 80px; height: 1px; background: var(--gold); margin: 0 auto 16px;
-            animation: expandLine 1s 0.8s ease both;
-        }
-        @keyframes expandLine {
-            0% { width: 0; opacity: 0; }
-            100% { width: 80px; opacity: 1; }
-        }
-        .splash-date {
-            font-family: 'Raleway', sans-serif; font-size: 0.7rem; letter-spacing: 8px;
-            text-transform: uppercase; color: var(--ink-light);
-            animation: fadeSlideUp 0.8s 1s ease both;
-        }
-        .splash-cta {
-            font-size: 0.6rem; letter-spacing: 5px; color: var(--coral); margin-top: 28px;
-            animation: softPulse 2.5s 1.2s ease-in-out infinite both;
-        }
-        @keyframes softPulse {
-            0%,100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.06); }
-        }
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         /* ═══════════ CONTENEDOR PRINCIPAL ═══════════ */
-        .main-wrapper {
-            position: relative; z-index: 3; max-width: 500px; width: 100%;
-            margin: 20px auto 60px;
-        }
-
-        /* ─── PÁGINA DEL LIBRO ─── */
-        .book-page {
-            background: rgba(250, 248, 245, 0.95); 
-            border-radius: 20px;
-            padding: 40px 24px 36px 20px; 
-            margin-bottom: 28px; 
+        .main-container {
             position: relative;
-            box-shadow: var(--shadow-soft);
-            border: 3px solid var(--beige);
-            transition: transform 0.5s, box-shadow 0.5s;
-            opacity: 0;
-        }
-        .book-page.visible {
-            animation: pageEnter 0.9s ease forwards;
-        }
-        @keyframes pageEnter {
-            from { opacity: 0; transform: translateY(40px) rotate(1deg); }
-            to { opacity: 1; transform: translateY(0) rotate(0deg); }
-        }
-        .book-page:hover {
-            transform: translateY(-3px) rotate(0.5deg);
-            box-shadow: 0 12px 35px rgba(139,115,85,0.15);
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        /* ─── STAGGER ANIMATIONS ── */
-        .stagger > * {
-            opacity: 0; transform: translateY(12px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .stagger.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
-        .stagger.visible > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
-        .stagger.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
-        .stagger.visible > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
-        .stagger.visible > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
-        .stagger.visible > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
-
-        /* ─── ORNAMENTOS ─── */
-        .page-ornament-top {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
-        }
-        .page-ornament-top::before, .page-ornament-top::after {
-            content: ''; flex: 1; height: 1px;
-            background: linear-gradient(to right, transparent, var(--sage), transparent);
-        }
-        .page-ornament-top span { color: var(--sage); font-size: 1rem; }
-
-        /* ─── CAPITULAR ─── */
-        .drop-cap {
-            float: left; font-family: 'Uncial Antiqua', cursive; font-size: 3.5rem;
-            line-height: 0.8; padding-right: 8px; color: var(--coral);
-            text-shadow: 1px 1px 0 var(--peach);
-            animation: dropCapEnter 0.8s ease both;
-        }
-        @keyframes dropCapEnter {
-            from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
-            to { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
-
-        /* ─── HÉROE ─── */
-        .hero-section { text-align: center; }
-        .hero-chapter {
-            font-family: 'Raleway', sans-serif; font-size: 0.5rem; letter-spacing: 6px;
-            text-transform: uppercase; color: var(--sage); margin-bottom: 8px;
-        }
-
-        /* ═══════════════════════════════════════════════════════
-           NUEVO MARCO DE FOTO ESTILO GALERÍA PREMIUM
-           - Marco rectangular con esquinas redondeadas
-           - Doble borde (dorado + beige)
-           - Esquinas ornamentales decorativas
-           - Animación: Reveal con clip-path + Ken Burns sutil + Shimmer único
-        ═══════════════════════════════════════════════════════ */
-        .hero-illustration {
-            width: 260px; 
-            height: 320px; 
-            margin: 0 auto 24px; 
-            position: relative;
-        }
-        
-        /* Marco exterior dorado */
-        .photo-frame-outer {
-            position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-light) 100%);
-            padding: 4px;
-            box-shadow: 
-                0 10px 40px rgba(201,169,110,0.3),
-                0 4px 12px rgba(139,115,85,0.2);
-            animation: frameReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            opacity: 0;
-        }
-        @keyframes frameReveal {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.85) translateY(20px);
-                filter: blur(10px);
-            }
-            60% {
-                filter: blur(0px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1) translateY(0);
-                filter: blur(0px);
-            }
-        }
-        
-        /* Marco interior beige */
-        .photo-frame-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 13px;
-            background: var(--cream);
-            padding: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Contenedor de la foto con clip-path reveal */
-        .photo-container {
-            width: 100%;
-            height: 100%;
+        /* ─── INVITACIÓN ─── */
+        .invitation {
+            background: var(--white);
+            border: 3px double var(--gold);
             border-radius: 8px;
-            overflow: hidden;
+            padding: 60px 40px;
+            margin: 40px 0;
             position: relative;
-            clip-path: circle(0% at 50% 50%);
-            animation: photoReveal 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+            box-shadow: 
+                var(--shadow),
+                0 0 0 1px var(--gold-light),
+                0 0 0 8px var(--white),
+                0 0 0 9px var(--gold);
+            opacity: 0;
+            transform: translateY(40px);
         }
-        @keyframes photoReveal {
-            0% { clip-path: circle(0% at 50% 50%); }
-            100% { clip-path: circle(75% at 50% 50%); }
+        .invitation.visible {
+            animation: cardReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-        
-        /* Foto con efecto Ken Burns sutil */
-        .photo-container img {
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── ORNAMENTOS DE ESQUINA ─── */
+        .corner-ornament {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0;
+        }
+        .corner-ornament.visible {
+            animation: ornamentReveal 1s ease forwards;
+        }
+        @keyframes ornamentReveal {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .corner-tl { top: 15px; left: 15px; animation-delay: 0.2s; }
+        .corner-tr { top: 15px; right: 15px; transform: scaleX(-1); animation-delay: 0.4s; }
+        .corner-bl { bottom: 15px; left: 15px; transform: scaleY(-1); animation-delay: 0.6s; }
+        .corner-br { bottom: 15px; right: 15px; transform: scale(-1, -1); animation-delay: 0.8s; }
+
+        .corner-ornament svg {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-            animation: kenBurns 20s ease-in-out infinite alternate;
-            transform-origin: center center;
         }
-        @keyframes kenBurns {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.08) translate(-1%, -1%); }
+
+        /* ─── CRUZ ─── */
+        .cross-container {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(-20px);
         }
-        
-        /* Efecto shimmer dorado que pasa UNA sola vez */
-        .photo-shimmer {
+        .cross-container.visible {
+            animation: crossReveal 1.2s ease 0.3s forwards;
+        }
+        @keyframes crossReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cross {
+            width: 50px;
+            height: 70px;
+            margin: 0 auto;
+            position: relative;
+            filter: drop-shadow(0 2px 8px rgba(184,148,62,0.3));
+        }
+        .cross::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 70px;
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            border-radius: 2px;
+        }
+        .cross::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 10px;
+            background: linear-gradient(90deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            border-radius: 2px;
+        }
+        .cross-shine {
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent 0%,
-                rgba(255,255,255,0) 30%,
-                rgba(255,255,255,0.4) 50%,
-                rgba(255,255,255,0) 70%,
-                transparent 100%
-            );
-            animation: shimmerPass 2s ease-in-out 1.5s forwards;
-            pointer-events: none;
-            z-index: 2;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: crossShine 3s ease-in-out infinite;
         }
-        @keyframes shimmerPass {
-            0% { left: -100%; }
-            100% { left: 200%; }
+        @keyframes crossShine {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
         }
-        
-        /* Esquinas ornamentales del marco */
-        .corner-ornament {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            z-index: 3;
+
+        /* ─── TEXTOS ─── */
+        .text-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--brown-light);
+            text-align: center;
+            margin-bottom: 15px;
+            font-style: italic;
             opacity: 0;
-            animation: cornerFade 0.6s ease forwards;
         }
-        .corner-ornament svg {
+        .text-intro.visible {
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+        .text-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brown);
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            opacity: 0;
+        }
+        .text-title.visible {
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+        .text-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--brown-light);
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+        .text-subtitle.visible {
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+        .text-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 5px;
+            opacity: 0;
+            text-shadow: 0 2px 4px rgba(184,148,62,0.2);
+        }
+        .text-name.visible {
+            animation: nameReveal 1.2s ease 1.1s forwards;
+        }
+        @keyframes nameReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+        .text-surname {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--brown);
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            opacity: 0;
+        }
+        .text-surname.visible {
+            animation: fadeInUp 1s ease 1.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── FECHA ─── */
+        .date-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 1px solid var(--gold-light);
+            border-bottom: 1px solid var(--gold-light);
+            opacity: 0;
+        }
+        .date-section.visible {
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .date-day {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .date-number {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+        .date-month {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+            letter-spacing: 3px;
+        }
+
+        /* ─── PADRES Y PADRINOS ─── */
+        .family-section {
+            margin: 40px 0;
+            opacity: 0;
+        }
+        .family-section.visible {
+            animation: fadeIn 1s ease 1.7s forwards;
+        }
+        .family-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px 0;
+        }
+        .family-label {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+            flex: 0 0 120px;
+            text-align: center;
+        }
+        .family-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--brown);
+            flex: 1;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .family-name strong {
+            display: block;
+            font-weight: 600;
+            color: var(--brown);
+        }
+
+        /* ─── IGLESIA ─── */
+        .church-section {
+            text-align: center;
+            margin: 40px 0;
+            opacity: 0;
+        }
+        .church-section.visible {
+            animation: fadeIn 1s ease 1.9s forwards;
+        }
+        .church-icon {
+            width: 60px;
+            height: 80px;
+            margin: 0 auto 20px;
+            position: relative;
+            opacity: 0.8;
+        }
+        .church-icon svg {
             width: 100%;
             height: 100%;
         }
-        .corner-tl { top: -2px; left: -2px; animation-delay: 0.8s; }
-        .corner-tr { top: -2px; right: -2px; animation-delay: 0.9s; transform: scaleX(-1); }
-        .corner-bl { bottom: -2px; left: -2px; animation-delay: 1s; transform: scaleY(-1); }
-        .corner-br { bottom: -2px; right: -2px; animation-delay: 1.1s; transform: scale(-1, -1); }
-        @keyframes cornerFade {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+        .church-time {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 15px;
         }
-        .corner-tr { animation: cornerFadeTR 0.6s ease 0.9s forwards; }
-        @keyframes cornerFadeTR {
-            0% { opacity: 0; transform: scaleX(-1) scale(0.5); }
-            100% { opacity: 1; transform: scaleX(-1) scale(1); }
+        .church-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+            margin-bottom: 10px;
+            font-weight: 600;
         }
-        .corner-bl { animation: cornerFadeBL 0.6s ease 1s forwards; }
-        @keyframes cornerFadeBL {
-            0% { opacity: 0; transform: scaleY(-1) scale(0.5); }
-            100% { opacity: 1; transform: scaleY(-1) scale(1); }
-        }
-        .corner-br { animation: cornerFadeBR 0.6s ease 1.1s forwards; }
-        @keyframes cornerFadeBR {
-            0% { opacity: 0; transform: scale(-1, -1) scale(0.5); }
-            100% { opacity: 1; transform: scale(-1, -1) scale(1); }
+        .church-reference {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--brown-light);
+            font-style: italic;
         }
 
-        .hero-name {
-            font-family: 'Uncial Antiqua', cursive; font-size: clamp(2rem, 6vw, 2.8rem);
-            color: var(--ink); line-height: 1.1;
+        /* ─── SEPARADOR ─── */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+            opacity: 0;
         }
-        .hero-sub {
-            font-family: 'Great Vibes', cursive; font-size: 1.3rem; color: var(--coral); margin: 6px 0 14px;
+        .divider.visible {
+            animation: fadeIn 1s ease 2.1s forwards;
         }
-        .hero-info {
-            font-family: 'Raleway', sans-serif; font-size: 0.55rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--ink-light); margin-bottom: 2px;
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
-        .hero-cta {
-            display: inline-block; margin-top: 18px; padding: 10px 26px;
-            background: linear-gradient(135deg, var(--sage-light), var(--sage));
-            color: var(--white); font-family: 'Raleway', sans-serif; font-weight: 600;
-            font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase;
-            border-radius: 25px; cursor: pointer; transition: all 0.4s;
-            position: relative; overflow: hidden;
+        .divider-icon {
+            width: 30px;
+            height: 30px;
+            margin: 0 15px;
+            position: relative;
         }
-        .hero-cta::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-        .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(168,181,160,0.4); }
-        .hero-cta:hover::after { transform: translateX(100%); }
-
-        /* ─── CHAPTER HEADER ─── */
-        .chapter-header { text-align: center; margin-bottom: 20px; }
-        .chapter-label {
-            font-family: 'Raleway', sans-serif; font-size: 0.5rem; letter-spacing: 6px;
-            text-transform: uppercase; color: var(--sage); margin-bottom: 4px;
-        }
-        .chapter-title {
-            font-family: 'Uncial Antiqua', cursive; font-size: clamp(1.4rem, 4vw, 1.8rem);
-            color: var(--ink); letter-spacing: 1px;
-        }
-        .chapter-rule {
-            width: 50px; height: 2px; background: var(--peach); margin: 8px auto 0;
-            border-radius: 1px; animation: expandLine 1s ease both;
-        }
-
-        /* ─── MENSAJE ─── */
-        .message-block {
-            background: linear-gradient(135deg, var(--peach-light), var(--beige));
-            border-radius: 15px; padding: 24px 20px; text-align: center; margin: 16px 0;
-            position: relative; overflow: hidden;
-        }
-        .message-text {
-            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem;
-            color: var(--ink); line-height: 1.8;
-        }
-        .milestones-row {
-            display: flex; justify-content: center; gap: 20px; margin-top: 18px;
-            padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.4);
-        }
-        .milestone-year {
-            font-family: 'Uncial Antiqua', cursive; font-size: 1.3rem; color: var(--coral);
-        }
-        .milestone-event {
-            font-family: 'Raleway', sans-serif; font-size: 0.48rem; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--ink-light); margin-top: 2px;
+        .divider-icon::before {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            font-size: 1.2rem;
         }
 
         /* ─── COUNTDOWN ─── */
-        .countdown-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .countdown-unit {
-            text-align: center; background: var(--cream); border-radius: 12px;
-            padding: 12px 8px; min-width: 56px;
-            box-shadow: 0 2px 8px rgba(139,115,85,0.08);
-            border: 2px solid var(--beige);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .countdown-section {
+            text-align: center;
+            margin: 40px 0;
+            opacity: 0;
         }
-        .countdown-unit:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(139,115,85,0.12); }
-        .countdown-num {
-            font-family: 'Uncial Antiqua', cursive; font-size: 1.6rem; color: var(--ink);
-            transition: transform 0.3s;
+        .countdown-section.visible {
+            animation: fadeIn 1s ease 2.3s forwards;
         }
-        .countdown-unit:hover .countdown-num { transform: scale(1.1); }
-        .countdown-lbl {
-            font-family: 'Raleway', sans-serif; font-size: 0.42rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--ink-light); margin-top: 3px;
+        .countdown-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
-
-        /* ─── INFO TILES ─── */
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 12px 0; }
-        .info-tile {
-            background: var(--cream); border-radius: 12px; padding: 14px 10px; text-align: center;
-            border: 2px solid var(--beige);
-            transition: transform 0.4s, box-shadow 0.4s;
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        .info-tile:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 20px rgba(139,115,85,0.12); }
-        .info-icon { font-size: 1.3rem; margin-bottom: 2px; transition: transform 0.3s; }
-        .info-tile:hover .info-icon { transform: scale(1.3) rotate(-10deg); }
-        .info-label {
-            font-family: 'Raleway', sans-serif; font-size: 0.45rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--sage); margin-bottom: 2px;
+        .countdown-item {
+            background: var(--cream);
+            border: 1px solid var(--gold-light);
+            border-radius: 4px;
+            padding: 15px 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .info-value {
-            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.72rem;
-            color: var(--ink-light); line-height: 1.4; white-space: pre-line;
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(184,148,62,0.2);
         }
-
-        /* ── PROGRAMA ─── */
-        .program-list { max-width: 340px; margin: 0 auto; }
-        .program-item {
-            display: flex; gap: 10px; margin-bottom: 10px; padding-bottom: 10px;
-            border-bottom: 1px dotted var(--beige); align-items: baseline;
-            transition: transform 0.3s, padding-left 0.3s;
+        .countdown-number {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
         }
-        .program-item:hover { transform: translateX(4px); }
-        .program-badge {
-            width: 28px; height: 28px; background: var(--beige); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-            font-family: 'Uncial Antiqua', cursive; font-size: 0.7rem; color: var(--brown);
-            transition: transform 0.3s, background 0.3s;
+        .countdown-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--brown-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .program-item:hover .program-badge {
-            transform: scale(1.2); background: var(--sage-light); color: var(--sage-dark);
-        }
-        .program-content { flex: 1; }
-        .program-time {
-            font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.65rem;
-            color: var(--sage); letter-spacing: 2px; margin-bottom: 1px;
-        }
-        .program-title {
-            font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.85rem;
-            color: var(--ink);
-        }
-        .program-desc {
-            font-family: 'Raleway', sans-serif; font-size: 0.48rem; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--ink-light); margin-top: 1px;
-        }
-
-        /* ─── MAP ─── */
-        .map-wrap {
-            border-radius: 12px; overflow: hidden; border: 2px solid var(--beige);
-            margin: 8px 0; transition: box-shadow 0.4s;
-        }
-        .map-wrap:hover { box-shadow: 0 8px 24px rgba(139,115,85,0.15); }
-        .map-wrap iframe { width: 100%; height: 180px; border: 0; display: block; }
-        .map-link {
-            display: inline-block; padding: 6px 14px; background: var(--beige);
-            color: var(--ink); font-family: 'Raleway', sans-serif; font-size: 0.45rem;
-            letter-spacing: 3px; text-transform: uppercase; border-radius: 15px;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .map-link:hover { background: var(--sage-light); transform: translateY(-2px); }
-
-        /* ─── CARRUSEL ─── */
-        .carousel-wrap {
-            position: relative; overflow: hidden; border-radius: 15px;
-            border: 2px solid var(--beige); margin: 8px 0;
-        }
-        .carousel-track {
-            display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-        .carousel-slide { min-width: 100%; position: relative; aspect-ratio: 4/3; overflow: hidden; }
-        .carousel-slide img {
-            width: 100%; height: 100%; object-fit: cover; filter: sepia(0.1);
-            transition: transform 0.5s;
-        }
-        .carousel-slide:hover img { transform: scale(1.04); }
-        .carousel-caption {
-            position: absolute; bottom: 0; left: 0; right: 0; padding: 12px;
-            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-            font-family: 'Raleway', sans-serif; font-size: 0.5rem;
-            letter-spacing: 2px; text-transform: uppercase; color: #fff;
-            transform: translateY(100%); transition: transform 0.4s;
-        }
-        .carousel-slide:hover .carousel-caption { transform: translateY(0); }
-        .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.9); border: 2px solid var(--beige);
-            color: var(--ink); width: 32px; height: 32px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            z-index: 5; transition: background 0.3s, transform 0.3s; font-size: 0.9rem;
-            opacity: 0.6;
-        }
-        .carousel-wrap:hover .carousel-btn { opacity: 1; }
-        .carousel-btn:hover { background: var(--cream); transform: translateY(-50%) scale(1.1); }
-        .carousel-prev { left: 8px; } .carousel-next { right: 8px; }
-        .carousel-dots { display: flex; justify-content: center; gap: 6px; padding: 8px 0; }
-        .carousel-dot {
-            width: 7px; height: 7px; border-radius: 50%; background: var(--beige);
-            cursor: pointer; transition: background 0.3s, transform 0.3s;
-        }
-        .carousel-dot.active { background: var(--sage); transform: scale(1.5); }
-
-        /* ─── MÚSICA ─── */
-        .music-player {
-            display: flex; align-items: center; gap: 8px; background: var(--cream);
-            border: 2px solid var(--beige); border-radius: 25px;
-            padding: 6px 14px 6px 8px; max-width: 240px; margin: 0 auto 16px;
-            cursor: pointer; transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .music-player:hover { box-shadow: 0 4px 12px rgba(139,115,85,0.1); transform: scale(1.03); }
-        .music-btn {
-            width: 30px; height: 30px; border-radius: 50%; background: var(--sage);
-            border: none; color: var(--white); font-size: 0.8rem; display: flex;
-            align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
-            transition: transform 0.3s, background 0.3s;
-        }
-        .music-player:hover .music-btn { transform: scale(1.1); }
-        .music-info { flex: 1; min-width: 0; }
-        .music-title {
-            font-family: 'Raleway', sans-serif; font-size: 0.55rem; font-weight: 600;
-            color: var(--ink); letter-spacing: 1px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .music-wave { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
-        .music-wave span {
-            width: 2px; background: var(--sage); border-radius: 1px;
-            animation: wave 0.7s ease-in-out infinite; animation-delay: var(--wdelay);
-        }
-        @keyframes wave {
-            0%,100% { height: 4px; } 50% { height: 14px; }
-        }
-        .music-paused .music-wave span { animation-play-state: paused; height: 3px; }
 
         /* ─── RSVP ─── */
-        .rsvp-card {
-            background: var(--cream); border-radius: 15px; padding: 24px 18px;
-            border: 2px solid var(--beige); box-shadow: var(--shadow-soft);
-            transition: box-shadow 0.4s;
+        .rsvp-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px 20px;
+            background: var(--cream);
+            border: 1px solid var(--gold-light);
+            border-radius: 4px;
+            opacity: 0;
         }
-        .rsvp-card:hover { box-shadow: 0 8px 24px rgba(139,115,85,0.15); }
+        .rsvp-section.visible {
+            animation: fadeIn 1s ease 2.5s forwards;
+        }
+        .rsvp-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--brown);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .rsvp-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--brown-light);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        .rsvp-form {
+            max-width: 350px;
+            margin: 0 auto;
+        }
         .rsvp-input {
-            width: 100%; padding: 8px 10px; margin-bottom: 10px; background: transparent;
-            border: none; border-bottom: 2px solid var(--beige);
-            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem;
-            color: var(--ink); outline: none; transition: border-color 0.3s, padding-left 0.3s;
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            border-radius: 4px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--brown);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .rsvp-input:focus { border-bottom-color: var(--sage); padding-left: 4px; }
-        .rsvp-input::placeholder { color: var(--ink-light); font-style: italic; }
-        .rsvp-btn {
-            width: 100%; padding: 12px;
-            background: linear-gradient(135deg, var(--sage), var(--coral));
-            color: var(--white); font-family: 'Raleway', sans-serif; font-weight: 600;
-            font-size: 0.5rem; letter-spacing: 4px; text-transform: uppercase;
-            cursor: pointer; border: none; border-radius: 20px; transition: opacity 0.3s, transform 0.3s;
-            position: relative; overflow: hidden;
+        .rsvp-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(184,148,62,0.1);
         }
-        .rsvp-btn::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
-            transform: translateX(-100%); transition: transform 0.5s;
+        .rsvp-input::placeholder {
+            color: var(--brown-light);
+            opacity: 0.6;
         }
-        .rsvp-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        .rsvp-btn:hover::after { transform: translateX(100%); }
-        .rsvp-thanks { display: none; text-align: center; padding: 24px; animation: fadeSlideUp 0.6s ease both; }
-        .rsvp-thanks.show { display: block; }
+        .rsvp-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .rsvp-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .rsvp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184,148,62,0.3);
+        }
+        .rsvp-button:hover::before {
+            left: 100%;
+        }
 
         /* ─── FOOTER ─── */
-        .footer-section {
-            text-align: center; padding: 30px 20px 20px; position: relative;
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0;
         }
-        .footer-ornament {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 12px; justify-content: center;
-        }
-        .footer-ornament::before, .footer-ornament::after {
-            content: ''; flex: 1; max-width: 60px; height: 1px;
-            background: linear-gradient(to right, transparent, var(--sage), transparent);
-        }
-        .footer-name {
-            font-family: 'Uncial Antiqua', cursive; font-size: 1.6rem; color: var(--ink);
-        }
-        .footer-date {
-            font-family: 'Raleway', sans-serif; font-size: 0.45rem; letter-spacing: 3px;
-            text-transform: uppercase; color: var(--ink-light); margin-top: 4px;
+        .footer.visible {
+            animation: fadeIn 1s ease 2.7s forwards;
         }
         .footer-verse {
-            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.8rem;
-            color: var(--ink-light); margin-top: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--brown-light);
+            font-style: italic;
+            margin-bottom: 10px;
         }
-        .footer-end {
-            font-family: 'Uncial Antiqua', cursive; font-size: 1rem; color: var(--coral);
-            margin-top: 10px; animation: softPulse 3s infinite;
+        .footer-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--gold);
         }
 
-        @media (max-width: 500px) {
-            .main-wrapper { 
-                margin: 10px 6px 40px; 
-                z-index: 5;
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            .invitation {
+                padding: 40px 25px;
+                margin: 20px 0;
             }
-            .book-page { 
-                padding: 30px 14px 24px 12px; 
-                margin-bottom: 20px;
-                border-radius: 15px;
+            .corner-ornament {
+                width: 60px;
+                height: 60px;
             }
-            .hero-illustration {
-                width: 220px; 
-                height: 280px;
+            .text-title {
+                font-size: 2rem;
+                letter-spacing: 4px;
             }
-            .jungle-animal {
-                z-index: 10 !important;
-                opacity: 0.95 !important;
-                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            .text-name {
+                font-size: 2.5rem;
             }
-            .animal-1 {
-                width: 85px !important;
-                height: 85px !important;
-                top: 1% !important;
-                left: 1% !important;
+            .family-row {
+                flex-direction: column;
+                gap: 10px;
             }
-            .animal-2 {
-                width: 85px !important;
-                height: 85px !important;
-                top: 1% !important;
-                right: 1% !important;
-            }
-            .animal-3 {
-                width: 75px !important;
-                height: 75px !important;
-                bottom: 1% !important;
-                left: 1% !important;
-            }
-            .animal-4 {
-                width: 80px !important;
-                height: 80px !important;
-                bottom: 1% !important;
-                right: 1% !important;
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Canvas de partículas mágicas -->
-    <canvas id="magic-canvas"></canvas>
+    <div class="bg-pattern"></div>
+    <canvas id="gold-canvas"></canvas>
 
-    <!-- ─── FONDO CON HOJAS TROPICALES ─── -->
-    <div class="jungle-bg">
-        <div class="tropical-leaf leaf-1" style="--rotation: -15deg;"></div>
-        <div class="tropical-leaf leaf-2" style="--rotation: 15deg;"></div>
-        <div class="tropical-leaf leaf-3" style="--rotation: 10deg;"></div>
-        <div class="tropical-leaf leaf-4" style="--rotation: -10deg;"></div>
-    </div>
-
-    <!-- ─── ANIMALES DE LA SELVA ─── -->
-    <svg class="jungle-animal animal-1" viewBox="0 0 100 100">
-        <g>
-            <ellipse cx="50" cy="55" rx="35" ry="30" fill="#faf8f5" stroke="#4a4a4a" stroke-width="1.5"/>
-            <path d="M 35 40 Q 50 35 65 40" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <path d="M 32 50 Q 50 45 68 50" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <path d="M 35 60 Q 50 55 65 60" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <path d="M 40 70 Q 50 67 60 70" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <ellipse cx="50" cy="30" rx="22" ry="20" fill="#faf8f5" stroke="#4a4a4a" stroke-width="1.5"/>
-            <path d="M 45 18 L 50 28 L 55 18" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <ellipse cx="35" cy="18" rx="6" ry="8" fill="#f0d5c5" stroke="#4a4a4a" stroke-width="1"/>
-            <ellipse cx="65" cy="18" rx="6" ry="8" fill="#f0d5c5" stroke="#4a4a4a" stroke-width="1"/>
-            <circle cx="43" cy="28" r="2.5" fill="#4a4a4a"/>
-            <circle cx="57" cy="28" r="2.5" fill="#4a4a4a"/>
-            <circle cx="44" cy="27" r="1" fill="#fff"/>
-            <circle cx="58" cy="27" r="1" fill="#fff"/>
-            <ellipse cx="50" cy="38" rx="10" ry="7" fill="#6b5d52"/>
-            <circle cx="47" cy="37" r="1.5" fill="#4a4a4a"/>
-            <circle cx="53" cy="37" r="1.5" fill="#4a4a4a"/>
-            <path d="M 47 42 Q 50 44 53 42" stroke="#4a4a4a" stroke-width="1" fill="none"/>
-            <path d="M 32 25 L 28 20" stroke="#4a4a4a" stroke-width="2"/>
-            <path d="M 35 22 L 32 16" stroke="#4a4a4a" stroke-width="2"/>
-            <path d="M 68 25 L 72 20" stroke="#4a4a4a" stroke-width="2"/>
-            <path d="M 65 22 L 68 16" stroke="#4a4a4a" stroke-width="2"/>
-        </g>
-    </svg>
-
-    <svg class="jungle-animal animal-2" viewBox="0 0 100 100">
-        <g>
-            <ellipse cx="50" cy="60" rx="32" ry="28" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <ellipse cx="50" cy="35" rx="28" ry="24" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <path d="M 28 22 L 22 8 L 38 18 Z" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <path d="M 72 22 L 78 8 L 62 18 Z" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <path d="M 30 20 L 26 12 L 36 17 Z" fill="#f5d5c5"/>
-            <path d="M 70 20 L 74 12 L 64 17 Z" fill="#f5d5c5"/>
-            <ellipse cx="42" cy="32" rx="4" ry="5" fill="#fff" stroke="#8b5a3c" stroke-width="1"/>
-            <ellipse cx="58" cy="32" rx="4" ry="5" fill="#fff" stroke="#8b5a3c" stroke-width="1"/>
-            <circle cx="43" cy="33" r="2.5" fill="#4a4a4a"/>
-            <circle cx="59" cy="33" r="2.5" fill="#4a4a4a"/>
-            <circle cx="44" cy="32" r="1" fill="#fff"/>
-            <circle cx="60" cy="32" r="1" fill="#fff"/>
-            <ellipse cx="50" cy="42" rx="4" ry="3" fill="#4a4a4a"/>
-            <ellipse cx="32" cy="38" rx="4" ry="3" fill="#f5b5a5" opacity="0.6"/>
-            <ellipse cx="68" cy="38" rx="4" ry="3" fill="#f5b5a5" opacity="0.6"/>
-            <path d="M 46 46 Q 50 49 54 46" stroke="#8b5a3c" stroke-width="1.5" fill="none"/>
-            <path d="M 75 55 Q 88 50 92 60 Q 94 65 88 68 Q 82 70 78 65" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <path d="M 80 60 Q 85 58 87 62" fill="#faf8f5"/>
-        </g>
-    </svg>
-
-    <svg class="jungle-animal animal-3" viewBox="0 0 100 100">
-        <g>
-            <ellipse cx="50" cy="55" rx="35" ry="32" fill="#e8e0d8" stroke="#a8a098" stroke-width="1.5"/>
-            <ellipse cx="50" cy="40" rx="30" ry="26" fill="#e8e0d8" stroke="#a8a098" stroke-width="1.5"/>
-            <ellipse cx="25" cy="38" rx="14" ry="18" fill="#f0e8e0" stroke="#a8a098" stroke-width="1.5"/>
-            <ellipse cx="75" cy="38" rx="14" ry="18" fill="#f0e8e0" stroke="#a8a098" stroke-width="1.5"/>
-            <path d="M 50 52 Q 48 65 52 72 Q 55 76 50 78 Q 45 80 42 75" fill="none" stroke="#a8a098" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="42" cy="35" r="3" fill="#4a4a4a"/>
-            <circle cx="58" cy="35" r="3" fill="#4a4a4a"/>
-            <circle cx="43" cy="34" r="1" fill="#fff"/>
-            <circle cx="59" cy="34" r="1" fill="#fff"/>
-            <ellipse cx="32" cy="45" rx="4" ry="3" fill="#f5d5c5" opacity="0.6"/>
-            <ellipse cx="68" cy="45" rx="4" ry="3" fill="#f5d5c5" opacity="0.6"/>
-            <path d="M 45 60 Q 42 65 44 68" fill="none" stroke="#faf8f5" stroke-width="2" stroke-linecap="round"/>
-            <path d="M 55 60 Q 58 65 56 68" fill="none" stroke="#faf8f5" stroke-width="2" stroke-linecap="round"/>
-        </g>
-    </svg>
-
-    <svg class="jungle-animal animal-4" viewBox="0 0 100 100">
-        <g>
-            <circle cx="50" cy="50" r="40" fill="#b8956a" stroke="#8b7355" stroke-width="1.5"/>
-            <circle cx="50" cy="50" r="28" fill="#f5d5a5" stroke="#d4b896" stroke-width="1.5"/>
-            <circle cx="28" cy="28" r="8" fill="#f5d5a5" stroke="#8b7355" stroke-width="1.5"/>
-            <circle cx="72" cy="28" r="8" fill="#f5d5a5" stroke="#8b7355" stroke-width="1.5"/>
-            <circle cx="28" cy="28" r="4" fill="#f5b5a5" opacity="0.6"/>
-            <circle cx="72" cy="28" r="4" fill="#f5b5a5" opacity="0.6"/>
-            <circle cx="42" cy="45" r="3.5" fill="#4a4a4a"/>
-            <circle cx="58" cy="45" r="3.5" fill="#4a4a4a"/>
-            <circle cx="43" cy="44" r="1.5" fill="#fff"/>
-            <circle cx="59" cy="44" r="1.5" fill="#fff"/>
-            <ellipse cx="50" cy="56" rx="5" ry="4" fill="#d4a595"/>
-            <path d="M 45 62 Q 50 66 55 62" stroke="#8b7355" stroke-width="2" fill="none"/>
-            <path d="M 50 62 L 50 66" stroke="#8b7355" stroke-width="1.5"/>
-            <line x1="35" y1="56" x2="25" y2="54" stroke="#8b7355" stroke-width="1"/>
-            <line x1="35" y1="60" x2="25" y2="60" stroke="#8b7355" stroke-width="1"/>
-            <line x1="65" y1="56" x2="75" y2="54" stroke="#8b7355" stroke-width="1"/>
-            <line x1="65" y1="60" x2="75" y2="60" stroke="#8b7355" stroke-width="1"/>
-            <circle cx="35" cy="55" r="4" fill="#f5b5a5" opacity="0.5"/>
-            <circle cx="65" cy="55" r="4" fill="#f5b5a5" opacity="0.5"/>
-        </g>
-    </svg>
-
-    <!-- ═══════════ SPLASH (APERTURA) ═══════════ -->
-    <div id="splash" onclick="closeSplash()">
-        <div class="splash-book">
-            <div class="splash-ornament-top"><span>🦁</span></div>
-            <p class="splash-eyebrow">Bienvenidos a la selva</p>
-            <h1 class="splash-name">Emilio André</h1>
-            <p class="splash-sub">Una aventura de Bautizo</p>
-            <div class="splash-ornament-bottom"></div>
-            <p class="splash-date">8 · Marzo · 2026</p>
-            <p class="splash-cta">✧ Abre el libro ✧</p>
+    <!-- SPLASH -->
+    <div id="splash">
+        <div class="splash-content">
+            <div class="splash-cross"></div>
+            <div class="splash-text">Bautizo</div>
+            <div class="splash-name">Emilio André</div>
+            <div class="splash-hint">Toca para abrir la invitación</div>
         </div>
     </div>
 
-    <!-- ═══════════ CONTENEDOR PRINCIPAL ═══════════ -->
-    <div class="main-wrapper">
-
-        <!-- ─── PÁGINA 1: HÉROE ─── -->
-        <div class="book-page stagger" id="page-hero">
-            <div class="page-ornament-top"><span>🌿</span></div>
-            <section class="hero-section" id="inicio">
-                <p class="hero-chapter">Capítulo Uno</p>
-                
-                <!-- NUEVO MARCO DE FOTO PREMIUM -->
-                <div class="hero-illustration">
-                    <div class="photo-frame-outer">
-                        <div class="photo-frame-inner">
-                            <div class="photo-container">
-                                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80" alt="Emilio André" crossorigin="anonymous">
-                                <div class="photo-shimmer"></div>
-                            </div>
-                        </div>
-                        <!-- Esquinas ornamentales -->
-                        <div class="corner-ornament corner-tl">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M2 8 C2 4, 4 2, 8 2" stroke="#c9a96e" stroke-width="2" fill="none"/>
-                                <circle cx="4" cy="4" r="2" fill="#c9a96e"/>
-                            </svg>
-                        </div>
-                        <div class="corner-ornament corner-tr">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M2 8 C2 4, 4 2, 8 2" stroke="#c9a96e" stroke-width="2" fill="none"/>
-                                <circle cx="4" cy="4" r="2" fill="#c9a96e"/>
-                            </svg>
-                        </div>
-                        <div class="corner-ornament corner-bl">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M2 8 C2 4, 4 2, 8 2" stroke="#c9a96e" stroke-width="2" fill="none"/>
-                                <circle cx="4" cy="4" r="2" fill="#c9a96e"/>
-                            </svg>
-                        </div>
-                        <div class="corner-ornament corner-br">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M2 8 C2 4, 4 2, 8 2" stroke="#c9a96e" stroke-width="2" fill="none"/>
-                                <circle cx="4" cy="4" r="2" fill="#c9a96e"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                
-                <h1 class="hero-name">Emilio André</h1>
-                <p class="hero-sub">Bautizo</p>
-                <p class="hero-info">8 · Marzo · 2026 · 11:00 am</p>
-                <p class="hero-info">Parroquia de San Juan · Tepoztlán, Morelos</p>
-                <a href="#rsvp" class="hero-cta">Confirmar Asistencia</a>
-            </section>
-        </div>
-
-        <!-- ─── PÁGINA 2: MENSAJE ─── -->
-        <div class="book-page stagger" id="page-message">
-            <div class="page-ornament-top"><span></span></div>
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Dos</p>
-                <h2 class="chapter-title">Un Pequeño Explorador</h2>
-                <div class="chapter-rule"></div>
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-container">
+        <div class="invitation" id="invitation">
+            
+            <!-- ORNAMENTOS DE ESQUINA -->
+            <div class="corner-ornament corner-tl">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
+                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
+                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+                </svg>
             </div>
-            <div class="message-block">
-                <p class="message-text">
-                    <span class="drop-cap">E</span>n la gran aventura de la vida, llegó nuestro pequeño explorador. Hoy lo presentamos ante Dios y celebramos su vida junto a nuestra familia, en un día lleno de amor y bendiciones.
-                </p>
-                <div class="milestones-row">
-                    <div>
-                        <div class="milestone-year">2025</div>
-                        <div class="milestone-event">Llegó al mundo</div>
-                    </div>
-                    <div>
-                        <div class="milestone-year">2025</div>
-                        <div class="milestone-event">Primeras sonrisas</div>
-                    </div>
-                    <div>
-                        <div class="milestone-year">2026</div>
-                        <div class="milestone-event">Recibe el Bautismo</div>
-                    </div>
+            <div class="corner-ornament corner-tr">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
+                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
+                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="corner-ornament corner-bl">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
+                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
+                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="corner-ornament corner-br">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
+                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
+                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+                </svg>
+            </div>
+
+            <!-- CRUZ -->
+            <div class="cross-container">
+                <div class="cross">
+                    <div class="cross-shine"></div>
                 </div>
             </div>
 
-            <div class="music-player music-paused" id="music-player" onclick="toggleMusic()" title="Música ambiental">
-                <button class="music-btn" id="music-btn">▶</button>
-                <div class="music-info"><div class="music-title">Ave Maria</div></div>
-                <div class="music-wave">
-                    <span style="--wdelay:0s;"></span><span style="--wdelay:0.12s;"></span>
-                    <span style="--wdelay:0.24s;"></span><span style="--wdelay:0.36s;"></span>
+            <!-- TEXTOS -->
+            <div class="text-intro">Acompáñanos a ser parte del</div>
+            <div class="text-title">BAUTIZO</div>
+            <div class="text-subtitle">De nuestro hijo</div>
+            <div class="text-name">Emilio André</div>
+            <div class="text-surname">ARIAS SERRANO</div>
+
+            <!-- FECHA -->
+            <div class="date-section">
+                <div class="date-day">Domingo</div>
+                <div class="date-number">08</div>
+                <div class="date-month">Febrero</div>
+            </div>
+
+            <!-- PADRES Y PADRINOS -->
+            <div class="family-section">
+                <div class="family-row">
+                    <div class="family-name">
+                        <strong>Andy R.</strong>
+                        Arias Jaramillo
+                    </div>
+                    <div class="family-label">Padres</div>
+                    <div class="family-name">
+                        <strong>Brestaneth R.</strong>
+                        Serrano Chong
+                    </div>
                 </div>
-                <audio id="bg-music" loop>
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                </audio>
+                <div class="family-row">
+                    <div class="family-name">
+                        <strong>Isaac García</strong>
+                    </div>
+                    <div class="family-label">Padrinos</div>
+                    <div class="family-name">
+                        <strong>Ashly González</strong>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- ─── PÁGINA 3: COUNTDOWN ─── -->
-        <div class="book-page stagger" id="page-countdown">
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Tres</p>
-                <h2 class="chapter-title">La Cuenta Regresiva</h2>
-                <div class="chapter-rule"></div>
+            <!-- IGLESIA -->
+            <div class="church-section">
+                <div class="church-icon">
+                    <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="30" width="20" height="40" fill="#4a3820" opacity="0.8"/>
+                        <polygon points="30,10 15,30 45,30" fill="#4a3820" opacity="0.8"/>
+                        <rect x="28" y="5" width="4" height="10" fill="#4a3820" opacity="0.8"/>
+                        <rect x="25" y="50" width="10" height="20" fill="#faf6ed" opacity="0.6"/>
+                        <circle cx="30" cy="20" r="2" fill="#b8943e"/>
+                    </svg>
+                </div>
+                <div class="church-time">10:00 a.m.</div>
+                <div class="church-name">Capilla San Juan Pablo II</div>
+                <div class="church-reference">
+                    Referencia:<br>
+                    En los estacionamientos de Albrook Mall
+                </div>
             </div>
-            <div class="countdown-row" id="countdown">
-                <div class="countdown-unit"><div class="countdown-num" id="cd-days">00</div><div class="countdown-lbl">Días</div></div>
-                <div class="countdown-unit"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-lbl">Horas</div></div>
-                <div class="countdown-unit"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-lbl">Min</div></div>
-                <div class="countdown-unit"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-lbl">Seg</div></div>
-            </div>
-        </div>
 
-        <!-- ─── PÁGINA 4: DETALLES ─── -->
-        <div class="book-page stagger" id="page-details">
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Cuatro</p>
-                <h2 class="chapter-title">La Celebración</h2>
-                <div class="chapter-rule"></div>
+            <!-- SEPARADOR -->
+            <div class="divider">
+                <div class="divider-icon"></div>
             </div>
-            <div class="info-grid">
-                <div class="info-tile"><div class="info-icon">🎈</div><div class="info-label">Fecha</div><div class="info-value">8 · Marzo · 2026</div></div>
-                <div class="info-tile"><div class="info-icon">🕊️</div><div class="info-label">Hora</div><div class="info-value">11:00 de la mañana</div></div>
-                <div class="info-tile"><div class="info-icon">⛪</div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
-                <div class="info-tile"><div class="info-icon"></div><div class="info-label">Vestimenta</div><div class="info-value">Elegante<br>Colores claros</div></div>
-            </div>
-            <div class="chapter-header" style="margin-top:20px;"><p class="chapter-label">El Itinerario</p></div>
-            <div class="program-list">
-                <div class="program-item"><div class="program-badge">I</div><div class="program-content"><div class="program-time">10:30</div><div class="program-title">Llegada</div><div class="program-desc">En el jardín</div></div></div>
-                <div class="program-item"><div class="program-badge">II</div><div class="program-content"><div class="program-time">11:00</div><div class="program-title">Bautismo</div><div class="program-desc">Sacramento</div></div></div>
-                <div class="program-item"><div class="program-badge">III</div><div class="program-content"><div class="program-time">12:00</div><div class="program-title">Misa</div><div class="program-desc">Acción de gracias</div></div></div>
-                <div class="program-item"><div class="program-badge">IV</div><div class="program-content"><div class="program-time">1:00</div><div class="program-title">Recepción</div><div class="program-desc">Comida y celebración</div></div></div>
-            </div>
-        </div>
 
-        <!-- ─── PÁGINA 5: MAPA ─── -->
-        <div class="book-page stagger" id="page-map">
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Cinco</p>
-                <h2 class="chapter-title">El Mapa del Tesoro</h2>
-                <div class="chapter-rule"></div>
+            <!-- COUNTDOWN -->
+            <div class="countdown-section">
+                <div class="countdown-title">Cuenta Regresiva</div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seg</span>
+                    </div>
+                </div>
             </div>
-            <div class="map-wrap">
-                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Plaza+Principal+Tepoztl%C3%A1n+Morelos" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <p style="text-align:center;">
-                <a href="https://www.google.com/maps?q=Plaza+Principal+Tepoztl%C3%A1n+Morelos" target="_blank" class="map-link">Abrir en Google Maps →</a>
-            </p>
-        </div>
 
-        <!-- ─── PÁGINA 6: GALERÍA ─── -->
-        <div class="book-page stagger" id="page-gallery">
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Seis</p>
-                <h2 class="chapter-title">Recuerdos Mágicos</h2>
-                <div class="chapter-rule"></div>
-            </div>
-            <div class="carousel-wrap" id="carousel">
-                <div class="carousel-track" id="carousel-track"></div>
-                <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Anterior">‹</button>
-                <button class="carousel-btn carousel-next" onclick="moveCarousel(1)" aria-label="Siguiente">›</button>
-            </div>
-            <div class="carousel-dots" id="carousel-dots"></div>
-        </div>
-
-        <!-- ── PÁGINA 7: RSVP ─── -->
-        <div class="book-page stagger" id="rsvp">
-            <div class="chapter-header">
-                <p class="chapter-label">Capítulo Siete</p>
-                <h2 class="chapter-title">Tu Lugar en la Aventura</h2>
-                <div class="chapter-rule"></div>
-            </div>
-            <p style="text-align:center;font-family:'Raleway',sans-serif;font-size:0.55rem;color:var(--ink-light);margin-bottom:16px;">Confírmanos antes del 22 de febrero de 2026</p>
-            <div class="rsvp-card">
-                <form id="rsvp-form" onsubmit="submitRSVP(event)">
-                    <input class="rsvp-input" type="text" id="rsvp-name" required placeholder="Nombre completo">
-                    <input class="rsvp-input" type="text" id="rsvp-guests" placeholder="Número de acompañantes">
-                    <textarea class="rsvp-input" id="rsvp-message" rows="3" placeholder="Mensaje para la familia..." style="resize:none;"></textarea>
-                    <button type="submit" class="rsvp-btn">Enviar por WhatsApp</button>
+            <!-- RSVP -->
+            <div class="rsvp-section">
+                <div class="rsvp-title">Confirmar Asistencia</div>
+                <div class="rsvp-subtitle">Por favor confirma antes del 1 de febrero</div>
+                <form class="rsvp-form" onsubmit="handleRSVP(event)">
+                    <input type="text" class="rsvp-input" placeholder="Nombre completo" required>
+                    <input type="number" class="rsvp-input" placeholder="Número de invitados" min="1" max="10">
+                    <button type="submit" class="rsvp-button">Enviar Confirmación</button>
                 </form>
-                <div class="rsvp-thanks" id="rsvp-thanks">
-                    <div style="font-size:2.5rem;"></div>
-                    <h3 style="font-family:'Uncial Antiqua',cursive;font-size:1.4rem;color:var(--ink);">¡Gracias!</h3>
-                    <p style="font-family:'Raleway',sans-serif;color:var(--ink-light);">Tu confirmación ha sido enviada.</p>
-                </div>
             </div>
+
         </div>
 
-        <!-- ─── PÁGINA 8: FOOTER ─── -->
-        <div class="footer-section book-page stagger" id="page-footer">
-            <div class="footer-ornament"><span>🌿</span></div>
-            <div class="footer-name">Emilio André</div>
-            <div class="footer-date">8 · Marzo · 2026 · Tepoztlán, Morelos</div>
-            <p class="footer-verse">&ldquo;Dejad que los niños vengan a mí.&rdquo;</p>
-            <p class="footer-end">¡Fin de la aventura!</p>
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-verse">"Dejad que los niños vengan a mí"</div>
+            <div class="footer-text">— Marcos 10:14 —</div>
         </div>
-
     </div>
 
     <script>
-        const CFG = {
-            person1: 'Emilio André',
-            eventType: 'Bautizo',
-            eventDate: '2026-03-08T11:00:00',
-            eventDateDisplay: '8 · Marzo · 2026',
-            eventTime: '11:00 de la mañana',
-            venue: 'Parroquia de San Juan',
-            address: 'Plaza Principal s/n',
-            city: 'Tepoztlán, Morelos',
-            storyText: 'En la gran aventura de la vida, llegó nuestro pequeño explorador.',
-            milestones: [
-                { year: '2025', event: 'Llegó al mundo' },
-                { year: '2025', event: 'Primeras sonrisas' },
-                { year: '2026', event: 'Recibe el Bautismo' },
-            ],
-            programItems: [
-                { time: '10:30', title: 'Llegada', desc: 'En el jardín' },
-                { time: '11:00', title: 'Bautismo', desc: 'Sacramento' },
-                { time: '12:00', title: 'Misa', desc: 'Acción de gracias' },
-                { time: '1:00', title: 'Recepción', desc: 'Comida y celebración' },
-            ],
-            dresscode: 'Elegante\nColores claros',
-            rsvpDeadline: '22 de febrero de 2026',
-            footerVerse: 'Dejad que los niños vengan a mí.',
-            whatsappNumber: '',
-            heroImage: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80',
-            gallery: [
-                { src: 'https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80', cap: 'Familia unida' },
-                { src: 'https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80', cap: 'Momento sagrado' },
-                { src: 'https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80', cap: 'Lleno de amor' },
-                { src: 'https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80', cap: 'Un ángel' },
-                { src: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?w=600&q=80', cap: 'La familia crece' },
-                { src: 'https://images.unsplash.com/photo-1607357910286-1ff94ac13c24?w=600&q=80', cap: 'Bendición' },
-            ],
-        };
+        // ─── SPLASH ───
+        const splash = document.getElementById('splash');
+        splash.addEventListener('click', () => {
+            splash.classList.add('hide');
+            setTimeout(() => {
+                splash.style.display = 'none';
+                revealInvitation();
+            }, 1500);
+        });
 
-        (function() {
-            const canvas = document.getElementById('magic-canvas');
-            const ctx = canvas.getContext('2d');
-            let W, H;
-            const sparkles = [];
-            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-            resize();
-            window.addEventListener('resize', resize);
-            const colors = ['#a8b5a0', '#c5d4be', '#f5d5c5', '#faf8f5', '#d4b896', '#e8a595'];
-            for (let i = 0; i < 50; i++) {
-                sparkles.push({
-                    x: Math.random() * W, y: Math.random() * H,
-                    r: Math.random() * 3 + 0.8,
-                    vy: -(Math.random() * 0.6 + 0.1),
-                    vx: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random() * 0.6 + 0.2,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    twinkle: Math.random() * Math.PI * 2,
-                    twinkleSpeed: 0.02 + Math.random() * 0.04,
-                });
-            }
-            function draw() {
-                ctx.clearRect(0, 0, W, H);
-                for (const s of sparkles) {
-                    s.x += s.vx; s.y += s.vy; s.twinkle += s.twinkleSpeed;
-                    if (s.y < -20) { s.y = H + 20; s.x = Math.random() * W; }
-                    if (s.x < -20) s.x = W + 20;
-                    if (s.x > W + 20) s.x = -20;
-                    const alpha = s.alpha * (0.4 + 0.6 * Math.abs(Math.sin(s.twinkle)));
-                    const r = s.r * (0.8 + 0.4 * Math.abs(Math.sin(s.twinkle * 1.3)));
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
-                    const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r);
-                    grad.addColorStop(0, s.color);
-                    grad.addColorStop(1, 'transparent');
-                    ctx.fillStyle = grad;
-                    ctx.globalAlpha = alpha;
-                    ctx.fill();
-                }
-                ctx.globalAlpha = 1;
-                requestAnimationFrame(draw);
-            }
-            draw();
-        })();
-
-        let splashClosed = false;
-        function closeSplash() {
-            if (splashClosed) return;
-            splashClosed = true;
-            document.getElementById('splash').classList.add('hide');
-            setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 1000);
-        }
-        setTimeout(closeSplash, 5000);
-
-        let musicPlaying = false;
-        const audio = document.getElementById('bg-music');
-        const musicPlayer = document.getElementById('music-player');
-        const musicBtn = document.getElementById('music-btn');
-        function toggleMusic() {
-            if (musicPlaying) {
-                audio.pause();
-                musicBtn.textContent = '▶';
-                musicPlayer.classList.add('music-paused');
-                musicPlayer.classList.remove('music-playing');
-            } else {
-                audio.play().catch(() => {});
-                musicBtn.textContent = '⏸';
-                musicPlayer.classList.add('music-playing');
-                musicPlayer.classList.remove('music-paused');
-            }
-            musicPlaying = !musicPlaying;
+        // ─── REVEAL INVITATION ───
+        function revealInvitation() {
+            const invitation = document.getElementById('invitation');
+            invitation.classList.add('visible');
+            
+            setTimeout(() => {
+                document.querySelectorAll('.corner-ornament').forEach(el => el.classList.add('visible'));
+            }, 200);
+            
+            setTimeout(() => {
+                document.querySelector('.cross-container').classList.add('visible');
+            }, 400);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.text-intro, .text-title, .text-subtitle, .text-name, .text-surname').forEach(el => el.classList.add('visible'));
+            }, 600);
+            
+            setTimeout(() => {
+                document.querySelector('.date-section').classList.add('visible');
+            }, 1000);
+            
+            setTimeout(() => {
+                document.querySelector('.family-section').classList.add('visible');
+            }, 1200);
+            
+            setTimeout(() => {
+                document.querySelector('.church-section').classList.add('visible');
+            }, 1400);
+            
+            setTimeout(() => {
+                document.querySelector('.divider').classList.add('visible');
+            }, 1600);
+            
+            setTimeout(() => {
+                document.querySelector('.countdown-section').classList.add('visible');
+            }, 1800);
+            
+            setTimeout(() => {
+                document.querySelector('.rsvp-section').classList.add('visible');
+            }, 2000);
+            
+            setTimeout(() => {
+                document.querySelector('.footer').classList.add('visible');
+            }, 2200);
         }
 
+        // ─── COUNTDOWN ───
+        const eventDate = new Date('2026-02-08T10:00:00').getTime();
+        
         function updateCountdown() {
-            const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
-            const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
-            const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-            const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            animateNum('cd-days', days);
-            animateNum('cd-hours', hours);
-            animateNum('cd-mins', mins);
-            animateNum('cd-secs', secs);
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            
+            if (distance < 0) return;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
-        function animateNum(id, newVal) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            if (el.textContent !== newVal) {
-                el.style.transform = 'scale(0.7)';
-                el.style.opacity = '0.5';
-                el.textContent = newVal;
-                requestAnimationFrame(() => {
-                    el.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease';
-                    el.style.transform = 'scale(1)';
-                    el.style.opacity = '1';
-                });
-            }
-        }
+        
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        let carouselIdx = 0;
-        function buildCarousel() {
-            const track = document.getElementById('carousel-track');
-            const dotsContainer = document.getElementById('carousel-dots');
-            track.innerHTML = CFG.gallery.map((img) => `
-            <div class="carousel-slide">
-              <img src="${img.src}" alt="${img.cap}" loading="lazy">
-              <div class="carousel-caption">${img.cap}</div>
-            </div>`).join('');
-            dotsContainer.innerHTML = CFG.gallery.map((_, i) => `
-            <div class="carousel-dot${i === 0 ? ' active' : ''}" onclick="goToCarousel(${i})"></div>`).join('');
-            updateCarousel();
-        }
-        buildCarousel();
-        function updateCarousel() {
-            const track = document.getElementById('carousel-track');
-            track.style.transform = `translateX(-${carouselIdx * 100}%)`;
-            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === carouselIdx);
-            });
-        }
-        function moveCarousel(dir) {
-            const len = CFG.gallery.length;
-            carouselIdx = (carouselIdx + dir + len) % len;
-            updateCarousel();
-        }
-        function goToCarousel(idx) { carouselIdx = idx; updateCarousel(); }
-        let touchStartX = 0;
-        document.getElementById('carousel').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-        document.getElementById('carousel').addEventListener('touchend', e => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 40) moveCarousel(diff > 0 ? 1 : -1);
-        });
-
-        function submitRSVP(e) {
+        // ─── RSVP ───
+        function handleRSVP(e) {
             e.preventDefault();
-            const name = document.getElementById('rsvp-name').value.trim();
-            const guests = document.getElementById('rsvp-guests').value.trim();
-            const message = document.getElementById('rsvp-message').value.trim();
-            if (!name) return alert('Por favor ingresa tu nombre.');
-            if (CFG.whatsappNumber) {
-                const text = `Hola, soy ${name}. Confirmo mi asistencia al ${CFG.eventType} de ${CFG.person1}${guests ? ' con ' + guests + ' acompañante(s)' : ''}.${message ? ' ' + message : ''}`;
-                window.open(`https://wa.me/${CFG.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
-            }
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-thanks').classList.add('show');
+            const button = e.target.querySelector('.rsvp-button');
+            button.textContent = '✓ Confirmación Enviada';
+            button.style.background = 'linear-gradient(135deg, #6b8e5a, #8ba87a)';
+            setTimeout(() => {
+                button.textContent = 'Enviar Confirmación';
+                button.style.background = '';
+                e.target.reset();
+            }, 3000);
         }
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+        // ─── PARTÍCULAS DORADAS ───
+        const canvas = document.getElementById('gold-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.3 + 0.1;
+                this.fadeSpeed = Math.random() * 0.01 + 0.005;
+                this.growing = Math.random() > 0.5;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.growing) {
+                    this.opacity += this.fadeSpeed;
+                    if (this.opacity >= 0.4) this.growing = false;
+                } else {
+                    this.opacity -= this.fadeSpeed;
+                    if (this.opacity <= 0.1) this.growing = true;
                 }
+                
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(184, 148, 62, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+        
+        for (let i = 0; i < 30; i++) {
+            particles.push(new Particle());
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.book-page').forEach(el => observer.observe(el));
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
