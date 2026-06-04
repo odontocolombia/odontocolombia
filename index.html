@@ -55,7 +55,6 @@
             background: linear-gradient(135deg, var(--sage) 0%, transparent 100%);
             border-radius: 0 100% 0 100%;
             transform: rotate(-15deg);
-            animation-delay: 0s;
         }
         .leaf-2 {
             top: 10%;
@@ -314,19 +313,65 @@
             from { transform: rotate(360deg); }
             to { transform: rotate(0deg); }
         }
+        /* NUEVA FORMA: OCTÁGONO REDONDEADO (SQUIRCLE) */
         .hero-photo-mask {
-            width: 200px; height: 200px; border-radius: 50%; overflow: hidden;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            border: 5px solid var(--white);
-            box-shadow: 0 0 0 3px var(--sage-light), 0 8px 30px rgba(168,181,160,0.3);
-            animation: photoFloat 5s ease-in-out infinite;
+            width: 180px; height: 180px; 
+            overflow: hidden;
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%);
+            /* Forma octagonal simétrica */
+            clip-path: polygon(
+                30% 0%, 70% 0%, 
+                100% 30%, 100% 70%, 
+                70% 100%, 30% 100%, 
+                0% 70%, 0% 30%
+            );
+            border: none;
+            box-shadow: none;
+            /* Marco decorativo con pseudo-elemento */
+            background: var(--white);
+            padding: 6px;
+            animation: photoFloat 5s ease-in-out infinite, photoGlow 3s ease-in-out infinite;
+        }
+        .hero-photo-mask::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(
+                30% 0%, 70% 0%, 
+                100% 30%, 100% 70%, 
+                70% 100%, 30% 100%, 
+                0% 70%, 0% 30%
+            );
+            background: linear-gradient(135deg, var(--sage-light), var(--peach));
+            z-index: -1;
+        }
+        .hero-photo-mask-inner {
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(
+                30% 0%, 70% 0%, 
+                100% 30%, 100% 70%, 
+                70% 100%, 30% 100%, 
+                0% 70%, 0% 30%
+            );
+            overflow: hidden;
+        }
+        .hero-photo-mask-inner img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
         }
         @keyframes photoFloat {
             0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
             33% { transform: translate(-50%, -50%) translateY(-8px) rotate(1deg); }
             66% { transform: translate(-50%, -50%) translateY(-4px) rotate(-1deg); }
         }
-        .hero-photo-mask img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes photoGlow {
+            0%,100% { filter: drop-shadow(0 0 8px rgba(168,181,160,0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(232,165,149,0.6)) drop-shadow(0 0 40px rgba(168,181,160,0.3)); }
+        }
         .hero-name {
             font-family: 'Uncial Antiqua', cursive; font-size: clamp(2rem, 6vw, 2.8rem);
             color: var(--ink); line-height: 1.1;
@@ -431,7 +476,7 @@
             color: var(--ink-light); line-height: 1.4; white-space: pre-line;
         }
 
-        /* ─── PROGRAMA ─── */
+        /* ── PROGRAMA ─── */
         .program-list { max-width: 340px; margin: 0 auto; }
         .program-item {
             display: flex; gap: 10px; margin-bottom: 10px; padding-bottom: 10px;
@@ -462,7 +507,7 @@
             text-transform: uppercase; color: var(--ink-light); margin-top: 1px;
         }
 
-        /* ─── MAP ── */
+        /* ─── MAP ─── */
         .map-wrap {
             border-radius: 12px; overflow: hidden; border: 2px solid var(--beige);
             margin: 8px 0; transition: box-shadow 0.4s;
@@ -623,13 +668,37 @@
                 width: 220px; height: 220px;
             }
             .hero-photo-mask {
-                width: 150px; height: 150px;
-                border-width: 4px;
+                width: 140px; height: 140px;
             }
+            /* ANIMALES AL FRENTE EN MÓVIL */
             .jungle-animal {
-                width: 70px !important;
-                height: 70px !important;
-                opacity: 0.7;
+                z-index: 10 !important;
+                opacity: 0.95 !important;
+                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            }
+            .animal-1 {
+                width: 85px !important;
+                height: 85px !important;
+                top: 1% !important;
+                left: 1% !important;
+            }
+            .animal-2 {
+                width: 85px !important;
+                height: 85px !important;
+                top: 1% !important;
+                right: 1% !important;
+            }
+            .animal-3 {
+                width: 75px !important;
+                height: 75px !important;
+                bottom: 1% !important;
+                left: 1% !important;
+            }
+            .animal-4 {
+                width: 80px !important;
+                height: 80px !important;
+                bottom: 1% !important;
+                right: 1% !important;
             }
         }
     </style>
@@ -651,32 +720,23 @@
     <!-- Cebra -->
     <svg class="jungle-animal animal-1" viewBox="0 0 100 100">
         <g>
-            <!-- Cuerpo -->
             <ellipse cx="50" cy="55" rx="35" ry="30" fill="#faf8f5" stroke="#4a4a4a" stroke-width="1.5"/>
-            <!-- Rayas -->
             <path d="M 35 40 Q 50 35 65 40" stroke="#4a4a4a" stroke-width="2" fill="none"/>
             <path d="M 32 50 Q 50 45 68 50" stroke="#4a4a4a" stroke-width="2" fill="none"/>
             <path d="M 35 60 Q 50 55 65 60" stroke="#4a4a4a" stroke-width="2" fill="none"/>
             <path d="M 40 70 Q 50 67 60 70" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <!-- Cabeza -->
             <ellipse cx="50" cy="30" rx="22" ry="20" fill="#faf8f5" stroke="#4a4a4a" stroke-width="1.5"/>
-            <!-- Raya frente -->
             <path d="M 45 18 L 50 28 L 55 18" stroke="#4a4a4a" stroke-width="2" fill="none"/>
-            <!-- Orejas -->
             <ellipse cx="35" cy="18" rx="6" ry="8" fill="#f0d5c5" stroke="#4a4a4a" stroke-width="1"/>
             <ellipse cx="65" cy="18" rx="6" ry="8" fill="#f0d5c5" stroke="#4a4a4a" stroke-width="1"/>
-            <!-- Ojos -->
             <circle cx="43" cy="28" r="2.5" fill="#4a4a4a"/>
             <circle cx="57" cy="28" r="2.5" fill="#4a4a4a"/>
             <circle cx="44" cy="27" r="1" fill="#fff"/>
             <circle cx="58" cy="27" r="1" fill="#fff"/>
-            <!-- Hocico -->
             <ellipse cx="50" cy="38" rx="10" ry="7" fill="#6b5d52"/>
             <circle cx="47" cy="37" r="1.5" fill="#4a4a4a"/>
             <circle cx="53" cy="37" r="1.5" fill="#4a4a4a"/>
-            <!-- Sonrisa -->
             <path d="M 47 42 Q 50 44 53 42" stroke="#4a4a4a" stroke-width="1" fill="none"/>
-            <!-- Melena -->
             <path d="M 32 25 L 28 20" stroke="#4a4a4a" stroke-width="2"/>
             <path d="M 35 22 L 32 16" stroke="#4a4a4a" stroke-width="2"/>
             <path d="M 68 25 L 72 20" stroke="#4a4a4a" stroke-width="2"/>
@@ -687,30 +747,22 @@
     <!-- Zorro -->
     <svg class="jungle-animal animal-2" viewBox="0 0 100 100">
         <g>
-            <!-- Cuerpo -->
             <ellipse cx="50" cy="60" rx="32" ry="28" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <!-- Cabeza -->
             <ellipse cx="50" cy="35" rx="28" ry="24" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
-            <!-- Orejas -->
             <path d="M 28 22 L 22 8 L 38 18 Z" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
             <path d="M 72 22 L 78 8 L 62 18 Z" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
             <path d="M 30 20 L 26 12 L 36 17 Z" fill="#f5d5c5"/>
             <path d="M 70 20 L 74 12 L 64 17 Z" fill="#f5d5c5"/>
-            <!-- Ojos -->
             <ellipse cx="42" cy="32" rx="4" ry="5" fill="#fff" stroke="#8b5a3c" stroke-width="1"/>
             <ellipse cx="58" cy="32" rx="4" ry="5" fill="#fff" stroke="#8b5a3c" stroke-width="1"/>
             <circle cx="43" cy="33" r="2.5" fill="#4a4a4a"/>
             <circle cx="59" cy="33" r="2.5" fill="#4a4a4a"/>
             <circle cx="44" cy="32" r="1" fill="#fff"/>
             <circle cx="60" cy="32" r="1" fill="#fff"/>
-            <!-- Nariz -->
             <ellipse cx="50" cy="42" rx="4" ry="3" fill="#4a4a4a"/>
-            <!-- Mejillas rosadas -->
             <ellipse cx="32" cy="38" rx="4" ry="3" fill="#f5b5a5" opacity="0.6"/>
             <ellipse cx="68" cy="38" rx="4" ry="3" fill="#f5b5a5" opacity="0.6"/>
-            <!-- Sonrisa -->
             <path d="M 46 46 Q 50 49 54 46" stroke="#8b5a3c" stroke-width="1.5" fill="none"/>
-            <!-- Cola -->
             <path d="M 75 55 Q 88 50 92 60 Q 94 65 88 68 Q 82 70 78 65" fill="#d48565" stroke="#8b5a3c" stroke-width="1.5"/>
             <path d="M 80 60 Q 85 58 87 62" fill="#faf8f5"/>
         </g>
@@ -719,24 +771,17 @@
     <!-- Elefante -->
     <svg class="jungle-animal animal-3" viewBox="0 0 100 100">
         <g>
-            <!-- Cuerpo -->
             <ellipse cx="50" cy="55" rx="35" ry="32" fill="#e8e0d8" stroke="#a8a098" stroke-width="1.5"/>
-            <!-- Cabeza -->
             <ellipse cx="50" cy="40" rx="30" ry="26" fill="#e8e0d8" stroke="#a8a098" stroke-width="1.5"/>
-            <!-- Orejas grandes -->
             <ellipse cx="25" cy="38" rx="14" ry="18" fill="#f0e8e0" stroke="#a8a098" stroke-width="1.5"/>
             <ellipse cx="75" cy="38" rx="14" ry="18" fill="#f0e8e0" stroke="#a8a098" stroke-width="1.5"/>
-            <!-- Trompa -->
             <path d="M 50 52 Q 48 65 52 72 Q 55 76 50 78 Q 45 80 42 75" fill="none" stroke="#a8a098" stroke-width="5" stroke-linecap="round"/>
-            <!-- Ojos -->
             <circle cx="42" cy="35" r="3" fill="#4a4a4a"/>
             <circle cx="58" cy="35" r="3" fill="#4a4a4a"/>
             <circle cx="43" cy="34" r="1" fill="#fff"/>
             <circle cx="59" cy="34" r="1" fill="#fff"/>
-            <!-- Mejillas -->
             <ellipse cx="32" cy="45" rx="4" ry="3" fill="#f5d5c5" opacity="0.6"/>
             <ellipse cx="68" cy="45" rx="4" ry="3" fill="#f5d5c5" opacity="0.6"/>
-            <!-- Colmillos -->
             <path d="M 45 60 Q 42 65 44 68" fill="none" stroke="#faf8f5" stroke-width="2" stroke-linecap="round"/>
             <path d="M 55 60 Q 58 65 56 68" fill="none" stroke="#faf8f5" stroke-width="2" stroke-linecap="round"/>
         </g>
@@ -745,31 +790,23 @@
     <!-- León -->
     <svg class="jungle-animal animal-4" viewBox="0 0 100 100">
         <g>
-            <!-- Melena -->
             <circle cx="50" cy="50" r="40" fill="#b8956a" stroke="#8b7355" stroke-width="1.5"/>
-            <!-- Cara -->
             <circle cx="50" cy="50" r="28" fill="#f5d5a5" stroke="#d4b896" stroke-width="1.5"/>
-            <!-- Orejas -->
             <circle cx="28" cy="28" r="8" fill="#f5d5a5" stroke="#8b7355" stroke-width="1.5"/>
             <circle cx="72" cy="28" r="8" fill="#f5d5a5" stroke="#8b7355" stroke-width="1.5"/>
             <circle cx="28" cy="28" r="4" fill="#f5b5a5" opacity="0.6"/>
             <circle cx="72" cy="28" r="4" fill="#f5b5a5" opacity="0.6"/>
-            <!-- Ojos -->
             <circle cx="42" cy="45" r="3.5" fill="#4a4a4a"/>
             <circle cx="58" cy="45" r="3.5" fill="#4a4a4a"/>
             <circle cx="43" cy="44" r="1.5" fill="#fff"/>
             <circle cx="59" cy="44" r="1.5" fill="#fff"/>
-            <!-- Nariz -->
             <ellipse cx="50" cy="56" rx="5" ry="4" fill="#d4a595"/>
-            <!-- Sonrisa -->
             <path d="M 45 62 Q 50 66 55 62" stroke="#8b7355" stroke-width="2" fill="none"/>
             <path d="M 50 62 L 50 66" stroke="#8b7355" stroke-width="1.5"/>
-            <!-- Bigotes -->
             <line x1="35" y1="56" x2="25" y2="54" stroke="#8b7355" stroke-width="1"/>
             <line x1="35" y1="60" x2="25" y2="60" stroke="#8b7355" stroke-width="1"/>
             <line x1="65" y1="56" x2="75" y2="54" stroke="#8b7355" stroke-width="1"/>
             <line x1="65" y1="60" x2="75" y2="60" stroke="#8b7355" stroke-width="1"/>
-            <!-- Mejillas -->
             <circle cx="35" cy="55" r="4" fill="#f5b5a5" opacity="0.5"/>
             <circle cx="65" cy="55" r="4" fill="#f5b5a5" opacity="0.5"/>
         </g>
@@ -809,7 +846,9 @@
                         <circle cx="140" cy="140" r="88" fill="none" stroke="#a8b5a0" stroke-width="2" class="hero-halo"/>
                     </svg>
                     <div class="hero-photo-mask">
-                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&q=80" alt="Emilio André" crossorigin="anonymous">
+                        <div class="hero-photo-mask-inner">
+                            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=200&q=80" alt="Emilio André" crossorigin="anonymous">
+                        </div>
                     </div>
                 </div>
                 <h1 class="hero-name">Emilio André</h1>
@@ -887,7 +926,7 @@
             <div class="info-grid">
                 <div class="info-tile"><div class="info-icon">🎈</div><div class="info-label">Fecha</div><div class="info-value">8 · Marzo · 2026</div></div>
                 <div class="info-tile"><div class="info-icon">🕊️</div><div class="info-label">Hora</div><div class="info-value">11:00 de la mañana</div></div>
-                <div class="info-tile"><div class="info-icon">⛪</div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
+                <div class="info-tile"><div class="info-icon"></div><div class="info-label">Lugar</div><div class="info-value">Parroquia de San Juan<br>Plaza Principal<br>Tepoztlán, Morelos</div></div>
                 <div class="info-tile"><div class="info-icon">👔</div><div class="info-label">Vestimenta</div><div class="info-value">Elegante<br>Colores claros</div></div>
             </div>
             <div class="chapter-header" style="margin-top:20px;"><p class="chapter-label">El Itinerario</p></div>
@@ -964,9 +1003,6 @@
     </div><!-- /main-wrapper -->
 
     <script>
-        // ═══════════════════════════════════════════
-        // CONFIGURACIÓN — Edita estos valores
-        // ═══════════════════════════════════════════
         const CFG = {
             person1: 'Emilio André',
             eventType: 'Bautizo',
@@ -1003,7 +1039,6 @@
             ],
         };
 
-        // ═══════════ PARTÍCULAS MÁGICAS ═══════════
         (function() {
             const canvas = document.getElementById('magic-canvas');
             const ctx = canvas.getContext('2d');
@@ -1049,7 +1084,6 @@
             draw();
         })();
 
-        // ═══════════ SPLASH ═══════════
         let splashClosed = false;
         function closeSplash() {
             if (splashClosed) return;
@@ -1059,7 +1093,6 @@
         }
         setTimeout(closeSplash, 5000);
 
-        // ═══════════ MÚSICA ═══════════
         let musicPlaying = false;
         const audio = document.getElementById('bg-music');
         const musicPlayer = document.getElementById('music-player');
@@ -1079,14 +1112,12 @@
             musicPlaying = !musicPlaying;
         }
 
-        // ═══════════ COUNTDOWN ═══════════
         function updateCountdown() {
             const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
             const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
             const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
             const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
             const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-
             animateNum('cd-days', days);
             animateNum('cd-hours', hours);
             animateNum('cd-mins', mins);
@@ -1109,7 +1140,6 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // ═══════════ CARRUSEL ═══════════
         let carouselIdx = 0;
         function buildCarousel() {
             const track = document.getElementById('carousel-track');
@@ -1136,8 +1166,7 @@
             carouselIdx = (carouselIdx + dir + len) % len;
             updateCarousel();
         }
-        function goToCarousel(idx) { carouselIdx = idx;
-            updateCarousel(); }
+        function goToCarousel(idx) { carouselIdx = idx; updateCarousel(); }
         let touchStartX = 0;
         document.getElementById('carousel').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
         document.getElementById('carousel').addEventListener('touchend', e => {
@@ -1145,7 +1174,6 @@
             if (Math.abs(diff) > 40) moveCarousel(diff > 0 ? 1 : -1);
         });
 
-        // ═══════════ RSVP ═══════════
         function submitRSVP(e) {
             e.preventDefault();
             const name = document.getElementById('rsvp-name').value.trim();
@@ -1160,7 +1188,6 @@
             document.getElementById('rsvp-thanks').classList.add('show');
         }
 
-        // ═══════════ INTERSECTION OBSERVER ═══════════
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
