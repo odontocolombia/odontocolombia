@@ -479,7 +479,7 @@
             text-transform: uppercase; color: var(--ink-light); margin-top: 1px;
         }
 
-        /* ─── MAP ── */
+        /* ─── MAP ─── */
         .map-wrap {
             border-radius: 12px; overflow: hidden; border: 1px solid var(--lavender-light);
             margin: 8px 0; transition: box-shadow 0.4s;
@@ -627,10 +627,25 @@
         }
 
         @media (max-width: 500px) {
-            .main-wrapper { margin: 10px 6px 40px; }
+            .main-wrapper { 
+                margin: 10px 6px 40px; 
+                z-index: 5; /* Menor que los elementos decorativos en móvil */
+            }
             .book-page { padding: 24px 14px 24px 12px; margin-bottom: 20px; }
-            .hot-air-balloon { width: 60px; height: 90px; }
-            .rocking-horse { width: 80px; height: 70px; bottom: 3%; right: 3%; }
+            .hot-air-balloon { 
+                width: 60px; 
+                height: 90px; 
+                z-index: 10; /* Mayor que el contenido en móvil */
+                opacity: 0.6; /* Un poco más transparente para no tapar tanto */
+            }
+            .rocking-horse { 
+                width: 80px; 
+                height: 70px; 
+                bottom: 3%; 
+                right: 3%; 
+                z-index: 10; /* Mayor que el contenido en móvil */
+                opacity: 0.5; /* Un poco más transparente para no tapar tanto */
+            }
         }
     </style>
 </head>
