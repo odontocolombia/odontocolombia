@@ -7,53 +7,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #b8943e;
-            --gold-light: #d4af6a;
-            --gold-dark: #8b6f2e;
-            --cream: #faf6ed;
-            --cream-dark: #f0e8d0;
-            --brown: #4a3820;
-            --brown-light: #6b5438;
+            --pink: #e8a0b8;
+            --pink-light: #f5d0e0;
+            --pink-dark: #c87898;
+            --pink-soft: #fdf0f5;
+            --rose: #d4899f;
+            --cream: #fff8fa;
+            --cream-dark: #f8e8f0;
+            --brown: #5a3848;
+            --brown-light: #7a5868;
+            --green: #a8b898;
+            --green-light: #c8d8b8;
+            --green-dark: #889878;
             --white: #ffffff;
-            --shadow: 0 4px 20px rgba(74,56,32,0.08);
+            --shadow: 0 4px 20px rgba(200,120,152,0.12);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Cormorant Garamond', serif;
-            background: linear-gradient(180deg, #f5f0e0 0%, #faf6ed 50%, #f5f0e0 100%);
+            background: linear-gradient(180deg, #fdf0f5 0%, #fff8fa 50%, #fdf0f5 100%);
             color: var(--brown);
             overflow-x: hidden;
             min-height: 100vh;
         }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--cream); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: var(--pink-soft); }
+        ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
+        /* ─── FONDO FLORAL SUTIL ─── */
         .bg-pattern {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.03;
+            opacity: 0.04;
             background-image: 
-                repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
-                repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
+                radial-gradient(circle at 20% 30%, var(--pink-light) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, var(--pink-light) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, var(--pink-soft) 0%, transparent 50%);
         }
 
-        #gold-canvas {
+        /* ─── PÉTALOS FLOTANTES (canvas) ─── */
+        #petals-canvas {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
         }
 
-        /* ═══════════ SPLASH CON ÁNGEL ══════════ */
+        /* ═══════════ SPLASH FLORAL ═══════════ */
         #splash {
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: linear-gradient(180deg, #faf6ed 0%, #f5f0e0 100%);
+            background: linear-gradient(180deg, #fdf0f5 0%, #fff8fa 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,71 +87,58 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── ÁNGEL ANIMADO SPLASH ─── */
-        .angel-container {
-            width: 280px;
-            height: 320px;
+        /* ─── CRUZ CON MOÑO ─── */
+        .cross-container {
+            width: 120px;
+            height: 160px;
             margin: 0 auto 30px;
             position: relative;
-            animation: angelFloat 4s ease-in-out infinite;
+            animation: crossFloat 4s ease-in-out infinite;
         }
-        @keyframes angelFloat {
+        @keyframes crossFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-8px); }
         }
-        .angel-svg {
+        .cross-svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 10px 30px rgba(184,148,62,0.3));
+            filter: drop-shadow(0 4px 12px rgba(200,120,152,0.2));
         }
-        
-        /* Halo con brillo */
-        .halo {
-            animation: haloGlow 2s ease-in-out infinite;
-            transform-origin: center;
+        .cross-shine {
+            animation: crossShine 3s ease-in-out infinite;
         }
-        @keyframes haloGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,106,0.6)); }
-            50% { filter: drop-shadow(0 0 20px rgba(212,175,106,1)); }
+        @keyframes crossShine {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
         }
-        
-        /* Alas con movimiento */
-        .wing-left {
-            animation: wingFlapLeft 3s ease-in-out infinite;
-            transform-origin: right center;
+        .bow-ribbon {
+            animation: bowSway 3s ease-in-out infinite;
+            transform-origin: center top;
         }
-        .wing-right {
-            animation: wingFlapRight 3s ease-in-out infinite;
-            transform-origin: left center;
+        @keyframes bowSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
         }
-        @keyframes wingFlapLeft {
+
+        /* ─── FLORES DECORATIVAS SPLASH ── */
+        .splash-flowers {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .flower-cluster {
+            position: absolute;
+            opacity: 0.6;
+            animation: flowerSway 6s ease-in-out infinite;
+        }
+        .flower-cluster:nth-child(1) { top: -20px; left: -20px; animation-delay: 0s; }
+        .flower-cluster:nth-child(2) { top: -20px; right: -20px; animation-delay: 1s; transform: scaleX(-1); }
+        .flower-cluster:nth-child(3) { bottom: -20px; left: -20px; animation-delay: 2s; transform: scaleY(-1); }
+        .flower-cluster:nth-child(4) { bottom: -20px; right: -20px; animation-delay: 3s; transform: scale(-1, -1); }
+        @keyframes flowerSway {
             0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-5deg); }
-        }
-        @keyframes wingFlapRight {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(5deg); }
-        }
-        
-        /* Estrellas del halo */
-        .halo-star {
-            animation: starTwinkle 1.5s ease-in-out infinite;
-        }
-        .halo-star:nth-child(2) { animation-delay: 0.3s; }
-        .halo-star:nth-child(3) { animation-delay: 0.6s; }
-        .halo-star:nth-child(4) { animation-delay: 0.9s; }
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-        
-        /* Nube brillante */
-        .cloud-glow {
-            animation: cloudPulse 3s ease-in-out infinite;
-        }
-        @keyframes cloudPulse {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); }
-            50% { filter: drop-shadow(0 0 25px rgba(255,255,255,1)); }
+            50% { transform: rotate(3deg); }
         }
 
         .splash-text {
@@ -151,7 +146,7 @@
             font-size: 0.75rem;
             letter-spacing: 8px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--pink);
             margin-bottom: 20px;
         }
         .splash-name {
@@ -172,32 +167,6 @@
             50% { opacity: 1; }
         }
 
-        /* ── LUCES DORADAS FLOTANTES EN SPLASH ─── */
-        .splash-lights {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .light-orb {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: lightFloat 6s ease-in-out infinite;
-        }
-        .light-orb:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .light-orb:nth-child(2) { left: 85%; top: 30%; animation-delay: 1s; }
-        .light-orb:nth-child(3) { left: 15%; top: 70%; animation-delay: 2s; }
-        .light-orb:nth-child(4) { left: 80%; top: 75%; animation-delay: 3s; }
-        .light-orb:nth-child(5) { left: 50%; top: 10%; animation-delay: 1.5s; }
-        .light-orb:nth-child(6) { left: 50%; top: 90%; animation-delay: 2.5s; }
-        @keyframes lightFloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-30px) scale(1.5); opacity: 0.8; }
-        }
-
         /* ═══════════ CONTENEDOR PRINCIPAL ═══════════ */
         .main-container {
             position: relative;
@@ -207,20 +176,20 @@
             padding: 20px;
         }
 
+        /* ─── INVITACIÓN ─── */
         .invitation {
             background: var(--white);
-            border: 3px double var(--gold);
-            border-radius: 8px;
-            padding: 60px 40px;
+            border-radius: 200px 200px 20px 20px;
+            padding: 80px 40px 60px;
             margin: 40px 0;
             position: relative;
             box-shadow: 
                 var(--shadow),
-                0 0 0 1px var(--gold-light),
                 0 0 0 8px var(--white),
-                0 0 0 9px var(--gold);
+                0 0 0 10px var(--pink-light);
             opacity: 0;
             transform: translateY(40px);
+            overflow: visible;
         }
         .invitation.visible {
             animation: cardReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -230,52 +199,93 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .corner-ornament {
+        /* ─── FLORES DE ESQUINA ─── */
+        .corner-flower {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            opacity: 0;
+            z-index: 5;
+        }
+        .corner-flower.visible {
+            animation: flowerReveal 1.2s ease forwards;
+        }
+        @keyframes flowerReveal {
+            0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+        .corner-tl { top: -30px; left: -30px; }
+        .corner-tr { top: -30px; right: -30px; transform: scaleX(-1); }
+        .corner-tr.visible { animation: flowerRevealTR 1.2s ease forwards; }
+        @keyframes flowerRevealTR {
+            0% { opacity: 0; transform: scaleX(-1) scale(0.3) rotate(-20deg); }
+            100% { opacity: 1; transform: scaleX(-1) scale(1) rotate(0deg); }
+        }
+        .corner-bl { bottom: -30px; left: -30px; transform: scaleY(-1); }
+        .corner-bl.visible { animation: flowerRevealBL 1.2s ease forwards; }
+        @keyframes flowerRevealBL {
+            0% { opacity: 0; transform: scaleY(-1) scale(0.3) rotate(-20deg); }
+            100% { opacity: 1; transform: scaleY(-1) scale(1) rotate(0deg); }
+        }
+        .corner-br { bottom: -30px; right: -30px; transform: scale(-1, -1); }
+        .corner-br.visible { animation: flowerRevealBR 1.2s ease forwards; }
+        @keyframes flowerRevealBR {
+            0% { opacity: 0; transform: scale(-1, -1) scale(0.3) rotate(-20deg); }
+            100% { opacity: 1; transform: scale(-1, -1) scale(1) rotate(0deg); }
+        }
+
+        .corner-flower svg { width: 100%; height: 100%; }
+
+        /* ─── FLORES LATERALES ─── */
+        .side-flower {
             position: absolute;
             width: 80px;
-            height: 80px;
+            height: 120px;
             opacity: 0;
+            z-index: 5;
         }
-        .corner-ornament.visible {
-            animation: ornamentReveal 1s ease forwards;
+        .side-flower.visible {
+            animation: sideFlowerReveal 1s ease forwards;
         }
-        @keyframes ornamentReveal {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+        @keyframes sideFlowerReveal {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 0.7; transform: translateX(0); }
         }
-        .corner-tl { top: 15px; left: 15px; animation-delay: 0.2s; }
-        .corner-tr { top: 15px; right: 15px; transform: scaleX(-1); animation-delay: 0.4s; }
-        .corner-bl { bottom: 15px; left: 15px; transform: scaleY(-1); animation-delay: 0.6s; }
-        .corner-br { bottom: 15px; right: 15px; transform: scale(-1, -1); animation-delay: 0.8s; }
+        .side-left { left: -50px; top: 50%; transform: translateY(-50%); }
+        .side-left.visible { animation: sideFlowerRevealLeft 1s ease 0.5s forwards; }
+        @keyframes sideFlowerRevealLeft {
+            0% { opacity: 0; transform: translateY(-50%) translateX(-20px); }
+            100% { opacity: 0.7; transform: translateY(-50%) translateX(0); }
+        }
+        .side-right { right: -50px; top: 50%; transform: translateY(-50%) scaleX(-1); }
+        .side-right.visible { animation: sideFlowerRevealRight 1s ease 0.7s forwards; }
+        @keyframes sideFlowerRevealRight {
+            0% { opacity: 0; transform: translateY(-50%) scaleX(-1) translateX(-20px); }
+            100% { opacity: 0.7; transform: translateY(-50%) scaleX(-1) translateX(0); }
+        }
 
-        .corner-ornament svg { width: 100%; height: 100%; }
-
-        /* ─── ÁNGEL EN PRIMER BLOQUE ─── */
-        .angel-header {
+        /* ─── CRUZ EN INVITACIÓN ─── */
+        .invitation-cross {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             opacity: 0;
             transform: translateY(-20px);
         }
-        .angel-header.visible {
-            animation: angelHeaderReveal 1.5s ease 0.3s forwards;
+        .invitation-cross.visible {
+            animation: crossReveal 1.2s ease 0.3s forwards;
         }
-        @keyframes angelHeaderReveal {
+        @keyframes crossReveal {
             0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .angel-header-svg {
-            width: 180px;
-            height: 200px;
+        .invitation-cross-svg {
+            width: 80px;
+            height: 110px;
             margin: 0 auto;
-            animation: angelFloatSmall 5s ease-in-out infinite;
-            filter: drop-shadow(0 8px 20px rgba(184,148,62,0.25));
-        }
-        @keyframes angelFloatSmall {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            filter: drop-shadow(0 4px 12px rgba(200,120,152,0.25));
         }
 
+        /* ─── TEXTOS ─── */
         .text-intro {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
@@ -309,11 +319,11 @@
         .text-name {
             font-family: 'Great Vibes', cursive;
             font-size: 3.5rem;
-            color: var(--gold);
+            color: var(--pink-dark);
             text-align: center;
             margin-bottom: 5px;
             opacity: 0;
-            text-shadow: 0 2px 4px rgba(184,148,62,0.2);
+            text-shadow: 0 2px 4px rgba(200,120,152,0.2);
         }
         .text-name.visible { animation: nameReveal 1.2s ease 1.1s forwards; }
         @keyframes nameReveal {
@@ -336,12 +346,13 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* ─── FECHA ── */
         .date-section {
             text-align: center;
             margin: 40px 0;
             padding: 30px 0;
-            border-top: 1px solid var(--gold-light);
-            border-bottom: 1px solid var(--gold-light);
+            border-top: 1px solid var(--pink-light);
+            border-bottom: 1px solid var(--pink-light);
             opacity: 0;
         }
         .date-section.visible { animation: fadeIn 1s ease 1.5s forwards; }
@@ -357,7 +368,7 @@
             font-family: 'Cinzel', serif;
             font-size: 3rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--pink-dark);
             margin: 10px 0;
         }
         .date-month {
@@ -367,6 +378,7 @@
             letter-spacing: 3px;
         }
 
+        /* ─── PADRES Y PADRINOS ─── */
         .family-section {
             margin: 40px 0;
             opacity: 0;
@@ -382,7 +394,7 @@
         .family-label {
             font-family: 'Great Vibes', cursive;
             font-size: 1.8rem;
-            color: var(--gold);
+            color: var(--pink-dark);
             flex: 0 0 120px;
             text-align: center;
         }
@@ -400,6 +412,7 @@
             color: var(--brown);
         }
 
+        /* ─── IGLESIA ─── */
         .church-section {
             text-align: center;
             margin: 40px 0;
@@ -434,6 +447,7 @@
             font-style: italic;
         }
 
+        /* ─── SEPARADOR ── */
         .divider {
             display: flex;
             align-items: center;
@@ -446,7 +460,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            background: linear-gradient(to right, transparent, var(--pink), transparent);
         }
         .divider-icon {
             width: 30px;
@@ -455,15 +469,16 @@
             position: relative;
         }
         .divider-icon::before {
-            content: '✦';
+            content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: var(--gold);
+            color: var(--pink);
             font-size: 1.2rem;
         }
 
+        /* ─── COUNTDOWN ── */
         .countdown-section {
             text-align: center;
             margin: 40px 0;
@@ -474,7 +489,7 @@
             font-family: 'Cinzel', serif;
             font-size: 1rem;
             letter-spacing: 4px;
-            color: var(--gold);
+            color: var(--pink-dark);
             margin-bottom: 20px;
             text-transform: uppercase;
         }
@@ -486,21 +501,21 @@
             margin: 0 auto;
         }
         .countdown-item {
-            background: var(--cream);
-            border: 1px solid var(--gold-light);
+            background: var(--pink-soft);
+            border: 1px solid var(--pink-light);
             border-radius: 4px;
             padding: 15px 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .countdown-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(184,148,62,0.2);
+            box-shadow: 0 8px 20px rgba(200,120,152,0.2);
         }
         .countdown-number {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--pink-dark);
             display: block;
         }
         .countdown-label {
@@ -511,6 +526,7 @@
             letter-spacing: 2px;
         }
 
+        /* ─── GALERÍA ─── */
         .gallery-section {
             margin: 40px 0;
             opacity: 0;
@@ -527,7 +543,7 @@
         }
         .carousel-wrap {
             position: relative;
-            border: 2px solid var(--gold-light);
+            border: 2px solid var(--pink-light);
             border-radius: 4px;
             overflow: hidden;
             background: var(--white);
@@ -545,14 +561,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.2);
+            filter: sepia(0.1) saturate(1.1);
         }
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             background: rgba(255,255,255,0.9);
-            border: 1px solid var(--gold);
+            border: 1px solid var(--pink);
             color: var(--brown);
             width: 40px;
             height: 40px;
@@ -566,7 +582,7 @@
             font-size: 1.2rem;
         }
         .carousel-btn:hover {
-            background: var(--gold);
+            background: var(--pink);
             color: var(--white);
             transform: translateY(-50%) scale(1.1);
         }
@@ -577,23 +593,24 @@
             justify-content: center;
             gap: 8px;
             padding: 15px;
-            background: var(--cream);
+            background: var(--pink-soft);
         }
         .carousel-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--gold-light);
+            background: var(--pink-light);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
         .carousel-dot.active {
-            background: var(--gold);
+            background: var(--pink);
             transform: scale(1.3);
-            border-color: var(--gold-dark);
+            border-color: var(--pink-dark);
         }
 
+        /* ─── MAPA ─── */
         .map-section {
             margin: 40px 0;
             opacity: 0;
@@ -609,7 +626,7 @@
             text-transform: uppercase;
         }
         .map-wrap {
-            border: 2px solid var(--gold-light);
+            border: 2px solid var(--pink-light);
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 15px;
@@ -623,7 +640,7 @@
         .map-link {
             display: inline-block;
             padding: 10px 25px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            background: linear-gradient(135deg, var(--pink-light), var(--pink));
             color: var(--white);
             text-decoration: none;
             font-family: 'Cinzel', serif;
@@ -635,15 +652,16 @@
         }
         .map-link:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(184,148,62,0.3);
+            box-shadow: 0 6px 15px rgba(200,120,152,0.3);
         }
 
+        /* ─── RSVP / WHATSAPP ─── */
         .rsvp-section {
             text-align: center;
             margin: 40px 0;
             padding: 40px 20px;
-            background: var(--cream);
-            border: 1px solid var(--gold-light);
+            background: var(--pink-soft);
+            border: 1px solid var(--pink-light);
             border-radius: 4px;
             opacity: 0;
         }
@@ -669,7 +687,7 @@
             padding: 12px 15px;
             margin-bottom: 15px;
             background: var(--white);
-            border: 1px solid var(--gold-light);
+            border: 1px solid var(--pink-light);
             border-radius: 4px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
@@ -678,8 +696,8 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .rsvp-input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(184,148,62,0.1);
+            border-color: var(--pink);
+            box-shadow: 0 0 0 3px rgba(200,120,152,0.1);
         }
         .rsvp-input::placeholder {
             color: var(--brown-light);
@@ -688,7 +706,7 @@
         .rsvp-button {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--pink-light), var(--pink), var(--pink-dark));
             color: var(--white);
             border: none;
             border-radius: 4px;
@@ -713,10 +731,11 @@
         }
         .rsvp-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(184,148,62,0.3);
+            box-shadow: 0 8px 20px rgba(200,120,152,0.3);
         }
         .rsvp-button:hover::before { left: 100%; }
 
+        /* ─── FOOTER ─── */
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -734,121 +753,142 @@
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
             letter-spacing: 3px;
-            color: var(--gold);
+            color: var(--pink-dark);
         }
 
+        /* ─── RESPONSIVE ─── */
         @media (max-width: 600px) {
-            .invitation { padding: 40px 25px; margin: 20px 0; }
-            .corner-ornament { width: 60px; height: 60px; }
+            .invitation { padding: 60px 25px 40px; margin: 20px 0; border-radius: 150px 150px 15px 15px; }
+            .corner-flower { width: 100px; height: 100px; }
+            .corner-tl { top: -20px; left: -20px; }
+            .corner-tr { top: -20px; right: -20px; }
+            .corner-bl { bottom: -20px; left: -20px; }
+            .corner-br { bottom: -20px; right: -20px; }
+            .side-flower { display: none; }
             .text-title { font-size: 2rem; letter-spacing: 4px; }
             .text-name { font-size: 2.5rem; }
             .family-row { flex-direction: column; gap: 10px; }
             .countdown-grid { grid-template-columns: repeat(2, 1fr); }
             .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
-            .angel-container { width: 220px; height: 260px; }
-            .angel-header-svg { width: 140px; height: 160px; }
+            .cross-container { width: 90px; height: 120px; }
+            .invitation-cross-svg { width: 60px; height: 85px; }
         }
     </style>
 </head>
 <body>
 
     <div class="bg-pattern"></div>
-    <canvas id="gold-canvas"></canvas>
+    <canvas id="petals-canvas"></canvas>
 
-    <!-- SPLASH CON ÁNGEL -->
+    <!-- SPLASH FLORAL -->
     <div id="splash">
-        <div class="splash-lights">
-            <div class="light-orb"></div>
-            <div class="light-orb"></div>
-            <div class="light-orb"></div>
-            <div class="light-orb"></div>
-            <div class="light-orb"></div>
-            <div class="light-orb"></div>
+        <div class="splash-flowers">
+            <div class="flower-cluster">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <g opacity="0.7">
+                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
+                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
+                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
+                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
+                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
+                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
+                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
+                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
+                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="flower-cluster">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <g opacity="0.7">
+                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
+                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
+                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
+                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
+                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
+                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
+                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
+                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
+                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="flower-cluster">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <g opacity="0.7">
+                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
+                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
+                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
+                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
+                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
+                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
+                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
+                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
+                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="flower-cluster">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <g opacity="0.7">
+                        <circle cx="30" cy="30" r="8" fill="#f5d0e0"/>
+                        <circle cx="25" cy="25" r="6" fill="#e8a0b8"/>
+                        <circle cx="35" cy="28" r="5" fill="#f5d0e0"/>
+                        <circle cx="28" cy="35" r="5" fill="#f0c0d0"/>
+                        <circle cx="50" cy="20" r="7" fill="#f5d0e0"/>
+                        <circle cx="48" cy="16" r="5" fill="#e8a0b8"/>
+                        <circle cx="55" cy="22" r="4" fill="#f0c0d0"/>
+                        <path d="M 30 38 Q 28 50 25 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 50 27 Q 52 40 55 50" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <ellipse cx="22" cy="50" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 22 50)"/>
+                        <ellipse cx="58" cy="45" rx="3" ry="7" fill="#c8d8b8" transform="rotate(15 58 45)"/>
+                    </g>
+                </svg>
+            </div>
         </div>
         <div class="splash-content">
-            <!-- ÁNGEL SVG ANIMADO -->
-            <div class="angel-container">
-                <svg class="angel-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Halo -->
-                    <g class="halo">
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#d4af6a" stroke-width="3"/>
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#faf6ed" stroke-width="1.5"/>
-                        <!-- Estrellas del halo -->
-                        <g class="halo-star">
-                            <path d="M 75 33 L 77 30 L 79 33 L 77 36 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 100 28 L 102 25 L 104 28 L 102 31 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 121 33 L 123 30 L 125 33 L 123 36 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 88 30 L 90 27 L 92 30 L 90 33 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 112 30 L 114 27 L 116 30 L 114 33 Z" fill="#d4af6a"/>
-                        </g>
-                    </g>
+            <!-- CRUZ CON MOÑO -->
+            <div class="cross-container">
+                <svg class="cross-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cruz de madera blanca -->
+                    <rect x="42" y="10" width="16" height="120" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
+                    <rect x="20" y="35" width="60" height="16" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
+                    <!-- Textura de madera -->
+                    <line x1="45" y1="15" x2="45" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="50" y1="15" x2="50" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
+                    <line x1="55" y1="15" x2="55" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="25" y1="40" x2="75" y2="40" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="25" y1="45" x2="75" y2="45" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
+                    <!-- Brillo -->
+                    <rect class="cross-shine" x="44" y="12" width="4" height="116" rx="1" fill="white" opacity="0.3"/>
                     
-                    <!-- Ala izquierda -->
-                    <g class="wing-left">
-                        <path d="M 85 90 Q 40 70 20 90 Q 10 110 30 120 Q 50 130 75 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 95 Q 45 85 30 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 65 105 Q 45 100 32 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 70 112 Q 50 110 38 115" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    
-                    <!-- Ala derecha -->
-                    <g class="wing-right">
-                        <path d="M 115 90 Q 160 70 180 90 Q 190 110 170 120 Q 150 130 125 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 130 95 Q 155 85 170 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 135 105 Q 155 100 168 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 130 112 Q 150 110 162 115" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    
-                    <!-- Cuerpo / Vestido -->
-                    <path d="M 85 95 Q 85 130 75 160 Q 70 175 100 180 Q 130 175 125 160 Q 115 130 115 95 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                    <path d="M 90 110 Q 100 115 110 110" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    <path d="M 88 130 Q 100 135 112 130" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    <path d="M 85 150 Q 100 155 115 150" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    
-                    <!-- Cabeza -->
-                    <circle cx="100" cy="75" r="22" fill="#fde8d0" stroke="#d4af6a" stroke-width="1"/>
-                    
-                    <!-- Cabello -->
-                    <path d="M 78 70 Q 80 55 100 52 Q 120 55 122 70 Q 120 65 115 63 Q 110 60 100 60 Q 90 60 85 63 Q 80 65 78 70" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 82 68 Q 85 62 90 61" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 95 60 Q 100 58 105 60" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 110 61 Q 115 62 118 68" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    
-                    <!-- Ojos -->
-                    <ellipse cx="92" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <ellipse cx="108" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <circle cx="93" cy="73.5" r="1.2" fill="#fff"/>
-                    <circle cx="109" cy="73.5" r="1.2" fill="#fff"/>
-                    
-                    <!-- Pestañas -->
-                    <path d="M 89 72 Q 90 70 91 71" fill="none" stroke="#2d5016" stroke-width="0.8"/>
-                    <path d="M 105 72 Q 106 70 107 71" fill="none" stroke="#2d5016" stroke-width="0.8"/>
-                    
-                    <!-- Mejillas rosadas -->
-                    <circle cx="87" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    <circle cx="113" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    
-                    <!-- Sonrisa -->
-                    <path d="M 95 85 Q 100 88 105 85" fill="none" stroke="#c87040" stroke-width="1.2" stroke-linecap="round"/>
-                    
-                    <!-- Manos sosteniendo la nube -->
-                    <circle cx="88" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    <circle cx="112" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    
-                    <!-- Nube -->
-                    <g class="cloud-glow">
-                        <path d="M 60 155 Q 60 140 75 140 Q 80 130 95 132 Q 105 125 115 132 Q 130 130 135 140 Q 150 140 150 155 Q 155 165 145 170 Q 140 175 130 175 L 80 175 Q 70 175 65 170 Q 55 165 60 155" fill="#fff" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 155 Q 75 150 85 152" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
-                        <path d="M 95 148 Q 105 145 115 148" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
-                        <path d="M 120 155 Q 128 152 135 158" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
+                    <!-- Moño rosa -->
+                    <g class="bow-ribbon">
+                        <!-- Cinta horizontal -->
+                        <path d="M 30 38 Q 50 35 70 38 Q 72 42 70 45 Q 50 42 30 45 Q 28 42 30 38" fill="#f0c0d0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <!-- Ala izquierda del moño -->
+                        <path d="M 50 40 Q 30 30 20 35 Q 15 40 20 45 Q 30 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 45 40 Q 32 35 25 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <!-- Ala derecha del moño -->
+                        <path d="M 50 40 Q 70 30 80 35 Q 85 40 80 45 Q 70 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 55 40 Q 68 35 75 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <!-- Centro del moño -->
+                        <ellipse cx="50" cy="41" rx="6" ry="5" fill="#e8a0b8" stroke="#d4899f" stroke-width="0.8"/>
+                        <ellipse cx="49" cy="40" rx="2" ry="1.5" fill="#f5d0e0" opacity="0.6"/>
+                        <!-- Colgantes del moño -->
+                        <path d="M 44 45 Q 40 60 35 75 Q 33 80 36 82 Q 40 80 42 75 Q 45 60 47 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 56 45 Q 60 60 65 75 Q 67 80 64 82 Q 60 80 58 75 Q 55 60 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <!-- Pliegues en colgantes -->
+                        <path d="M 40 55 Q 42 58 44 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 38 65 Q 40 68 42 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 60 55 Q 58 58 56 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 62 65 Q 60 68 58 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
                     </g>
                 </svg>
             </div>
@@ -863,100 +903,223 @@
     <div class="main-container">
         <div class="invitation" id="invitation">
             
-            <div class="corner-ornament corner-tl">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+            <!-- FLORES DE ESQUINA -->
+            <div class="corner-flower corner-tl">
+                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <!-- Ramas -->
+                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 25 40 Q 45 50 65 55" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        
+                        <!-- Flores grandes -->
+                        <g>
+                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
+                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
+                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
+                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
+                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
+                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
+                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
+                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
+                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
+                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="95" cy="50" r="9" fill="#f5d0e0"/>
+                            <circle cx="92" cy="47" r="6" fill="#e8a0b8"/>
+                            <circle cx="98" cy="49" r="5" fill="#f0c0d0"/>
+                            <circle cx="95" cy="50" r="3" fill="#d4899f"/>
+                        </g>
+                        
+                        <!-- Flores pequeñas / brotes -->
+                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
+                        <circle cx="53" cy="28" r="3" fill="#e8a0b8"/>
+                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
+                        <circle cx="78" cy="36" r="4" fill="#e8a0b8"/>
+                        <circle cx="110" cy="52" r="5" fill="#f5d0e0"/>
+                        <circle cx="108" cy="50" r="3" fill="#e8a0b8"/>
+                        
+                        <!-- Hojas -->
+                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
+                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
+                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
+                        <ellipse cx="90" cy="58" rx="4" ry="8" fill="#c8d8b8" transform="rotate(0 90 58)"/>
+                        
+                        <!-- Puntos decorativos -->
+                        <circle cx="45" cy="25" r="1.5" fill="#a8b898"/>
+                        <circle cx="60" cy="35" r="1" fill="#a8b898"/>
+                        <circle cx="85" cy="45" r="1.5" fill="#a8b898"/>
+                    </g>
                 </svg>
             </div>
-            <div class="corner-ornament corner-tr">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+            <div class="corner-flower corner-tr">
+                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 25 40 Q 45 50 65 55" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <g>
+                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
+                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
+                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
+                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
+                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
+                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
+                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
+                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
+                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
+                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="95" cy="50" r="9" fill="#f5d0e0"/>
+                            <circle cx="92" cy="47" r="6" fill="#e8a0b8"/>
+                            <circle cx="98" cy="49" r="5" fill="#f0c0d0"/>
+                            <circle cx="95" cy="50" r="3" fill="#d4899f"/>
+                        </g>
+                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
+                        <circle cx="53" cy="28" r="3" fill="#e8a0b8"/>
+                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
+                        <circle cx="78" cy="36" r="4" fill="#e8a0b8"/>
+                        <circle cx="110" cy="52" r="5" fill="#f5d0e0"/>
+                        <circle cx="108" cy="50" r="3" fill="#e8a0b8"/>
+                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
+                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
+                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
+                        <ellipse cx="90" cy="58" rx="4" ry="8" fill="#c8d8b8" transform="rotate(0 90 58)"/>
+                    </g>
                 </svg>
             </div>
-            <div class="corner-ornament corner-bl">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+            <div class="corner-flower corner-bl">
+                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <g>
+                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
+                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
+                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
+                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
+                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
+                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
+                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
+                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
+                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
+                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
+                        </g>
+                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
+                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
+                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
+                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
+                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
+                    </g>
                 </svg>
             </div>
-            <div class="corner-ornament corner-br">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
+            <div class="corner-flower corner-br">
+                <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M 20 20 Q 40 40 60 50 Q 80 60 100 55" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 30 Q 50 35 70 40" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <g>
+                            <circle cx="40" cy="35" r="12" fill="#f5d0e0"/>
+                            <circle cx="35" cy="30" r="8" fill="#e8a0b8"/>
+                            <circle cx="45" cy="32" r="7" fill="#f0c0d0"/>
+                            <circle cx="38" cy="42" r="7" fill="#f0c0d0"/>
+                            <circle cx="48" cy="40" r="6" fill="#f5d0e0"/>
+                            <circle cx="40" cy="35" r="4" fill="#d4899f"/>
+                        </g>
+                        <g>
+                            <circle cx="70" cy="45" r="10" fill="#f5d0e0"/>
+                            <circle cx="66" cy="41" r="7" fill="#e8a0b8"/>
+                            <circle cx="74" cy="43" r="6" fill="#f0c0d0"/>
+                            <circle cx="68" cy="50" r="6" fill="#f0c0d0"/>
+                            <circle cx="70" cy="45" r="3" fill="#d4899f"/>
+                        </g>
+                        <circle cx="55" cy="30" r="5" fill="#f5d0e0"/>
+                        <circle cx="80" cy="38" r="6" fill="#f5d0e0"/>
+                        <ellipse cx="30" cy="50" rx="6" ry="12" fill="#c8d8b8" transform="rotate(-30 30 50)"/>
+                        <ellipse cx="50" cy="55" rx="5" ry="10" fill="#c8d8b8" transform="rotate(-20 50 55)"/>
+                        <ellipse cx="75" cy="52" rx="5" ry="9" fill="#c8d8b8" transform="rotate(-10 75 52)"/>
+                    </g>
                 </svg>
             </div>
 
-            <!-- ÁNGEL EN PRIMER BLOQUE -->
-            <div class="angel-header">
-                <svg class="angel-header-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Halo -->
-                    <g class="halo">
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#d4af6a" stroke-width="3"/>
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#faf6ed" stroke-width="1.5"/>
-                        <g class="halo-star"><path d="M 75 33 L 77 30 L 79 33 L 77 36 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 100 28 L 102 25 L 104 28 L 102 31 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 121 33 L 123 30 L 125 33 L 123 36 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 88 30 L 90 27 L 92 30 L 90 33 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 112 30 L 114 27 L 116 30 L 114 33 Z" fill="#d4af6a"/></g>
+            <!-- FLORES LATERALES -->
+            <div class="side-flower side-left">
+                <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M 40 120 Q 35 90 30 70 Q 25 50 20 30" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 70 Q 20 65 15 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 25 50 Q 15 48 10 45" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <circle cx="20" cy="25" r="8" fill="#f5d0e0"/>
+                        <circle cx="17" cy="22" r="5" fill="#e8a0b8"/>
+                        <circle cx="23" cy="24" r="4" fill="#f0c0d0"/>
+                        <circle cx="20" cy="25" r="2.5" fill="#d4899f"/>
+                        <circle cx="15" cy="40" r="6" fill="#f5d0e0"/>
+                        <circle cx="13" cy="38" r="4" fill="#e8a0b8"/>
+                        <circle cx="15" cy="40" r="2" fill="#d4899f"/>
+                        <circle cx="10" cy="55" r="5" fill="#f5d0e0"/>
+                        <circle cx="8" cy="53" r="3" fill="#e8a0b8"/>
+                        <ellipse cx="25" cy="80" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 25 80)"/>
+                        <ellipse cx="18" cy="65" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-30 18 65)"/>
                     </g>
-                    
-                    <!-- Ala izquierda -->
-                    <g class="wing-left">
-                        <path d="M 85 90 Q 40 70 20 90 Q 10 110 30 120 Q 50 130 75 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 95 Q 45 85 30 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 65 105 Q 45 100 32 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="side-flower side-right">
+                <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path d="M 40 120 Q 35 90 30 70 Q 25 50 20 30" stroke="#a8b898" stroke-width="2" fill="none"/>
+                        <path d="M 30 70 Q 20 65 15 60" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <path d="M 25 50 Q 15 48 10 45" stroke="#a8b898" stroke-width="1.5" fill="none"/>
+                        <circle cx="20" cy="25" r="8" fill="#f5d0e0"/>
+                        <circle cx="17" cy="22" r="5" fill="#e8a0b8"/>
+                        <circle cx="23" cy="24" r="4" fill="#f0c0d0"/>
+                        <circle cx="20" cy="25" r="2.5" fill="#d4899f"/>
+                        <circle cx="15" cy="40" r="6" fill="#f5d0e0"/>
+                        <circle cx="13" cy="38" r="4" fill="#e8a0b8"/>
+                        <circle cx="15" cy="40" r="2" fill="#d4899f"/>
+                        <circle cx="10" cy="55" r="5" fill="#f5d0e0"/>
+                        <circle cx="8" cy="53" r="3" fill="#e8a0b8"/>
+                        <ellipse cx="25" cy="80" rx="4" ry="8" fill="#c8d8b8" transform="rotate(-20 25 80)"/>
+                        <ellipse cx="18" cy="65" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-30 18 65)"/>
                     </g>
-                    
-                    <!-- Ala derecha -->
-                    <g class="wing-right">
-                        <path d="M 115 90 Q 160 70 180 90 Q 190 110 170 120 Q 150 130 125 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 130 95 Q 155 85 170 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 135 105 Q 155 100 168 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    
-                    <!-- Cuerpo -->
-                    <path d="M 85 95 Q 85 130 75 160 Q 70 175 100 180 Q 130 175 125 160 Q 115 130 115 95 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                    
-                    <!-- Cabeza -->
-                    <circle cx="100" cy="75" r="22" fill="#fde8d0" stroke="#d4af6a" stroke-width="1"/>
-                    
-                    <!-- Cabello -->
-                    <path d="M 78 70 Q 80 55 100 52 Q 120 55 122 70 Q 120 65 115 63 Q 110 60 100 60 Q 90 60 85 63 Q 80 65 78 70" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
-                    
-                    <!-- Ojos -->
-                    <ellipse cx="92" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <ellipse cx="108" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <circle cx="93" cy="73.5" r="1.2" fill="#fff"/>
-                    <circle cx="109" cy="73.5" r="1.2" fill="#fff"/>
-                    
-                    <!-- Mejillas -->
-                    <circle cx="87" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    <circle cx="113" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    
-                    <!-- Sonrisa -->
-                    <path d="M 95 85 Q 100 88 105 85" fill="none" stroke="#c87040" stroke-width="1.2" stroke-linecap="round"/>
-                    
-                    <!-- Manos -->
-                    <circle cx="88" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    <circle cx="112" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    
-                    <!-- Nube -->
-                    <g class="cloud-glow">
-                        <path d="M 60 155 Q 60 140 75 140 Q 80 130 95 132 Q 105 125 115 132 Q 130 130 135 140 Q 150 140 150 155 Q 155 165 145 170 Q 140 175 130 175 L 80 175 Q 70 175 65 170 Q 55 165 60 155" fill="#fff" stroke="#d4af6a" stroke-width="1"/>
+                </svg>
+            </div>
+
+            <!-- CRUZ EN INVITACIÓN -->
+            <div class="invitation-cross">
+                <svg class="invitation-cross-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="42" y="10" width="16" height="120" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
+                    <rect x="20" y="35" width="60" height="16" rx="2" fill="#f5f0eb" stroke="#d8c8b8" stroke-width="1"/>
+                    <line x1="45" y1="15" x2="45" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="50" y1="15" x2="50" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
+                    <line x1="55" y1="15" x2="55" y2="125" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="25" y1="40" x2="75" y2="40" stroke="#e8d8c8" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="25" y1="45" x2="75" y2="45" stroke="#e8d8c8" stroke-width="0.5" opacity="0.3"/>
+                    <rect class="cross-shine" x="44" y="12" width="4" height="116" rx="1" fill="white" opacity="0.3"/>
+                    <g class="bow-ribbon">
+                        <path d="M 30 38 Q 50 35 70 38 Q 72 42 70 45 Q 50 42 30 45 Q 28 42 30 38" fill="#f0c0d0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 50 40 Q 30 30 20 35 Q 15 40 20 45 Q 30 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 45 40 Q 32 35 25 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 50 40 Q 70 30 80 35 Q 85 40 80 45 Q 70 50 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 55 40 Q 68 35 75 38" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <ellipse cx="50" cy="41" rx="6" ry="5" fill="#e8a0b8" stroke="#d4899f" stroke-width="0.8"/>
+                        <ellipse cx="49" cy="40" rx="2" ry="1.5" fill="#f5d0e0" opacity="0.6"/>
+                        <path d="M 44 45 Q 40 60 35 75 Q 33 80 36 82 Q 40 80 42 75 Q 45 60 47 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 56 45 Q 60 60 65 75 Q 67 80 64 82 Q 60 80 58 75 Q 55 60 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
+                        <path d="M 40 55 Q 42 58 44 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 38 65 Q 40 68 42 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 60 55 Q 58 58 56 55" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
+                        <path d="M 62 65 Q 60 68 58 65" fill="none" stroke="#e8a0b8" stroke-width="0.5" opacity="0.6"/>
                     </g>
                 </svg>
             </div>
@@ -999,11 +1162,11 @@
             <div class="church-section">
                 <div class="church-icon">
                     <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="30" width="20" height="40" fill="#4a3820" opacity="0.8"/>
-                        <polygon points="30,10 15,30 45,30" fill="#4a3820" opacity="0.8"/>
-                        <rect x="28" y="5" width="4" height="10" fill="#4a3820" opacity="0.8"/>
-                        <rect x="25" y="50" width="10" height="20" fill="#faf6ed" opacity="0.6"/>
-                        <circle cx="30" cy="20" r="2" fill="#b8943e"/>
+                        <rect x="20" y="30" width="20" height="40" fill="#5a3848" opacity="0.7"/>
+                        <polygon points="30,10 15,30 45,30" fill="#5a3848" opacity="0.7"/>
+                        <rect x="28" y="5" width="4" height="10" fill="#5a3848" opacity="0.7"/>
+                        <rect x="25" y="50" width="10" height="20" fill="#fff8fa" opacity="0.6"/>
+                        <circle cx="30" cy="20" r="2" fill="#e8a0b8"/>
                     </svg>
                 </div>
                 <div class="church-time">10:00 a.m.</div>
@@ -1092,12 +1255,16 @@
             invitation.classList.add('visible');
             
             setTimeout(() => {
-                document.querySelectorAll('.corner-ornament').forEach(el => el.classList.add('visible'));
+                document.querySelectorAll('.corner-flower').forEach(el => el.classList.add('visible'));
             }, 200);
             
             setTimeout(() => {
-                document.querySelector('.angel-header').classList.add('visible');
+                document.querySelectorAll('.side-flower').forEach(el => el.classList.add('visible'));
             }, 400);
+            
+            setTimeout(() => {
+                document.querySelector('.invitation-cross').classList.add('visible');
+            }, 500);
             
             setTimeout(() => {
                 document.querySelectorAll('.text-intro, .text-title, .text-subtitle, .text-name, .text-surname').forEach(el => el.classList.add('visible'));
@@ -1192,7 +1359,7 @@
             const button = e.target.querySelector('.rsvp-button');
             const originalText = button.textContent;
             button.textContent = '✓ Enviado';
-            button.style.background = 'linear-gradient(135deg, #6b8e5a, #8ba87a)';
+            button.style.background = 'linear-gradient(135deg, #a8b898, #889878)';
             setTimeout(() => {
                 button.textContent = originalText;
                 button.style.background = '';
@@ -1200,9 +1367,10 @@
             }, 3000);
         }
 
-        const canvas = document.getElementById('gold-canvas');
+        // PÉTALOS FLOTANTES
+        const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let petals = [];
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -1210,44 +1378,44 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        class Particle {
+        class Petal {
             constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * 0.5 + 0.2;
                 this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-                this.opacity = Math.random() * 0.3 + 0.1;
-                this.fadeSpeed = Math.random() * 0.01 + 0.005;
-                this.growing = Math.random() > 0.5;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+                this.opacity = Math.random() * 0.4 + 0.2;
+                this.color = Math.random() > 0.5 ? '#f5d0e0' : '#e8a0b8';
             }
             update() {
-                this.x += this.speedX;
+                this.x += this.speedX + Math.sin(this.y * 0.01) * 0.3;
                 this.y += this.speedY;
-                if (this.growing) {
-                    this.opacity += this.fadeSpeed;
-                    if (this.opacity >= 0.4) this.growing = false;
-                } else {
-                    this.opacity -= this.fadeSpeed;
-                    if (this.opacity <= 0.1) this.growing = true;
-                }
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+                this.rotation += this.rotationSpeed;
+                if (this.y > canvas.height + 20) this.reset();
             }
             draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(184, 148, 62, ${this.opacity})`;
+                ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
                 ctx.fill();
+                ctx.restore();
             }
         }
-        for (let i = 0; i < 30; i++) particles.push(new Particle());
-        function animateParticles() {
+        for (let i = 0; i < 25; i++) petals.push(new Petal());
+        function animatePetals() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animateParticles);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animatePetals);
         }
-        animateParticles();
+        animatePetals();
 
         buildCarousel();
     </script>
