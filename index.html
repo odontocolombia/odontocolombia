@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#faf6ed">
     <title>Bautizo de Emilio André</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,12 +22,6 @@
             
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            
-            --shadow-sm: 0 2px 8px rgba(74,56,32,0.06);
-            --shadow-md: 0 4px 20px rgba(74,56,32,0.08);
-            --shadow-lg: 0 8px 32px rgba(74,56,32,0.12);
-            --shadow-gold: 0 8px 24px rgba(184,148,62,0.25);
             
             --fs-xs: clamp(0.65rem, 1.5vw, 0.8rem);
             --fs-sm: clamp(0.8rem, 2vw, 1rem);
@@ -35,53 +29,21 @@
             --fs-lg: clamp(1.3rem, 3.5vw, 1.8rem);
             --fs-xl: clamp(1.8rem, 5vw, 2.8rem);
             --fs-2xl: clamp(2.4rem, 7vw, 4rem);
-            --fs-hero: clamp(2.2rem, 8vw, 4rem);
-            
-            --gap-xs: clamp(0.4rem, 1vw, 0.6rem);
-            --gap-sm: clamp(0.8rem, 2vw, 1.2rem);
-            --gap-md: clamp(1.2rem, 3vw, 2rem);
-            --gap-lg: clamp(2rem, 5vw, 3.5rem);
-            --gap-xl: clamp(3rem, 7vw, 5rem);
+            --fs-hero: clamp(2rem, 7vw, 3.5rem);
         }
         
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { 
-            scroll-behavior: smooth; 
-            -webkit-text-size-adjust: 100%;
-            touch-action: manipulation;
-        }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
             background: linear-gradient(180deg, #f5f0e0 0%, #faf6ed 50%, #f5f0e0 100%);
             color: var(--brown);
             overflow-x: hidden;
             min-height: 100vh;
-            min-height: 100dvh;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
         }
         img { display: block; max-width: 100%; height: auto; }
         button { cursor: pointer; border: none; background: none; font-family: inherit; }
-        
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--cream); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
-
-        .bg-pattern {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.03;
-            background-image: 
-                repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
-                repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
-        }
 
         #gold-canvas {
             position: fixed;
@@ -94,7 +56,13 @@
         /* ═══════════ SPLASH SCREEN ══════════ */
         #splash {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             z-index: 9999;
             background: linear-gradient(180deg, #faf6ed 0%, #f5f0e0 100%);
             display: flex;
@@ -103,37 +71,12 @@
             cursor: pointer;
             overflow: hidden;
             transition: opacity 1.2s var(--ease-out-expo), visibility 1.2s;
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-            touch-action: none;
-            -webkit-overflow-scrolling: none;
         }
         #splash.hide {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-        
-        .splash-rays {
-            position: absolute;
-            inset: 0;
-            background: conic-gradient(from 0deg at 50% 45%,
-                rgba(212,175,106,0) 0deg, rgba(212,175,106,0.08) 8deg, rgba(212,175,106,0) 16deg,
-                rgba(212,175,106,0) 35deg, rgba(212,175,106,0.06) 43deg, rgba(212,175,106,0) 51deg,
-                rgba(212,175,106,0) 70deg, rgba(212,175,106,0.1) 78deg, rgba(212,175,106,0) 86deg,
-                rgba(212,175,106,0) 105deg, rgba(212,175,106,0.05) 113deg, rgba(212,175,106,0) 121deg,
-                rgba(212,175,106,0) 140deg, rgba(212,175,106,0.08) 148deg, rgba(212,175,106,0) 156deg,
-                rgba(212,175,106,0) 175deg, rgba(212,175,106,0.06) 183deg, rgba(212,175,106,0) 191deg,
-                rgba(212,175,106,0) 210deg, rgba(212,175,106,0.09) 218deg, rgba(212,175,106,0) 226deg,
-                rgba(212,175,106,0) 245deg, rgba(212,175,106,0.04) 253deg, rgba(212,175,106,0) 261deg,
-                rgba(212,175,106,0) 280deg, rgba(212,175,106,0.07) 288deg, rgba(212,175,106,0) 296deg,
-                rgba(212,175,106,0) 315deg, rgba(212,175,106,0.05) 323deg, rgba(212,175,106,0) 331deg,
-                rgba(212,175,106,0) 350deg, rgba(212,175,106,0.08) 358deg, rgba(212,175,106,0) 360deg);
-            animation: raysRotate 30s linear infinite;
-            pointer-events: none;
-        }
-        @keyframes raysRotate { to { transform: rotate(360deg); } }
         
         .splash-orbs {
             position: absolute;
@@ -147,10 +90,10 @@
             background: radial-gradient(circle, rgba(212,175,106,0.2) 0%, rgba(212,175,106,0) 70%);
             animation: orbFloat 8s ease-in-out infinite;
         }
-        .splash-orb:nth-child(1){width:250px;height:250px;top:-60px;left:-60px;animation-delay:0s;}
-        .splash-orb:nth-child(2){width:200px;height:200px;top:-40px;right:-40px;animation-delay:2s;}
-        .splash-orb:nth-child(3){width:160px;height:160px;bottom:-40px;left:10%;animation-delay:4s;}
-        .splash-orb:nth-child(4){width:220px;height:220px;bottom:-50px;right:-30px;animation-delay:1s;}
+        .splash-orb:nth-child(1){width:200px;height:200px;top:-50px;left:-50px;animation-delay:0s;}
+        .splash-orb:nth-child(2){width:160px;height:160px;top:-30px;right:-30px;animation-delay:2s;}
+        .splash-orb:nth-child(3){width:140px;height:140px;bottom:-30px;left:10%;animation-delay:4s;}
+        .splash-orb:nth-child(4){width:180px;height:180px;bottom:-40px;right:-20px;animation-delay:1s;}
         @keyframes orbFloat { 
             0%,100%{transform:scale(1) translateY(0);} 
             50%{transform:scale(1.15) translateY(-15px);} 
@@ -161,30 +104,24 @@
             animation: splashReveal 1.5s var(--ease-out-expo) both;
             position: relative;
             z-index: 2;
-            padding: 10px 15px;
+            padding: 15px 20px;
             width: 100%;
             max-width: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            overflow: hidden;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            gap: 10px;
         }
         
         @keyframes splashReveal {
-            0% { opacity: 0; transform: translate(-50%, -40%) scale(0.96); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ── ÁNGEL IMAGEN SPLASH ─── */
         .angel-container {
-            width: clamp(100px, 28vw, 180px);
-            margin: 0 auto 5px;
+            width: clamp(120px, 30vw, 200px);
+            margin: 0 auto 10px;
             animation: angelFloat 4s ease-in-out infinite;
             flex-shrink: 0;
         }
@@ -200,7 +137,7 @@
 
         .splash-label {
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
+            font-size: var(--fs-xs);
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold);
@@ -211,7 +148,7 @@
         }
         .splash-name {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2rem, 9vw, 3rem);
+            font-size: var(--fs-hero);
             color: var(--brown);
             margin-bottom: 0;
             opacity: 0;
@@ -224,15 +161,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin: 4px 0;
+            gap: 10px;
+            margin: 5px 0 10px;
             opacity: 0;
             animation: fadeSlideUp 1s 0.8s var(--ease-out-expo) forwards;
             flex-shrink: 0;
         }
         .splash-divider::before, .splash-divider::after {
             content: '';
-            width: 35px;
+            width: 40px;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
@@ -247,7 +184,7 @@
         }
         .splash-hint {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.75rem;
+            font-size: var(--fs-sm);
             color: var(--brown-light);
             letter-spacing: 2px;
             font-style: italic;
@@ -270,12 +207,12 @@
         
         .splash-countdown {
             position: absolute;
-            bottom: 12px;
+            bottom: 15px;
             left: 0;
             right: 0;
             text-align: center;
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
+            font-size: var(--fs-xs);
             color: var(--gold);
             letter-spacing: 0.15em;
             opacity: 0;
@@ -306,7 +243,7 @@
             margin: 40px 0;
             position: relative;
             box-shadow: 
-                var(--shadow-md),
+                0 4px 20px rgba(74,56,32,0.08),
                 0 0 0 1px var(--gold-light),
                 0 0 0 8px var(--white),
                 0 0 0 9px var(--gold);
@@ -317,24 +254,6 @@
         .invitation.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        .invitation::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            bottom: 0;
-            width: 55%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: cardShimmer 8s ease-in-out infinite;
-            pointer-events: none;
-            border-radius: inherit;
-            z-index: 10;
-        }
-        @keyframes cardShimmer {
-            0%, 70% { left: -100%; }
-            85% { left: 160%; }
-            100% { left: 160%; }
         }
 
         .corner-ornament {
@@ -482,11 +401,6 @@
             font-weight: 700;
             color: var(--gold);
             margin: 10px 0;
-            animation: dateGlow 3.5s ease-in-out infinite;
-        }
-        @keyframes dateGlow {
-            0%, 100% { text-shadow: 0 2px 4px rgba(184,148,62,0.2); }
-            50% { text-shadow: 0 2px 20px rgba(184,148,62,0.55), 0 0 40px rgba(184,148,62,0.15); }
         }
         .date-month {
             font-family: 'Cinzel', serif;
@@ -517,11 +431,6 @@
             color: var(--gold);
             flex: 0 0 120px;
             text-align: center;
-            animation: labelGlow 4s ease-in-out infinite;
-        }
-        @keyframes labelGlow {
-            0%, 100% { text-shadow: none; }
-            50% { text-shadow: 0 0 15px rgba(184,148,62,0.4); }
         }
         .family-name {
             font-family: 'Cormorant Garamond', serif;
@@ -551,11 +460,6 @@
             height: 80px;
             margin: 0 auto 20px;
             opacity: 0.8;
-            animation: churchFloat 5s ease-in-out infinite;
-        }
-        @keyframes churchFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
         .church-icon svg { width: 100%; height: 100%; }
         .church-time {
@@ -605,17 +509,10 @@
             align-items: center;
             justify-content: center;
         }
-        .divider-icon::before, .divider-icon::after {
+        .divider-icon::before {
             content: '✦';
-            position: absolute;
             color: var(--gold);
-            animation: starTwinkleCard 2s ease-in-out infinite;
-        }
-        .divider-icon::before { font-size: 1.2rem; }
-        .divider-icon::after { font-size: 0.7rem; color: var(--gold-light); animation-delay: 1s; }
-        @keyframes starTwinkleCard {
-            0%, 100% { opacity: 0.4; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+            font-size: 1.2rem;
         }
 
         .countdown-section {
@@ -647,13 +544,6 @@
             border: 1px solid var(--gold-light);
             border-radius: 6px;
             padding: 15px 10px;
-            transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .countdown-item:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-gold);
         }
         .countdown-number {
             font-family: 'Cinzel', serif;
@@ -661,9 +551,7 @@
             font-weight: 700;
             color: var(--gold);
             display: block;
-            transition: transform 0.2s var(--ease-spring);
         }
-        .countdown-number.tick { transform: scale(1.15); }
         .countdown-label {
             font-family: 'Cormorant Garamond', serif;
             font-size: var(--fs-sm);
@@ -695,7 +583,6 @@
             border-radius: 6px;
             overflow: hidden;
             background: var(--white);
-            box-shadow: var(--shadow-sm);
         }
         .carousel-track {
             display: flex;
@@ -710,7 +597,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.15) saturate(1.1);
         }
         .carousel-btn {
             position: absolute;
@@ -727,14 +613,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 5;
-            transition: all 0.3s var(--ease-spring);
             font-size: 1.3rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .carousel-btn:hover {
-            background: var(--gold);
-            color: var(--white);
-            transform: translateY(-50%) scale(1.12);
         }
         .carousel-prev { left: 10px; }
         .carousel-next { right: 10px; }
@@ -782,7 +661,6 @@
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 15px;
-            box-shadow: var(--shadow-md);
         }
         .map-wrap iframe {
             width: 100%;
@@ -801,18 +679,12 @@
             font-size: var(--fs-sm);
             letter-spacing: 2px;
             border-radius: 30px;
-            transition: all 0.3s var(--ease-spring);
             text-transform: uppercase;
             animation: buttonPremium 3.5s linear infinite;
-            box-shadow: var(--shadow-gold);
         }
         @keyframes buttonPremium {
             0% { background-position: 0% center; }
             100% { background-position: 300% center; }
-        }
-        .map-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(184,148,62,0.4);
         }
 
         .rsvp-section {
@@ -826,8 +698,6 @@
             transform: translateY(20px);
             transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
             transition-delay: 2.9s;
-            position: relative;
-            overflow: hidden;
         }
         .rsvp-section.visible { opacity: 1; transform: translateY(0); }
         .rsvp-title {
@@ -857,16 +727,10 @@
             font-size: var(--fs-md);
             color: var(--brown);
             outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            resize: vertical;
         }
         .rsvp-input:focus {
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(184,148,62,0.12);
-        }
-        .rsvp-input::placeholder {
-            color: var(--brown-light);
-            opacity: 0.55;
         }
         .rsvp-button {
             width: 100%;
@@ -881,26 +745,8 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
             animation: buttonPremium 3.5s linear infinite;
         }
-        .rsvp-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-            transition: left 0.6s ease;
-        }
-        .rsvp-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
-        }
-        .rsvp-button:hover::before { left: 100%; }
         .rsvp-button.sent {
             background: linear-gradient(135deg, #8ba87a, #6b8e5a) !important;
             animation: none;
@@ -929,23 +775,8 @@
             color: var(--gold);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* ═══════ RESPONSIVE MÓVIL - CORREGIDO ═══════ */
+        /* ═══════ RESPONSIVE MÓVIL ═══════ */
         @media (max-width: 600px) {
-            body {
-                position: relative;
-                overflow: auto;
-                height: auto;
-                min-height: 100vh;
-            }
-            
             .invitation { 
                 padding: 40px 25px; 
                 margin: 20px 0; 
@@ -957,25 +788,25 @@
             .family-label { flex: 0 0 auto; }
             .countdown-grid { grid-template-columns: repeat(2, 1fr); }
             .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
-            .angel-container { width: 160px; margin-bottom: 10px; }
+            .angel-container { width: 140px; margin-bottom: 8px; }
             .map-wrap iframe { height: 240px; }
             
-            /* SPLASH MÓVIL - CORRECCIÓN CRÍTICA */
+            /* SPLASH MÓVIL - CORREGIDO */
             .splash-content {
-                padding: 8px 12px;
-                gap: 6px;
+                padding: 10px 15px;
+                gap: 8px;
                 max-width: 320px;
             }
             .angel-container {
-                width: clamp(90px, 26vw, 150px);
-                margin-bottom: 4px;
+                width: clamp(100px, 26vw, 160px);
+                margin-bottom: 6px;
             }
             .splash-label {
                 font-size: 0.6rem;
                 letter-spacing: 0.35em;
             }
             .splash-name {
-                font-size: clamp(1.8rem, 8.5vw, 2.6rem);
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
             }
             .splash-divider {
                 margin: 3px 0 8px;
@@ -987,10 +818,10 @@
             .splash-hint {
                 font-size: 0.7rem;
             }
-            .splash-orb:nth-child(1){width:180px;height:180px;}
-            .splash-orb:nth-child(2){width:140px;height:140px;}
-            .splash-orb:nth-child(3){width:120px;height:120px;}
-            .splash-orb:nth-child(4){width:160px;height:160px;}
+            .splash-orb:nth-child(1){width:160px;height:160px;}
+            .splash-orb:nth-child(2){width:120px;height:120px;}
+            .splash-orb:nth-child(3){width:100px;height:100px;}
+            .splash-orb:nth-child(4){width:140px;height:140px;}
         }
         
         @media (max-width: 400px) {
@@ -998,18 +829,17 @@
             .family-label { font-size: var(--fs-lg); }
             .countdown-number { font-size: var(--fs-lg); }
             
-            /* SPLASH PANTALLAS MUY PEQUEÑAS */
             .splash-content {
-                padding: 6px 10px;
-                gap: 5px;
+                padding: 8px 12px;
+                gap: 6px;
                 max-width: 280px;
             }
             .angel-container {
-                width: clamp(80px, 24vw, 130px);
-                margin-bottom: 3px;
+                width: clamp(90px, 24vw, 140px);
+                margin-bottom: 5px;
             }
             .splash-name {
-                font-size: clamp(1.6rem, 8vw, 2.4rem);
+                font-size: clamp(1.6rem, 7.5vw, 2.4rem);
             }
             .splash-label {
                 font-size: 0.55rem;
@@ -1019,54 +849,14 @@
                 width: 25px;
             }
         }
-        
-        /* Landscape en móvil - ajuste especial */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .splash-content {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                padding: 8px;
-            }
-            .angel-container {
-                width: 100px;
-                margin: 0;
-                order: 1;
-            }
-            .splash-label {
-                order: 2;
-                width: 100%;
-                margin: 0;
-            }
-            .splash-name {
-                order: 3;
-                width: 100%;
-                margin: 0;
-                font-size: 1.8rem;
-            }
-            .splash-divider {
-                order: 4;
-                width: 100%;
-                margin: 2px 0;
-            }
-            .splash-hint {
-                order: 5;
-                width: 100%;
-                font-size: 0.65rem;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
     <canvas id="gold-canvas"></canvas>
 
     <!-- SPLASH CON ÁNGEL IMAGEN -->
     <div id="splash">
-        <div class="splash-rays"></div>
         <div class="splash-orbs">
             <div class="splash-orb"></div>
             <div class="splash-orb"></div>
@@ -1076,7 +866,7 @@
         
         <div class="splash-content">
             <div class="angel-container">
-                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="180" height="230" decoding="async" />
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="200" height="260" decoding="async" />
             </div>
             
             <div class="splash-label">Bautizo</div>
@@ -1102,8 +892,6 @@
                     <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
                     <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
                     <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-tr">
@@ -1111,8 +899,6 @@
                     <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
                     <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
                     <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-bl">
@@ -1120,8 +906,6 @@
                     <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
                     <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
                     <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-br">
@@ -1129,8 +913,6 @@
                     <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
                     <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
                     <circle cx="25" cy="25" r="3" fill="#b8943e"/>
-                    <path d="M10,10 Q20,15 25,25 Q30,35 25,45" fill="none" stroke="#b8943e" stroke-width="1"/>
-                    <path d="M10,10 Q15,20 25,25 Q35,30 45,25" fill="none" stroke="#b8943e" stroke-width="1"/>
                 </svg>
             </div>
 
@@ -1176,20 +958,11 @@
             <div class="church-section">
                 <div class="church-icon">
                     <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="churchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#6b5438"/>
-                                <stop offset="100%" stop-color="#4a3820"/>
-                            </linearGradient>
-                        </defs>
-                        <rect x="20" y="30" width="20" height="40" fill="url(#churchGrad)" opacity="0.8"/>
-                        <polygon points="30,10 15,30 45,30" fill="url(#churchGrad)" opacity="0.8"/>
-                        <rect x="28" y="5" width="4" height="10" fill="url(#churchGrad)" opacity="0.8"/>
+                        <rect x="20" y="30" width="20" height="40" fill="#4a3820" opacity="0.8"/>
+                        <polygon points="30,10 15,30 45,30" fill="#4a3820" opacity="0.8"/>
+                        <rect x="28" y="5" width="4" height="10" fill="#4a3820" opacity="0.8"/>
                         <rect x="25" y="50" width="10" height="20" fill="#faf6ed" opacity="0.6"/>
-                        <rect x="26" y="35" width="8" height="10" fill="#faf6ed" opacity="0.5"/>
                         <circle cx="30" cy="20" r="2.5" fill="#b8943e" opacity="0.9"/>
-                        <line x1="30" y1="17" x2="30" y2="23" stroke="#b8943e" stroke-width="0.8"/>
-                        <line x1="27" y1="20" x2="33" y2="20" stroke="#b8943e" stroke-width="0.8"/>
                     </svg>
                 </div>
                 <div class="church-time">10:00 a.m.</div>
@@ -1230,8 +1003,8 @@
                 <div class="gallery-title">Galería de Recuerdos</div>
                 <div class="carousel-wrap" id="carousel">
                     <div class="carousel-track" id="carousel-track"></div>
-                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Anterior">‹</button>
-                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)" aria-label="Siguiente">›</button>
+                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">‹</button>
+                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">›</button>
                 </div>
                 <div class="carousel-dots" id="carousel-dots"></div>
             </div>
@@ -1239,7 +1012,7 @@
             <div class="map-section">
                 <div class="map-title">Ubicación</div>
                 <div class="map-wrap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa" allowfullscreen="" loading="lazy" title="Ubicación"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="map-link">Ver en Google Maps</a>
             </div>
@@ -1316,7 +1089,7 @@
             autoTimer = setTimeout(openInvitation, AUTO_OPEN_MS);
         }
         
-        splash.addEventListener('click', openInvitation, { passive: true });
+        splash.addEventListener('click', openInvitation);
         
         function revealInvitation() {
             const invitation = document.getElementById('invitation');
@@ -1400,7 +1173,6 @@
             const track = document.getElementById('carousel-track');
             const dotsContainer = document.getElementById('carousel-dots');
             
-            const fragment = document.createDocumentFragment();
             galleryImages.forEach(img => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
@@ -1408,20 +1180,16 @@
                 imgEl.src = img.src;
                 imgEl.alt = img.cap;
                 imgEl.loading = 'lazy';
-                imgEl.decoding = 'async';
                 slide.appendChild(imgEl);
-                fragment.appendChild(slide);
+                track.appendChild(slide);
             });
-            track.appendChild(fragment);
             
-            const dotsFragment = document.createDocumentFragment();
             galleryImages.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.addEventListener('click', () => goToCarousel(i));
-                dotsFragment.appendChild(dot);
+                dotsContainer.appendChild(dot);
             });
-            dotsContainer.appendChild(dotsFragment);
             
             updateCarousel();
             autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
@@ -1451,15 +1219,11 @@
         
         let touchStartX = 0;
         const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => { 
-            touchStartX = e.touches[0].clientX; 
-        }, { passive: true });
+        carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
         carousel.addEventListener('touchend', e => {
             const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                moveCarousel(diff > 0 ? 1 : -1);
-            }
-        }, { passive: true });
+            if (Math.abs(diff) > 50) moveCarousel(diff > 0 ? 1 : -1);
+        });
         
         window.handleRSVP = function(e) {
             e.preventDefault();
@@ -1467,10 +1231,7 @@
             const guests = document.getElementById('rsvp-guests').value.trim();
             const message = document.getElementById('rsvp-message').value.trim();
             
-            if (!name) { 
-                alert('Por favor ingresa tu nombre'); 
-                return; 
-            }
+            if (!name) { alert('Por favor ingresa tu nombre'); return; }
             
             const whatsappNumber = '50712345678';
             const text = 'Hola, soy ' + name + '. Confirmo mi asistencia al Bautizo de Emilio André' + 
@@ -1493,19 +1254,13 @@
         
         function initParticles() {
             const canvas = document.getElementById('gold-canvas');
-            const ctx = canvas.getContext('2d', { alpha: true });
+            const ctx = canvas.getContext('2d');
             let particles = [];
             let W, H;
-            let dpr = Math.min(window.devicePixelRatio || 1, 2);
             
             function resize() {
-                W = window.innerWidth;
-                H = window.innerHeight;
-                canvas.width = W * dpr;
-                canvas.height = H * dpr;
-                canvas.style.width = W + 'px';
-                canvas.style.height = H + 'px';
-                ctx.scale(dpr, dpr);
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
             }
             
             function createParticle() {
@@ -1522,26 +1277,13 @@
             }
             
             resize();
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push(createParticle());
-            }
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
             
-            let lastTime = 0;
-            const targetFPS = IS_MOBILE ? 30 : 60;
-            const frameInterval = 1000 / targetFPS;
-            
-            function animate(currentTime) {
+            function animate() {
                 particlesRAF = requestAnimationFrame(animate);
-                
-                const deltaTime = currentTime - lastTime;
-                if (deltaTime < frameInterval) return;
-                lastTime = currentTime - (deltaTime % frameInterval);
-                
                 ctx.clearRect(0, 0, W, H);
-                ctx.fillStyle = 'rgba(184, 148, 62, 1)';
                 
-                for (let i = 0; i < particles.length; i++) {
-                    const p = particles[i];
+                particles.forEach(p => {
                     p.x += p.speedX;
                     p.y += p.speedY;
                     
@@ -1560,7 +1302,24 @@
                     
                     ctx.globalAlpha = p.opacity;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, 6.2832);
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(184, 148, 62, 1)';
                     ctx.fill();
-                }
-                ctx.globalAlpha = 1; = 1;
+                });
+                ctx.globalAlpha = 1;
+            }
+            
+            animate();
+            window.addEventListener('resize', resize);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startAutoOpen);
+        } else {
+            startAutoOpen();
+        }
+        
+    })();
+    </script>
+</body>
+</html>
