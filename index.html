@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#3d0a2a" />
+  <meta name="theme-color" content="#021a3d" />
   <title>Invitación de Bautizo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,8 +18,8 @@
     }
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      background: linear-gradient(180deg, #1e0212 0%, #3d0a2a 50%, #1e0212 100%);
-      color: #faeaf0;
+      background: linear-gradient(180deg, #010d1f 0%, #021a3d 50%, #010d1f 100%);
+      color: #e8f0fa;
       overflow-x: hidden;
       min-height: 100vh;
       line-height: 1.6;
@@ -28,12 +28,12 @@
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
     :root {
-      --gold: #e8a0bf;
-      --gold-light: #f5c6da;
-      --gold-pale: #fde8f0;
-      --purple-deep: #3d0a2a;
-      --purple-mid: #5c1040;
-      --white-soft: #fdf0f5;
+      --gold: #7ab8e8;
+      --gold-light: #a8d0f0;
+      --gold-pale: #deeefa;
+      --purple-deep: #021a3d;
+      --purple-mid: #04285c;
+      --white-soft: #eef5fc;
     }
 
     /* SPLASH SCREEN */
@@ -46,7 +46,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: radial-gradient(ellipse at 50% 60%, #5c1040 0%, #3d0a2a 50%, #1e0212 100%);
+      background: radial-gradient(ellipse at 50% 60%, #04285c 0%, #021a3d 50%, #010d1f 100%);
       transition: opacity 0.9s ease, visibility 0.9s;
     }
     #splash.hidden { 
@@ -70,7 +70,7 @@
     .angel-wrap img {
       width: clamp(150px, 30vw, 280px);
       height: auto;
-      filter: drop-shadow(0 0 30px rgba(232,160,191,0.5));
+      filter: drop-shadow(0 0 30px rgba(122,184,232,0.5));
     }
 
     .splash-text {
@@ -90,21 +90,21 @@
       font-family: 'Great Vibes', cursive;
       font-size: clamp(3rem, 10vw, 5rem);
       color: var(--gold-pale);
-      text-shadow: 0 0 30px rgba(232,160,191,0.5);
+      text-shadow: 0 0 30px rgba(122,184,232,0.5);
       margin-bottom: 0.5rem;
     }
     .splash-subtitle {
       font-size: 1.2rem;
       font-style: italic;
-      color: rgba(250,234,240,0.8);
+      color: rgba(232,240,250,0.8);
     }
 
     .splash-btn {
       margin-top: 2rem;
       padding: 1rem 2.5rem;
       border-radius: 50px;
-      background: linear-gradient(135deg, rgba(232,160,191,0.2), rgba(232,160,191,0.1));
-      border: 1px solid rgba(232,160,191,0.5);
+      background: linear-gradient(135deg, rgba(122,184,232,0.2), rgba(122,184,232,0.1));
+      border: 1px solid rgba(122,184,232,0.5);
       color: var(--gold-pale);
       font-family: 'Montserrat', sans-serif;
       font-size: 0.85rem;
@@ -114,9 +114,9 @@
       transition: all 0.3s ease;
     }
     .splash-btn:hover {
-      background: linear-gradient(135deg, rgba(232,160,191,0.3), rgba(232,160,191,0.15));
+      background: linear-gradient(135deg, rgba(122,184,232,0.3), rgba(122,184,232,0.15));
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(232,160,191,0.3);
+      box-shadow: 0 10px 30px rgba(122,184,232,0.3);
     }
 
     .progress-bar {
@@ -174,7 +174,7 @@
     .header img {
       width: clamp(120px, 25vw, 220px);
       margin: 0 auto 30px;
-      filter: drop-shadow(0 0 20px rgba(232,160,191,0.4));
+      filter: drop-shadow(0 0 20px rgba(122,184,232,0.4));
       animation: float 4s ease-in-out infinite;
     }
 
@@ -191,7 +191,7 @@
       font-family: 'Great Vibes', cursive;
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       color: var(--gold-pale);
-      text-shadow: 0 0 30px rgba(232,160,191,0.4);
+      text-shadow: 0 0 30px rgba(122,184,232,0.4);
       margin: 1rem 0;
       line-height: 1.2;
     }
@@ -199,7 +199,7 @@
     .subtitle {
       font-size: 1.3rem;
       font-style: italic;
-      color: rgba(250,234,240,0.7);
+      color: rgba(232,240,250,0.7);
       line-height: 1.6;
     }
 
@@ -224,7 +224,7 @@
     .text-block {
       font-size: 1.1rem;
       line-height: 1.8;
-      color: rgba(250,234,240,0.85);
+      color: rgba(232,240,250,0.85);
       margin: 30px 0;
     }
     .text-block strong {
@@ -263,8 +263,8 @@
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: rgba(30,2,18,0.6);
-      border: 1px solid rgba(232,160,191,0.4);
+      background: rgba(1,13,31,0.6);
+      border: 1px solid rgba(122,184,232,0.4);
       color: var(--gold-pale);
       border-radius: 50%;
       font-size: 1.2rem;
@@ -273,7 +273,7 @@
       z-index: 2;
     }
     .carousel-btn:hover {
-      background: rgba(232,160,191,0.3);
+      background: rgba(122,184,232,0.3);
       transform: translateY(-50%) scale(1.1);
     }
     .carousel-btn.prev { left: 10px; }
@@ -288,7 +288,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(232,160,191,0.3);
+      background: rgba(122,184,232,0.3);
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -299,8 +299,8 @@
 
     /* DETAILS */
     .details-box {
-      background: rgba(232,160,191,0.05);
-      border: 1px solid rgba(232,160,191,0.15);
+      background: rgba(122,184,232,0.05);
+      border: 1px solid rgba(122,184,232,0.15);
       border-radius: 16px;
       padding: 40px 30px;
       margin: 40px 0;
@@ -325,7 +325,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(232,160,191,0.7);
+      color: rgba(122,184,232,0.7);
       margin-bottom: 5px;
     }
     .detail-value {
@@ -342,8 +342,8 @@
       margin: 30px auto;
     }
     .countdown-box {
-      background: rgba(232,160,191,0.08);
-      border: 1px solid rgba(232,160,191,0.2);
+      background: rgba(122,184,232,0.08);
+      border: 1px solid rgba(122,184,232,0.2);
       border-radius: 12px;
       padding: 20px 10px;
     }
@@ -360,7 +360,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(232,160,191,0.7);
+      color: rgba(122,184,232,0.7);
       margin-top: 8px;
       display: block;
     }
@@ -408,9 +408,9 @@
       padding: 40px 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.8rem;
-      color: rgba(232,160,191,0.5);
+      color: rgba(122,184,232,0.5);
       letter-spacing: 0.15em;
-      border-top: 1px solid rgba(232,160,191,0.1);
+      border-top: 1px solid rgba(122,184,232,0.1);
       margin-top: 60px;
     }
 
@@ -439,7 +439,7 @@
 <div id="splash">
   <canvas id="starfield"></canvas>
   <div class="angel-wrap">
-    <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel" />
+    <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
   </div>
   <div class="splash-text">
     <p class="splash-label">Santo Bautismo</p>
@@ -457,7 +457,7 @@
   <div class="container">
     <!-- Header -->
     <div class="section header">
-      <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel" />
+      <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
       <p class="tag">✦ Santo Bautismo ✦</p>
       <h2 class="name">Nombre del Bebé</h2>
       <p class="subtitle">Nos llena de alegría comunicarte<br>que recibirá las aguas bautismales</p>
@@ -477,7 +477,7 @@
       </div>
       <p class="parents">Nombre Papá & Nombre Mamá</p>
       <div class="text-block">
-        <p>tienen el honor de invitarte a compartir este momento tan especial en la vida de su pequeña.</p>
+        <p>tienen el honor de invitarte a compartir este momento tan especial en la vida de su pequeño.</p>
       </div>
     </div>
 
@@ -698,7 +698,7 @@ function initStarfield() {
   
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#fde8f0';
+    ctx.fillStyle = '#deeefa';
     
     stars.forEach(star => {
       star.y -= star.speed;
@@ -752,7 +752,7 @@ function initParticles() {
   
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#e8a0bf';
+    ctx.fillStyle = '#7ab8e8';
     
     particles.forEach(p => {
       p.x += p.speedX;
