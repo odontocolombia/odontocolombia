@@ -101,7 +101,6 @@
             pointer-events: none;
         }
         
-        /* Rays decorativos */
         .splash-rays {
             position: absolute;
             inset: 0;
@@ -122,7 +121,6 @@
         }
         @keyframes raysRotate { to { transform: rotate(360deg); } }
         
-        /* Orbes flotantes */
         .splash-orbs {
             position: absolute;
             inset: 0;
@@ -158,68 +156,20 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ── ÁNGEL ANIMADO SPLASH ─── */
+        /* ── ÁNGEL IMAGEN SPLASH ─── */
         .angel-container {
-            width: clamp(200px, 50vw, 280px);
-            height: clamp(230px, 58vw, 320px);
+            width: clamp(160px, 40vw, 240px);
             margin: 0 auto 25px;
-            position: relative;
             animation: angelFloat 4s ease-in-out infinite;
+        }
+        .angel-container img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(184,148,62,0.35));
         }
         @keyframes angelFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
-        }
-        .angel-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 10px 30px rgba(184,148,62,0.3));
-        }
-        
-        .halo {
-            animation: haloGlow 2s ease-in-out infinite;
-            transform-origin: center;
-        }
-        @keyframes haloGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,106,0.6)); }
-            50% { filter: drop-shadow(0 0 20px rgba(212,175,106,1)); }
-        }
-        
-        .wing-left {
-            animation: wingFlapLeft 3s ease-in-out infinite;
-            transform-origin: right center;
-        }
-        .wing-right {
-            animation: wingFlapRight 3s ease-in-out infinite;
-            transform-origin: left center;
-        }
-        @keyframes wingFlapLeft {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-5deg); }
-        }
-        @keyframes wingFlapRight {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(5deg); }
-        }
-        
-        .halo-star {
-            animation: starTwinkle 1.5s ease-in-out infinite;
-        }
-        .halo-star:nth-child(2) { animation-delay: 0.3s; }
-        .halo-star:nth-child(3) { animation-delay: 0.6s; }
-        .halo-star:nth-child(4) { animation-delay: 0.9s; }
-        .halo-star:nth-child(5) { animation-delay: 1.2s; }
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-        
-        .cloud-glow {
-            animation: cloudPulse 3s ease-in-out infinite;
-        }
-        @keyframes cloudPulse {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); }
-            50% { filter: drop-shadow(0 0 25px rgba(255,255,255,1)); }
         }
 
         .splash-label {
@@ -276,7 +226,6 @@
             animation: fadeSlideUp 1s 1s var(--ease-out-expo) forwards;
         }
         
-        /* Progress bar */
         .progress-bar {
             position: absolute;
             bottom: 0;
@@ -374,7 +323,7 @@
         .corner-bl { bottom: 15px; left: 15px; transform: scaleY(-1); transition-delay: 0.6s; }
         .corner-br { bottom: 15px; right: 15px; transform: scale(-1, -1); transition-delay: 0.8s; }
 
-        /* ─── ÁNGEL EN PRIMER BLOQUE ─── */
+        /* ─── ÁNGEL IMAGEN EN HEADER ─── */
         .angel-header {
             text-align: center;
             margin-bottom: 40px;
@@ -387,9 +336,8 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .angel-header-svg {
-            width: 180px;
-            height: 200px;
+        .angel-header img {
+            width: clamp(120px, 30vw, 180px);
             margin: 0 auto;
             animation: angelFloatSmall 5s ease-in-out infinite;
             filter: drop-shadow(0 8px 20px rgba(184,148,62,0.25));
@@ -957,7 +905,6 @@
             color: var(--gold);
         }
 
-        /* ─── REDUCE MOTION ─── */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -978,8 +925,7 @@
             .family-label { flex: 0 0 auto; }
             .countdown-grid { grid-template-columns: repeat(2, 1fr); }
             .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
-            .angel-container { width: 220px; height: 260px; }
-            .angel-header-svg { width: 140px; height: 160px; }
+            .angel-container { width: 180px; }
             .map-wrap iframe { height: 240px; }
         }
         
@@ -995,7 +941,7 @@
     <div class="bg-pattern"></div>
     <canvas id="gold-canvas"></canvas>
 
-    <!-- SPLASH CON ÁNGEL -->
+    <!-- SPLASH CON ÁNGEL IMAGEN -->
     <div id="splash">
         <div class="splash-rays"></div>
         <div class="splash-orbs">
@@ -1006,90 +952,8 @@
         </div>
         
         <div class="splash-content">
-            <!-- ÁNGEL SVG ANIMADO -->
             <div class="angel-container">
-                <svg class="angel-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Halo -->
-                    <g class="halo">
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#d4af6a" stroke-width="3"/>
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#faf6ed" stroke-width="1.5"/>
-                        <g class="halo-star">
-                            <path d="M 75 33 L 77 30 L 79 33 L 77 36 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 100 28 L 102 25 L 104 28 L 102 31 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 121 33 L 123 30 L 125 33 L 123 36 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 88 30 L 90 27 L 92 30 L 90 33 Z" fill="#d4af6a"/>
-                        </g>
-                        <g class="halo-star">
-                            <path d="M 112 30 L 114 27 L 116 30 L 114 33 Z" fill="#d4af6a"/>
-                        </g>
-                    </g>
-                    
-                    <!-- Ala izquierda -->
-                    <g class="wing-left">
-                        <path d="M 85 90 Q 40 70 20 90 Q 10 110 30 120 Q 50 130 75 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 95 Q 45 85 30 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 65 105 Q 45 100 32 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 70 112 Q 50 110 38 115" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    
-                    <!-- Ala derecha -->
-                    <g class="wing-right">
-                        <path d="M 115 90 Q 160 70 180 90 Q 190 110 170 120 Q 150 130 125 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 130 95 Q 155 85 170 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 135 105 Q 155 100 168 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 130 112 Q 150 110 162 115" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    
-                    <!-- Cuerpo / Vestido -->
-                    <path d="M 85 95 Q 85 130 75 160 Q 70 175 100 180 Q 130 175 125 160 Q 115 130 115 95 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                    <path d="M 90 110 Q 100 115 110 110" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    <path d="M 88 130 Q 100 135 112 130" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    <path d="M 85 150 Q 100 155 115 150" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.5"/>
-                    
-                    <!-- Cabeza -->
-                    <circle cx="100" cy="75" r="22" fill="#fde8d0" stroke="#d4af6a" stroke-width="1"/>
-                    
-                    <!-- Cabello -->
-                    <path d="M 78 70 Q 80 55 100 52 Q 120 55 122 70 Q 120 65 115 63 Q 110 60 100 60 Q 90 60 85 63 Q 80 65 78 70" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 82 68 Q 85 62 90 61" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 95 60 Q 100 58 105 60" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    <path d="M 110 61 Q 115 62 118 68" fill="none" stroke="#8b4520" stroke-width="0.8"/>
-                    
-                    <!-- Ojos -->
-                    <ellipse cx="92" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <ellipse cx="108" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <circle cx="93" cy="73.5" r="1.2" fill="#fff"/>
-                    <circle cx="109" cy="73.5" r="1.2" fill="#fff"/>
-                    
-                    <!-- Pestañas -->
-                    <path d="M 89 72 Q 90 70 91 71" fill="none" stroke="#2d5016" stroke-width="0.8"/>
-                    <path d="M 105 72 Q 106 70 107 71" fill="none" stroke="#2d5016" stroke-width="0.8"/>
-                    
-                    <!-- Mejillas rosadas -->
-                    <circle cx="87" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    <circle cx="113" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    
-                    <!-- Sonrisa -->
-                    <path d="M 95 85 Q 100 88 105 85" fill="none" stroke="#c87040" stroke-width="1.2" stroke-linecap="round"/>
-                    
-                    <!-- Manos sosteniendo la nube -->
-                    <circle cx="88" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    <circle cx="112" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    
-                    <!-- Nube -->
-                    <g class="cloud-glow">
-                        <path d="M 60 155 Q 60 140 75 140 Q 80 130 95 132 Q 105 125 115 132 Q 130 130 135 140 Q 150 140 150 155 Q 155 165 145 170 Q 140 175 130 175 L 80 175 Q 70 175 65 170 Q 55 165 60 155" fill="#fff" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 155 Q 75 150 85 152" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
-                        <path d="M 95 148 Q 105 145 115 148" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
-                        <path d="M 120 155 Q 128 152 135 158" fill="none" stroke="#faf6ed" stroke-width="1.5" opacity="0.8"/>
-                    </g>
-                </svg>
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
             </div>
             
             <div class="splash-label">Bautizo</div>
@@ -1147,44 +1011,9 @@
                 </svg>
             </div>
 
-            <!-- ÁNGEL EN PRIMER BLOQUE -->
+            <!-- ÁNGEL IMAGEN EN HEADER -->
             <div class="angel-header">
-                <svg class="angel-header-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                    <g class="halo">
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#d4af6a" stroke-width="3"/>
-                        <ellipse cx="100" cy="35" rx="28" ry="8" fill="none" stroke="#faf6ed" stroke-width="1.5"/>
-                        <g class="halo-star"><path d="M 75 33 L 77 30 L 79 33 L 77 36 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 100 28 L 102 25 L 104 28 L 102 31 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 121 33 L 123 30 L 125 33 L 123 36 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 88 30 L 90 27 L 92 30 L 90 33 Z" fill="#d4af6a"/></g>
-                        <g class="halo-star"><path d="M 112 30 L 114 27 L 116 30 L 114 33 Z" fill="#d4af6a"/></g>
-                    </g>
-                    <g class="wing-left">
-                        <path d="M 85 90 Q 40 70 20 90 Q 10 110 30 120 Q 50 130 75 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 70 95 Q 45 85 30 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 65 105 Q 45 100 32 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    <g class="wing-right">
-                        <path d="M 115 90 Q 160 70 180 90 Q 190 110 170 120 Q 150 130 125 115 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                        <path d="M 130 95 Q 155 85 170 95" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                        <path d="M 135 105 Q 155 100 168 108" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
-                    </g>
-                    <path d="M 85 95 Q 85 130 75 160 Q 70 175 100 180 Q 130 175 125 160 Q 115 130 115 95 Z" fill="#faf6ed" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="100" cy="75" r="22" fill="#fde8d0" stroke="#d4af6a" stroke-width="1"/>
-                    <path d="M 78 70 Q 80 55 100 52 Q 120 55 122 70 Q 120 65 115 63 Q 110 60 100 60 Q 90 60 85 63 Q 80 65 78 70" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
-                    <ellipse cx="92" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <ellipse cx="108" cy="75" rx="3.5" ry="4.5" fill="#2d5016"/>
-                    <circle cx="93" cy="73.5" r="1.2" fill="#fff"/>
-                    <circle cx="109" cy="73.5" r="1.2" fill="#fff"/>
-                    <circle cx="87" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    <circle cx="113" cy="82" r="3" fill="#ffb6c1" opacity="0.5"/>
-                    <path d="M 95 85 Q 100 88 105 85" fill="none" stroke="#c87040" stroke-width="1.2" stroke-linecap="round"/>
-                    <circle cx="88" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    <circle cx="112" cy="145" r="4" fill="#fde8d0" stroke="#d4af6a" stroke-width="0.8"/>
-                    <g class="cloud-glow">
-                        <path d="M 60 155 Q 60 140 75 140 Q 80 130 95 132 Q 105 125 115 132 Q 130 130 135 140 Q 150 140 150 155 Q 155 165 145 170 Q 140 175 130 175 L 80 175 Q 70 175 65 170 Q 55 165 60 155" fill="#fff" stroke="#d4af6a" stroke-width="1"/>
-                    </g>
-                </svg>
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
             </div>
 
             <div class="text-intro">Acompáñanos a ser parte del</div>
@@ -1398,7 +1227,6 @@
             buildCarousel();
         }
         
-        // Countdown
         function startCountdown() {
             const els = {
                 d: document.getElementById('days'),
@@ -1443,7 +1271,6 @@
             setInterval(tick, 1000);
         }
         
-        // Carousel
         const galleryImages = [
             { src: 'https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80', cap: 'Familia' },
             { src: 'https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80', cap: 'Bendición' },
@@ -1470,7 +1297,6 @@
             `).join('');
             
             updateCarousel();
-            
             autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
         }
         
@@ -1508,7 +1334,6 @@
             }
         }, { passive: true });
         
-        // RSVP
         window.handleRSVP = function(e) {
             e.preventDefault();
             const name = document.getElementById('rsvp-name').value.trim();
@@ -1537,7 +1362,6 @@
             }, 3000);
         };
         
-        // Particles
         function initParticles() {
             const canvas = document.getElementById('gold-canvas');
             const ctx = canvas.getContext('2d');
@@ -1564,7 +1388,6 @@
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-                    
                     if (this.growing) {
                         this.opacity += this.fadeSpeed;
                         if (this.opacity >= 0.4) this.growing = false;
@@ -1572,7 +1395,6 @@
                         this.opacity -= this.fadeSpeed;
                         if (this.opacity <= 0.1) this.growing = true;
                     }
-                    
                     if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) {
                         this.reset();
                     }
@@ -1592,10 +1414,7 @@
             
             function animate() {
                 ctx.clearRect(0, 0, W, H);
-                particles.forEach(p => { 
-                    p.update(); 
-                    p.draw(); 
-                });
+                particles.forEach(p => { p.update(); p.draw(); });
                 requestAnimationFrame(animate);
             }
             
@@ -1603,7 +1422,6 @@
             window.addEventListener('resize', resize, { passive: true });
         }
         
-        // Init
         document.addEventListener('DOMContentLoaded', function() {
             startAutoOpen();
         });
