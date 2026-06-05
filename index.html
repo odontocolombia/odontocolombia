@@ -18,7 +18,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: 
 
 .template-selector { padding: 15px 20px; margin-bottom: 10px; }
 .template-selector label { display: block; font-size: 0.75rem; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-.template-select { width: 100%; padding: 8px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; }
+.template-select { width: 100%; padding: 8px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; margin-bottom: 10px; }
+
+.palette-selector { margin-top: 15px; padding-top: 15px; border-top: 1px solid #3a3a52; }
+.palette-selector label { display: block; font-size: 0.75rem; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.palette-select { width: 100%; padding: 8px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; }
 
 .section-list { list-style: none; padding: 0 10px; }
 .section-item { padding: 10px 15px; margin: 2px 0; cursor: pointer; font-size: 0.82rem; transition: all 0.2s; border-left: 3px solid transparent; display: flex; align-items: center; gap: 8px; border-radius: 0 4px 4px 0; }
@@ -44,10 +48,6 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: 
 .field-input:focus, .field-textarea:focus, .field-select:focus { outline: none; border-color: #d4af37; box-shadow: 0 0 0 2px rgba(212,175,55,0.15); }
 .field-textarea { resize: vertical; min-height: 60px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-.color-field { display: flex; align-items: center; gap: 8px; }
-.color-field input[type="color"] { width: 36px; height: 32px; border: none; border-radius: 4px; cursor: pointer; background: none; padding: 0; }
-.color-hex { flex: 1; padding: 8px 10px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 4px; color: #e4e4e7; font-size: 0.8rem; font-family: monospace; }
 
 .field-divider { height: 1px; background: #3a3a52; margin: 18px 0; }
 .field-section-title { font-size: 0.75rem; color: #d4af37; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #3a3a52; }
@@ -109,6 +109,15 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: 
         <option value="pink">🌸 Floral Rosa</option>
         <option value="gold">👼 Ángel Dorado</option>
       </select>
+      
+      <div class="palette-selector">
+        <label>Paleta de Colores</label>
+        <select class="palette-select" id="paletteSelect" onchange="changePalette()">
+          <option value="1">🎨 Clásica Azul y Dorada</option>
+          <option value="2">🌸 Romántica Rosa</option>
+          <option value="3">💜 Elegante Lavanda</option>
+        </select>
+      </div>
     </div>
     
     <ul class="section-list" id="sectionList">
@@ -137,6 +146,46 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: 
 
 <script>
 // ═══════════════════════════════════════════════
+// PALETAS DE COLORES PREDETERMINADAS
+// ═══════════════════════════════════════════════
+
+const colorPalettes = {
+  1: { // Clásica Azul y Dorada
+    blue: "#7ba3d4", blueLight: "#a8c8e8", blueDark: "#5a8ab8", blueSoft: "#d4e4f4",
+    gold: "#d4af37", goldLight: "#f0d860", goldDark: "#b8941f", goldSoft: "#f5e6b8",
+    pink: "#e8a0b8", pinkLight: "#f5d0e0", pinkDark: "#c87898", pinkSoft: "#fdf0f5",
+    rose: "#d4899f",
+    purple: "#9b7cb6", purpleLight: "#b89fd4", purpleDark: "#7a5a99", purpleSoft: "#e8dff0",
+    silver: "#c0c0c0", silverLight: "#d8d8d8", silverDark: "#a8a8a8",
+    white: "#ffffff", cream: "#faf8f0", creamDark: "#f0e8d0", beige: "#f5f0e0",
+    brown: "#4a3820", brownLight: "#6b5438",
+    green: "#a8b898", greenLight: "#c8d8b8", greenDark: "#889878"
+  },
+  2: { // Romántica Rosa
+    pink: "#e8a0b8", pinkLight: "#f5d0e0", pinkDark: "#c87898", pinkSoft: "#fdf0f5",
+    rose: "#d4899f", roseLight: "#e8b0c0", roseDark: "#b86878",
+    blue: "#a8c8e8", blueLight: "#c8d8f0", blueDark: "#7898b8", blueSoft: "#e8f0f8",
+    gold: "#d4af37", goldLight: "#f0d860", goldDark: "#b8941f", goldSoft: "#f5e6b8",
+    purple: "#b898c8", purpleLight: "#d0b8e0", purpleDark: "#9878a8", purpleSoft: "#f0e8f8",
+    silver: "#c0c0c0", silverLight: "#d8d8d8", silverDark: "#a8a8a8",
+    white: "#ffffff", cream: "#fff8fa", creamDark: "#f8e8f0", beige: "#f5f0e0",
+    brown: "#5a3848", brownLight: "#7a5868",
+    green: "#a8b898", greenLight: "#c8d8b8", greenDark: "#889878"
+  },
+  3: { // Elegante Lavanda
+    purple: "#9b7cb6", purpleLight: "#b89fd4", purpleDark: "#7a5a99", purpleSoft: "#e8dff0",
+    lavender: "#c8b8e0", lavenderLight: "#d8c8f0", lavenderDark: "#a898c8",
+    blue: "#8898b8", blueLight: "#a8b8d0", blueDark: "#687898", blueSoft: "#d8e0f0",
+    gold: "#c8b878", goldLight: "#d8c898", goldDark: "#a89858", goldSoft: "#f0e8c8",
+    silver: "#b8b8c8", silverLight: "#c8c8d8", silverDark: "#9898a8",
+    pink: "#d8b8c8", pinkLight: "#e8c8d8", pinkDark: "#b898a8", pinkSoft: "#f0e8ec",
+    white: "#ffffff", cream: "#f8f5f0", creamDark: "#f0e8e0", beige: "#f5f0e8",
+    brown: "#4a3a48", brownLight: "#6a5a68",
+    green: "#98a888", greenLight: "#b8c8a8", greenDark: "#788868"
+  }
+};
+
+// ═══════════════════════════════════════════════
 // DATOS DE LAS PLANTILLAS
 // ═══════════════════════════════════════════════
 
@@ -144,11 +193,6 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: 
 const templateBlue = {
   id: 'blue',
   name: 'Clásica Azul & Dorada',
-  colors: {
-    blue: "#7ba3d4", blueLight: "#a8c8e8", blueDark: "#5a8ab8", blueSoft: "#d4e4f4",
-    gold: "#d4af37", goldLight: "#f0d860", goldDark: "#b8941f", goldSoft: "#f5e6b8",
-    white: "#ffffff", cream: "#faf8f0", beige: "#f5f0e0", brown: "#4a3820"
-  },
   data: {
     splashText: "Bautizo", splashTitle: "Emilio André", splashHint: "Toca para abrir la invitación",
     topRibbonText: "Mi Bautizo",
@@ -187,13 +231,6 @@ const templateBlue = {
 const templatePink = {
   id: 'pink',
   name: 'Floral Rosa',
-  colors: {
-    pink: "#e8a0b8", pinkLight: "#f5d0e0", pinkDark: "#c87898", pinkSoft: "#fdf0f5",
-    rose: "#d4899f", cream: "#fff8fa", creamDark: "#f8e8f0",
-    brown: "#5a3848", brownLight: "#7a5868",
-    green: "#a8b898", greenLight: "#c8d8b8", greenDark: "#889878",
-    white: "#ffffff"
-  },
   data: {
     splashText: "Bautizo", splashName: "Emilio André", splashHint: "Toca para abrir la invitación",
     textIntro: "Acompáñanos a ser parte del",
@@ -230,12 +267,6 @@ const templatePink = {
 const templateGold = {
   id: 'gold',
   name: 'Ángel Dorado',
-  colors: {
-    gold: "#b8943e", goldLight: "#d4af6a", goldDark: "#8b6f2e",
-    cream: "#faf6ed", creamDark: "#f0e8d0",
-    brown: "#4a3820", brownLight: "#6b5438",
-    white: "#ffffff"
-  },
   data: {
     splashText: "Bautizo", splashName: "Emilio André", splashHint: "Toca para abrir la invitación",
     textIntro: "Acompáñanos a ser parte del",
@@ -271,6 +302,7 @@ const templateGold = {
 // Estado actual
 let currentTemplate = 'blue';
 let currentSection = 'splash';
+let currentPalette = '1';
 let templates = { blue: templateBlue, pink: templatePink, gold: templateGold };
 
 // ═══════════════════════════════════════════════
@@ -354,11 +386,6 @@ const sectionsConfig = {
       {key:"footerVerse",label:"Versículo",type:"text"},
       {key:"footerRef",label:"Referencia",type:"text"}
     ]},
-    colors: { title: "Colores", desc: "Paleta", fields: [
-      {key:"colors.blue",label:"Azul",type:"color"},
-      {key:"colors.gold",label:"Dorado",type:"color"},
-      {key:"colors.brown",label:"Marrón",type:"color"}
-    ]},
     whatsapp: { title: "WhatsApp", desc: "Contacto", fields: [
       {key:"whatsappNumber",label:"Número",type:"text"}
     ]}
@@ -423,11 +450,6 @@ const sectionsConfig = {
     footer: { title: "Footer", desc: "Versículo", fields: [
       {key:"footerVerse",label:"Versículo",type:"text"},
       {key:"footerRef",label:"Referencia",type:"text"}
-    ]},
-    colors: { title: "Colores", desc: "Paleta rosa", fields: [
-      {key:"colors.pink",label:"Rosa",type:"color"},
-      {key:"colors.brown",label:"Marrón",type:"color"},
-      {key:"colors.green",label:"Verde",type:"color"}
     ]},
     whatsapp: { title: "WhatsApp", desc: "Contacto", fields: [
       {key:"whatsappNumber",label:"Número",type:"text"}
@@ -494,11 +516,6 @@ const sectionsConfig = {
       {key:"footerVerse",label:"Versículo",type:"text"},
       {key:"footerRef",label:"Referencia",type:"text"}
     ]},
-    colors: { title: "Colores", desc: "Paleta dorada", fields: [
-      {key:"colors.gold",label:"Dorado",type:"color"},
-      {key:"colors.brown",label:"Marrón",type:"color"},
-      {key:"colors.cream",label:"Crema",type:"color"}
-    ]},
     whatsapp: { title: "WhatsApp", desc: "Contacto", fields: [
       {key:"whatsappNumber",label:"Número",type:"text"}
     ]}
@@ -515,6 +532,15 @@ function changeTemplate() {
   renderSectionList();
   renderEditor();
   renderCard();
+}
+
+function changePalette() {
+  currentPalette = document.getElementById('paletteSelect').value;
+  renderCard();
+}
+
+function getCurrentColors() {
+  return colorPalettes[currentPalette];
 }
 
 function renderSectionList() {
@@ -539,7 +565,6 @@ function renderSectionList() {
 function renderEditor() {
   const section = sectionsConfig[currentTemplate][currentSection];
   const data = templates[currentTemplate].data;
-  const colors = templates[currentTemplate].colors;
   
   document.getElementById('editorTitle').textContent = section.title;
   document.getElementById('editorDesc').textContent = section.desc;
@@ -549,9 +574,7 @@ function renderEditor() {
   
   section.fields.forEach((field, idx) => {
     let value;
-    if (field.key.startsWith('colors.')) {
-      value = colors[field.key.split('.')[1]];
-    } else if (field.index !== undefined) {
+    if (field.index !== undefined) {
       value = data[field.key][field.index];
     } else {
       value = data[field.key];
@@ -572,11 +595,6 @@ function renderEditor() {
         html += `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`;
       });
       html += `</select>`;
-    } else if (field.type === 'color') {
-      html += `<div class="color-field">
-        <input type="color" value="${value}" data-key="${field.key}" onchange="updateColor(this)">
-        <input type="text" class="color-hex" value="${value}" readonly>
-      </div>`;
     } else if (field.type === 'gallery') {
       html += `<div class="image-upload" onclick="document.getElementById('${fieldId}_file').click()">
         <input type="file" id="${fieldId}_file" accept="image/*" multiple onchange="handleGalleryUpload(this)">
@@ -611,13 +629,6 @@ function updateField(el) {
   }
   
   if (key === 'eventDateISO') autoUpdateDateFields(value);
-  renderCard();
-}
-
-function updateColor(el) {
-  const key = el.dataset.key;
-  templates[currentTemplate].colors[key] = el.value;
-  el.parentElement.querySelector('.color-hex').value = el.value;
   renderCard();
 }
 
@@ -678,7 +689,7 @@ function escapeHtml(str) {
 function renderCard() {
   const t = templates[currentTemplate];
   const d = t.data;
-  const c = t.colors;
+  const c = getCurrentColors();
   
   let html = '';
   
@@ -1326,8 +1337,8 @@ function resetDefaults() {
 function saveProject() {
   const data = {
     template: currentTemplate,
-    data: templates[currentTemplate].data,
-    colors: templates[currentTemplate].colors
+    palette: currentPalette,
+    data: templates[currentTemplate].data
   };
   const dataStr = JSON.stringify(data, null, 2);
   const blob = new Blob([dataStr], { type: 'application/json' });
