@@ -77,7 +77,7 @@
     .flower-cluster:nth-child(4){bottom:-25px;right:-25px;transform:scale(-1,-1);animation-delay:4.5s;}
     @keyframes clusterSway{0%,100%{filter:none}50%{filter:drop-shadow(0 0 6px rgba(232,160,184,0.4))}}
     .cross-container {
-      width:200px;height:270px;margin:0 auto 30px;position:relative;
+      width:400px;height:540px;margin:0 auto 30px;position:relative;
       animation:crossFloat 5s ease-in-out infinite;
       filter:drop-shadow(0 6px 20px rgba(200,120,152,0.25));
     }
@@ -90,8 +90,8 @@
     @keyframes glowPulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
     /* ── ANGEL IMAGE ── */
     #angel-splash img {
-      width:200px;
-      height:270px;
+      width:400px;
+      height:540px;
       object-fit:contain;
       position:relative;
       z-index:2;
@@ -339,8 +339,8 @@
       .family-row{flex-direction:column;gap:10px;}
       .countdown-grid{grid-template-columns:repeat(2,1fr);}
       .carousel-btn{width:36px;height:36px;font-size:1.1rem;}
-      .cross-container{width:160px;height:215px;}
-      #angel-splash img{width:160px;height:215px;}
+      .cross-container{width:320px;height:430px;}
+      #angel-splash img{width:320px;height:430px;}
     }
   </style>
 </head>
@@ -564,7 +564,6 @@ function crossWithBowSVG() {
 </svg>`;
 }
 // ─── INJECT SVGs ─────────────────────────────────────────────────
-// El ángel ya está como <img> directo en el HTML
 document.getElementById('cross-svg-wrap').innerHTML = crossWithBowSVG();
 document.getElementById('church-icon-wrap').innerHTML = churchIconSVG();
 ['ctl','ctr','cbl','cbr'].forEach(id => {
