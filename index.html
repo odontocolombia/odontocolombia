@@ -1,934 +1,1200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editor de Tarjetas de Bautizo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            overflow: hidden;
-        }
-        
-        /* Layout Principal */
-        .editor-container {
-            display: grid;
-            grid-template-columns: 250px 1fr 350px;
-            height: 100vh;
-        }
-        
-        /* Sidebar Izquierdo - Templates */
-        .templates-sidebar {
-            background: #fff;
-            border-right: 1px solid #e0e0e0;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        .section-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .template-category {
-            padding: 10px 15px;
-            margin-bottom: 5px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        .template-category:hover { background: #f5f5f5; }
-        .template-category.active {
-            background: #7ba3d4;
-            color: white;
-        }
-        .template-preview {
-            width: 100%;
-            height: 150px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .template-preview:hover {
-            border-color: #7ba3d4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .template-preview.active {
-            border-color: #7ba3d4;
-            box-shadow: 0 0 0 3px rgba(123,163,212,0.3);
-        }
-        .template-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Área Central - Preview */
-        .preview-area {
-            background: #f0f0f0;
-            overflow: auto;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-        .preview-container {
-            transform-origin: top center;
-            background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        /* Sidebar Derecho - Editor */
-        .editor-sidebar {
-            background: #fff;
-            border-left: 1px solid #e0e0e0;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .editor-header {
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .editor-tabs {
-            display: flex;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .editor-tab {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #666;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        .editor-tab:hover { color: #333; }
-        .editor-tab.active {
-            color: #7ba3d4;
-            border-bottom-color: #7ba3d4;
-            background: #f9f9f9;
-        }
-        .editor-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        .editor-panel { display: none; }
-        .editor-panel.active { display: block; }
-        
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .form-input, .form-textarea, .form-select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            outline: none;
-            border-color: #7ba3d4;
-            box-shadow: 0 0 0 3px rgba(123,163,212,0.1);
-        }
-        .form-textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        .color-picker-wrapper {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .color-picker {
-            width: 50px;
-            height: 40px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .color-value {
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-primary {
-            background: #7ba3d4;
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #5a8ab8;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(123,163,212,0.4);
-        }
-        .btn-secondary {
-            background: #f5f5f5;
-            color: #333;
-        }
-        .btn-secondary:hover { background: #e0e0e0; }
-        .btn-success {
-            background: #4CAF50;
-            color: white;
-        }
-        .btn-success:hover { background: #45a049; }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        /* Toolbar Superior */
-        .top-toolbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 1000;
-        }
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #333;
-        }
-        .toolbar-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        /* Range Slider */
-        .range-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .range-slider {
-            flex: 1;
-            height: 6px;
-            border-radius: 3px;
-            background: #e0e0e0;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #7ba3d4;
-            cursor: pointer;
-        }
-        .range-value {
-            min-width: 50px;
-            text-align: right;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        /* Image Upload */
-        .image-upload {
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .image-upload:hover {
-            border-color: #7ba3d4;
-            background: #f9f9f9;
-        }
-        .image-upload input { display: none; }
-        .upload-icon {
-            font-size: 2rem;
-            color: #999;
-            margin-bottom: 10px;
-        }
-        .upload-text {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        /* Editable Elements Highlight */
-        .editable {
-            cursor: text;
-            position: relative;
-        }
-        .editable:hover {
-            outline: 2px dashed #7ba3d4;
-            outline-offset: 2px;
-        }
-        .editable.active {
-            outline: 2px solid #7ba3d4;
-            background: rgba(123,163,212,0.1);
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
-        
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .editor-container {
-                grid-template-columns: 200px 1fr 300px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor de Tarjeta de Bautizo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: #e4e4e7; overflow: hidden; height: 100vh; }
+
+.editor-layout { display: grid; grid-template-columns: 240px 1fr 380px; height: 100vh; }
+
+/* Sidebar Izquierdo */
+.sidebar-left { background: #252537; border-right: 1px solid #3a3a52; overflow-y: auto; padding: 20px 0; }
+.editor-logo { padding: 0 20px 20px; border-bottom: 1px solid #3a3a52; margin-bottom: 15px; }
+.editor-logo h1 { font-size: 1.1rem; color: #d4af37; display: flex; align-items: center; gap: 8px; }
+.editor-logo p { font-size: 0.75rem; color: #888; margin-top: 4px; }
+.section-list { list-style: none; }
+.section-item { padding: 12px 20px; cursor: pointer; font-size: 0.88rem; transition: all 0.2s; border-left: 3px solid transparent; display: flex; align-items: center; gap: 10px; }
+.section-item:hover { background: #2d2d44; color: #fff; }
+.section-item.active { background: #2d2d44; border-left-color: #d4af37; color: #d4af37; }
+.section-item .icon { font-size: 1rem; }
+
+/* Preview Central */
+.preview-center { background: #2a2a3e; overflow: auto; padding: 30px; display: flex; justify-content: center; align-items: flex-start; }
+.preview-frame-wrap { background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }
+#cardPreview { width: 420px; height: 780px; border: none; transform-origin: top left; }
+
+/* Sidebar Derecho - Editor */
+.sidebar-right { background: #252537; border-left: 1px solid #3a3a52; display: flex; flex-direction: column; overflow: hidden; }
+.editor-header { padding: 18px 20px; border-bottom: 1px solid #3a3a52; background: #2a2a42; }
+.editor-header h2 { font-size: 1rem; color: #d4af37; margin-bottom: 4px; }
+.editor-header p { font-size: 0.75rem; color: #888; }
+.editor-body { flex: 1; overflow-y: auto; padding: 20px; }
+
+.field-group { margin-bottom: 18px; }
+.field-label { display: block; font-size: 0.78rem; color: #a0a0b8; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.field-input, .field-textarea, .field-select { width: 100%; padding: 10px 12px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.88rem; transition: all 0.2s; font-family: inherit; }
+.field-input:focus, .field-textarea:focus, .field-select:focus { outline: none; border-color: #d4af37; box-shadow: 0 0 0 2px rgba(212,175,55,0.15); }
+.field-textarea { resize: vertical; min-height: 70px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+.color-field { display: flex; align-items: center; gap: 10px; }
+.color-field input[type="color"] { width: 40px; height: 36px; border: none; border-radius: 6px; cursor: pointer; background: none; padding: 0; }
+.color-field input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+.color-field input[type="color"]::-webkit-color-swatch { border: 1px solid #3a3a52; border-radius: 4px; }
+.color-hex { flex: 1; padding: 10px 12px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; font-family: monospace; }
+
+.field-divider { height: 1px; background: #3a3a52; margin: 20px 0; }
+.field-section-title { font-size: 0.8rem; color: #d4af37; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid #3a3a52; }
+
+.image-upload { border: 2px dashed #3a3a52; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.image-upload:hover { border-color: #d4af37; background: rgba(212,175,55,0.05); }
+.image-upload input { display: none; }
+.image-upload .icon { font-size: 2rem; margin-bottom: 8px; }
+.image-upload .text { font-size: 0.82rem; color: #888; }
+.image-preview { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-top: 10px; border: 1px solid #3a3a52; }
+
+/* Toolbar Superior */
+.top-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: #1a1a2a; border-bottom: 1px solid #3a3a52; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; }
+.top-bar .title { font-size: 0.9rem; color: #d4af37; font-weight: 600; }
+.top-bar .actions { display: flex; gap: 8px; }
+.btn { padding: 7px 14px; border: none; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: #d4af37; color: #1a1a2a; }
+.btn-primary:hover { background: #e6c04a; transform: translateY(-1px); }
+.btn-secondary { background: #3a3a52; color: #e4e4e7; }
+.btn-secondary:hover { background: #4a4a62; }
+.btn-success { background: #10b981; color: #fff; }
+.btn-success:hover { background: #059669; }
+
+.editor-layout { margin-top: 50px; height: calc(100vh - 50px); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1e1e2e; }
+::-webkit-scrollbar-thumb { background: #3a3a52; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4a4a62; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .editor-layout { grid-template-columns: 200px 1fr 340px; }
+}
+@media (max-width: 900px) {
+  .editor-layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+  .sidebar-left, .sidebar-right { max-height: 200px; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Toolbar Superior -->
-    <div class="top-toolbar">
-        <div class="logo">✝️ Editor de Bautizos</div>
-        <div class="toolbar-actions">
-            <button class="btn btn-secondary" onclick="previewCard()">👁️ Vista Previa</button>
-            <button class="btn btn-secondary" onclick="saveProject()">💾 Guardar</button>
-            <button class="btn btn-success" onclick="exportHTML()">📥 Descargar HTML</button>
-            <button class="btn btn-primary" onclick="shareCard()">🔗 Compartir</button>
+<div class="top-bar">
+  <div class="title">✝️ Editor de Tarjeta de Bautizo</div>
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetDefaults()">↺ Restablecer</button>
+    <button class="btn btn-secondary" onclick="saveProject()">💾 Guardar</button>
+    <button class="btn btn-primary" onclick="exportHTML()">📥 Exportar HTML</button>
+  </div>
+</div>
+
+<div class="editor-layout">
+  <!-- Sidebar Izquierdo -->
+  <div class="sidebar-left">
+    <div class="editor-logo">
+      <h1>✝️ Secciones</h1>
+      <p>Selecciona para editar</p>
+    </div>
+    <ul class="section-list" id="sectionList">
+      <li class="section-item active" data-section="splash"><span class="icon">🌟</span> Pantalla Inicial</li>
+      <li class="section-item" data-section="photo"><span class="icon">📷</span> Foto Principal</li>
+      <li class="section-item" data-section="header"><span class="icon">🎀</span> Encabezado</li>
+      <li class="section-item" data-section="parents"><span class="icon">👨‍👩‍👦</span> Padres</li>
+      <li class="section-item" data-section="name"><span class="icon">✍️</span> Nombre del Niño</li>
+      <li class="section-item" data-section="datetime"><span class="icon">📅</span> Fecha y Hora</li>
+      <li class="section-item" data-section="church"><span class="icon">⛪</span> Iglesia</li>
+      <li class="section-item" data-section="godparents"><span class="icon">👥</span> Padrinos</li>
+      <li class="section-item" data-section="buttons"><span class="icon">🔘</span> Botones</li>
+      <li class="section-item" data-section="waiting"><span class="icon">💬</span> Mensaje Final</li>
+      <li class="section-item" data-section="countdown"><span class="icon">⏰</span> Cuenta Regresiva</li>
+      <li class="section-item" data-section="gallery"><span class="icon">🖼️</span> Galería</li>
+      <li class="section-item" data-section="map"><span class="icon">🗺️</span> Mapa</li>
+      <li class="section-item" data-section="rsvp"><span class="icon">📩</span> Confirmar Asistencia</li>
+      <li class="section-item" data-section="footer"><span class="icon">📖</span> Pie de Página</li>
+      <li class="section-item" data-section="colors"><span class="icon">🎨</span> Colores</li>
+      <li class="section-item" data-section="whatsapp"><span class="icon">📱</span> WhatsApp</li>
+    </ul>
+  </div>
+
+  <!-- Preview Central -->
+  <div class="preview-center">
+    <div class="preview-frame-wrap">
+      <iframe id="cardPreview"></iframe>
+    </div>
+  </div>
+
+  <!-- Sidebar Derecho -->
+  <div class="sidebar-right">
+    <div class="editor-header">
+      <h2 id="editorTitle">Pantalla Inicial</h2>
+      <p id="editorDesc">Edita el contenido de la pantalla de bienvenida</p>
+    </div>
+    <div class="editor-body" id="editorBody">
+      <!-- Los campos se generan dinámicamente -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATOS DE LA TARJETA
+// ═══════════════════════════════════════════════
+let cardData = {
+  // Splash
+  splashText: "Bautizo",
+  splashTitle: "Emilio André",
+  splashHint: "Toca para abrir la invitación",
+  
+  // Cinta superior
+  topRibbonText: "Mi Bautizo",
+  
+  // Foto principal
+  mainPhoto: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80",
+  mainPhotoAlt: "Emilio André",
+  
+  // Encabezado
+  titleText: "Bautizo",
+  subtitleText: "de su hijo",
+  
+  // Padres
+  fatherName: "Papá Andy",
+  motherName: "Mamá Brestaneth",
+  introText2: "invitan al",
+  
+  // Nombre en cinta
+  ribbonName: "Emilio André Arias",
+  
+  // Fecha y Hora
+  dayName: "Sábado",
+  dayNumber: "08",
+  monthName: "Febrero",
+  timeLabel: "A las",
+  timeValue: "10:00",
+  timeAmPm: "AM",
+  eventDateISO: "2026-02-08T10:00:00",
+  
+  // Iglesia
+  churchName: "Capilla San Juan Pablo II",
+  churchLocation: "En los estacionamientos de Albrook Mall",
+  
+  // Padrinos
+  godparentsTitle: "Padrinos",
+  godfather: "Isaac García",
+  godmother: "Ashly González",
+  
+  // Botones
+  mapButtonText: "Mapa - Ver Ubicación",
+  mapButtonUrl: "https://www.google.com/maps",
+  rsvpButtonText: "Confirmar Asistencia",
+  
+  // Mensaje final
+  waitingText: "¡Te esperamos!",
+  
+  // Cuenta regresiva
+  countdownTitle: "Cuenta Regresiva",
+  countdownLabels: ["Días", "Horas", "Min", "Seg"],
+  
+  // Galería
+  galleryTitle: "Galería de Recuerdos",
+  galleryImages: [
+    "https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80",
+    "https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80",
+    "https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80",
+    "https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80",
+    "https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?w=600&q=80"
+  ],
+  
+  // Mapa
+  mapTitle: "Ubicación",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa",
+  
+  // RSVP
+  rsvpTitle: "Confirmar Asistencia",
+  rsvpSubtitle: "Por favor confirma antes del 1 de febrero",
+  rsvpPlaceholderName: "Nombre completo",
+  rsvpPlaceholderGuests: "Número de invitados",
+  rsvpPlaceholderMessage: "Mensaje para la familia...",
+  rsvpButtonTextForm: "Enviar por WhatsApp",
+  
+  // Footer
+  footerVerse: "Dejad que los niños vengan a mí",
+  footerRef: "Marcos 10:14",
+  
+  // WhatsApp
+  whatsappNumber: "50712345678",
+  
+  // Colores
+  colors: {
+    blue: "#7ba3d4",
+    blueLight: "#a8c8e8",
+    blueDark: "#5a8ab8",
+    blueSoft: "#d4e4f4",
+    gold: "#d4af37",
+    goldLight: "#f0d860",
+    goldDark: "#b8941f",
+    goldSoft: "#f5e6b8",
+    white: "#ffffff",
+    cream: "#faf8f0",
+    beige: "#f5f0e0",
+    brown: "#4a3820"
+  }
+};
+
+// ═══════════════════════════════════════════════
+// DEFINICIÓN DE CAMPOS POR SECCIÓN
+// ═══════════════════════════════════════════════
+const sectionFields = {
+  splash: {
+    title: "Pantalla Inicial",
+    desc: "Edita el contenido de la pantalla de bienvenida (splash)",
+    fields: [
+      { key: "splashText", label: "Texto superior", type: "text" },
+      { key: "splashTitle", label: "Título principal", type: "text" },
+      { key: "splashHint", label: "Texto de instrucción", type: "text" }
+    ]
+  },
+  photo: {
+    title: "Foto Principal",
+    desc: "Configura la foto del niño/a en el marco circular",
+    fields: [
+      { key: "mainPhoto", label: "URL de la foto", type: "text" },
+      { key: "mainPhoto", label: "O subir imagen", type: "image", target: "mainPhoto" },
+      { key: "mainPhotoAlt", label: "Texto alternativo (alt)", type: "text" }
+    ]
+  },
+  header: {
+    title: "Encabezado",
+    desc: "Edita la cinta superior y el título principal",
+    fields: [
+      { key: "topRibbonText", label: "Texto cinta superior", type: "text" },
+      { key: "titleText", label: "Título principal", type: "text" },
+      { key: "subtitleText", label: "Subtítulo", type: "text" }
+    ]
+  },
+  parents: {
+    title: "Padres",
+    desc: "Información de los padres que invitan",
+    fields: [
+      { key: "fatherName", label: "Nombre del papá", type: "text" },
+      { key: "motherName", label: "Nombre de la mamá", type: "text" },
+      { key: "introText2", label: "Texto conector", type: "text" }
+    ]
+  },
+  name: {
+    title: "Nombre del Niño",
+    desc: "Nombre que aparece en la cinta azul",
+    fields: [
+      { key: "ribbonName", label: "Nombre completo", type: "text" }
+    ]
+  },
+  datetime: {
+    title: "Fecha y Hora",
+    desc: "Configura la fecha y hora del evento",
+    fields: [
+      { key: "eventDateISO", label: "Fecha y hora (automático)", type: "datetime-local" },
+      { key: "dayName", label: "Día de la semana", type: "text" },
+      { key: "dayNumber", label: "Número del día", type: "text" },
+      { key: "monthName", label: "Mes", type: "text" },
+      { key: "timeLabel", label: "Etiqueta hora", type: "text" },
+      { key: "timeValue", label: "Hora", type: "text" },
+      { key: "timeAmPm", label: "AM/PM", type: "select", options: ["AM", "PM"] }
+    ]
+  },
+  church: {
+    title: "Iglesia",
+    desc: "Información del lugar de la ceremonia",
+    fields: [
+      { key: "churchName", label: "Nombre de la iglesia", type: "text" },
+      { key: "churchLocation", label: "Ubicación / referencia", type: "textarea" }
+    ]
+  },
+  godparents: {
+    title: "Padrinos",
+    desc: "Nombres de los padrinos",
+    fields: [
+      { key: "godparentsTitle", label: "Título de sección", type: "text" },
+      { key: "godfather", label: "Padrino", type: "text" },
+      { key: "godmother", label: "Madrina", type: "text" }
+    ]
+  },
+  buttons: {
+    title: "Botones",
+    desc: "Configura los botones de acción",
+    fields: [
+      { key: "mapButtonText", label: "Texto botón mapa", type: "text" },
+      { key: "mapButtonUrl", label: "URL del mapa", type: "text" },
+      { key: "rsvpButtonText", label: "Texto botón RSVP", type: "text" }
+    ]
+  },
+  waiting: {
+    title: "Mensaje Final",
+    desc: "Mensaje de espera antes de la cuenta regresiva",
+    fields: [
+      { key: "waitingText", label: "Mensaje", type: "text" }
+    ]
+  },
+  countdown: {
+    title: "Cuenta Regresiva",
+    desc: "Configura la sección de cuenta regresiva",
+    fields: [
+      { key: "countdownTitle", label: "Título", type: "text" },
+      { key: "countdownLabels", label: "Etiqueta Días", type: "text", index: 0 },
+      { key: "countdownLabels", label: "Etiqueta Horas", type: "text", index: 1 },
+      { key: "countdownLabels", label: "Etiqueta Minutos", type: "text", index: 2 },
+      { key: "countdownLabels", label: "Etiqueta Segundos", type: "text", index: 3 }
+    ]
+  },
+  gallery: {
+    title: "Galería",
+    desc: "Configura la galería de fotos",
+    fields: [
+      { key: "galleryTitle", label: "Título de la galería", type: "text" },
+      { key: "galleryImages", label: "Imágenes de la galería", type: "gallery" }
+    ]
+  },
+  map: {
+    title: "Mapa",
+    desc: "Configura el mapa de ubicación",
+    fields: [
+      { key: "mapTitle", label: "Título de la sección", type: "text" },
+      { key: "mapEmbedUrl", label: "URL embed de Google Maps", type: "textarea" }
+    ]
+  },
+  rsvp: {
+    title: "Confirmar Asistencia",
+    desc: "Configura el formulario RSVP",
+    fields: [
+      { key: "rsvpTitle", label: "Título", type: "text" },
+      { key: "rsvpSubtitle", label: "Subtítulo", type: "text" },
+      { key: "rsvpPlaceholderName", label: "Placeholder nombre", type: "text" },
+      { key: "rsvpPlaceholderGuests", label: "Placeholder invitados", type: "text" },
+      { key: "rsvpPlaceholderMessage", label: "Placeholder mensaje", type: "text" },
+      { key: "rsvpButtonTextForm", label: "Texto del botón", type: "text" }
+    ]
+  },
+  footer: {
+    title: "Pie de Página",
+    desc: "Versículo bíblico y referencia",
+    fields: [
+      { key: "footerVerse", label: "Versículo", type: "text" },
+      { key: "footerRef", label: "Referencia bíblica", type: "text" }
+    ]
+  },
+  colors: {
+    title: "Colores",
+    desc: "Personaliza la paleta de colores",
+    fields: [
+      { key: "colors.blue", label: "Azul principal", type: "color" },
+      { key: "colors.blueLight", label: "Azul claro", type: "color" },
+      { key: "colors.blueDark", label: "Azul oscuro", type: "color" },
+      { key: "colors.blueSoft", label: "Azul suave (fondo)", type: "color" },
+      { key: "colors.gold", label: "Dorado principal", type: "color" },
+      { key: "colors.goldLight", label: "Dorado claro", type: "color" },
+      { key: "colors.goldDark", label: "Dorado oscuro", type: "color" },
+      { key: "colors.goldSoft", label: "Dorado suave", type: "color" },
+      { key: "colors.brown", label: "Marrón (texto)", type: "color" }
+    ]
+  },
+  whatsapp: {
+    title: "WhatsApp",
+    desc: "Configura el número para confirmaciones",
+    fields: [
+      { key: "whatsappNumber", label: "Número (con código país)", type: "text" }
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════════
+// NAVEGACIÓN ENTRE SECCIONES
+// ═══════════════════════════════════════════════
+let currentSection = 'splash';
+
+document.getElementById('sectionList').addEventListener('click', (e) => {
+  const item = e.target.closest('.section-item');
+  if (!item) return;
+  document.querySelectorAll('.section-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+  currentSection = item.dataset.section;
+  renderEditor();
+});
+
+// ═══════════════════════════════════════════════
+// RENDERIZAR EDITOR
+// ═══════════════════════════════════════════════
+function renderEditor() {
+  const section = sectionFields[currentSection];
+  document.getElementById('editorTitle').textContent = section.title;
+  document.getElementById('editorDesc').textContent = section.desc;
+  
+  const body = document.getElementById('editorBody');
+  let html = '';
+  
+  section.fields.forEach((field, idx) => {
+    const value = getNestedValue(cardData, field.key);
+    const actualValue = field.index !== undefined ? value[field.index] : value;
+    const fieldId = `field_${field.key.replace(/\./g, '_')}_${field.index !== undefined ? field.index : idx}`;
+    
+    html += `<div class="field-group">`;
+    html += `<label class="field-label" for="${fieldId}">${field.label}</label>`;
+    
+    if (field.type === 'text' || field.type === 'datetime-local') {
+      html += `<input type="${field.type}" class="field-input" id="${fieldId}" value="${escapeHtml(actualValue)}" data-key="${field.key}" data-index="${field.index !== undefined ? field.index : ''}" onchange="updateField(this)">`;
+    } else if (field.type === 'textarea') {
+      html += `<textarea class="field-textarea" id="${fieldId}" data-key="${field.key}" data-index="${field.index !== undefined ? field.index : ''}" onchange="updateField(this)">${escapeHtml(actualValue)}</textarea>`;
+    } else if (field.type === 'select') {
+      html += `<select class="field-select" id="${fieldId}" data-key="${field.key}" data-index="${field.index !== undefined ? field.index : ''}" onchange="updateField(this)">`;
+      field.options.forEach(opt => {
+        html += `<option value="${opt}" ${opt === actualValue ? 'selected' : ''}>${opt}</option>`;
+      });
+      html += `</select>`;
+    } else if (field.type === 'color') {
+      html += `<div class="color-field">
+        <input type="color" id="${fieldId}_picker" value="${actualValue}" data-key="${field.key}" onchange="updateColor(this, '${fieldId}')">
+        <input type="text" class="color-hex" id="${fieldId}" value="${actualValue}" data-key="${field.key}" onchange="updateColorHex(this, '${fieldId}_picker')">
+      </div>`;
+    } else if (field.type === 'image') {
+      html += `<div class="image-upload" onclick="document.getElementById('${fieldId}_file').click()">
+        <input type="file" id="${fieldId}_file" accept="image/*" onchange="handleImageUpload(this, '${field.target}')">
+        <div class="icon">📷</div>
+        <div class="text">Haz clic para subir imagen</div>
+      </div>`;
+      if (actualValue && !actualValue.startsWith('data:')) {
+        html += `<img src="${actualValue}" class="image-preview" onerror="this.style.display='none'">`;
+      } else if (actualValue && actualValue.startsWith('data:')) {
+        html += `<img src="${actualValue}" class="image-preview">`;
+      }
+    } else if (field.type === 'gallery') {
+      html += `<div class="image-upload" onclick="document.getElementById('${fieldId}_file').click()">
+        <input type="file" id="${fieldId}_file" accept="image/*" multiple onchange="handleGalleryUpload(this)">
+        <div class="icon">🖼️</div>
+        <div class="text">Subir múltiples imágenes</div>
+      </div>`;
+      html += `<div style="margin-top:10px;">`;
+      actualValue.forEach((img, i) => {
+        html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <img src="${img}" style="width:50px;height:50px;object-fit:cover;border-radius:4px;border:1px solid #3a3a52;">
+          <input type="text" class="field-input" value="${escapeHtml(img)}" style="flex:1;font-size:0.75rem;" data-key="galleryImages" data-index="${i}" onchange="updateField(this)">
+          <button class="btn btn-secondary" style="padding:4px 8px;font-size:0.7rem;" onclick="removeGalleryImage(${i})">✕</button>
+        </div>`;
+      });
+      html += `</div>`;
+      html += `<button class="btn btn-secondary" style="margin-top:8px;width:100%;justify-content:center;" onclick="addGalleryImage()">+ Agregar URL de imagen</button>`;
+    }
+    
+    html += `</div>`;
+  });
+  
+  body.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// ACTUALIZAR CAMPOS
+// ═══════════════════════════════════════════════
+function updateField(el) {
+  const key = el.dataset.key;
+  const index = el.dataset.index;
+  let value = el.value;
+  
+  if (index !== '' && index !== undefined && index !== 'undefined') {
+    const arr = getNestedValue(cardData, key);
+    arr[parseInt(index)] = value;
+  } else {
+    setNestedValue(cardData, key, value);
+  }
+  
+  // Auto-actualizar fecha si cambia el datetime-local
+  if (key === 'eventDateISO') {
+    autoUpdateDateFields(value);
+  }
+  
+  renderCard();
+}
+
+function updateColor(el, hexId) {
+  const key = el.dataset.key;
+  setNestedValue(cardData, key, el.value);
+  document.getElementById(hexId).value = el.value;
+  renderCard();
+}
+
+function updateColorHex(el, pickerId) {
+  const key = el.dataset.key;
+  setNestedValue(cardData, key, el.value);
+  document.getElementById(pickerId).value = el.value;
+  renderCard();
+}
+
+function handleImageUpload(input, targetKey) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setNestedValue(cardData, targetKey, e.target.result);
+      renderEditor();
+      renderCard();
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function handleGalleryUpload(input) {
+  if (input.files) {
+    Array.from(input.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        cardData.galleryImages.push(e.target.result);
+        renderEditor();
+        renderCard();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+}
+
+function removeGalleryImage(index) {
+  cardData.galleryImages.splice(index, 1);
+  renderEditor();
+  renderCard();
+}
+
+function addGalleryImage() {
+  const url = prompt("Ingresa la URL de la imagen:");
+  if (url) {
+    cardData.galleryImages.push(url);
+    renderEditor();
+    renderCard();
+  }
+}
+
+function autoUpdateDateFields(isoStr) {
+  if (!isoStr) return;
+  const d = new Date(isoStr);
+  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  cardData.dayName = days[d.getDay()];
+  cardData.dayNumber = String(d.getDate()).padStart(2, '0');
+  cardData.monthName = months[d.getMonth()];
+  let hours = d.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  cardData.timeValue = `${String(hours).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  cardData.timeAmPm = ampm;
+  renderEditor();
+}
+
+// ═══════════════════════════════════════════════
+// UTILIDADES
+// ═══════════════════════════════════════════════
+function getNestedValue(obj, path) {
+  return path.split('.').reduce((o, k) => o && o[k], obj);
+}
+
+function setNestedValue(obj, path, value) {
+  const keys = path.split('.');
+  const last = keys.pop();
+  const target = keys.reduce((o, k) => o[k] = o[k] || {}, obj);
+  target[last] = value;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════════
+// RENDERIZAR TARJETA (IFRAME)
+// ═══════════════════════════════════════════════
+function renderCard() {
+  const d = cardData;
+  const c = d.colors;
+  
+  const gallerySlides = d.galleryImages.map((img, i) => `
+    <div class="carousel-slide">
+      <img src="${img}" alt="Galería ${i+1}" loading="lazy">
+    </div>
+  `).join('');
+  
+  const galleryDots = d.galleryImages.map((_, i) => `
+    <div class="carousel-dot${i === 0 ? ' active' : ''}" onclick="goToCarousel(${i})"></div>
+  `).join('');
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: ${c.blue}; --blue-light: ${c.blueLight}; --blue-dark: ${c.blueDark}; --blue-soft: ${c.blueSoft};
+  --gold: ${c.gold}; --gold-light: ${c.goldLight}; --gold-dark: ${c.goldDark}; --gold-soft: ${c.goldSoft};
+  --white: ${c.white}; --cream: ${c.cream}; --beige: ${c.beige}; --brown: ${c.brown};
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Cormorant Garamond', serif; background: var(--blue-soft); color: var(--brown); overflow-x: hidden; min-height: 100vh; }
+.bg-dots { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-color: var(--blue-light); background-image: radial-gradient(circle, var(--white) 2px, transparent 2px); background-size: 30px 30px; animation: dotsMove 20s linear infinite; }
+@keyframes dotsMove { 0% { background-position: 0 0; } 100% { background-position: 30px 30px; } }
+#gold-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+#splash { position: fixed; inset: 0; z-index: 9999; background: var(--blue-soft); display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; }
+#splash.hide { animation: splashFade 1.5s ease forwards; pointer-events: none; }
+@keyframes splashFade { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+.splash-content { text-align: center; animation: splashReveal 2s ease forwards; position: relative; z-index: 2; padding: 40px; background: var(--white); border-radius: 20px; box-shadow: 0 0 0 4px var(--gold), 0 0 0 8px var(--blue-light); }
+@keyframes splashReveal { 0% { opacity: 0; transform: translateY(30px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.splash-cross { width: 50px; height: 70px; margin: 20px auto; position: relative; animation: crossGlow 2s ease-in-out infinite; }
+@keyframes crossGlow { 0%, 100% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); } 50% { filter: drop-shadow(0 0 25px rgba(212,175,55,1)); } }
+.splash-cross::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 10px; height: 70px; background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark)); border-radius: 2px; }
+.splash-cross::after { content: ''; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 35px; height: 10px; background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark)); border-radius: 2px; }
+.splash-text { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase; color: var(--blue-dark); margin-bottom: 15px; }
+.splash-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; text-shadow: 0 2px 4px rgba(212,175,55,0.3); }
+.splash-hint { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--blue); letter-spacing: 2px; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+.main-container { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; padding: 20px; }
+.invitation { background: var(--white); border-radius: 30px; padding: 60px 40px; margin: 40px 0; position: relative; opacity: 0; transform: translateY(40px); box-shadow: 0 0 0 3px var(--gold), 0 0 0 6px var(--white), 0 0 0 9px var(--blue), 0 0 0 12px var(--white), 0 0 0 15px var(--gold), 0 10px 40px rgba(90,138,184,0.3); }
+.invitation.visible { animation: cardReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+@keyframes cardReveal { 0% { opacity: 0; transform: translateY(40px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.invitation::before { content: ''; position: absolute; inset: -15px; border-radius: 35px; background: linear-gradient(45deg, var(--gold) 0%, var(--gold-light) 25%, var(--gold) 50%, var(--gold-dark) 75%, var(--gold) 100%); z-index: -1; animation: borderShimmer 3s linear infinite; background-size: 200% 200%; }
+@keyframes borderShimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+.photo-frame-section { position: relative; text-align: center; margin-bottom: 40px; opacity: 0; }
+.photo-frame-section.visible { animation: frameReveal 1.5s ease 0.3s forwards; }
+@keyframes frameReveal { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+.top-ribbon { position: relative; display: inline-block; margin-bottom: -20px; z-index: 10; }
+.top-ribbon-svg { width: 280px; height: 80px; filter: drop-shadow(0 4px 8px rgba(212,175,55,0.3)); }
+.top-ribbon-text { font-family: 'Great Vibes', cursive; font-size: 2.2rem; fill: var(--brown); }
+.circular-frame-container { position: relative; width: 320px; height: 320px; margin: 0 auto; }
+.frame-ring { position: absolute; border-radius: 50%; border: 3px solid var(--gold); }
+.ring-outer { inset: 0; border-width: 4px; border-color: var(--gold-dark); animation: ringRotate 20s linear infinite; }
+.ring-middle { inset: 10px; border-width: 3px; border-color: var(--gold); }
+.ring-inner { inset: 18px; border-width: 2px; border-color: var(--gold-light); }
+@keyframes ringRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.frame-stars { position: absolute; inset: -20px; pointer-events: none; }
+.frame-star { position: absolute; color: var(--gold); font-size: 12px; animation: starTwinkle 2s ease-in-out infinite; }
+.frame-star:nth-child(1) { top: 10%; left: 5%; }
+.frame-star:nth-child(2) { top: 5%; left: 30%; animation-delay: 0.3s; }
+.frame-star:nth-child(3) { top: 15%; right: 10%; animation-delay: 0.6s; }
+.frame-star:nth-child(4) { top: 40%; left: 0%; animation-delay: 0.9s; }
+.frame-star:nth-child(5) { top: 40%; right: 0%; animation-delay: 1.2s; }
+.frame-star:nth-child(6) { bottom: 20%; left: 5%; animation-delay: 1.5s; }
+.frame-star:nth-child(7) { bottom: 10%; right: 8%; animation-delay: 1.8s; }
+@keyframes starTwinkle { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.3); } }
+.photo-circle { position: absolute; inset: 25px; border-radius: 50%; overflow: hidden; border: 4px solid var(--gold); box-shadow: 0 0 0 3px var(--gold-light), 0 0 0 6px var(--gold), inset 0 0 20px rgba(212,175,55,0.2), 0 8px 30px rgba(212,175,55,0.3); }
+.photo-circle img { width: 100%; height: 100%; object-fit: cover; animation: photoZoom 8s ease-in-out infinite alternate; }
+@keyframes photoZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+.laurel-wreath { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); width: 380px; height: 120px; pointer-events: none; }
+.laurel-wreath svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 8px rgba(212,175,55,0.3)); }
+.side-doves { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; pointer-events: none; }
+.side-dove { position: absolute; width: 80px; height: 80px; top: 50%; transform: translateY(-50%); }
+.side-dove-left { left: -60px; animation: doveLeftFloat 4s ease-in-out infinite; }
+.side-dove-right { right: -60px; animation: doveRightFloat 4s ease-in-out infinite; animation-delay: 1s; }
+@keyframes doveLeftFloat { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(calc(-50% - 8px)) translateX(5px); } }
+@keyframes doveRightFloat { 0%, 100% { transform: translateY(-50%) translateX(0) scaleX(-1); } 50% { transform: translateY(calc(-50% - 8px)) translateX(-5px) scaleX(-1); } }
+
+.ribbon-container { position: relative; margin: 30px 0; opacity: 0; text-align: center; }
+.ribbon-container.visible { animation: ribbonReveal 1s ease 0.5s forwards; }
+@keyframes ribbonReveal { 0% { opacity: 0; transform: scaleX(0); } 100% { opacity: 1; transform: scaleX(1); } }
+.ribbon { background: linear-gradient(135deg, var(--blue-light), var(--blue), var(--blue-dark)); padding: 15px 40px; position: relative; display: inline-block; box-shadow: 0 4px 15px rgba(90,138,184,0.4); }
+.ribbon::before, .ribbon::after { content: ''; position: absolute; top: 50%; width: 30px; height: 40px; background: var(--blue-dark); transform: translateY(-50%); }
+.ribbon::before { left: -25px; clip-path: polygon(100% 0, 100% 100%, 0 50%); }
+.ribbon::after { right: -25px; clip-path: polygon(0 0, 0 100%, 100% 50%); }
+.ribbon-text { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space: nowrap; }
+
+.text-intro { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--brown); text-align: center; margin-bottom: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0; }
+.text-intro.visible { animation: fadeInUp 1s ease 0.3s forwards; }
+.text-title { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold); text-align: center; margin-bottom: 10px; opacity: 0; text-shadow: 0 2px 4px rgba(212,175,55,0.3); }
+.text-title.visible { animation: titleReveal 1.2s ease 0.5s forwards; }
+@keyframes titleReveal { 0% { opacity: 0; transform: scale(0.8); filter: blur(10px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+.text-subtitle { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--brown); text-align: center; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; opacity: 0; }
+.text-subtitle.visible { animation: fadeInUp 1s ease 0.7s forwards; }
+@keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+.cross-section { text-align: center; margin: 30px 0; opacity: 0; }
+.cross-section.visible { animation: fadeIn 1s ease 0.9s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+.cross-gold { width: 40px; height: 60px; margin: 0 auto; position: relative; animation: crossFloat 3s ease-in-out infinite; }
+@keyframes crossFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.cross-gold::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 8px; height: 60px; background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark)); border-radius: 2px; box-shadow: 0 0 10px rgba(212,175,55,0.5); }
+.cross-gold::after { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 30px; height: 8px; background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark)); border-radius: 2px; box-shadow: 0 0 10px rgba(212,175,55,0.5); }
+
+.datetime-section { display: flex; justify-content: space-around; align-items: center; margin: 40px 0; padding: 30px 0; border-top: 2px dotted var(--blue-light); border-bottom: 2px dotted var(--blue-light); opacity: 0; }
+.datetime-section.visible { animation: fadeIn 1s ease 1.1s forwards; }
+.datetime-block { text-align: center; }
+.datetime-label { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--brown); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+.datetime-value { font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 700; color: var(--blue-dark); line-height: 1; }
+.datetime-sub { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--brown); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; }
+.datetime-divider { width: 2px; height: 80px; background: linear-gradient(180deg, transparent, var(--blue), transparent); }
+
+.church-section { text-align: center; margin: 40px 0; opacity: 0; }
+.church-section.visible { animation: fadeIn 1s ease 1.3s forwards; }
+.church-name { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--brown); letter-spacing: 2px; text-transform: uppercase; line-height: 1.6; }
+
+.godparents-section { text-align: center; margin: 40px 0; opacity: 0; }
+.godparents-section.visible { animation: fadeIn 1s ease 1.5s forwards; }
+.godparents-title { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; }
+.godparents-names { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--brown); line-height: 1.8; }
+
+.buttons-section { display: flex; flex-direction: column; gap: 15px; align-items: center; margin: 40px 0; opacity: 0; }
+.buttons-section.visible { animation: fadeIn 1s ease 1.7s forwards; }
+.gold-button { padding: 12px 30px; background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark)); color: var(--white); border: none; border-radius: 25px; font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(212,175,55,0.4); position: relative; overflow: hidden; text-decoration: none; display: inline-block; }
+.gold-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s ease; }
+.gold-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(212,175,55,0.6); }
+.gold-button:hover::before { left: 100%; }
+
+.bottom-decoration { display: flex; justify-content: space-between; align-items: flex-end; margin: 40px 0 20px; opacity: 0; }
+.bottom-decoration.visible { animation: fadeIn 1s ease 1.9s forwards; }
+.angel-figure { width: 100px; height: 120px; animation: angelBounce 3s ease-in-out infinite; }
+@keyframes angelBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.chalice-figure { width: 80px; height: 100px; animation: chaliceGlow 2s ease-in-out infinite; }
+@keyframes chaliceGlow { 0%, 100% { filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); } 50% { filter: drop-shadow(0 0 25px rgba(212,175,55,1)); } }
+
+.waiting-text { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--blue-dark); text-align: center; margin: 20px 0; opacity: 0; }
+.waiting-text.visible { animation: fadeIn 1s ease 2.1s forwards; }
+
+.countdown-section { text-align: center; margin: 40px 0; padding: 30px; background: var(--blue-soft); border-radius: 20px; border: 2px solid var(--gold); opacity: 0; }
+.countdown-section.visible { animation: fadeIn 1s ease 2.3s forwards; }
+.countdown-title { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 4px; color: var(--gold-dark); margin-bottom: 20px; text-transform: uppercase; }
+.countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.countdown-item { background: var(--white); border: 2px solid var(--gold-light); border-radius: 10px; padding: 15px 10px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.countdown-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+.countdown-number { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--blue-dark); display: block; }
+.countdown-label { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--brown); text-transform: uppercase; letter-spacing: 2px; }
+
+.gallery-section { margin: 40px 0; opacity: 0; }
+.gallery-section.visible { animation: fadeIn 1s ease 2.5s forwards; }
+.gallery-title { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--gold-dark); text-align: center; margin-bottom: 25px; text-transform: uppercase; }
+.carousel-wrap { position: relative; border: 3px solid var(--gold); border-radius: 10px; overflow: hidden; background: var(--white); }
+.carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.carousel-slide { min-width: 100%; position: relative; aspect-ratio: 4/3; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--gold); border: 2px solid var(--white); color: var(--white); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; transition: all 0.3s ease; font-size: 1.2rem; }
+.carousel-btn:hover { background: var(--gold-dark); transform: translateY(-50%) scale(1.1); }
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+.carousel-dots { display: flex; justify-content: center; gap: 8px; padding: 15px; background: var(--blue-soft); }
+.carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
+.carousel-dot.active { background: var(--gold); transform: scale(1.3); border-color: var(--gold-dark); }
+
+.map-section { margin: 40px 0; opacity: 0; }
+.map-section.visible { animation: fadeIn 1s ease 2.7s forwards; }
+.map-title { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--gold-dark); text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+.map-wrap { border: 3px solid var(--gold); border-radius: 10px; overflow: hidden; margin-bottom: 15px; }
+.map-wrap iframe { width: 100%; height: 250px; border: 0; display: block; }
+
+.rsvp-section { text-align: center; margin: 40px 0; padding: 40px 20px; background: var(--blue-soft); border: 2px solid var(--gold); border-radius: 20px; opacity: 0; }
+.rsvp-section.visible { animation: fadeIn 1s ease 2.9s forwards; }
+.rsvp-title { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--gold-dark); margin-bottom: 10px; text-transform: uppercase; }
+.rsvp-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--brown); margin-bottom: 25px; font-style: italic; }
+.rsvp-form { max-width: 350px; margin: 0 auto; }
+.rsvp-input { width: 100%; padding: 12px 15px; margin-bottom: 15px; background: var(--white); border: 2px solid var(--blue-light); border-radius: 25px; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--brown); outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.rsvp-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,0.2); }
+.rsvp-input::placeholder { color: var(--blue); opacity: 0.7; }
+.rsvp-button { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark)); color: var(--white); border: none; border-radius: 25px; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
+.rsvp-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s ease; }
+.rsvp-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.6); }
+.rsvp-button:hover::before { left: 100%; }
+
+.footer { text-align: center; padding: 40px 20px; opacity: 0; }
+.footer.visible { animation: fadeIn 1s ease 3.1s forwards; }
+.footer-verse { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--brown); font-style: italic; margin-bottom: 10px; }
+.footer-text { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 3px; color: var(--gold-dark); }
+
+@media (max-width: 600px) {
+  .invitation { padding: 50px 25px; margin: 20px 0; }
+  .text-title { font-size: 3rem; }
+  .ribbon-text { font-size: 2rem; }
+  .ribbon { padding: 12px 30px; }
+  .datetime-value { font-size: 2.5rem; }
+  .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+  .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
+  .angel-figure { width: 80px; height: 100px; }
+  .chalice-figure { width: 60px; height: 80px; }
+  .circular-frame-container { width: 260px; height: 260px; }
+  .laurel-wreath { width: 300px; height: 100px; bottom: -25px; }
+  .side-dove { width: 60px; height: 60px; }
+  .side-dove-left { left: -40px; }
+  .side-dove-right { right: -40px; }
+  .top-ribbon-svg { width: 220px; height: 65px; }
+  .top-ribbon-text { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<div class="bg-dots"></div>
+<canvas id="gold-canvas"></canvas>
+
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-cross"></div>
+    <div class="splash-text">${escapeHtml(d.splashText)}</div>
+    <div class="splash-title">${escapeHtml(d.splashTitle)}</div>
+    <div class="splash-hint">${escapeHtml(d.splashHint)}</div>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="invitation" id="invitation">
+    <div class="photo-frame-section">
+      <div class="top-ribbon">
+        <svg class="top-ribbon-svg" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 10 Q 140 0 260 10 L 270 40 L 260 70 Q 140 60 20 70 L 10 40 Z" fill="${c.beige}" stroke="${c.gold}" stroke-width="2"/>
+          <path d="M 20 10 Q 140 0 260 10 L 270 40 L 260 70 Q 140 60 20 70 L 10 40 Z" fill="none" stroke="${c.goldDark}" stroke-width="1" opacity="0.5"/>
+          <path d="M 10 40 L 0 35 L 5 40 L 0 45 Z" fill="${c.gold}"/>
+          <path d="M 270 40 L 280 35 L 275 40 L 280 45 Z" fill="${c.gold}"/>
+          <text x="140" y="48" text-anchor="middle" class="top-ribbon-text">${escapeHtml(d.topRibbonText)}</text>
+        </svg>
+      </div>
+      <div class="circular-frame-container">
+        <div class="frame-stars">
+          <span class="frame-star">✦</span><span class="frame-star">✦</span><span class="frame-star">✦</span>
+          <span class="frame-star">✦</span><span class="frame-star">✦</span><span class="frame-star">✦</span>
+          <span class="frame-star">✦</span>
         </div>
+        <div class="frame-ring ring-outer"></div>
+        <div class="frame-ring ring-middle"></div>
+        <div class="frame-ring ring-inner"></div>
+        <div class="photo-circle">
+          <img src="${d.mainPhoto}" alt="${escapeHtml(d.mainPhotoAlt)}" crossorigin="anonymous">
+        </div>
+        <div class="side-doves">
+          <svg class="side-dove side-dove-left" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="${c.gold}" stroke-width="1.5">
+              <path d="M 40 40 Q 30 30 20 35 Q 10 40 15 50 Q 20 55 30 50 Q 25 60 20 65 Q 25 63 30 58 Q 35 55 40 50"/>
+              <path d="M 35 45 Q 25 35 15 38 Q 10 42 15 48 Q 20 52 30 48"/>
+              <path d="M 40 50 Q 45 55 50 60 Q 55 58 60 55 Q 55 52 50 50"/>
+              <circle cx="22" cy="38" r="3"/>
+              <path d="M 19 38 L 15 37 L 19 39"/>
+              <circle cx="21" cy="37" r="0.8" fill="${c.gold}"/>
+            </g>
+          </svg>
+          <svg class="side-dove side-dove-right" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="${c.gold}" stroke-width="1.5">
+              <path d="M 40 40 Q 30 30 20 35 Q 10 40 15 50 Q 20 55 30 50 Q 25 60 20 65 Q 25 63 30 58 Q 35 55 40 50"/>
+              <path d="M 35 45 Q 25 35 15 38 Q 10 42 15 48 Q 20 52 30 48"/>
+              <path d="M 40 50 Q 45 55 50 60 Q 55 58 60 55 Q 55 52 50 50"/>
+              <circle cx="22" cy="38" r="3"/>
+              <path d="M 19 38 L 15 37 L 19 39"/>
+              <circle cx="21" cy="37" r="0.8" fill="${c.gold}"/>
+            </g>
+          </svg>
+        </div>
+        <div class="laurel-wreath">
+          <svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="laurelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:${c.goldLight};stop-opacity:1" />
+                <stop offset="50%" style="stop-color:${c.gold};stop-opacity:1" />
+                <stop offset="100%" style="stop-color:${c.goldDark};stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <g fill="url(#laurelGrad)" stroke="${c.goldDark}" stroke-width="0.5">
+              <path d="M 190 110 Q 150 100 100 80 Q 60 60 30 30" fill="none" stroke="${c.goldDark}" stroke-width="2"/>
+              <ellipse cx="170" cy="100" rx="15" ry="6" transform="rotate(-20 170 100)"/>
+              <ellipse cx="150" cy="92" rx="14" ry="5.5" transform="rotate(-30 150 92)"/>
+              <ellipse cx="130" cy="85" rx="13" ry="5" transform="rotate(-40 130 85)"/>
+              <ellipse cx="110" cy="78" rx="12" ry="5" transform="rotate(-50 110 78)"/>
+              <ellipse cx="90" cy="70" rx="11" ry="4.5" transform="rotate(-55 90 70)"/>
+              <ellipse cx="72" cy="60" rx="10" ry="4" transform="rotate(-60 72 60)"/>
+              <ellipse cx="55" cy="48" rx="9" ry="3.5" transform="rotate(-65 55 48)"/>
+              <ellipse cx="40" cy="35" rx="8" ry="3" transform="rotate(-70 40 35)"/>
+            </g>
+            <g fill="url(#laurelGrad)" stroke="${c.goldDark}" stroke-width="0.5">
+              <path d="M 190 110 Q 230 100 280 80 Q 320 60 350 30" fill="none" stroke="${c.goldDark}" stroke-width="2"/>
+              <ellipse cx="210" cy="100" rx="15" ry="6" transform="rotate(20 210 100)"/>
+              <ellipse cx="230" cy="92" rx="14" ry="5.5" transform="rotate(30 230 92)"/>
+              <ellipse cx="250" cy="85" rx="13" ry="5" transform="rotate(40 250 85)"/>
+              <ellipse cx="270" cy="78" rx="12" ry="5" transform="rotate(50 270 78)"/>
+              <ellipse cx="290" cy="70" rx="11" ry="4.5" transform="rotate(55 290 70)"/>
+              <ellipse cx="308" cy="60" rx="10" ry="4" transform="rotate(60 308 60)"/>
+              <ellipse cx="325" cy="48" rx="9" ry="3.5" transform="rotate(65 325 48)"/>
+              <ellipse cx="340" cy="35" rx="8" ry="3" transform="rotate(70 340 35)"/>
+            </g>
+            <circle cx="190" cy="108" r="5" fill="${c.gold}" stroke="${c.goldDark}" stroke-width="1"/>
+            <circle cx="190" cy="108" r="2" fill="${c.goldLight}"/>
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <div class="editor-container" style="margin-top: 60px;">
-        <!-- Sidebar Izquierdo -->
-        <div class="templates-sidebar">
-            <div class="section-title">📁 Categorías</div>
-            <div class="template-category active">Todas</div>
-            <div class="template-category">Bautizos</div>
-            <div class="template-category">Bodas</div>
-            <div class="template-category">Cumpleaños</div>
-            <div class="template-category">Eventos</div>
-            
-            <div class="section-title" style="margin-top: 30px;">🎨 Plantillas</div>
-            <div class="template-preview active" onclick="loadTemplate('baptism1')">
-                <div style="background: linear-gradient(135deg, #d4e4f4, #f5f0e0); height: 100%; display: flex; align-items: center; justify-content: center; color: #7ba3d4; font-family: 'Great Vibes'; font-size: 1.5rem;">
-                    Bautizo Clásico
-                </div>
-            </div>
-            <div class="template-preview" onclick="loadTemplate('baptism2')">
-                <div style="background: linear-gradient(135deg, #f0d860, #fff); height: 100%; display: flex; align-items: center; justify-content: center; color: #b8941f; font-family: 'Great Vibes'; font-size: 1.5rem;">
-                    Bautizo Dorado
-                </div>
-            </div>
-            <div class="template-preview" onclick="loadTemplate('baptism3')">
-                <div style="background: linear-gradient(135deg, #fff5f5, #ffe4e4); height: 100%; display: flex; align-items: center; justify-content: center; color: #d4a5a5; font-family: 'Great Vibes'; font-size: 1.5rem;">
-                    Bautizo Rosa
-                </div>
-            </div>
-        </div>
+    <div class="text-intro">${escapeHtml(d.fatherName)} y ${escapeHtml(d.motherName)}</div>
+    <div class="text-intro" style="margin-top: -5px;">${escapeHtml(d.introText2)}</div>
+    <div class="text-title">${escapeHtml(d.titleText)}</div>
+    <div class="text-subtitle">${escapeHtml(d.subtitleText)}</div>
 
-        <!-- Área de Preview -->
-        <div class="preview-area" id="previewArea">
-            <div class="preview-container" id="previewContainer">
-                <!-- El contenido de la tarjeta se cargará aquí -->
-                <iframe id="cardFrame" style="border: none; width: 600px; height: 2000px;"></iframe>
-            </div>
-        </div>
-
-        <!-- Sidebar Derecho - Editor -->
-        <div class="editor-sidebar">
-            <div class="editor-tabs">
-                <button class="editor-tab active" onclick="switchTab('text')">Texto</button>
-                <button class="editor-tab" onclick="switchTab('design')">Diseño</button>
-                <button class="editor-tab" onclick="switchTab('media')">Multimedia</button>
-            </div>
-            
-            <div class="editor-content">
-                <!-- Panel de Texto -->
-                <div class="editor-panel active" id="panel-text">
-                    <div class="form-group">
-                        <label class="form-label">Nombre del Niño/a</label>
-                        <input type="text" class="form-input" id="edit-childName" value="Emilio André Arias" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Nombre del Padre</label>
-                        <input type="text" class="form-input" id="edit-fatherName" value="Papá Andy" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Nombre de la Madre</label>
-                        <input type="text" class="form-input" id="edit-motherName" value="Mamá Brestaneth" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Fecha</label>
-                        <input type="date" class="form-input" id="edit-eventDate" value="2026-02-08" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Hora</label>
-                        <input type="time" class="form-input" id="edit-eventTime" value="10:00" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Nombre de la Iglesia</label>
-                        <input type="text" class="form-input" id="edit-churchName" value="Capilla San Juan Pablo II" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Ubicación Detallada</label>
-                        <textarea class="form-textarea" id="edit-churchLocation" onchange="updateCard()">En los estacionamientos de Albrook Mall</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Padrino</label>
-                        <input type="text" class="form-input" id="edit-godfather" value="Isaac García" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Madrina</label>
-                        <input type="text" class="form-input" id="edit-godmother" value="Ashly González" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Mensaje Final</label>
-                        <textarea class="form-textarea" id="edit-waitingMessage" onchange="updateCard()">¡Te esperamos!</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Versículo Bíblico</label>
-                        <input type="text" class="form-input" id="edit-bibleVerse" value="Dejad que los niños vengan a mí" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Referencia Bíblica</label>
-                        <input type="text" class="form-input" id="edit-bibleRef" value="Marcos 10:14" onchange="updateCard()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Número de WhatsApp</label>
-                        <input type="tel" class="form-input" id="edit-whatsapp" value="50712345678" onchange="updateCard()">
-                    </div>
-                </div>
-                
-                <!-- Panel de Diseño -->
-                <div class="editor-panel" id="panel-design">
-                    <div class="form-group">
-                        <label class="form-label">Color Principal (Azul)</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" class="color-picker" id="edit-colorBlue" value="#7ba3d4" onchange="updateColors()">
-                            <span class="color-value" id="value-colorBlue">#7ba3d4</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Color Dorado</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" class="color-picker" id="edit-colorGold" value="#d4af37" onchange="updateColors()">
-                            <span class="color-value" id="value-colorGold">#d4af37</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Color de Texto</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" class="color-picker" id="edit-colorText" value="#4a3820" onchange="updateColors()">
-                            <span class="color-value" id="value-colorText">#4a3820</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Color de Fondo</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" class="color-picker" id="edit-colorBg" value="#d4e4f4" onchange="updateColors()">
-                            <span class="color-value" id="value-colorBg">#d4e4f4</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Fuente del Título</label>
-                        <select class="form-select" id="edit-titleFont" onchange="updateFonts()">
-                            <option value="'Great Vibes', cursive">Great Vibes</option>
-                            <option value="'Playfair Display', serif">Playfair Display</option>
-                            <option value="'Cinzel', serif">Cinzel</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Tamaño del Título</label>
-                        <div class="range-wrapper">
-                            <input type="range" class="range-slider" id="edit-titleSize" min="2" max="6" step="0.1" value="4" onchange="updateFonts()">
-                            <span class="range-value" id="value-titleSize">4rem</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Panel de Multimedia -->
-                <div class="editor-panel" id="panel-media">
-                    <div class="form-group">
-                        <label class="form-label">Foto Principal del Niño/a</label>
-                        <div class="image-upload" onclick="document.getElementById('edit-mainPhoto').click()">
-                            <input type="file" id="edit-mainPhoto" accept="image/*" onchange="handleImageUpload(this, 'main')">
-                            <div class="upload-icon">📷</div>
-                            <div class="upload-text">Haz clic para subir una foto</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Galería de Fotos</label>
-                        <div class="image-upload" onclick="document.getElementById('edit-galleryPhotos').click()">
-                            <input type="file" id="edit-galleryPhotos" accept="image/*" multiple onchange="handleGalleryUpload(this)">
-                            <div class="upload-icon">🖼️</div>
-                            <div class="upload-text">Subir múltiples fotos</div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">URL de Google Maps</label>
-                        <input type="text" class="form-input" id="edit-mapUrl" placeholder="Pegar URL de Google Maps embed" onchange="updateCard()">
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="ribbon-container">
+      <div class="ribbon">
+        <div class="ribbon-text">${escapeHtml(d.ribbonName)}</div>
+      </div>
     </div>
 
-    <script>
-        // Datos actuales de la tarjeta
-        let cardData = {
-            childName: "Emilio André Arias",
-            fatherName: "Papá Andy",
-            motherName: "Mamá Brestaneth",
-            eventDate: "2026-02-08",
-            eventTime: "10:00",
-            churchName: "Capilla San Juan Pablo II",
-            churchLocation: "En los estacionamientos de Albrook Mall",
-            godfather: "Isaac García",
-            godmother: "Ashly González",
-            waitingMessage: "¡Te esperamos!",
-            bibleVerse: "Dejad que los niños vengan a mí",
-            bibleRef: "Marcos 10:14",
-            whatsapp: "50712345678",
-            colors: {
-                blue: "#7ba3d4",
-                gold: "#d4af37",
-                text: "#4a3820",
-                bg: "#d4e4f4"
-            },
-            fonts: {
-                title: "'Great Vibes', cursive",
-                titleSize: "4rem"
-            },
-            images: {
-                main: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80",
-                gallery: [
-                    "https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80",
-                    "https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80",
-                    "https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80"
-                ]
-            }
-        };
+    <div class="cross-section"><div class="cross-gold"></div></div>
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCardContent();
-            updateCard();
-        });
+    <div class="datetime-section">
+      <div class="datetime-block">
+        <div class="datetime-label">${escapeHtml(d.dayName)}</div>
+        <div class="datetime-value">${escapeHtml(d.dayNumber)}</div>
+        <div class="datetime-sub">${escapeHtml(d.monthName)}</div>
+      </div>
+      <div class="datetime-divider"></div>
+      <div class="datetime-block">
+        <div class="datetime-label">${escapeHtml(d.timeLabel)}</div>
+        <div class="datetime-value">${escapeHtml(d.timeValue)}</div>
+        <div class="datetime-sub">${escapeHtml(d.timeAmPm)}</div>
+      </div>
+    </div>
 
-        // Cargar contenido en los inputs
-        function loadCardContent() {
-            document.getElementById('edit-childName').value = cardData.childName;
-            document.getElementById('edit-fatherName').value = cardData.fatherName;
-            document.getElementById('edit-motherName').value = cardData.motherName;
-            document.getElementById('edit-eventDate').value = cardData.eventDate;
-            document.getElementById('edit-eventTime').value = cardData.eventTime;
-            document.getElementById('edit-churchName').value = cardData.churchName;
-            document.getElementById('edit-churchLocation').value = cardData.churchLocation;
-            document.getElementById('edit-godfather').value = cardData.godfather;
-            document.getElementById('edit-godmother').value = cardData.godmother;
-            document.getElementById('edit-waitingMessage').value = cardData.waitingMessage;
-            document.getElementById('edit-bibleVerse').value = cardData.bibleVerse;
-            document.getElementById('edit-bibleRef').value = cardData.bibleRef;
-            document.getElementById('edit-whatsapp').value = cardData.whatsapp;
-        }
+    <div class="church-section">
+      <div class="church-name">
+        ${escapeHtml(d.churchName)}<br>
+        <span style="font-size: 0.9rem; color: var(--blue);">${escapeHtml(d.churchLocation)}</span>
+      </div>
+    </div>
 
-        // Actualizar tarjeta
-        function updateCard() {
-            cardData.childName = document.getElementById('edit-childName').value;
-            cardData.fatherName = document.getElementById('edit-fatherName').value;
-            cardData.motherName = document.getElementById('edit-motherName').value;
-            cardData.eventDate = document.getElementById('edit-eventDate').value;
-            cardData.eventTime = document.getElementById('edit-eventTime').value;
-            cardData.churchName = document.getElementById('edit-churchName').value;
-            cardData.churchLocation = document.getElementById('edit-churchLocation').value;
-            cardData.godfather = document.getElementById('edit-godfather').value;
-            cardData.godmother = document.getElementById('edit-godmother').value;
-            cardData.waitingMessage = document.getElementById('edit-waitingMessage').value;
-            cardData.bibleVerse = document.getElementById('edit-bibleVerse').value;
-            cardData.bibleRef = document.getElementById('edit-bibleRef').value;
-            cardData.whatsapp = document.getElementById('edit-whatsapp').value;
-            
-            renderCard();
-        }
+    <div class="godparents-section">
+      <div class="godparents-title">${escapeHtml(d.godparentsTitle)}</div>
+      <div class="godparents-names">${escapeHtml(d.godfather)}<br>${escapeHtml(d.godmother)}</div>
+    </div>
 
-        // Actualizar colores
-        function updateColors() {
-            cardData.colors.blue = document.getElementById('edit-colorBlue').value;
-            cardData.colors.gold = document.getElementById('edit-colorGold').value;
-            cardData.colors.text = document.getElementById('edit-colorText').value;
-            cardData.colors.bg = document.getElementById('edit-colorBg').value;
-            
-            document.getElementById('value-colorBlue').textContent = cardData.colors.blue;
-            document.getElementById('value-colorGold').textContent = cardData.colors.gold;
-            document.getElementById('value-colorText').textContent = cardData.colors.text;
-            document.getElementById('value-colorBg').textContent = cardData.colors.bg;
-            
-            renderCard();
-        }
+    <div class="buttons-section">
+      <a href="${d.mapButtonUrl}" target="_blank" class="gold-button">${escapeHtml(d.mapButtonText)}</a>
+      <a href="#rsvp" class="gold-button">${escapeHtml(d.rsvpButtonText)}</a>
+    </div>
 
-        // Actualizar fuentes
-        function updateFonts() {
-            cardData.fonts.title = document.getElementById('edit-titleFont').value;
-            cardData.fonts.titleSize = document.getElementById('edit-titleSize').value + 'rem';
-            document.getElementById('value-titleSize').textContent = cardData.fonts.titleSize;
-            renderCard();
-        }
+    <div class="bottom-decoration">
+      <svg class="angel-figure" viewBox="0 0 100 120">
+        <ellipse cx="50" cy="15" rx="15" ry="5" fill="none" stroke="${c.gold}" stroke-width="2"/>
+        <path d="M 35 40 Q 20 35 15 45 Q 10 55 20 60 Q 30 65 40 55 Z" fill="#fff" stroke="${c.gold}" stroke-width="1"/>
+        <path d="M 65 40 Q 80 35 85 45 Q 90 55 80 60 Q 70 65 60 55 Z" fill="#fff" stroke="${c.gold}" stroke-width="1"/>
+        <circle cx="50" cy="30" r="12" fill="#fde8d0" stroke="${c.gold}" stroke-width="1"/>
+        <path d="M 38 28 Q 40 20 50 18 Q 60 20 62 28 Q 60 25 55 24 Q 50 23 45 24 Q 40 25 38 28" fill="#8b4513"/>
+        <circle cx="46" cy="30" r="2" fill="${c.brown}"/>
+        <circle cx="54" cy="30" r="2" fill="${c.brown}"/>
+        <path d="M 47 35 Q 50 37 53 35" fill="none" stroke="${c.brown}" stroke-width="1"/>
+        <path d="M 40 42 Q 40 70 35 90 Q 33 100 50 105 Q 67 100 65 90 Q 60 70 60 42 Z" fill="#fff" stroke="${c.gold}" stroke-width="1"/>
+        <line x1="42" y1="60" x2="58" y2="60" stroke="${c.gold}" stroke-width="2"/>
+        <circle cx="42" cy="70" r="3" fill="#fde8d0"/>
+        <circle cx="58" cy="70" r="3" fill="#fde8d0"/>
+      </svg>
+      <svg class="chalice-figure" viewBox="0 0 80 100">
+        <line x1="40" y1="10" x2="40" y2="0" stroke="${c.gold}" stroke-width="1"/>
+        <line x1="30" y1="12" x2="25" y2="5" stroke="${c.gold}" stroke-width="1"/>
+        <line x1="50" y1="12" x2="55" y2="5" stroke="${c.gold}" stroke-width="1"/>
+        <line x1="25" y1="18" x2="18" y2="13" stroke="${c.gold}" stroke-width="1"/>
+        <line x1="55" y1="18" x2="62" y2="13" stroke="${c.gold}" stroke-width="1"/>
+        <path d="M 25 30 Q 25 50 40 55 Q 55 50 55 30 Z" fill="${c.gold}" stroke="${c.goldDark}" stroke-width="1"/>
+        <ellipse cx="40" cy="30" rx="15" ry="5" fill="${c.goldLight}" stroke="${c.goldDark}" stroke-width="1"/>
+        <circle cx="40" cy="28" r="6" fill="#fff" stroke="${c.gold}" stroke-width="1"/>
+        <rect x="37" y="55" width="6" height="20" fill="${c.gold}"/>
+        <ellipse cx="40" cy="75" rx="12" ry="4" fill="${c.gold}" stroke="${c.goldDark}" stroke-width="1"/>
+        <ellipse cx="40" cy="78" rx="15" ry="5" fill="${c.goldDark}"/>
+      </svg>
+    </div>
 
-        // Renderizar tarjeta
-        function renderCard() {
-            const frame = document.getElementById('cardFrame');
-            const date = new Date(cardData.eventDate);
-            const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = date.toLocaleDateString('es-ES', { month: 'long' });
-            
-            const html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-                    <style>
-                        :root {
-                            --blue: ${cardData.colors.blue};
-                            --blue-light: ${adjustColor(cardData.colors.blue, 20)};
-                            --blue-dark: ${adjustColor(cardData.colors.blue, -20)};
-                            --blue-soft: ${adjustColor(cardData.colors.blue, 40)};
-                            --gold: ${cardData.colors.gold};
-                            --gold-light: ${adjustColor(cardData.colors.gold, 20)};
-                            --gold-dark: ${adjustColor(cardData.colors.gold, -20)};
-                            --white: #ffffff;
-                            --brown: ${cardData.colors.text};
-                        }
-                        body {
-                            font-family: 'Cormorant Garamond', serif;
-                            background: var(--blue-soft);
-                            color: var(--brown);
-                            margin: 0;
-                            padding: 20px;
-                        }
-                        .invitation {
-                            background: var(--white);
-                            border-radius: 30px;
-                            padding: 60px 40px;
-                            max-width: 600px;
-                            margin: 0 auto;
-                            box-shadow: 0 0 0 3px var(--gold), 0 10px 40px rgba(0,0,0,0.1);
-                        }
-                        .photo-frame {
-                            text-align: center;
-                            margin-bottom: 40px;
-                        }
-                        .photo-circle {
-                            width: 300px;
-                            height: 300px;
-                            border-radius: 50%;
-                            overflow: hidden;
-                            margin: 0 auto;
-                            border: 4px solid var(--gold);
-                            box-shadow: 0 0 0 3px var(--gold-light), 0 8px 30px rgba(0,0,0,0.2);
-                        }
-                        .photo-circle img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                        .text-intro {
-                            font-family: 'Cinzel', serif;
-                            font-size: 0.9rem;
-                            text-align: center;
-                            margin-bottom: 10px;
-                            letter-spacing: 3px;
-                            text-transform: uppercase;
-                        }
-                        .text-title {
-                            font-family: ${cardData.fonts.title};
-                            font-size: ${cardData.fonts.titleSize};
-                            color: var(--gold);
-                            text-align: center;
-                            margin: 20px 0;
-                        }
-                        .ribbon {
-                            background: linear-gradient(135deg, var(--blue-light), var(--blue), var(--blue-dark));
-                            padding: 15px 40px;
-                            text-align: center;
-                            margin: 30px 0;
-                            border-radius: 25px;
-                        }
-                        .ribbon-text {
-                            font-family: 'Great Vibes', cursive;
-                            font-size: 2.5rem;
-                            color: var(--white);
-                        }
-                        .datetime {
-                            display: flex;
-                            justify-content: space-around;
-                            margin: 40px 0;
-                            padding: 30px 0;
-                            border-top: 2px dotted var(--blue-light);
-                            border-bottom: 2px dotted var(--blue-light);
-                        }
-                        .datetime-block {
-                            text-align: center;
-                        }
-                        .datetime-label {
-                            font-family: 'Cinzel', serif;
-                            font-size: 0.9rem;
-                            letter-spacing: 3px;
-                            text-transform: uppercase;
-                            margin-bottom: 10px;
-                        }
-                        .datetime-value {
-                            font-family: 'Cinzel', serif;
-                            font-size: 3rem;
-                            font-weight: 700;
-                            color: var(--blue-dark);
-                        }
-                        .church {
-                            text-align: center;
-                            margin: 30px 0;
-                        }
-                        .church-name {
-                            font-family: 'Cinzel', serif;
-                            font-size: 1.3rem;
-                            letter-spacing: 2px;
-                            text-transform: uppercase;
-                        }
-                        .godparents {
-                            text-align: center;
-                            margin: 30px 0;
-                        }
-                        .godparents-title {
-                            font-family: 'Cinzel', serif;
-                            font-size: 1rem;
-                            color: var(--gold);
-                            letter-spacing: 4px;
-                            text-transform: uppercase;
-                            margin-bottom: 15px;
-                        }
-                        .waiting {
-                            font-family: 'Great Vibes', cursive;
-                            font-size: 2rem;
-                            color: var(--blue-dark);
-                            text-align: center;
-                            margin: 30px 0;
-                        }
-                        .footer {
-                            text-align: center;
-                            margin-top: 40px;
-                            padding-top: 20px;
-                            border-top: 2px solid var(--blue-light);
-                        }
-                        .footer-verse {
-                            font-style: italic;
-                            font-size: 1.1rem;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="invitation">
-                        <div class="photo-frame">
-                            <div class="photo-circle">
-                                <img src="${cardData.images.main}" alt="${cardData.childName}">
-                            </div>
-                        </div>
-                        
-                        <div class="text-intro">${cardData.fatherName} y ${cardData.motherName}</div>
-                        <div class="text-intro" style="margin-top: -5px;">invitan al</div>
-                        <div class="text-title">Bautizo</div>
-                        <div class="text-intro">de su hijo</div>
-                        
-                        <div class="ribbon">
-                            <div class="ribbon-text">${cardData.childName}</div>
-                        </div>
-                        
-                        <div class="datetime">
-                            <div class="datetime-block">
-                                <div class="datetime-label">${dayName.charAt(0).toUpperCase() + dayName.slice(1)}</div>
-                                <div class="datetime-value">${day}</div>
-                                <div class="datetime-label">${month.charAt(0).toUpperCase() + month.slice(1)}</div>
-                            </div>
-                            <div class="datetime-block">
-                                <div class="datetime-label">A las</div>
-                                <div class="datetime-value">${cardData.eventTime}</div>
-                                <div class="datetime-label">${parseInt(cardData.eventTime) < 12 ? 'AM' : 'PM'}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="church">
-                            <div class="church-name">${cardData.churchName}</div>
-                            <div style="font-size: 0.9rem; color: var(--blue); margin-top: 5px;">${cardData.churchLocation}</div>
-                        </div>
-                        
-                        <div class="godparents">
-                            <div class="godparents-title">Padrinos</div>
-                            <div>${cardData.godfather}<br>${cardData.godmother}</div>
-                        </div>
-                        
-                        <div class="waiting">${cardData.waitingMessage}</div>
-                        
-                        <div class="footer">
-                            <div class="footer-verse">"${cardData.bibleVerse}"</div>
-                            <div style="font-family: 'Cinzel', serif; font-size: 0.85rem; margin-top: 10px;">— ${cardData.bibleRef} —</div>
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            frame.srcdoc = html;
-        }
+    <div class="waiting-text">${escapeHtml(d.waitingText)}</div>
 
-        // Función para ajustar colores (más claro/más oscuro)
-        function adjustColor(color, amount) {
-            const num = parseInt(color.replace("#",""), 16);
-            const r = Math.min(255, Math.max(0, (num >> 16) + amount));
-            const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
-            const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
-            return "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
-        }
+    <div class="countdown-section">
+      <div class="countdown-title">${escapeHtml(d.countdownTitle)}</div>
+      <div class="countdown-grid">
+        <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[0])}</span></div>
+        <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[1])}</span></div>
+        <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[2])}</span></div>
+        <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[3])}</span></div>
+      </div>
+    </div>
 
-        // Cambiar tabs
-        function switchTab(tab) {
-            document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.editor-panel').forEach(p => p.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById('panel-' + tab).classList.add('active');
-        }
+    <div class="gallery-section">
+      <div class="gallery-title">${escapeHtml(d.galleryTitle)}</div>
+      <div class="carousel-wrap" id="carousel">
+        <div class="carousel-track" id="carousel-track">${gallerySlides}</div>
+        <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">›</button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots">${galleryDots}</div>
+    </div>
 
-        // Subir imagen principal
-        function handleImageUpload(input, type) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    cardData.images.main = e.target.result;
-                    renderCard();
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+    <div class="map-section">
+      <div class="map-title">${escapeHtml(d.mapTitle)}</div>
+      <div class="map-wrap">
+        <iframe src="${d.mapEmbedUrl}" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
 
-        // Subir galería
-        function handleGalleryUpload(input) {
-            if (input.files) {
-                cardData.images.gallery = [];
-                Array.from(input.files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        cardData.images.gallery.push(e.target.result);
-                        if (cardData.images.gallery.length === input.files.length) {
-                            renderCard();
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-        }
+    <div class="rsvp-section" id="rsvp">
+      <div class="rsvp-title">${escapeHtml(d.rsvpTitle)}</div>
+      <div class="rsvp-subtitle">${escapeHtml(d.rsvpSubtitle)}</div>
+      <form class="rsvp-form" onsubmit="handleRSVP(event)">
+        <input type="text" class="rsvp-input" id="rsvp-name" placeholder="${escapeHtml(d.rsvpPlaceholderName)}" required>
+        <input type="number" class="rsvp-input" id="rsvp-guests" placeholder="${escapeHtml(d.rsvpPlaceholderGuests)}" min="1" max="10">
+        <textarea class="rsvp-input" id="rsvp-message" rows="3" placeholder="${escapeHtml(d.rsvpPlaceholderMessage)}"></textarea>
+        <button type="submit" class="rsvp-button">${escapeHtml(d.rsvpButtonTextForm)}</button>
+      </form>
+    </div>
+  </div>
 
-        // Cargar plantilla
-        function loadTemplate(template) {
-            document.querySelectorAll('.template-preview').forEach(p => p.classList.remove('active'));
-            event.target.closest('.template-preview').classList.add('active');
-            // Aquí se podrían cargar diferentes plantillas
-        }
+  <div class="footer">
+    <div class="footer-verse">"${escapeHtml(d.footerVerse)}"</div>
+    <div class="footer-text">— ${escapeHtml(d.footerRef)} —</div>
+  </div>
+</div>
 
-        // Vista previa
-        function previewCard() {
-            const frame = document.getElementById('cardFrame');
-            const newWindow = window.open('', '_blank');
-            newWindow.document.write(frame.contentDocument.documentElement.outerHTML);
-            newWindow.document.close();
-        }
+<script>
+const splash = document.getElementById('splash');
+splash.addEventListener('click', () => {
+  splash.classList.add('hide');
+  setTimeout(() => {
+    splash.style.display = 'none';
+    revealInvitation();
+  }, 1500);
+});
 
-        // Guardar proyecto
-        function saveProject() {
-            const dataStr = JSON.stringify(cardData, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'bautizo-project.json';
-            a.click();
-        }
+function revealInvitation() {
+  const inv = document.getElementById('invitation');
+  inv.classList.add('visible');
+  const sections = ['.photo-frame-section','.text-intro','.text-title','.text-subtitle','.ribbon-container','.cross-section','.datetime-section','.church-section','.godparents-section','.buttons-section','.bottom-decoration','.waiting-text','.countdown-section','.gallery-section','.map-section','.rsvp-section','.footer'];
+  sections.forEach((sel, i) => {
+    setTimeout(() => {
+      document.querySelectorAll(sel).forEach(el => el.classList.add('visible'));
+    }, 200 + i * 200);
+  });
+}
 
-        // Exportar HTML
-        function exportHTML() {
-            const frame = document.getElementById('cardFrame');
-            const html = frame.contentDocument.documentElement.outerHTML;
-            const blob = new Blob([html], {type: 'text/html'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'invitacion-bautizo.html';
-            a.click();
-        }
+const eventDate = new Date('${d.eventDateISO}').getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = eventDate - now;
+  if (distance < 0) return;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-        // Compartir
-        function shareCard() {
-            alert('Función de compartir: Aquí se generaría un link único para compartir la invitación');
-        }
-    </script>
+let carouselIdx = 0;
+const totalSlides = ${d.galleryImages.length};
+function updateCarousel() {
+  const track = document.getElementById('carousel-track');
+  if (track) track.style.transform = 'translateX(-' + (carouselIdx * 100) + '%)';
+  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === carouselIdx);
+  });
+}
+function moveCarousel(dir) {
+  carouselIdx = (carouselIdx + dir + totalSlides) % totalSlides;
+  updateCarousel();
+}
+function goToCarousel(idx) {
+  carouselIdx = idx;
+  updateCarousel();
+}
+
+function handleRSVP(e) {
+  e.preventDefault();
+  const name = document.getElementById('rsvp-name').value.trim();
+  const guests = document.getElementById('rsvp-guests').value.trim();
+  const message = document.getElementById('rsvp-message').value.trim();
+  if (!name) { alert('Por favor ingresa tu nombre'); return; }
+  const whatsappNumber = '${d.whatsappNumber}';
+  const text = 'Hola, soy ' + name + '. Confirmo mi asistencia al Bautizo de ' + '${escapeHtml(d.ribbonName)}' + (guests ? ' con ' + guests + ' invitado(s)' : '') + '.' + (message ? ' ' + message : '');
+  window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(text), '_blank');
+}
+
+// Partículas doradas
+const canvas = document.getElementById('gold-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.3 + 0.1;
+    this.fadeSpeed = Math.random() * 0.01 + 0.005;
+    this.growing = Math.random() > 0.5;
+  }
+  update() {
+    this.x += this.speedX; this.y += this.speedY;
+    if (this.growing) { this.opacity += this.fadeSpeed; if (this.opacity >= 0.4) this.growing = false; }
+    else { this.opacity -= this.fadeSpeed; if (this.opacity <= 0.1) this.growing = true; }
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(212, 175, 55, ' + this.opacity + ')';
+    ctx.fill();
+  }
+}
+for (let i = 0; i < 30; i++) particles.push(new Particle());
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+<\/script>
+</body>
+</html>`;
+
+  document.getElementById('cardPreview').srcdoc = html;
+}
+
+// ═══════════════════════════════════════════════
+// FUNCIONES GLOBALES
+// ═══════════════════════════════════════════════
+function resetDefaults() {
+  if (!confirm('¿Restablecer todos los valores por defecto?')) return;
+  location.reload();
+}
+
+function saveProject() {
+  const dataStr = JSON.stringify(cardData, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'bautizo-project.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportHTML() {
+  const iframe = document.getElementById('cardPreview');
+  const htmlContent = iframe.srcdoc;
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'invitacion-bautizo.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ═══════════════════════════════════════════════
+// INICIALIZACIÓN
+// ═══════════════════════════════════════════════
+renderEditor();
+renderCard();
+</script>
 </body>
 </html>
