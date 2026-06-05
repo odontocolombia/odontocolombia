@@ -7,27 +7,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink: #e8a0b8;
-      --pink-light: #f5d0e0;
-      --pink-dark: #c87898;
-      --pink-soft: #fdf0f5;
-      --cream: #fff8fa;
-      --brown: #5a3848;
-      --brown-light: #7a5868;
+      --blue: #7eb8d4;
+      --blue-light: #c4e4f0;
+      --blue-dark: #5a9ab8;
+      --blue-soft: #f0f8fc;
+      --cream: #f8fcff;
+      --navy: #3a5a6a;
+      --navy-light: #5a7a8a;
       --white: #ffffff;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
       font-family:'Cormorant Garamond',serif;
-      color:var(--brown);
+      color:var(--navy);
       overflow-x:hidden;
       min-height:100vh;
-      background:linear-gradient(180deg,#fdf0f5 0%,#fff8fa 50%,#fdf0f5 100%);
+      background:linear-gradient(180deg,#f0f8fc 0%,#f8fcff 50%,#f0f8fc 100%);
     }
     ::-webkit-scrollbar{width:5px;}
-    ::-webkit-scrollbar-track{background:#fdf0f5;}
-    ::-webkit-scrollbar-thumb{background:var(--pink);border-radius:3px;}
+    ::-webkit-scrollbar-track{background:#f0f8fc;}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px;}
     #gold-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;}
 
     /* SPLASH */
@@ -40,7 +40,7 @@
       justify-content:center;
       cursor:pointer;
       overflow:hidden;
-      background: radial-gradient(ellipse at 50% 40%, #fff5fa 0%, #fde8f2 50%, #f8dce8 100%);
+      background: radial-gradient(ellipse at 50% 40%, #f5faff 0%, #e8f4fc 50%, #dceef8 100%);
       will-change: transform, opacity;
     }
     #splash.hiding {
@@ -57,8 +57,8 @@
     .splash-bg-pattern {
       position:absolute;inset:0;
       background-image: 
-        radial-gradient(circle at 20% 30%, rgba(232,160,184,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(200,120,152,0.06) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(126,184,212,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(90,154,184,0.06) 0%, transparent 50%);
       animation: bgPulse 8s ease-in-out infinite;
     }
     @keyframes bgPulse {
@@ -74,7 +74,7 @@
       content:'';
       position:absolute;
       width:200%;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(232,160,184,0.2),transparent);
+      background:linear-gradient(90deg,transparent,rgba(126,184,212,0.2),transparent);
       animation: lineSweep 12s ease-in-out infinite;
     }
     .splash-lines::before { top:30%; left:-50%; animation-delay:0s; }
@@ -104,8 +104,8 @@
     
     .splash-angel-wrap { 
       position:relative;
-      width: min(200px, 45vw);
-      height: min(200px, 45vw);
+      width: min(220px, 50vw);
+      height: min(220px, 50vw);
       margin-bottom: 15px; 
       animation: angelFloat 6s ease-in-out infinite; 
       flex-shrink: 0;
@@ -118,7 +118,7 @@
     .splash-angel-glow { 
       position:absolute;inset:-20px;
       border-radius:50%; 
-      background:radial-gradient(circle, rgba(255,230,245,0.6) 0%, rgba(255,230,245,0) 70%); 
+      background:radial-gradient(circle, rgba(200,230,250,0.6) 0%, rgba(200,230,250,0) 70%); 
       animation: glowBreath 4s ease-in-out infinite; 
     }
     @keyframes glowBreath { 
@@ -130,7 +130,7 @@
       width:100%;height:100%; 
       object-fit:contain; 
       position:relative;z-index:2; 
-      filter:drop-shadow(0 8px 20px rgba(200,120,152,0.25)); 
+      filter:drop-shadow(0 8px 20px rgba(90,154,184,0.25)); 
     }
     .splash-angel-fallback { display:none; width:100%;height:100%; }
     
@@ -157,7 +157,7 @@
       font-size: clamp(0.6rem, 2vw, 0.75rem);
       letter-spacing: clamp(6px, 2vw, 12px);
       text-transform:uppercase; 
-      color:var(--pink-dark); 
+      color:var(--blue-dark); 
       margin-bottom: 8px; 
       opacity:0; 
       animation:fadeSlideUp 1s 0.5s ease forwards; 
@@ -166,7 +166,7 @@
     .splash-name { 
       font-family:'Great Vibes',cursive; 
       font-size: clamp(2rem, 8vw, 3.2rem);
-      background:linear-gradient(135deg,#c87898 0%,#e8a0b8 40%,#d4899f 65%,#c87898 100%); 
+      background:linear-gradient(135deg,#5a9ab8 0%,#7eb8d4 40%,#6aa8c4 65%,#5a9ab8 100%); 
       background-size:200% auto; 
       -webkit-background-clip:text; 
       -webkit-text-fill-color:transparent; 
@@ -182,7 +182,7 @@
       font-family:'Cinzel',serif; 
       font-size: clamp(0.75rem, 2.5vw, 1rem);
       letter-spacing: clamp(3px, 1.5vw, 6px);
-      color:var(--brown); 
+      color:var(--navy); 
       opacity:0; 
       animation:fadeSlideUp 1s 0.9s ease forwards; 
       margin-bottom: 18px; 
@@ -202,10 +202,10 @@
     }
     .splash-divider::before,.splash-divider::after { 
       content:'';width: clamp(50px, 15vw, 80px);height:1px; 
-      background:linear-gradient(to right,transparent,var(--pink),transparent); 
+      background:linear-gradient(to right,transparent,var(--blue),transparent); 
     }
     .splash-divider-icon { 
-      color:var(--pink);font-size: 1rem; 
+      color:var(--blue);font-size: 1rem; 
       animation: iconRotate 4s ease-in-out infinite;
     }
     @keyframes iconRotate {
@@ -216,7 +216,7 @@
     .splash-btn { 
       display:inline-flex;align-items:center;gap: 10px; 
       padding: clamp(10px, 3vw, 14px) clamp(24px, 8vw, 36px);
-      background:linear-gradient(135deg,#f5d0e0,#e8a0b8,#c87898,#e8a0b8,#f5d0e0); 
+      background:linear-gradient(135deg,#c4e4f0,#7eb8d4,#5a9ab8,#7eb8d4,#c4e4f0); 
       background-size:300% 100%; 
       color:var(--white); 
       font-family:'Cinzel',serif; 
@@ -226,7 +226,7 @@
       border:none; 
       border-radius:50px; 
       cursor:pointer; 
-      box-shadow:0 6px 20px rgba(200,120,152,0.3); 
+      box-shadow:0 6px 20px rgba(90,154,184,0.3); 
       animation:fadeSlideUp 1s 1.3s ease forwards, buttonPremium 4s 2.3s linear infinite; 
       opacity:0; 
       transition:transform 0.3s ease, box-shadow 0.3s ease; 
@@ -241,7 +241,7 @@
     }
     .splash-btn:hover { 
       transform:translateY(-2px); 
-      box-shadow:0 10px 28px rgba(200,120,152,0.45); 
+      box-shadow:0 10px 28px rgba(90,154,184,0.45); 
     }
     .splash-btn:hover::before { left:100%; }
     .splash-btn-icon { 
@@ -258,7 +258,7 @@
       margin-top: 12px; 
       font-family:'Cormorant Garamond',serif; 
       font-size: clamp(0.7rem, 2vw, 0.85rem);
-      color:var(--brown-light); 
+      color:var(--navy-light); 
       letter-spacing: 2px; 
       font-style:italic; 
       opacity:0; 
@@ -273,7 +273,7 @@
       padding:80px 40px 60px; 
       margin:40px 0; 
       position:relative; 
-      box-shadow:0 8px 40px rgba(200,120,152,0.12),0 0 0 8px var(--white),0 0 0 10px var(--pink-light),0 20px 60px rgba(200,120,152,0.08); 
+      box-shadow:0 8px 40px rgba(90,154,184,0.12),0 0 0 8px var(--white),0 0 0 10px var(--blue-light),0 20px 60px rgba(90,154,184,0.08); 
       opacity:0; 
       transform:translateY(45px); 
       overflow:visible; 
@@ -312,11 +312,11 @@
     .side-right.visible{animation:sideRevealRight 1.2s ease 0.6s forwards;}
     @keyframes sideRevealRight{0%{opacity:0;transform:translateY(-50%) scaleX(-1) translateX(-25px)}100%{opacity:0.75;transform:translateY(-50%) scaleX(-1) translateX(0)}}
     
-    .text-intro{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown-light);text-align:center;margin-bottom:15px;font-style:italic;opacity:0;}
+    .text-intro{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy-light);text-align:center;margin-bottom:15px;font-style:italic;opacity:0;}
     .text-intro.visible{animation:fadeUp 1s ease 0.5s forwards;}
-    .text-title{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;color:var(--brown);text-align:center;letter-spacing:8px;margin-bottom:10px;opacity:0;}
+    .text-title{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;color:var(--navy);text-align:center;letter-spacing:8px;margin-bottom:10px;opacity:0;}
     .text-title.visible{animation:fadeUp 1s ease 0.7s forwards;}
-    .text-subtitle{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown-light);text-align:center;margin-bottom:20px;opacity:0;}
+    .text-subtitle{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--navy-light);text-align:center;margin-bottom:20px;opacity:0;}
     .text-subtitle.visible{animation:fadeUp 1s ease 0.9s forwards;}
     .text-name{ 
       font-family:'Great Vibes',cursive; 
@@ -324,7 +324,7 @@
       text-align:center; 
       margin-bottom:5px; 
       opacity:0; 
-      background:linear-gradient(90deg,#c87898 0%,#e8a0b8 35%,#d4899f 60%,#c87898 100%); 
+      background:linear-gradient(90deg,#5a9ab8 0%,#7eb8d4 35%,#6aa8c4 60%,#5a9ab8 100%); 
       background-size:200% auto; 
       -webkit-background-clip:text; 
       -webkit-text-fill-color:transparent; 
@@ -332,17 +332,16 @@
     }
     .text-name.visible{animation:nameReveal 1.4s cubic-bezier(0.22,1,0.36,1) 1.1s forwards,nameShimmer 4s 2.5s linear infinite;}
     @keyframes nameReveal{0%{opacity:0;transform:scale(0.75);filter:blur(12px)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
-    .text-surname{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--brown);text-align:center;letter-spacing:4px;margin-bottom:40px;opacity:0;}
+    .text-surname{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--navy);text-align:center;letter-spacing:4px;margin-bottom:40px;opacity:0;}
     .text-surname.visible{animation:fadeUp 1s ease 1.3s forwards;}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(22px)}100%{opacity:1;transform:translateY(0)}}
     
-    /* DATE SECTION - DISPOSICIÓN MÓVIL */
     .date-section{
       text-align:center;
       margin:40px 0;
       padding:30px 0;
-      border-top:1px solid var(--pink-light);
-      border-bottom:1px solid var(--pink-light);
+      border-top:1px solid var(--blue-light);
+      border-bottom:1px solid var(--blue-light);
       opacity:0;
       position:relative;
     }
@@ -351,7 +350,7 @@
     .date-day{
       font-family:'Cinzel',serif;
       font-size:1.3rem;
-      color:var(--brown);
+      color:var(--navy);
       letter-spacing:3px;
       margin-bottom:10px;
       text-transform: uppercase;
@@ -360,23 +359,22 @@
       font-family:'Cinzel',serif;
       font-size:3rem;
       font-weight:700;
-      color:var(--pink-dark);
+      color:var(--blue-dark);
       margin:10px 0;
       animation:dateGlow 3.5s ease-in-out infinite;
     }
     @keyframes dateGlow{
-      0%,100%{text-shadow:0 2px 4px rgba(200,120,152,0.2)}
-      50%{text-shadow:0 2px 20px rgba(200,120,152,0.55),0 0 40px rgba(200,120,152,0.15)}
+      0%,100%{text-shadow:0 2px 4px rgba(90,154,184,0.2)}
+      50%{text-shadow:0 2px 20px rgba(90,154,184,0.55),0 0 40px rgba(90,154,184,0.15)}
     }
     .date-month{
       font-family:'Cinzel',serif;
       font-size:1.3rem;
-      color:var(--brown);
+      color:var(--navy);
       letter-spacing:3px;
       text-transform: uppercase;
     }
     
-    /* FAMILY SECTION - DISPOSICIÓN MÓVIL */
     .family-section{
       margin:40px 0;
       opacity:0;
@@ -392,19 +390,19 @@
     .family-label{
       font-family:'Great Vibes',cursive;
       font-size:1.8rem;
-      color:var(--pink-dark);
+      color:var(--blue-dark);
       flex:0 0 120px;
       text-align:center;
       animation:labelGlow 4s ease-in-out infinite;
     }
     @keyframes labelGlow{
       0%,100%{text-shadow:none}
-      50%{text-shadow:0 0 15px rgba(200,120,152,0.4)}
+      50%{text-shadow:0 0 15px rgba(90,154,184,0.4)}
     }
     .family-name{
       font-family:'Cormorant Garamond',serif;
       font-size:1rem;
-      color:var(--brown);
+      color:var(--navy);
       flex:1;
       text-align:center;
       line-height:1.6;
@@ -412,10 +410,9 @@
     .family-name strong{
       display:block;
       font-weight:600;
-      color:var(--brown);
+      color:var(--navy);
     }
     
-    /* CHURCH SECTION */
     .church-section{
       text-align:center;
       margin:40px 0;
@@ -436,20 +433,20 @@
       font-family:'Cinzel',serif;
       font-size:2rem;
       font-weight:700;
-      color:var(--brown);
+      color:var(--navy);
       margin-bottom:15px;
     }
     .church-name{
       font-family:'Cormorant Garamond',serif;
       font-size:1.3rem;
-      color:var(--brown);
+      color:var(--navy);
       margin-bottom:10px;
       font-weight:600;
     }
     .church-reference{
       font-family:'Cormorant Garamond',serif;
       font-size:1rem;
-      color:var(--brown-light);
+      color:var(--navy-light);
       font-style:italic;
       line-height:1.5;
     }
@@ -466,7 +463,7 @@
       content:'';
       flex:1;
       height:1px;
-      background:linear-gradient(to right,transparent,var(--pink),transparent);
+      background:linear-gradient(to right,transparent,var(--blue),transparent);
     }
     .divider-center{
       width:32px;
@@ -480,21 +477,20 @@
     .divider-center::before,.divider-center::after{
       content:'✦';
       position:absolute;
-      color:var(--pink);
+      color:var(--blue);
       font-size:1.2rem;
       animation:starTwinkleCard 2s ease-in-out infinite;
     }
     .divider-center::after{
       animation-delay:1s;
       font-size:0.7rem;
-      color:var(--pink-light);
+      color:var(--blue-light);
     }
     @keyframes starTwinkleCard{
       0%,100%{opacity:0.4;transform:scale(0.8)}
       50%{opacity:1;transform:scale(1.2)}
     }
     
-    /* COUNTDOWN SECTION */
     .countdown-section{
       text-align:center;
       margin:40px 0;
@@ -505,7 +501,7 @@
       font-family:'Cinzel',serif;
       font-size:1rem;
       letter-spacing:4px;
-      color:var(--pink-dark);
+      color:var(--blue-dark);
       margin-bottom:20px;
       text-transform:uppercase;
     }
@@ -517,8 +513,8 @@
       margin:0 auto;
     }
     .countdown-item{ 
-      background:linear-gradient(135deg,#fdf0f5,#fff4f8); 
-      border:1px solid var(--pink-light); 
+      background:linear-gradient(135deg,#f0f8fc,#f4faff); 
+      border:1px solid var(--blue-light); 
       border-radius:6px; 
       padding:15px 10px; 
       transition:transform 0.3s ease,box-shadow 0.3s ease; 
@@ -527,13 +523,13 @@
     }
     .countdown-item:hover{
       transform:translateY(-6px);
-      box-shadow:0 10px 25px rgba(200,120,152,0.22);
+      box-shadow:0 10px 25px rgba(90,154,184,0.22);
     }
     .countdown-number{
       font-family:'Cinzel',serif;
       font-size:2rem;
       font-weight:700;
-      color:var(--pink-dark);
+      color:var(--blue-dark);
       display:block;
     }
     .countdown-number.flip{animation:numFlip 0.3s ease;}
@@ -544,30 +540,29 @@
     .countdown-label{
       font-family:'Cormorant Garamond',serif;
       font-size:0.85rem;
-      color:var(--brown-light);
+      color:var(--navy-light);
       text-transform:uppercase;
       letter-spacing:2px;
     }
     
-    /* GALLERY SECTION */
     .gallery-section{margin:40px 0;opacity:0;}
     .gallery-section.visible{animation:fadeIn 1s ease 2.5s forwards;}
     .gallery-title{
       font-family:'Cinzel',serif;
       font-size:1.2rem;
       letter-spacing:4px;
-      color:var(--brown);
+      color:var(--navy);
       text-align:center;
       margin-bottom:25px;
       text-transform:uppercase;
     }
     .carousel-wrap{
       position:relative;
-      border:2px solid var(--pink-light);
+      border:2px solid var(--blue-light);
       border-radius:6px;
       overflow:hidden;
       background:var(--white);
-      box-shadow:0 4px 20px rgba(200,120,152,0.08);
+      box-shadow:0 4px 20px rgba(90,154,184,0.08);
     }
     .carousel-track{
       display:flex;
@@ -589,8 +584,8 @@
       top:50%;
       transform:translateY(-50%); 
       background:rgba(255,255,255,0.92); 
-      border:1.5px solid var(--pink); 
-      color:var(--brown); 
+      border:1.5px solid var(--blue); 
+      color:var(--navy); 
       width:42px; 
       height:42px; 
       border-radius:50%; 
@@ -601,10 +596,10 @@
       z-index:5; 
       transition:all 0.3s ease; 
       font-size:1.3rem; 
-      box-shadow:0 2px 10px rgba(200,120,152,0.15); 
+      box-shadow:0 2px 10px rgba(90,154,184,0.15); 
     }
     .carousel-btn:hover{
-      background:var(--pink);
+      background:var(--blue);
       color:var(--white);
       transform:translateY(-50%) scale(1.12);
     }
@@ -615,41 +610,40 @@
       justify-content:center;
       gap:8px;
       padding:15px;
-      background:linear-gradient(135deg,#fdf0f5,#fff4f8);
+      background:linear-gradient(135deg,#f0f8fc,#f4faff);
     }
     .carousel-dot{
       width:10px;
       height:10px;
       border-radius:50%;
-      background:var(--pink-light);
+      background:var(--blue-light);
       cursor:pointer;
       transition:all 0.35s ease;
       border:2px solid transparent;
     }
     .carousel-dot.active{
-      background:var(--pink);
+      background:var(--blue);
       transform:scale(1.4);
-      border-color:var(--pink-dark);
+      border-color:var(--blue-dark);
     }
     
-    /* MAP SECTION */
     .map-section{margin:40px 0;opacity:0;}
     .map-section.visible{animation:fadeIn 1s ease 2.7s forwards;}
     .map-title{
       font-family:'Cinzel',serif;
       font-size:1.2rem;
       letter-spacing:4px;
-      color:var(--brown);
+      color:var(--navy);
       text-align:center;
       margin-bottom:20px;
       text-transform:uppercase;
     }
     .map-wrap{
-      border:2px solid var(--pink-light);
+      border:2px solid var(--blue-light);
       border-radius:10px;
       overflow:hidden;
       margin-bottom:6px;
-      box-shadow:0 6px 24px rgba(200,120,152,0.13);
+      box-shadow:0 6px 24px rgba(90,154,184,0.13);
     }
     .map-wrap iframe{
       width:100%;
@@ -663,8 +657,8 @@
       justify-content:center;
       gap:8px;
       padding:12px 16px; 
-      background:linear-gradient(135deg,#fdf0f5,#fff4f8); 
-      border:2px solid var(--pink-light); 
+      background:linear-gradient(135deg,#f0f8fc,#f4faff); 
+      border:2px solid var(--blue-light); 
       border-top:none; 
       border-radius:0 0 10px 10px; 
       margin-bottom:20px; 
@@ -674,7 +668,7 @@
       height:7px;
       border-radius:50%;
       flex-shrink:0;
-      background:var(--pink);
+      background:var(--blue);
       animation:dotPulse 2s ease-in-out infinite;
     }
     @keyframes dotPulse{
@@ -684,7 +678,7 @@
     .map-info-text{
       font-family:'Cormorant Garamond',serif;
       font-size:0.9rem;
-      color:var(--brown-light);
+      color:var(--navy-light);
       font-style:italic;
     }
     .map-btn-wrap{display:flex;justify-content:center;}
@@ -693,7 +687,7 @@
       align-items:center;
       gap:8px;
       padding:11px 30px; 
-      background:linear-gradient(135deg,#f5d0e0,#e8a0b8,#c87898,#e8a0b8,#f5d0e0); 
+      background:linear-gradient(135deg,#c4e4f0,#7eb8d4,#5a9ab8,#7eb8d4,#c4e4f0); 
       background-size:300% 100%; 
       color:var(--white); 
       text-decoration:none; 
@@ -704,20 +698,19 @@
       transition:all 0.3s ease; 
       text-transform:uppercase; 
       animation:buttonPremium 3.5s linear infinite; 
-      box-shadow:0 4px 15px rgba(200,120,152,0.22); 
+      box-shadow:0 4px 15px rgba(90,154,184,0.22); 
     }
     .map-link:hover{
       transform:translateY(-2px);
-      box-shadow:0 10px 25px rgba(200,120,152,0.35);
+      box-shadow:0 10px 25px rgba(90,154,184,0.35);
     }
     
-    /* RSVP SECTION */
     .rsvp-section{ 
       text-align:center;
       margin:40px 0;
       padding:42px 20px; 
-      background:linear-gradient(135deg,#fdf0f5,#fff8fa,#fdf5f8); 
-      border:1px solid var(--pink-light); 
+      background:linear-gradient(135deg,#f0f8fc,#f8fcff,#f4faff); 
+      border:1px solid var(--blue-light); 
       border-radius:6px; 
       opacity:0; 
       position:relative; 
@@ -728,14 +721,14 @@
       font-family:'Cinzel',serif;
       font-size:1.2rem;
       letter-spacing:4px;
-      color:var(--brown);
+      color:var(--navy);
       margin-bottom:10px;
       text-transform:uppercase;
     }
     .rsvp-subtitle{
       font-family:'Cormorant Garamond',serif;
       font-size:1rem;
-      color:var(--brown-light);
+      color:var(--navy-light);
       margin-bottom:25px;
       font-style:italic;
     }
@@ -745,21 +738,21 @@
       padding:12px 16px;
       margin-bottom:15px; 
       background:var(--white);
-      border:1.5px solid var(--pink-light);
+      border:1.5px solid var(--blue-light);
       border-radius:5px; 
       font-family:'Cormorant Garamond',serif;
       font-size:1rem;
-      color:var(--brown); 
+      color:var(--navy); 
       outline:none;
       transition:border-color 0.3s ease,box-shadow 0.3s ease;
       resize:vertical; 
     }
     .rsvp-input:focus{
-      border-color:var(--pink);
-      box-shadow:0 0 0 3px rgba(200,120,152,0.12);
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(90,154,184,0.12);
     }
     .rsvp-input::placeholder{
-      color:var(--brown-light);
+      color:var(--navy-light);
       opacity:0.55;
     }
     .rsvp-button{ 
@@ -775,21 +768,20 @@
       position:relative;
       overflow:hidden;
       color:var(--white); 
-      background:linear-gradient(135deg,#f5d0e0,#e8a0b8,#c87898,#e8a0b8,#f5d0e0); 
+      background:linear-gradient(135deg,#c4e4f0,#7eb8d4,#5a9ab8,#7eb8d4,#c4e4f0); 
       background-size:300% 100%; 
       animation:buttonPremium 3.5s linear infinite; 
       transition:transform 0.3s ease,box-shadow 0.3s ease; 
     }
     .rsvp-button:hover{
       transform:translateY(-2px);
-      box-shadow:0 10px 25px rgba(200,120,152,0.35);
+      box-shadow:0 10px 25px rgba(90,154,184,0.35);
     }
     .rsvp-button.sent{
       background:linear-gradient(135deg,#a8b898,#889878)!important;
       animation:none;
     }
     
-    /* FOOTER */
     .footer{
       text-align:center;
       padding:40px 20px;
@@ -799,7 +791,7 @@
     .footer-verse{
       font-family:'Cormorant Garamond',serif;
       font-size:1.1rem;
-      color:var(--brown-light);
+      color:var(--navy-light);
       font-style:italic;
       margin-bottom:10px;
     }
@@ -807,10 +799,9 @@
       font-family:'Cinzel',serif;
       font-size:0.85rem;
       letter-spacing:3px;
-      color:var(--pink-dark);
+      color:var(--blue-dark);
     }
 
-    /* MEDIA QUERIES - VERSIÓN MÓVIL */
     @media(max-width:600px){
       .invitation { 
         padding:40px 20px 30px; 
@@ -824,19 +815,16 @@
       .corner-br{bottom:-22px;right:-22px;}
       .side-flower{display:none;}
       
-      /* Textos principales más pequeños */
       .text-title{font-size:1.8rem;letter-spacing:4px;}
       .text-name{font-size:2.5rem;}
       .text-intro{font-size:1rem;}
       .text-subtitle{font-size:0.9rem;}
       .text-surname{font-size:1rem;}
       
-      /* Fecha centrada y más grande */
       .date-day{font-size:1.1rem;letter-spacing:2px;}
       .date-number{font-size:3.5rem;}
       .date-month{font-size:1.1rem;letter-spacing:2px;}
       
-      /* Family section - filas horizontales */
       .family-row{
         flex-direction: row;
         justify-content: space-between;
@@ -856,13 +844,11 @@
         font-size:0.95rem;
       }
       
-      /* Church section */
       .church-icon{width:50px;height:65px;}
       .church-time{font-size:1.6rem;}
       .church-name{font-size:1.1rem;}
       .church-reference{font-size:0.9rem;}
       
-      /* Countdown */
       .countdown-title{font-size:0.9rem;letter-spacing:3px;}
       .countdown-grid{
         grid-template-columns:repeat(4,1fr);
@@ -872,15 +858,12 @@
       .countdown-number{font-size:1.6rem;}
       .countdown-label{font-size:0.75rem;}
       
-      /* Carousel */
       .carousel-btn{width:36px;height:36px;font-size:1.1rem;}
       .gallery-title{font-size:1rem;}
       
-      /* Map */
       .map-wrap iframe{height:250px;}
       .map-link{padding:10px 24px;font-size:0.75rem;}
       
-      /* RSVP */
       .rsvp-title{font-size:1rem;}
       .rsvp-subtitle{font-size:0.9rem;}
       .rsvp-form{max-width:100%;}
@@ -912,14 +895,14 @@
            alt="Ángel de la guarda" 
            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
       <svg class="splash-angel-fallback" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs><radialGradient id="angelGrad" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff0f8"/><stop offset="100%" stop-color="#e8a0b8"/></radialGradient></defs>
+        <defs><radialGradient id="angelGrad" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#f0f8ff"/><stop offset="100%" stop-color="#7eb8d4"/></radialGradient></defs>
         <circle cx="100" cy="100" r="90" fill="url(#angelGrad)" opacity="0.3"/>
-        <path d="M100 20 Q115 65 135 85 Q155 105 125 120 Q100 135 75 120 Q45 105 65 85 Q85 65 100 20" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="2"/>
+        <path d="M100 20 Q115 65 135 85 Q155 105 125 120 Q100 135 75 120 Q45 105 65 85 Q85 65 100 20" fill="#c4e4f0" stroke="#7eb8d4" stroke-width="2"/>
         <circle cx="90" cy="60" r="3" fill="#f8d840"/>
         <circle cx="110" cy="60" r="3" fill="#f8d840"/>
-        <path d="M90 75 Q100 85 110 75" fill="none" stroke="#c87898" stroke-width="2"/>
-        <path d="M70 100 Q45 65 15 80 Q-15 95 15 115 Q45 135 75 120" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="1.5" opacity="0.8"/>
-        <path d="M130 100 Q155 65 185 80 Q215 95 185 115 Q155 135 125 120" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="1.5" opacity="0.8"/>
+        <path d="M90 75 Q100 85 110 75" fill="none" stroke="#5a9ab8" stroke-width="2"/>
+        <path d="M70 100 Q45 65 15 80 Q-15 95 15 115 Q45 135 75 120" fill="#c4e4f0" stroke="#7eb8d4" stroke-width="1.5" opacity="0.8"/>
+        <path d="M130 100 Q155 65 185 80 Q215 95 185 115 Q155 135 125 120" fill="#c4e4f0" stroke="#7eb8d4" stroke-width="1.5" opacity="0.8"/>
       </svg>
     </div>
 
@@ -1049,10 +1032,10 @@ const GALLERY_IMAGES = [
 function cornerFlowerSVG() {
   return `<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs>
-    <radialGradient id="cfp1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff0f8"/><stop offset="50%" stop-color="#f8d8ee"/><stop offset="100%" stop-color="#e8a8cc"/></radialGradient>
-    <radialGradient id="cfp2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fde8f5"/><stop offset="50%" stop-color="#f5c8e4"/><stop offset="100%" stop-color="#d4899f"/></radialGradient>
-    <radialGradient id="cfp3" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff8fc"/><stop offset="60%" stop-color="#fde0f0"/><stop offset="100%" stop-color="#e8b8d4"/></radialGradient>
-    <radialGradient id="cfc1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f8d0e4"/><stop offset="100%" stop-color="#c8688f"/></radialGradient>
+    <radialGradient id="cfp1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#f0f8ff"/><stop offset="50%" stop-color="#d4eef8"/><stop offset="100%" stop-color="#a8d4e8"/></radialGradient>
+    <radialGradient id="cfp2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8f4fc"/><stop offset="50%" stop-color="#b8dce8"/><stop offset="100%" stop-color="#7eb8d4"/></radialGradient>
+    <radialGradient id="cfp3" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#f8fcff"/><stop offset="60%" stop-color="#d0e8f4"/><stop offset="100%" stop-color="#a8c8d8"/></radialGradient>
+    <radialGradient id="cfc1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c4e4f0"/><stop offset="100%" stop-color="#5a9ab8"/></radialGradient>
     <linearGradient id="cfl1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a8d890"/><stop offset="100%" stop-color="#68a850"/></linearGradient>
     <linearGradient id="cfl2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c0e0a8"/><stop offset="100%" stop-color="#80b860"/></linearGradient>
   </defs>
@@ -1067,37 +1050,37 @@ function cornerFlowerSVG() {
   <path d="M 92,82 C 108,72 122,76 122,88 C 122,100 108,106 98,100 C 90,94 88,88 92,82 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
   <path d="M 108,118 C 96,110 92,96 102,88 C 108,84 116,90 114,100 C 112,110 108,116 108,118 Z" fill="url(#cfl1)" stroke="#50883a" stroke-width="0.6"/>
   <path d="M 130,120 C 144,110 152,114 150,126 C 148,136 136,140 128,134 C 122,128 122,124 130,120 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
-  <circle cx="60" cy="72" r="3.8" fill="#e8a0c0"/>
-  <circle cx="65" cy="67" r="3" fill="#f5c8dc"/>
-  <circle cx="40" cy="44" r="3.2" fill="#d4899f"/>
-  ${[0,60,120,180,240,300].map((angle,i)=>{const r=(angle*Math.PI)/180,px=48+8*Math.cos(r),py=26+8*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4" ry="6.5" fill="${i%2===0?'#fde8f5':'#f5d4e8'}" stroke="#e8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
+  <circle cx="60" cy="72" r="3.8" fill="#a8c8d8"/>
+  <circle cx="65" cy="67" r="3" fill="#c4e4f0"/>
+  <circle cx="40" cy="44" r="3.2" fill="#7eb8d4"/>
+  ${[0,60,120,180,240,300].map((angle,i)=>{const r=(angle*Math.PI)/180,px=48+8*Math.cos(r),py=26+8*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4" ry="6.5" fill="${i%2===0?'#e8f4fc':'#d4eef8'}" stroke="#a8c8d8" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="48" cy="26" r="5" fill="url(#cfc1)"/>
-  ${[0,45,90,135,180,225,270,315].map((angle,i)=>{const r=(angle*Math.PI)/180,px=78+12*Math.cos(r),py=44+12*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5.5" ry="9" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#e0a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
+  ${[0,45,90,135,180,225,270,315].map((angle,i)=>{const r=(angle*Math.PI)/180,px=78+12*Math.cos(r),py=44+12*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5.5" ry="9" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#a8c8d8" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="78" cy="44" r="5.5" fill="url(#cfc1)"/>
-  ${[0,36,72,108,144,180,216,252,288,324].map((angle,i)=>{const r=(angle*Math.PI)/180,px=106+20*Math.cos(r),py=112+20*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="7.5" ry="13" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#e0a8c8" stroke-width="0.5" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
-  <circle cx="106" cy="112" r="7" fill="#c86888"/>
+  ${[0,36,72,108,144,180,216,252,288,324].map((angle,i)=>{const r=(angle*Math.PI)/180,px=106+20*Math.cos(r),py=112+20*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="7.5" ry="13" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#a8c8d8" stroke-width="0.5" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
+  <circle cx="106" cy="112" r="7" fill="#5a9ab8"/>
 </svg>`;
 }
 
 function sideFlowerSVG() {
   return `<svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-  <defs><radialGradient id="sfGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fde8f0"/><stop offset="100%" stop-color="#e8a0b8"/></radialGradient></defs>
+  <defs><radialGradient id="sfGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e8f4fc"/><stop offset="100%" stop-color="#7eb8d4"/></radialGradient></defs>
   <path d="M 40 120 Q 35 90 30 70 Q 24 50 18 28" stroke="#a8b898" stroke-width="1.8" fill="none" stroke-linecap="round"/>
   <path d="M 30 70 Q 18 65 12 60" stroke="#b8c8a8" stroke-width="1.2" fill="none"/>
   <path d="M 24 50 Q 12 48 8 44" stroke="#b8c8a8" stroke-width="1.2" fill="none"/>
-  <path d="M 20 18 Q 23 25 20 30 Q 17 25 20 18" fill="#f5d0e0"/>
-  <path d="M 25 22 Q 23 29 20 30 Q 20 23 25 22" fill="#f5d0e0"/>
-  <path d="M 25 34 Q 22 28 20 30 Q 22 35 25 34" fill="#f5d0e0"/>
-  <path d="M 15 34 Q 18 28 20 30 Q 16 35 15 34" fill="#f5d0e0"/>
-  <path d="M 15 22 Q 18 26 20 30 Q 14 26 15 22" fill="#f5d0e0"/>
+  <path d="M 20 18 Q 23 25 20 30 Q 17 25 20 18" fill="#c4e4f0"/>
+  <path d="M 25 22 Q 23 29 20 30 Q 20 23 25 22" fill="#c4e4f0"/>
+  <path d="M 25 34 Q 22 28 20 30 Q 22 35 25 34" fill="#c4e4f0"/>
+  <path d="M 15 34 Q 18 28 20 30 Q 16 35 15 34" fill="#c4e4f0"/>
+  <path d="M 15 22 Q 18 26 20 30 Q 14 26 15 22" fill="#c4e4f0"/>
   <circle cx="20" cy="30" r="4" fill="url(#sfGrad)"/>
-  <path d="M 15 42 Q 17 48 15 52 Q 13 48 15 42" fill="#f5d0e0"/>
-  <path d="M 19 45 Q 18 51 15 52 Q 15 46 19 45" fill="#f5d0e0"/>
-  <path d="M 19 55 Q 17 50 15 52 Q 17 56 19 55" fill="#f5d0e0"/>
-  <path d="M 11 55 Q 13 50 15 52 Q 12 56 11 55" fill="#f5d0e0"/>
-  <circle cx="15" cy="52" r="3" fill="#e8a0b8"/>
-  <circle cx="10" cy="65" r="4.5" fill="#f5d0e0"/>
-  <circle cx="9" cy="64" r="2.5" fill="#e8a0b8"/>
+  <path d="M 15 42 Q 17 48 15 52 Q 13 48 15 42" fill="#c4e4f0"/>
+  <path d="M 19 45 Q 18 51 15 52 Q 15 46 19 45" fill="#c4e4f0"/>
+  <path d="M 19 55 Q 17 50 15 52 Q 17 56 19 55" fill="#c4e4f0"/>
+  <path d="M 11 55 Q 13 50 15 52 Q 12 56 11 55" fill="#c4e4f0"/>
+  <circle cx="15" cy="52" r="3" fill="#7eb8d4"/>
+  <circle cx="10" cy="65" r="4.5" fill="#c4e4f0"/>
+  <circle cx="9" cy="64" r="2.5" fill="#7eb8d4"/>
   <ellipse cx="26" cy="82" rx="4" ry="8.5" fill="#b8d0a8" transform="rotate(-22 26 82)" opacity="0.85"/>
   <ellipse cx="18" cy="66" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-32 18 66)" opacity="0.85"/>
 </svg>`;
@@ -1105,15 +1088,15 @@ function sideFlowerSVG() {
 
 function churchIconSVG() {
   return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-  <defs><linearGradient id="churchGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7a5868"/><stop offset="100%" stop-color="#5a3848"/></linearGradient></defs>
+  <defs><linearGradient id="churchGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5a7a8a"/><stop offset="100%" stop-color="#3a5a6a"/></linearGradient></defs>
   <rect x="18" y="30" width="24" height="42" rx="1" fill="url(#churchGrad)" opacity="0.75"/>
   <polygon points="30,8 12,30 48,30" fill="url(#churchGrad)" opacity="0.75"/>
   <rect x="27" y="3" width="6" height="12" rx="1" fill="url(#churchGrad)" opacity="0.75"/>
-  <rect x="24" y="50" width="12" height="22" rx="1.5" fill="#fff8fa" opacity="0.65"/>
-  <rect x="26" y="35" width="8" height="10" rx="1" fill="#fff8fa" opacity="0.5"/>
-  <circle cx="30" cy="20" r="2.5" fill="#e8a0b8" opacity="0.9"/>
-  <line x1="30" y1="17" x2="30" y2="23" stroke="#e8a0b8" stroke-width="0.8"/>
-  <line x1="27" y1="20" x2="33" y2="20" stroke="#e8a0b8" stroke-width="0.8"/>
+  <rect x="24" y="50" width="12" height="22" rx="1.5" fill="#f8fcff" opacity="0.65"/>
+  <rect x="26" y="35" width="8" height="10" rx="1" fill="#f8fcff" opacity="0.5"/>
+  <circle cx="30" cy="20" r="2.5" fill="#7eb8d4" opacity="0.9"/>
+  <line x1="30" y1="17" x2="30" y2="23" stroke="#7eb8d4" stroke-width="0.8"/>
+  <line x1="27" y1="20" x2="33" y2="20" stroke="#7eb8d4" stroke-width="0.8"/>
 </svg>`;
 }
 
@@ -1236,7 +1219,7 @@ const ctx    = canvas.getContext('2d');
 function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-const COLORS = ['#f5d0e0','#e8a0b8','#f0c8d8','#fde8f2','#d4899f'];
+const COLORS = ['#c4e4f0','#7eb8d4','#a8d4e8','#e8f4fc','#5a9ab8'];
 function createPetal() {
   return {
     x: Math.random() * canvas.width,
@@ -1270,9 +1253,9 @@ function drawPetal(p) {
 }
 function animate() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  bokehOrbs.forEach(b => { b.phase+=b.speed; const op=b.opacity*(0.7+0.3*Math.sin(b.phase)); const grad=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r); grad.addColorStop(0,`rgba(232,160,184,${op})`); grad.addColorStop(1,'rgba(232,160,184,0)'); ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill(); });
+  bokehOrbs.forEach(b => { b.phase+=b.speed; const op=b.opacity*(0.7+0.3*Math.sin(b.phase)); const grad=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r); grad.addColorStop(0,`rgba(126,184,212,${op})`); grad.addColorStop(1,'rgba(126,184,212,0)'); ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill(); });
   sparkleTimer++; if(sparkleTimer>20){sparkleTimer=0; sparkles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,life:0,maxLife:60+Math.random()*40,size:Math.random()*2+0.5});}
-  for(let i=sparkles.length-1;i>=0;i--){const sp=sparkles[i];sp.life++;const t=sp.life/sp.maxLife;const alpha=t<0.5?t*2*0.4:(1-t)*2*0.4;ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle='#fde8f0';const s=sp.size*(1+Math.sin(t*Math.PI)*0.5);ctx.translate(sp.x,sp.y);ctx.beginPath();for(let j=0;j<4;j++){ctx.rotate(Math.PI/2);ctx.lineTo(0,-s*2.5);ctx.lineTo(s*0.4,-s*0.4);}ctx.closePath();ctx.fill();ctx.restore();if(sp.life>=sp.maxLife)sparkles.splice(i,1);}
+  for(let i=sparkles.length-1;i>=0;i--){const sp=sparkles[i];sp.life++;const t=sp.life/sp.maxLife;const alpha=t<0.5?t*2*0.4:(1-t)*2*0.4;ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle='#e8f4fc';const s=sp.size*(1+Math.sin(t*Math.PI)*0.5);ctx.translate(sp.x,sp.y);ctx.beginPath();for(let j=0;j<4;j++){ctx.rotate(Math.PI/2);ctx.lineTo(0,-s*2.5);ctx.lineTo(s*0.4,-s*0.4);}ctx.closePath();ctx.fill();ctx.restore();if(sp.life>=sp.maxLife)sparkles.splice(i,1);}
   petals.forEach(p=>{p.wave+=p.waveSpeed;p.x+=p.speedX+Math.sin(p.wave)*0.4;p.y+=p.speedY;p.rotation+=p.rotationSpeed;if(p.y>canvas.height+20){p.y=-20;p.x=Math.random()*canvas.width;}drawPetal(p);});
   requestAnimationFrame(animate);
 }
