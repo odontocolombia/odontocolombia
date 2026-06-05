@@ -2,66 +2,41 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#1a0533" />
   <title>Invitación de Bautizo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── RESET & BASE ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    html { 
+      font-size: 16px; 
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      background: #0e021f;
+      background: linear-gradient(180deg, #0e021f 0%, #1a0533 50%, #0e021f 100%);
       color: #f5e6c8;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      line-height: 1.6;
     }
     img { display: block; max-width: 100%; height: auto; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
-    /* ─── CSS CUSTOM PROPERTIES ─── */
     :root {
-      --gold:        #d4af37;
-      --gold-light:  #f0d060;
-      --gold-pale:   #fdf3c0;
+      --gold: #d4af37;
+      --gold-light: #f0d060;
+      --gold-pale: #fdf3c0;
       --purple-deep: #1a0533;
-      --purple-mid:  #2d0a52;
-      --purple-soft: #4a1478;
-      --white-soft:  #fdf8f0;
-      --radius-pill: 50px;
-
-      /* fluid type scale */
-      --fs-xs:   clamp(0.65rem,  1.5vw, 0.8rem);
-      --fs-sm:   clamp(0.8rem,   2vw,   1rem);
-      --fs-md:   clamp(1rem,     2.5vw, 1.2rem);
-      --fs-lg:   clamp(1.3rem,   3.5vw, 1.8rem);
-      --fs-xl:   clamp(1.8rem,   5vw,   2.8rem);
-      --fs-2xl:  clamp(2.4rem,   7vw,   4rem);
-      --fs-hero: clamp(3rem,     10vw,  6rem);
-
-      /* spacing */
-      --gap-xs: clamp(0.4rem, 1vw, 0.6rem);
-      --gap-sm: clamp(0.8rem, 2vw, 1.2rem);
-      --gap-md: clamp(1.2rem, 3vw, 2rem);
-      --gap-lg: clamp(2rem,   5vw, 3.5rem);
-      --gap-xl: clamp(3rem,   7vw, 5rem);
-      
-      /* timing */
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --purple-mid: #2d0a52;
+      --white-soft: #fdf8f0;
     }
 
-    /* ─── UTILITY ─── */
-    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
-
-    /* =========================================================
-       SPLASH SCREEN
-    ========================================================= */
+    /* SPLASH SCREEN */
     #splash {
       position: fixed;
       inset: 0;
@@ -71,288 +46,207 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: radial-gradient(ellipse 80% 70% at 50% 60%, #2d0a52 0%, #1a0533 45%, #0e021f 100%);
-      transition: opacity 0.9s var(--ease-out-expo), visibility 0.9s;
+      background: radial-gradient(ellipse at 50% 60%, #2d0a52 0%, #1a0533 50%, #0e021f 100%);
+      transition: opacity 0.9s ease, visibility 0.9s;
     }
-    #splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-    /* Starfield canvas */
-    #starfield { position:absolute; inset:0; pointer-events:none; }
-
-    /* Rotating halo behind angel */
-    .halo {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(212,175,55,0.18);
-      animation: spin-slow linear infinite;
-      pointer-events: none;
+    #splash.hidden { 
+      opacity: 0; 
+      visibility: hidden; 
+      pointer-events: none; 
     }
-    .halo:nth-child(1) { width: 420px; height: 420px; top:50%; left:50%; translate:-50% -50%;
-      animation-duration: 22s; border-color: rgba(212,175,55,0.22); }
-    .halo:nth-child(2) { width: 560px; height: 560px; top:50%; left:50%; translate:-50% -50%;
-      animation-duration: 34s; animation-direction: reverse; border-color: rgba(212,175,55,0.12); }
-    .halo:nth-child(3) { width: 700px; height: 700px; top:50%; left:50%; translate:-50% -50%;
-      animation-duration: 48s; border-color: rgba(212,175,55,0.07); }
 
-    /* Floating orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,175,55,0.35) 0%, transparent 70%);
-      pointer-events: none;
-      animation: float-orb ease-in-out infinite alternate;
-      will-change: transform, opacity;
+    #starfield { 
+      position: absolute; 
+      inset: 0; 
+      pointer-events: none; 
     }
-    .orb-1 { width:90px; height:90px; top:12%; left:8%;  animation-duration:5.5s; opacity:.6; }
-    .orb-2 { width:60px; height:60px; top:20%; right:10%; animation-duration:7s;   opacity:.4; }
-    .orb-3 { width:120px;height:120px;bottom:18%;left:6%; animation-duration:6.2s; opacity:.3; }
-    .orb-4 { width:50px; height:50px; bottom:22%;right:8%;animation-duration:8s;   opacity:.5; }
 
-    /* Corner flowers */
-    .corner-flower {
-      position: absolute;
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      opacity: 0.55;
-      filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
-      pointer-events: none;
-      animation: pulse-flower 4s ease-in-out infinite alternate;
-    }
-    .corner-flower.tl { top:  clamp(10px,3vw,20px); left:  clamp(10px,3vw,20px); }
-    .corner-flower.tr { top:  clamp(10px,3vw,20px); right: clamp(10px,3vw,20px); }
-    .corner-flower.bl { bottom:clamp(10px,3vw,20px);left:  clamp(10px,3vw,20px); animation-delay:.8s; }
-    .corner-flower.br { bottom:clamp(10px,3vw,20px);right: clamp(10px,3vw,20px); animation-delay:1.6s;}
-
-    /* Angel image wrapper */
     .angel-wrap {
       position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--gap-md);
-      animation: angel-rise 1.4s var(--ease-out-expo) both;
-      will-change: transform, opacity;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 2rem;
     }
     .angel-wrap img {
-      width:  clamp(200px, 48vw, 380px);
-      height: clamp(270px, 65vw, 520px);
-      object-fit: contain;
-      filter: drop-shadow(0 0 24px rgba(212,175,55,0.45)) drop-shadow(0 0 60px rgba(180,130,255,0.25));
-      animation: angel-float 6s ease-in-out infinite;
-      will-change: transform;
+      width: clamp(150px, 30vw, 280px);
+      height: auto;
+      filter: drop-shadow(0 0 30px rgba(212,175,55,0.5));
     }
 
-    /* Splash text */
     .splash-text {
-      position: relative;
-      z-index: 2;
       text-align: center;
-      padding: 0 var(--gap-md);
-      animation: fade-up 1.2s 0.3s var(--ease-out-expo) both;
+      z-index: 2;
+      padding: 0 20px;
     }
-    .splash-eyebrow {
+    .splash-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 400;
+      font-size: 0.75rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: var(--gap-xs);
-      opacity: .85;
+      color: var(--gold);
+      margin-bottom: 1rem;
     }
     .splash-title {
       font-family: 'Great Vibes', cursive;
-      font-size: var(--fs-hero);
-      line-height: 1;
+      font-size: clamp(3rem, 10vw, 5rem);
       color: var(--gold-pale);
-      text-shadow: 0 0 30px rgba(212,175,55,0.5), 0 2px 4px rgba(0,0,0,0.6);
-      margin-bottom: var(--gap-xs);
+      text-shadow: 0 0 30px rgba(212,175,55,0.5);
+      margin-bottom: 0.5rem;
     }
     .splash-subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: var(--fs-md);
+      font-size: 1.2rem;
       font-style: italic;
-      font-weight: 300;
-      color: rgba(245,230,200,0.75);
-      letter-spacing: 0.08em;
-      margin-bottom: var(--gap-lg);
+      color: rgba(245,230,200,0.8);
     }
 
-    /* CTA button */
     .splash-btn {
-      position: relative;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6em;
-      padding: 0.85em 2.2em;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.08) 100%);
-      border: 1px solid rgba(212,175,55,0.55);
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1));
+      border: 1px solid rgba(212,175,55,0.5);
       color: var(--gold-pale);
       font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-sm);
-      font-weight: 400;
-      letter-spacing: 0.18em;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      animation: fade-up 1.2s 0.6s var(--ease-out-expo) both;
-      transition: background 0.35s, box-shadow 0.35s, transform 0.25s;
-      backdrop-filter: blur(6px);
-      will-change: transform;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-    .splash-btn:hover, .splash-btn:focus-visible {
-      background: linear-gradient(135deg, rgba(212,175,55,0.32) 0%, rgba(212,175,55,0.16) 100%);
-      box-shadow: 0 0 28px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15);
-      transform: translateY(-2px) scale(1.02);
+    .splash-btn:hover {
+      background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.15));
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.3);
     }
-    .splash-btn:active { transform: translateY(0) scale(0.98); }
-    .splash-btn-icon { font-size: 1.1em; animation: pulse-icon 2s ease-in-out infinite; }
 
-    /* Progress bar */
     .progress-bar {
       position: absolute;
-      bottom: 0; left: 0;
-      height: 2px;
+      bottom: 0;
+      left: 0;
+      height: 3px;
       width: 0%;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      transition: width linear;
-      pointer-events: none;
+      transition: width 0.1s linear;
     }
 
-    /* Countdown hint */
-    .splash-countdown {
-      position: absolute;
-      bottom: clamp(14px, 3vw, 22px);
-      left: 0; right: 0;
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
-      color: rgba(212,175,55,0.55);
-      letter-spacing: 0.15em;
-      animation: fade-up 1.2s 0.9s both;
-      pointer-events: none;
-    }
-
-    /* =========================================================
-       MAIN INVITATION
-    ========================================================= */
+    /* MAIN INVITATION */
     #invitation {
+      display: none;
       min-height: 100vh;
-      background: linear-gradient(180deg, #0e021f 0%, #1a0533 30%, #0e021f 100%);
-      position: relative;
-    }
-    #invitation.hidden { display: none; }
-
-    /* Decorative particle canvas */
-    #particles { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.6; }
-
-    /* Section wrapper */
-    .section {
       position: relative;
       z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
-      padding: var(--gap-lg) var(--gap-md);
-      text-align: center;
+    }
+    #invitation.visible {
+      display: block;
     }
 
-    /* Divider ornament */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      margin: 60px 0;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .header {
+      padding: 60px 20px 40px;
+    }
+    .header img {
+      width: clamp(120px, 25vw, 220px);
+      margin: 0 auto 30px;
+      filter: drop-shadow(0 0 20px rgba(212,175,55,0.4));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: var(--gold-pale);
+      text-shadow: 0 0 30px rgba(212,175,55,0.4);
+      margin: 1rem 0;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: rgba(245,230,200,0.7);
+      line-height: 1.6;
+    }
+
     .divider {
       display: flex;
       align-items: center;
-      gap: var(--gap-sm);
-      margin: var(--gap-md) auto;
-      max-width: 320px;
-      opacity: .7;
-    }
-    .divider-line { flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .divider-icon { color: var(--gold); font-size: var(--fs-sm); flex-shrink:0; }
-
-    /* ── HERO HEADER ── */
-    .header-section {
-      padding-top: var(--gap-xl);
-      padding-bottom: var(--gap-lg);
-    }
-    .header-cross-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
-      width:  clamp(160px, 45vw, 300px);
-      height: clamp(160px, 45vw, 300px);
-      margin-bottom: var(--gap-md);
+      margin: 40px 0;
+      gap: 15px;
     }
-    .header-cross-wrap::before {
-      content: '✝';
-      position: absolute;
-      font-size: clamp(120px, 35vw, 240px);
-      color: rgba(212,175,55,0.06);
-      line-height: 1;
-      pointer-events: none;
+    .divider-line {
+      flex: 1;
+      max-width: 150px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-    .header-cross-wrap img {
-      width:  clamp(130px, 38vw, 260px);
-      height: clamp(175px, 51vw, 350px);
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 0 18px rgba(212,175,55,0.4));
-      animation: angel-float 6s ease-in-out infinite;
-    }
-
-    .tag-sacrament {
-      font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 400;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
+    .divider-icon {
       color: var(--gold);
-      margin-bottom: var(--gap-xs);
-    }
-    .name-main {
-      font-family: 'Great Vibes', cursive;
-      font-size: var(--fs-2xl);
-      color: var(--gold-pale);
-      line-height: 1.1;
-      text-shadow: 0 0 30px rgba(212,175,55,0.4);
-      margin-bottom: calc(var(--gap-xs) * 0.5);
-    }
-    .subtitle-invite {
-      font-size: var(--fs-lg);
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(245,230,200,0.7);
-      line-height: 1.4;
+      font-size: 1.2rem;
     }
 
-    /* ── INVITE TEXT ── */
-    .invite-text-block { margin: var(--gap-md) 0; }
-    .invite-lead {
-      font-size: var(--fs-md);
-      font-weight: 300;
-      line-height: 1.75;
-      color: rgba(245,230,200,0.82);
-      letter-spacing: 0.04em;
+    .text-block {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(245,230,200,0.85);
+      margin: 30px 0;
     }
-    .invite-parents {
-      font-family: 'Great Vibes', cursive;
-      font-size: var(--fs-xl);
+    .text-block strong {
       color: var(--gold-light);
-      margin: var(--gap-sm) 0;
-      line-height: 1.3;
+    }
+    .parents {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: var(--gold-light);
+      margin: 20px 0;
     }
 
-    /* ── CAROUSEL ── */
-    .carousel-section { padding: 0 0 var(--gap-lg); }
-    .carousel-track-wrap {
-      overflow: hidden;
-      border-radius: 12px;
+    /* CAROUSEL */
+    .carousel-container {
       position: relative;
+      margin: 40px 0;
+      border-radius: 12px;
+      overflow: hidden;
     }
     .carousel-track {
       display: flex;
-      transition: transform 0.55s var(--ease-out-expo);
-      will-change: transform;
+      transition: transform 0.5s ease;
     }
     .carousel-slide {
       min-width: 100%;
@@ -360,791 +254,597 @@
     }
     .carousel-slide img {
       width: 100%;
-      height: clamp(220px, 55vw, 420px);
+      height: clamp(250px, 50vw, 450px);
       object-fit: cover;
-      border-radius: 12px;
     }
-    .carousel-slide::after {
-      content: '';
+    .carousel-btn {
       position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      background: linear-gradient(to bottom, transparent 50%, rgba(14,2,31,0.65) 100%);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(14,2,31,0.6);
+      border: 1px solid rgba(212,175,55,0.4);
+      color: var(--gold-pale);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
     }
+    .carousel-btn:hover {
+      background: rgba(212,175,55,0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
     .carousel-dots {
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 14px;
+      margin-top: 15px;
     }
     .carousel-dot {
-      width: 8px; height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: rgba(212,175,55,0.3);
-      transition: background 0.3s, transform 0.3s;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     .carousel-dot.active {
       background: var(--gold);
       transform: scale(1.3);
     }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      translate: 0 -50%;
-      z-index: 3;
-      width: clamp(32px, 8vw, 42px);
-      height: clamp(32px, 8vw, 42px);
-      border-radius: 50%;
-      background: rgba(14,2,31,0.55);
-      border: 1px solid rgba(212,175,55,0.35);
-      color: var(--gold-pale);
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(4px);
-      transition: background 0.25s, transform 0.2s;
-    }
-    .carousel-btn:hover { background: rgba(212,175,55,0.25); transform: translateY(-50%) scale(1.08); }
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
 
-    /* ── EVENT DETAILS ── */
-    .details-section { background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.12); border-radius: 16px; padding: var(--gap-lg) var(--gap-md); }
-    .section-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: var(--gap-sm);
+    /* DETAILS */
+    .details-box {
+      background: rgba(212,175,55,0.05);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px;
+      padding: 40px 30px;
+      margin: 40px 0;
     }
-    .detail-items { display: flex; flex-direction: column; gap: var(--gap-sm); }
     .detail-item {
       display: flex;
       align-items: flex-start;
-      gap: var(--gap-sm);
-      padding: var(--gap-sm);
-      border-radius: 10px;
+      gap: 15px;
+      margin: 25px 0;
+      padding: 15px;
       background: rgba(255,255,255,0.03);
-      transition: transform 0.3s, background 0.3s;
-    }
-    .detail-item:hover {
-      background: rgba(255,255,255,0.06);
-      transform: translateX(4px);
+      border-radius: 10px;
+      text-align: left;
     }
     .detail-icon {
-      font-size: var(--fs-lg);
+      font-size: 1.8rem;
       color: var(--gold);
       flex-shrink: 0;
-      width: 2em;
-      text-align: center;
-      line-height: 1;
     }
-    .detail-body { text-align: left; }
     .detail-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(212,175,55,0.7);
-      margin-bottom: 2px;
+      margin-bottom: 5px;
     }
     .detail-value {
-      font-size: var(--fs-md);
-      font-weight: 300;
+      font-size: 1.1rem;
       color: var(--white-soft);
-      line-height: 1.5;
     }
 
-    /* ── COUNTDOWN ── */
-    .countdown-section { padding: var(--gap-lg) var(--gap-md); }
-    .section-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: var(--fs-xl);
-      color: var(--gold-light);
-      margin-bottom: var(--gap-md);
-      line-height: 1.2;
-    }
+    /* COUNTDOWN */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--gap-sm);
-      max-width: 480px;
-      margin: 0 auto;
+      gap: 15px;
+      max-width: 500px;
+      margin: 30px auto;
     }
     .countdown-box {
-      background: rgba(212,175,55,0.07);
+      background: rgba(212,175,55,0.08);
       border: 1px solid rgba(212,175,55,0.2);
       border-radius: 12px;
-      padding: var(--gap-sm) var(--gap-xs);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .countdown-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(212,175,55,0.15);
+      padding: 20px 10px;
     }
     .countdown-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: var(--fs-xl);
+      font-size: 2.5rem;
       font-weight: 600;
       color: var(--gold-pale);
+      display: block;
       line-height: 1;
-      min-width: 2ch;
-      text-align: center;
-      transition: transform 0.2s var(--ease-spring);
     }
-    .countdown-num.tick { transform: scale(1.15); }
-    .countdown-unit {
+    .countdown-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
+      font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(212,175,55,0.65);
-    }
-
-    /* ── RSVP ─ */
-    .rsvp-section { padding-bottom: var(--gap-xl); }
-    .rsvp-desc {
-      font-size: var(--fs-sm);
-      color: rgba(245,230,200,0.65);
-      margin-bottom: var(--gap-md);
-      line-height: 1.7;
-      font-style: italic;
-    }
-    .rsvp-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7em;
-      padding: 0.9em 2.4em;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(135deg, #25a244 0%, #128c3a 100%);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-sm);
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      box-shadow: 0 4px 24px rgba(37,162,68,0.35);
-      transition: transform 0.25s, box-shadow 0.25s;
-      will-change: transform;
-    }
-    .rsvp-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 32px rgba(37,162,68,0.45); }
-    .rsvp-btn:active { transform: scale(0.97); }
-
-    /* ── MAP ── */
-    .map-section { padding-bottom: var(--gap-xl); }
-    .map-embed {
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.5);
-      margin-top: var(--gap-md);
-      aspect-ratio: 16/9;
-    }
-    .map-embed iframe {
-      width: 100%; height: 100%;
-      border: 0;
+      color: rgba(212,175,55,0.7);
+      margin-top: 8px;
       display: block;
     }
 
-    /* ── FOOTER ── */
-    .invitation-footer {
-      padding: var(--gap-md);
-      text-align: center;
+    /* RSVP */
+    .rsvp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #25a244, #128c3a);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
       font-family: 'Montserrat', sans-serif;
-      font-size: var(--fs-xs);
-      color: rgba(212,175,55,0.4);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37,162,68,0.3);
+    }
+    .rsvp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(37,162,68,0.4);
+    }
+
+    /* MAP */
+    .map-container {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      margin: 30px 0;
+      aspect-ratio: 16/9;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(212,175,55,0.5);
       letter-spacing: 0.15em;
       border-top: 1px solid rgba(212,175,55,0.1);
+      margin-top: 60px;
     }
 
-    /* ─────────────────────────────────────────
-       KEYFRAME ANIMATIONS
-    ───────────────────────────────────────── */
-    @keyframes spin-slow {
-      to { rotate: 360deg; }
-    }
-    @keyframes float-orb {
-      from { transform: translate(0, 0) scale(1); opacity: .4; }
-      to   { transform: translate(12px, -18px) scale(1.08); opacity: .7; }
-    }
-    @keyframes pulse-flower {
-      from { transform: scale(1)   rotate(-4deg); opacity: .45; }
-      to   { transform: scale(1.1) rotate( 4deg); opacity: .7; }
-    }
-    @keyframes angel-rise {
-      from { transform: translateY(40px); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
-    }
-    @keyframes angel-float {
+    @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-12px); }
-    }
-    @keyframes fade-up {
-      from { transform: translateY(20px); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
-    }
-    @keyframes pulse-icon {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.18); }
+      50% { transform: translateY(-15px); }
     }
 
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ─── REDUCE MOTION ─── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+    @media (max-width: 600px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-    }
-
-    /* ─── MOBILE TWEAKS ─── */
-    @media (max-width: 420px) {
-      .countdown-grid { gap: 6px; }
-      .countdown-box { padding: 10px 4px; border-radius: 8px; }
-      .halo:nth-child(1) { width: 290px; height: 290px; }
-      .halo:nth-child(2) { width: 380px; height: 380px; }
-      .halo:nth-child(3) { width: 480px; height: 480px; }
+      .countdown-num {
+        font-size: 2rem;
+      }
+      .detail-item {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     SPLASH
-══════════════════════════════════════ -->
-<section id="splash" role="dialog" aria-modal="true" aria-label="Pantalla de bienvenida">
-  <canvas id="starfield" aria-hidden="true"></canvas>
-
-  <!-- Halos / rotating rings -->
-  <div class="halo" aria-hidden="true"></div>
-  <div class="halo" aria-hidden="true"></div>
-  <div class="halo" aria-hidden="true"></div>
-
-  <!-- Floating orbs -->
-  <div class="orb orb-1" aria-hidden="true"></div>
-  <div class="orb orb-2" aria-hidden="true"></div>
-  <div class="orb orb-3" aria-hidden="true"></div>
-  <div class="orb orb-4" aria-hidden="true"></div>
-
-  <!-- Corner flowers -->
-  <span class="corner-flower tl" aria-hidden="true">✿</span>
-  <span class="corner-flower tr" aria-hidden="true">">✿</span>
-  <span class="corner-flower bl" aria-hidden="true">❀</span>
-  <span class="corner-flower br" aria-hidden="true">❀</span>
-
-  <!-- Angel -->
+<!-- SPLASH -->
+<div id="splash">
+  <canvas id="starfield"></canvas>
   <div class="angel-wrap">
-    <img
-      src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27"
-      alt="Ángel de bautizo"
-      loading="eager"
-      decoding="async"
-      width="380" height="520"
-    />
+    <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel" />
   </div>
-
-  <!-- Text block -->
   <div class="splash-text">
-    <p class="splash-eyebrow">con amor os invitamos a</p>
-    <h1 class="splash-title">Bautizo</h1>
-    <p class="splash-subtitle">un sacramento lleno de gracia y luz</p>
+    <p class="splash-label">Santo Bautismo</p>
+    <h1 class="splash-title">Nombre del Bebé</h1>
+    <p class="splash-subtitle">Nos llena de alegría comunicarte<br>que recibirá las aguas bautismales</p>
   </div>
+  <button class="splash-btn" onclick="openInvitation()">Abrir Invitación</button>
+  <div class="progress-bar" id="progressBar"></div>
+</div>
 
-  <!-- Open button -->
-  <button class="splash-btn" id="open-btn" onclick="openInvitation()" aria-label="Abrir invitación">
-    <span class="splash-btn-icon" aria-hidden="true">✦</span>
-    Abrir Invitación
-    <span class="splash-btn-icon" aria-hidden="true">✦</span>
-  </button>
-
-  <!-- Auto-open progress bar -->
-  <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
-
-  <!-- Countdown hint -->
-  <p class="splash-countdown" id="splash-countdown" aria-live="polite"></p>
-</section>
-
-<!-- ══════════════════════════════════════
-     MAIN INVITATION
-══════════════════════════════════════ -->
-<main id="invitation" class="hidden" aria-label="Invitación de bautizo">
-  <canvas id="particles" aria-hidden="true"></canvas>
-
-  <!-- ── HEADER ── -->
-  <header class="section header-section reveal">
-    <div class="header-cross-wrap" aria-hidden="true">
-      <img
-        src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        width="260" height="350"
-      />
+<!-- MAIN INVITATION -->
+<main id="invitation">
+  <canvas id="particles"></canvas>
+  
+  <div class="container">
+    <!-- Header -->
+    <div class="section header">
+      <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel" />
+      <p class="tag">✦ Santo Bautismo ✦</p>
+      <h2 class="name">Nombre del Bebé</h2>
+      <p class="subtitle">Nos llena de alegría comunicarte<br>que recibirá las aguas bautismales</p>
     </div>
-    <p class="tag-sacrament">✦ Santo Bautismo ✦</p>
-    <h2 class="name-main">Nombre del Bebé</h2>
-    <p class="subtitle-invite">Nos llena de alegría comunicarte<br>que recibirá las aguas bautismales</p>
-  </header>
 
-  <div class="divider reveal" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-icon">✦</span>
-    <span class="divider-line"></span>
-  </div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✦</span>
+      <div class="divider-line"></div>
+    </div>
 
-  <!-- ── INVITE TEXT ── -->
-  <div class="section invite-text-block reveal">
-    <p class="invite-lead">
-      Con el corazón rebosante de alegría y gratitud a Dios,<br>
-      <strong style="color:var(--gold-light)">Sus papás</strong>
-    </p>
-    <p class="invite-parents">Nombre Papá &amp; Nombre Mamá</p>
-    <p class="invite-lead">
-      tienen el honor de invitarte a compartir este momento tan especial en la vida de su pequeño.
-    </p>
-  </div>
-
-  <div class="divider reveal" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-icon">">✿</span>
-    <span class="divider-line"></span>
-  </div>
-
-  <!-- ── CAROUSEL ── -->
-  <div class="section carousel-section reveal">
-    <p class="section-label">Galería de Momentos</p>
-    <div class="carousel-track-wrap">
-      <div class="carousel-track" id="carouselTrack">
-        <!-- Slides — reemplaza los src con tus fotos -->
-        <div class="carousel-slide">
-          <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80" alt="Momento especial 1" loading="lazy" />
-        </div>
-        <div class="carousel-slide">
-          <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&q=80" alt="Momento especial 2" loading="lazy" />
-        </div>
-        <div class="carousel-slide">
-          <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80" alt="Momento especial 3" loading="lazy" />
-        </div>
+    <!-- Invitation Text -->
+    <div class="section">
+      <div class="text-block">
+        <p>Con el corazón rebosante de alegría y gratitud a Dios,</p>
+        <p><strong>Sus papás</strong></p>
       </div>
-      <button class="carousel-btn prev" onclick="carouselMove(-1)" aria-label="Foto anterior">&#8249;</button>
-      <button class="carousel-btn next" onclick="carouselMove(1)"  aria-label="Foto siguiente">&#8250;</button>
+      <p class="parents">Nombre Papá & Nombre Mamá</p>
+      <div class="text-block">
+        <p>tienen el honor de invitarte a compartir este momento tan especial en la vida de su pequeño.</p>
+      </div>
     </div>
-    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Indicadores de carrusel"></div>
-  </div>
 
-  <div class="divider reveal" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-icon">✦</span>
-    <span class="divider-line"></span>
-  </div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✿</span>
+      <div class="divider-line"></div>
+    </div>
 
-  <!-- ── DETAILS ── -->
-  <div class="section reveal">
-    <div class="details-section">
-      <p class="section-label">Detalles del Evento</p>
-      <div class="detail-items">
+    <!-- Gallery -->
+    <div class="section">
+      <p class="tag">Galería de Momentos</p>
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800" alt="Foto 1" />
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800" alt="Foto 2" />
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800" alt="Foto 3" />
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✦</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Details -->
+    <div class="section">
+      <div class="details-box">
+        <p class="tag">Detalles del Evento</p>
+        
         <div class="detail-item">
-          <span class="detail-icon" aria-hidden="true">⛪</span>
-          <div class="detail-body">
+          <span class="detail-icon">⛪</span>
+          <div>
             <p class="detail-label">Ceremonia</p>
             <p class="detail-value">Nombre de la Iglesia</p>
           </div>
         </div>
+
         <div class="detail-item">
-          <span class="detail-icon" aria-hidden="true">📅</span>
-          <div class="detail-body">
+          <span class="detail-icon">📅</span>
+          <div>
             <p class="detail-label">Fecha</p>
-            <p class="detail-value">Día, DD de Mes de AAAA</p>
+            <p class="detail-value">Domingo 8 de Febrero de 2026</p>
           </div>
         </div>
+
         <div class="detail-item">
-          <span class="detail-icon" aria-hidden="true">🕐</span>
-          <div class="detail-body">
+          <span class="detail-icon">🕐</span>
+          <div>
             <p class="detail-label">Hora</p>
-            <p class="detail-value">12:00 pm · Misa · 2:00 pm Recepción</p>
+            <p class="detail-value">10:00 a.m.</p>
           </div>
         </div>
+
         <div class="detail-item">
-          <span class="detail-icon" aria-hidden="true">📍</span>
-          <div class="detail-body">
-            <p class="detail-label">Lugar de Recepción</p>
-            <p class="detail-value">Nombre del Salón · Dirección Completa</p>
+          <span class="detail-icon">📍</span>
+          <div>
+            <p class="detail-label">Lugar</p>
+            <p class="detail-value">Capilla San Juan Pablo II<br>Albrook Mall</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="divider reveal" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-icon">✿</span>
-    <span class="divider-line"></span>
-  </div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✿</span>
+      <div class="divider-line"></div>
+    </div>
 
-  <!-- ── COUNTDOWN ── -->
-  <div class="section countdown-section reveal">
-    <p class="section-title">La espera es casi un sueño…</p>
-    <div class="countdown-grid">
-      <div class="countdown-box">
-        <span class="countdown-num" id="cd-days">00</span>
-        <span class="countdown-unit">días</span>
-      </div>
-      <div class="countdown-box">
-        <span class="countdown-num" id="cd-hours">00</span>
-        <span class="countdown-unit">horas</span>
-      </div>
-      <div class="countdown-box">
-        <span class="countdown-num" id="cd-mins">00</span>
-        <span class="countdown-unit">min</span>
-      </div>
-      <div class="countdown-box">
-        <span class="countdown-num" id="cd-secs">00</span>
-        <span class="countdown-unit">seg</span>
+    <!-- Countdown -->
+    <div class="section">
+      <p class="tag">Falta Poco</p>
+      <div class="countdown-grid">
+        <div class="countdown-box">
+          <span class="countdown-num" id="days">00</span>
+          <span class="countdown-label">Días</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="hours">00</span>
+          <span class="countdown-label">Horas</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="minutes">00</span>
+          <span class="countdown-label">Minutos</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="seconds">00</span>
+          <span class="countdown-label">Segundos</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="divider reveal" aria-hidden="true">
-    <span class="divider-line"></span>
-    <span class="divider-icon">✦</span>
-    <span class="divider-line"></span>
-  </div>
-
-  <!-- ── RSVP ── -->
-  <div class="section rsvp-section reveal">
-    <p class="section-label">Confirma tu Asistencia</p>
-    <p class="section-title">¿Nos acompañas?</p>
-    <p class="rsvp-desc">
-      Por favor confirma antes del<br>
-      <strong style="color:var(--gold-light)">DD de Mes de AAAA</strong>
-    </p>
-    <a
-      class="rsvp-btn"
-      href="https://wa.me/521XXXXXXXXXX?text=Hola%2C+confirmo+mi+asistencia+al+bautizo.+%F0%9F%8C%BF"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Confirmar asistencia por WhatsApp"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a13.5 13.5 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-      </svg>
-      Confirmar por WhatsApp
-    </a>
-  </div>
-
-  <!-- ── MAP ─ -->
-  <div class="section map-section reveal">
-    <p class="section-label">Cómo Llegar</p>
-    <p class="section-title">Ubicación</p>
-    <div class="map-embed">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661913737!2d-99.13319492394903!3d19.432607041862644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sCatedral%20Metropolitana!5e0!3m2!1ses!2smx!4v1700000000000"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación del evento"
-      ></iframe>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✦</span>
+      <div class="divider-line"></div>
     </div>
-  </div>
 
-  <!-- ── FOOTER ── -->
-  <footer class="invitation-footer">
-    <p>✦ Con amor, la familia ✦</p>
-  </footer>
+    <!-- RSVP -->
+    <div class="section">
+      <p class="tag">Confirma tu Asistencia</p>
+      <h3 class="name" style="font-size: 2.5rem;">¿Nos acompañas?</h3>
+      <p class="text-block">Por favor confirma antes del<br><strong>1 de Febrero de 2026</strong></p>
+      
+      <a href="https://wa.me/50712345678?text=Hola,%20confirmo%20mi%20asistencia%20al%20bautizo" 
+         class="rsvp-btn" 
+         target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a13.5 13.5 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        Confirmar por WhatsApp
+      </a>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <p class="tag">Ubicación</p>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.123456789!2d-79.123456789!3d8.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123" 
+                allowfullscreen 
+                loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>✦ Con amor, la familia ✦</p>
+    </footer>
+  </div>
 </main>
 
 <script>
-(function () {
-  'use strict';
+// Event date - CHANGE THIS
+const EVENT_DATE = new Date('2026-02-08T10:00:00').getTime();
+const AUTO_OPEN_TIME = 7000; // 7 seconds
 
-  /* ─── CONFIG ─── */
-  var AUTO_OPEN_MS   = 7000;
-  var EVENT_DATE     = new Date('2025-06-15T12:00:00');
+let carouselIndex = 0;
+let carouselInterval;
 
-  /* ─── STATE ─── */
-  var splashEl       = document.getElementById('splash');
-  var invitationEl   = document.getElementById('invitation');
-  var progressEl     = document.getElementById('progress-bar');
-  var countdownHint  = document.getElementById('splash-countdown');
-  var autoTimer      = null;
-  var progressStart  = null;
-  var progressRAF    = null;
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  initStarfield();
+  startAutoOpen();
+});
 
-  /* ─── OPEN INVITATION ─── */
-  window.openInvitation = function () {
-    if (autoTimer)  { clearTimeout(autoTimer);          autoTimer  = null; }
-    if (progressRAF){ cancelAnimationFrame(progressRAF); progressRAF = null; }
-
-    splashEl.classList.add('hidden');
-    invitationEl.classList.remove('hidden');
-
-    setTimeout(initReveal, 50);
+function openInvitation() {
+  document.getElementById('splash').classList.add('hidden');
+  const invitation = document.getElementById('invitation');
+  invitation.classList.add('visible');
+  
+  setTimeout(() => {
     initParticles();
     initCarousel();
     startCountdown();
-  };
+    initScrollReveal();
+  }, 100);
+}
 
-  /* ─── AUTO OPEN PROGRESS ─── */
-  function startAutoOpen() {
-    progressEl.style.transitionDuration = AUTO_OPEN_MS + 'ms';
-
-    var step = function (ts) {
-      if (!progressStart) progressStart = ts;
-      var elapsed  = ts - progressStart;
-      var pct      = Math.min(elapsed / AUTO_OPEN_MS * 100, 100);
-      var remaining = Math.max(0, Math.ceil((AUTO_OPEN_MS - elapsed) / 1000));
-
-      progressEl.style.width = pct + '%';
-      countdownHint.textContent = remaining > 0
-        ? 'Abriendo en ' + remaining + ' segundo' + (remaining === 1 ? '' : 's') + '…'
-        : '';
-
-      if (elapsed < AUTO_OPEN_MS) {
-        progressRAF = requestAnimationFrame(step);
-      }
-    };
-    progressRAF = requestAnimationFrame(step);
-    autoTimer = setTimeout(openInvitation, AUTO_OPEN_MS);
+function startAutoOpen() {
+  const progressBar = document.getElementById('progressBar');
+  const startTime = Date.now();
+  
+  function updateProgress() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min((elapsed / AUTO_OPEN_TIME) * 100, 100);
+    progressBar.style.width = progress + '%';
+    
+    if (elapsed < AUTO_OPEN_TIME) {
+      requestAnimationFrame(updateProgress);
+    }
   }
+  
+  updateProgress();
+  setTimeout(openInvitation, AUTO_OPEN_TIME);
+}
 
-  /* ─── STARFIELD ─── */
-  function initStarfield() {
-    var canvas = document.getElementById('starfield');
-    var ctx    = canvas.getContext('2d');
-    var stars  = [];
-    var W, H;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-
-    function makeStars(n) {
-      stars = [];
-      for (var i = 0; i < n; i++) {
-        stars.push({
-          x:  Math.random() * W,
-          y:  Math.random() * H,
-          r:  Math.random() * 1.4 + 0.3,
-          a:  Math.random(),
-          da: (Math.random() * 0.006 + 0.002) * (Math.random() < 0.5 ? 1 : -1),
-          s:  Math.random() * 0.4 + 0.1
-        });
-      }
-    }
-
-    var rafId;
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      stars.forEach(function (s) {
-        s.a = Math.max(0.05, Math.min(1, s.a + s.da));
-        if (s.a <= 0.05 || s.a >= 1) s.da *= -1;
-        s.y -= s.s;
-        if (s.y < -2) { s.y = H + 2; s.x = Math.random() * W; }
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(253,243,192,' + s.a + ')';
-        ctx.fill();
+function initStarfield() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speed: Math.random() * 0.5 + 0.1,
+        opacity: Math.random()
       });
-      rafId = requestAnimationFrame(draw);
     }
-
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fdf3c0';
+    
+    stars.forEach(star => {
+      star.y -= star.speed;
+      if (star.y < 0) {
+        star.y = canvas.height;
+        star.x = Math.random() * canvas.width;
+      }
+      
+      ctx.globalAlpha = star.opacity;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  resize();
+  createStars();
+  animate();
+  
+  window.addEventListener('resize', () => {
     resize();
-    makeStars(160);
-    draw();
-    window.addEventListener('resize', function () { resize(); makeStars(160); }, { passive: true });
-
-    var observer = new MutationObserver(function () {
-      if (splashEl.classList.contains('hidden')) {
-        cancelAnimationFrame(rafId);
-        observer.disconnect();
-      }
-    });
-    observer.observe(splashEl, { attributes: true, attributeFilter: ['class'] });
-  }
-
-  /* ─── PARTICLES ─── */
-  function initParticles() {
-    var canvas = document.getElementById('particles');
-    var ctx    = canvas.getContext('2d');
-    var pts    = [];
-    var W, H;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-
-    for (var i = 0; i < 55; i++) {
-      pts.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: Math.random() * 2 + 0.4,
-        a: Math.random() * 0.5 + 0.1,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3
-      });
-    }
-
-    resize();
-
-    (function loop() {
-      ctx.clearRect(0, 0, W, H);
-      pts.forEach(function (p) {
-        p.x = (p.x + p.vx + W) % W;
-        p.y = (p.y + p.vy + H) % H;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(212,175,55,' + p.a + ')';
-        ctx.fill();
-      });
-      requestAnimationFrame(loop);
-    })();
-
-    window.addEventListener('resize', resize, { passive: true });
-  }
-
-  /* ─── CAROUSEL ─── */
-  function initCarousel() {
-    var track  = document.getElementById('carouselTrack');
-    var dotsEl = document.getElementById('carouselDots');
-    if (!track) return;
-
-    var slides   = track.querySelectorAll('.carousel-slide');
-    var total    = slides.length;
-    var current  = 0;
-    var autoPlay = null;
-    var startX   = 0;
-
-    slides.forEach(function (_, i) {
-      var d = document.createElement('button');
-      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('role', 'tab');
-      d.setAttribute('aria-label', 'Foto ' + (i + 1));
-      d.onclick = function () { goTo(i); };
-      dotsEl.appendChild(d);
-    });
-
-    function goTo(idx) {
-      current = (idx + total) % total;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      dotsEl.querySelectorAll('.carousel-dot').forEach(function (d, i) {
-        d.classList.toggle('active', i === current);
-      });
-    }
-
-    window.carouselMove = function (dir) {
-      clearInterval(autoPlay);
-      goTo(current + dir);
-      startAutoPlay();
-    };
-
-    function startAutoPlay() {
-      autoPlay = setInterval(function () { goTo(current + 1); }, 4500);
-    }
-
-    track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend',   function (e) {
-      var dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) { clearInterval(autoPlay); goTo(current + (dx < 0 ? 1 : -1)); startAutoPlay(); }
-    }, { passive: true });
-
-    startAutoPlay();
-  }
-
-  /* ─── COUNTDOWN ─── */
-  function startCountdown() {
-    var els = {
-      d: document.getElementById('cd-days'),
-      h: document.getElementById('cd-hours'),
-      m: document.getElementById('cd-mins'),
-      s: document.getElementById('cd-secs')
-    };
-
-    function pad(n) { return String(n).padStart(2, '0'); }
-
-    function tick() {
-      var diff = EVENT_DATE - Date.now();
-      if (diff <= 0) {
-        Object.values(els).forEach(function (e) { if (e) e.textContent = '00'; });
-        return;
-      }
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
-      var m = Math.floor((diff % 3600000) / 60000);
-      var s = Math.floor((diff % 60000) / 1000);
-
-      function update(el, val) {
-        if (!el) return;
-        var v = pad(val);
-        if (el.textContent !== v) {
-          el.textContent = v;
-          el.classList.remove('tick');
-          void el.offsetWidth;
-          el.classList.add('tick');
-          setTimeout(function () { el.classList.remove('tick'); }, 200);
-        }
-      }
-      update(els.d, d);
-      update(els.h, h);
-      update(els.m, m);
-      update(els.s, s);
-    }
-
-    tick();
-    setInterval(tick, 1000);
-  }
-
-  /* ─── SCROLL REVEAL ─── */
-  function initReveal() {
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal').forEach(function (el) {
-        el.classList.add('visible');
-      });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-  }
-
-  /* ─── INIT ─── */
-  document.addEventListener('DOMContentLoaded', function () {
-    initStarfield();
-    startAutoOpen();
-
-    splashEl.addEventListener('click', function (e) {
-      if (e.target !== document.getElementById('open-btn') &&
-          !document.getElementById('open-btn').contains(e.target)) {
-        openInvitation();
-      }
-    });
+    createStars();
   });
+}
 
-})();
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.body.scrollHeight;
+  }
+  
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.5 + 0.1
+      });
+    }
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#d4af37';
+    
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      
+      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      
+      ctx.globalAlpha = p.opacity;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  resize();
+  createParticles();
+  animate();
+}
+
+function initCarousel() {
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  const slides = track.children;
+  const totalSlides = slides.length;
+  
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  }
+  
+  window.moveCarousel = (direction) => {
+    carouselIndex = (carouselIndex + direction + totalSlides) % totalSlides;
+    updateCarousel();
+  };
+  
+  function goToSlide(index) {
+    carouselIndex = index;
+    updateCarousel();
+  }
+  
+  function updateCarousel() {
+    track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+    const dots = dotsContainer.children;
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === carouselIndex);
+    }
+  }
+  
+  // Auto-play
+  carouselInterval = setInterval(() => {
+    moveCarousel(1);
+  }, 5000);
+}
+
+function startCountdown() {
+  function update() {
+    const now = Date.now();
+    const distance = EVENT_DATE - now;
+    
+    if (distance > 0) {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+  }
+  
+  update();
+  setInterval(update, 1000);
+}
+
+function initScrollReveal() {
+  const sections = document.querySelectorAll('.section');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+}
 </script>
+
 </body>
 </html>
