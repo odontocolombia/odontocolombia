@@ -37,7 +37,6 @@
     ::-webkit-scrollbar-track{background:#fdf0f5;}
     ::-webkit-scrollbar-thumb{background:var(--pink);border-radius:3px;}
     #gold-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;}
-
     /* ── SPLASH ── */
     #splash {
       position:fixed;inset:0;z-index:9999;
@@ -89,6 +88,14 @@
       animation:glowPulse 3s ease-in-out infinite;
     }
     @keyframes glowPulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+    /* ── ANGEL IMAGE ── */
+    #angel-splash img {
+      width:200px;
+      height:270px;
+      object-fit:contain;
+      position:relative;
+      z-index:2;
+    }
     .splash-text {
       font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:8px;
       text-transform:uppercase;color:var(--pink);margin-bottom:20px;
@@ -109,10 +116,8 @@
       animation:pulseFade 2.2s ease-in-out infinite;
     }
     @keyframes pulseFade{0%,100%{opacity:0.35}50%{opacity:1}}
-
     /* ── MAIN ── */
     .main-container{position:relative;z-index:2;max-width:620px;margin:0 auto;padding:20px;}
-
     /* ── INVITATION CARD ── */
     .invitation {
       background:var(--white);
@@ -130,7 +135,6 @@
       animation:cardShimmer 8s ease-in-out infinite;pointer-events:none;border-radius:inherit;z-index:10;
     }
     @keyframes cardShimmer{0%,70%{left:-100%}85%{left:160%}100%{left:160%}}
-
     /* ── CORNER FLOWERS ── */
     .corner-flower{position:absolute;width:145px;height:145px;opacity:0;z-index:5;}
     .corner-flower.visible{animation:flowerReveal 1.4s cubic-bezier(0.22,1,0.36,1) forwards;}
@@ -147,7 +151,6 @@
     .corner-br{bottom:-30px;right:-30px;transform:scale(-1,-1);}
     .corner-br.visible{animation:flowerRevealBR 1.4s cubic-bezier(0.22,1,0.36,1) 0.15s forwards;}
     @keyframes flowerRevealBR{0%{opacity:0;transform:scale(-1,-1) scale(0.2) rotate(-25deg)}60%{transform:scale(-1,-1) scale(1.08)}100%{opacity:1;transform:scale(-1,-1) scale(1)}}
-
     /* ── SIDE FLOWERS ── */
     .side-flower{position:absolute;width:80px;height:120px;opacity:0;z-index:5;}
     .side-left{left:-52px;top:50%;transform:translateY(-50%);}
@@ -158,14 +161,12 @@
     @keyframes sideRevealRight{0%{opacity:0;transform:translateY(-50%) scaleX(-1) translateX(-25px)}100%{opacity:0.75;transform:translateY(-50%) scaleX(-1) translateX(0)}}
     .side-flower svg{animation:sideBreathe 6s ease-in-out infinite;}
     @keyframes sideBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-
     /* ── CROSS ── */
     .invitation-cross{text-align:center;margin-bottom:32px;opacity:0;}
     .invitation-cross.visible{animation:crossReveal 1.4s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;}
     @keyframes crossReveal{0%{opacity:0;transform:translateY(-25px) scale(0.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
     .invitation-cross-inner{display:inline-block;animation:crossGlowPulse 4s ease-in-out infinite;}
     @keyframes crossGlowPulse{0%,100%{filter:drop-shadow(0 4px 12px rgba(200,120,152,0.2));}50%{filter:drop-shadow(0 4px 22px rgba(200,120,152,0.55)) drop-shadow(0 0 35px rgba(255,215,230,0.35));}}
-
     /* ── TEXT ── */
     .text-intro{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown-light);text-align:center;margin-bottom:15px;font-style:italic;opacity:0;}
     .text-intro.visible{animation:fadeUp 1s ease 0.5s forwards;}
@@ -184,7 +185,6 @@
     .text-surname{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--brown);text-align:center;letter-spacing:4px;margin-bottom:40px;opacity:0;}
     .text-surname.visible{animation:fadeUp 1s ease 1.3s forwards;}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(22px)}100%{opacity:1;transform:translateY(0)}}
-
     /* ── DATE ── */
     .date-section{text-align:center;margin:40px 0;padding:30px 0;border-top:1px solid var(--pink-light);border-bottom:1px solid var(--pink-light);opacity:0;position:relative;}
     .date-section.visible{animation:fadeIn 1s ease 1.5s forwards;}
@@ -201,7 +201,6 @@
     .date-number{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--pink-dark);margin:10px 0;animation:dateGlow 3.5s ease-in-out infinite;}
     @keyframes dateGlow{0%,100%{text-shadow:0 2px 4px rgba(200,120,152,0.2)}50%{text-shadow:0 2px 20px rgba(200,120,152,0.55),0 0 40px rgba(200,120,152,0.15)}}
     .date-month{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--brown);letter-spacing:3px;}
-
     /* ── FAMILY ── */
     .family-section{margin:40px 0;opacity:0;}
     .family-section.visible{animation:fadeIn 1s ease 1.7s forwards;}
@@ -210,7 +209,6 @@
     @keyframes labelGlow{0%,100%{text-shadow:none}50%{text-shadow:0 0 15px rgba(200,120,152,0.4)}}
     .family-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown);flex:1;text-align:center;line-height:1.6;}
     .family-name strong{display:block;font-weight:600;color:var(--brown);}
-
     /* ── CHURCH ── */
     .church-section{text-align:center;margin:40px 0;opacity:0;}
     .church-section.visible{animation:fadeIn 1s ease 1.9s forwards;}
@@ -219,7 +217,6 @@
     .church-time{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--brown);margin-bottom:15px;}
     .church-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown);margin-bottom:10px;font-weight:600;}
     .church-reference{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown-light);font-style:italic;}
-
     /* ── DIVIDER ── */
     .divider{display:flex;align-items:center;justify-content:center;margin:40px 0;opacity:0;}
     .divider.visible{animation:fadeIn 1s ease 2.1s forwards;}
@@ -228,7 +225,6 @@
     .divider-center::before,.divider-center::after{content:'✦';position:absolute;color:var(--pink);font-size:1.2rem;animation:starTwinkle 2s ease-in-out infinite;}
     .divider-center::after{animation-delay:1s;font-size:0.7rem;color:var(--pink-light);}
     @keyframes starTwinkle{0%,100%{opacity:0.4;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
-
     /* ── COUNTDOWN ── */
     .countdown-section{text-align:center;margin:40px 0;opacity:0;}
     .countdown-section.visible{animation:fadeIn 1s ease 2.3s forwards;}
@@ -245,7 +241,6 @@
     .countdown-number.flip{animation:numFlip 0.3s ease;}
     @keyframes numFlip{0%{transform:translateY(-8px);opacity:0.5}100%{transform:translateY(0);opacity:1}}
     .countdown-label{font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--brown-light);text-transform:uppercase;letter-spacing:2px;}
-
     /* ── GALLERY ── */
     .gallery-section{margin:40px 0;opacity:0;}
     .gallery-section.visible{animation:fadeIn 1s ease 2.5s forwards;}
@@ -267,7 +262,6 @@
     .carousel-dots{display:flex;justify-content:center;gap:8px;padding:15px;background:linear-gradient(135deg,#fdf0f5,#fff4f8);}
     .carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--pink-light);cursor:pointer;transition:all 0.35s ease;border:2px solid transparent;}
     .carousel-dot.active{background:var(--pink);transform:scale(1.4);border-color:var(--pink-dark);}
-
     /* ── MAP ── */
     .map-section{margin:40px 0;opacity:0;}
     .map-section.visible{animation:fadeIn 1s ease 2.7s forwards;}
@@ -293,7 +287,6 @@
     }
     .map-link:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(200,120,152,0.35);}
     @keyframes buttonPremium{0%{background-position:0% center}100%{background-position:300% center}}
-
     /* ── RSVP ── */
     .rsvp-section{
       text-align:center;margin:40px 0;padding:42px 20px;
@@ -330,13 +323,11 @@
     .rsvp-button:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(200,120,152,0.35);}
     .rsvp-button:hover::before{left:100%;}
     .rsvp-button.sent{background:linear-gradient(135deg,#a8b898,#889878)!important;animation:none;}
-
     /* ── FOOTER ── */
     .footer{text-align:center;padding:40px 20px;opacity:0;}
     .footer.visible{animation:fadeIn 1s ease 3.1s forwards;}
     .footer-verse{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown-light);font-style:italic;margin-bottom:10px;}
     .footer-text{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:3px;color:var(--pink-dark);}
-
     @media(max-width:600px){
       .invitation{padding:60px 25px 40px;margin:20px 0;border-radius:150px 150px 15px 15px;}
       .corner-flower{width:105px;height:105px;}
@@ -349,13 +340,12 @@
       .countdown-grid{grid-template-columns:repeat(2,1fr);}
       .carousel-btn{width:36px;height:36px;font-size:1.1rem;}
       .cross-container{width:160px;height:215px;}
+      #angel-splash img{width:160px;height:215px;}
     }
   </style>
 </head>
 <body>
-
 <canvas id="gold-canvas"></canvas>
-
 <!-- SPLASH -->
 <div id="splash">
   <div class="light-rays"></div>
@@ -368,42 +358,37 @@
   <div class="splash-content">
     <div class="cross-container">
       <div class="cross-glow-ring"></div>
-      <div id="angel-splash"></div>
+      <div id="angel-splash">
+        <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel Bautizo" />
+      </div>
     </div>
     <div class="splash-text">Bautizo</div>
     <div class="splash-name">Emilio André</div>
     <div class="splash-hint">Toca para abrir la invitación</div>
   </div>
 </div>
-
 <!-- MAIN -->
 <div class="main-container">
   <div class="invitation" id="invitation">
-
     <div class="corner-flower corner-tl" id="ctl"></div>
     <div class="corner-flower corner-tr" id="ctr"></div>
     <div class="corner-flower corner-bl" id="cbl"></div>
     <div class="corner-flower corner-br" id="cbr"></div>
-
     <div class="side-flower side-left" id="sfl"></div>
     <div class="side-flower side-right" id="sfr"></div>
-
     <div class="invitation-cross" id="inv-cross">
       <div class="invitation-cross-inner" id="cross-svg-wrap"></div>
     </div>
-
     <div class="text-intro" id="t1">Acompáñanos a ser parte del</div>
     <div class="text-title" id="t2">BAUTIZO</div>
     <div class="text-subtitle" id="t3">De nuestro hijo</div>
     <div class="text-name" id="t4">Emilio André</div>
     <div class="text-surname" id="t5">ARIAS SERRANO</div>
-
     <div class="date-section" id="date-sec">
       <div class="date-day">Domingo</div>
       <div class="date-number">08</div>
       <div class="date-month">Febrero</div>
     </div>
-
     <div class="family-section" id="fam-sec">
       <div class="family-row">
         <div class="family-name"><strong>Andy R.</strong>Arias Jaramillo</div>
@@ -416,16 +401,13 @@
         <div class="family-name"><strong>Ashly González</strong></div>
       </div>
     </div>
-
     <div class="church-section" id="church-sec">
       <div class="church-icon" id="church-icon-wrap"></div>
       <div class="church-time">10:00 a.m.</div>
       <div class="church-name">Capilla San Juan Pablo II</div>
       <div class="church-reference">Referencia:<br>En los estacionamientos de Albrook Mall</div>
     </div>
-
     <div class="divider" id="div-sec"><div class="divider-center"></div></div>
-
     <div class="countdown-section" id="cd-sec">
       <div class="countdown-title">Cuenta Regresiva</div>
       <div class="countdown-grid">
@@ -435,21 +417,19 @@
         <div class="countdown-item"><span class="countdown-number" id="cd-sec-el">00</span><span class="countdown-label">Seg</span></div>
       </div>
     </div>
-
     <div class="gallery-section" id="gal-sec">
       <div class="gallery-title">Galería de Recuerdos</div>
       <div class="carousel-wrap" id="carousel-wrap">
         <div class="carousel-track" id="carousel-track"></div>
-        <button class="carousel-btn carousel-prev" id="c-prev">‹</button>
-        <button class="carousel-btn carousel-next" id="c-next">›</button>
+        <button class="carousel-btn carousel-prev" id="c-prev">&#8249;</button>
+        <button class="carousel-btn carousel-next" id="c-next">&#8250;</button>
       </div>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
-
     <div class="map-section" id="map-sec">
       <div class="map-title">Ubicación</div>
       <div class="map-wrap">
-        <!-- ✏️ CAMBIA ESTE URL POR EL DE TU IGLESIA EN GOOGLE MAPS -->
+        <!-- ✏ CAMBIA ESTE URL POR EL DE TU IGLESIA EN GOOGLE MAPS -->
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa"
           allowfullscreen loading="lazy" title="Ubicación">
@@ -460,11 +440,10 @@
         <span class="map-info-text">Capilla San Juan Pablo II · Albrook Mall</span>
       </div>
       <div class="map-btn-wrap">
-        <!-- ✏️ CAMBIA ESTE LINK POR EL DE TU IGLESIA -->
+        <!-- ✏ CAMBIA ESTE LINK POR EL DE TU IGLESIA -->
         <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="map-link">Ver en Google Maps</a>
       </div>
     </div>
-
     <div class="rsvp-section" id="rsvp-sec">
       <div class="rsvp-title">Confirmar Asistencia</div>
       <div class="rsvp-subtitle">Por favor confirma antes del 1 de febrero</div>
@@ -475,18 +454,15 @@
         <button type="submit" class="rsvp-button" id="rsvp-btn">Enviar por WhatsApp</button>
       </form>
     </div>
-
   </div>
-
   <div class="footer" id="footer-sec">
     <div class="footer-verse">"Dejad que los niños vengan a mí"</div>
     <div class="footer-text">— Marcos 10:14 —</div>
   </div>
 </div>
-
 <script>
 // ─── CONFIGURACIÓN ────────────────────────────────────────────────
-// ✏️ PERSONALIZA AQUÍ:
+// ✏ PERSONALIZA AQUÍ:
 const WHATSAPP_NUMBER = "50712345678"; // tu número con código de país
 const EVENT_DATE = new Date("2026-02-08T10:00:00").getTime();
 const GALLERY_IMAGES = [
@@ -496,7 +472,6 @@ const GALLERY_IMAGES = [
   { src: "https://images.unsplash.com/photo-1764922074767-a27ee324380e?w=600&q=80", cap: "Alegría" },
   { src: "https://images.unsplash.com/photo-1721862650498-1e7274dec2ec?w=600&q=80", cap: "Celebración" },
 ];
-
 // ─── SVG GENERATORS ───────────────────────────────────────────────
 function cornerFlowerSVG() {
   return `<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -513,30 +488,19 @@ function cornerFlowerSVG() {
   <path d="M 52,52 C 60,47 70,44 78,44" stroke="#6a9850" stroke-width="2" fill="none" stroke-linecap="round"/>
   <path d="M 30,30 C 36,26 42,25 48,26" stroke="#6a9850" stroke-width="1.6" fill="none" stroke-linecap="round"/>
   <path d="M 90,92 C 97,98 102,104 104,110" stroke="#6a9850" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M 68,70 C 60,60 55,48 60,40 C 62,35 58,28" fill="none" stroke="#98c878" stroke-width="1" stroke-linecap="round"/>
-  <path d="M 38,38 C 30,28 28,16 35,10 C 38,6 34,2" fill="none" stroke="#98c878" stroke-width="1" stroke-linecap="round"/>
-  <path d="M 100,108 C 108,116 106,128 98,134 C 94,138 90,134" fill="none" stroke="#98c878" stroke-width="1" stroke-linecap="round"/>
   <path d="M 22,48 C 12,38 9,22 18,14 C 24,8 32,14 30,24 C 28,34 22,44 22,48 Z" fill="url(#cfl1)" stroke="#50883a" stroke-width="0.6"/>
-  <path d="M 22,48 C 20,36 18,24 18,14" fill="none" stroke="#3a6828" stroke-width="0.8"/>
   <path d="M 55,40 C 68,28 82,28 84,38 C 86,48 74,54 64,50 C 56,46 52,44 55,40 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
-  <path d="M 55,40 C 65,38 76,36 84,38" fill="none" stroke="#3a6828" stroke-width="0.8"/>
   <path d="M 60,75 C 48,68 44,54 54,46 C 60,42 68,48 66,58 C 64,66 60,72 60,75 Z" fill="url(#cfl1)" stroke="#50883a" stroke-width="0.6"/>
   <path d="M 92,82 C 108,72 122,76 122,88 C 122,100 108,106 98,100 C 90,94 88,88 92,82 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
   <path d="M 108,118 C 96,110 92,96 102,88 C 108,84 116,90 114,100 C 112,110 108,116 108,118 Z" fill="url(#cfl1)" stroke="#50883a" stroke-width="0.6"/>
   <path d="M 130,120 C 144,110 152,114 150,126 C 148,136 136,140 128,134 C 122,128 122,124 130,120 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
-  <ellipse cx="72" cy="78" rx="4.5" ry="9" fill="#a8d890" transform="rotate(-38,72,78)" opacity="0.85"/>
-  <ellipse cx="48" cy="58" rx="4" ry="8" fill="#c0e0a8" transform="rotate(22,48,58)" opacity="0.85"/>
-  <ellipse cx="112" cy="102" rx="4" ry="8" fill="#a8d890" transform="rotate(-28,112,102)" opacity="0.85"/>
   <circle cx="60" cy="72" r="3.8" fill="#e8a0c0"/>
   <circle cx="65" cy="67" r="3" fill="#f5c8dc"/>
   <circle cx="67" cy="74" r="2.5" fill="#d48898"/>
   <circle cx="40" cy="44" r="3.2" fill="#d4899f"/>
   <circle cx="45" cy="40" r="2.6" fill="#e8b0c4"/>
-  <path d="M 26,24 C 24,16 28,10 30,8 C 33,6 35,12 32,18 C 30,22 26,24 26,24 Z" fill="#f5c8dc" stroke="#e0a0b8" stroke-width="0.5"/>
-  <path d="M 122,132 C 120,125 124,120 126,118 C 129,116 131,122 128,128 C 126,132 122,132 122,132 Z" fill="#f5c8dc" stroke="#e0a0b8" stroke-width="0.5"/>
   ${[0,60,120,180,240,300].map((angle,i)=>{const r=(angle*Math.PI)/180,px=48+8*Math.cos(r),py=26+8*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4" ry="6.5" fill="${i%2===0?'#fde8f5':'#f5d4e8'}" stroke="#e8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="48" cy="26" r="5" fill="url(#cfc1)"/>
-  ${[0,45,90,135,180,225,270,315].map(a=>{const r=(a*Math.PI)/180;return `<circle cx="${(48+3.2*Math.cos(r)).toFixed(1)}" cy="${(26+3.2*Math.sin(r)).toFixed(1)}" r="0.7" fill="#e8a0c0"/>`;}).join('')}
   ${[0,45,90,135,180,225,270,315].map((angle,i)=>{const r=(angle*Math.PI)/180,px=78+12*Math.cos(r),py=44+12*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5.5" ry="9" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#e0a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   ${[0,60,120,180,240,300].map((angle)=>{const r=(angle*Math.PI)/180,px=78+7.5*Math.cos(r),py=44+7.5*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4.5" ry="7" fill="#f8d0e8" stroke="#d8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="78" cy="44" r="5.5" fill="url(#cfc1)"/>
@@ -544,11 +508,8 @@ function cornerFlowerSVG() {
   ${[22,67,112,157,202,247,292,337].map((angle)=>{const r=(angle*Math.PI)/180,px=106+14*Math.cos(r),py=112+14*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="6" ry="10" fill="url(#cfp2)" stroke="#d8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   ${[0,60,120,180,240,300].map((angle)=>{const r=(angle*Math.PI)/180,px=106+8.5*Math.cos(r),py=112+8.5*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5" ry="8" fill="#e8c0d8" stroke="#c890b0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="106" cy="112" r="7" fill="#c86888"/>
-  <path d="M 4,15 C 6,10 10,8 14,10 C 18,12 18,18 14,20 C 10,22 8,17 11,13 C 13,9 17,10 17,14" fill="none" stroke="#e0a0c0" stroke-width="1.3" stroke-linecap="round"/>
-  <path d="M 15,4 C 10,6 8,10 10,14 C 12,18 18,18 20,14 C 22,10 18,7 14,9 C 10,11 10,15 14,16" fill="none" stroke="#e0a0c0" stroke-width="1.3" stroke-linecap="round"/>
 </svg>`;
 }
-
 function sideFlowerSVG() {
   return `<svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs><radialGradient id="sfGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fde8f0"/><stop offset="100%" stop-color="#e8a0b8"/></radialGradient></defs>
@@ -572,7 +533,6 @@ function sideFlowerSVG() {
   <ellipse cx="18" cy="66" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-32 18 66)" opacity="0.85"/>
 </svg>`;
 }
-
 function churchIconSVG() {
   return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs><linearGradient id="churchGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7a5868"/><stop offset="100%" stop-color="#5a3848"/></linearGradient></defs>
@@ -586,7 +546,6 @@ function churchIconSVG() {
   <line x1="27" y1="20" x2="33" y2="20" stroke="#e8a0b8" stroke-width="0.8"/>
 </svg>`;
 }
-
 function crossWithBowSVG() {
   return `<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" width="80" height="110">
   <defs>
@@ -595,9 +554,6 @@ function crossWithBowSVG() {
   </defs>
   <rect x="42" y="10" width="16" height="120" rx="2.5" fill="url(#crossGrad)" stroke="#d0bfae" stroke-width="0.8"/>
   <rect x="20" y="35" width="60" height="16" rx="2.5" fill="url(#crossGrad)" stroke="#d0bfae" stroke-width="0.8"/>
-  <line x1="45" y1="12" x2="45" y2="128" stroke="#e8d5c2" stroke-width="0.5" opacity="0.5"/>
-  <line x1="50" y1="12" x2="50" y2="128" stroke="#e8d5c2" stroke-width="0.5" opacity="0.3"/>
-  <line x1="55" y1="12" x2="55" y2="128" stroke="#e8d5c2" stroke-width="0.5" opacity="0.5"/>
   <rect x="44" y="12" width="4" height="116" rx="1.5" fill="url(#crossShineGrad)" opacity="0.4"/>
   <path d="M 30 38 Q 50 35 70 38 Q 72 42 70 45 Q 50 42 30 45 Q 28 42 30 38" fill="#f0c0d0" stroke="#e8a0b8" stroke-width="0.8"/>
   <path d="M 50 40 Q 28 28 18 34 Q 13 40 18 46 Q 28 52 50 42" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
@@ -607,86 +563,8 @@ function crossWithBowSVG() {
   <path d="M 56 45 Q 60 62 66 76 Q 68 82 64 83 Q 59 81 57 76 Q 54 62 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
 </svg>`;
 }
-
-function angelSVG() {
-  return `<svg viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg" width="200" height="270">
-  <defs>
-    <radialGradient id="ai-skin" cx="42%" cy="38%" r="58%"><stop offset="0%" stop-color="#ffe8d2"/><stop offset="60%" stop-color="#f5caa0"/><stop offset="100%" stop-color="#e8b888"/></radialGradient>
-    <linearGradient id="ai-dress" x1="30%" y1="0%" x2="70%" y2="100%"><stop offset="0%" stop-color="#fff4f8"/><stop offset="40%" stop-color="#fde8f4"/><stop offset="80%" stop-color="#f5d0e8"/><stop offset="100%" stop-color="#e8c0dc"/></linearGradient>
-    <radialGradient id="ai-wing" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#fef0f8"/><stop offset="80%" stop-color="#f8ddf0"/><stop offset="100%" stop-color="#e8c8e0"/></radialGradient>
-    <linearGradient id="ai-wing-sh" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.9)"/><stop offset="50%" stop-color="rgba(248,224,240,0.4)"/><stop offset="100%" stop-color="rgba(232,192,224,0.2)"/></linearGradient>
-    <radialGradient id="ai-halo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffbe0"/><stop offset="40%" stop-color="#f8e888"/><stop offset="70%" stop-color="#e8c848"/><stop offset="100%" stop-color="#c8a028"/></radialGradient>
-    <radialGradient id="ai-hair" cx="50%" cy="20%" r="80%"><stop offset="0%" stop-color="#f8d888"/><stop offset="50%" stop-color="#e8c060"/><stop offset="100%" stop-color="#c8a030"/></radialGradient>
-    <linearGradient id="ai-sash" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f5c8e0"/><stop offset="50%" stop-color="#e8a0c8"/><stop offset="100%" stop-color="#f5c8e0"/></linearGradient>
-    <radialGradient id="ai-flame" cx="50%" cy="20%" r="80%"><stop offset="0%" stop-color="#fff8c0"/><stop offset="40%" stop-color="#f8d840"/><stop offset="100%" stop-color="#e89800" stop-opacity="0.5"/></radialGradient>
-    <filter id="ai-blur"><feGaussianBlur stdDeviation="2.5"/></filter>
-    <filter id="ai-soft"><feGaussianBlur stdDeviation="1"/></filter>
-  </defs>
-  <ellipse cx="100" cy="170" rx="75" ry="85" fill="rgba(255,220,245,0.18)" filter="url(#ai-blur)"/>
-  <path d="M 95,118 C 72,106 42,88 18,100 C 4,108 2,124 12,136 C 26,152 58,152 80,144 C 90,140 96,134 95,118 Z" fill="url(#ai-wing)" stroke="#e0c0d8" stroke-width="0.8" opacity="0.95"/>
-  <path d="M 95,118 C 78,110 55,98 30,106 C 16,112 10,124 18,134 C 30,148 62,148 80,140 C 90,136 96,128 95,118 Z" fill="url(#ai-wing-sh)" opacity="0.55"/>
-  <path d="M 95,118 C 78,112 56,108 38,118" fill="none" stroke="#d8b0cc" stroke-width="1.2"/>
-  <path d="M 94,122 C 76,118 52,116 34,128" fill="none" stroke="#d8b0cc" stroke-width="1"/>
-  <path d="M 93,128 C 74,126 50,126 30,138" fill="none" stroke="#d8b0cc" stroke-width="1"/>
-  <path d="M 91,134 C 72,133 48,135 28,146" fill="none" stroke="#d0a8c4" stroke-width="0.9"/>
-  <path d="M 92,115 C 75,104 52,94 34,100" fill="none" stroke="#dcc0d4" stroke-width="0.9"/>
-  <path d="M 105,118 C 128,106 158,88 182,100 C 196,108 198,124 188,136 C 174,152 142,152 120,144 C 110,140 104,134 105,118 Z" fill="url(#ai-wing)" stroke="#e0c0d8" stroke-width="0.8" opacity="0.95"/>
-  <path d="M 105,118 C 122,110 145,98 170,106 C 184,112 190,124 182,134 C 170,148 138,148 120,140 C 110,136 104,128 105,118 Z" fill="url(#ai-wing-sh)" opacity="0.55"/>
-  <path d="M 105,118 C 122,112 144,108 162,118" fill="none" stroke="#d8b0cc" stroke-width="1.2"/>
-  <path d="M 106,122 C 124,118 148,116 166,128" fill="none" stroke="#d8b0cc" stroke-width="1"/>
-  <path d="M 107,128 C 126,126 150,126 170,138" fill="none" stroke="#d8b0cc" stroke-width="1"/>
-  <path d="M 109,134 C 128,133 152,135 172,146" fill="none" stroke="#d0a8c4" stroke-width="0.9"/>
-  <path d="M 108,115 C 125,104 148,94 166,100" fill="none" stroke="#dcc0d4" stroke-width="0.9"/>
-  <ellipse cx="100" cy="263" rx="42" ry="7" fill="rgba(200,130,180,0.12)" filter="url(#ai-blur)"/>
-  <path d="M 70,150 C 58,158 50,172 48,192 C 44,216 46,240 50,260 C 56,268 80,272 100,272 C 120,272 144,268 150,260 C 154,240 156,216 152,192 C 150,172 142,158 130,150 Z" fill="url(#ai-dress)" stroke="#e8c0dc" stroke-width="0.8"/>
-  <path d="M 80,155 C 74,170 70,190 72,218 C 73,234 76,250 78,262" fill="none" stroke="#e0b0d0" stroke-width="1.2"/>
-  <path d="M 110,152 C 114,170 116,195 114,225 C 113,242 112,256 110,266" fill="none" stroke="#e8c0d8" stroke-width="0.8"/>
-  <path d="M 120,155 C 126,170 130,190 128,218 C 127,234 124,250 122,262" fill="none" stroke="#e0b0d0" stroke-width="1.2"/>
-  <path d="M 50,260 C 58,268 80,274 100,274 C 120,274 142,268 150,260" fill="none" stroke="#e0a8cc" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <path d="M 68,164 C 78,160 90,158 100,158 C 110,158 122,160 132,164 C 130,172 118,176 100,176 C 82,176 70,172 68,164 Z" fill="url(#ai-sash)" stroke="#d898bc" stroke-width="0.6" opacity="0.7"/>
-  <path d="M 73,128 C 65,140 62,154 68,164" stroke="#f0c8a8" stroke-width="8" stroke-linecap="round" fill="none"/>
-  <path d="M 127,128 C 135,140 138,154 132,164" stroke="#f0c8a8" stroke-width="8" stroke-linecap="round" fill="none"/>
-  <ellipse cx="62" cy="162" rx="7" ry="5.5" fill="url(#ai-skin)" transform="rotate(-15,62,162)"/>
-  <ellipse cx="138" cy="162" rx="7" ry="5.5" fill="url(#ai-skin)" transform="rotate(15,138,162)"/>
-  <rect x="58" y="138" width="8" height="24" rx="4" fill="#fff8f0" stroke="#e8d0c0" stroke-width="0.7"/>
-  <path d="M 62,138 C 62,130 58,124 62,120 C 66,124 66,130 62,138 Z" fill="url(#ai-flame)"/>
-  <ellipse cx="62" cy="138" rx="4.5" ry="2" fill="#f8d878" opacity="0.6"/>
-  <ellipse cx="62" cy="128" rx="14" ry="14" fill="rgba(255,240,150,0.2)" filter="url(#ai-blur)"/>
-  <rect x="128" y="148" width="18" height="24" rx="3" fill="#fff8f0" stroke="#ddc8a0" stroke-width="0.8"/>
-  <rect x="127" y="148" width="4" height="24" rx="2" fill="#e8d8b0" stroke="#c8b880" stroke-width="0.5"/>
-  <rect x="143" y="148" width="4" height="24" rx="2" fill="#e8d8b0" stroke="#c8b880" stroke-width="0.5"/>
-  <path d="M 88,125 C 88,120 100,118 112,125" fill="none" stroke="#e8c0d0" stroke-width="1.5"/>
-  <rect x="94" y="96" width="12" height="16" rx="6" fill="url(#ai-skin)"/>
-  <ellipse cx="100" cy="84" rx="22" ry="24" fill="url(#ai-skin)" filter="url(#ai-soft)"/>
-  <ellipse cx="83" cy="88" rx="7" ry="4.5" fill="rgba(255,160,160,0.2)"/>
-  <ellipse cx="117" cy="88" rx="7" ry="4.5" fill="rgba(255,160,160,0.2)"/>
-  <ellipse cx="78" cy="84" rx="4.5" ry="6" fill="#f0c898"/>
-  <ellipse cx="122" cy="84" rx="4.5" ry="6" fill="#f0c898"/>
-  <path d="M 78,72 C 70,58 68,44 78,34 C 86,26 100,24 114,26 C 126,28 134,40 132,52 C 130,62 124,70 122,72 Z" fill="url(#ai-hair)"/>
-  <path d="M 78,72 C 74,80 72,94 74,110 C 75,120 74,130 72,140" fill="none" stroke="#d4a030" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 122,72 C 126,80 128,94 126,110 C 125,120 126,130 128,140" fill="none" stroke="#d4a030" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 78,72 C 80,62 84,54 90,50 C 94,46 100,44 106,46 C 112,48 118,54 120,62 C 122,68 120,72 118,72 Z" fill="url(#ai-hair)"/>
-  <path d="M 85,76 C 88,73 92,73 94,75" fill="none" stroke="#b08828" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M 106,75 C 108,73 112,73 115,76" fill="none" stroke="#b08828" stroke-width="1.5" stroke-linecap="round"/>
-  <ellipse cx="90" cy="80" rx="5.5" ry="4.5" fill="#4a3020"/>
-  <ellipse cx="110" cy="80" rx="5.5" ry="4.5" fill="#4a3020"/>
-  <ellipse cx="90" cy="80" rx="3.5" ry="3" fill="#2a1810"/>
-  <ellipse cx="110" cy="80" rx="3.5" ry="3" fill="#2a1810"/>
-  <circle cx="92" cy="78" r="1.5" fill="white"/>
-  <circle cx="112" cy="78" r="1.5" fill="white"/>
-  <path d="M 97,86 C 98,89 100,91 102,91 C 104,91 105,89 103,88" fill="none" stroke="#d4a060" stroke-width="1.2" stroke-linecap="round"/>
-  <path d="M 93,94 C 96,97 104,97 107,94" fill="none" stroke="#c87070" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M 93,94 C 96,92 104,92 107,94" fill="rgba(255,180,180,0.3)" stroke="none"/>
-  <ellipse cx="100" cy="56" rx="34" ry="10" fill="none" stroke="rgba(232,200,80,0.3)" stroke-width="8" filter="url(#ai-blur)"/>
-  <ellipse cx="100" cy="56" rx="32" ry="9" fill="none" stroke="url(#ai-halo)" stroke-width="4"/>
-  <path d="M 72,52 C 78,46 92,44 108,46 C 118,48 126,52 130,56" fill="none" stroke="rgba(255,255,230,0.8)" stroke-width="2.5" stroke-linecap="round"/>
-  ${[0,30,60,90,120,150,180,210,240,270,300,330].map((angle,i)=>{const r=(angle*Math.PI)/180,x=100+32*Math.cos(r),y=56+9*Math.sin(r);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i%3===0?1.4:0.8}" fill="#f8e060" opacity="${i%3===0?1:0.6}"/>`;}).join('')}
-  ${[[32,80,0.9],[168,90,0.7],[28,148,0.6],[172,140,0.8],[60,200,0.5],[140,198,0.6]].map(([sx,sy,op])=>`<g opacity="${op}"><path d="M ${sx},${sy-5} L ${sx},${sy+5} M ${sx-5},${sy} L ${sx+5},${sy}" stroke="#f8d840" stroke-width="1.5" stroke-linecap="round"/></g>`).join('')}
-</svg>`;
-}
-
 // ─── INJECT SVGs ─────────────────────────────────────────────────
-document.getElementById('angel-splash').innerHTML = angelSVG();
+// El ángel ya está como <img> directo en el HTML
 document.getElementById('cross-svg-wrap').innerHTML = crossWithBowSVG();
 document.getElementById('church-icon-wrap').innerHTML = churchIconSVG();
 ['ctl','ctr','cbl','cbr'].forEach(id => {
@@ -695,11 +573,9 @@ document.getElementById('church-icon-wrap').innerHTML = churchIconSVG();
 ['sfl','sfr'].forEach(id => {
   document.getElementById(id).innerHTML = sideFlowerSVG();
 });
-// Splash corners
 ['fc0','fc1','fc2','fc3'].forEach(id => {
   document.getElementById(id).innerHTML = cornerFlowerSVG();
 });
-
 // ─── GALLERY CAROUSEL ────────────────────────────────────────────
 let carouselIdx = 0;
 const track = document.getElementById('carousel-track');
@@ -714,7 +590,6 @@ GALLERY_IMAGES.forEach((img, i) => {
   dot.addEventListener('click', () => goCarousel(i));
   dotsEl.appendChild(dot);
 });
-
 function goCarousel(idx) {
   carouselIdx = (idx + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
   track.style.transform = `translateX(-${carouselIdx * 100}%)`;
@@ -724,22 +599,18 @@ function goCarousel(idx) {
 }
 document.getElementById('c-prev').addEventListener('click', () => goCarousel(carouselIdx - 1));
 document.getElementById('c-next').addEventListener('click', () => goCarousel(carouselIdx + 1));
-
-// Touch swipe
 let touchStart = 0;
 document.getElementById('carousel-wrap').addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; });
 document.getElementById('carousel-wrap').addEventListener('touchend', e => {
   const diff = touchStart - e.changedTouches[0].clientX;
   if (Math.abs(diff) > 50) goCarousel(carouselIdx + (diff > 0 ? 1 : -1));
 });
-
 // ─── COUNTDOWN ───────────────────────────────────────────────────
 const cdDays = document.getElementById('cd-days');
 const cdHours = document.getElementById('cd-hours');
 const cdMin = document.getElementById('cd-min');
 const cdSecEl = document.getElementById('cd-sec-el');
 let prevSec = '';
-
 function updateCountdown() {
   const dist = EVENT_DATE - Date.now();
   if (dist < 0) return;
@@ -761,14 +632,12 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
-
 // ─── SPLASH ──────────────────────────────────────────────────────
 const splash = document.getElementById('splash');
 splash.addEventListener('click', () => {
   splash.classList.add('hiding');
   setTimeout(() => {
     splash.classList.add('gone');
-    // Reveal invitation
     const revealIds = [
       'invitation','ctl','ctr','cbl','cbr','sfl','sfr',
       'inv-cross','t1','t2','t3','t4','t5',
@@ -781,7 +650,6 @@ splash.addEventListener('click', () => {
     });
   }, 1500);
 });
-
 // ─── RSVP ────────────────────────────────────────────────────────
 document.getElementById('rsvp-form').addEventListener('submit', e => {
   e.preventDefault();
@@ -802,20 +670,16 @@ document.getElementById('rsvp-form').addEventListener('submit', e => {
     document.getElementById('rsvp-msg').value = '';
   }, 3000);
 });
-
 // ─── CANVAS PARTICLES ────────────────────────────────────────────
 const canvas = document.getElementById('gold-canvas');
 const ctx = canvas.getContext('2d');
-
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-
 const COLORS = ['#f5d0e0','#e8a0b8','#f0c8d8','#fde8f2','#d4899f'];
-
 function createPetal() {
   const types = ['oval','teardrop','flower'];
   return {
@@ -833,7 +697,6 @@ function createPetal() {
     waveSpeed: Math.random() * 0.02 + 0.005
   };
 }
-
 const petals = Array.from({length: 30}, createPetal);
 const bokehOrbs = Array.from({length: 12}, () => ({
   x: Math.random() * window.innerWidth,
@@ -845,7 +708,6 @@ const bokehOrbs = Array.from({length: 12}, () => ({
 }));
 const sparkles = [];
 let sparkleTimer = 0;
-
 function drawPetal(p) {
   ctx.save();
   ctx.translate(p.x, p.y);
@@ -881,7 +743,6 @@ function drawPetal(p) {
   }
   ctx.restore();
 }
-
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   bokehOrbs.forEach(b => {
