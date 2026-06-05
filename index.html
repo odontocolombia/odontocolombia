@@ -22,6 +22,7 @@
             
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             
             --fs-xs: clamp(0.65rem, 1.5vw, 0.8rem);
             --fs-sm: clamp(0.8rem, 2vw, 1rem);
@@ -56,10 +57,7 @@
         /* ═══════════ SPLASH SCREEN ══════════ */
         #splash {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw;
             height: 100vh;
             height: 100dvh;
@@ -141,7 +139,6 @@
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 0;
             opacity: 0;
             animation: fadeSlideUp 1s 0.4s var(--ease-out-expo) forwards;
             flex-shrink: 0;
@@ -150,7 +147,6 @@
             font-family: 'Great Vibes', cursive;
             font-size: var(--fs-hero);
             color: var(--brown);
-            margin-bottom: 0;
             opacity: 0;
             animation: fadeSlideUp 1s 0.6s var(--ease-out-expo) forwards;
             text-shadow: 0 2px 8px rgba(184,148,62,0.15);
@@ -195,8 +191,7 @@
         
         .progress-bar {
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             height: 2px;
             width: 0%;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -207,9 +202,7 @@
         
         .splash-countdown {
             position: absolute;
-            bottom: 15px;
-            left: 0;
-            right: 0;
+            bottom: 15px; left: 0; right: 0;
             text-align: center;
             font-family: 'Cinzel', serif;
             font-size: var(--fs-xs);
@@ -256,20 +249,24 @@
             transform: translateY(0);
         }
 
+        /* ═══════════ CORNER ORNAMENTS MEJORADOS ═══════════ */
         .corner-ornament {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             opacity: 0;
             transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
             z-index: 5;
         }
-        .corner-ornament.visible { opacity: 1; transform: scale(1); }
-        .corner-ornament svg { width: 100%; height: 100%; }
-        .corner-tl { top: 15px; left: 15px; transition-delay: 0.2s; }
-        .corner-tr { top: 15px; right: 15px; transform: scaleX(-1); transition-delay: 0.4s; }
-        .corner-bl { bottom: 15px; left: 15px; transform: scaleY(-1); transition-delay: 0.6s; }
-        .corner-br { bottom: 15px; right: 15px; transform: scale(-1, -1); transition-delay: 0.8s; }
+        .corner-ornament.visible { opacity: 1; }
+        .corner-ornament svg { width: 100%; height: 100%; overflow: visible; }
+        .corner-tl { top: 10px; left: 10px; transition-delay: 0.2s; }
+        .corner-tr { top: 10px; right: 10px; transition-delay: 0.4s; transform: scaleX(-1); }
+        .corner-bl { bottom: 10px; left: 10px; transition-delay: 0.6s; transform: scaleY(-1); }
+        .corner-br { bottom: 10px; right: 10px; transition-delay: 0.8s; transform: scale(-1,-1); }
+        .corner-tr.visible { transform: scaleX(-1); }
+        .corner-bl.visible { transform: scaleY(-1); }
+        .corner-br.visible { transform: scale(-1,-1); }
 
         .angel-header {
             text-align: center;
@@ -459,7 +456,7 @@
             width: 60px;
             height: 80px;
             margin: 0 auto 20px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
         .church-icon svg { width: 100%; height: 100%; }
         .church-time {
@@ -504,7 +501,6 @@
             width: 30px;
             height: 30px;
             margin: 0 15px;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -639,6 +635,7 @@
             border-color: var(--gold-dark);
         }
 
+        /* ═══════════ MAP SECTION ═══════════ */
         .map-section {
             margin: 40px 0;
             opacity: 0;
@@ -660,7 +657,7 @@
             border: 2px solid var(--gold-light);
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .map-wrap iframe {
             width: 100%;
@@ -668,9 +665,17 @@
             border: 0;
             display: block;
         }
+        /* BOTÓN MAPS CENTRADO */
+        .map-btn-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .map-link {
-            display: inline-block;
-            padding: 12px 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 34px;
             background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark), var(--gold), var(--gold-light));
             background-size: 300% 100%;
             color: var(--white);
@@ -681,6 +686,10 @@
             border-radius: 30px;
             text-transform: uppercase;
             animation: buttonPremium 3.5s linear infinite;
+            box-shadow: 0 4px 16px rgba(184,148,62,0.3);
+        }
+        .map-link svg {
+            flex-shrink: 0;
         }
         @keyframes buttonPremium {
             0% { background-position: 0% center; }
@@ -727,6 +736,7 @@
             font-size: var(--fs-md);
             color: var(--brown);
             outline: none;
+            resize: vertical;
         }
         .rsvp-input:focus {
             border-color: var(--gold);
@@ -777,11 +787,8 @@
 
         /* ═══════ RESPONSIVE MÓVIL ═══════ */
         @media (max-width: 600px) {
-            .invitation { 
-                padding: 40px 25px; 
-                margin: 20px 0; 
-            }
-            .corner-ornament { width: 60px; height: 60px; }
+            .invitation { padding: 40px 25px; margin: 20px 0; }
+            .corner-ornament { width: 65px; height: 65px; }
             .text-title { font-size: var(--fs-lg); letter-spacing: 4px; }
             .text-name { font-size: var(--fs-xl); }
             .family-row { flex-direction: column; gap: 10px; }
@@ -790,34 +797,13 @@
             .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
             .angel-container { width: 140px; margin-bottom: 8px; }
             .map-wrap iframe { height: 240px; }
-            
-            /* SPLASH MÓVIL - CORREGIDO */
-            .splash-content {
-                padding: 10px 15px;
-                gap: 8px;
-                max-width: 320px;
-            }
-            .angel-container {
-                width: clamp(100px, 26vw, 160px);
-                margin-bottom: 6px;
-            }
-            .splash-label {
-                font-size: 0.6rem;
-                letter-spacing: 0.35em;
-            }
-            .splash-name {
-                font-size: clamp(1.8rem, 8vw, 2.8rem);
-            }
-            .splash-divider {
-                margin: 3px 0 8px;
-                gap: 6px;
-            }
-            .splash-divider::before, .splash-divider::after {
-                width: 30px;
-            }
-            .splash-hint {
-                font-size: 0.7rem;
-            }
+            .splash-content { padding: 10px 15px; gap: 8px; max-width: 320px; }
+            .angel-container { width: clamp(100px, 26vw, 160px); margin-bottom: 6px; }
+            .splash-label { font-size: 0.6rem; letter-spacing: 0.35em; }
+            .splash-name { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+            .splash-divider { margin: 3px 0 8px; gap: 6px; }
+            .splash-divider::before, .splash-divider::after { width: 30px; }
+            .splash-hint { font-size: 0.7rem; }
             .splash-orb:nth-child(1){width:160px;height:160px;}
             .splash-orb:nth-child(2){width:120px;height:120px;}
             .splash-orb:nth-child(3){width:100px;height:100px;}
@@ -828,26 +814,11 @@
             .date-number { font-size: var(--fs-xl); }
             .family-label { font-size: var(--fs-lg); }
             .countdown-number { font-size: var(--fs-lg); }
-            
-            .splash-content {
-                padding: 8px 12px;
-                gap: 6px;
-                max-width: 280px;
-            }
-            .angel-container {
-                width: clamp(90px, 24vw, 140px);
-                margin-bottom: 5px;
-            }
-            .splash-name {
-                font-size: clamp(1.6rem, 7.5vw, 2.4rem);
-            }
-            .splash-label {
-                font-size: 0.55rem;
-                letter-spacing: 0.3em;
-            }
-            .splash-divider::before, .splash-divider::after {
-                width: 25px;
-            }
+            .splash-content { padding: 8px 12px; gap: 6px; max-width: 280px; }
+            .angel-container { width: clamp(90px, 24vw, 140px); margin-bottom: 5px; }
+            .splash-name { font-size: clamp(1.6rem, 7.5vw, 2.4rem); }
+            .splash-label { font-size: 0.55rem; letter-spacing: 0.3em; }
+            .splash-divider::before, .splash-divider::after { width: 25px; }
         }
     </style>
 </head>
@@ -855,7 +826,7 @@
 
     <canvas id="gold-canvas"></canvas>
 
-    <!-- SPLASH CON ÁNGEL IMAGEN -->
+    <!-- SPLASH -->
     <div id="splash">
         <div class="splash-orbs">
             <div class="splash-orb"></div>
@@ -868,14 +839,11 @@
             <div class="angel-container">
                 <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="200" height="260" decoding="async" />
             </div>
-            
             <div class="splash-label">Bautizo</div>
             <div class="splash-name">Emilio André</div>
-            
             <div class="splash-divider">
                 <span class="splash-divider-icon">✦</span>
             </div>
-            
             <div class="splash-hint">Toca para abrir la invitación</div>
         </div>
         
@@ -887,32 +855,113 @@
     <div class="main-container">
         <div class="invitation" id="invitation">
             
+            <!-- CORNER ORNAMENTS MEJORADOS -->
             <div class="corner-ornament corner-tl">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rama curva principal -->
+                    <path d="M8,8 C8,8 12,25 22,35 C32,45 45,48 55,55" fill="none" stroke="#b8943e" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- Ramas secundarias -->
+                    <path d="M18,18 C18,18 25,20 28,28" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M28,32 C28,32 35,30 36,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M40,42 C40,42 44,36 50,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <!-- Hoja grande izquierda -->
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-40 14 26)"/>
+                    <!-- Hoja grande derecha -->
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-70 44 16)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-70 44 16)"/>
+                    <!-- Pequeñas flores -->
+                    <circle cx="22" cy="10" r="3.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="22" cy="10" r="1.5" fill="#b8943e"/>
+                    <circle cx="8" cy="22" r="3" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="8" cy="22" r="1.2" fill="#b8943e"/>
+                    <!-- Flor esquina -->
+                    <circle cx="8" cy="8" r="4.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" fill="#b8943e"/>
+                    <!-- Pétalos esquina -->
+                    <ellipse cx="8" cy="3" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="13" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="8" cy="13" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="3" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <!-- Puntos decorativos -->
+                    <circle cx="32" cy="24" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="20" cy="38" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="48" cy="30" r="1.5" fill="#b8943e" opacity="0.6"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-tr">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 C8,8 12,25 22,35 C32,45 45,48 55,55" fill="none" stroke="#b8943e" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M18,18 C18,18 25,20 28,28" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M28,32 C28,32 35,30 36,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M40,42 C40,42 44,36 50,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-70 44 16)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-70 44 16)"/>
+                    <circle cx="22" cy="10" r="3.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="22" cy="10" r="1.5" fill="#b8943e"/>
+                    <circle cx="8" cy="22" r="3" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="8" cy="22" r="1.2" fill="#b8943e"/>
+                    <circle cx="8" cy="8" r="4.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" fill="#b8943e"/>
+                    <ellipse cx="8" cy="3" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="13" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="8" cy="13" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="3" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <circle cx="32" cy="24" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="20" cy="38" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="48" cy="30" r="1.5" fill="#b8943e" opacity="0.6"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-bl">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 C8,8 12,25 22,35 C32,45 45,48 55,55" fill="none" stroke="#b8943e" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M18,18 C18,18 25,20 28,28" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M28,32 C28,32 35,30 36,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M40,42 C40,42 44,36 50,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-70 44 16)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-70 44 16)"/>
+                    <circle cx="22" cy="10" r="3.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="22" cy="10" r="1.5" fill="#b8943e"/>
+                    <circle cx="8" cy="22" r="3" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="8" cy="22" r="1.2" fill="#b8943e"/>
+                    <circle cx="8" cy="8" r="4.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" fill="#b8943e"/>
+                    <ellipse cx="8" cy="3" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="13" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="8" cy="13" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="3" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <circle cx="32" cy="24" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="20" cy="38" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="48" cy="30" r="1.5" fill="#b8943e" opacity="0.6"/>
                 </svg>
             </div>
             <div class="corner-ornament corner-br">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10,10 Q30,5 40,20 Q50,35 35,50 Q20,65 10,50 Q5,35 10,10" fill="none" stroke="#b8943e" stroke-width="1.5"/>
-                    <path d="M15,15 Q30,12 38,22 Q45,32 32,45 Q20,55 12,45 Q8,35 15,15" fill="none" stroke="#d4af6a" stroke-width="1"/>
-                    <circle cx="25" cy="25" r="3" fill="#b8943e"/>
+                <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 C8,8 12,25 22,35 C32,45 45,48 55,55" fill="none" stroke="#b8943e" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M18,18 C18,18 25,20 28,28" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M28,32 C28,32 35,30 36,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M40,42 C40,42 44,36 50,38" fill="none" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="14" cy="26" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-40 14 26)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="#d4af6a" opacity="0.5" transform="rotate(-70 44 16)"/>
+                    <ellipse cx="44" cy="16" rx="6" ry="3.5" fill="none" stroke="#b8943e" stroke-width="0.8" transform="rotate(-70 44 16)"/>
+                    <circle cx="22" cy="10" r="3.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="22" cy="10" r="1.5" fill="#b8943e"/>
+                    <circle cx="8" cy="22" r="3" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.2"/>
+                    <circle cx="8" cy="22" r="1.2" fill="#b8943e"/>
+                    <circle cx="8" cy="8" r="4.5" fill="#f5e6b8" stroke="#b8943e" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" fill="#b8943e"/>
+                    <ellipse cx="8" cy="3" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="13" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="8" cy="13" rx="1.8" ry="2.5" fill="#d4af6a" opacity="0.7"/>
+                    <ellipse cx="3" cy="8" rx="2.5" ry="1.8" fill="#d4af6a" opacity="0.7"/>
+                    <circle cx="32" cy="24" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="20" cy="38" r="1.5" fill="#b8943e" opacity="0.6"/>
+                    <circle cx="48" cy="30" r="1.5" fill="#b8943e" opacity="0.6"/>
                 </svg>
             </div>
 
@@ -958,11 +1007,22 @@
             <div class="church-section">
                 <div class="church-icon">
                     <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="30" width="20" height="40" fill="#4a3820" opacity="0.8"/>
-                        <polygon points="30,10 15,30 45,30" fill="#4a3820" opacity="0.8"/>
-                        <rect x="28" y="5" width="4" height="10" fill="#4a3820" opacity="0.8"/>
-                        <rect x="25" y="50" width="10" height="20" fill="#faf6ed" opacity="0.6"/>
-                        <circle cx="30" cy="20" r="2.5" fill="#b8943e" opacity="0.9"/>
+                        <!-- Torre -->
+                        <rect x="22" y="32" width="16" height="38" fill="#4a3820" opacity="0.85" rx="1"/>
+                        <!-- Techo triangular -->
+                        <polygon points="30,8 13,32 47,32" fill="#4a3820" opacity="0.85"/>
+                        <!-- Cruz en la torre -->
+                        <rect x="28" y="2" width="4" height="12" fill="#b8943e"/>
+                        <rect x="24" y="6" width="12" height="3" fill="#b8943e"/>
+                        <!-- Ventana arco -->
+                        <path d="M26,42 Q30,37 34,42 L34,52 L26,52 Z" fill="#faf6ed" opacity="0.7"/>
+                        <!-- Puerta arco -->
+                        <path d="M26,62 Q30,57 34,62 L34,70 L26,70 Z" fill="#faf6ed" opacity="0.6"/>
+                        <!-- Ventana circular rosetón -->
+                        <circle cx="30" cy="22" r="5" fill="none" stroke="#b8943e" stroke-width="1.5"/>
+                        <circle cx="30" cy="22" r="2.5" fill="#d4af6a" opacity="0.6"/>
+                        <!-- Halo dorado en la cima -->
+                        <circle cx="30" cy="2" r="2.5" fill="#b8943e" opacity="0.9"/>
                     </svg>
                 </div>
                 <div class="church-time">10:00 a.m.</div>
@@ -1003,8 +1063,8 @@
                 <div class="gallery-title">Galería de Recuerdos</div>
                 <div class="carousel-wrap" id="carousel">
                     <div class="carousel-track" id="carousel-track"></div>
-                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">‹</button>
-                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">›</button>
+                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
+                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">&#8250;</button>
                 </div>
                 <div class="carousel-dots" id="carousel-dots"></div>
             </div>
@@ -1014,7 +1074,16 @@
                 <div class="map-wrap">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="map-link">Ver en Google Maps</a>
+                <!-- BOTÓN CENTRADO -->
+                <div class="map-btn-wrap">
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" class="map-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Ver en Google Maps
+                    </a>
+                </div>
             </div>
 
             <div class="rsvp-section">
@@ -1040,30 +1109,27 @@
     (function() {
         'use strict';
         
-        const AUTO_OPEN_MS = 7000;
-        const EVENT_DATE = new Date('2026-02-08T10:00:00').getTime();
-        const IS_MOBILE = window.innerWidth <= 600;
-        const PARTICLE_COUNT = IS_MOBILE ? 15 : 30;
+        var AUTO_OPEN_MS = 7000;
+        var EVENT_DATE = new Date('2026-02-08T10:00:00').getTime();
+        var IS_MOBILE = window.innerWidth <= 600;
+        var PARTICLE_COUNT = IS_MOBILE ? 15 : 30;
         
-        const splash = document.getElementById('splash');
-        const progressBar = document.getElementById('progress-bar');
-        const countdownHint = document.getElementById('splash-countdown');
-        let opened = false;
-        let progressStart = null;
-        let progressRAF = null;
-        let autoTimer = null;
-        let particlesRAF = null;
+        var splash = document.getElementById('splash');
+        var progressBar = document.getElementById('progress-bar');
+        var countdownHint = document.getElementById('splash-countdown');
+        var opened = false;
+        var progressStart = null;
+        var progressRAF = null;
+        var autoTimer = null;
+        var particlesRAF = null;
         
         function openInvitation() {
             if (opened) return;
             opened = true;
-            
             if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
             if (progressRAF) { cancelAnimationFrame(progressRAF); progressRAF = null; }
-            
             splash.classList.add('hide');
-            
-            setTimeout(() => {
+            setTimeout(function() {
                 splash.style.display = 'none';
                 revealInvitation();
             }, 1200);
@@ -1072,15 +1138,13 @@
         function startAutoOpen() {
             function step(ts) {
                 if (!progressStart) progressStart = ts;
-                const elapsed = ts - progressStart;
-                const pct = Math.min((elapsed / AUTO_OPEN_MS) * 100, 100);
-                const remaining = Math.max(0, Math.ceil((AUTO_OPEN_MS - elapsed) / 1000));
-                
+                var elapsed = ts - progressStart;
+                var pct = Math.min((elapsed / AUTO_OPEN_MS) * 100, 100);
+                var remaining = Math.max(0, Math.ceil((AUTO_OPEN_MS - elapsed) / 1000));
                 progressBar.style.width = pct + '%';
                 countdownHint.textContent = remaining > 0 
                     ? 'Se abre automáticamente en ' + remaining + 's' 
                     : '';
-                
                 if (elapsed < AUTO_OPEN_MS) {
                     progressRAF = requestAnimationFrame(step);
                 }
@@ -1092,113 +1156,98 @@
         splash.addEventListener('click', openInvitation);
         
         function revealInvitation() {
-            const invitation = document.getElementById('invitation');
+            var invitation = document.getElementById('invitation');
             invitation.classList.add('visible');
-            
-            const revealElements = [
+            var selectors = [
                 '.corner-ornament', '.angel-header', '.text-intro', '.text-title',
                 '.text-subtitle', '.text-name', '.text-surname', '.date-section',
                 '.family-section', '.church-section', '.divider', '.countdown-section',
                 '.gallery-section', '.map-section', '.rsvp-section', '.footer'
             ];
-            
-            revealElements.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => el.classList.add('visible'));
+            selectors.forEach(function(sel) {
+                document.querySelectorAll(sel).forEach(function(el) { el.classList.add('visible'); });
             });
-            
             initParticles();
             startCountdown();
             buildCarousel();
         }
         
         function startCountdown() {
-            const els = {
+            var els = {
                 d: document.getElementById('days'),
                 h: document.getElementById('hours'),
                 m: document.getElementById('minutes'),
                 s: document.getElementById('seconds')
             };
-            
-            let prevValues = { d: '', h: '', m: '', s: '' };
-            
+            var prevValues = { d: '', h: '', m: '', s: '' };
             function pad(n) { return String(n).padStart(2, '0'); }
-            
             function tick() {
-                const diff = EVENT_DATE - Date.now();
+                var diff = EVENT_DATE - Date.now();
                 if (diff <= 0) {
-                    Object.values(els).forEach(el => { if (el) el.textContent = '00'; });
+                    Object.values(els).forEach(function(el) { if (el) el.textContent = '00'; });
                     return;
                 }
-                
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                
+                var d = Math.floor(diff / 86400000);
+                var h = Math.floor((diff % 86400000) / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
                 function update(key, el, val) {
                     if (!el) return;
-                    const v = pad(val);
+                    var v = pad(val);
                     if (prevValues[key] !== v) {
                         prevValues[key] = v;
                         el.textContent = v;
-                        el.classList.remove('tick');
-                        void el.offsetWidth;
-                        el.classList.add('tick');
-                        setTimeout(() => el.classList.remove('tick'), 200);
                     }
                 }
-                
                 update('d', els.d, d);
                 update('h', els.h, h);
                 update('m', els.m, m);
                 update('s', els.s, s);
             }
-            
             tick();
             setInterval(tick, 1000);
         }
         
-        const galleryImages = [
-            { src: 'https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80', cap: 'Familia' },
-            { src: 'https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80', cap: 'Bendición' },
-            { src: 'https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80', cap: 'Amor' },
-            { src: 'https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80', cap: 'Alegría' },
-            { src: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?w=600&q=80', cap: 'Celebración' }
+        // FOTOS DE BAUTISMO REALES
+        var galleryImages = [
+            { src: 'https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?w=800&q=80', cap: 'Bautizo' },
+            { src: 'https://images.unsplash.com/photo-1721862650498-1e7274dec2ec?w=800&q=80', cap: 'Ceremonia' },
+            { src: 'https://images.unsplash.com/photo-1746300336572-75535acb7a85?w=800&q=80', cap: 'Agua Bautismal' },
+            { src: 'https://images.unsplash.com/photo-1721862650465-b590bc35b7c8?w=800&q=80', cap: 'Bendición' },
+            { src: 'https://images.unsplash.com/photo-1766305306658-6a80707d09f2?w=800&q=80', cap: 'Familia' },
+            { src: 'https://images.unsplash.com/photo-1485364103940-e8aff191ed1e?w=800&q=80', cap: 'Velas' }
         ];
         
-        let carouselIdx = 0;
-        let autoPlayInterval = null;
+        var carouselIdx = 0;
+        var autoPlayInterval = null;
         
         function buildCarousel() {
-            const track = document.getElementById('carousel-track');
-            const dotsContainer = document.getElementById('carousel-dots');
-            
-            galleryImages.forEach(img => {
-                const slide = document.createElement('div');
+            var track = document.getElementById('carousel-track');
+            var dotsContainer = document.getElementById('carousel-dots');
+            galleryImages.forEach(function(img) {
+                var slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                const imgEl = document.createElement('img');
+                var imgEl = document.createElement('img');
                 imgEl.src = img.src;
                 imgEl.alt = img.cap;
                 imgEl.loading = 'lazy';
                 slide.appendChild(imgEl);
                 track.appendChild(slide);
             });
-            
-            galleryImages.forEach((_, i) => {
-                const dot = document.createElement('div');
+            galleryImages.forEach(function(_, i) {
+                var dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => goToCarousel(i));
+                dot.addEventListener('click', function() { goToCarousel(i); });
                 dotsContainer.appendChild(dot);
             });
-            
             updateCarousel();
-            autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
+            autoPlayInterval = setInterval(function() { moveCarousel(1); }, 5000);
         }
         
         function updateCarousel() {
-            const track = document.getElementById('carousel-track');
+            var track = document.getElementById('carousel-track');
             track.style.transform = 'translateX(-' + (carouselIdx * 100) + '%)';
-            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            document.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
                 dot.classList.toggle('active', i === carouselIdx);
             });
         }
@@ -1207,45 +1256,40 @@
             carouselIdx = (carouselIdx + dir + galleryImages.length) % galleryImages.length;
             updateCarousel();
             clearInterval(autoPlayInterval);
-            autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
+            autoPlayInterval = setInterval(function() { moveCarousel(1); }, 5000);
         };
         
         window.goToCarousel = function(idx) {
             carouselIdx = idx;
             updateCarousel();
             clearInterval(autoPlayInterval);
-            autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
+            autoPlayInterval = setInterval(function() { moveCarousel(1); }, 5000);
         };
         
-        let touchStartX = 0;
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-        carousel.addEventListener('touchend', e => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
+        var touchStartX = 0;
+        var carousel = document.getElementById('carousel');
+        carousel.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+        carousel.addEventListener('touchend', function(e) {
+            var diff = touchStartX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 50) moveCarousel(diff > 0 ? 1 : -1);
         });
         
         window.handleRSVP = function(e) {
             e.preventDefault();
-            const name = document.getElementById('rsvp-name').value.trim();
-            const guests = document.getElementById('rsvp-guests').value.trim();
-            const message = document.getElementById('rsvp-message').value.trim();
-            
+            var name = document.getElementById('rsvp-name').value.trim();
+            var guests = document.getElementById('rsvp-guests').value.trim();
+            var message = document.getElementById('rsvp-message').value.trim();
             if (!name) { alert('Por favor ingresa tu nombre'); return; }
-            
-            const whatsappNumber = '50712345678';
-            const text = 'Hola, soy ' + name + '. Confirmo mi asistencia al Bautizo de Emilio André' + 
+            var whatsappNumber = '50712345678';
+            var text = 'Hola, soy ' + name + '. Confirmo mi asistencia al Bautizo de Emilio André' + 
                         (guests ? ' con ' + guests + ' invitado(s)' : '') + 
-                        (message ? ' ' + message : '');
-            
+                        (message ? '. ' + message : '');
             window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(text), '_blank');
-            
-            const button = document.getElementById('rsvp-btn');
-            const originalText = button.textContent;
+            var button = document.getElementById('rsvp-btn');
+            var originalText = button.textContent;
             button.textContent = '✓ Enviado';
             button.classList.add('sent');
-            
-            setTimeout(() => {
+            setTimeout(function() {
                 button.textContent = originalText;
                 button.classList.remove('sent');
                 e.target.reset();
@@ -1253,16 +1297,14 @@
         };
         
         function initParticles() {
-            const canvas = document.getElementById('gold-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let W, H;
-            
+            var canvas = document.getElementById('gold-canvas');
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var W, H;
             function resize() {
                 W = canvas.width = window.innerWidth;
                 H = canvas.height = window.innerHeight;
             }
-            
             function createParticle() {
                 return {
                     x: Math.random() * W,
@@ -1275,18 +1317,14 @@
                     growing: Math.random() > 0.5
                 };
             }
-            
             resize();
-            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
-            
+            for (var i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
             function animate() {
                 particlesRAF = requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, W, H);
-                
-                particles.forEach(p => {
+                particles.forEach(function(p) {
                     p.x += p.speedX;
                     p.y += p.speedY;
-                    
                     if (p.growing) {
                         p.opacity += p.fadeSpeed;
                         if (p.opacity >= 0.4) p.growing = false;
@@ -1294,12 +1332,10 @@
                         p.opacity -= p.fadeSpeed;
                         if (p.opacity <= 0.1) p.growing = true;
                     }
-                    
                     if (p.x < 0) p.x = W;
                     else if (p.x > W) p.x = 0;
                     if (p.y < 0) p.y = H;
                     else if (p.y > H) p.y = 0;
-                    
                     ctx.globalAlpha = p.opacity;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -1308,7 +1344,6 @@
                 });
                 ctx.globalAlpha = 1;
             }
-            
             animate();
             window.addEventListener('resize', resize);
         }
