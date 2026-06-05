@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#faf6ed">
     <title>Bautizo de Emilio André</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
             --fs-lg: clamp(1.3rem, 3.5vw, 1.8rem);
             --fs-xl: clamp(1.8rem, 5vw, 2.8rem);
             --fs-2xl: clamp(2.4rem, 7vw, 4rem);
-            --fs-hero: clamp(2.8rem, 9vw, 5rem);
+            --fs-hero: clamp(2.2rem, 8vw, 4rem);
             
             --gap-xs: clamp(0.4rem, 1vw, 0.6rem);
             --gap-sm: clamp(0.8rem, 2vw, 1.2rem);
@@ -45,15 +45,24 @@
         }
         
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html { 
+            scroll-behavior: smooth; 
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
+        }
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
             background: linear-gradient(180deg, #f5f0e0 0%, #faf6ed 50%, #f5f0e0 100%);
             color: var(--brown);
             overflow-x: hidden;
             min-height: 100vh;
+            min-height: 100dvh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
         img { display: block; max-width: 100%; height: auto; }
         button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -72,7 +81,6 @@
             background-image: 
                 repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
                 repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
-            will-change: auto;
         }
 
         #gold-canvas {
@@ -95,8 +103,11 @@
             cursor: pointer;
             overflow: hidden;
             transition: opacity 1.2s var(--ease-out-expo), visibility 1.2s;
-            min-height: 100vh;
-            min-height: 100dvh;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            touch-action: none;
+            -webkit-overflow-scrolling: none;
         }
         #splash.hide {
             opacity: 0;
@@ -121,7 +132,6 @@
                 rgba(212,175,106,0) 350deg, rgba(212,175,106,0.08) 358deg, rgba(212,175,106,0) 360deg);
             animation: raysRotate 30s linear infinite;
             pointer-events: none;
-            will-change: transform;
         }
         @keyframes raysRotate { to { transform: rotate(360deg); } }
         
@@ -136,12 +146,11 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(212,175,106,0.2) 0%, rgba(212,175,106,0) 70%);
             animation: orbFloat 8s ease-in-out infinite;
-            will-change: transform;
         }
-        .splash-orb:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-delay:0s;}
-        .splash-orb:nth-child(2){width:250px;height:250px;top:-60px;right:-60px;animation-delay:2s;}
-        .splash-orb:nth-child(3){width:200px;height:200px;bottom:-50px;left:10%;animation-delay:4s;}
-        .splash-orb:nth-child(4){width:280px;height:280px;bottom:-70px;right:-40px;animation-delay:1s;}
+        .splash-orb:nth-child(1){width:250px;height:250px;top:-60px;left:-60px;animation-delay:0s;}
+        .splash-orb:nth-child(2){width:200px;height:200px;top:-40px;right:-40px;animation-delay:2s;}
+        .splash-orb:nth-child(3){width:160px;height:160px;bottom:-40px;left:10%;animation-delay:4s;}
+        .splash-orb:nth-child(4){width:220px;height:220px;bottom:-50px;right:-30px;animation-delay:1s;}
         @keyframes orbFloat { 
             0%,100%{transform:scale(1) translateY(0);} 
             50%{transform:scale(1.15) translateY(-15px);} 
@@ -152,35 +161,32 @@
             animation: splashReveal 1.5s var(--ease-out-expo) both;
             position: relative;
             z-index: 2;
-            padding: 15px;
-            max-width: 400px;
+            padding: 10px 15px;
             width: 100%;
-            max-height: 100vh;
-            max-height: 100dvh;
+            max-width: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
+            gap: 8px;
+            overflow: hidden;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        .splash-content::-webkit-scrollbar { display: none; }
-        .splash-content { scrollbar-width: none; -ms-overflow-style: none; }
         
         @keyframes splashReveal {
-            0% { opacity: 0; transform: translateY(30px) scale(0.96); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            0% { opacity: 0; transform: translate(-50%, -40%) scale(0.96); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
         /* ── ÁNGEL IMAGEN SPLASH ─── */
         .angel-container {
-            width: clamp(140px, 32vw, 220px);
-            margin: 0 auto 15px;
+            width: clamp(100px, 28vw, 180px);
+            margin: 0 auto 5px;
             animation: angelFloat 4s ease-in-out infinite;
             flex-shrink: 0;
-            will-change: transform;
         }
         .angel-container img {
             width: 100%;
@@ -189,25 +195,25 @@
         }
         @keyframes angelFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
         .splash-label {
             font-family: 'Cinzel', serif;
-            font-size: var(--fs-xs);
-            letter-spacing: 0.5em;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 8px;
+            margin-bottom: 0;
             opacity: 0;
             animation: fadeSlideUp 1s 0.4s var(--ease-out-expo) forwards;
             flex-shrink: 0;
         }
         .splash-name {
             font-family: 'Great Vibes', cursive;
-            font-size: var(--fs-hero);
+            font-size: clamp(2rem, 9vw, 3rem);
             color: var(--brown);
-            margin-bottom: 12px;
+            margin-bottom: 0;
             opacity: 0;
             animation: fadeSlideUp 1s 0.6s var(--ease-out-expo) forwards;
             text-shadow: 0 2px 8px rgba(184,148,62,0.15);
@@ -218,21 +224,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin: 10px 0 15px;
+            gap: 8px;
+            margin: 4px 0;
             opacity: 0;
             animation: fadeSlideUp 1s 0.8s var(--ease-out-expo) forwards;
             flex-shrink: 0;
         }
         .splash-divider::before, .splash-divider::after {
             content: '';
-            width: 50px;
+            width: 35px;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
         .splash-divider-icon {
             color: var(--gold);
-            font-size: 1rem;
+            font-size: 0.9rem;
             animation: iconRotate 4s ease-in-out infinite;
         }
         @keyframes iconRotate {
@@ -241,7 +247,7 @@
         }
         .splash-hint {
             font-family: 'Cormorant Garamond', serif;
-            font-size: var(--fs-sm);
+            font-size: 0.75rem;
             color: var(--brown-light);
             letter-spacing: 2px;
             font-style: italic;
@@ -264,12 +270,12 @@
         
         .splash-countdown {
             position: absolute;
-            bottom: 15px;
+            bottom: 12px;
             left: 0;
             right: 0;
             text-align: center;
             font-family: 'Cinzel', serif;
-            font-size: var(--fs-xs);
+            font-size: 0.65rem;
             color: var(--gold);
             letter-spacing: 0.15em;
             opacity: 0;
@@ -307,7 +313,6 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
-            will-change: opacity, transform;
         }
         .invitation.visible {
             opacity: 1;
@@ -361,7 +366,6 @@
             margin: 0 auto;
             animation: angelFloatSmall 5s ease-in-out infinite;
             filter: drop-shadow(0 8px 20px rgba(184,148,62,0.25));
-            will-change: transform;
         }
         @keyframes angelFloatSmall {
             0%, 100% { transform: translateY(0); }
@@ -696,7 +700,6 @@
         .carousel-track {
             display: flex;
             transition: transform 0.65s var(--ease-smooth);
-            will-change: transform;
         }
         .carousel-slide {
             min-width: 100%;
@@ -936,6 +939,13 @@
 
         /* ═══════ RESPONSIVE MÓVIL - CORREGIDO ═══════ */
         @media (max-width: 600px) {
+            body {
+                position: relative;
+                overflow: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+            
             .invitation { 
                 padding: 40px 25px; 
                 margin: 20px 0; 
@@ -952,36 +962,35 @@
             
             /* SPLASH MÓVIL - CORRECCIÓN CRÍTICA */
             .splash-content {
-                padding: 10px 15px;
-                gap: 0;
+                padding: 8px 12px;
+                gap: 6px;
+                max-width: 320px;
             }
             .angel-container {
-                width: clamp(120px, 35vw, 180px);
-                margin-bottom: 8px;
-            }
-            .splash-label {
-                font-size: 0.65rem;
-                letter-spacing: 0.4em;
+                width: clamp(90px, 26vw, 150px);
                 margin-bottom: 4px;
             }
+            .splash-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.35em;
+            }
             .splash-name {
-                font-size: clamp(2.2rem, 11vw, 3.2rem);
-                margin-bottom: 8px;
+                font-size: clamp(1.8rem, 8.5vw, 2.6rem);
             }
             .splash-divider {
-                margin: 6px 0 10px;
-                gap: 8px;
+                margin: 3px 0 8px;
+                gap: 6px;
             }
             .splash-divider::before, .splash-divider::after {
-                width: 40px;
+                width: 30px;
             }
             .splash-hint {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
             }
-            .splash-orb:nth-child(1){width:200px;height:200px;}
-            .splash-orb:nth-child(2){width:160px;height:160px;}
-            .splash-orb:nth-child(3){width:140px;height:140px;}
-            .splash-orb:nth-child(4){width:180px;height:180px;}
+            .splash-orb:nth-child(1){width:180px;height:180px;}
+            .splash-orb:nth-child(2){width:140px;height:140px;}
+            .splash-orb:nth-child(3){width:120px;height:120px;}
+            .splash-orb:nth-child(4){width:160px;height:160px;}
         }
         
         @media (max-width: 400px) {
@@ -990,35 +999,62 @@
             .countdown-number { font-size: var(--fs-lg); }
             
             /* SPLASH PANTALLAS MUY PEQUEÑAS */
+            .splash-content {
+                padding: 6px 10px;
+                gap: 5px;
+                max-width: 280px;
+            }
             .angel-container {
-                width: clamp(100px, 30vw, 150px);
-                margin-bottom: 6px;
+                width: clamp(80px, 24vw, 130px);
+                margin-bottom: 3px;
             }
             .splash-name {
-                font-size: clamp(2rem, 10vw, 2.8rem);
+                font-size: clamp(1.6rem, 8vw, 2.4rem);
             }
             .splash-label {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
                 letter-spacing: 0.3em;
+            }
+            .splash-divider::before, .splash-divider::after {
+                width: 25px;
             }
         }
         
         /* Landscape en móvil - ajuste especial */
-        @media (max-height: 600px) and (orientation: landscape) {
+        @media (max-height: 500px) and (orientation: landscape) {
             .splash-content {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
                 align-items: center;
-                gap: 15px;
+                gap: 10px;
+                padding: 8px;
             }
             .angel-container {
-                width: 120px;
+                width: 100px;
                 margin: 0;
+                order: 1;
             }
-            .splash-label, .splash-name, .splash-divider, .splash-hint {
+            .splash-label {
+                order: 2;
                 width: 100%;
                 margin: 0;
+            }
+            .splash-name {
+                order: 3;
+                width: 100%;
+                margin: 0;
+                font-size: 1.8rem;
+            }
+            .splash-divider {
+                order: 4;
+                width: 100%;
+                margin: 2px 0;
+            }
+            .splash-hint {
+                order: 5;
+                width: 100%;
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -1040,7 +1076,7 @@
         
         <div class="splash-content">
             <div class="angel-container">
-                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="220" height="280" decoding="async" />
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="180" height="230" decoding="async" />
             </div>
             
             <div class="splash-label">Bautizo</div>
@@ -1527,25 +1563,4 @@
                     ctx.arc(p.x, p.y, p.size, 0, 6.2832);
                     ctx.fill();
                 }
-                ctx.globalAlpha = 1;
-            }
-            
-            particlesRAF = requestAnimationFrame(animate);
-            
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(resize, 150);
-            }, { passive: true });
-        }
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startAutoOpen);
-        } else {
-            startAutoOpen();
-        }
-        
-    })();
-    </script>
-</body>
-</html>
+                ctx.globalAlpha = 1; = 1;
