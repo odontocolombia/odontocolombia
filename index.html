@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
     <meta name="theme-color" content="#faf6ed">
     <title>Bautizo de Emilio André</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #b8943e;
@@ -35,7 +35,7 @@
             --fs-lg: clamp(1.3rem, 3.5vw, 1.8rem);
             --fs-xl: clamp(1.8rem, 5vw, 2.8rem);
             --fs-2xl: clamp(2.4rem, 7vw, 4rem);
-            --fs-hero: clamp(3rem, 10vw, 5rem);
+            --fs-hero: clamp(2.8rem, 9vw, 5rem);
             
             --gap-xs: clamp(0.4rem, 1vw, 0.6rem);
             --gap-sm: clamp(0.8rem, 2vw, 1.2rem);
@@ -72,6 +72,7 @@
             background-image: 
                 repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
                 repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
+            will-change: auto;
         }
 
         #gold-canvas {
@@ -94,6 +95,8 @@
             cursor: pointer;
             overflow: hidden;
             transition: opacity 1.2s var(--ease-out-expo), visibility 1.2s;
+            min-height: 100vh;
+            min-height: 100dvh;
         }
         #splash.hide {
             opacity: 0;
@@ -118,6 +121,7 @@
                 rgba(212,175,106,0) 350deg, rgba(212,175,106,0.08) 358deg, rgba(212,175,106,0) 360deg);
             animation: raysRotate 30s linear infinite;
             pointer-events: none;
+            will-change: transform;
         }
         @keyframes raysRotate { to { transform: rotate(360deg); } }
         
@@ -132,6 +136,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(212,175,106,0.2) 0%, rgba(212,175,106,0) 70%);
             animation: orbFloat 8s ease-in-out infinite;
+            will-change: transform;
         }
         .splash-orb:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-delay:0s;}
         .splash-orb:nth-child(2){width:250px;height:250px;top:-60px;right:-60px;animation-delay:2s;}
@@ -147,10 +152,23 @@
             animation: splashReveal 1.5s var(--ease-out-expo) both;
             position: relative;
             z-index: 2;
-            padding: 20px;
+            padding: 15px;
             max-width: 400px;
             width: 100%;
+            max-height: 100vh;
+            max-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
+        .splash-content::-webkit-scrollbar { display: none; }
+        .splash-content { scrollbar-width: none; -ms-overflow-style: none; }
+        
         @keyframes splashReveal {
             0% { opacity: 0; transform: translateY(30px) scale(0.96); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -158,9 +176,11 @@
 
         /* ── ÁNGEL IMAGEN SPLASH ─── */
         .angel-container {
-            width: clamp(160px, 40vw, 240px);
-            margin: 0 auto 25px;
+            width: clamp(140px, 32vw, 220px);
+            margin: 0 auto 15px;
             animation: angelFloat 4s ease-in-out infinite;
+            flex-shrink: 0;
+            will-change: transform;
         }
         .angel-container img {
             width: 100%;
@@ -169,7 +189,7 @@
         }
         @keyframes angelFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-12px); }
         }
 
         .splash-label {
@@ -178,32 +198,35 @@
             letter-spacing: 0.5em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             opacity: 0;
             animation: fadeSlideUp 1s 0.4s var(--ease-out-expo) forwards;
+            flex-shrink: 0;
         }
         .splash-name {
             font-family: 'Great Vibes', cursive;
             font-size: var(--fs-hero);
             color: var(--brown);
-            margin-bottom: 25px;
+            margin-bottom: 12px;
             opacity: 0;
             animation: fadeSlideUp 1s 0.6s var(--ease-out-expo) forwards;
             text-shadow: 0 2px 8px rgba(184,148,62,0.15);
             line-height: 1.1;
+            flex-shrink: 0;
         }
         .splash-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0 30px;
+            gap: 12px;
+            margin: 10px 0 15px;
             opacity: 0;
             animation: fadeSlideUp 1s 0.8s var(--ease-out-expo) forwards;
+            flex-shrink: 0;
         }
         .splash-divider::before, .splash-divider::after {
             content: '';
-            width: 60px;
+            width: 50px;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
@@ -224,6 +247,7 @@
             font-style: italic;
             opacity: 0;
             animation: fadeSlideUp 1s 1s var(--ease-out-expo) forwards;
+            flex-shrink: 0;
         }
         
         .progress-bar {
@@ -235,11 +259,12 @@
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
             transition: width 0.1s linear;
             pointer-events: none;
+            z-index: 10;
         }
         
         .splash-countdown {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 0;
             right: 0;
             text-align: center;
@@ -250,10 +275,11 @@
             opacity: 0;
             animation: fadeSlideUp 1s 1.2s var(--ease-out-expo) forwards;
             pointer-events: none;
+            z-index: 10;
         }
         
         @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(20px); }
+            0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
@@ -281,6 +307,7 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+            will-change: opacity, transform;
         }
         .invitation.visible {
             opacity: 1;
@@ -313,17 +340,13 @@
             transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
             z-index: 5;
         }
-        .corner-ornament.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .corner-ornament.visible { opacity: 1; transform: scale(1); }
         .corner-ornament svg { width: 100%; height: 100%; }
         .corner-tl { top: 15px; left: 15px; transition-delay: 0.2s; }
         .corner-tr { top: 15px; right: 15px; transform: scaleX(-1); transition-delay: 0.4s; }
         .corner-bl { bottom: 15px; left: 15px; transform: scaleY(-1); transition-delay: 0.6s; }
         .corner-br { bottom: 15px; right: 15px; transform: scale(-1, -1); transition-delay: 0.8s; }
 
-        /* ─── ÁNGEL IMAGEN EN HEADER ─── */
         .angel-header {
             text-align: center;
             margin-bottom: 40px;
@@ -332,15 +355,13 @@
             transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
             transition-delay: 0.3s;
         }
-        .angel-header.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .angel-header.visible { opacity: 1; transform: translateY(0); }
         .angel-header img {
             width: clamp(120px, 30vw, 180px);
             margin: 0 auto;
             animation: angelFloatSmall 5s ease-in-out infinite;
             filter: drop-shadow(0 8px 20px rgba(184,148,62,0.25));
+            will-change: transform;
         }
         @keyframes angelFloatSmall {
             0%, 100% { transform: translateY(0); }
@@ -913,6 +934,7 @@
             }
         }
 
+        /* ═══════ RESPONSIVE MÓVIL - CORREGIDO ═══════ */
         @media (max-width: 600px) {
             .invitation { 
                 padding: 40px 25px; 
@@ -925,14 +947,79 @@
             .family-label { flex: 0 0 auto; }
             .countdown-grid { grid-template-columns: repeat(2, 1fr); }
             .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
-            .angel-container { width: 180px; }
+            .angel-container { width: 160px; margin-bottom: 10px; }
             .map-wrap iframe { height: 240px; }
+            
+            /* SPLASH MÓVIL - CORRECCIÓN CRÍTICA */
+            .splash-content {
+                padding: 10px 15px;
+                gap: 0;
+            }
+            .angel-container {
+                width: clamp(120px, 35vw, 180px);
+                margin-bottom: 8px;
+            }
+            .splash-label {
+                font-size: 0.65rem;
+                letter-spacing: 0.4em;
+                margin-bottom: 4px;
+            }
+            .splash-name {
+                font-size: clamp(2.2rem, 11vw, 3.2rem);
+                margin-bottom: 8px;
+            }
+            .splash-divider {
+                margin: 6px 0 10px;
+                gap: 8px;
+            }
+            .splash-divider::before, .splash-divider::after {
+                width: 40px;
+            }
+            .splash-hint {
+                font-size: 0.8rem;
+            }
+            .splash-orb:nth-child(1){width:200px;height:200px;}
+            .splash-orb:nth-child(2){width:160px;height:160px;}
+            .splash-orb:nth-child(3){width:140px;height:140px;}
+            .splash-orb:nth-child(4){width:180px;height:180px;}
         }
         
         @media (max-width: 400px) {
             .date-number { font-size: var(--fs-xl); }
             .family-label { font-size: var(--fs-lg); }
             .countdown-number { font-size: var(--fs-lg); }
+            
+            /* SPLASH PANTALLAS MUY PEQUEÑAS */
+            .angel-container {
+                width: clamp(100px, 30vw, 150px);
+                margin-bottom: 6px;
+            }
+            .splash-name {
+                font-size: clamp(2rem, 10vw, 2.8rem);
+            }
+            .splash-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.3em;
+            }
+        }
+        
+        /* Landscape en móvil - ajuste especial */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .splash-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+            }
+            .angel-container {
+                width: 120px;
+                margin: 0;
+            }
+            .splash-label, .splash-name, .splash-divider, .splash-hint {
+                width: 100%;
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -953,7 +1040,7 @@
         
         <div class="splash-content">
             <div class="angel-container">
-                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="220" height="280" decoding="async" />
             </div>
             
             <div class="splash-label">Bautizo</div>
@@ -1011,9 +1098,8 @@
                 </svg>
             </div>
 
-            <!-- ÁNGEL IMAGEN EN HEADER -->
             <div class="angel-header">
-                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" />
+                <img src="https://hercules-cdn.com/file_DIJw4S0b67ZfCrbmEZz8LBTC" alt="Ángel" width="180" height="230" loading="lazy" decoding="async" />
             </div>
 
             <div class="text-intro">Acompáñanos a ser parte del</div>
@@ -1147,6 +1233,8 @@
         
         const AUTO_OPEN_MS = 7000;
         const EVENT_DATE = new Date('2026-02-08T10:00:00').getTime();
+        const IS_MOBILE = window.innerWidth <= 600;
+        const PARTICLE_COUNT = IS_MOBILE ? 15 : 30;
         
         const splash = document.getElementById('splash');
         const progressBar = document.getElementById('progress-bar');
@@ -1155,6 +1243,7 @@
         let progressStart = null;
         let progressRAF = null;
         let autoTimer = null;
+        let particlesRAF = null;
         
         function openInvitation() {
             if (opened) return;
@@ -1191,35 +1280,21 @@
             autoTimer = setTimeout(openInvitation, AUTO_OPEN_MS);
         }
         
-        splash.addEventListener('click', openInvitation);
+        splash.addEventListener('click', openInvitation, { passive: true });
         
         function revealInvitation() {
             const invitation = document.getElementById('invitation');
             invitation.classList.add('visible');
             
             const revealElements = [
-                '.corner-ornament',
-                '.angel-header',
-                '.text-intro',
-                '.text-title',
-                '.text-subtitle',
-                '.text-name',
-                '.text-surname',
-                '.date-section',
-                '.family-section',
-                '.church-section',
-                '.divider',
-                '.countdown-section',
-                '.gallery-section',
-                '.map-section',
-                '.rsvp-section',
-                '.footer'
+                '.corner-ornament', '.angel-header', '.text-intro', '.text-title',
+                '.text-subtitle', '.text-name', '.text-surname', '.date-section',
+                '.family-section', '.church-section', '.divider', '.countdown-section',
+                '.gallery-section', '.map-section', '.rsvp-section', '.footer'
             ];
             
             revealElements.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => {
-                    el.classList.add('visible');
-                });
+                document.querySelectorAll(selector).forEach(el => el.classList.add('visible'));
             });
             
             initParticles();
@@ -1235,6 +1310,8 @@
                 s: document.getElementById('seconds')
             };
             
+            let prevValues = { d: '', h: '', m: '', s: '' };
+            
             function pad(n) { return String(n).padStart(2, '0'); }
             
             function tick() {
@@ -1249,10 +1326,11 @@
                 const m = Math.floor((diff % 3600000) / 60000);
                 const s = Math.floor((diff % 60000) / 1000);
                 
-                function update(el, val) {
+                function update(key, el, val) {
                     if (!el) return;
                     const v = pad(val);
-                    if (el.textContent !== v) {
+                    if (prevValues[key] !== v) {
+                        prevValues[key] = v;
                         el.textContent = v;
                         el.classList.remove('tick');
                         void el.offsetWidth;
@@ -1261,10 +1339,10 @@
                     }
                 }
                 
-                update(els.d, d);
-                update(els.h, h);
-                update(els.m, m);
-                update(els.s, s);
+                update('d', els.d, d);
+                update('h', els.h, h);
+                update('m', els.m, m);
+                update('s', els.s, s);
             }
             
             tick();
@@ -1286,15 +1364,28 @@
             const track = document.getElementById('carousel-track');
             const dotsContainer = document.getElementById('carousel-dots');
             
-            track.innerHTML = galleryImages.map(img => `
-                <div class="carousel-slide">
-                    <img src="${img.src}" alt="${img.cap}" loading="lazy">
-                </div>
-            `).join('');
+            const fragment = document.createDocumentFragment();
+            galleryImages.forEach(img => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const imgEl = document.createElement('img');
+                imgEl.src = img.src;
+                imgEl.alt = img.cap;
+                imgEl.loading = 'lazy';
+                imgEl.decoding = 'async';
+                slide.appendChild(imgEl);
+                fragment.appendChild(slide);
+            });
+            track.appendChild(fragment);
             
-            dotsContainer.innerHTML = galleryImages.map((_, i) => `
-                <div class="carousel-dot${i === 0 ? ' active' : ''}" onclick="goToCarousel(${i})"></div>
-            `).join('');
+            const dotsFragment = document.createDocumentFragment();
+            galleryImages.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToCarousel(i));
+                dotsFragment.appendChild(dot);
+            });
+            dotsContainer.appendChild(dotsFragment);
             
             updateCarousel();
             autoPlayInterval = setInterval(() => moveCarousel(1), 5000);
@@ -1302,7 +1393,7 @@
         
         function updateCarousel() {
             const track = document.getElementById('carousel-track');
-            track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+            track.style.transform = 'translateX(-' + (carouselIdx * 100) + '%)';
             document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i === carouselIdx);
             });
@@ -1346,9 +1437,11 @@
             }
             
             const whatsappNumber = '50712345678';
-            const text = `Hola, soy ${name}. Confirmo mi asistencia al Bautizo de Emilio André${guests ? ' con ' + guests + ' invitado(s)' : ''}.${message ? ' ' + message : ''}`;
+            const text = 'Hola, soy ' + name + '. Confirmo mi asistencia al Bautizo de Emilio André' + 
+                        (guests ? ' con ' + guests + ' invitado(s)' : '') + 
+                        (message ? ' ' + message : '');
             
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+            window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(text), '_blank');
             
             const button = document.getElementById('rsvp-btn');
             const originalText = button.textContent;
@@ -1364,67 +1457,93 @@
         
         function initParticles() {
             const canvas = document.getElementById('gold-canvas');
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d', { alpha: true });
             let particles = [];
             let W, H;
+            let dpr = Math.min(window.devicePixelRatio || 1, 2);
             
             function resize() {
-                W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight;
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = W * dpr;
+                canvas.height = H * dpr;
+                canvas.style.width = W + 'px';
+                canvas.style.height = H + 'px';
+                ctx.scale(dpr, dpr);
             }
             
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * W;
-                    this.y = Math.random() * H;
-                    this.size = Math.random() * 2 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.3;
-                    this.speedY = (Math.random() - 0.5) * 0.3;
-                    this.opacity = Math.random() * 0.3 + 0.1;
-                    this.fadeSpeed = Math.random() * 0.01 + 0.005;
-                    this.growing = Math.random() > 0.5;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.growing) {
-                        this.opacity += this.fadeSpeed;
-                        if (this.opacity >= 0.4) this.growing = false;
-                    } else {
-                        this.opacity -= this.fadeSpeed;
-                        if (this.opacity <= 0.1) this.growing = true;
-                    }
-                    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) {
-                        this.reset();
-                    }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(184, 148, 62, ${this.opacity})`;
-                    ctx.fill();
-                }
+            function createParticle() {
+                return {
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    size: Math.random() * 2 + 0.5,
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: (Math.random() - 0.5) * 0.3,
+                    opacity: Math.random() * 0.3 + 0.1,
+                    fadeSpeed: Math.random() * 0.01 + 0.005,
+                    growing: Math.random() > 0.5
+                };
             }
             
             resize();
-            for (let i = 0; i < 30; i++) {
-                particles.push(new Particle());
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(createParticle());
             }
             
-            function animate() {
+            let lastTime = 0;
+            const targetFPS = IS_MOBILE ? 30 : 60;
+            const frameInterval = 1000 / targetFPS;
+            
+            function animate(currentTime) {
+                particlesRAF = requestAnimationFrame(animate);
+                
+                const deltaTime = currentTime - lastTime;
+                if (deltaTime < frameInterval) return;
+                lastTime = currentTime - (deltaTime % frameInterval);
+                
                 ctx.clearRect(0, 0, W, H);
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
+                ctx.fillStyle = 'rgba(184, 148, 62, 1)';
+                
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    if (p.growing) {
+                        p.opacity += p.fadeSpeed;
+                        if (p.opacity >= 0.4) p.growing = false;
+                    } else {
+                        p.opacity -= p.fadeSpeed;
+                        if (p.opacity <= 0.1) p.growing = true;
+                    }
+                    
+                    if (p.x < 0) p.x = W;
+                    else if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H;
+                    else if (p.y > H) p.y = 0;
+                    
+                    ctx.globalAlpha = p.opacity;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, 6.2832);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
             }
             
-            animate();
-            window.addEventListener('resize', resize, { passive: true });
+            particlesRAF = requestAnimationFrame(animate);
+            
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(resize, 150);
+            }, { passive: true });
         }
         
-        document.addEventListener('DOMContentLoaded', function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startAutoOpen);
+        } else {
             startAutoOpen();
-        });
+        }
         
     })();
     </script>
