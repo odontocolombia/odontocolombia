@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bautizo de Emilio André</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --pink: #e8a0b8;
@@ -15,8 +15,6 @@
       --cream: #fff8fa;
       --brown: #5a3848;
       --brown-light: #7a5868;
-      --green: #a8b898;
-      --green-light: #c8d8b8;
       --white: #ffffff;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -27,98 +25,255 @@
       overflow-x:hidden;
       min-height:100vh;
       background:linear-gradient(180deg,#fdf0f5 0%,#fff8fa 50%,#fdf0f5 100%);
-      animation:bgBreath 10s ease-in-out infinite;
-    }
-    @keyframes bgBreath {
-      0%,100%{background:linear-gradient(180deg,#fdf0f5 0%,#fff8fa 50%,#fdf0f5 100%);}
-      50%{background:linear-gradient(180deg,#fae8f2 0%,#fff8fa 50%,#fdf5f8 100%);}
     }
     ::-webkit-scrollbar{width:5px;}
     ::-webkit-scrollbar-track{background:#fdf0f5;}
     ::-webkit-scrollbar-thumb{background:var(--pink);border-radius:3px;}
     #gold-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;}
-    /* ── SPLASH ── */
+
+    /* ══════════════════════════════════════════
+       SPLASH — nuevo diseño
+    ══════════════════════════════════════════ */
     #splash {
       position:fixed;inset:0;z-index:9999;
-      background:linear-gradient(160deg,#fdf0f5 0%,#fff4f8 50%,#fdf0f5 100%);
       display:flex;align-items:center;justify-content:center;
       cursor:pointer;overflow:hidden;
+      background: radial-gradient(ellipse at 50% 30%, #fff0f8 0%, #fde8f5 40%, #f5d8ee 100%);
     }
-    #splash.hiding { animation:splashFade 1.5s ease forwards; pointer-events:none; }
+    #splash.hiding {
+      animation: splashExit 1.8s cubic-bezier(0.76,0,0.24,1) forwards;
+      pointer-events:none;
+    }
     #splash.gone { display:none; }
-    @keyframes splashFade{0%{opacity:1}100%{opacity:0;visibility:hidden;}}
-    .light-rays {
+
+    @keyframes splashExit {
+      0%   { opacity:1; transform:scale(1); }
+      40%  { opacity:1; transform:scale(1.04); }
+      100% { opacity:0; transform:scale(1.12); }
+    }
+
+    /* Fondo con rayos de luz giratorios */
+    .splash-rays {
       position:absolute;inset:0;
-      background:conic-gradient(from 0deg at 50% 50%,
-        rgba(255,220,240,0) 0deg, rgba(255,220,240,0.07) 10deg, rgba(255,220,240,0) 20deg,
-        rgba(255,220,240,0) 40deg, rgba(255,220,240,0.05) 50deg, rgba(255,220,240,0) 60deg,
-        rgba(255,220,240,0) 80deg, rgba(255,220,240,0.08) 90deg, rgba(255,220,240,0) 100deg,
-        rgba(255,220,240,0) 120deg, rgba(255,220,240,0.04) 130deg, rgba(255,220,240,0) 140deg,
-        rgba(255,220,240,0) 160deg, rgba(255,220,240,0.07) 170deg, rgba(255,220,240,0) 180deg,
-        rgba(255,220,240,0) 200deg, rgba(255,220,240,0.05) 210deg, rgba(255,220,240,0) 220deg,
-        rgba(255,220,240,0) 240deg, rgba(255,220,240,0.06) 250deg, rgba(255,220,240,0) 260deg,
-        rgba(255,220,240,0) 280deg, rgba(255,220,240,0.04) 290deg, rgba(255,220,240,0) 300deg,
-        rgba(255,220,240,0) 320deg, rgba(255,220,240,0.07) 330deg, rgba(255,220,240,0) 340deg,
-        rgba(255,220,240,0) 360deg);
-      animation:raysRotate 30s linear infinite;pointer-events:none;
+      background: conic-gradient(from 0deg at 50% 45%,
+        rgba(255,210,235,0) 0deg,   rgba(255,210,235,0.12) 8deg,  rgba(255,210,235,0) 16deg,
+        rgba(255,210,235,0) 35deg,  rgba(255,210,235,0.08) 43deg, rgba(255,210,235,0) 51deg,
+        rgba(255,210,235,0) 70deg,  rgba(255,210,235,0.14) 78deg, rgba(255,210,235,0) 86deg,
+        rgba(255,210,235,0) 105deg, rgba(255,210,235,0.07) 113deg,rgba(255,210,235,0) 121deg,
+        rgba(255,210,235,0) 140deg, rgba(255,210,235,0.11) 148deg,rgba(255,210,235,0) 156deg,
+        rgba(255,210,235,0) 175deg, rgba(255,210,235,0.09) 183deg,rgba(255,210,235,0) 191deg,
+        rgba(255,210,235,0) 210deg, rgba(255,210,235,0.13) 218deg,rgba(255,210,235,0) 226deg,
+        rgba(255,210,235,0) 245deg, rgba(255,210,235,0.06) 253deg,rgba(255,210,235,0) 261deg,
+        rgba(255,210,235,0) 280deg, rgba(255,210,235,0.10) 288deg,rgba(255,210,235,0) 296deg,
+        rgba(255,210,235,0) 315deg, rgba(255,210,235,0.08) 323deg,rgba(255,210,235,0) 331deg,
+        rgba(255,210,235,0) 350deg, rgba(255,210,235,0.12) 358deg,rgba(255,210,235,0) 360deg);
+      animation: raysRotate 25s linear infinite;
+      pointer-events:none;
     }
-    @keyframes raysRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    @keyframes raysRotate { to { transform:rotate(360deg); } }
+
+    /* Partículas de fondo decorativas */
+    .splash-orbs {
+      position:absolute;inset:0;pointer-events:none;overflow:hidden;
+    }
+    .splash-orb {
+      position:absolute;border-radius:50%;
+      background:radial-gradient(circle, rgba(232,160,184,0.18) 0%, rgba(232,160,184,0) 70%);
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .splash-orb:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-delay:0s;}
+    .splash-orb:nth-child(2){width:250px;height:250px;top:-60px;right:-60px;animation-delay:2s;}
+    .splash-orb:nth-child(3){width:200px;height:200px;bottom:-50px;left:10%;animation-delay:4s;}
+    .splash-orb:nth-child(4){width:280px;height:280px;bottom:-70px;right:-40px;animation-delay:1s;}
+    .splash-orb:nth-child(5){width:180px;height:180px;top:40%;left:-50px;animation-delay:3s;}
+    .splash-orb:nth-child(6){width:160px;height:160px;top:35%;right:-40px;animation-delay:5s;}
+    @keyframes orbFloat {
+      0%,100%{transform:scale(1) translateY(0);}
+      50%{transform:scale(1.15) translateY(-15px);}
+    }
+
+    /* Flores en las 4 esquinas del splash */
+    .splash-corner {
+      position:absolute;width:180px;height:180px;opacity:0.7;
+      animation: cornerSway 6s ease-in-out infinite;
+    }
+    .splash-corner:nth-child(1){top:-20px;left:-20px;}
+    .splash-corner:nth-child(2){top:-20px;right:-20px;transform:scaleX(-1);animation-delay:1.5s;}
+    .splash-corner:nth-child(3){bottom:-20px;left:-20px;transform:scaleY(-1);animation-delay:3s;}
+    .splash-corner:nth-child(4){bottom:-20px;right:-20px;transform:scale(-1,-1);animation-delay:4.5s;}
+    @keyframes cornerSway {
+      0%,100%{filter:drop-shadow(0 0 4px rgba(232,160,184,0.3));}
+      50%{filter:drop-shadow(0 0 12px rgba(232,160,184,0.6));}
+    }
+
+    /* Contenido central */
     .splash-content {
+      position:relative;z-index:5;
+      display:flex;flex-direction:column;align-items:center;
       text-align:center;
-      animation:splashReveal 2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
-      position:relative;z-index:2;
+      animation: splashReveal 1.2s cubic-bezier(0.22,1,0.36,1) forwards;
     }
-    @keyframes splashReveal{0%{opacity:0;transform:translateY(35px)}100%{opacity:1;transform:translateY(0)}}
-    .splash-flowers{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-    .flower-cluster{position:absolute;opacity:0.65;animation:clusterSway 7s ease-in-out infinite;}
-    .flower-cluster:nth-child(1){top:-25px;left:-25px;}
-    .flower-cluster:nth-child(2){top:-25px;right:-25px;transform:scaleX(-1);animation-delay:1.5s;}
-    .flower-cluster:nth-child(3){bottom:-25px;left:-25px;transform:scaleY(-1);animation-delay:3s;}
-    .flower-cluster:nth-child(4){bottom:-25px;right:-25px;transform:scale(-1,-1);animation-delay:4.5s;}
-    @keyframes clusterSway{0%,100%{filter:none}50%{filter:drop-shadow(0 0 6px rgba(232,160,184,0.4))}}
-    .cross-container {
-      width:400px;height:540px;margin:0 auto 30px;position:relative;
-      animation:crossFloat 5s ease-in-out infinite;
-      filter:drop-shadow(0 6px 20px rgba(200,120,152,0.25));
+    @keyframes splashReveal {
+      0%   { opacity:0; transform:translateY(40px) scale(0.95); }
+      100% { opacity:1; transform:translateY(0)   scale(1); }
     }
-    @keyframes crossFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
-    .cross-glow-ring {
-      position:absolute;inset:-15px;border-radius:50%;
-      background:radial-gradient(circle,rgba(232,160,184,0.2) 0%,rgba(232,160,184,0) 70%);
-      animation:glowPulse 3s ease-in-out infinite;
-    }
-    @keyframes glowPulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
-    /* ── ANGEL IMAGE ── */
-    #angel-splash img {
-      width:400px;
-      height:540px;
-      object-fit:contain;
+
+    /* Ángel */
+    .splash-angel-wrap {
       position:relative;
-      z-index:2;
+      width:340px;height:340px;
+      margin-bottom:10px;
+      animation: angelFloat 5s ease-in-out infinite;
     }
-    .splash-text {
-      font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:8px;
-      text-transform:uppercase;color:var(--pink);margin-bottom:20px;
+    @media(max-width:480px){
+      .splash-angel-wrap { width:260px;height:260px; }
+    }
+    @keyframes angelFloat {
+      0%,100%{ transform:translateY(0) rotate(-0.5deg); }
+      50%    { transform:translateY(-14px) rotate(0.5deg); }
+    }
+    .splash-angel-glow {
+      position:absolute;inset:-20px;border-radius:50%;
+      background:radial-gradient(circle, rgba(255,220,240,0.55) 0%, rgba(255,220,240,0) 70%);
+      animation: glowBreath 3s ease-in-out infinite;
+    }
+    @keyframes glowBreath {
+      0%,100%{ transform:scale(1);   opacity:0.6; }
+      50%    { transform:scale(1.18);opacity:1; }
+    }
+    .splash-angel-wrap img {
+      width:100%;height:100%;
+      object-fit:contain;
+      position:relative;z-index:2;
+      filter:drop-shadow(0 8px 24px rgba(200,120,152,0.3));
+    }
+
+    /* Estrellas alrededor del ángel */
+    .star {
+      position:absolute;z-index:3;
+      color:#f8d840;font-size:1.1rem;
+      animation: starTwinkle 2s ease-in-out infinite;
+    }
+    .star:nth-child(2){top:8%;left:12%;animation-delay:0s;font-size:1.3rem;}
+    .star:nth-child(3){top:5%;right:18%;animation-delay:0.6s;font-size:0.9rem;}
+    .star:nth-child(4){top:30%;left:4%;animation-delay:1.2s;font-size:0.8rem;}
+    .star:nth-child(5){top:28%;right:5%;animation-delay:0.3s;font-size:1rem;}
+    .star:nth-child(6){bottom:18%;left:8%;animation-delay:0.9s;font-size:0.7rem;}
+    .star:nth-child(7){bottom:20%;right:10%;animation-delay:1.5s;font-size:0.9rem;}
+    @keyframes starTwinkle {
+      0%,100%{ opacity:0.3; transform:scale(0.8)  rotate(0deg); }
+      50%    { opacity:1;   transform:scale(1.3)  rotate(20deg); }
+    }
+
+    /* Encabezado texto */
+    .splash-label {
+      font-family:'Cinzel',serif;
+      font-size:0.7rem;letter-spacing:10px;
+      text-transform:uppercase;
+      color:var(--pink-dark);
+      margin-bottom:8px;
+      opacity:0;animation:fadeSlideUp 0.8s 0.4s ease forwards;
     }
     .splash-name {
-      font-family:'Great Vibes',cursive;font-size:3.2rem;color:var(--brown);
-      margin-bottom:30px;
-      background:linear-gradient(90deg,#c87898 0%,#e8a0b8 35%,#d4899f 60%,#c87898 100%);
+      font-family:'Great Vibes',cursive;
+      font-size:3.6rem;
+      background:linear-gradient(135deg,#c87898 0%,#e8a0b8 40%,#d4899f 65%,#c87898 100%);
       background-size:200% auto;
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text;
-      animation:nameShimmer 4s linear infinite;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:fadeSlideUp 0.8s 0.6s ease forwards, nameShimmer 4s 1.4s linear infinite;
+      opacity:0;
+      line-height:1.1;
+      margin-bottom:4px;
+    }
+    .splash-surname {
+      font-family:'Cinzel',serif;
+      font-size:1rem;letter-spacing:5px;
+      color:var(--brown);
+      opacity:0;animation:fadeSlideUp 0.8s 0.8s ease forwards;
+      margin-bottom:28px;
     }
     @keyframes nameShimmer{0%{background-position:0% center}100%{background-position:200% center}}
-    .splash-hint {
-      font-family:'Cormorant Garamond',serif;font-size:0.85rem;
-      color:var(--brown-light);letter-spacing:3px;
-      animation:pulseFade 2.2s ease-in-out infinite;
+    @keyframes fadeSlideUp {
+      0%  { opacity:0; transform:translateY(18px); }
+      100%{ opacity:1; transform:translateY(0); }
     }
-    @keyframes pulseFade{0%,100%{opacity:0.35}50%{opacity:1}}
-    /* ── MAIN ── */
+
+    /* Separador decorativo */
+    .splash-divider {
+      display:flex;align-items:center;gap:12px;
+      margin-bottom:22px;
+      opacity:0;animation:fadeSlideUp 0.8s 1s ease forwards;
+    }
+    .splash-divider::before,.splash-divider::after {
+      content:'';width:60px;height:1px;
+      background:linear-gradient(to right,transparent,var(--pink));
+    }
+    .splash-divider::after{background:linear-gradient(to left,transparent,var(--pink));}
+    .splash-divider-icon { color:var(--pink);font-size:1rem; }
+
+    /* Botón CTA */
+    .splash-btn {
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 36px;
+      background:linear-gradient(135deg,#f5d0e0,#e8a0b8,#c87898,#e8a0b8,#f5d0e0);
+      background-size:300% 100%;
+      color:var(--white);
+      font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:3px;
+      text-transform:uppercase;border:none;border-radius:50px;
+      cursor:pointer;
+      box-shadow:0 6px 24px rgba(200,120,152,0.35);
+      animation:fadeSlideUp 0.8s 1.2s ease forwards, buttonPremium 3s 2s linear infinite;
+      opacity:0;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+      position:relative;overflow:hidden;
+    }
+    .splash-btn::before {
+      content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+      transition:left 0.5s ease;
+    }
+    .splash-btn:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(200,120,152,0.5); }
+    .splash-btn:hover::before { left:100%; }
+    .splash-btn-icon { font-size:1rem; animation:iconBounce 1.5s ease-in-out infinite; }
+    @keyframes iconBounce {
+      0%,100%{ transform:translateX(0); }
+      50%    { transform:translateX(5px); }
+    }
+    @keyframes buttonPremium{0%{background-position:0% center}100%{background-position:300% center}}
+
+    /* Contador regresivo del splash */
+    .splash-auto {
+      margin-top:16px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:0.82rem;color:var(--brown-light);
+      letter-spacing:2px;font-style:italic;
+      opacity:0;animation:fadeSlideUp 0.8s 1.4s ease forwards;
+    }
+    .splash-auto span {
+      font-family:'Cinzel',serif;font-weight:700;
+      color:var(--pink-dark);font-style:normal;
+    }
+
+    /* Barra de progreso auto-open */
+    .splash-progress-bar {
+      width:160px;height:2px;
+      background:rgba(200,120,152,0.2);
+      border-radius:2px;margin-top:10px;
+      overflow:hidden;
+      opacity:0;animation:fadeSlideUp 0.8s 1.6s ease forwards;
+    }
+    .splash-progress-fill {
+      height:100%;width:0%;
+      background:linear-gradient(90deg,var(--pink-light),var(--pink-dark));
+      border-radius:2px;
+      transition:width 0.1s linear;
+    }
+
+    /* ══════════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════════ */
     .main-container{position:relative;z-index:2;max-width:620px;margin:0 auto;padding:20px;}
-    /* ── INVITATION CARD ── */
+
     .invitation {
       background:var(--white);
       border-radius:200px 200px 20px 20px;
@@ -135,7 +290,7 @@
       animation:cardShimmer 8s ease-in-out infinite;pointer-events:none;border-radius:inherit;z-index:10;
     }
     @keyframes cardShimmer{0%,70%{left:-100%}85%{left:160%}100%{left:160%}}
-    /* ── CORNER FLOWERS ── */
+
     .corner-flower{position:absolute;width:145px;height:145px;opacity:0;z-index:5;}
     .corner-flower.visible{animation:flowerReveal 1.4s cubic-bezier(0.22,1,0.36,1) forwards;}
     @keyframes flowerReveal{0%{opacity:0;transform:scale(0.2) rotate(-25deg)}60%{transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
@@ -151,7 +306,7 @@
     .corner-br{bottom:-30px;right:-30px;transform:scale(-1,-1);}
     .corner-br.visible{animation:flowerRevealBR 1.4s cubic-bezier(0.22,1,0.36,1) 0.15s forwards;}
     @keyframes flowerRevealBR{0%{opacity:0;transform:scale(-1,-1) scale(0.2) rotate(-25deg)}60%{transform:scale(-1,-1) scale(1.08)}100%{opacity:1;transform:scale(-1,-1) scale(1)}}
-    /* ── SIDE FLOWERS ── */
+
     .side-flower{position:absolute;width:80px;height:120px;opacity:0;z-index:5;}
     .side-left{left:-52px;top:50%;transform:translateY(-50%);}
     .side-left.visible{animation:sideRevealLeft 1.2s ease 0.4s forwards;}
@@ -161,13 +316,13 @@
     @keyframes sideRevealRight{0%{opacity:0;transform:translateY(-50%) scaleX(-1) translateX(-25px)}100%{opacity:0.75;transform:translateY(-50%) scaleX(-1) translateX(0)}}
     .side-flower svg{animation:sideBreathe 6s ease-in-out infinite;}
     @keyframes sideBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-    /* ── CROSS ── */
+
     .invitation-cross{text-align:center;margin-bottom:32px;opacity:0;}
     .invitation-cross.visible{animation:crossReveal 1.4s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;}
     @keyframes crossReveal{0%{opacity:0;transform:translateY(-25px) scale(0.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
     .invitation-cross-inner{display:inline-block;animation:crossGlowPulse 4s ease-in-out infinite;}
     @keyframes crossGlowPulse{0%,100%{filter:drop-shadow(0 4px 12px rgba(200,120,152,0.2));}50%{filter:drop-shadow(0 4px 22px rgba(200,120,152,0.55)) drop-shadow(0 0 35px rgba(255,215,230,0.35));}}
-    /* ── TEXT ── */
+
     .text-intro{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown-light);text-align:center;margin-bottom:15px;font-style:italic;opacity:0;}
     .text-intro.visible{animation:fadeUp 1s ease 0.5s forwards;}
     .text-title{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;color:var(--brown);text-align:center;letter-spacing:8px;margin-bottom:10px;opacity:0;}
@@ -185,7 +340,7 @@
     .text-surname{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--brown);text-align:center;letter-spacing:4px;margin-bottom:40px;opacity:0;}
     .text-surname.visible{animation:fadeUp 1s ease 1.3s forwards;}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(22px)}100%{opacity:1;transform:translateY(0)}}
-    /* ── DATE ── */
+
     .date-section{text-align:center;margin:40px 0;padding:30px 0;border-top:1px solid var(--pink-light);border-bottom:1px solid var(--pink-light);opacity:0;position:relative;}
     .date-section.visible{animation:fadeIn 1s ease 1.5s forwards;}
     .date-section::before,.date-section::after{
@@ -201,7 +356,7 @@
     .date-number{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--pink-dark);margin:10px 0;animation:dateGlow 3.5s ease-in-out infinite;}
     @keyframes dateGlow{0%,100%{text-shadow:0 2px 4px rgba(200,120,152,0.2)}50%{text-shadow:0 2px 20px rgba(200,120,152,0.55),0 0 40px rgba(200,120,152,0.15)}}
     .date-month{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--brown);letter-spacing:3px;}
-    /* ── FAMILY ── */
+
     .family-section{margin:40px 0;opacity:0;}
     .family-section.visible{animation:fadeIn 1s ease 1.7s forwards;}
     .family-row{display:flex;justify-content:space-between;align-items:center;margin:20px 0;padding:15px 0;}
@@ -209,7 +364,7 @@
     @keyframes labelGlow{0%,100%{text-shadow:none}50%{text-shadow:0 0 15px rgba(200,120,152,0.4)}}
     .family-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown);flex:1;text-align:center;line-height:1.6;}
     .family-name strong{display:block;font-weight:600;color:var(--brown);}
-    /* ── CHURCH ── */
+
     .church-section{text-align:center;margin:40px 0;opacity:0;}
     .church-section.visible{animation:fadeIn 1s ease 1.9s forwards;}
     .church-icon{width:60px;height:80px;margin:0 auto 20px;animation:churchFloat 5s ease-in-out infinite;}
@@ -217,15 +372,15 @@
     .church-time{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--brown);margin-bottom:15px;}
     .church-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown);margin-bottom:10px;font-weight:600;}
     .church-reference{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown-light);font-style:italic;}
-    /* ── DIVIDER ── */
+
     .divider{display:flex;align-items:center;justify-content:center;margin:40px 0;opacity:0;}
     .divider.visible{animation:fadeIn 1s ease 2.1s forwards;}
     .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--pink),transparent);}
     .divider-center{width:32px;height:32px;margin:0 15px;position:relative;display:flex;align-items:center;justify-content:center;}
-    .divider-center::before,.divider-center::after{content:'✦';position:absolute;color:var(--pink);font-size:1.2rem;animation:starTwinkle 2s ease-in-out infinite;}
+    .divider-center::before,.divider-center::after{content:'✦';position:absolute;color:var(--pink);font-size:1.2rem;animation:starTwinkleCard 2s ease-in-out infinite;}
     .divider-center::after{animation-delay:1s;font-size:0.7rem;color:var(--pink-light);}
-    @keyframes starTwinkle{0%,100%{opacity:0.4;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
-    /* ── COUNTDOWN ── */
+    @keyframes starTwinkleCard{0%,100%{opacity:0.4;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+
     .countdown-section{text-align:center;margin:40px 0;opacity:0;}
     .countdown-section.visible{animation:fadeIn 1s ease 2.3s forwards;}
     .countdown-title{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:4px;color:var(--pink-dark);margin-bottom:20px;text-transform:uppercase;}
@@ -237,11 +392,11 @@
     }
     .countdown-item::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.5),transparent);pointer-events:none;}
     .countdown-item:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(200,120,152,0.22);}
-    .countdown-number{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--pink-dark);display:block;transition:transform 0.15s ease;}
+    .countdown-number{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--pink-dark);display:block;}
     .countdown-number.flip{animation:numFlip 0.3s ease;}
     @keyframes numFlip{0%{transform:translateY(-8px);opacity:0.5}100%{transform:translateY(0);opacity:1}}
     .countdown-label{font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--brown-light);text-transform:uppercase;letter-spacing:2px;}
-    /* ── GALLERY ── */
+
     .gallery-section{margin:40px 0;opacity:0;}
     .gallery-section.visible{animation:fadeIn 1s ease 2.5s forwards;}
     .gallery-title{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:4px;color:var(--brown);text-align:center;margin-bottom:25px;text-transform:uppercase;}
@@ -257,17 +412,17 @@
       cursor:pointer;z-index:5;transition:all 0.3s ease;font-size:1.3rem;
       box-shadow:0 2px 10px rgba(200,120,152,0.15);
     }
-    .carousel-btn:hover{background:var(--pink);color:var(--white);transform:translateY(-50%) scale(1.12);box-shadow:0 4px 15px rgba(200,120,152,0.3);}
+    .carousel-btn:hover{background:var(--pink);color:var(--white);transform:translateY(-50%) scale(1.12);}
     .carousel-prev{left:10px;}.carousel-next{right:10px;}
     .carousel-dots{display:flex;justify-content:center;gap:8px;padding:15px;background:linear-gradient(135deg,#fdf0f5,#fff4f8);}
     .carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--pink-light);cursor:pointer;transition:all 0.35s ease;border:2px solid transparent;}
     .carousel-dot.active{background:var(--pink);transform:scale(1.4);border-color:var(--pink-dark);}
-    /* ── MAP ── */
+
     .map-section{margin:40px 0;opacity:0;}
     .map-section.visible{animation:fadeIn 1s ease 2.7s forwards;}
     .map-title{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:4px;color:var(--brown);text-align:center;margin-bottom:20px;text-transform:uppercase;}
-    .map-wrap{border:2px solid var(--pink-light);border-radius:10px;overflow:hidden;margin-bottom:6px;box-shadow:0 6px 24px rgba(200,120,152,0.13);position:relative;}
-    .map-wrap iframe{width:100%;height:320px;border:0;display:block;filter:saturate(0.9) brightness(1.02);}
+    .map-wrap{border:2px solid var(--pink-light);border-radius:10px;overflow:hidden;margin-bottom:6px;box-shadow:0 6px 24px rgba(200,120,152,0.13);}
+    .map-wrap iframe{width:100%;height:320px;border:0;display:block;}
     .map-footer{
       display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;
       background:linear-gradient(135deg,#fdf0f5,#fff4f8);
@@ -287,7 +442,7 @@
     }
     .map-link:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(200,120,152,0.35);}
     @keyframes buttonPremium{0%{background-position:0% center}100%{background-position:300% center}}
-    /* ── RSVP ── */
+
     .rsvp-section{
       text-align:center;margin:40px 0;padding:42px 20px;
       background:linear-gradient(135deg,#fdf0f5,#fff8fa,#fdf5f8);
@@ -319,15 +474,14 @@
       background-size:300% 100%;animation:buttonPremium 3.5s linear infinite;
       transition:transform 0.3s ease,box-shadow 0.3s ease;
     }
-    .rsvp-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);transition:left 0.5s ease;}
     .rsvp-button:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(200,120,152,0.35);}
-    .rsvp-button:hover::before{left:100%;}
     .rsvp-button.sent{background:linear-gradient(135deg,#a8b898,#889878)!important;animation:none;}
-    /* ── FOOTER ── */
+
     .footer{text-align:center;padding:40px 20px;opacity:0;}
     .footer.visible{animation:fadeIn 1s ease 3.1s forwards;}
     .footer-verse{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown-light);font-style:italic;margin-bottom:10px;}
     .footer-text{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:3px;color:var(--pink-dark);}
+
     @media(max-width:600px){
       .invitation{padding:60px 25px 40px;margin:20px 0;border-radius:150px 150px 15px 15px;}
       .corner-flower{width:105px;height:105px;}
@@ -339,35 +493,66 @@
       .family-row{flex-direction:column;gap:10px;}
       .countdown-grid{grid-template-columns:repeat(2,1fr);}
       .carousel-btn{width:36px;height:36px;font-size:1.1rem;}
-      .cross-container{width:320px;height:430px;}
-      #angel-splash img{width:320px;height:430px;}
+      .splash-name{font-size:2.8rem;}
+      .splash-surname{font-size:0.85rem;letter-spacing:4px;}
+      .splash-btn{padding:12px 28px;font-size:0.72rem;letter-spacing:2px;}
     }
   </style>
 </head>
 <body>
 <canvas id="gold-canvas"></canvas>
-<!-- SPLASH -->
+
+<!-- ══════ SPLASH ══════ -->
 <div id="splash">
-  <div class="light-rays"></div>
-  <div class="splash-flowers">
-    <div class="flower-cluster" id="fc0"></div>
-    <div class="flower-cluster" id="fc1"></div>
-    <div class="flower-cluster" id="fc2"></div>
-    <div class="flower-cluster" id="fc3"></div>
+  <div class="splash-rays"></div>
+  <div class="splash-orbs">
+    <div class="splash-orb"></div>
+    <div class="splash-orb"></div>
+    <div class="splash-orb"></div>
+    <div class="splash-orb"></div>
+    <div class="splash-orb"></div>
+    <div class="splash-orb"></div>
   </div>
+  <!-- Flores en las esquinas -->
+  <div class="splash-corner" id="sc0"></div>
+  <div class="splash-corner" id="sc1"></div>
+  <div class="splash-corner" id="sc2"></div>
+  <div class="splash-corner" id="sc3"></div>
+
   <div class="splash-content">
-    <div class="cross-container">
-      <div class="cross-glow-ring"></div>
-      <div id="angel-splash">
-        <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel Bautizo" />
-      </div>
+    <!-- Ángel con estrellas -->
+    <div class="splash-angel-wrap">
+      <div class="splash-angel-glow"></div>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <img src="https://hercules-cdn.com/file_0IljnAhpypMlOCB8qLHpTy27" alt="Ángel Bautizo" />
     </div>
-    <div class="splash-text">Bautizo</div>
+
+    <div class="splash-label">Bautizo</div>
     <div class="splash-name">Emilio André</div>
-    <div class="splash-hint">Toca para abrir la invitación</div>
+    <div class="splash-surname">ARIAS SERRANO</div>
+
+    <div class="splash-divider">
+      <span class="splash-divider-icon">✦</span>
+    </div>
+
+    <button class="splash-btn" id="splash-btn">
+      Abrir Invitación
+      <span class="splash-btn-icon">→</span>
+    </button>
+
+    <div class="splash-auto">Se abre automáticamente en <span id="splash-countdown">6</span>s</div>
+    <div class="splash-progress-bar">
+      <div class="splash-progress-fill" id="splash-progress"></div>
+    </div>
   </div>
 </div>
-<!-- MAIN -->
+
+<!-- ══════ MAIN ══════ -->
 <div class="main-container">
   <div class="invitation" id="invitation">
     <div class="corner-flower corner-tl" id="ctl"></div>
@@ -429,11 +614,9 @@
     <div class="map-section" id="map-sec">
       <div class="map-title">Ubicación</div>
       <div class="map-wrap">
-        <!-- ✏ CAMBIA ESTE URL POR EL DE TU IGLESIA EN GOOGLE MAPS -->
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa"
-          allowfullscreen loading="lazy" title="Ubicación">
-        </iframe>
+        <!-- ✏ CAMBIA ESTE URL POR EL DE TU IGLESIA -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa"
+          allowfullscreen loading="lazy" title="Ubicación"></iframe>
       </div>
       <div class="map-footer">
         <div class="map-info-dot"></div>
@@ -460,11 +643,12 @@
     <div class="footer-text">— Marcos 10:14 —</div>
   </div>
 </div>
+
 <script>
 // ─── CONFIGURACIÓN ────────────────────────────────────────────────
-// ✏ PERSONALIZA AQUÍ:
-const WHATSAPP_NUMBER = "50712345678"; // tu número con código de país
+const WHATSAPP_NUMBER = "50712345678"; // ✏ tu número con código de país
 const EVENT_DATE = new Date("2026-02-08T10:00:00").getTime();
+const AUTO_OPEN_SECONDS = 6; // segundos antes de abrir automáticamente
 const GALLERY_IMAGES = [
   { src: "https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?w=600&q=80", cap: "Bautizo" },
   { src: "https://images.unsplash.com/photo-1614112555221-27ccf710a7ab?w=600&q=80", cap: "Bendición" },
@@ -472,7 +656,8 @@ const GALLERY_IMAGES = [
   { src: "https://images.unsplash.com/photo-1764922074767-a27ee324380e?w=600&q=80", cap: "Alegría" },
   { src: "https://images.unsplash.com/photo-1721862650498-1e7274dec2ec?w=600&q=80", cap: "Celebración" },
 ];
-// ─── SVG GENERATORS ───────────────────────────────────────────────
+
+// ─── SVGs ────────────────────────────────────────────────────────
 function cornerFlowerSVG() {
   return `<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs>
@@ -496,20 +681,16 @@ function cornerFlowerSVG() {
   <path d="M 130,120 C 144,110 152,114 150,126 C 148,136 136,140 128,134 C 122,128 122,124 130,120 Z" fill="url(#cfl2)" stroke="#50883a" stroke-width="0.6"/>
   <circle cx="60" cy="72" r="3.8" fill="#e8a0c0"/>
   <circle cx="65" cy="67" r="3" fill="#f5c8dc"/>
-  <circle cx="67" cy="74" r="2.5" fill="#d48898"/>
   <circle cx="40" cy="44" r="3.2" fill="#d4899f"/>
-  <circle cx="45" cy="40" r="2.6" fill="#e8b0c4"/>
   ${[0,60,120,180,240,300].map((angle,i)=>{const r=(angle*Math.PI)/180,px=48+8*Math.cos(r),py=26+8*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4" ry="6.5" fill="${i%2===0?'#fde8f5':'#f5d4e8'}" stroke="#e8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="48" cy="26" r="5" fill="url(#cfc1)"/>
   ${[0,45,90,135,180,225,270,315].map((angle,i)=>{const r=(angle*Math.PI)/180,px=78+12*Math.cos(r),py=44+12*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5.5" ry="9" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#e0a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
-  ${[0,60,120,180,240,300].map((angle)=>{const r=(angle*Math.PI)/180,px=78+7.5*Math.cos(r),py=44+7.5*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="4.5" ry="7" fill="#f8d0e8" stroke="#d8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="78" cy="44" r="5.5" fill="url(#cfc1)"/>
   ${[0,36,72,108,144,180,216,252,288,324].map((angle,i)=>{const r=(angle*Math.PI)/180,px=106+20*Math.cos(r),py=112+20*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="7.5" ry="13" fill="${i%2===0?'url(#cfp1)':'url(#cfp3)'}" stroke="#e0a8c8" stroke-width="0.5" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
-  ${[22,67,112,157,202,247,292,337].map((angle)=>{const r=(angle*Math.PI)/180,px=106+14*Math.cos(r),py=112+14*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="6" ry="10" fill="url(#cfp2)" stroke="#d8a0c0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
-  ${[0,60,120,180,240,300].map((angle)=>{const r=(angle*Math.PI)/180,px=106+8.5*Math.cos(r),py=112+8.5*Math.sin(r);return `<ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="5" ry="8" fill="#e8c0d8" stroke="#c890b0" stroke-width="0.4" transform="rotate(${angle+90},${px.toFixed(1)},${py.toFixed(1)})"/>`;}).join('')}
   <circle cx="106" cy="112" r="7" fill="#c86888"/>
 </svg>`;
 }
+
 function sideFlowerSVG() {
   return `<svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs><radialGradient id="sfGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fde8f0"/><stop offset="100%" stop-color="#e8a0b8"/></radialGradient></defs>
@@ -533,6 +714,7 @@ function sideFlowerSVG() {
   <ellipse cx="18" cy="66" rx="3" ry="7" fill="#c8d8b8" transform="rotate(-32 18 66)" opacity="0.85"/>
 </svg>`;
 }
+
 function churchIconSVG() {
   return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
   <defs><linearGradient id="churchGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7a5868"/><stop offset="100%" stop-color="#5a3848"/></linearGradient></defs>
@@ -546,6 +728,7 @@ function churchIconSVG() {
   <line x1="27" y1="20" x2="33" y2="20" stroke="#e8a0b8" stroke-width="0.8"/>
 </svg>`;
 }
+
 function crossWithBowSVG() {
   return `<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" width="80" height="110">
   <defs>
@@ -563,21 +746,66 @@ function crossWithBowSVG() {
   <path d="M 56 45 Q 60 62 66 76 Q 68 82 64 83 Q 59 81 57 76 Q 54 62 53 45" fill="#f5d0e0" stroke="#e8a0b8" stroke-width="0.8"/>
 </svg>`;
 }
+
 // ─── INJECT SVGs ─────────────────────────────────────────────────
 document.getElementById('cross-svg-wrap').innerHTML = crossWithBowSVG();
 document.getElementById('church-icon-wrap').innerHTML = churchIconSVG();
-['ctl','ctr','cbl','cbr'].forEach(id => {
-  document.getElementById(id).innerHTML = cornerFlowerSVG();
+['ctl','ctr','cbl','cbr'].forEach(id => document.getElementById(id).innerHTML = cornerFlowerSVG());
+['sfl','sfr'].forEach(id => document.getElementById(id).innerHTML = sideFlowerSVG());
+['sc0','sc1','sc2','sc3'].forEach(id => document.getElementById(id).innerHTML = cornerFlowerSVG());
+
+// ─── SPLASH AUTO-OPEN ────────────────────────────────────────────
+const splash       = document.getElementById('splash');
+const splashBtn    = document.getElementById('splash-btn');
+const cdEl         = document.getElementById('splash-countdown');
+const progressFill = document.getElementById('splash-progress');
+
+const TOTAL_MS  = AUTO_OPEN_SECONDS * 1000;
+const TICK_MS   = 50;
+let elapsed     = 0;
+let autoTimer   = null;
+let opened      = false;
+
+function openInvitation() {
+  if (opened) return;
+  opened = true;
+  clearInterval(autoTimer);
+  splash.classList.add('hiding');
+  setTimeout(() => {
+    splash.classList.add('gone');
+    const revealIds = [
+      'invitation','ctl','ctr','cbl','cbr','sfl','sfr',
+      'inv-cross','t1','t2','t3','t4','t5',
+      'date-sec','fam-sec','church-sec','div-sec',
+      'cd-sec','gal-sec','map-sec','rsvp-sec','footer-sec'
+    ];
+    revealIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('visible');
+    });
+  }, 1800);
+}
+
+// Empezar el timer después de que las animaciones del splash carguen
+setTimeout(() => {
+  autoTimer = setInterval(() => {
+    elapsed += TICK_MS;
+    const remaining = Math.ceil((TOTAL_MS - elapsed) / 1000);
+    cdEl.textContent = remaining > 0 ? remaining : 0;
+    progressFill.style.width = Math.min((elapsed / TOTAL_MS) * 100, 100) + '%';
+    if (elapsed >= TOTAL_MS) openInvitation();
+  }, TICK_MS);
+}, 2000); // esperar 2s para que aparezcan las animaciones
+
+splashBtn.addEventListener('click', openInvitation);
+splash.addEventListener('click', e => {
+  // abrir si hacen clic en cualquier parte del splash (no solo el botón)
+  openInvitation();
 });
-['sfl','sfr'].forEach(id => {
-  document.getElementById(id).innerHTML = sideFlowerSVG();
-});
-['fc0','fc1','fc2','fc3'].forEach(id => {
-  document.getElementById(id).innerHTML = cornerFlowerSVG();
-});
+
 // ─── GALLERY CAROUSEL ────────────────────────────────────────────
 let carouselIdx = 0;
-const track = document.getElementById('carousel-track');
+const track  = document.getElementById('carousel-track');
 const dotsEl = document.getElementById('carousel-dots');
 GALLERY_IMAGES.forEach((img, i) => {
   const slide = document.createElement('div');
@@ -592,9 +820,7 @@ GALLERY_IMAGES.forEach((img, i) => {
 function goCarousel(idx) {
   carouselIdx = (idx + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
   track.style.transform = `translateX(-${carouselIdx * 100}%)`;
-  document.querySelectorAll('.carousel-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === carouselIdx);
-  });
+  document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
 }
 document.getElementById('c-prev').addEventListener('click', () => goCarousel(carouselIdx - 1));
 document.getElementById('c-next').addEventListener('click', () => goCarousel(carouselIdx + 1));
@@ -604,23 +830,24 @@ document.getElementById('carousel-wrap').addEventListener('touchend', e => {
   const diff = touchStart - e.changedTouches[0].clientX;
   if (Math.abs(diff) > 50) goCarousel(carouselIdx + (diff > 0 ? 1 : -1));
 });
+
 // ─── COUNTDOWN ───────────────────────────────────────────────────
-const cdDays = document.getElementById('cd-days');
+const cdDays  = document.getElementById('cd-days');
 const cdHours = document.getElementById('cd-hours');
-const cdMin = document.getElementById('cd-min');
+const cdMin   = document.getElementById('cd-min');
 const cdSecEl = document.getElementById('cd-sec-el');
-let prevSec = '';
+let prevSec   = '';
 function updateCountdown() {
   const dist = EVENT_DATE - Date.now();
   if (dist < 0) return;
-  const d = Math.floor(dist / 86400000);
-  const h = Math.floor((dist % 86400000) / 3600000);
-  const m = Math.floor((dist % 3600000) / 60000);
-  const s = Math.floor((dist % 60000) / 1000);
+  const d    = Math.floor(dist / 86400000);
+  const h    = Math.floor((dist % 86400000) / 3600000);
+  const m    = Math.floor((dist % 3600000) / 60000);
+  const s    = Math.floor((dist % 60000) / 1000);
   const sStr = String(s).padStart(2,'0');
-  cdDays.textContent = String(d).padStart(2,'0');
+  cdDays.textContent  = String(d).padStart(2,'0');
   cdHours.textContent = String(h).padStart(2,'0');
-  cdMin.textContent = String(m).padStart(2,'0');
+  cdMin.textContent   = String(m).padStart(2,'0');
   if (sStr !== prevSec) {
     cdSecEl.classList.remove('flip');
     void cdSecEl.offsetWidth;
@@ -631,30 +858,13 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
-// ─── SPLASH ──────────────────────────────────────────────────────
-const splash = document.getElementById('splash');
-splash.addEventListener('click', () => {
-  splash.classList.add('hiding');
-  setTimeout(() => {
-    splash.classList.add('gone');
-    const revealIds = [
-      'invitation','ctl','ctr','cbl','cbr','sfl','sfr',
-      'inv-cross','t1','t2','t3','t4','t5',
-      'date-sec','fam-sec','church-sec','div-sec',
-      'cd-sec','gal-sec','map-sec','rsvp-sec','footer-sec'
-    ];
-    revealIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('visible');
-    });
-  }, 1500);
-});
+
 // ─── RSVP ────────────────────────────────────────────────────────
 document.getElementById('rsvp-form').addEventListener('submit', e => {
   e.preventDefault();
-  const name = document.getElementById('rsvp-name').value.trim();
+  const name   = document.getElementById('rsvp-name').value.trim();
   const guests = document.getElementById('rsvp-guests').value;
-  const msg = document.getElementById('rsvp-msg').value;
+  const msg    = document.getElementById('rsvp-msg').value;
   if (!name) return;
   const text = `Hola, soy ${name}. Confirmo mi asistencia al Bautizo de Emilio André${guests ? ' con ' + guests + ' invitado(s)' : ''}.${msg ? ' ' + msg : ''}`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
@@ -664,23 +874,20 @@ document.getElementById('rsvp-form').addEventListener('submit', e => {
   setTimeout(() => {
     btn.textContent = 'Enviar por WhatsApp';
     btn.classList.remove('sent');
-    document.getElementById('rsvp-name').value = '';
+    document.getElementById('rsvp-name').value   = '';
     document.getElementById('rsvp-guests').value = '';
-    document.getElementById('rsvp-msg').value = '';
+    document.getElementById('rsvp-msg').value    = '';
   }, 3000);
 });
+
 // ─── CANVAS PARTICLES ────────────────────────────────────────────
 const canvas = document.getElementById('gold-canvas');
-const ctx = canvas.getContext('2d');
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+const ctx    = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 const COLORS = ['#f5d0e0','#e8a0b8','#f0c8d8','#fde8f2','#d4899f'];
 function createPetal() {
-  const types = ['oval','teardrop','flower'];
   return {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height - canvas.height,
@@ -691,19 +898,16 @@ function createPetal() {
     rotationSpeed: (Math.random() - 0.5) * 0.025,
     opacity: Math.random() * 0.45 + 0.15,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
-    type: types[Math.floor(Math.random() * types.length)],
+    type: ['oval','teardrop','flower'][Math.floor(Math.random() * 3)],
     wave: Math.random() * Math.PI * 2,
     waveSpeed: Math.random() * 0.02 + 0.005
   };
 }
-const petals = Array.from({length: 30}, createPetal);
+const petals    = Array.from({length: 30}, createPetal);
 const bokehOrbs = Array.from({length: 12}, () => ({
-  x: Math.random() * window.innerWidth,
-  y: Math.random() * window.innerHeight,
-  r: Math.random() * 40 + 15,
-  opacity: Math.random() * 0.05 + 0.02,
-  phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.005 + 0.002
+  x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
+  r: Math.random() * 40 + 15, opacity: Math.random() * 0.05 + 0.02,
+  phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.005 + 0.002
 }));
 const sparkles = [];
 let sparkleTimer = 0;
@@ -715,68 +919,57 @@ function drawPetal(p) {
   ctx.fillStyle = p.color;
   if (p.type === 'oval') {
     ctx.beginPath();
-    ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+    ctx.ellipse(0,0,p.size,p.size*0.55,0,0,Math.PI*2);
     ctx.fill();
   } else if (p.type === 'teardrop') {
     const s = p.size;
     ctx.beginPath();
-    ctx.moveTo(0, -s);
-    ctx.bezierCurveTo(s*0.8, -s*0.2, s*0.8, s*0.8, 0, s);
-    ctx.bezierCurveTo(-s*0.8, s*0.8, -s*0.8, -s*0.2, 0, -s);
+    ctx.moveTo(0,-s);
+    ctx.bezierCurveTo(s*0.8,-s*0.2,s*0.8,s*0.8,0,s);
+    ctx.bezierCurveTo(-s*0.8,s*0.8,-s*0.8,-s*0.2,0,-s);
     ctx.fill();
   } else {
     const s = p.size * 0.7;
     for (let i = 0; i < 5; i++) {
-      ctx.save();
-      ctx.rotate((i * Math.PI * 2) / 5);
-      ctx.beginPath();
-      ctx.ellipse(0, -s, s * 0.45, s, 0, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.save(); ctx.rotate((i * Math.PI * 2) / 5);
+      ctx.beginPath(); ctx.ellipse(0,-s,s*0.45,s,0,0,Math.PI*2); ctx.fill();
       ctx.restore();
     }
-    ctx.fillStyle = '#fff';
-    ctx.globalAlpha = p.opacity * 0.6;
-    ctx.beginPath();
-    ctx.arc(0, 0, s * 0.3, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.fillStyle='#fff'; ctx.globalAlpha=p.opacity*0.6;
+    ctx.beginPath(); ctx.arc(0,0,s*0.3,0,Math.PI*2); ctx.fill();
   }
   ctx.restore();
 }
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   bokehOrbs.forEach(b => {
     b.phase += b.speed;
     const op = b.opacity * (0.7 + 0.3 * Math.sin(b.phase));
-    const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
-    grad.addColorStop(0, `rgba(232,160,184,${op})`);
-    grad.addColorStop(1, 'rgba(232,160,184,0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-    ctx.fill();
+    const grad = ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+    grad.addColorStop(0,`rgba(232,160,184,${op})`);
+    grad.addColorStop(1,'rgba(232,160,184,0)');
+    ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
   });
   sparkleTimer++;
   if (sparkleTimer > 20) {
     sparkleTimer = 0;
-    sparkles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, life: 0, maxLife: 60 + Math.random() * 40, size: Math.random() * 2 + 0.5 });
+    sparkles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,life:0,maxLife:60+Math.random()*40,size:Math.random()*2+0.5});
   }
   for (let i = sparkles.length - 1; i >= 0; i--) {
     const sp = sparkles[i]; sp.life++;
     const t = sp.life / sp.maxLife;
-    const alpha = t < 0.5 ? t * 2 * 0.4 : (1 - t) * 2 * 0.4;
-    ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = '#fde8f0';
+    const alpha = t < 0.5 ? t*2*0.4 : (1-t)*2*0.4;
+    ctx.save(); ctx.globalAlpha=alpha; ctx.fillStyle='#fde8f0';
     const s = sp.size * (1 + Math.sin(t * Math.PI) * 0.5);
-    ctx.translate(sp.x, sp.y); ctx.beginPath();
-    for (let j = 0; j < 4; j++) { ctx.rotate(Math.PI / 2); ctx.lineTo(0, -s*2.5); ctx.lineTo(s*0.4,-s*0.4); }
+    ctx.translate(sp.x,sp.y); ctx.beginPath();
+    for (let j = 0; j < 4; j++) { ctx.rotate(Math.PI/2); ctx.lineTo(0,-s*2.5); ctx.lineTo(s*0.4,-s*0.4); }
     ctx.closePath(); ctx.fill(); ctx.restore();
-    if (sp.life >= sp.maxLife) sparkles.splice(i, 1);
+    if (sp.life >= sp.maxLife) sparkles.splice(i,1);
   }
   petals.forEach(p => {
-    p.wave += p.waveSpeed;
-    p.x += p.speedX + Math.sin(p.wave) * 0.4;
-    p.y += p.speedY;
-    p.rotation += p.rotationSpeed;
-    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+    p.wave += p.waveSpeed; p.x += p.speedX + Math.sin(p.wave)*0.4;
+    p.y += p.speedY; p.rotation += p.rotationSpeed;
+    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random()*canvas.width; }
     drawPetal(p);
   });
   requestAnimationFrame(animate);
