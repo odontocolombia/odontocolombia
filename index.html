@@ -1,1328 +1,1330 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Editor Profesional de Invitaciones</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1e1e2e; color: #e4e4e7; overflow: hidden; height: 100vh; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bautizo de Emilio André</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8943e;
+            --gold-light: #d4af6a;
+            --gold-dark: #8b6f2e;
+            --gold-pale: #f0dfa0;
+            --cream: #faf6ed;
+            --cream-dark: #f0e8d0;
+            --brown: #4a3820;
+            --brown-light: #6b5438;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(74,56,32,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(180deg, #f5f0e0 0%, #faf6ed 50%, #f5f0e0 100%);
+            color: var(--brown);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-/* ═══ LAYOUT PRINCIPAL ═══ */
-.editor-layout { display: grid; grid-template-columns: 320px 1fr 400px; height: 100vh; }
+        /* ── FONDO PREMIUM CON PATRÓN VIVO ── */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bg-pattern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.025;
+            background-image:
+                repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 40px);
+        }
+        /* luz ambiental suave en bucle */
+        .bg-light {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            animation: ambientLoop 18s ease-in-out infinite;
+        }
+        .bg-light-1 {
+            top: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(212,175,106,0.12) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+        .bg-light-2 {
+            bottom: -200px; right: -200px;
+            background: radial-gradient(circle, rgba(184,148,62,0.10) 0%, transparent 70%);
+            animation-delay: 9s;
+        }
+        @keyframes ambientLoop {
+            0%,100% { opacity:0; transform:scale(0.8); }
+            50% { opacity:1; transform:scale(1.2); }
+        }
 
-/* ═══ SIDEBAR IZQUIERDO - BIBLIOTECA ═══ */
-.sidebar-left { background: #252537; border-right: 1px solid #3a3a52; display: flex; flex-direction: column; overflow: hidden; }
+        #gold-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-.sidebar-header { padding: 15px; border-bottom: 1px solid #3a3a52; }
-.sidebar-header h1 { font-size: 1rem; color: #d4af37; margin-bottom: 8px; }
+        /* ════════════════════════════════════
+           SPLASH CON ÁNGEL PREMIUM
+        ════════════════════════════════════ */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(160deg, #fdf8ee 0%, #f5edd5 50%, #faf6ed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        #splash.hide {
+            animation: splashFade 1.5s cubic-bezier(0.7,0,1,1) forwards;
+            pointer-events: none;
+        }
+        @keyframes splashFade {
+            0%   { opacity:1; transform:scale(1); }
+            60%  { opacity:0.6; transform:scale(1.04); }
+            100% { opacity:0; transform:scale(1.08); visibility:hidden; }
+        }
 
-/* Búsqueda */
-.search-box { position: relative; margin-bottom: 10px; }
-.search-box input { width: 100%; padding: 8px 12px 8px 32px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; }
-.search-box::before { content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; }
+        /* borde de luz que gira alrededor del splash */
+        #splash::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: conic-gradient(from 0deg, transparent 0%, rgba(212,175,106,0.15) 20%, transparent 40%);
+            animation: splashRotate 8s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes splashRotate { to { transform: rotate(360deg); } }
 
-/* Filtros rápidos */
-.quick-filters { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
-.filter-chip { padding: 4px 10px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 12px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
-.filter-chip:hover, .filter-chip.active { background: #d4af37; color: #1a1a2a; border-color: #d4af37; }
+        .splash-content {
+            text-align: center;
+            animation: splashReveal 2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+            position: relative;
+            z-index: 2;
+        }
+        @keyframes splashReveal {
+            0%   { opacity:0; transform:translateY(40px) scale(0.95); }
+            100% { opacity:1; transform:translateY(0)   scale(1); }
+        }
 
-/* Categorías tipo Accordion */
-.categories-container { flex: 1; overflow-y: auto; padding: 10px; }
-.category-group { margin-bottom: 8px; }
-.category-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: #2d2d44; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-.category-header:hover { background: #353550; }
-.category-header.active { background: #d4af37; color: #1a1a2a; }
-.category-title { font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.category-count { background: #1e1e2e; color: #d4af37; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; }
-.category-header.active .category-count { background: #1a1a2a; color: #d4af37; }
-.category-arrow { transition: transform 0.3s; font-size: 0.7rem; }
-.category-header.active .category-arrow { transform: rotate(180deg); }
+        /* ── ÁNGEL SPLASH ── */
+        .angel-container {
+            width: 280px;
+            height: 320px;
+            margin: 0 auto 28px;
+            position: relative;
+            animation: angelFloat 5s ease-in-out infinite;
+            filter: drop-shadow(0 12px 35px rgba(184,148,62,0.35));
+        }
+        @keyframes angelFloat {
+            0%,100% { transform: translateY(0) rotate(-0.5deg); }
+            50%      { transform: translateY(-18px) rotate(0.5deg); }
+        }
+        .angel-svg { width:100%; height:100%; }
 
-/* Grid de plantillas */
-.templates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.templates-grid.open { max-height: 2000px; }
+        /* halo con rotación+brillo */
+        .halo {
+            transform-origin: 100px 35px;
+            animation: haloSpin 12s linear infinite;
+        }
+        @keyframes haloSpin {
+            0%   { filter: drop-shadow(0 0 6px rgba(212,175,106,0.5)); }
+            50%  { filter: drop-shadow(0 0 22px rgba(212,175,106,1)); }
+            100% { filter: drop-shadow(0 0 6px rgba(212,175,106,0.5)); }
+        }
+        .halo-ring {
+            animation: haloRotate 20s linear infinite;
+            transform-origin: 100px 35px;
+        }
+        @keyframes haloRotate { to { transform: rotate(360deg); } }
 
-.template-card { background: #1e1e2e; border: 2px solid #3a3a52; border-radius: 8px; cursor: pointer; transition: all 0.2s; overflow: hidden; position: relative; }
-.template-card:hover { border-color: #d4af37; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212,175,55,0.2); }
-.template-card.active { border-color: #d4af37; box-shadow: 0 0 0 2px rgba(212,175,55,0.3); }
-.template-thumb { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #3a3a52, #2d2d44); display: flex; align-items: center; justify-content: center; font-size: 2rem; position: relative; overflow: hidden; }
-.template-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.template-info { padding: 6px 8px; }
-.template-name { font-size: 0.72rem; font-weight: 600; color: #e4e4e7; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.template-meta { font-size: 0.65rem; color: #888; display: flex; justify-content: space-between; align-items: center; }
-.template-fav { cursor: pointer; font-size: 0.8rem; opacity: 0.5; transition: opacity 0.2s; }
-.template-fav:hover, .template-fav.active { opacity: 1; color: #ff6b6b; }
-.template-badge { position: absolute; top: 5px; right: 5px; background: #d4af37; color: #1a1a2a; font-size: 0.6rem; padding: 2px 6px; border-radius: 3px; font-weight: 700; }
+        .halo-star { animation: starTwinkle 1.5s ease-in-out infinite; }
+        .halo-star:nth-child(2) { animation-delay:0.3s; }
+        .halo-star:nth-child(3) { animation-delay:0.6s; }
+        .halo-star:nth-child(4) { animation-delay:0.9s; }
+        .halo-star:nth-child(5) { animation-delay:1.2s; }
+        @keyframes starTwinkle {
+            0%,100% { opacity:0.5; transform:scale(1); }
+            50%      { opacity:1;   transform:scale(1.5); }
+        }
 
-/* Sidebar acciones inferiores */
-.sidebar-footer { padding: 10px 15px; border-top: 1px solid #3a3a52; display: flex; gap: 6px; }
-.sidebar-footer .btn { flex: 1; justify-content: center; font-size: 0.75rem; padding: 8px; }
+        .wing-left  { animation: wingFlapLeft  4s ease-in-out infinite; transform-origin:95px 100px; }
+        .wing-right { animation: wingFlapRight 4s ease-in-out infinite; transform-origin:105px 100px; }
+        @keyframes wingFlapLeft  {
+            0%,100% { transform:scaleX(1) rotate(0deg); }
+            50%      { transform:scaleX(1.08) rotate(-4deg); }
+        }
+        @keyframes wingFlapRight {
+            0%,100% { transform:scaleX(1) rotate(0deg); }
+            50%      { transform:scaleX(1.08) rotate(4deg); }
+        }
 
-/* ═══ PREVIEW CENTRAL ═══ */
-.preview-center { background: #2a2a3e; overflow: auto; padding: 30px; display: flex; justify-content: center; align-items: flex-start; }
-.preview-frame-wrap { background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }
-#cardPreview { width: 420px; height: 900px; border: none; }
+        .cloud-glow { animation: cloudPulse 3s ease-in-out infinite; }
+        @keyframes cloudPulse {
+            0%,100% { filter:drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
+            50%      { filter:drop-shadow(0 0 28px rgba(255,255,255,1)) drop-shadow(0 0 10px rgba(212,175,106,0.5)); }
+        }
 
-/* ═══ SIDEBAR DERECHO - EDITOR ═══ */
-.sidebar-right { background: #252537; border-left: 1px solid #3a3a52; display: flex; flex-direction: column; overflow: hidden; }
-.editor-header { padding: 15px; border-bottom: 1px solid #3a3a52; background: #2a2a42; }
-.editor-header h2 { font-size: 0.95rem; color: #d4af37; margin-bottom: 4px; }
-.editor-header p { font-size: 0.7rem; color: #888; }
+        /* partículas doradas del splash */
+        .splash-lights { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+        .light-orb {
+            position:absolute;
+            background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+            border-radius:50%;
+            animation: lightFloat 7s ease-in-out infinite;
+        }
+        .light-orb:nth-child(1)  { width:6px;  height:6px;  left:8%;  top:18%; animation-delay:0s;   }
+        .light-orb:nth-child(2)  { width:4px;  height:4px;  left:85%; top:28%; animation-delay:1.2s; }
+        .light-orb:nth-child(3)  { width:5px;  height:5px;  left:12%; top:72%; animation-delay:2.4s; }
+        .light-orb:nth-child(4)  { width:3px;  height:3px;  left:80%; top:75%; animation-delay:3.6s; }
+        .light-orb:nth-child(5)  { width:5px;  height:5px;  left:50%; top:8%;  animation-delay:0.8s; }
+        .light-orb:nth-child(6)  { width:4px;  height:4px;  left:48%; top:90%; animation-delay:2s;   }
+        .light-orb:nth-child(7)  { width:6px;  height:6px;  left:25%; top:45%; animation-delay:1.5s; }
+        .light-orb:nth-child(8)  { width:3px;  height:3px;  left:70%; top:50%; animation-delay:3s;   }
+        @keyframes lightFloat {
+            0%,100% { transform:translateY(0)    scale(1);   opacity:0.25; }
+            50%      { transform:translateY(-35px) scale(2); opacity:0.9;  }
+        }
 
-/* Tabs del editor */
-.editor-tabs { display: flex; border-bottom: 1px solid #3a3a52; background: #2a2a42; }
-.editor-tab { flex: 1; padding: 10px 5px; border: none; background: none; color: #888; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; border-bottom: 2px solid transparent; font-weight: 600; }
-.editor-tab:hover { color: #e4e4e7; }
-.editor-tab.active { color: #d4af37; border-bottom-color: #d4af37; background: #252537; }
+        /* Cruz de agua flotante (tema bautizo) */
+        .water-cross {
+            position: absolute;
+            opacity: 0;
+            animation: crossFloat 6s ease-in-out infinite;
+        }
+        .water-cross:nth-child(1) { left:5%;  top:60%; animation-delay:0s;  }
+        .water-cross:nth-child(2) { right:5%; top:35%; animation-delay:2s;  }
+        .water-cross:nth-child(3) { left:45%; top:85%; animation-delay:4s;  }
+        @keyframes crossFloat {
+            0%   { opacity:0; transform:translateY(10px) scale(0.5); }
+            20%  { opacity:0.4; }
+            80%  { opacity:0.4; }
+            100% { opacity:0; transform:translateY(-40px) scale(0.8); }
+        }
 
-.editor-body { flex: 1; overflow-y: auto; padding: 15px; }
+        .splash-text {
+            font-family:'Cinzel',serif;
+            font-size:0.75rem;
+            letter-spacing:8px;
+            text-transform:uppercase;
+            color:var(--gold);
+            margin-bottom:16px;
+        }
+        .splash-name {
+            font-family:'Great Vibes',cursive;
+            font-size:3.2rem;
+            color:var(--brown);
+            margin-bottom:28px;
+            text-shadow: 0 2px 8px rgba(184,148,62,0.2);
+            animation: nameShimmer 4s ease-in-out infinite 2s;
+        }
+        @keyframes nameShimmer {
+            0%,100% { text-shadow:0 2px 8px rgba(184,148,62,0.2); }
+            50%      { text-shadow:0 2px 24px rgba(212,175,106,0.6), 0 0 40px rgba(212,175,106,0.2); }
+        }
+        .splash-hint {
+            font-family:'Cormorant Garamond',serif;
+            font-size:0.85rem;
+            color:var(--brown-light);
+            letter-spacing:2px;
+            animation: pulseBeat 2.5s ease-in-out infinite;
+        }
+        @keyframes pulseBeat {
+            0%,100% { opacity:0.3; transform:scale(1); }
+            50%      { opacity:1;   transform:scale(1.05); }
+        }
 
-.field-group { margin-bottom: 14px; }
-.field-label { display: block; font-size: 0.72rem; color: #a0a0b8; margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-.field-input, .field-textarea, .field-select { width: 100%; padding: 8px 10px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 6px; color: #e4e4e7; font-size: 0.85rem; font-family: inherit; }
-.field-input:focus, .field-textarea:focus, .field-select:focus { outline: none; border-color: #d4af37; }
-.field-textarea { resize: vertical; min-height: 60px; }
+        /* ════════════════════════════════════
+           CONTENEDOR PRINCIPAL
+        ════════════════════════════════════ */
+        .main-container {
+            position:relative;
+            z-index:2;
+            max-width:600px;
+            margin:0 auto;
+            padding:20px;
+        }
 
-.color-field { display: flex; align-items: center; gap: 8px; }
-.color-field input[type="color"] { width: 36px; height: 32px; border: none; border-radius: 4px; cursor: pointer; background: none; padding: 0; }
-.color-hex { flex: 1; padding: 8px 10px; background: #1e1e2e; border: 1px solid #3a3a52; border-radius: 4px; color: #e4e4e7; font-size: 0.8rem; font-family: monospace; }
+        /* shimmer sweep loop en la tarjeta */
+        .invitation {
+            background: var(--white);
+            border: 3px double var(--gold);
+            border-radius: 8px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                var(--shadow),
+                0 0 0 1px var(--gold-light),
+                0 0 0 8px var(--white),
+                0 0 0 9px var(--gold);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .invitation::before {
+            content:'';
+            position:absolute;
+            top:0; left:-200%;
+            width:80px; height:100%;
+            background: linear-gradient(90deg, transparent, rgba(212,175,106,0.12), transparent);
+            transform: skewX(-20deg);
+            animation: shimmerSweep 6s ease-in-out infinite 3s;
+            pointer-events:none;
+            z-index:10;
+        }
+        @keyframes shimmerSweep {
+            0%   { left:-200%; }
+            100% { left:250%; }
+        }
+        .invitation.visible {
+            animation: cardReveal 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+        }
+        @keyframes cardReveal {
+            0%   { opacity:0; transform:translateY(40px) scale(0.98); }
+            100% { opacity:1; transform:translateY(0)   scale(1); }
+        }
 
-.image-upload { border: 2px dashed #3a3a52; border-radius: 6px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.image-upload:hover { border-color: #d4af37; background: rgba(212,175,55,0.05); }
-.image-upload input { display: none; }
+        /* ── ORNAMENTOS DE ESQUINA PREMIUM ── */
+        .corner-ornament {
+            position:absolute;
+            width:90px; height:90px;
+            opacity:0;
+        }
+        .corner-ornament.visible { animation:ornamentReveal 1s ease forwards; }
+        @keyframes ornamentReveal {
+            0%   { opacity:0; transform:scale(0.4) rotate(-15deg); }
+            70%  { opacity:1; transform:scale(1.08) rotate(2deg); }
+            100% { opacity:1; transform:scale(1) rotate(0deg); }
+        }
+        .corner-tl { top:12px; left:12px; }
+        .corner-tr { top:12px; right:12px; transform:scaleX(-1); }
+        .corner-bl { bottom:12px; left:12px; transform:scaleY(-1); }
+        .corner-br { bottom:12px; right:12px; transform:scale(-1,-1); }
+        /* animación continua de las esquinas */
+        .corner-ornament svg {
+            width:100%; height:100%;
+            animation: cornerGlow 5s ease-in-out infinite;
+        }
+        .corner-tr svg { animation-delay:1.2s; }
+        .corner-bl svg { animation-delay:2.4s; }
+        .corner-br svg { animation-delay:3.6s; }
+        @keyframes cornerGlow {
+            0%,100% { filter:drop-shadow(0 0 3px rgba(184,148,62,0.3)); }
+            50%      { filter:drop-shadow(0 0 10px rgba(212,175,106,0.8)); }
+        }
 
-/* ═══ TOOLBAR SUPERIOR ═══ */
-.top-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: #1a1a2a; border-bottom: 1px solid #3a3a52; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; }
-.top-bar .title { font-size: 0.85rem; color: #d4af37; font-weight: 600; }
-.top-bar .actions { display: flex; gap: 8px; }
-.btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px; }
-.btn-primary { background: #d4af37; color: #1a1a2a; }
-.btn-primary:hover { background: #e6c04a; }
-.btn-secondary { background: #3a3a52; color: #e4e4e7; }
-.btn-secondary:hover { background: #4a4a62; }
+        /* ── ÁNGEL HEADER ── */
+        .angel-header {
+            text-align:center;
+            margin-bottom:40px;
+            opacity:0;
+            transform:translateY(-20px);
+        }
+        .angel-header.visible {
+            animation: angelHeaderReveal 1.5s ease 0.3s forwards;
+        }
+        @keyframes angelHeaderReveal {
+            0%   { opacity:0; transform:translateY(-30px) scale(0.9); }
+            100% { opacity:1; transform:translateY(0)    scale(1); }
+        }
+        .angel-header-svg {
+            width:180px; height:200px;
+            margin:0 auto;
+            animation: angelFloatSmall 6s ease-in-out infinite;
+            filter: drop-shadow(0 8px 22px rgba(184,148,62,0.28));
+        }
+        @keyframes angelFloatSmall {
+            0%,100% { transform:translateY(0) rotate(-0.3deg); }
+            50%      { transform:translateY(-12px) rotate(0.3deg); }
+        }
 
-.editor-layout { margin-top: 50px; height: calc(100vh - 50px); }
+        /* ── TEXTOS ── */
+        .text-intro  { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--brown-light); text-align:center; margin-bottom:15px; font-style:italic; opacity:0; }
+        .text-title  { font-family:'Cinzel',serif; font-size:2.5rem; font-weight:700; color:var(--brown); text-align:center; letter-spacing:8px; margin-bottom:10px; opacity:0; }
+        .text-subtitle{ font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--brown-light); text-align:center; margin-bottom:20px; opacity:0; }
+        .text-name   { font-family:'Great Vibes',cursive; font-size:3.5rem; color:var(--gold); text-align:center; margin-bottom:5px; opacity:0; text-shadow:0 2px 4px rgba(184,148,62,0.2); }
+        .text-surname{ font-family:'Cinzel',serif; font-size:1.2rem; color:var(--brown); text-align:center; letter-spacing:4px; margin-bottom:40px; opacity:0; }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1e1e2e; }
-::-webkit-scrollbar-thumb { background: #3a3a52; border-radius: 3px; }
-</style>
+        .text-intro.visible  { animation: fadeInUp 1s ease 0.5s forwards; }
+        .text-title.visible  { animation: fadeInUp 1s ease 0.7s forwards; }
+        .text-subtitle.visible{ animation: fadeInUp 1s ease 0.9s forwards; }
+        .text-name.visible   { animation: nameReveal 1.4s ease 1.1s forwards; }
+        .text-surname.visible{ animation: fadeInUp 1s ease 1.3s forwards; }
+
+        @keyframes fadeInUp {
+            0%   { opacity:0; transform:translateY(22px); }
+            100% { opacity:1; transform:translateY(0); }
+        }
+        @keyframes nameReveal {
+            0%   { opacity:0; transform:scale(0.75); filter:blur(12px); }
+            60%  { filter:blur(0); }
+            100% { opacity:1; transform:scale(1); filter:blur(0); }
+        }
+        /* bucle de pulso en el nombre principal */
+        .text-name.visible { animation: nameReveal 1.4s ease 1.1s forwards, nameGlowLoop 5s ease-in-out 2.5s infinite; }
+        @keyframes nameGlowLoop {
+            0%,100% { text-shadow:0 2px 4px rgba(184,148,62,0.2); }
+            50%      { text-shadow:0 4px 20px rgba(212,175,106,0.6), 0 0 50px rgba(212,175,106,0.15); }
+        }
+
+        /* ── FECHA ── */
+        .date-section {
+            text-align:center;
+            margin:40px 0; padding:30px 0;
+            border-top:1px solid var(--gold-light);
+            border-bottom:1px solid var(--gold-light);
+            opacity:0;
+            position:relative;
+        }
+        .date-section.visible { animation:fadeIn 1s ease 1.5s forwards; }
+        /* línea de brillo loop */
+        .date-section::before {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0;
+            height:1px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+            background-size:200% 100%;
+            animation: borderShine 4s linear infinite;
+        }
+        .date-section::after {
+            content:'';
+            position:absolute;
+            bottom:0; left:0; right:0;
+            height:1px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+            background-size:200% 100%;
+            animation: borderShine 4s linear infinite 2s;
+        }
+        @keyframes borderShine {
+            0%   { background-position: -200% 0; }
+            100% { background-position:  200% 0; }
+        }
+        @keyframes fadeIn { to { opacity:1; } }
+
+        .date-day    { font-family:'Cinzel',serif; font-size:1.3rem; color:var(--brown); letter-spacing:3px; margin-bottom:10px; }
+        .date-number { font-family:'Cinzel',serif; font-size:3.2rem; font-weight:700; color:var(--gold); margin:10px 0; animation: dateGlow 4s ease-in-out infinite 2s; }
+        @keyframes dateGlow {
+            0%,100% { text-shadow:none; }
+            50%      { text-shadow:0 0 20px rgba(212,175,106,0.7); }
+        }
+        .date-month  { font-family:'Cinzel',serif; font-size:1.3rem; color:var(--brown); letter-spacing:3px; }
+
+        /* ── FAMILIA ── */
+        .family-section { margin:40px 0; opacity:0; }
+        .family-section.visible { animation:fadeIn 1s ease 1.7s forwards; }
+        .family-row { display:flex; justify-content:space-between; align-items:center; margin:20px 0; padding:15px 0; }
+        .family-label { font-family:'Great Vibes',cursive; font-size:1.8rem; color:var(--gold); flex:0 0 120px; text-align:center; }
+        .family-name  { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--brown); flex:1; text-align:center; line-height:1.6; }
+        .family-name strong { display:block; font-weight:600; color:var(--brown); }
+
+        /* ── IGLESIA ── */
+        .church-section { text-align:center; margin:40px 0; opacity:0; }
+        .church-section.visible { animation:fadeIn 1s ease 1.9s forwards; }
+        .church-icon { width:60px; height:80px; margin:0 auto 20px; opacity:0.85; }
+        .church-icon svg { width:100%; height:100%; animation:churchPulse 5s ease-in-out infinite; }
+        @keyframes churchPulse {
+            0%,100% { filter:drop-shadow(0 0 4px rgba(184,148,62,0.2)); }
+            50%      { filter:drop-shadow(0 0 14px rgba(184,148,62,0.6)); }
+        }
+        .church-time      { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--brown); margin-bottom:15px; }
+        .church-name      { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--brown); margin-bottom:10px; font-weight:600; }
+        .church-reference { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--brown-light); font-style:italic; }
+
+        /* ── DIVISOR PREMIUM (SVG animado) ── */
+        .divider { display:flex; align-items:center; justify-content:center; margin:40px 0; opacity:0; }
+        .divider.visible { animation:fadeIn 1s ease 2.1s forwards; }
+        .divider::before,.divider::after {
+            content:'';
+            flex:1; height:1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            background-size:200% 100%;
+            animation: borderShine 4s linear infinite;
+        }
+        .divider::after { animation-delay:2s; }
+        .divider-icon { width:34px; height:34px; margin:0 14px; position:relative; }
+        .divider-icon svg { width:100%; height:100%; animation:divIconSpin 8s linear infinite; }
+        @keyframes divIconSpin {
+            0%,100% { transform:rotate(0deg) scale(1); filter:drop-shadow(0 0 4px rgba(184,148,62,0.4)); }
+            25%      { transform:rotate(90deg) scale(1.15); filter:drop-shadow(0 0 10px rgba(212,175,106,0.8)); }
+            50%      { transform:rotate(180deg) scale(1); filter:drop-shadow(0 0 4px rgba(184,148,62,0.4)); }
+            75%      { transform:rotate(270deg) scale(1.15); filter:drop-shadow(0 0 10px rgba(212,175,106,0.8)); }
+        }
+
+        /* ── CUENTA REGRESIVA ── */
+        .countdown-section { text-align:center; margin:40px 0; opacity:0; }
+        .countdown-section.visible { animation:fadeIn 1s ease 2.3s forwards; }
+        .countdown-title { font-family:'Cinzel',serif; font-size:1rem; letter-spacing:4px; color:var(--gold); margin-bottom:20px; text-transform:uppercase; }
+        .countdown-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; max-width:400px; margin:0 auto; }
+        .countdown-item {
+            background: linear-gradient(160deg, var(--cream) 0%, #ece4cc 100%);
+            border:1px solid var(--gold-light);
+            border-radius:6px;
+            padding:16px 10px;
+            position:relative;
+            overflow:hidden;
+            transition:transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .countdown-item::after {
+            content:'';
+            position:absolute;
+            top:0; left:-100%; width:50%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: countShimmer 5s linear infinite;
+        }
+        .countdown-item:nth-child(2)::after { animation-delay:1.25s; }
+        .countdown-item:nth-child(3)::after { animation-delay:2.5s; }
+        .countdown-item:nth-child(4)::after { animation-delay:3.75s; }
+        @keyframes countShimmer { to { left:200%; } }
+        .countdown-item:hover { transform:translateY(-6px); box-shadow:0 10px 22px rgba(184,148,62,0.25); }
+        .countdown-number { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--gold); display:block; }
+        .countdown-label  { font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:var(--brown-light); text-transform:uppercase; letter-spacing:2px; }
+
+        /* ── GALERÍA ── */
+        .gallery-section { margin:40px 0; opacity:0; }
+        .gallery-section.visible { animation:fadeIn 1s ease 2.5s forwards; }
+        .gallery-title { font-family:'Cinzel',serif; font-size:1.2rem; letter-spacing:4px; color:var(--brown); text-align:center; margin-bottom:25px; text-transform:uppercase; }
+        .carousel-wrap { position:relative; border:2px solid var(--gold-light); border-radius:6px; overflow:hidden; background:var(--white); box-shadow:0 4px 18px rgba(184,148,62,0.12); }
+        .carousel-track { display:flex; transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .carousel-slide { min-width:100%; position:relative; aspect-ratio:4/3; overflow:hidden; }
+        .carousel-slide img {
+            width:100%; height:100%; object-fit:cover;
+            filter: sepia(0.15) contrast(1.04);
+            transition: transform 8s ease;
+        }
+        /* Ken Burns loop automático */
+        .carousel-slide.active img { animation: kenBurns 8s ease-in-out forwards; }
+        @keyframes kenBurns {
+            0%   { transform:scale(1)    translate(0,0); }
+            100% { transform:scale(1.08) translate(-2%,-1%); }
+        }
+        /* overlay dorado suave sobre cada slide */
+        .carousel-slide::after {
+            content:'';
+            position:absolute;
+            inset:0;
+            background: linear-gradient(to top, rgba(74,56,32,0.25) 0%, transparent 60%);
+            pointer-events:none;
+        }
+        .carousel-btn {
+            position:absolute; top:50%; transform:translateY(-50%);
+            background:rgba(255,255,255,0.92);
+            border:1.5px solid var(--gold);
+            color:var(--brown);
+            width:42px; height:42px;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; z-index:5;
+            transition:all 0.3s ease;
+            font-size:1.2rem;
+            box-shadow:0 3px 12px rgba(184,148,62,0.25);
+        }
+        .carousel-btn:hover { background:var(--gold); color:var(--white); transform:translateY(-50%) scale(1.12); box-shadow:0 6px 18px rgba(184,148,62,0.4); }
+        .carousel-prev { left:12px; }
+        .carousel-next { right:12px; }
+        .carousel-dots { display:flex; justify-content:center; gap:9px; padding:14px; background:var(--cream); }
+        .carousel-dot  { width:10px; height:10px; border-radius:50%; background:var(--gold-light); cursor:pointer; transition:all 0.35s ease; border:2px solid transparent; }
+        .carousel-dot.active { background:var(--gold); transform:scale(1.35); border-color:var(--gold-dark); box-shadow:0 0 6px rgba(184,148,62,0.5); }
+
+        /* ── MAPA ── */
+        .map-section { margin:40px 0; opacity:0; }
+        .map-section.visible { animation:fadeIn 1s ease 2.7s forwards; }
+        .map-title { font-family:'Cinzel',serif; font-size:1.2rem; letter-spacing:4px; color:var(--brown); text-align:center; margin-bottom:20px; text-transform:uppercase; }
+        .map-wrap {
+            border-radius:10px;
+            overflow:hidden;
+            margin-bottom:18px;
+            position:relative;
+            box-shadow:0 0 0 2px var(--gold-light), 0 6px 24px rgba(184,148,62,0.18);
+        }
+        .map-wrap::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            border-radius:10px;
+            box-shadow: inset 0 0 30px rgba(184,148,62,0.08);
+            pointer-events:none;
+            z-index:2;
+        }
+        .map-wrap iframe { width:100%; height:300px; border:0; display:block; }
+        .map-footer {
+            display:flex; align-items:center; justify-content:center;
+            gap:10px;
+            padding:12px 20px;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+            border:1px solid var(--gold-light);
+            border-radius:0 0 10px 10px;
+            margin-top:-4px;
+        }
+        .map-pulse-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:var(--gold);
+            box-shadow:0 0 0 0 rgba(184,148,62,0.5);
+            animation: mapPulse 2s ease-in-out infinite;
+        }
+        @keyframes mapPulse {
+            0%   { box-shadow:0 0 0 0 rgba(184,148,62,0.6); }
+            70%  { box-shadow:0 0 0 10px rgba(184,148,62,0); }
+            100% { box-shadow:0 0 0 0 rgba(184,148,62,0); }
+        }
+        .map-location-text { font-family:'Cormorant Garamond',serif; font-size:0.95rem; color:var(--brown-light); font-style:italic; }
+        .map-btn-wrap { display:flex; justify-content:center; margin-top:16px; }
+        .map-link {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:12px 32px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            color:var(--white);
+            text-decoration:none;
+            font-family:'Cinzel',serif;
+            font-size:0.82rem;
+            letter-spacing:2.5px;
+            border-radius:50px;
+            transition:all 0.35s ease;
+            text-transform:uppercase;
+            box-shadow:0 4px 16px rgba(184,148,62,0.3);
+            position:relative;
+            overflow:hidden;
+        }
+        .map-link::before {
+            content:'';
+            position:absolute;
+            top:0; left:-100%; width:60%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: mapLinkShimmer 4s ease-in-out infinite;
+        }
+        @keyframes mapLinkShimmer { to { left:200%; } }
+        .map-link:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(184,148,62,0.45); }
+
+        /* ── RSVP ── */
+        .rsvp-section {
+            text-align:center; margin:40px 0; padding:40px 20px;
+            background: linear-gradient(160deg, var(--cream) 0%, #ece4cc 100%);
+            border:1px solid var(--gold-light);
+            border-radius:8px;
+            opacity:0;
+            position:relative;
+            overflow:hidden;
+        }
+        .rsvp-section::after {
+            content:'';
+            position:absolute;
+            top:0; left:-60%; width:40%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform:skewX(-15deg);
+            animation: rsvpShimmer 8s ease-in-out infinite 4s;
+            pointer-events:none;
+        }
+        @keyframes rsvpShimmer { to { left:160%; } }
+        .rsvp-section.visible { animation:fadeIn 1s ease 2.9s forwards; }
+        .rsvp-title    { font-family:'Cinzel',serif; font-size:1.2rem; letter-spacing:4px; color:var(--brown); margin-bottom:10px; text-transform:uppercase; }
+        .rsvp-subtitle { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--brown-light); margin-bottom:25px; font-style:italic; }
+        .rsvp-form     { max-width:350px; margin:0 auto; }
+        .rsvp-input {
+            width:100%; padding:12px 15px; margin-bottom:15px;
+            background:var(--white);
+            border:1.5px solid var(--gold-light);
+            border-radius:6px;
+            font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--brown);
+            outline:none;
+            transition:border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .rsvp-input:focus { border-color:var(--gold); box-shadow:0 0 0 4px rgba(184,148,62,0.1); }
+        .rsvp-input::placeholder { color:var(--brown-light); opacity:0.6; }
+        .rsvp-button {
+            width:100%; padding:15px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            color:var(--white);
+            border:none; border-radius:6px;
+            font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:3px;
+            text-transform:uppercase; cursor:pointer;
+            transition:transform 0.3s ease, box-shadow 0.3s ease;
+            position:relative; overflow:hidden;
+        }
+        .rsvp-button::before {
+            content:'';
+            position:absolute; top:0; left:-100%; width:100%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition:left 0.5s ease;
+        }
+        .rsvp-button:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(184,148,62,0.35); }
+        .rsvp-button:hover::before { left:100%; }
+
+        /* ── FOOTER ── */
+        .footer { text-align:center; padding:40px 20px; opacity:0; }
+        .footer.visible { animation:fadeIn 1s ease 3.1s forwards; }
+        .footer-verse { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--brown-light); font-style:italic; margin-bottom:10px; }
+        .footer-text  { font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:3px; color:var(--gold); animation:footerGlow 5s ease-in-out infinite 3.5s; }
+        @keyframes footerGlow {
+            0%,100% { color:var(--gold); }
+            50%      { color:var(--gold-light); text-shadow:0 0 12px rgba(212,175,106,0.5); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width:600px) {
+            .invitation { padding:40px 22px; margin:20px 0; }
+            .corner-ornament { width:65px; height:65px; }
+            .text-title { font-size:2rem; letter-spacing:4px; }
+            .text-name  { font-size:2.5rem; }
+            .family-row { flex-direction:column; gap:10px; }
+            .countdown-grid { grid-template-columns:repeat(2,1fr); }
+            .carousel-btn { width:36px; height:36px; font-size:1rem; }
+            .angel-container { width:220px; height:260px; }
+            .angel-header-svg { width:140px; height:160px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="top-bar">
-  <div class="title">✝️ Editor Profesional de Invitaciones</div>
-  <div class="actions">
-    <button class="btn btn-secondary" onclick="resetDefaults()">↺ Restablecer</button>
-    <button class="btn btn-secondary" onclick="saveProject()">💾 Guardar</button>
-    <button class="btn btn-secondary" onclick="loadProjectFromFile()">📂 Cargar</button>
-    <button class="btn btn-primary" onclick="exportHTML()">📥 Exportar HTML</button>
-  </div>
-</div>
-
-<div class="editor-layout">
-  <!-- ═══ SIDEBAR IZQUIERDO - BIBLIOTECA ═══ -->
-  <div class="sidebar-left">
-    <div class="sidebar-header">
-      <h1>📚 Biblioteca de Plantillas</h1>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Buscar plantilla..." oninput="filterTemplates()">
-      </div>
-      <div class="quick-filters">
-        <div class="filter-chip active" data-filter="all" onclick="setFilter('all', this)">Todas</div>
-        <div class="filter-chip" data-filter="favorites" onclick="setFilter('favorites', this)">⭐ Favoritas</div>
-        <div class="filter-chip" data-filter="new" onclick="setFilter('new', this)">🆕 Nuevas</div>
-        <div class="filter-chip" data-filter="popular" onclick="setFilter('popular', this)">🔥 Populares</div>
-      </div>
+    <!-- fondos y luces ambientales en bucle -->
+    <div class="bg-pattern">
+        <div class="bg-light bg-light-1"></div>
+        <div class="bg-light bg-light-2"></div>
     </div>
-    
-    <div class="categories-container" id="categoriesContainer">
-      <!-- Se genera dinámicamente -->
-    </div>
-    
-    <div class="sidebar-footer">
-      <button class="btn btn-secondary" onclick="importTemplates()">📥 Importar</button>
-      <button class="btn btn-secondary" onclick="exportTemplates()">📤 Exportar</button>
-    </div>
-  </div>
+    <canvas id="gold-canvas"></canvas>
 
-  <!-- ═══ PREVIEW CENTRAL ═══ -->
-  <div class="preview-center">
-    <div class="preview-frame-wrap">
-      <iframe id="cardPreview"></iframe>
-    </div>
-  </div>
-
-  <!-- ═══ SIDEBAR DERECHO - EDITOR ═══ -->
-  <div class="sidebar-right">
-    <div class="editor-header">
-      <h2 id="editorTitle">Configuración</h2>
-      <p id="editorDesc">Edita los elementos de la plantilla</p>
-    </div>
-    
-    <div class="editor-tabs">
-      <button class="editor-tab active" onclick="switchEditorTab('text', this)">📝 Texto</button>
-      <button class="editor-tab" onclick="switchEditorTab('media', this)">🖼️ Media</button>
-      <button class="editor-tab" onclick="switchEditorTab('palette', this)">🎨 Paleta</button>
-      <button class="editor-tab" onclick="switchEditorTab('advanced', this)">⚙️ Avanzado</button>
-    </div>
-    
-    <div class="editor-body" id="editorBody">
-      <!-- Campos dinámicos -->
-    </div>
-  </div>
-</div>
-
-<script>
-// ═══════════════════════════════════════════════
-// 📦 REGISTRO CENTRAL DE PLANTILLAS
-// ═══════════════════════════════════════════════
-// Estructura escalable: cada plantilla es un objeto independiente
-// Para agregar nuevas plantillas, solo añade objetos al array correspondiente
-
-const TEMPLATES_REGISTRY = {
-  // ═══ CATEGORÍA: BAUTIZOS ═══
-  'bautizos': {
-    name: '✝️ Bautizos',
-    icon: '✝️',
-    templates: [
-      {
-        id: 'bautizo-azul-clasico',
-        name: 'Azul Clásico',
-        category: 'bautizos',
-        gender: 'niño',
-        tags: ['azul', 'dorado', 'clásico', 'elegante'],
-        thumbnail: '🔵',
-        badge: 'Popular',
-        isNew: false,
-        isPopular: true,
-        palettes: {
-          1: { blue: "#7ba3d4", blueLight: "#a8c8e8", blueDark: "#5a8ab8", blueSoft: "#d4e4f4", gold: "#d4af37", goldLight: "#f0d860", goldDark: "#b8941f", goldSoft: "#f5e6b8", white: "#ffffff", cream: "#faf8f0", beige: "#f5f0e0", brown: "#4a3820" },
-          2: { blue: "#e8a0b8", blueLight: "#f5d0e0", blueDark: "#c87898", blueSoft: "#fdf0f5", gold: "#d4af37", goldLight: "#f0d860", goldDark: "#b8941f", goldSoft: "#f5e6b8", white: "#ffffff", cream: "#fff8fa", beige: "#f8e8f0", brown: "#5a3848" },
-          3: { blue: "#9b7cb6", blueLight: "#b89fd4", blueDark: "#7a5a99", blueSoft: "#e8dff0", gold: "#c8b878", goldLight: "#d8c898", goldDark: "#a89858", goldSoft: "#f0e8c8", white: "#ffffff", cream: "#f8f5f0", beige: "#f5f0e8", brown: "#4a3a48" }
-        },
-        data: {
-          splashText: "Bautizo", splashTitle: "Emilio André", splashHint: "Toca para abrir la invitación",
-          topRibbonText: "Mi Bautizo",
-          mainPhoto: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80",
-          mainPhotoAlt: "Emilio André",
-          titleText: "Bautizo", subtitleText: "de su hijo",
-          fatherName: "Papá Andy", motherName: "Mamá Brestaneth", introText2: "invitan al",
-          ribbonName: "Emilio André Arias",
-          dayName: "Sábado", dayNumber: "08", monthName: "Febrero",
-          timeLabel: "A las", timeValue: "10:00", timeAmPm: "AM",
-          eventDateISO: "2026-02-08T10:00:00",
-          churchName: "Capilla San Juan Pablo II", churchLocation: "En los estacionamientos de Albrook Mall",
-          godparentsTitle: "Padrinos", godfather: "Isaac García", godmother: "Ashly González",
-          mapButtonText: "Mapa - Ver Ubicación", mapButtonUrl: "https://www.google.com/maps",
-          rsvpButtonText: "Confirmar Asistencia",
-          waitingText: "¡Te esperamos!",
-          countdownTitle: "Cuenta Regresiva",
-          countdownLabels: ["Días", "Horas", "Min", "Seg"],
-          galleryTitle: "Galería de Recuerdos",
-          galleryImages: ["https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80", "https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80", "https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80"],
-          mapTitle: "Ubicación",
-          mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa",
-          rsvpTitle: "Confirmar Asistencia", rsvpSubtitle: "Por favor confirma antes del 1 de febrero",
-          rsvpPlaceholderName: "Nombre completo", rsvpPlaceholderGuests: "Número de invitados",
-          rsvpPlaceholderMessage: "Mensaje para la familia...", rsvpButtonTextForm: "Enviar por WhatsApp",
-          footerVerse: "Dejad que los niños vengan a mí", footerRef: "Marcos 10:14",
-          whatsappNumber: "50712345678"
-        },
-        renderer: 'renderBlueTemplate'
-      },
-      {
-        id: 'bautizo-floral-rosa',
-        name: 'Floral Rosa',
-        category: 'bautizos',
-        gender: 'niña',
-        tags: ['rosa', 'floral', 'romántico', 'flores'],
-        thumbnail: '🌸',
-        badge: null,
-        isNew: false,
-        isPopular: true,
-        palettes: {
-          1: { pink: "#e8a0b8", pinkLight: "#f5d0e0", pinkDark: "#c87898", pinkSoft: "#fdf0f5", rose: "#d4899f", cream: "#fff8fa", creamDark: "#f8e8f0", brown: "#5a3848", brownLight: "#7a5868", green: "#a8b898", greenLight: "#c8d8b8", greenDark: "#889878", white: "#ffffff" },
-          2: { pink: "#7ba3d4", pinkLight: "#a8c8e8", pinkDark: "#5a8ab8", pinkSoft: "#d4e4f4", rose: "#5a8ab8", cream: "#f0f8ff", creamDark: "#e0e8f0", brown: "#384858", brownLight: "#586878", green: "#98a8b8", greenLight: "#b8c8d8", greenDark: "#788898", white: "#ffffff" },
-          3: { pink: "#b89878", pinkLight: "#d8b898", pinkDark: "#987858", pinkSoft: "#f5ece0", rose: "#a88868", cream: "#faf5f0", creamDark: "#f0e8e0", brown: "#584838", brownLight: "#786858", green: "#a8a888", greenLight: "#c8c8a8", greenDark: "#888868", white: "#ffffff" }
-        },
-        data: {
-          splashText: "Bautizo", splashName: "Emilio André", splashHint: "Toca para abrir la invitación",
-          textIntro: "Acompáñanos a ser parte del",
-          textTitle: "BAUTIZO", textSubtitle: "De nuestro hijo",
-          textName: "Emilio André", textSurname: "ARIAS SERRANO",
-          dateDay: "Domingo", dateNumber: "08", dateMonth: "Febrero",
-          fatherName1: "Andy R.", fatherName2: "Arias Jaramillo",
-          motherName1: "Brestaneth R.", motherName2: "Serrano Chong",
-          godfatherName: "Isaac García", godmotherName: "Ashly González",
-          churchTime: "10:00 a.m.",
-          churchName: "Capilla San Juan Pablo II",
-          churchReference: "En los estacionamientos de Albrook Mall",
-          countdownTitle: "Cuenta Regresiva",
-          countdownLabels: ["Días", "Horas", "Min", "Seg"],
-          galleryTitle: "Galería de Recuerdos",
-          galleryImages: ["https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80", "https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80", "https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80"],
-          mapTitle: "Ubicación",
-          mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa",
-          mapLinkText: "Ver en Google Maps",
-          rsvpTitle: "Confirmar Asistencia", rsvpSubtitle: "Por favor confirma antes del 1 de febrero",
-          rsvpPlaceholderName: "Nombre completo", rsvpPlaceholderGuests: "Número de invitados",
-          rsvpPlaceholderMessage: "Mensaje para la familia...", rsvpButtonText: "Enviar por WhatsApp",
-          footerVerse: "Dejad que los niños vengan a mí", footerRef: "Marcos 10:14",
-          whatsappNumber: "50712345678",
-          eventDateISO: "2026-02-08T10:00:00"
-        },
-        renderer: 'renderPinkTemplate'
-      },
-      {
-        id: 'bautizo-angel-dorado',
-        name: 'Ángel Dorado',
-        category: 'bautizos',
-        gender: 'unisex',
-        tags: ['dorado', 'ángel', 'elegante', 'clásico'],
-        thumbnail: '👼',
-        badge: 'Nuevo',
-        isNew: true,
-        isPopular: false,
-        palettes: {
-          1: { gold: "#b8943e", goldLight: "#d4af6a", goldDark: "#8b6f2e", cream: "#faf6ed", creamDark: "#f0e8d0", brown: "#4a3820", brownLight: "#6b5438", white: "#ffffff" },
-          2: { gold: "#a8a8a8", goldLight: "#c8c8c8", goldDark: "#888888", cream: "#f5f5f5", creamDark: "#e8e8e8", brown: "#3a3a3a", brownLight: "#5a5a5a", white: "#ffffff" },
-          3: { gold: "#b87858", goldLight: "#d89878", goldDark: "#986848", cream: "#faf0e8", creamDark: "#f0e0d0", brown: "#4a3020", brownLight: "#6b5040", white: "#ffffff" }
-        },
-        data: {
-          splashText: "Bautizo", splashName: "Emilio André", splashHint: "Toca para abrir la invitación",
-          textIntro: "Acompáñanos a ser parte del",
-          textTitle: "BAUTIZO", textSubtitle: "De nuestro hijo",
-          textName: "Emilio André", textSurname: "ARIAS SERRANO",
-          dateDay: "Domingo", dateNumber: "08", dateMonth: "Febrero",
-          fatherName1: "Andy R.", fatherName2: "Arias Jaramillo",
-          motherName1: "Brestaneth R.", motherName2: "Serrano Chong",
-          godfatherName: "Isaac García", godmotherName: "Ashly González",
-          churchTime: "10:00 a.m.",
-          churchName: "Capilla San Juan Pablo II",
-          churchReference: "En los estacionamientos de Albrook Mall",
-          countdownTitle: "Cuenta Regresiva",
-          countdownLabels: ["Días", "Horas", "Min", "Seg"],
-          galleryTitle: "Galería de Recuerdos",
-          galleryImages: ["https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80", "https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80", "https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80"],
-          mapTitle: "Ubicación",
-          mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa",
-          mapLinkText: "Ver en Google Maps",
-          rsvpTitle: "Confirmar Asistencia", rsvpSubtitle: "Por favor confirma antes del 1 de febrero",
-          rsvpPlaceholderName: "Nombre completo", rsvpPlaceholderGuests: "Número de invitados",
-          rsvpPlaceholderMessage: "Mensaje para la familia...", rsvpButtonText: "Enviar por WhatsApp",
-          footerVerse: "Dejad que los niños vengan a mí", footerRef: "Marcos 10:14",
-          whatsappNumber: "50712345678",
-          eventDateISO: "2026-02-08T10:00:00"
-        },
-        renderer: 'renderGoldTemplate'
-      }
-    ]
-  },
-  
-  // ═══ CATEGORÍA: BODAS ═══
-  'bodas': {
-    name: '💒 Bodas',
-    icon: '💒',
-    templates: [
-      {
-        id: 'boda-elegante',
-        name: 'Elegante Clásica',
-        category: 'bodas',
-        gender: 'unisex',
-        tags: ['elegante', 'clásico', 'blanco', 'dorado'],
-        thumbnail: '💍',
-        badge: null,
-        isNew: false,
-        isPopular: true,
-        palettes: {
-          1: { primary: "#d4af37", primaryLight: "#f0d860", primaryDark: "#b8941f", secondary: "#ffffff", bg: "#faf8f0", text: "#4a3820", textLight: "#6b5438" },
-          2: { primary: "#b8943e", primaryLight: "#d8b878", primaryDark: "#987838", secondary: "#f5f0e0", bg: "#faf6ed", text: "#4a3820", textLight: "#6b5438" },
-          3: { primary: "#8b7355", primaryLight: "#a89070", primaryDark: "#6b5540", secondary: "#f5ede0", bg: "#faf5ed", text: "#3a2820", textLight: "#5a4838" }
-        },
-        data: {
-          title: "Nuestra Boda",
-          groomName: "Carlos", brideName: "María",
-          dateDay: "Sábado", dateNumber: "15", dateMonth: "Junio", dateYear: "2026",
-          ceremonyTime: "4:00 PM", receptionTime: "6:00 PM",
-          ceremonyPlace: "Iglesia San José", receptionPlace: "Salón Real",
-          ceremonyAddress: "Av. Principal 123", receptionAddress: "Hotel Marriott",
-          parentsText: "Con la bendición de nuestros padres",
-          countdownTitle: "Faltan",
-          countdownLabels: ["Días", "Horas", "Min", "Seg"],
-          galleryTitle: "Nuestra Historia",
-          galleryImages: ["https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80"],
-          mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976!2d-79!3d8!5e0!3m2!1ses!2spa",
-          rsvpTitle: "Confirma tu Asistencia",
-          rsvpSubtitle: "Antes del 1 de junio",
-          footerVerse: "El amor es paciente, es bondadoso", footerRef: "1 Corintios 13:4",
-          whatsappNumber: "50712345678",
-          eventDateISO: "2026-06-15T16:00:00"
-        },
-        renderer: 'renderWeddingTemplate'
-      }
-    ]
-  },
-  
-  // ═══ CATEGORÍA: CUMPLEAÑOS ═══
-  'cumpleanos': {
-    name: '🎂 Cumpleaños',
-    icon: '🎂',
-    templates: []
-  },
-  
-  // ═══ CATEGORÍA: XV AÑOS ═══
-  'xv-anos': {
-    name: '👑 XV Años',
-    icon: '👑',
-    templates: []
-  },
-  
-  // ═══ CATEGORÍA: BABY SHOWER ═══
-  'baby-shower': {
-    name: '👶 Baby Shower',
-    icon: '👶',
-    templates: []
-  },
-  
-  // ═══ CATEGORÍA: GRADUACIONES ═══
-  'graduaciones': {
-    name: '🎓 Graduaciones',
-    icon: '🎓',
-    templates: []
-  }
-};
-
-// ═══════════════════════════════════════════════
-// 🎨 PALETAS DE COLORES GLOBALES
-// ═══════════════════════════════════════════════
-const PALETTES = {
-  1: { name: '🎨 Clásica', description: 'Azul y Dorado' },
-  2: { name: '🌸 Romántica', description: 'Rosa Suave' },
-  3: { name: '💜 Elegante', description: 'Lavanda' }
-};
-
-// ═══════════════════════════════════════════════
-// 🎯 ESTADO DE LA APLICACIÓN
-// ═══════════════════════════════════════════════
-let state = {
-  currentTemplateId: 'bautizo-azul-clasico',
-  currentCategory: 'bautizos',
-  currentPalette: 1,
-  currentEditorTab: 'text',
-  currentFilter: 'all',
-  favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
-  openCategories: ['bautizos'],
-  searchQuery: ''
-};
-
-// ═══════════════════════════════════════════════
-// 🎨 RENDERIZADO DE CATEGORÍAS Y PLANTILLAS
-// ═══════════════════════════════════════════════
-function renderCategories() {
-  const container = document.getElementById('categoriesContainer');
-  let html = '';
-  
-  Object.keys(TEMPLATES_REGISTRY).forEach(catKey => {
-    const cat = TEMPLATES_REGISTRY[catKey];
-    const isOpen = state.openCategories.includes(catKey);
-    const filteredTemplates = filterTemplatesList(cat.templates);
-    
-    if (state.currentFilter !== 'all' && filteredTemplates.length === 0) return;
-    
-    html += `
-      <div class="category-group">
-        <div class="category-header ${isOpen ? 'active' : ''}" onclick="toggleCategory('${catKey}')">
-          <div class="category-title">
-            <span>${cat.icon}</span>
-            <span>${cat.name.replace(cat.icon + ' ', '')}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span class="category-count">${cat.templates.length}</span>
-            <span class="category-arrow">▼</span>
-          </div>
+    <!-- ══════════════ SPLASH ══════════════ -->
+    <div id="splash">
+        <div class="splash-lights">
+            <div class="light-orb"></div><div class="light-orb"></div>
+            <div class="light-orb"></div><div class="light-orb"></div>
+            <div class="light-orb"></div><div class="light-orb"></div>
+            <div class="light-orb"></div><div class="light-orb"></div>
         </div>
-        <div class="templates-grid ${isOpen ? 'open' : ''}">
-          ${filteredTemplates.map(t => renderTemplateCard(t)).join('')}
+        <!-- cruces flotantes temáticas -->
+        <div class="water-cross">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <rect x="9" y="1" width="4" height="20" rx="2" fill="#d4af6a" opacity="0.7"/>
+                <rect x="1" y="8" width="20" height="4" rx="2" fill="#d4af6a" opacity="0.7"/>
+            </svg>
         </div>
-      </div>
-    `;
-  });
-  
-  container.innerHTML = html;
-}
-
-function renderTemplateCard(t) {
-  const isActive = state.currentTemplateId === t.id;
-  const isFav = state.favorites.includes(t.id);
-  
-  return `
-    <div class="template-card ${isActive ? 'active' : ''}" onclick="selectTemplate('${t.id}')">
-      ${t.badge ? `<div class="template-badge">${t.badge}</div>` : ''}
-      <div class="template-thumb">${t.thumbnail}</div>
-      <div class="template-info">
-        <div class="template-name">${t.name}</div>
-        <div class="template-meta">
-          <span>${t.gender === 'niño' ? '👦' : t.gender === 'niña' ? '👧' : '👶'}</span>
-          <span class="template-fav ${isFav ? 'active' : ''}" onclick="event.stopPropagation();toggleFavorite('${t.id}')">${isFav ? '❤️' : '🤍'}</span>
+        <div class="water-cross">
+            <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+                <rect x="9" y="1" width="4" height="20" rx="2" fill="#b8943e" opacity="0.6"/>
+                <rect x="1" y="8" width="20" height="4" rx="2" fill="#b8943e" opacity="0.6"/>
+            </svg>
         </div>
-      </div>
-    </div>
-  `;
-}
-
-function filterTemplatesList(templates) {
-  let result = templates;
-  
-  // Filtro por búsqueda
-  if (state.searchQuery) {
-    const q = state.searchQuery.toLowerCase();
-    result = result.filter(t => 
-      t.name.toLowerCase().includes(q) ||
-      t.tags.some(tag => tag.toLowerCase().includes(q))
-    );
-  }
-  
-  // Filtro rápido
-  if (state.currentFilter === 'favorites') {
-    result = result.filter(t => state.favorites.includes(t.id));
-  } else if (state.currentFilter === 'new') {
-    result = result.filter(t => t.isNew);
-  } else if (state.currentFilter === 'popular') {
-    result = result.filter(t => t.isPopular);
-  }
-  
-  return result;
-}
-
-function filterTemplates() {
-  state.searchQuery = document.getElementById('searchInput').value;
-  renderCategories();
-}
-
-function setFilter(filter, el) {
-  state.currentFilter = filter;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  renderCategories();
-}
-
-function toggleCategory(catKey) {
-  const idx = state.openCategories.indexOf(catKey);
-  if (idx >= 0) state.openCategories.splice(idx, 1);
-  else state.openCategories.push(catKey);
-  renderCategories();
-}
-
-function toggleFavorite(templateId) {
-  const idx = state.favorites.indexOf(templateId);
-  if (idx >= 0) state.favorites.splice(idx, 1);
-  else state.favorites.push(templateId);
-  localStorage.setItem('favorites', JSON.stringify(state.favorites));
-  renderCategories();
-}
-
-// ═══════════════════════════════════════════════
-// 🎯 SELECCIÓN DE PLANTILLA
-// ═══════════════════════════════════════════════
-function findTemplate(id) {
-  for (const catKey in TEMPLATES_REGISTRY) {
-    const found = TEMPLATES_REGISTRY[catKey].templates.find(t => t.id === id);
-    if (found) return found;
-  }
-  return null;
-}
-
-function selectTemplate(id) {
-  state.currentTemplateId = id;
-  const template = findTemplate(id);
-  if (template) {
-    state.currentCategory = template.category;
-    if (!state.openCategories.includes(template.category)) {
-      state.openCategories.push(template.category);
-    }
-  }
-  renderCategories();
-  renderEditor();
-  renderCard();
-}
-
-// ═══════════════════════════════════════════════
-// ✏️ RENDERIZADO DEL EDITOR
-// ═══════════════════════════════════════════════
-function switchEditorTab(tab, el) {
-  state.currentEditorTab = tab;
-  document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderEditor();
-}
-
-function renderEditor() {
-  const template = findTemplate(state.currentTemplateId);
-  if (!template) return;
-  
-  const tabNames = {
-    text: '📝 Textos',
-    media: '🖼️ Multimedia',
-    palette: '🎨 Paleta de Colores',
-    advanced: '⚙️ Avanzado'
-  };
-  
-  document.getElementById('editorTitle').textContent = template.name;
-  document.getElementById('editorDesc').textContent = tabNames[state.currentEditorTab];
-  
-  const body = document.getElementById('editorBody');
-  let html = '';
-  
-  if (state.currentEditorTab === 'text') {
-    html = renderTextFields(template);
-  } else if (state.currentEditorTab === 'media') {
-    html = renderMediaFields(template);
-  } else if (state.currentEditorTab === 'palette') {
-    html = renderPaletteFields(template);
-  } else if (state.currentEditorTab === 'advanced') {
-    html = renderAdvancedFields(template);
-  }
-  
-  body.innerHTML = html;
-}
-
-function renderTextFields(template) {
-  const d = template.data;
-  let html = '';
-  
-  // Campos de texto comunes
-  const textFields = [
-    { key: 'splashText', label: 'Texto Splash' },
-    { key: 'splashTitle', label: 'Título Splash' },
-    { key: 'splashName', label: 'Nombre en Splash' },
-    { key: 'splashHint', label: 'Instrucción Splash' },
-    { key: 'topRibbonText', label: 'Cinta Superior' },
-    { key: 'titleText', label: 'Título Principal' },
-    { key: 'subtitleText', label: 'Subtítulo' },
-    { key: 'textIntro', label: 'Texto Intro' },
-    { key: 'textTitle', label: 'Título Grande' },
-    { key: 'textSubtitle', label: 'Subtítulo Grande' },
-    { key: 'textName', label: 'Nombre Destacado' },
-    { key: 'textSurname', label: 'Apellido' },
-    { key: 'ribbonName', label: 'Nombre en Cinta' },
-    { key: 'fatherName', label: 'Nombre Papá' },
-    { key: 'motherName', label: 'Nombre Mamá' },
-    { key: 'fatherName1', label: 'Papá (línea 1)' },
-    { key: 'fatherName2', label: 'Papá (línea 2)' },
-    { key: 'motherName1', label: 'Mamá (línea 1)' },
-    { key: 'motherName2', label: 'Mamá (línea 2)' },
-    { key: 'godfatherName', label: 'Padrino' },
-    { key: 'godmotherName', label: 'Madrina' },
-    { key: 'godfather', label: 'Padrino' },
-    { key: 'godmother', label: 'Madrina' },
-    { key: 'churchName', label: 'Nombre Iglesia' },
-    { key: 'churchLocation', label: 'Ubicación Iglesia' },
-    { key: 'churchReference', label: 'Referencia' },
-    { key: 'churchTime', label: 'Hora Ceremonia' },
-    { key: 'waitingText', label: 'Mensaje Espera' },
-    { key: 'countdownTitle', label: 'Título Countdown' },
-    { key: 'galleryTitle', label: 'Título Galería' },
-    { key: 'mapTitle', label: 'Título Mapa' },
-    { key: 'rsvpTitle', label: 'Título RSVP' },
-    { key: 'rsvpSubtitle', label: 'Subtítulo RSVP' },
-    { key: 'footerVerse', label: 'Versículo' },
-    { key: 'footerRef', label: 'Referencia Bíblica' }
-  ];
-  
-  textFields.forEach(f => {
-    if (d[f.key] !== undefined) {
-      html += `
-        <div class="field-group">
-          <label class="field-label">${f.label}</label>
-          <input type="text" class="field-input" value="${escapeHtml(d[f.key])}" onchange="updateData('${f.key}', this.value)">
+        <div class="water-cross">
+            <svg width="14" height="14" viewBox="0 0 22 22" fill="none">
+                <rect x="9" y="1" width="4" height="20" rx="2" fill="#d4af6a" opacity="0.5"/>
+                <rect x="1" y="8" width="20" height="4" rx="2" fill="#d4af6a" opacity="0.5"/>
+            </svg>
         </div>
-      `;
-    }
-  });
-  
-  // Fecha
-  if (d.eventDateISO !== undefined) {
-    html += `
-      <div class="field-group">
-        <label class="field-label">📅 Fecha y Hora</label>
-        <input type="datetime-local" class="field-input" value="${d.eventDateISO}" onchange="updateDate(this.value)">
-      </div>
-    `;
-  }
-  
-  // WhatsApp
-  if (d.whatsappNumber !== undefined) {
-    html += `
-      <div class="field-group">
-        <label class="field-label">📱 WhatsApp</label>
-        <input type="text" class="field-input" value="${d.whatsappNumber}" onchange="updateData('whatsappNumber', this.value)">
-      </div>
-    `;
-  }
-  
-  return html || '<p style="color:#888;text-align:center;padding:20px;">No hay campos de texto en esta plantilla</p>';
-}
 
-function renderMediaFields(template) {
-  const d = template.data;
-  let html = '';
-  
-  // Foto principal
-  if (d.mainPhoto !== undefined) {
-    html += `
-      <div class="field-group">
-        <label class="field-label">📷 Foto Principal</label>
-        <div class="image-upload" onclick="document.getElementById('mainPhotoFile').click()">
-          <input type="file" id="mainPhotoFile" accept="image/*" onchange="handleImageUpload(this, 'mainPhoto')">
-          <div style="font-size:2rem;">📷</div>
-          <div style="font-size:0.8rem;color:#888;">Subir imagen</div>
-        </div>
-        <input type="text" class="field-input" style="margin-top:8px;" value="${d.mainPhoto}" onchange="updateData('mainPhoto', this.value)" placeholder="URL de la imagen">
-        ${d.mainPhoto ? `<img src="${d.mainPhoto}" style="width:100%;margin-top:8px;border-radius:6px;max-height:150px;object-fit:cover;">` : ''}
-      </div>
-    `;
-  }
-  
-  // Galería
-  if (d.galleryImages !== undefined) {
-    html += `
-      <div class="field-group">
-        <label class="field-label">🖼️ Galería de Fotos</label>
-        <div class="image-upload" onclick="document.getElementById('galleryFile').click()">
-          <input type="file" id="galleryFile" accept="image/*" multiple onchange="handleGalleryUpload(this)">
-          <div style="font-size:2rem;">🖼️</div>
-          <div style="font-size:0.8rem;color:#888;">Agregar fotos</div>
-        </div>
-        <div style="margin-top:10px;">
-          ${d.galleryImages.map((img, i) => `
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-              <img src="${img}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;">
-              <input type="text" class="field-input" style="flex:1;font-size:0.75rem;" value="${escapeHtml(img)}" onchange="updateGalleryImage(${i}, this.value)">
-              <button class="btn btn-secondary" style="padding:4px 8px;font-size:0.7rem;" onclick="removeGalleryImage(${i})">✕</button>
+        <div class="splash-content">
+            <!-- ÁNGEL SVG PREMIUM -->
+            <div class="angel-container">
+                <svg class="angel-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="bodyGrad" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fff8f0"/>
+                            <stop offset="100%" stop-color="#faf0e0"/>
+                        </radialGradient>
+                        <radialGradient id="faceGrad" cx="40%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#ffe8d0"/>
+                            <stop offset="100%" stop-color="#f8d0b0"/>
+                        </radialGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                        <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fff8f0"/>
+                            <stop offset="60%" stop-color="#faf0e0"/>
+                            <stop offset="100%" stop-color="#f0e8d0"/>
+                        </linearGradient>
+                        <linearGradient id="haloGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#d4af6a"/>
+                            <stop offset="50%" stop-color="#f0dfa0"/>
+                            <stop offset="100%" stop-color="#d4af6a"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Halo brillante con rotación -->
+                    <g class="halo">
+                        <ellipse cx="100" cy="35" rx="30" ry="9" fill="none" stroke="url(#haloGrad)" stroke-width="3.5" class="halo-ring"/>
+                        <ellipse cx="100" cy="35" rx="30" ry="9" fill="none" stroke="#fff8f0" stroke-width="1.5" opacity="0.7"/>
+                        <!-- destellos del halo -->
+                        <g class="halo-star"><path d="M73,32 L75,29 L77,32 L75,35Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M99,26 L101,23 L103,26 L101,29Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M123,32 L125,29 L127,32 L125,35Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M86,28 L88,25 L90,28 L88,31Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M112,28 L114,25 L116,28 L114,31Z" fill="#d4af6a"/></g>
+                    </g>
+
+                    <!-- Ala izquierda (más detalle) -->
+                    <g class="wing-left">
+                        <path d="M83,92 Q50,68 18,86 Q6,108 26,122 Q48,134 74,118 Z" fill="url(#wingGrad)" stroke="#d4af6a" stroke-width="1.2"/>
+                        <!-- plumas -->
+                        <path d="M68,97 Q50,88 32,96" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M62,107 Q44,102 30,109" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M66,116 Q50,113 36,118" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M74,103 Q60,94 44,98" fill="none" stroke="#d4af6a" stroke-width="0.7" opacity="0.5"/>
+                    </g>
+
+                    <!-- Ala derecha -->
+                    <g class="wing-right">
+                        <path d="M117,92 Q150,68 182,86 Q194,108 174,122 Q152,134 126,118 Z" fill="url(#wingGrad)" stroke="#d4af6a" stroke-width="1.2"/>
+                        <path d="M132,97 Q150,88 168,96" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M138,107 Q156,102 170,109" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M134,116 Q150,113 164,118" fill="none" stroke="#d4af6a" stroke-width="0.9" opacity="0.7"/>
+                        <path d="M126,103 Q140,94 156,98" fill="none" stroke="#d4af6a" stroke-width="0.7" opacity="0.5"/>
+                    </g>
+
+                    <!-- Vestido/Cuerpo -->
+                    <path d="M84,95 Q83,132 72,162 Q67,177 100,182 Q133,177 128,162 Q117,132 116,95 Z" fill="url(#bodyGrad)" stroke="#d4af6a" stroke-width="1.2"/>
+                    <!-- pliegues del vestido -->
+                    <path d="M89,112 Q100,117 111,112" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.45"/>
+                    <path d="M87,132 Q100,137 113,132" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.45"/>
+                    <path d="M83,152 Q100,158 117,152" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.45"/>
+                    <!-- cinturón dorado -->
+                    <path d="M87,105 Q100,109 113,105" fill="none" stroke="#d4af6a" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Cabeza -->
+                    <circle cx="100" cy="74" r="23" fill="url(#faceGrad)" stroke="#d4af6a" stroke-width="1"/>
+
+                    <!-- Cabello -->
+                    <path d="M77,69 Q79,53 100,50 Q121,53 123,69 Q120,63 114,61 Q108,58 100,58 Q92,58 86,61 Q80,63 77,69" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
+                    <path d="M81,67 Q84,60 90,59" fill="none" stroke="#8b4520" stroke-width="0.9"/>
+                    <path d="M94,58 Q100,56 106,58" fill="none" stroke="#8b4520" stroke-width="0.9"/>
+                    <path d="M110,59 Q116,60 119,67" fill="none" stroke="#8b4520" stroke-width="0.9"/>
+
+                    <!-- Ojos expresivos -->
+                    <ellipse cx="91" cy="74" rx="3.8" ry="5" fill="#2d5016"/>
+                    <ellipse cx="109" cy="74" rx="3.8" ry="5" fill="#2d5016"/>
+                    <circle cx="92.5" cy="72.5" r="1.4" fill="#fff"/>
+                    <circle cx="110.5" cy="72.5" r="1.4" fill="#fff"/>
+                    <!-- brillos adicionales -->
+                    <circle cx="91.5" cy="75.5" r="0.6" fill="#fff" opacity="0.6"/>
+                    <circle cx="109.5" cy="75.5" r="0.6" fill="#fff" opacity="0.6"/>
+                    <!-- pestañas -->
+                    <path d="M88,71 Q89.5,69 91,70" fill="none" stroke="#2d5016" stroke-width="0.9"/>
+                    <path d="M106,71 Q107.5,69 109,70" fill="none" stroke="#2d5016" stroke-width="0.9"/>
+
+                    <!-- Mejillas -->
+                    <circle cx="86" cy="81" r="3.5" fill="#ffb6c1" opacity="0.45"/>
+                    <circle cx="114" cy="81" r="3.5" fill="#ffb6c1" opacity="0.45"/>
+
+                    <!-- Boca / sonrisa -->
+                    <path d="M94,85 Q100,89 106,85" fill="none" stroke="#c87040" stroke-width="1.4" stroke-linecap="round"/>
+
+                    <!-- Manos -->
+                    <circle cx="87" cy="144" r="4.5" fill="url(#faceGrad)" stroke="#d4af6a" stroke-width="0.9"/>
+                    <circle cx="113" cy="144" r="4.5" fill="url(#faceGrad)" stroke="#d4af6a" stroke-width="0.9"/>
+
+                    <!-- Nube con destello -->
+                    <g class="cloud-glow" filter="url(#glow)">
+                        <path d="M58,154 Q57,138 74,138 Q79,128 95,130 Q106,123 116,130 Q132,128 137,138 Q153,138 153,154 Q158,165 147,170 Q142,176 132,176 L78,176 Q68,176 63,170 Q53,165 58,154" fill="#fff" stroke="#d4af6a" stroke-width="1.2"/>
+                        <!-- brillo interior -->
+                        <path d="M70,152 Q76,148 86,150" fill="none" stroke="#f5f0e0" stroke-width="2" opacity="0.9"/>
+                        <path d="M96,146 Q106,143 116,146" fill="none" stroke="#f5f0e0" stroke-width="2" opacity="0.9"/>
+                        <path d="M121,153 Q129,150 137,156" fill="none" stroke="#f5f0e0" stroke-width="2" opacity="0.9"/>
+                    </g>
+                </svg>
             </div>
-          `).join('')}
+
+            <div class="splash-text">Bautizo</div>
+            <div class="splash-name">Emilio André</div>
+            <div class="splash-hint">Toca para abrir la invitación</div>
         </div>
-      </div>
-    `;
-  }
-  
-  // Mapa
-  if (d.mapEmbedUrl !== undefined) {
-    html += `
-      <div class="field-group">
-        <label class="field-label">🗺️ URL del Mapa</label>
-        <textarea class="field-textarea" onchange="updateData('mapEmbedUrl', this.value)">${escapeHtml(d.mapEmbedUrl)}</textarea>
-      </div>
-    `;
-  }
-  
-  return html || '<p style="color:#888;text-align:center;padding:20px;">No hay campos multimedia</p>';
-}
+    </div>
 
-function renderPaletteFields(template) {
-  const palettes = template.palettes;
-  let html = `
-    <div class="field-group">
-      <label class="field-label">Selecciona una paleta</label>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-  `;
-  
-  Object.keys(palettes).forEach(pKey => {
-    const colors = palettes[pKey];
-    const colorValues = Object.values(colors).slice(0, 5);
-    const isActive = state.currentPalette == pKey;
-    
-    html += `
-      <div onclick="selectPalette(${pKey})" style="cursor:pointer;border:2px solid ${isActive ? '#d4af37' : '#3a3a52'};border-radius:8px;padding:8px;background:#1e1e2e;transition:all 0.2s;">
-        <div style="display:flex;gap:2px;margin-bottom:6px;">
-          ${colorValues.map(c => `<div style="flex:1;height:20px;background:${c};border-radius:2px;"></div>`).join('')}
+    <!-- ══════════════ CONTENIDO PRINCIPAL ══════════════ -->
+    <div class="main-container">
+        <div class="invitation" id="invitation">
+
+            <!-- Ornamentos de esquina (SVG mejorado) -->
+            <div class="corner-ornament corner-tl">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 Q32,4 42,22 Q52,38 36,52 Q18,66 8,52 Q3,36 8,8" fill="none" stroke="#b8943e" stroke-width="1.6"/>
+                    <path d="M14,14 Q32,11 40,24 Q48,34 32,46 Q18,56 12,46 Q8,33 14,14" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3.5" fill="#b8943e"/>
+                    <circle cx="25" cy="25" r="5.5" fill="none" stroke="#d4af6a" stroke-width="0.8"/>
+                    <path d="M8,8 Q18,16 25,25 Q32,34 25,44" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M8,8 Q16,18 25,25 Q34,32 44,25" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <!-- pequeño diamante -->
+                    <path d="M12,20 L15,17 L18,20 L15,23Z" fill="#d4af6a" opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="corner-ornament corner-tr">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 Q32,4 42,22 Q52,38 36,52 Q18,66 8,52 Q3,36 8,8" fill="none" stroke="#b8943e" stroke-width="1.6"/>
+                    <path d="M14,14 Q32,11 40,24 Q48,34 32,46 Q18,56 12,46 Q8,33 14,14" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3.5" fill="#b8943e"/>
+                    <circle cx="25" cy="25" r="5.5" fill="none" stroke="#d4af6a" stroke-width="0.8"/>
+                    <path d="M8,8 Q18,16 25,25 Q32,34 25,44" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M8,8 Q16,18 25,25 Q34,32 44,25" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M12,20 L15,17 L18,20 L15,23Z" fill="#d4af6a" opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="corner-ornament corner-bl">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 Q32,4 42,22 Q52,38 36,52 Q18,66 8,52 Q3,36 8,8" fill="none" stroke="#b8943e" stroke-width="1.6"/>
+                    <path d="M14,14 Q32,11 40,24 Q48,34 32,46 Q18,56 12,46 Q8,33 14,14" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3.5" fill="#b8943e"/>
+                    <circle cx="25" cy="25" r="5.5" fill="none" stroke="#d4af6a" stroke-width="0.8"/>
+                    <path d="M8,8 Q18,16 25,25 Q32,34 25,44" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M8,8 Q16,18 25,25 Q34,32 44,25" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M12,20 L15,17 L18,20 L15,23Z" fill="#d4af6a" opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="corner-ornament corner-br">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8,8 Q32,4 42,22 Q52,38 36,52 Q18,66 8,52 Q3,36 8,8" fill="none" stroke="#b8943e" stroke-width="1.6"/>
+                    <path d="M14,14 Q32,11 40,24 Q48,34 32,46 Q18,56 12,46 Q8,33 14,14" fill="none" stroke="#d4af6a" stroke-width="1"/>
+                    <circle cx="25" cy="25" r="3.5" fill="#b8943e"/>
+                    <circle cx="25" cy="25" r="5.5" fill="none" stroke="#d4af6a" stroke-width="0.8"/>
+                    <path d="M8,8 Q18,16 25,25 Q32,34 25,44" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M8,8 Q16,18 25,25 Q34,32 44,25" fill="none" stroke="#b8943e" stroke-width="1.1"/>
+                    <path d="M12,20 L15,17 L18,20 L15,23Z" fill="#d4af6a" opacity="0.7"/>
+                </svg>
+            </div>
+
+            <!-- ÁNGEL EN PRIMER BLOQUE -->
+            <div class="angel-header">
+                <svg class="angel-header-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="bodyGrad2" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fff8f0"/>
+                            <stop offset="100%" stop-color="#faf0e0"/>
+                        </radialGradient>
+                        <radialGradient id="faceGrad2" cx="40%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#ffe8d0"/>
+                            <stop offset="100%" stop-color="#f8d0b0"/>
+                        </radialGradient>
+                        <linearGradient id="wingGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fff8f0"/>
+                            <stop offset="100%" stop-color="#f0e8d0"/>
+                        </linearGradient>
+                        <linearGradient id="haloGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#d4af6a"/>
+                            <stop offset="50%" stop-color="#f0dfa0"/>
+                            <stop offset="100%" stop-color="#d4af6a"/>
+                        </linearGradient>
+                    </defs>
+                    <g class="halo">
+                        <ellipse cx="100" cy="35" rx="30" ry="9" fill="none" stroke="url(#haloGrad2)" stroke-width="3" class="halo-ring"/>
+                        <ellipse cx="100" cy="35" rx="30" ry="9" fill="none" stroke="#fff8f0" stroke-width="1.5" opacity="0.7"/>
+                        <g class="halo-star"><path d="M73,32 L75,29 L77,32 L75,35Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M99,26 L101,23 L103,26 L101,29Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M123,32 L125,29 L127,32 L125,35Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M86,28 L88,25 L90,28 L88,31Z" fill="#d4af6a"/></g>
+                        <g class="halo-star"><path d="M112,28 L114,25 L116,28 L114,31Z" fill="#d4af6a"/></g>
+                    </g>
+                    <g class="wing-left">
+                        <path d="M83,92 Q50,68 18,86 Q6,108 26,122 Q48,134 74,118 Z" fill="url(#wingGrad2)" stroke="#d4af6a" stroke-width="1.1"/>
+                        <path d="M68,97 Q50,88 32,96" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
+                        <path d="M62,107 Q44,102 30,109" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
+                    </g>
+                    <g class="wing-right">
+                        <path d="M117,92 Q150,68 182,86 Q194,108 174,122 Q152,134 126,118 Z" fill="url(#wingGrad2)" stroke="#d4af6a" stroke-width="1.1"/>
+                        <path d="M132,97 Q150,88 168,96" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
+                        <path d="M138,107 Q156,102 170,109" fill="none" stroke="#d4af6a" stroke-width="0.8" opacity="0.6"/>
+                    </g>
+                    <path d="M84,95 Q83,132 72,162 Q67,177 100,182 Q133,177 128,162 Q117,132 116,95 Z" fill="url(#bodyGrad2)" stroke="#d4af6a" stroke-width="1.2"/>
+                    <path d="M87,105 Q100,109 113,105" fill="none" stroke="#d4af6a" stroke-width="1.8" opacity="0.55"/>
+                    <circle cx="100" cy="74" r="23" fill="url(#faceGrad2)" stroke="#d4af6a" stroke-width="1"/>
+                    <path d="M77,69 Q79,53 100,50 Q121,53 123,69 Q120,63 114,61 Q108,58 100,58 Q92,58 86,61 Q80,63 77,69" fill="#c87040" stroke="#8b4520" stroke-width="0.8"/>
+                    <ellipse cx="91" cy="74" rx="3.8" ry="5" fill="#2d5016"/>
+                    <ellipse cx="109" cy="74" rx="3.8" ry="5" fill="#2d5016"/>
+                    <circle cx="92.5" cy="72.5" r="1.4" fill="#fff"/>
+                    <circle cx="110.5" cy="72.5" r="1.4" fill="#fff"/>
+                    <circle cx="86" cy="81" r="3.5" fill="#ffb6c1" opacity="0.45"/>
+                    <circle cx="114" cy="81" r="3.5" fill="#ffb6c1" opacity="0.45"/>
+                    <path d="M94,85 Q100,89 106,85" fill="none" stroke="#c87040" stroke-width="1.4" stroke-linecap="round"/>
+                    <circle cx="87" cy="144" r="4.5" fill="url(#faceGrad2)" stroke="#d4af6a" stroke-width="0.9"/>
+                    <circle cx="113" cy="144" r="4.5" fill="url(#faceGrad2)" stroke="#d4af6a" stroke-width="0.9"/>
+                    <g class="cloud-glow">
+                        <path d="M58,154 Q57,138 74,138 Q79,128 95,130 Q106,123 116,130 Q132,128 137,138 Q153,138 153,154 Q158,165 147,170 Q142,176 132,176 L78,176 Q68,176 63,170 Q53,165 58,154" fill="#fff" stroke="#d4af6a" stroke-width="1.2"/>
+                        <path d="M70,152 Q76,148 86,150" fill="none" stroke="#f5f0e0" stroke-width="1.8" opacity="0.9"/>
+                        <path d="M96,146 Q106,143 116,146" fill="none" stroke="#f5f0e0" stroke-width="1.8" opacity="0.9"/>
+                        <path d="M121,153 Q129,150 137,156" fill="none" stroke="#f5f0e0" stroke-width="1.8" opacity="0.9"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="text-intro">Acompáñanos a ser parte del</div>
+            <div class="text-title">BAUTIZO</div>
+            <div class="text-subtitle">De nuestro hijo</div>
+            <div class="text-name">Emilio André</div>
+            <div class="text-surname">ARIAS SERRANO</div>
+
+            <div class="date-section">
+                <div class="date-day">Domingo</div>
+                <div class="date-number">08</div>
+                <div class="date-month">Febrero</div>
+            </div>
+
+            <div class="family-section">
+                <div class="family-row">
+                    <div class="family-name"><strong>Andy R.</strong>Arias Jaramillo</div>
+                    <div class="family-label">Padres</div>
+                    <div class="family-name"><strong>Brestaneth R.</strong>Serrano Chong</div>
+                </div>
+                <div class="family-row">
+                    <div class="family-name"><strong>Isaac García</strong></div>
+                    <div class="family-label">Padrinos</div>
+                    <div class="family-name"><strong>Ashly González</strong></div>
+                </div>
+            </div>
+
+            <div class="church-section">
+                <div class="church-icon">
+                    <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="churchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#6b5438"/>
+                                <stop offset="100%" stop-color="#4a3820"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="20" y="30" width="20" height="40" fill="url(#churchGrad)" rx="1"/>
+                        <polygon points="30,8 14,30 46,30" fill="url(#churchGrad)"/>
+                        <rect x="27.5" y="3" width="5" height="12" fill="url(#churchGrad)" rx="1"/>
+                        <rect x="24" y="50" width="12" height="20" fill="#faf0e0" opacity="0.7" rx="1"/>
+                        <!-- ventanas -->
+                        <ellipse cx="23" cy="40" rx="2.5" ry="3.5" fill="#d4af6a" opacity="0.7"/>
+                        <ellipse cx="37" cy="40" rx="2.5" ry="3.5" fill="#d4af6a" opacity="0.7"/>
+                        <!-- cruz en la cúpula -->
+                        <rect x="29" y="3" width="2" height="8" fill="#d4af6a" rx="0.5"/>
+                        <rect x="26.5" y="6" width="7" height="2" fill="#d4af6a" rx="0.5"/>
+                    </svg>
+                </div>
+                <div class="church-time">10:00 a.m.</div>
+                <div class="church-name">Capilla San Juan Pablo II</div>
+                <div class="church-reference">Referencia:<br>En los estacionamientos de Albrook Mall</div>
+            </div>
+
+            <div class="divider">
+                <div class="divider-icon">
+                    <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- estrella de 8 puntas -->
+                        <path d="M17,2 L19,13 L28,6 L21,15 L32,17 L21,19 L28,28 L19,21 L17,32 L15,21 L6,28 L13,19 L2,17 L13,15 L6,6 L15,13Z" fill="#b8943e"/>
+                        <circle cx="17" cy="17" r="4" fill="#d4af6a"/>
+                        <circle cx="17" cy="17" r="2" fill="#f0dfa0"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="countdown-section">
+                <div class="countdown-title">Cuenta Regresiva</div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <div class="gallery-title">Galería de Recuerdos</div>
+                <div class="carousel-wrap" id="carousel">
+                    <div class="carousel-track" id="carousel-track"></div>
+                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
+                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">&#8250;</button>
+                </div>
+                <div class="carousel-dots" id="carousel-dots"></div>
+            </div>
+
+            <div class="map-section">
+                <div class="map-title">Ubicación</div>
+                <div class="map-wrap">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.1234567890123!2d-79.12345678901234!3d8.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDcnMjQuNCJOIDc5wrAwNycyNC40Ilc!5e0!3m2!1ses!2spa!4v1234567890123!5m2!1ses!2spa" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="map-footer">
+                        <div class="map-pulse-dot"></div>
+                        <span class="map-location-text">Capilla San Juan Pablo II · Albrook Mall</span>
+                    </div>
+                </div>
+                <div class="map-btn-wrap">
+                    <a href="https://www.google.com/maps" target="_blank" class="map-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <div class="rsvp-section">
+                <div class="rsvp-title">Confirmar Asistencia</div>
+                <div class="rsvp-subtitle">Por favor confirma antes del 1 de febrero</div>
+                <form class="rsvp-form" onsubmit="handleRSVP(event)">
+                    <input type="text" class="rsvp-input" id="rsvp-name" placeholder="Nombre completo" required>
+                    <input type="number" class="rsvp-input" id="rsvp-guests" placeholder="Número de invitados" min="1" max="10">
+                    <textarea class="rsvp-input" id="rsvp-message" rows="3" placeholder="Mensaje para la familia..."></textarea>
+                    <button type="submit" class="rsvp-button">Enviar por WhatsApp</button>
+                </form>
+            </div>
+
         </div>
-        <div style="font-size:0.7rem;text-align:center;color:${isActive ? '#d4af37' : '#888'};">Paleta ${pKey}</div>
-      </div>
-    `;
-  });
-  
-  html += `</div></div>`;
-  
-  // Mostrar colores actuales editables
-  const currentColors = palettes[state.currentPalette];
-  html += `<div class="field-group"><label class="field-label">Colores actuales (editables)</label>`;
-  Object.keys(currentColors).forEach(cKey => {
-    html += `
-      <div class="color-field" style="margin-bottom:6px;">
-        <input type="color" value="${currentColors[cKey]}" onchange="updateColor('${cKey}', this.value)">
-        <span style="flex:1;font-size:0.75rem;color:#a0a0b8;">${cKey}</span>
-        <input type="text" class="color-hex" value="${currentColors[cKey]}" onchange="updateColor('${cKey}', this.value)" style="width:80px;">
-      </div>
-    `;
-  });
-  html += `</div>`;
-  
-  return html;
-}
 
-function renderAdvancedFields(template) {
-  return `
-    <div class="field-group">
-      <label class="field-label">ID de la plantilla</label>
-      <input type="text" class="field-input" value="${template.id}" readonly>
+        <div class="footer">
+            <div class="footer-verse">"Dejad que los niños vengan a mí"</div>
+            <div class="footer-text">— Marcos 10:14 —</div>
+        </div>
     </div>
-    <div class="field-group">
-      <label class="field-label">Categoría</label>
-      <input type="text" class="field-input" value="${template.category}" readonly>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Etiquetas</label>
-      <input type="text" class="field-input" value="${template.tags.join(', ')}" readonly>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Renderer</label>
-      <input type="text" class="field-input" value="${template.renderer}" readonly>
-    </div>
-    <div class="field-group">
-      <label class="field-label">JSON de datos</label>
-      <textarea class="field-textarea" style="min-height:200px;font-family:monospace;font-size:0.7rem;" readonly>${JSON.stringify(template.data, null, 2)}</textarea>
-    </div>
-  `;
-}
 
-// ═══════════════════════════════════════════════
-// 🔄 ACTUALIZACIÓN DE DATOS
-// ═══════════════════════════════════════════════
-function updateData(key, value) {
-  const template = findTemplate(state.currentTemplateId);
-  if (template) {
-    template.data[key] = value;
-    renderCard();
-  }
-}
+    <script>
+        /* ── SPLASH ── */
+        const splash = document.getElementById('splash');
+        splash.addEventListener('click', () => {
+            splash.classList.add('hide');
+            setTimeout(() => {
+                splash.style.display = 'none';
+                revealInvitation();
+            }, 1500);
+        });
 
-function updateDate(isoStr) {
-  const template = findTemplate(state.currentTemplateId);
-  if (!template) return;
-  
-  const d = new Date(isoStr);
-  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  
-  template.data.eventDateISO = isoStr;
-  if (template.data.dayName !== undefined) template.data.dayName = days[d.getDay()];
-  if (template.data.dateDay !== undefined) template.data.dateDay = days[d.getDay()];
-  if (template.data.dayNumber !== undefined) template.data.dayNumber = String(d.getDate()).padStart(2, '0');
-  if (template.data.dateNumber !== undefined) template.data.dateNumber = String(d.getDate()).padStart(2, '0');
-  if (template.data.monthName !== undefined) template.data.monthName = months[d.getMonth()];
-  if (template.data.dateMonth !== undefined) template.data.dateMonth = months[d.getMonth()];
-  
-  renderEditor();
-  renderCard();
-}
-
-function selectPalette(pKey) {
-  state.currentPalette = pKey;
-  renderEditor();
-  renderCard();
-}
-
-function updateColor(key, value) {
-  const template = findTemplate(state.currentTemplateId);
-  if (template && template.palettes[state.currentPalette]) {
-    template.palettes[state.currentPalette][key] = value;
-    renderEditor();
-    renderCard();
-  }
-}
-
-function handleImageUpload(input, key) {
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      updateData(key, e.target.result);
-      renderEditor();
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-function handleGalleryUpload(input) {
-  if (input.files) {
-    Array.from(input.files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const template = findTemplate(state.currentTemplateId);
-        if (template) {
-          if (!template.data.galleryImages) template.data.galleryImages = [];
-          template.data.galleryImages.push(e.target.result);
-          renderEditor();
-          renderCard();
+        function revealInvitation() {
+            const invitation = document.getElementById('invitation');
+            invitation.classList.add('visible');
+            setTimeout(() => { document.querySelectorAll('.corner-ornament').forEach(el => el.classList.add('visible')); }, 200);
+            setTimeout(() => { document.querySelector('.angel-header').classList.add('visible'); }, 400);
+            setTimeout(() => { document.querySelectorAll('.text-intro,.text-title,.text-subtitle,.text-name,.text-surname').forEach(el => el.classList.add('visible')); }, 600);
+            setTimeout(() => { document.querySelector('.date-section').classList.add('visible'); }, 1000);
+            setTimeout(() => { document.querySelector('.family-section').classList.add('visible'); }, 1200);
+            setTimeout(() => { document.querySelector('.church-section').classList.add('visible'); }, 1400);
+            setTimeout(() => { document.querySelector('.divider').classList.add('visible'); }, 1600);
+            setTimeout(() => { document.querySelector('.countdown-section').classList.add('visible'); }, 1800);
+            setTimeout(() => { document.querySelector('.gallery-section').classList.add('visible'); }, 2000);
+            setTimeout(() => { document.querySelector('.map-section').classList.add('visible'); }, 2200);
+            setTimeout(() => { document.querySelector('.rsvp-section').classList.add('visible'); }, 2400);
+            setTimeout(() => { document.querySelector('.footer').classList.add('visible'); }, 2600);
         }
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-}
 
-function updateGalleryImage(index, value) {
-  const template = findTemplate(state.currentTemplateId);
-  if (template && template.data.galleryImages) {
-    template.data.galleryImages[index] = value;
-    renderCard();
-  }
-}
-
-function removeGalleryImage(index) {
-  const template = findTemplate(state.currentTemplateId);
-  if (template && template.data.galleryImages) {
-    template.data.galleryImages.splice(index, 1);
-    renderEditor();
-    renderCard();
-  }
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ═══════════════════════════════════════════════
-// 🖼️ RENDERIZADO DE TARJETA (PREVIEW)
-// ═══════════════════════════════════════════════
-function renderCard() {
-  const template = findTemplate(state.currentTemplateId);
-  if (!template) return;
-  
-  const colors = template.palettes[state.currentPalette];
-  const data = template.data;
-  
-  let html = '';
-  
-  // Llamar al renderer correspondiente
-  if (template.renderer === 'renderBlueTemplate') {
-    html = renderBlueTemplate(data, colors);
-  } else if (template.renderer === 'renderPinkTemplate') {
-    html = renderPinkTemplate(data, colors);
-  } else if (template.renderer === 'renderGoldTemplate') {
-    html = renderGoldTemplate(data, colors);
-  } else if (template.renderer === 'renderWeddingTemplate') {
-    html = renderWeddingTemplate(data, colors);
-  } else {
-    html = `<html><body style="padding:40px;text-align:center;font-family:sans-serif;"><h2>🚧 Plantilla en construcción</h2><p>${template.name}</p></body></html>`;
-  }
-  
-  document.getElementById('cardPreview').srcdoc = html;
-}
-
-// ═══════════════════════════════════════════════
-// 🎨 RENDERIZADORES DE PLANTILLAS
-// ═══════════════════════════════════════════════
-
-function renderBlueTemplate(d, c) {
-  const gallerySlides = (d.galleryImages || []).map(img => `<div style="min-width:100%;aspect-ratio:4/3;"><img src="${img}" style="width:100%;height:100%;object-fit:cover;"></div>`).join('');
-  
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--blue:${c.blue};--blue-light:${c.blueLight};--blue-dark:${c.blueDark};--blue-soft:${c.blueSoft};--gold:${c.gold};--gold-light:${c.goldLight};--gold-dark:${c.goldDark};--white:${c.white};--beige:${c.beige};--brown:${c.brown}}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:var(--blue-soft);color:var(--brown);padding:20px}
-.invitation{background:var(--white);border-radius:30px;padding:40px 30px;max-width:500px;margin:0 auto;box-shadow:0 0 0 3px var(--gold),0 0 0 6px var(--white),0 0 0 9px var(--blue),0 10px 40px rgba(90,138,184,0.3)}
-.photo-circle{width:200px;height:200px;border-radius:50%;margin:0 auto 20px;overflow:hidden;border:4px solid var(--gold);box-shadow:0 0 0 3px var(--gold-light),0 8px 30px rgba(212,175,55,0.3)}
-.photo-circle img{width:100%;height:100%;object-fit:cover}
-.text-center{text-align:center}
-.title{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--gold);margin:10px 0}
-.subtitle{font-family:'Cinzel',serif;font-size:0.9rem;letter-spacing:3px;text-transform:uppercase;color:var(--brown)}
-.ribbon{background:linear-gradient(135deg,var(--blue-light),var(--blue),var(--blue-dark));padding:12px 30px;border-radius:25px;margin:20px auto;display:inline-block}
-.ribbon-text{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--white)}
-.datetime{display:flex;justify-content:space-around;padding:20px 0;margin:20px 0;border-top:2px dotted var(--blue-light);border-bottom:2px dotted var(--blue-light)}
-.datetime-block{text-align:center}
-.datetime-value{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:700;color:var(--blue-dark)}
-.datetime-label{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase}
-.section{margin:25px 0;text-align:center}
-.section-title{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.church-name{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:2px;text-transform:uppercase}
-.waiting{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--blue-dark);margin:20px 0}
-.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--blue-soft);padding:20px;border-radius:15px;border:2px solid var(--gold)}
-.countdown-item{background:var(--white);padding:10px;border-radius:8px;border:2px solid var(--gold-light);text-align:center}
-.countdown-number{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--blue-dark);display:block}
-.countdown-label{font-size:0.75rem;color:var(--brown);text-transform:uppercase;letter-spacing:1px}
-.gallery{border:3px solid var(--gold);border-radius:10px;overflow:hidden;margin:15px 0}
-.gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
-.gallery-track > div{min-width:100%;scroll-snap-align:start}
-.footer{text-align:center;padding:20px 0;border-top:2px solid var(--blue-light);margin-top:20px}
-.footer-verse{font-style:italic;margin-bottom:5px}
-.footer-ref{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold-dark);letter-spacing:2px}
-</style></head><body>
-<div class="invitation">
-  <div class="photo-circle"><img src="${d.mainPhoto}" alt="${escapeHtml(d.mainPhotoAlt)}"></div>
-  <div class="text-center">
-    <div class="subtitle">${escapeHtml(d.fatherName)} y ${escapeHtml(d.motherName)}</div>
-    <div class="subtitle" style="margin-top:-5px">${escapeHtml(d.introText2)}</div>
-    <div class="title">${escapeHtml(d.titleText)}</div>
-    <div class="subtitle">${escapeHtml(d.subtitleText)}</div>
-  </div>
-  <div class="text-center"><div class="ribbon"><div class="ribbon-text">${escapeHtml(d.ribbonName)}</div></div></div>
-  <div class="datetime">
-    <div class="datetime-block">
-      <div class="datetime-label">${escapeHtml(d.dayName)}</div>
-      <div class="datetime-value">${escapeHtml(d.dayNumber)}</div>
-      <div class="datetime-label">${escapeHtml(d.monthName)}</div>
-    </div>
-    <div class="datetime-block">
-      <div class="datetime-label">${escapeHtml(d.timeLabel)}</div>
-      <div class="datetime-value">${escapeHtml(d.timeValue)}</div>
-      <div class="datetime-label">${escapeHtml(d.timeAmPm)}</div>
-    </div>
-  </div>
-  <div class="section">
-    <div class="church-name">${escapeHtml(d.churchName)}<br><span style="font-size:0.85rem;color:var(--blue)">${escapeHtml(d.churchLocation)}</span></div>
-  </div>
-  <div class="section">
-    <div class="section-title">${escapeHtml(d.godparentsTitle)}</div>
-    <div>${escapeHtml(d.godfather)}<br>${escapeHtml(d.godmother)}</div>
-  </div>
-  <div class="waiting">${escapeHtml(d.waitingText)}</div>
-  <div class="countdown">
-    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[0])}</span></div>
-    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[1])}</span></div>
-    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[2])}</span></div>
-    <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[3])}</span></div>
-  </div>
-  <div class="section">
-    <div class="section-title">${escapeHtml(d.galleryTitle)}</div>
-    <div class="gallery"><div class="gallery-track">${gallerySlides}</div></div>
-  </div>
-  <div class="footer">
-    <div class="footer-verse">"${escapeHtml(d.footerVerse)}"</div>
-    <div class="footer-ref">— ${escapeHtml(d.footerRef)} —</div>
-  </div>
-</div>
-<script>
-const eventDate=new Date('${d.eventDateISO}').getTime();
-function updateCountdown(){const now=new Date().getTime();const distance=eventDate-now;if(distance<0)return;const days=Math.floor(distance/(1000*60*60*24));const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));const minutes=Math.floor((distance%(1000*60*60))/(1000*60));const seconds=Math.floor((distance%(1000*60))/1000);document.getElementById('days').textContent=String(days).padStart(2,'0');document.getElementById('hours').textContent=String(hours).padStart(2,'0');document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');document.getElementById('seconds').textContent=String(seconds).padStart(2,'0')}
-updateCountdown();setInterval(updateCountdown,1000);
-<\/script></body></html>`;
-}
-
-function renderPinkTemplate(d, c) {
-  const gallerySlides = (d.galleryImages || []).map(img => `<div style="min-width:100%;aspect-ratio:4/3;"><img src="${img}" style="width:100%;height:100%;object-fit:cover;"></div>`).join('');
-  
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--pink:${c.pink};--pink-light:${c.pinkLight};--pink-dark:${c.pinkDark};--pink-soft:${c.pinkSoft};--rose:${c.rose};--cream:${c.cream};--brown:${c.brown};--brown-light:${c.brownLight};--green:${c.green};--white:${c.white}}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:linear-gradient(180deg,#fdf0f5 0%,#fff8fa 100%);color:var(--brown);padding:20px}
-.invitation{background:var(--white);border-radius:150px 150px 15px 15px;padding:60px 30px 40px;max-width:500px;margin:0 auto;box-shadow:0 4px 20px rgba(200,120,152,0.12),0 0 0 8px var(--white),0 0 0 10px var(--pink-light)}
-.text-center{text-align:center}
-.title{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;letter-spacing:6px;margin:10px 0}
-.name{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--pink-dark);margin:10px 0;text-shadow:0 2px 4px rgba(200,120,152,0.2)}
-.surname{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;margin-bottom:30px}
-.date-section{padding:25px 0;margin:30px 0;border-top:1px solid var(--pink-light);border-bottom:1px solid var(--pink-light);text-align:center}
-.date-number{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--pink-dark);margin:10px 0}
-.date-label{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:3px}
-.family-row{display:flex;justify-content:space-between;align-items:center;margin:15px 0;padding:10px 0}
-.family-label{font-family:'Great Vibes',cursive;font-size:1.5rem;color:var(--pink-dark);flex:0 0 100px;text-align:center}
-.family-name{font-size:0.95rem;flex:1;text-align:center;line-height:1.5}
-.family-name strong{display:block;font-weight:600}
-.church-time{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;margin-bottom:10px}
-.church-name{font-size:1.2rem;font-weight:600;margin-bottom:5px}
-.church-ref{font-size:0.9rem;color:var(--brown-light);font-style:italic}
-.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
-.countdown-item{background:var(--pink-soft);padding:12px 5px;border-radius:4px;border:1px solid var(--pink-light);text-align:center}
-.countdown-number{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--pink-dark);display:block}
-.countdown-label{font-size:0.7rem;color:var(--brown-light);text-transform:uppercase;letter-spacing:1px}
-.gallery{border:2px solid var(--pink-light);border-radius:4px;overflow:hidden;margin:15px 0}
-.gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
-.gallery-track > div{min-width:100%;scroll-snap-align:start}
-.footer{text-align:center;padding:20px 0;margin-top:20px;border-top:1px solid var(--pink-light)}
-.footer-verse{font-style:italic;margin-bottom:5px;color:var(--brown-light)}
-.footer-ref{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--pink-dark);letter-spacing:2px}
-</style></head><body>
-<div class="invitation">
-  <div class="text-center">
-    <div style="font-style:italic;color:var(--brown-light);margin-bottom:10px;">${escapeHtml(d.textIntro)}</div>
-    <div class="title">${escapeHtml(d.textTitle)}</div>
-    <div style="color:var(--brown-light);margin-bottom:10px;">${escapeHtml(d.textSubtitle)}</div>
-    <div class="name">${escapeHtml(d.textName)}</div>
-    <div class="surname">${escapeHtml(d.textSurname)}</div>
-  </div>
-  <div class="date-section">
-    <div class="date-label">${escapeHtml(d.dateDay)}</div>
-    <div class="date-number">${escapeHtml(d.dateNumber)}</div>
-    <div class="date-label">${escapeHtml(d.dateMonth)}</div>
-  </div>
-  <div class="family-row">
-    <div class="family-name"><strong>${escapeHtml(d.fatherName1)}</strong>${escapeHtml(d.fatherName2)}</div>
-    <div class="family-label">Padres</div>
-    <div class="family-name"><strong>${escapeHtml(d.motherName1)}</strong>${escapeHtml(d.motherName2)}</div>
-  </div>
-  <div class="family-row">
-    <div class="family-name"><strong>${escapeHtml(d.godfatherName)}</strong></div>
-    <div class="family-label">Padrinos</div>
-    <div class="family-name"><strong>${escapeHtml(d.godmotherName)}</strong></div>
-  </div>
-  <div class="text-center" style="margin:30px 0;">
-    <div class="church-time">${escapeHtml(d.churchTime)}</div>
-    <div class="church-name">${escapeHtml(d.churchName)}</div>
-    <div class="church-ref">${escapeHtml(d.churchReference)}</div>
-  </div>
-  <div style="text-align:center;margin:20px 0;">
-    <div style="font-family:'Cinzel',serif;font-size:0.9rem;letter-spacing:3px;color:var(--pink-dark);margin-bottom:15px;">${escapeHtml(d.countdownTitle)}</div>
-    <div class="countdown">
-      <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[0])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[1])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[2])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[3])}</span></div>
-    </div>
-  </div>
-  <div class="text-center" style="margin:20px 0;">
-    <div style="font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;margin-bottom:15px;">${escapeHtml(d.galleryTitle)}</div>
-    <div class="gallery"><div class="gallery-track">${gallerySlides}</div></div>
-  </div>
-  <div class="footer">
-    <div class="footer-verse">"${escapeHtml(d.footerVerse)}"</div>
-    <div class="footer-ref">— ${escapeHtml(d.footerRef)} —</div>
-  </div>
-</div>
-<script>
-const eventDate=new Date('${d.eventDateISO}').getTime();
-function updateCountdown(){const now=new Date().getTime();const distance=eventDate-now;if(distance<0)return;const days=Math.floor(distance/(1000*60*60*24));const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));const minutes=Math.floor((distance%(1000*60*60))/(1000*60));const seconds=Math.floor((distance%(1000*60))/1000);document.getElementById('days').textContent=String(days).padStart(2,'0');document.getElementById('hours').textContent=String(hours).padStart(2,'0');document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');document.getElementById('seconds').textContent=String(seconds).padStart(2,'0')}
-updateCountdown();setInterval(updateCountdown,1000);
-<\/script></body></html>`;
-}
-
-function renderGoldTemplate(d, c) {
-  const gallerySlides = (d.galleryImages || []).map(img => `<div style="min-width:100%;aspect-ratio:4/3;"><img src="${img}" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.2);"></div>`).join('');
-  
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--gold:${c.gold};--gold-light:${c.goldLight};--gold-dark:${c.goldDark};--cream:${c.cream};--cream-dark:${c.creamDark};--brown:${c.brown};--brown-light:${c.brownLight};--white:${c.white}}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:linear-gradient(180deg,#f5f0e0 0%,#faf6ed 100%);color:var(--brown);padding:20px}
-.invitation{background:var(--white);border:3px double var(--gold);border-radius:8px;padding:40px 30px;max-width:500px;margin:0 auto;box-shadow:0 4px 20px rgba(74,56,32,0.08),0 0 0 1px var(--gold-light),0 0 0 8px var(--white),0 0 0 9px var(--gold)}
-.text-center{text-align:center}
-.title{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;letter-spacing:6px;margin:10px 0}
-.name{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--gold);margin:10px 0;text-shadow:0 2px 4px rgba(184,148,62,0.2)}
-.surname{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;margin-bottom:30px}
-.date-section{padding:25px 0;margin:30px 0;border-top:1px solid var(--gold-light);border-bottom:1px solid var(--gold-light);text-align:center}
-.date-number{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--gold);margin:10px 0}
-.date-label{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:3px}
-.family-row{display:flex;justify-content:space-between;align-items:center;margin:15px 0;padding:10px 0}
-.family-label{font-family:'Great Vibes',cursive;font-size:1.5rem;color:var(--gold);flex:0 0 100px;text-align:center}
-.family-name{font-size:0.95rem;flex:1;text-align:center;line-height:1.5}
-.family-name strong{display:block;font-weight:600}
-.church-time{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;margin-bottom:10px}
-.church-name{font-size:1.2rem;font-weight:600;margin-bottom:5px}
-.church-ref{font-size:0.9rem;color:var(--brown-light);font-style:italic}
-.divider{display:flex;align-items:center;justify-content:center;margin:30px 0}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
-.divider-icon{margin:0 15px;color:var(--gold);font-size:1.2rem}
-.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
-.countdown-item{background:var(--cream);padding:12px 5px;border-radius:4px;border:1px solid var(--gold-light);text-align:center}
-.countdown-number{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--gold);display:block}
-.countdown-label{font-size:0.7rem;color:var(--brown-light);text-transform:uppercase;letter-spacing:1px}
-.gallery{border:2px solid var(--gold-light);border-radius:4px;overflow:hidden;margin:15px 0}
-.gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
-.gallery-track > div{min-width:100%;scroll-snap-align:start}
-.footer{text-align:center;padding:20px 0;margin-top:20px}
-.footer-verse{font-style:italic;margin-bottom:5px;color:var(--brown-light)}
-.footer-ref{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold);letter-spacing:2px}
-</style></head><body>
-<div class="invitation">
-  <div class="text-center">
-    <div style="font-size:3rem;margin-bottom:10px;">👼</div>
-    <div style="font-style:italic;color:var(--brown-light);margin-bottom:10px;">${escapeHtml(d.textIntro)}</div>
-    <div class="title">${escapeHtml(d.textTitle)}</div>
-    <div style="color:var(--brown-light);margin-bottom:10px;">${escapeHtml(d.textSubtitle)}</div>
-    <div class="name">${escapeHtml(d.textName)}</div>
-    <div class="surname">${escapeHtml(d.textSurname)}</div>
-  </div>
-  <div class="date-section">
-    <div class="date-label">${escapeHtml(d.dateDay)}</div>
-    <div class="date-number">${escapeHtml(d.dateNumber)}</div>
-    <div class="date-label">${escapeHtml(d.dateMonth)}</div>
-  </div>
-  <div class="family-row">
-    <div class="family-name"><strong>${escapeHtml(d.fatherName1)}</strong>${escapeHtml(d.fatherName2)}</div>
-    <div class="family-label">Padres</div>
-    <div class="family-name"><strong>${escapeHtml(d.motherName1)}</strong>${escapeHtml(d.motherName2)}</div>
-  </div>
-  <div class="family-row">
-    <div class="family-name"><strong>${escapeHtml(d.godfatherName)}</strong></div>
-    <div class="family-label">Padrinos</div>
-    <div class="family-name"><strong>${escapeHtml(d.godmotherName)}</strong></div>
-  </div>
-  <div class="text-center" style="margin:30px 0;">
-    <div class="church-time">${escapeHtml(d.churchTime)}</div>
-    <div class="church-name">${escapeHtml(d.churchName)}</div>
-    <div class="church-ref">${escapeHtml(d.churchReference)}</div>
-  </div>
-  <div class="divider"><div class="divider-icon">✦</div></div>
-  <div style="text-align:center;margin:20px 0;">
-    <div style="font-family:'Cinzel',serif;font-size:0.9rem;letter-spacing:3px;color:var(--gold);margin-bottom:15px;">${escapeHtml(d.countdownTitle)}</div>
-    <div class="countdown">
-      <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[0])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[1])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[2])}</span></div>
-      <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">${escapeHtml(d.countdownLabels[3])}</span></div>
-    </div>
-  </div>
-  <div class="text-center" style="margin:20px 0;">
-    <div style="font-family:'Cinzel',serif;font-size:1rem;letter-spacing:3px;margin-bottom:15px;">${escapeHtml(d.galleryTitle)}</div>
-    <div class="gallery"><div class="gallery-track">${gallerySlides}</div></div>
-  </div>
-  <div class="footer">
-    <div class="footer-verse">"${escapeHtml(d.footerVerse)}"</div>
-    <div class="footer-ref">— ${escapeHtml(d.footerRef)} —</div>
-  </div>
-</div>
-<script>
-const eventDate=new Date('${d.eventDateISO}').getTime();
-function updateCountdown(){const now=new Date().getTime();const distance=eventDate-now;if(distance<0)return;const days=Math.floor(distance/(1000*60*60*24));const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));const minutes=Math.floor((distance%(1000*60*60))/(1000*60));const seconds=Math.floor((distance%(1000*60))/1000);document.getElementById('days').textContent=String(days).padStart(2,'0');document.getElementById('hours').textContent=String(hours).padStart(2,'0');document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');document.getElementById('seconds').textContent=String(seconds).padStart(2,'0')}
-updateCountdown();setInterval(updateCountdown,1000);
-<\/script></body></html>`;
-}
-
-function renderWeddingTemplate(d, c) {
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--primary:${c.primary};--primary-light:${c.primaryLight};--primary-dark:${c.primaryDark};--secondary:${c.secondary};--bg:${c.bg};--text:${c.text};--text-light:${c.textLight}}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:var(--bg);color:var(--text);padding:20px}
-.invitation{background:var(--secondary);padding:50px 30px;max-width:500px;margin:0 auto;border:2px solid var(--primary);text-align:center}
-.title{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--primary);margin:20px 0}
-.names{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--text);margin:20px 0}
-.names .and{font-size:1.5rem;color:var(--primary);display:block;margin:5px 0}
-.date-section{padding:25px 0;margin:30px 0;border-top:1px solid var(--primary-light);border-bottom:1px solid var(--primary-light)}
-.date-number{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--primary);margin:10px 0}
-.date-label{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:3px}
-.section{margin:25px 0}
-.section-title{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--primary);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.footer{padding:20px 0;margin-top:20px;border-top:1px solid var(--primary-light)}
-.footer-verse{font-style:italic;margin-bottom:5px;color:var(--text-light)}
-.footer-ref{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--primary);letter-spacing:2px}
-</style></head><body>
-<div class="invitation">
-  <div style="font-size:3rem;">💍</div>
-  <div class="title">${escapeHtml(d.title)}</div>
-  <div style="font-style:italic;color:var(--text-light);margin:10px 0;">${escapeHtml(d.parentsText)}</div>
-  <div class="names">
-    ${escapeHtml(d.groomName)}
-    <span class="and">&</span>
-    ${escapeHtml(d.brideName)}
-  </div>
-  <div class="date-section">
-    <div class="date-label">${escapeHtml(d.dateDay)}</div>
-    <div class="date-number">${escapeHtml(d.dateNumber)}</div>
-    <div class="date-label">${escapeHtml(d.dateMonth)} ${escapeHtml(d.dateYear)}</div>
-  </div>
-  <div class="section">
-    <div class="section-title">Ceremonia</div>
-    <div style="font-size:1.5rem;font-weight:700;margin:5px 0;">${escapeHtml(d.ceremonyTime)}</div>
-    <div style="font-weight:600;">${escapeHtml(d.ceremonyPlace)}</div>
-    <div style="font-size:0.9rem;color:var(--text-light);">${escapeHtml(d.ceremonyAddress)}</div>
-  </div>
-  <div class="section">
-    <div class="section-title">Recepción</div>
-    <div style="font-size:1.5rem;font-weight:700;margin:5px 0;">${escapeHtml(d.receptionTime)}</div>
-    <div style="font-weight:600;">${escapeHtml(d.receptionPlace)}</div>
-    <div style="font-size:0.9rem;color:var(--text-light);">${escapeHtml(d.receptionAddress)}</div>
-  </div>
-  <div class="footer">
-    <div class="footer-verse">"${escapeHtml(d.footerVerse)}"</div>
-    <div class="footer-ref">— ${escapeHtml(d.footerRef)} —</div>
-  </div>
-</div>
-</body></html>`;
-}
-
-// ═══════════════════════════════════════════════
-// 💾 GUARDAR / CARGAR / EXPORTAR
-// ═══════════════════════════════════════════════
-function resetDefaults() {
-  if (!confirm('¿Restablecer todos los valores por defecto?')) return;
-  location.reload();
-}
-
-function saveProject() {
-  const data = {
-    version: '2.0',
-    state: state,
-    templates: TEMPLATES_REGISTRY
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'invitaciones-proyecto.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function loadProjectFromFile() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      try {
-        const data = JSON.parse(ev.target.result);
-        if (data.templates) {
-          Object.assign(TEMPLATES_REGISTRY, data.templates);
+        /* ── CUENTA REGRESIVA ── */
+        const eventDate = new Date('2026-02-08T10:00:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            if (distance < 0) return;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const el = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = String(val).padStart(2,'0'); };
+            el('days', days); el('hours', hours); el('minutes', minutes); el('seconds', seconds);
         }
-        if (data.state) {
-          state = { ...state, ...data.state };
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        /* ── CARRUSEL ── */
+        let carouselIdx = 0;
+        let autoSlide;
+        const galleryImages = [
+            { src:'https://images.unsplash.com/photo-1544717304-14d94551b7dc?w=600&q=80', cap:'Familia' },
+            { src:'https://images.unsplash.com/photo-1562859135-3c009b776595?w=600&q=80', cap:'Bendición' },
+            { src:'https://images.unsplash.com/photo-1621621668101-d5c8329b3784?w=600&q=80', cap:'Amor' },
+            { src:'https://images.unsplash.com/photo-1674232636710-704974388125?w=600&q=80', cap:'Alegría' },
+            { src:'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?w=600&q=80', cap:'Celebración' }
+        ];
+
+        function buildCarousel() {
+            const track = document.getElementById('carousel-track');
+            const dots  = document.getElementById('carousel-dots');
+            track.innerHTML = galleryImages.map((img,i) => `
+                <div class="carousel-slide${i===0?' active':''}">
+                    <img src="${img.src}" alt="${img.cap}" loading="lazy">
+                </div>`).join('');
+            dots.innerHTML = galleryImages.map((_,i) => `
+                <div class="carousel-dot${i===0?' active':''}" onclick="goToCarousel(${i})"></div>`).join('');
+            updateCarousel();
+            startAutoSlide();
         }
-        renderCategories();
-        renderEditor();
-        renderCard();
-        alert('✅ Proyecto cargado correctamente');
-      } catch (err) {
-        alert('❌ Error al cargar: ' + err.message);
-      }
-    };
-    reader.readAsText(file);
-  };
-  input.click();
-}
 
-function exportHTML() {
-  const iframe = document.getElementById('cardPreview');
-  const htmlContent = iframe.srcdoc;
-  const blob = new Blob([htmlContent], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'invitacion.html';
-  a.click();
-  URL.revokeObjectURL(url);
-}
+        function updateCarousel() {
+            const track  = document.getElementById('carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+            document.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===carouselIdx));
+            slides.forEach((s,i) => {
+                s.classList.toggle('active', i===carouselIdx);
+                if(i===carouselIdx) {
+                    const img = s.querySelector('img');
+                    img.style.animation='none';
+                    img.offsetHeight; // reflow
+                    img.style.animation='';
+                    s.querySelector('img').style.animation='kenBurns 8s ease-in-out forwards';
+                }
+            });
+        }
 
-function importTemplates() {
-  alert('📥 Función de importar plantillas desde archivo JSON.\n\nEstructura esperada:\n{\n  "categoria": {\n    "name": "Nombre",\n    "icon": "🎯",\n    "templates": [...]\n  }\n}');
-}
+        function moveCarousel(dir) {
+            carouselIdx = (carouselIdx + dir + galleryImages.length) % galleryImages.length;
+            updateCarousel();
+            resetAutoSlide();
+        }
+        function goToCarousel(idx) {
+            carouselIdx = idx;
+            updateCarousel();
+            resetAutoSlide();
+        }
+        function startAutoSlide() {
+            autoSlide = setInterval(() => moveCarousel(1), 5000);
+        }
+        function resetAutoSlide() {
+            clearInterval(autoSlide);
+            startAutoSlide();
+        }
 
-function exportTemplates() {
-  const blob = new Blob([JSON.stringify(TEMPLATES_REGISTRY, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'plantillas.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
+        let touchStartX = 0;
+        const carousel = document.getElementById('carousel');
+        carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+        carousel.addEventListener('touchend',   e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) moveCarousel(diff > 0 ? 1 : -1);
+        });
 
-// ═══════════════════════════════════════════════
-// 🚀 INICIALIZACIÓN
-// ═══════════════════════════════════════════════
-renderCategories();
-renderEditor();
-renderCard();
-</script>
+        /* ── RSVP WHATSAPP ── */
+        function handleRSVP(e) {
+            e.preventDefault();
+            const name    = document.getElementById('rsvp-name').value.trim();
+            const guests  = document.getElementById('rsvp-guests').value.trim();
+            const message = document.getElementById('rsvp-message').value.trim();
+            if (!name) { alert('Por favor ingresa tu nombre'); return; }
+            const whatsappNumber = '50712345678';
+            const text = `Hola, soy ${name}. Confirmo mi asistencia al Bautizo de Emilio André${guests?' con '+guests+' invitado(s)':''}.${message?' '+message:''}`;
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+            const button = e.target.querySelector('.rsvp-button');
+            const orig = button.textContent;
+            button.textContent = '✓ Enviado';
+            button.style.background = 'linear-gradient(135deg,#6b8e5a,#8ba87a)';
+            setTimeout(() => { button.textContent = orig; button.style.background=''; e.target.reset(); }, 3000);
+        }
+
+        /* ── PARTÍCULAS CANVAS PREMIUM ── */
+        const canvas = document.getElementById('gold-canvas');
+        const ctx    = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // tipos: circle, star, cross, diamond
+        const TYPES = ['circle','star','cross','diamond'];
+
+        class Particle {
+            constructor() { this.reset(true); }
+            reset(randomY) {
+                this.x      = Math.random() * canvas.width;
+                this.y      = randomY ? Math.random() * canvas.height : canvas.height + 10;
+                this.size   = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.35;
+                this.speedY = -(Math.random() * 0.4 + 0.15);
+                this.opacity    = 0;
+                this.maxOpacity = Math.random() * 0.35 + 0.08;
+                this.phase  = Math.random() * Math.PI * 2;
+                this.phaseSpeed = Math.random() * 0.02 + 0.008;
+                this.type   = TYPES[Math.floor(Math.random() * TYPES.length)];
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.02;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.phase += this.phaseSpeed;
+                this.rotation += this.rotSpeed;
+                this.opacity = Math.sin(this.phase) * this.maxOpacity;
+                if (this.y < -20) this.reset(false);
+            }
+            draw() {
+                if (this.opacity <= 0) return;
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle    = `rgba(184,148,62,1)`;
+                ctx.strokeStyle  = `rgba(212,175,106,1)`;
+                ctx.lineWidth    = 0.6;
+
+                switch(this.type) {
+                    case 'circle':
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 'star':
+                        drawStar(ctx, 0, 0, 4, this.size * 1.5, this.size * 0.6);
+                        ctx.fill();
+                        break;
+                    case 'cross':
+                        const cs = this.size;
+                        ctx.fillRect(-cs/4, -cs, cs/2, cs*2);
+                        ctx.fillRect(-cs,  -cs/4, cs*2, cs/2);
+                        break;
+                    case 'diamond':
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size*1.4);
+                        ctx.lineTo(this.size*0.8, 0);
+                        ctx.lineTo(0, this.size*1.4);
+                        ctx.lineTo(-this.size*0.8, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                }
+                ctx.restore();
+            }
+        }
+
+        function drawStar(c, cx, cy, spikes, outerR, innerR) {
+            let rot = (Math.PI / 2) * 3;
+            const step = Math.PI / spikes;
+            c.beginPath();
+            c.moveTo(cx, cy - outerR);
+            for (let i = 0; i < spikes; i++) {
+                c.lineTo(cx + Math.cos(rot) * outerR, cy + Math.sin(rot) * outerR);
+                rot += step;
+                c.lineTo(cx + Math.cos(rot) * innerR, cy + Math.sin(rot) * innerR);
+                rot += step;
+            }
+            c.lineTo(cx, cy - outerR);
+            c.closePath();
+        }
+
+        const particles = [];
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        /* ── INICIAR ── */
+        buildCarousel();
+    </script>
 </body>
 </html>
