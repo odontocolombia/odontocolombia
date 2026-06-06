@@ -468,13 +468,31 @@ mainEl.addEventListener("touchend", e => {
 document.getElementById("rsvp-form").addEventListener("submit", function(e) {
   e.preventDefault();
   const name = document.getElementById("rsvp-name").value.trim();
+  const guests = document.getElementById("rsvp-guests").value.trim();
+  const msg = document.getElementById("rsvp-msg").value.trim();
   if (!name) return;
+
+  // Build WhatsApp message
+  let text = `¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🎉\n\n`;
+  text += `👤 *Nombre:* ${name}\n`;
+  if (guests) text += `👥 *Invitados:* ${guests}\n`;
+  if (msg) text += `💬 *Mensaje:* ${msg}\n`;
+  text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
+
+  // Clean phone: digits only
+  const phone = CFG.phone.replace(/\D/g, "");
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+  // Show success then open WhatsApp
   document.getElementById("rsvp-form-area").innerHTML = `
     <div style="text-align:center;padding:2rem 0">
       <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
       <h3 style="font-family:'Dancing Script',cursive;font-size:2.2rem;color:#e8c84a;margin:0 0 .5rem">¡Gracias!</h3>
-      <p style="font-family:'Lato',sans-serif;font-style:italic;font-size:.95rem;color:#b8e8ff">Tu confirmación fue enviada. ¡Te esperamos!</p>
+      <p style="font-family:'Lato',sans-serif;font-style:italic;font-size:.95rem;color:#b8e8ff;margin-bottom:1.25rem">Abriendo WhatsApp para enviar tu confirmación…</p>
+      <a href="${waUrl}" target="_blank" style="display:inline-block;padding:.75rem 2rem;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#020a18;background:linear-gradient(135deg,#25d366,#128c50);border-radius:50px;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.4)">Abrir WhatsApp</a>
     </div>`;
+
+  window.open(waUrl, "_blank");
 });
 </script>
 </body>
