@@ -87,7 +87,7 @@
             filter: drop-shadow(0 8px 20px rgba(100,160,200,0.35));
         }
         .balloon-1 {
-            top:4%; right:4%; width:110px; height:165px;
+            top:3%; right:4%; width:120px; height:210px;
             animation: floatBalloon 20s ease-in-out infinite, swayBalloon 7s ease-in-out infinite;
         }
         @keyframes floatBalloon {
@@ -698,7 +698,7 @@
             .book-page { padding:44px 16px 28px;border-radius:85px 85px 18px 18px; }
             .hero-illustration { width:250px;height:250px; }
             .hero-photo-mask { width:172px;height:172px; }
-            .hot-air-balloon { width:85px;height:130px;opacity:0.75; }
+            .hot-air-balloon { width:88px;height:154px;opacity:0.8; }
             .toy-car { width:115px;height:88px;opacity:0.75; }
             .bird { display:none; }
         }
@@ -729,36 +729,107 @@
 </svg>
 
 <!-- Globo aerostático -->
-<svg class="hot-air-balloon balloon-1" viewBox="0 0 110 165">
+<svg class="hot-air-balloon balloon-1" viewBox="0 0 120 210" xmlns="http://www.w3.org/2000/svg">
     <defs>
-        <linearGradient id="ballG" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"  stop-color="#c8dff0" stop-opacity="0.95"/>
-            <stop offset="30%" stop-color="#ffffff" stop-opacity="0.9"/>
-            <stop offset="60%" stop-color="#b8d4e8" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#e2c99a" stop-opacity="0.85"/>
+        <!-- Gradiente principal del globo: franjas de colores -->
+        <linearGradient id="ballStripe1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#c8dff0"/>
+            <stop offset="20%"  stop-color="#ffffff"/>
+            <stop offset="40%"  stop-color="#c8dff0"/>
+            <stop offset="60%"  stop-color="#dbb0b4"/>
+            <stop offset="80%"  stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#c8dff0"/>
         </linearGradient>
-        <radialGradient id="ballShine" cx="35%" cy="30%" r="50%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+        <!-- Sombra lateral derecha -->
+        <linearGradient id="ballShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="rgba(80,120,160,0.18)"/>
+            <stop offset="45%"  stop-color="rgba(80,120,160,0)"/>
+            <stop offset="100%" stop-color="rgba(80,120,160,0.22)"/>
+        </linearGradient>
+        <!-- Brillo superior izquierdo -->
+        <radialGradient id="ballShine" cx="35%" cy="25%" r="45%">
+            <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.65"/>
+            <stop offset="60%"  stop-color="#ffffff" stop-opacity="0.1"/>
             <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
         </radialGradient>
+        <!-- Clip para limitar al óvalo -->
+        <clipPath id="ballClip">
+            <ellipse cx="60" cy="68" rx="52" ry="64"/>
+        </clipPath>
     </defs>
-    <ellipse cx="55" cy="50" rx="46" ry="55" fill="url(#ballG)" stroke="rgba(122,171,204,0.5)" stroke-width="1.5"/>
-    <ellipse cx="55" cy="50" rx="46" ry="55" fill="url(#ballShine)"/>
-    <!-- Rayas verticales -->
-    <line x1="55" y1="0" x2="55" y2="100" stroke="rgba(122,171,204,0.3)" stroke-width="1"/>
-    <path d="M30 5 Q35 50 40 98" stroke="rgba(122,171,204,0.25)" stroke-width="0.8" fill="none"/>
-    <path d="M80 5 Q75 50 70 98" stroke="rgba(122,171,204,0.25)" stroke-width="0.8" fill="none"/>
-    <!-- Aro inferior -->
-    <ellipse cx="55" cy="100" rx="28" ry="7" fill="none" stroke="rgba(122,171,204,0.4)" stroke-width="1.2"/>
-    <!-- Cuerdas -->
-    <line x1="38" y1="104" x2="42" y2="128" stroke="#a08070" stroke-width="1"/>
-    <line x1="72" y1="104" x2="68" y2="128" stroke="#a08070" stroke-width="1"/>
-    <!-- Canasta -->
-    <rect x="40" y="128" width="30" height="20" rx="3" fill="#d4b8a8" stroke="#a08070" stroke-width="1.5"/>
-    <rect x="43" y="131" width="24" height="14" rx="2" fill="#e8d4c8" opacity="0.5"/>
-    <line x1="49" y1="128" x2="49" y2="148" stroke="#a08070" stroke-width="0.8"/>
-    <line x1="55" y1="128" x2="55" y2="148" stroke="#a08070" stroke-width="0.8"/>
-    <line x1="61" y1="128" x2="61" y2="148" stroke="#a08070" stroke-width="0.8"/>
+
+    <!-- ── CUERPO DEL GLOBO ── -->
+    <!-- Base sólida con franjas de color -->
+    <ellipse cx="60" cy="68" rx="52" ry="64" fill="url(#ballStripe1)"/>
+
+    <!-- Paneles de color sobre el clip para paneles curvos -->
+    <g clip-path="url(#ballClip)">
+        <!-- Panel azul izquierdo -->
+        <path d="M8 68 Q20 10 60 5 L60 132 Q20 128 8 68 Z" fill="#c8dff0" opacity="0.7"/>
+        <!-- Panel blanco centro-izquierdo -->
+        <path d="M60 5 Q80 8 95 20 L80 130 Q60 133 60 132 Z" fill="#ffffff" opacity="0.55"/>
+        <!-- Panel rosa centro-derecho -->
+        <path d="M95 20 Q112 40 112 68 Q112 96 95 116 L80 130 Q95 20 95 20 Z" fill="#dbb0b4" opacity="0.55"/>
+        <!-- Panel azul derecho -->
+        <path d="M112 68 Q112 100 95 116 L60 132 Q90 128 112 68 Z" fill="#c8dff0" opacity="0.5"/>
+        <!-- Líneas de paneles verticales -->
+        <line x1="60" y1="5"  x2="60" y2="132" stroke="rgba(100,150,190,0.35)" stroke-width="1.2"/>
+        <line x1="80" y1="7"  x2="80" y2="131" stroke="rgba(100,150,190,0.2)"  stroke-width="0.9"/>
+        <line x1="40" y1="7"  x2="40" y2="131" stroke="rgba(100,150,190,0.2)"  stroke-width="0.9"/>
+        <line x1="97" y1="18" x2="95" y2="116" stroke="rgba(100,150,190,0.15)" stroke-width="0.7"/>
+        <line x1="23" y1="18" x2="25" y2="116" stroke="rgba(100,150,190,0.15)" stroke-width="0.7"/>
+        <!-- Líneas horizontales decorativas -->
+        <ellipse cx="60" cy="35" rx="42" ry="6" fill="none" stroke="rgba(150,180,210,0.3)" stroke-width="0.8"/>
+        <ellipse cx="60" cy="68" rx="51" ry="6" fill="none" stroke="rgba(150,180,210,0.3)" stroke-width="0.8"/>
+        <ellipse cx="60" cy="100" rx="44" ry="5" fill="none" stroke="rgba(150,180,210,0.25)" stroke-width="0.8"/>
+        <!-- Sombra lateral -->
+        <ellipse cx="60" cy="68" rx="52" ry="64" fill="url(#ballShadow)"/>
+        <!-- Brillo -->
+        <ellipse cx="60" cy="68" rx="52" ry="64" fill="url(#ballShine)"/>
+    </g>
+    <!-- Borde del globo -->
+    <ellipse cx="60" cy="68" rx="52" ry="64" fill="none" stroke="rgba(100,150,200,0.45)" stroke-width="1.5"/>
+
+    <!-- Pequeña estrella en la punta superior -->
+    <g transform="translate(60, 7)">
+        <polygon points="0,-5 1.2,-1.5 5,-1.5 2,1 3,5 0,2.5 -3,5 -2,1 -5,-1.5 -1.2,-1.5"
+            fill="#e2c99a" opacity="0.9"/>
+    </g>
+
+    <!-- ── ARO INFERIOR / CUELLO ── -->
+    <ellipse cx="60" cy="130" rx="30" ry="7" fill="rgba(100,140,180,0.15)" stroke="rgba(100,150,200,0.5)" stroke-width="1.5"/>
+    <!-- Banda decorativa inferior -->
+    <path d="M30 130 Q60 140 90 130" fill="none" stroke="rgba(100,150,200,0.3)" stroke-width="1"/>
+
+    <!-- ── CUERDAS ── -->
+    <line x1="40" y1="136" x2="44" y2="168" stroke="#a08070" stroke-width="1.2"/>
+    <line x1="60" y1="137" x2="60" y2="168" stroke="#a08070" stroke-width="1.2"/>
+    <line x1="80" y1="136" x2="76" y2="168" stroke="#a08070" stroke-width="1.2"/>
+
+    <!-- ── CANASTA ── -->
+    <!-- Tejido de canasta (base) -->
+    <rect x="38" y="168" width="44" height="26" rx="4" fill="#c4a484" stroke="#8a6448" stroke-width="1.8"/>
+    <!-- Textura de tejido -->
+    <g stroke="#a08060" stroke-width="0.7" opacity="0.6">
+        <line x1="49" y1="168" x2="49" y2="194"/>
+        <line x1="60" y1="168" x2="60" y2="194"/>
+        <line x1="71" y1="168" x2="71" y2="194"/>
+        <line x1="38" y1="177" x2="82" y2="177"/>
+        <line x1="38" y1="186" x2="82" y2="186"/>
+    </g>
+    <!-- Cara de la canasta (interior cálido) -->
+    <rect x="41" y="171" width="38" height="20" rx="2" fill="#d9b894" opacity="0.45"/>
+    <!-- Borde superior de la canasta -->
+    <rect x="36" y="166" width="48" height="5" rx="2" fill="#a07850" opacity="0.8"/>
+    <!-- Asa izquierda -->
+    <path d="M42 168 Q36 158 40 152" fill="none" stroke="#8a6448" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Asa derecha -->
+    <path d="M78 168 Q84 158 80 152" fill="none" stroke="#8a6448" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- ── LLAMA DEL QUEMADOR (debajo del globo) ── -->
+    <ellipse cx="60" cy="133" rx="6" ry="3" fill="rgba(255,180,60,0.5)"/>
+    <ellipse cx="60" cy="133" rx="3" ry="5" fill="rgba(255,220,100,0.6)"/>
+    <ellipse cx="60" cy="133" rx="1.5" ry="3" fill="rgba(255,255,200,0.7)"/>
 </svg>
 
 <!-- Carrito de juguete -->
