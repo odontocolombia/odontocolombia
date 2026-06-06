@@ -70,11 +70,11 @@
         }
 
         /* ─── CANVAS ─── */
-        #magic-canvas { position:fixed;inset:0;z-index:2;pointer-events:none; }
+        #magic-canvas { position:fixed;inset:0;z-index:10;pointer-events:none; }
 
         /* ─── GLOBO AEROSTÁTICO ROSADO ─── */
         .hot-air-balloon {
-            position:fixed; z-index:3; pointer-events:none;
+            position:fixed; z-index:12; pointer-events:none;
             filter:drop-shadow(0 8px 20px rgba(200,100,130,0.3));
         }
         .balloon-1 {
@@ -93,7 +93,7 @@
         /* ─── CARRITO DE BEBÉ ─── */
         .pram {
             position:fixed; bottom:3%; left:3%; width:150px; height:130px;
-            z-index:3; pointer-events:none;
+            z-index:12; pointer-events:none;
             filter:drop-shadow(0 6px 14px rgba(200,100,130,0.25));
             animation:pramFloat 4s ease-in-out infinite;
         }
@@ -104,7 +104,7 @@
 
         /* ─── MARIPOSAS ─── */
         .butterfly {
-            position:fixed; z-index:3; pointer-events:none;
+            position:fixed; z-index:12; pointer-events:none;
             animation:bflyMove var(--bfdur,30s) ease-in-out infinite;
         }
         .bf1 { top:12%; --bfdur:34s; animation-delay:-5s; }
