@@ -3,588 +3,484 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bautizo de Emilio André</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+  <title>Invitación de Cumpleaños</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Lato', sans-serif; background: linear-gradient(180deg,#c5e3f5 0%,#d8eef8 30%,#e8f4fb 60%,#d0e9f6 100%); min-height: 100vh; overflow-x: hidden; }
-
-    @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
-    @keyframes blink   { 0%,100%{opacity:.3} 50%{opacity:.85} }
-    @keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-    @keyframes pulseRing { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2.2);opacity:0} }
-
-    /* ── Splash ── */
-    #splash {
-      position:fixed;inset:0;z-index:9999;
-      background:linear-gradient(180deg,#d4eaf7 0%,#b8d8f0 50%,#c8e6f5 100%);
-      display:flex;align-items:center;justify-content:center;cursor:pointer;
-      animation:fadeIn .5s ease;
-    }
-    #splash h1 { font-family:'Dancing Script',cursive; font-size:clamp(3rem,12vw,4.5rem); color:#2c5f8a; line-height:1.1; margin-bottom:.25rem; }
-    #splash .subtitle { font-family:'Dancing Script',cursive; font-style:italic; font-size:1.3rem; color:#5a8fc2; margin-bottom:1.25rem; }
-    .tap-hint { font-size:.5rem; letter-spacing:.3em; text-transform:uppercase; color:#5a8fc2; margin-top:1rem; animation:blink 2s infinite; }
-    .thin-line { width:80px; height:1px; background:linear-gradient(90deg,transparent,#5a8fc2,transparent); margin:.75rem auto 1.25rem; }
-    .eyebrow { font-weight:300; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:#5a8fc2; display:block; margin-bottom:.3rem; }
-
-    /* ── Layout ── */
-    .page { position:relative; z-index:10; max-width:448px; margin:0 auto; padding:1.5rem 1rem 4rem; display:flex; flex-direction:column; gap:1.25rem; }
-
-    /* ── Hero card ── */
-    .hero-card { border-radius:22px; box-shadow:0 8px 40px rgba(58,114,168,.22),0 2px 8px rgba(58,114,168,.1); overflow:clip; border:1px solid rgba(255,255,255,.8); }
-    .sky-zone {
-      background:linear-gradient(160deg,#a8d4ee 0%,#b8ddf5 40%,#cce8f8 75%,#daeef8 100%);
-      padding:2rem 1.75rem 0; position:relative; text-align:center; overflow:hidden;
-    }
-    .star-pattern { position:absolute;inset:0;width:100%;height:100%;opacity:.18;pointer-events:none; }
-    .radial-glow { position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45) 0%,transparent 70%);pointer-events:none; }
-    .snowflake-corner { position:absolute;opacity:.55;pointer-events:none; }
-    .hanging-stars { display:flex;justify-content:center;gap:18px;align-items:flex-start;margin-bottom:.25rem;position:relative;z-index:3; }
-    .star-col { display:flex;flex-direction:column;align-items:center; }
-    .star-thread { width:1px;background:#b8cfe0; }
-
-    /* Photo ring */
-    .photo-wrap { position:relative;display:inline-block;margin:.75rem auto 0;z-index:3; }
-    .gold-ring {
-      width:172px;height:172px;border-radius:50%;
-      background:linear-gradient(135deg,#e8d48a 0%,#f5e9a8 30%,#c9a84c 60%,#e8d48a 100%);
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 0 0 3px rgba(255,255,255,.7),0 8px 32px rgba(58,114,168,.3);
-    }
-    .white-ring { width:158px;height:158px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center; }
-    .photo-circle { width:148px;height:148px;border-radius:50%;overflow:hidden; }
-    .photo-circle img { width:100%;height:100%;object-fit:cover;object-position:top; }
-    .cross-badge {
-      position:absolute;bottom:6px;right:6px;width:30px;height:30px;border-radius:50%;background:white;
-      box-shadow:0 2px 8px rgba(58,114,168,.3);display:flex;align-items:center;justify-content:center;z-index:4;
-    }
-    .cloud-wave { margin-top:1.75rem;line-height:0;position:relative;z-index:2;margin-left:-40px;margin-right:-40px; }
-    .cloud-wave svg { width:100%;display:block; }
-
-    /* White zone */
-    .white-zone { background:white;text-align:center;padding:1.25rem 1.75rem 2.25rem; }
-    .white-zone .eyebrow2 { font-weight:300;font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:#7aaecf;margin-bottom:.5rem; }
-    .hero-name { font-family:'Dancing Script',cursive;font-size:clamp(2.8rem,9vw,3.6rem);font-weight:700;color:#2c5f8a;line-height:1.05;margin-bottom:.75rem; }
-    .ornament-divider { display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem; }
-    .ornament-line { height:1px;width:48px; }
-    .date-ribbon {
-      display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(135deg,#eef6fc 0%,#f5fafd 100%);
-      border:1px solid rgba(168,204,223,.5);border-radius:50px;padding:.45rem 1.25rem;margin-bottom:.6rem;
-    }
-    .date-ribbon span { font-weight:600;font-size:.72rem;letter-spacing:.1em;color:#2c5f8a; }
-    .venue { font-weight:300;font-size:.6rem;letter-spacing:.08em;color:#8ab8d4;margin-bottom:1.75rem;line-height:1.6; }
-    .cta-btn {
-      display:inline-flex;align-items:center;gap:8px;padding:.8rem 2.25rem;
-      font-weight:700;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:white;
-      background:linear-gradient(135deg,#4a85bc 0%,#2e6ba0 100%);border-radius:50px;text-decoration:none;
-      box-shadow:0 6px 22px rgba(46,107,160,.4),inset 0 1px 0 rgba(255,255,255,.2);
-      transition:transform .2s;
-    }
-    .cta-btn:hover { transform:translateY(-2px); }
-
-    /* ── Sky card (glass) ── */
-    .sky-card {
-      background:rgba(255,255,255,.22);backdrop-filter:blur(8px);
-      border:1px solid rgba(255,255,255,.55);border-radius:18px;
-      box-shadow:0 4px 24px rgba(100,160,220,.15);padding:2rem 1.75rem;
-      position:relative;overflow:hidden;
-    }
-    .section-eyebrow { font-weight:300;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:#5a8fc2;display:block;margin-bottom:.4rem;text-align:center; }
-    .section-title { font-family:'Dancing Script',cursive;font-size:clamp(2rem,6vw,2.6rem);font-weight:700;color:#2c5f8a;line-height:1.15;text-align:center; }
-    .section-rule { width:64px;height:1px;background:linear-gradient(90deg,transparent,#5a8fc2,transparent);margin:.75rem auto 1.5rem; }
-
-    /* Countdown */
-    .countdown { display:flex;justify-content:center;gap:10px;flex-wrap:wrap; }
-    .cd-box { text-align:center;min-width:68px;padding:14px 10px;background:rgba(255,255,255,.55);border:1px solid rgba(90,143,194,.25);border-radius:12px;box-shadow:0 2px 12px rgba(90,143,194,.1); }
-    .cd-num { font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;line-height:1;color:#2c5f8a; }
-    .cd-unit { font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#5a8fc2;margin-top:6px; }
-
-    /* Tiles grid */
-    .tiles { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:2rem; }
-    .tile { text-align:center;padding:1rem .75rem;background:rgba(255,255,255,.55);border:1px solid rgba(90,143,194,.2);border-radius:10px;box-shadow:0 2px 8px rgba(90,143,194,.08);position:relative;overflow:hidden; }
-    .tile-accent { position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(90,143,194,.5),transparent); }
-    .tile-icon { font-size:1rem;color:#5a8fc2;margin-bottom:6px; }
-    .tile-label { font-size:.43rem;letter-spacing:.2em;text-transform:uppercase;color:#5a8fc2;margin-bottom:6px;display:block; }
-    .tile-val { font-family:'Dancing Script',cursive;font-size:.95rem;color:#2c5f8a;line-height:1.5;white-space:pre-line; }
-
-    /* Program */
-    .program-header { display:flex;align-items:center;gap:12px;margin-bottom:1.25rem; }
-    .prog-label { font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#5a8fc2;white-space:nowrap; }
-    .prog-line { flex:1;height:1px; }
-    .program-list { position:relative; }
-    .prog-spine { position:absolute;left:16px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(90,143,194,.6),transparent); }
-    .prog-item { display:flex;align-items:flex-start;gap:14px;padding:12px 8px 12px 0;border-bottom:1px solid rgba(90,143,194,.1); }
-    .prog-dot-col { flex-shrink:0;width:20px;display:flex;justify-content:center;margin-top:6px; }
-    .prog-dot { width:10px;height:10px;border-radius:50%;background:#5a8fc2;box-shadow:0 0 10px rgba(90,143,194,.5); }
-    .prog-time { font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#5a8fc2;font-weight:600; }
-    .prog-title { font-family:'Dancing Script',cursive;font-size:1.1rem;color:#2c5f8a;margin-top:2px; }
-    .prog-desc { font-size:.43rem;letter-spacing:.12em;text-transform:uppercase;color:#7aaecf;margin-top:3px; }
-    .prog-num { flex-shrink:0;font-family:'Dancing Script',cursive;font-size:.75rem;color:rgba(90,143,194,.3);align-self:center; }
-
-    /* Map */
-    .map-box { position:relative;height:180px;overflow:hidden;border-radius:10px;margin-bottom:1.25rem;border:1px solid rgba(90,143,194,.25);background:linear-gradient(135deg,#daeef8 0%,#c5e0f0 100%); }
-    .pulse-ring { position:absolute;width:36px;height:36px;top:-18px;left:-18px;border-radius:50%;background:rgba(90,143,194,.25);border:1px solid rgba(90,143,194,.5);animation:pulseRing 2s infinite ease-out; }
-
-    /* Gallery */
-    .gallery-main { position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;margin-bottom:10px;border:1px solid rgba(255,255,255,.7); }
-    .gallery-slide { position:absolute;inset:0;opacity:0;transition:opacity .55s; }
-    .gallery-slide.active { opacity:1; }
-    .gallery-slide img { width:100%;height:100%;object-fit:cover; }
-    .slide-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(44,95,138,.55) 0%,transparent 45%); }
-    .slide-caption { position:absolute;bottom:0;left:0;right:0;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:flex-end; }
-    .cap-text { font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.9); }
-    .cap-num { font-family:'Dancing Script',cursive;font-size:.85rem;color:rgba(255,255,255,.7); }
-    .nav-btn {
-      position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;
-      background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(4px);
-      cursor:pointer;color:#2c5f8a;font-size:1.1rem;display:flex;align-items:center;justify-content:center;z-index:10;
-    }
-    .nav-btn.prev { left:10px; } .nav-btn.next { right:10px; }
-    .thumbs { display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px; }
-    .thumb { aspect-ratio:1;overflow:hidden;border-radius:6px;cursor:pointer;border:2px solid rgba(255,255,255,.5);transition:border-color .2s,transform .2s; }
-    .thumb.active { border-color:#5a8fc2;transform:scale(1.05); }
-    .thumb img { width:100%;height:100%;object-fit:cover;filter:brightness(.6);transition:filter .2s; }
-    .thumb.active img { filter:none; }
-    .dots { display:flex;justify-content:center;gap:8px; }
-    .dot { height:3px;border-radius:2px;border:none;cursor:pointer;background:#5a8fc2;opacity:.35;width:8px;transition:width .3s,opacity .3s; }
-    .dot.active { width:24px;opacity:1; }
-
-    /* RSVP */
-    .rsvp-form { max-width:320px;margin:0 auto; }
-    .field { border-bottom:1px solid rgba(90,143,194,.4);margin-bottom:1.5rem;padding-bottom:4px; }
-    .field input, .field textarea {
-      width:100%;background:transparent;border:none;outline:none;
-      font-family:'Dancing Script',cursive;font-style:italic;font-size:1.1rem;color:#2c5f8a;padding:4px 0;
-    }
-    .field textarea { resize:none; }
-    .field input::placeholder, .field textarea::placeholder { color:rgba(90,143,194,.5); }
-    .submit-btn {
-      width:100%;padding:.875rem;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
-      color:white;background:linear-gradient(135deg,#5a8fc2 0%,#3a72a8 100%);border:none;border-radius:50px;cursor:pointer;
-      box-shadow:0 4px 18px rgba(58,114,168,.35);transition:transform .2s;
-    }
-    .submit-btn:hover { transform:translateY(-2px); }
-    .sent-msg { text-align:center;padding:2rem 0; }
-    .sent-msg h3 { font-family:'Dancing Script',cursive;font-size:2.2rem;color:#2c5f8a;margin:1rem 0 .5rem; }
-    .sent-msg p { font-style:italic;font-size:.95rem;color:#5a8fc2; }
-
-    /* Footer */
-    footer {
-      text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(90,143,194,.25);
-      position:relative;z-index:10;background:rgba(255,255,255,.2);
-    }
-    footer h3 { font-family:'Dancing Script',cursive;font-weight:400;font-size:2.2rem;color:#2c5f8a;margin-bottom:.25rem; }
-    footer .footer-date { font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#5a8fc2;margin-bottom:.75rem; }
-    footer .footer-quote { font-family:'Dancing Script',cursive;font-style:italic;font-size:1rem;color:#7aaecf;margin-bottom:1rem; }
-    footer .footer-love { font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(90,143,194,.6);margin-top:.75rem;animation:blink 3s infinite; }
-
-    /* Fixed snowflakes */
-    .fixed-flake { position:fixed;pointer-events:none;z-index:1; }
-
-    /* clouds bg */
-    .top-clouds { position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:1; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: linear-gradient(170deg, #fde8f0 0%, #fef5f0 35%, #fef9f5 65%, #fde8f0 100%); min-height: 100vh; }
+    ::placeholder { color: rgba(192,96,144,0.45) !important; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes blink  { 0%,100%{opacity:.3} 50%{opacity:.9} }
+    @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes sway   { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
+    @keyframes sparkle{ 0%,100%{opacity:.2;transform:scale(0.8)} 50%{opacity:1;transform:scale(1.2)} }
   </style>
 </head>
 <body>
 
-<!-- ── SPLASH ── -->
-<div id="splash" onclick="closeSplash()">
+<!-- ══ SPLASH ══ -->
+<div id="splash" onclick="closeSplash()" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#fde8f0 0%,#fbd0e4 50%,#fce8d4 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;animation:fadeIn 0.5s ease">
+  <!-- Floating hearts -->
+  <div style="position:absolute;left:8%;top:12%;animation:float 2.5s ease-in-out infinite;opacity:.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <div style="position:absolute;left:88%;top:8%;animation:float 2.9s ease-in-out infinite;opacity:.5"><svg width="10" height="10" viewBox="0 0 24 24" fill="#e8c84a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <div style="position:absolute;left:15%;top:55%;animation:float 3.3s ease-in-out infinite;opacity:.5"><svg width="8" height="8" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <div style="position:absolute;left:85%;top:50%;animation:float 3.7s ease-in-out infinite;opacity:.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="#e8c84a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
   <div style="text-align:center;padding:2rem">
-    <!-- Hanging stars -->
-    <div class="hanging-stars" style="margin-bottom:.75rem">
-      <div class="star-col" style="margin-top:12px">
-        <div class="star-thread" style="height:32px"></div>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-      </div>
-      <div class="star-col">
-        <div class="star-thread" style="height:20px"></div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-      </div>
-      <div class="star-col" style="margin-top:18px">
-        <div class="star-thread" style="height:28px"></div>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-      </div>
-    </div>
-    <span class="eyebrow">Con el corazón lleno de alegría</span>
-    <h1>Emilio André</h1>
-    <p class="subtitle">Bautizo</p>
-    <div class="thin-line"></div>
-    <p style="font-weight:300;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#5a8fc2;margin-bottom:1.5rem">15 de Agosto, 2026</p>
-    <svg width="120" height="66" viewBox="0 0 80 44" fill="none" style="opacity:.6">
-      <ellipse cx="40" cy="30" rx="36" ry="14" fill="white"/><ellipse cx="25" cy="24" rx="16" ry="13" fill="white"/>
-      <ellipse cx="52" cy="22" rx="18" ry="14" fill="white"/><ellipse cx="38" cy="18" rx="14" ry="12" fill="white"/>
+    <!-- Crown -->
+    <svg width="64" height="46" viewBox="0 0 60 43" fill="none">
+      <defs><linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs>
+      <path d="M5 35 L5 10 L18 25 L30 5 L42 25 L55 10 L55 35 Z" fill="url(#cg)"/>
+      <rect x="5" y="34" width="50" height="6" rx="2" fill="url(#cg)"/>
+      <circle cx="30" cy="6" r="3.5" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+      <circle cx="5" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+      <circle cx="55" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
     </svg>
-    <p class="tap-hint">✦ Toca para abrir ✦</p>
+    <p style="font-family:'Lato',sans-serif;font-weight:300;font-size:0.6rem;letter-spacing:.32em;text-transform:uppercase;color:#c06090;margin-top:1rem;margin-bottom:.5rem">Please join us for a</p>
+    <h1 style="font-family:'Dancing Script',cursive;font-size:clamp(3.2rem,13vw,5rem);font-weight:700;color:#c0366a;line-height:1;margin-bottom:.15rem">Birthday</h1>
+    <div style="display:inline-block;background:linear-gradient(135deg,#e8a0b4,#d4608a);border-radius:4px;padding:.3rem 1.5rem;margin-bottom:1rem">
+      <span style="font-family:'Lato',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:white">Celebration</span>
+    </div>
+    <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,#e8a0b4,transparent);margin:0 auto .75rem"></div>
+    <p style="font-family:'Dancing Script',cursive;font-style:italic;font-size:1.5rem;color:#c06090;margin-bottom:.25rem">Our little princess</p>
+    <h2 style="font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,10vw,3.8rem);font-weight:700;color:#c0366a;line-height:1" id="splash-name"></h2>
+    <p style="font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#c06090;margin-top:1.5rem;animation:blink 2s infinite">♥ Toca para abrir ♥</p>
   </div>
 </div>
 
-<!-- ── BG ── -->
-<div style="position:relative;min-height:100vh">
-  <!-- Fixed snowflakes -->
-  <div class="fixed-flake" style="left:5%;top:8%"><svg width="22" height="22" viewBox="0 0 40 40" fill="none" style="opacity:.35"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="fixed-flake" style="right:5%;top:5%"><svg width="18" height="18" viewBox="0 0 40 40" fill="none" style="opacity:.28"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="fixed-flake" style="left:8%;top:45%"><svg width="16" height="16" viewBox="0 0 40 40" fill="none" style="opacity:.22"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="fixed-flake" style="right:6%;bottom:30%"><svg width="20" height="20" viewBox="0 0 40 40" fill="none" style="opacity:.28"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
+<!-- ══ PAGE ══ -->
+<div style="position:relative;overflow-x:hidden">
 
-  <!-- Top clouds -->
-  <div class="top-clouds">
-    <svg width="120" height="66" viewBox="0 0 80 44" fill="none" style="opacity:.5"><ellipse cx="40" cy="30" rx="36" ry="14" fill="white"/><ellipse cx="25" cy="24" rx="16" ry="13" fill="white"/><ellipse cx="52" cy="22" rx="18" ry="14" fill="white"/><ellipse cx="38" cy="18" rx="14" ry="12" fill="white"/></svg>
-    <svg width="100" height="55" viewBox="0 0 80 44" fill="none" style="opacity:.45"><ellipse cx="40" cy="30" rx="36" ry="14" fill="white"/><ellipse cx="25" cy="24" rx="16" ry="13" fill="white"/><ellipse cx="52" cy="22" rx="18" ry="14" fill="white"/><ellipse cx="38" cy="18" rx="14" ry="12" fill="white"/></svg>
+  <!-- Floating hearts bg -->
+  <div style="position:fixed;left:3%;top:10%;pointer-events:none;z-index:1;animation:float 3s ease-in-out infinite;opacity:.35"><svg width="12" height="12" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <div style="position:fixed;left:94%;top:6%;pointer-events:none;z-index:1;animation:float 3.5s ease-in-out infinite;opacity:.35"><svg width="10" height="10" viewBox="0 0 24 24" fill="#e8c84a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <!-- Gold sparkles -->
+  <div style="position:fixed;left:12%;top:18%;pointer-events:none;z-index:1;animation:sparkle 2s ease-in-out infinite"><svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#e8c84a"/></svg></div>
+  <div style="position:fixed;left:82%;top:14%;pointer-events:none;z-index:1;animation:sparkle 2.3s ease-in-out infinite;animation-delay:.5s"><svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#e8c84a"/></svg></div>
+
+  <!-- Balloons top-right -->
+  <div style="position:absolute;top:0;right:0;pointer-events:none;z-index:2;display:flex;gap:8px;padding:0 12px">
+    <div style="animation:sway 4s ease-in-out infinite"><svg width="55" height="82" viewBox="0 0 60 90" fill="none" style="transform:rotate(-8deg)"><ellipse cx="30" cy="33" rx="26" ry="30" fill="#f5c0d4" opacity=".92"/><ellipse cx="22" cy="22" rx="8" ry="10" fill="rgba(255,255,255,.3)"/><path d="M30 63 Q28 70 30 75 Q32 70 30 63Z" fill="#f5c0d4" opacity=".6"/><path d="M30 75 Q26 80 28 85 M30 75 Q34 80 32 85" stroke="#f5c0d4" stroke-width="1.2" fill="none" opacity=".5"/></svg></div>
+    <div style="animation:sway 3.5s ease-in-out infinite;animation-delay:.5s;margin-top:10px"><svg width="50" height="75" viewBox="0 0 60 90" fill="none" style="transform:rotate(5deg)"><ellipse cx="30" cy="33" rx="26" ry="30" fill="#f9e8c0" opacity=".92"/><ellipse cx="22" cy="22" rx="8" ry="10" fill="rgba(255,255,255,.3)"/><path d="M30 63 Q28 70 30 75 Q32 70 30 63Z" fill="#f9e8c0" opacity=".6"/></svg></div>
   </div>
 
-  <div class="page">
+  <div style="position:relative;z-index:10;max-width:448px;margin:0 auto;padding:1.5rem 1rem 4rem;display:flex;flex-direction:column;gap:1.25rem">
 
-    <!-- ── HERO ── -->
-    <div class="hero-card">
-      <div class="sky-zone">
-        <!-- Star pattern bg -->
-        <svg class="star-pattern" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
-          <polygon points="30,15 31.2,18.8 35,18.8 32,21.2 33.1,25 30,22.8 26.9,25 28,21.2 25,18.8 28.8,18.8" fill="#2c5f8a"/>
-          <polygon points="90,10 91.2,13.8 95,13.8 92,16.2 93.1,20 90,17.8 86.9,20 88,16.2 85,13.8 88.8,13.8" fill="#2c5f8a"/>
-          <polygon points="160,20 161.2,23.8 165,23.8 162,26.2 163.1,30 160,27.8 156.9,30 158,26.2 155,23.8 158.8,23.8" fill="#2c5f8a"/>
-          <polygon points="230,7 231.2,10.8 235,10.8 232,13.2 233.1,17 230,14.8 226.9,17 228,13.2 225,10.8 228.8,10.8" fill="#2c5f8a"/>
-          <polygon points="310,17 311.2,20.8 315,20.8 312,23.2 313.1,27 310,24.8 306.9,27 308,23.2 305,20.8 308.8,20.8" fill="#2c5f8a"/>
-          <polygon points="55,65 56.2,68.8 60,68.8 57,71.2 58.1,75 55,72.8 51.9,75 53,71.2 50,68.8 53.8,68.8" fill="#2c5f8a"/>
-          <polygon points="130,55 131.2,58.8 135,58.8 132,61.2 133.1,65 130,62.8 126.9,65 128,61.2 125,58.8 128.8,58.8" fill="#2c5f8a"/>
-          <polygon points="200,70 201.2,73.8 205,73.8 202,76.2 203.1,80 200,77.8 196.9,80 198,76.2 195,73.8 198.8,73.8" fill="#2c5f8a"/>
-          <polygon points="280,60 281.2,63.8 285,63.8 282,66.2 283.1,70 280,67.8 276.9,70 278,66.2 275,63.8 278.8,63.8" fill="#2c5f8a"/>
-          <polygon points="355,67 356.2,70.8 360,70.8 357,73.2 358.1,77 355,74.8 351.9,77 353,73.2 350,70.8 353.8,70.8" fill="#2c5f8a"/>
-          <polygon points="20,115 21.2,118.8 25,118.8 22,121.2 23.1,125 20,122.8 16.9,125 18,121.2 15,118.8 18.8,118.8" fill="#2c5f8a"/>
-          <polygon points="100,110 101.2,113.8 105,113.8 102,116.2 103.1,120 100,117.8 96.9,120 98,116.2 95,113.8 98.8,113.8" fill="#2c5f8a"/>
-          <polygon points="250,113 251.2,116.8 255,116.8 252,119.2 253.1,123 250,120.8 246.9,123 248,119.2 245,116.8 248.8,116.8" fill="#2c5f8a"/>
+    <!-- ══ HERO ══ -->
+    <div style="border-radius:24px;box-shadow:0 10px 50px rgba(210,96,140,.18),0 2px 10px rgba(210,96,140,.1);overflow:clip;border:1.5px solid rgba(240,190,210,.7);background:#fef8f0">
+
+      <!-- Top zone -->
+      <div style="background:linear-gradient(170deg,#fde8f0 0%,#fef2f8 60%,#fef8f0 100%);padding:1.75rem 1.5rem 0;position:relative;text-align:center">
+        <!-- Dot pattern -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.25;pointer-events:none" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <circle cx="20" cy="20" r="2.5" fill="#e8c84a"/><circle cx="75" cy="20" r="2.5" fill="#e8c84a"/><circle cx="130" cy="20" r="2.5" fill="#e8c84a"/><circle cx="185" cy="20" r="2.5" fill="#e8c84a"/><circle cx="240" cy="20" r="2.5" fill="#e8c84a"/><circle cx="295" cy="20" r="2.5" fill="#e8c84a"/><circle cx="350" cy="20" r="2.5" fill="#e8c84a"/><circle cx="405" cy="20" r="2.5" fill="#e8c84a"/>
+          <circle cx="20" cy="82" r="2.5" fill="#e8c84a"/><circle cx="75" cy="82" r="2.5" fill="#e8c84a"/><circle cx="130" cy="82" r="2.5" fill="#e8c84a"/><circle cx="185" cy="82" r="2.5" fill="#e8c84a"/><circle cx="240" cy="82" r="2.5" fill="#e8c84a"/><circle cx="295" cy="82" r="2.5" fill="#e8c84a"/><circle cx="350" cy="82" r="2.5" fill="#e8c84a"/>
+          <circle cx="20" cy="144" r="2.5" fill="#e8c84a"/><circle cx="75" cy="144" r="2.5" fill="#e8c84a"/><circle cx="130" cy="144" r="2.5" fill="#e8c84a"/><circle cx="185" cy="144" r="2.5" fill="#e8c84a"/><circle cx="240" cy="144" r="2.5" fill="#e8c84a"/><circle cx="295" cy="144" r="2.5" fill="#e8c84a"/>
         </svg>
-        <div class="radial-glow"></div>
 
-        <!-- Snowflake corners -->
-        <div class="snowflake-corner" style="top:14px;left:16px"><svg width="22" height="22" viewBox="0 0 40 40" fill="none"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <div class="snowflake-corner" style="top:12px;right:18px"><svg width="17" height="17" viewBox="0 0 40 40" fill="none"><line x1="20" y1="2" x2="20" y2="38" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="20" x2="38" y2="20" stroke="#a8d4e8" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="6" x2="34" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/><line x1="34" y1="6" x2="6" y2="34" stroke="#a8d4e8" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <p style="font-family:'Lato',sans-serif;font-weight:300;font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;color:#c06090;margin-bottom:.4rem">Please join us for a</p>
 
-        <!-- Hanging stars -->
-        <div class="hanging-stars">
-          <div class="star-col" style="margin-top:12px"><div class="star-thread" style="height:32px"></div><svg width="18" height="18" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
-          <div class="star-col"><div class="star-thread" style="height:20px"></div><svg width="28" height="28" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
-          <div class="star-col" style="margin-top:18px"><div class="star-thread" style="height:28px"></div><svg width="22" height="22" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+        <!-- Crown -->
+        <div style="display:flex;justify-content:center;margin-bottom:.25rem">
+          <svg width="44" height="32" viewBox="0 0 60 43" fill="none">
+            <defs><linearGradient id="cg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs>
+            <path d="M5 35 L5 10 L18 25 L30 5 L42 25 L55 10 L55 35 Z" fill="url(#cg2)"/>
+            <rect x="5" y="34" width="50" height="6" rx="2" fill="url(#cg2)"/>
+            <circle cx="30" cy="6" r="3.5" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+            <circle cx="5" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+            <circle cx="55" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+          </svg>
         </div>
 
-        <!-- Photo -->
-        <div class="photo-wrap">
-          <div class="gold-ring">
-            <div class="white-ring">
-              <div class="photo-circle">
-                <img src="https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?w=400&q=80" alt="Emilio André" />
+        <h1 style="font-family:'Dancing Script',cursive;font-size:clamp(3rem,11vw,4.2rem);font-weight:700;color:#c0366a;line-height:1;margin-bottom:.1rem">Birthday</h1>
+
+        <div style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e8a0b4,#d4608a);border-radius:4px;padding:.3rem 1.4rem;margin-bottom:.6rem">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span style="font-family:'Lato',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:white">Celebration</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+
+        <!-- Photo + balloons -->
+        <div style="position:relative;display:flex;justify-content:center;align-items:center">
+          <!-- Left balloon -->
+          <div style="position:absolute;left:0;top:-20px;animation:sway 3.8s ease-in-out infinite">
+            <svg width="48" height="72" viewBox="0 0 60 90" fill="none" style="transform:rotate(-12deg)"><ellipse cx="30" cy="33" rx="26" ry="30" fill="#f9c8d8" opacity=".92"/><ellipse cx="22" cy="22" rx="8" ry="10" fill="rgba(255,255,255,.3)"/><path d="M30 63 Q28 70 30 75 Q32 70 30 63Z" fill="#f9c8d8" opacity=".6"/></svg>
+          </div>
+          <!-- Right balloons -->
+          <div style="position:absolute;right:0;top:-30px;display:flex;gap:4px">
+            <div style="animation:sway 4.2s ease-in-out infinite"><svg width="52" height="78" viewBox="0 0 60 90" fill="none" style="transform:rotate(10deg)"><ellipse cx="30" cy="33" rx="26" ry="30" fill="#f5c0d4" opacity=".92"/><ellipse cx="22" cy="22" rx="8" ry="10" fill="rgba(255,255,255,.3)"/><path d="M30 63 Q28 70 30 75 Q32 70 30 63Z" fill="#f5c0d4" opacity=".6"/></svg></div>
+            <div style="animation:sway 3.6s ease-in-out infinite;animation-delay:.8s;margin-top:8px"><svg width="46" height="69" viewBox="0 0 60 90" fill="none" style="transform:rotate(-5deg)"><ellipse cx="30" cy="33" rx="26" ry="30" fill="#f9e8a0" opacity=".92"/><ellipse cx="22" cy="22" rx="8" ry="10" fill="rgba(255,255,255,.3)"/><path d="M30 63 Q28 70 30 75 Q32 70 30 63Z" fill="#f9e8a0" opacity=".6"/></svg></div>
+          </div>
+          <!-- Photo circle -->
+          <div style="position:relative;z-index:3">
+            <div style="width:168px;height:168px;border-radius:50%;background:linear-gradient(135deg,#f5e27a 0%,#e8c84a 40%,#c9a020 60%,#e8c84a 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 8px 32px rgba(210,96,140,.3)">
+              <div style="width:154px;height:154px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center">
+                <div style="width:144px;height:144px;border-radius:50%;overflow:hidden">
+                  <img id="hero-photo" src="" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top"/>
+                </div>
               </div>
             </div>
           </div>
-          <div class="cross-badge">
-            <svg width="12" height="15.6" viewBox="0 0 22 29" fill="none"><rect x="8.36" y="0" width="5.28" height="29" rx="1.5" fill="#5a8fc2"/><rect x="0" y="6.16" width="22" height="5.28" rx="1.5" fill="#5a8fc2"/></svg>
+        </div>
+
+        <p style="font-family:'Lato',sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#7a3060;margin-top:1.25rem;margin-bottom:.15rem">♥ Our little princess ♥</p>
+        <h2 id="hero-name" style="font-family:'Dancing Script',cursive;font-size:clamp(2.6rem,9vw,3.4rem);font-weight:700;color:#c0366a;line-height:1;margin-bottom:.15rem"></h2>
+        <p style="font-family:'Lato',sans-serif;font-weight:300;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#c06090;margin-bottom:.75rem">— is turning —</p>
+
+        <!-- Age number -->
+        <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:.5rem">
+          <span id="hero-age" style="font-family:'Dancing Script',cursive;font-size:5.5rem;font-weight:700;background:linear-gradient(160deg,#f5e27a 0%,#e8c84a 40%,#c9a020 70%,#e8c84a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 6px rgba(200,160,30,.4));line-height:1"></span>
+        </div>
+
+        <!-- Flower row -->
+        <div style="margin-top:.5rem">
+          <svg viewBox="0 0 320 70" fill="none" style="width:100%;display:block">
+            <circle cx="25" cy="50" r="14" fill="#f9c8d8" opacity=".7"/><circle cx="20" cy="38" r="10" fill="#f0a0bc" opacity=".6"/><circle cx="42" cy="45" r="12" fill="#f9c8d8" opacity=".65"/><circle cx="10" cy="55" r="9" fill="#f0a0bc" opacity=".5"/>
+            <ellipse cx="55" cy="52" rx="14" ry="6" fill="#a8c88a" opacity=".55" transform="rotate(-30 55 52)"/><ellipse cx="62" cy="44" rx="12" ry="5" fill="#8ab870" opacity=".5" transform="rotate(20 62 44)"/>
+            <path d="M70 60 Q90 40 110 55" stroke="#d4a84c" stroke-width="1.5" fill="none" opacity=".5"/><circle cx="110" cy="55" r="4" fill="#e8c84a" opacity=".5"/>
+            <circle cx="295" cy="50" r="14" fill="#f9c8d8" opacity=".7"/><circle cx="300" cy="38" r="10" fill="#f0a0bc" opacity=".6"/><circle cx="278" cy="45" r="12" fill="#f9c8d8" opacity=".65"/><circle cx="310" cy="55" r="9" fill="#f0a0bc" opacity=".5"/>
+            <ellipse cx="265" cy="52" rx="14" ry="6" fill="#a8c88a" opacity=".55" transform="rotate(30 265 52)"/><ellipse cx="258" cy="44" rx="12" ry="5" fill="#8ab870" opacity=".5" transform="rotate(-20 258 44)"/>
+            <path d="M250 60 Q230 40 210 55" stroke="#d4a84c" stroke-width="1.5" fill="none" opacity=".5"/><circle cx="210" cy="55" r="4" fill="#e8c84a" opacity=".5"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Info zone: white -->
+      <div style="background:white;padding:1.5rem 1.25rem 1.75rem">
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:1.25rem">
+          <!-- Date -->
+          <div style="text-align:center;border-right:1px dashed rgba(210,100,150,.3);padding-right:8px">
+            <div id="date-line1" style="font-family:'Lato',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#c06090"></div>
+            <div id="date-line2" style="font-family:'Lato',sans-serif;font-weight:300;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:#c06090"></div>
+            <div id="date-day" style="font-family:'Dancing Script',cursive;font-size:3rem;font-weight:700;color:#c0366a;line-height:1"></div>
+            <div id="date-year" style="font-family:'Lato',sans-serif;font-size:.55rem;color:#c06090"></div>
+            <div style="display:flex;justify-content:center;gap:4px;margin-top:4px">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+          </div>
+          <!-- Center: time -->
+          <div style="text-align:center;padding:0 8px">
+            <p style="font-family:'Dancing Script',cursive;font-style:italic;font-size:1.05rem;color:#d4608a;margin-bottom:4px">at</p>
+            <div id="event-time" style="font-family:'Dancing Script',cursive;font-size:2rem;font-weight:700;color:#d4608a;line-height:1"></div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <!-- Venue -->
+          <div style="text-align:center;border-left:1px dashed rgba(210,100,150,.3);padding-left:8px">
+            <div style="font-family:'Lato',sans-serif;font-weight:300;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#c06090;margin-bottom:4px">Venue</div>
+            <div id="event-venue" style="font-family:'Dancing Script',cursive;font-size:1.05rem;font-weight:700;color:#d4608a;line-height:1.2"></div>
+            <div id="event-address" style="font-family:'Lato',sans-serif;font-size:.48rem;color:#c06090;margin-top:4px;line-height:1.5"></div>
           </div>
         </div>
-
-        <!-- Cloud wave -->
-        <div class="cloud-wave">
-          <svg viewBox="0 0 400 55" xmlns="http://www.w3.org/2000/svg">
-            <defs><filter id="cb"><feGaussianBlur stdDeviation="1.5"/></filter></defs>
-            <ellipse cx="200" cy="30" rx="210" ry="18" fill="rgba(180,215,240,0.3)" filter="url(#cb)"/>
-            <ellipse cx="-14" cy="40" rx="28" ry="18" fill="white"/>
-            <ellipse cx="20"  cy="40" rx="32" ry="20" fill="white"/>
-            <ellipse cx="58"  cy="35" rx="26" ry="19" fill="white"/>
-            <ellipse cx="92"  cy="40" rx="28" ry="18" fill="white"/>
-            <ellipse cx="126" cy="36" rx="24" ry="18" fill="white"/>
-            <ellipse cx="158" cy="41" rx="26" ry="19" fill="white"/>
-            <ellipse cx="192" cy="36" rx="28" ry="20" fill="white"/>
-            <ellipse cx="226" cy="41" rx="24" ry="18" fill="white"/>
-            <ellipse cx="260" cy="36" rx="26" ry="19" fill="white"/>
-            <ellipse cx="294" cy="41" rx="28" ry="18" fill="white"/>
-            <ellipse cx="328" cy="36" rx="24" ry="18" fill="white"/>
-            <ellipse cx="362" cy="41" rx="26" ry="19" fill="white"/>
-            <ellipse cx="394" cy="38" rx="28" ry="18" fill="white"/>
-            <ellipse cx="418" cy="40" rx="28" ry="18" fill="white"/>
-            <rect x="-20" y="46" width="440" height="9" fill="white"/>
-          </svg>
+        <!-- RSVP banner -->
+        <div style="background:linear-gradient(135deg,#f9e0ec,#fce8d4);border:1px solid rgba(232,160,180,.5);border-radius:8px;padding:.7rem 1rem;text-align:center">
+          <div style="font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#b8366a;display:flex;align-items:center;justify-content:center;gap:8px">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#d4608a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            RSVP a <span id="rsvp-to-banner"></span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#d4608a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <div id="rsvp-phone-banner" style="font-family:'Dancing Script',cursive;font-size:1.6rem;font-weight:700;color:#c0366a;margin-top:2px"></div>
         </div>
       </div>
 
-      <!-- White zone -->
-      <div class="white-zone">
-        <p class="eyebrow2">Invitación al bautizo de</p>
-        <h1 class="hero-name">Emilio André</h1>
-        <div class="ornament-divider">
-          <div class="ornament-line" style="background:linear-gradient(to right,transparent,#b8d4e8)"></div>
-          <svg width="28" height="18" viewBox="0 0 28 18" fill="none"><path d="M14 1 C10 1 6 4 6 9 C6 14 10 17 14 17 C18 17 22 14 22 9 C22 4 18 1 14 1Z" stroke="#a8ccdf" stroke-width="1" fill="none"/><circle cx="14" cy="9" r="2.5" fill="#a8ccdf"/><line x1="0" y1="9" x2="5" y2="9" stroke="#a8ccdf" stroke-width="1" stroke-linecap="round"/><line x1="23" y1="9" x2="28" y2="9" stroke="#a8ccdf" stroke-width="1" stroke-linecap="round"/></svg>
-          <div class="ornament-line" style="background:linear-gradient(to left,transparent,#b8d4e8)"></div>
-        </div>
-        <div class="date-ribbon">
-          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 6.2,3.8 10,3.8 7,6.2 8.1,10 5,7.8 1.9,10 3,6.2 0,3.8 3.8,3.8" fill="#e8c84a"/></svg>
-          <span>15 de Agosto, 2026</span>
-          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 6.2,3.8 10,3.8 7,6.2 8.1,10 5,7.8 1.9,10 3,6.2 0,3.8 3.8,3.8" fill="#e8c84a"/></svg>
-        </div>
-        <p class="venue">Parroquia de San Juan Bautista<br/><span style="color:#a0c8e0">Tepoztlán, Morelos</span></p>
-        <a href="#rsvp" class="cta-btn">
-          <svg width="10" height="13" viewBox="0 0 10 13" fill="none"><rect x="3.8" y="0" width="2.4" height="13" rx="1" fill="rgba(255,255,255,0.7)"/><rect x="0" y="3" width="10" height="2.4" rx="1" fill="rgba(255,255,255,0.7)"/></svg>
-          Confirmar Asistencia
-        </a>
-      </div>
-    </div>
-
-    <!-- ── HISTORIA ── -->
-    <div class="sky-card">
-      <span class="section-eyebrow">La Historia</span>
-      <h2 class="section-title">Un Alma de Cielo</h2>
-      <div class="section-rule"></div>
-      <div style="text-align:center;padding:1.25rem 1rem;background:rgba(90,143,194,.08);border-radius:12px;border:1px solid rgba(90,143,194,.2);margin-bottom:1.5rem">
-        <p style="font-family:'Dancing Script',cursive;font-style:italic;font-size:1.15rem;line-height:1.8;color:#2c5f8a">"Con su llegada el mundo se llenó de gracia y ternura. Hoy lo presentamos ante Dios y celebramos su vida junto a quienes más amamos."</p>
-      </div>
-      <div style="display:flex;justify-content:center;margin-bottom:1.5rem">
-        <svg width="80" height="88" viewBox="0 0 80 88" fill="none">
-          <ellipse cx="40" cy="82" rx="28" ry="6" fill="rgba(90,143,194,0.12)" stroke="rgba(90,143,194,0.4)" stroke-width="1"/>
-          <rect x="34" y="58" width="12" height="24" rx="2" fill="rgba(90,143,194,0.15)" stroke="rgba(90,143,194,0.35)" stroke-width="1"/>
-          <path d="M14 32 Q12 56 40 58 Q68 56 66 32 Z" fill="rgba(90,143,194,0.12)" stroke="rgba(90,143,194,0.45)" stroke-width="1.2"/>
-          <path d="M18 46 Q20 52 40 54 Q60 52 62 46" stroke="#6baed6" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7"/>
-          <rect x="37" y="10" width="6" height="22" rx="1" fill="#5a8fc2" opacity="0.9"/>
-          <rect x="28" y="16" width="24" height="5" rx="1" fill="#5a8fc2" opacity="0.9"/>
-          <circle cx="30" cy="36" r="2" fill="#6baed6" opacity="0.6"/>
-          <circle cx="40" cy="33" r="1.5" fill="#6baed6" opacity="0.5"/>
-          <circle cx="50" cy="36" r="2" fill="#6baed6" opacity="0.6"/>
+      <!-- Bottom flower border -->
+      <div style="background:white;line-height:0">
+        <svg viewBox="0 0 320 90" fill="none" style="width:100%;display:block">
+          <g transform="translate(20,40)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(60,52)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(100,40)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(140,52)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(180,40)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(220,52)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(260,40)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f9c8d8" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <g transform="translate(300,52)"><ellipse cx="-4.95" cy="-3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(0)"/><ellipse cx="3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(60)"/><ellipse cx="6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(120)"/><ellipse cx="0" cy="7" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(180)"/><ellipse cx="-6.06" cy="3.5" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(240)"/><ellipse cx="-3.5" cy="-6.06" rx="5" ry="7" fill="#f0a0bc" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="4" fill="#e8c84a" opacity=".8"/></g>
+          <ellipse cx="40" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(-15 40 78)"/>
+          <ellipse cx="80" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(15 80 78)"/>
+          <ellipse cx="120" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(-15 120 78)"/>
+          <ellipse cx="160" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(15 160 78)"/>
+          <ellipse cx="200" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(-15 200 78)"/>
+          <ellipse cx="240" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(15 240 78)"/>
+          <ellipse cx="280" cy="78" rx="16" ry="7" fill="#a8c88a" opacity=".45" transform="rotate(-15 280 78)"/>
         </svg>
       </div>
-      <div style="display:flex;justify-content:center">
-        <div style="flex:1;text-align:center;position:relative">
-          <div style="width:32px;height:32px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;background:rgba(90,143,194,.12);border:1px solid rgba(90,143,194,.3);font-size:.85rem">🌙</div>
-          <div style="font-family:'Dancing Script',cursive;font-size:1.4rem;color:#2c5f8a">2025</div>
-          <div style="font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:#7aaecf;margin-top:4px">Llegó al mundo</div>
+    </div>
+
+    <!-- ══ COUNTDOWN ══ -->
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1.5px solid rgba(240,180,200,.5);border-radius:20px;box-shadow:0 6px 30px rgba(210,100,150,.12);padding:2rem 1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,#e8a0b4,#e8c84a,#e8a0b4,transparent)"></div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span style="font-family:'Lato',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#c06090;display:block;margin-bottom:.4rem">El Gran Día</span>
+        <h2 style="font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.5rem);font-weight:700;color:#c0366a">Cuenta Regresiva</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:.5rem">
+          <div style="width:36px;height:1px;background:linear-gradient(to right,transparent,#e8a0b4)"></div>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div style="width:36px;height:1px;background:linear-gradient(to left,transparent,#e8a0b4)"></div>
         </div>
-        <div style="flex:1;text-align:center;position:relative">
-          <div style="width:32px;height:32px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;background:rgba(90,143,194,.12);border:1px solid rgba(90,143,194,.3);font-size:.85rem">☁️</div>
-          <div style="font-family:'Dancing Script',cursive;font-size:1.4rem;color:#2c5f8a">2025</div>
-          <div style="font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:#7aaecf;margin-top:4px">Primeras sonrisas</div>
-        </div>
-        <div style="flex:1;text-align:center">
-          <div style="width:32px;height:32px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;background:rgba(90,143,194,.12);border:1px solid rgba(90,143,194,.3);font-size:.85rem">✦</div>
-          <div style="font-family:'Dancing Script',cursive;font-size:1.4rem;color:#2c5f8a">2026</div>
-          <div style="font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:#7aaecf;margin-top:4px">Recibe el Bautismo</div>
-        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+        <div style="text-align:center;min-width:68px;padding:14px 10px;background:linear-gradient(135deg,#fde8f4,#fef4f8);border:1.5px solid rgba(232,160,180,.4);border-radius:14px"><div id="cd-d" style="font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;line-height:1;color:#c0366a">00</div><div style="font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#c06090;margin-top:6px">Días</div></div>
+        <div style="text-align:center;min-width:68px;padding:14px 10px;background:linear-gradient(135deg,#fde8f4,#fef4f8);border:1.5px solid rgba(232,160,180,.4);border-radius:14px"><div id="cd-h" style="font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;line-height:1;color:#c0366a">00</div><div style="font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#c06090;margin-top:6px">Horas</div></div>
+        <div style="text-align:center;min-width:68px;padding:14px 10px;background:linear-gradient(135deg,#fde8f4,#fef4f8);border:1.5px solid rgba(232,160,180,.4);border-radius:14px"><div id="cd-m" style="font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;line-height:1;color:#c0366a">00</div><div style="font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#c06090;margin-top:6px">Min</div></div>
+        <div style="text-align:center;min-width:68px;padding:14px 10px;background:linear-gradient(135deg,#fde8f4,#fef4f8);border:1.5px solid rgba(232,160,180,.4);border-radius:14px"><div id="cd-s" style="font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;line-height:1;color:#c0366a">00</div><div style="font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:#c06090;margin-top:6px">Seg</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:1.5rem;justify-content:center">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span id="cd-date" style="font-family:'Lato',sans-serif;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#c06090"></span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       </div>
     </div>
 
-    <!-- ── COUNTDOWN ── -->
-    <div class="sky-card">
-      <span class="section-eyebrow">El Gran Día</span>
-      <h2 class="section-title">Cuenta Regresiva</h2>
-      <div class="section-rule"></div>
-      <div class="countdown">
-        <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-unit">Días</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-unit">Horas</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-unit">Min</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-unit">Seg</div></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;margin-top:1.5rem">
-        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(90,143,194,.3))"></div>
-        <svg width="12" height="15.6" viewBox="0 0 22 29" fill="none"><rect x="8.36" y="0" width="5.28" height="29" rx="1.5" fill="#5a8fc2"/><rect x="0" y="6.16" width="22" height="5.28" rx="1.5" fill="#5a8fc2"/></svg>
-        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(90,143,194,.3))"></div>
-      </div>
-      <p style="text-align:center;margin-top:.75rem;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#7aaecf">Tepoztlán, Morelos · 15 de Agosto, 2026</p>
-    </div>
-
-    <!-- ── DETALLES + PROGRAMA ── -->
-    <div class="sky-card">
-      <span class="section-eyebrow">Detalles</span>
-      <h2 class="section-title">El Evento</h2>
-      <div class="section-rule"></div>
-      <div class="tiles">
-        <div class="tile"><div class="tile-accent"></div><div class="tile-icon">✦</div><span class="tile-label">Fecha</span><div class="tile-val">15 de Agosto, 2026</div></div>
-        <div class="tile"><div class="tile-accent"></div><div class="tile-icon">◎</div><span class="tile-label">Hora</span><div class="tile-val">11:00 de la mañana</div></div>
-        <div class="tile"><div class="tile-accent"></div><div class="tile-icon">✝</div><span class="tile-label">Lugar</span><div class="tile-val">Parroquia de San Juan Bautista&#10;Tepoztlán, Morelos</div></div>
-        <div class="tile"><div class="tile-accent"></div><div class="tile-icon">◈</div><span class="tile-label">Vestimenta</span><div class="tile-val">Elegante&#10;Colores claros</div></div>
-      </div>
-      <div class="program-header">
-        <div class="prog-line" style="background:linear-gradient(to right,transparent,rgba(90,143,194,.3))"></div>
-        <span class="prog-label">Programa</span>
-        <div class="prog-line" style="background:linear-gradient(to left,transparent,rgba(90,143,194,.3))"></div>
-      </div>
-      <div class="program-list">
-        <div class="prog-spine"></div>
-        <div class="prog-item"><div class="prog-dot-col"><div class="prog-dot"></div></div><div style="flex:1"><div class="prog-time">10:30</div><div class="prog-title">Llegada de invitados</div><div class="prog-desc">Bienvenida en el atrio</div></div><div class="prog-num">01</div></div>
-        <div class="prog-item"><div class="prog-dot-col"><div class="prog-dot"></div></div><div style="flex:1"><div class="prog-time">11:00</div><div class="prog-title">Sacramento del Bautismo</div><div class="prog-desc">Celebración litúrgica</div></div><div class="prog-num">02</div></div>
-        <div class="prog-item"><div class="prog-dot-col"><div class="prog-dot"></div></div><div style="flex:1"><div class="prog-time">12:00</div><div class="prog-title">Misa de acción de gracias</div><div class="prog-desc">Santa Eucaristía</div></div><div class="prog-num">03</div></div>
-        <div class="prog-item"><div class="prog-dot-col"><div class="prog-dot"></div></div><div style="flex:1"><div class="prog-time">1:30 pm</div><div class="prog-title">Recepción familiar</div><div class="prog-desc">Comida y celebración</div></div><div class="prog-num">04</div></div>
-        <div class="prog-item"><div class="prog-dot-col"><div class="prog-dot"></div></div><div style="flex:1"><div class="prog-time">4:00 pm</div><div class="prog-title">Brindis</div><div class="prog-desc">Por la nueva vida de Emilio</div></div><div class="prog-num">05</div></div>
-      </div>
-    </div>
-
-    <!-- ── MAPA ── -->
-    <div class="sky-card">
-      <span class="section-eyebrow">Cómo Llegar</span>
-      <h2 class="section-title">Ubicación</h2>
-      <div class="section-rule"></div>
-      <div style="display:flex;align-items:center;gap:14px;padding:1rem;margin-bottom:1.25rem;background:rgba(255,255,255,.55);border:1px solid rgba(90,143,194,.2);border-radius:10px">
-        <svg width="12" height="15.6" viewBox="0 0 22 29" fill="none"><rect x="8.36" y="0" width="5.28" height="29" rx="1.5" fill="#5a8fc2"/><rect x="0" y="6.16" width="22" height="5.28" rx="1.5" fill="#5a8fc2"/></svg>
-        <div>
-          <div style="font-family:'Dancing Script',cursive;font-size:1.05rem;color:#2c5f8a">Parroquia de San Juan Bautista</div>
-          <div style="font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#5a8fc2;margin-top:3px">Plaza Principal s/n · Tepoztlán, Morelos</div>
+    <!-- ══ PROGRAM ══ -->
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1.5px solid rgba(240,180,200,.5);border-radius:20px;box-shadow:0 6px 30px rgba(210,100,150,.12);padding:2rem 1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,#e8a0b4,#e8c84a,#e8a0b4,transparent)"></div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span style="font-family:'Lato',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#c06090;display:block;margin-bottom:.4rem">El Evento</span>
+        <h2 style="font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.5rem);font-weight:700;color:#c0366a">Programa del Día</h2>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:.5rem">
+          <div style="width:36px;height:1px;background:linear-gradient(to right,transparent,#e8a0b4)"></div>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="#e8a0b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div style="width:36px;height:1px;background:linear-gradient(to left,transparent,#e8a0b4)"></div>
         </div>
       </div>
-      <div class="map-box">
-        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.2" viewBox="0 0 320 180" preserveAspectRatio="none">
-          <line x1="0" y1="20" x2="320" y2="20" stroke="#5a8fc2" stroke-width=".5"/><line x1="0" y1="40" x2="320" y2="40" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="0" y1="60" x2="320" y2="60" stroke="#5a8fc2" stroke-width=".5"/><line x1="0" y1="80" x2="320" y2="80" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="0" y1="100" x2="320" y2="100" stroke="#5a8fc2" stroke-width=".5"/><line x1="0" y1="120" x2="320" y2="120" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="0" y1="140" x2="320" y2="140" stroke="#5a8fc2" stroke-width=".5"/><line x1="0" y1="160" x2="320" y2="160" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="20" y1="0" x2="20" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="40" y1="0" x2="40" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="60" y1="0" x2="60" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="80" y1="0" x2="80" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="100" y1="0" x2="100" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="120" y1="0" x2="120" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="140" y1="0" x2="140" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="160" y1="0" x2="160" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="180" y1="0" x2="180" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="200" y1="0" x2="200" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="220" y1="0" x2="220" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="240" y1="0" x2="240" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="260" y1="0" x2="260" y2="180" stroke="#5a8fc2" stroke-width=".5"/><line x1="280" y1="0" x2="280" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-          <line x1="300" y1="0" x2="300" y2="180" stroke="#5a8fc2" stroke-width=".5"/>
-        </svg>
-        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 320 180" preserveAspectRatio="none">
-          <path d="M0 90 Q80 70 160 90 Q240 110 320 90" stroke="rgba(90,143,194,0.5)" stroke-width="3" fill="none"/>
-          <path d="M160 0 Q155 60 160 90 Q165 130 160 180" stroke="rgba(90,143,194,0.35)" stroke-width="2" fill="none"/>
-        </svg>
-        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
-          <div class="pulse-ring"></div>
-          <svg width="28" height="36" viewBox="0 0 28 36" fill="none" style="position:relative;z-index:2;filter:drop-shadow(0 2px 8px rgba(90,143,194,0.8))">
-            <path d="M14 0 C6.3 0 0 6.3 0 14 C0 24.5 14 36 14 36 C14 36 28 24.5 28 14 C28 6.3 21.7 0 14 0Z" fill="#5a8fc2"/>
-            <circle cx="14" cy="14" r="6" fill="white"/>
-            <rect x="12" y="8" width="4" height="12" rx="1" fill="#5a8fc2"/>
-            <rect x="8" y="12" width="12" height="4" rx="1" fill="#5a8fc2"/>
-          </svg>
-        </div>
-        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:#5a8fc2">Tepoztlán, Morelos</div>
-      </div>
-      <div style="text-align:center">
-        <a href="https://www.google.com/maps?q=Plaza+Principal+s/n+Tepoztlán+Morelos" target="_blank" rel="noopener noreferrer" style="display:inline-block;font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:#2c5f8a;text-decoration:none;padding:.625rem 1.5rem;background:rgba(255,255,255,.6);border:1px solid rgba(90,143,194,.3);border-radius:50px;transition:transform .2s">Abrir en Google Maps →</a>
+      <div style="position:relative">
+        <div style="position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,#e8a0b4,transparent)"></div>
+        <div id="program-list"></div>
       </div>
     </div>
 
-    <!-- ── GALERÍA ── -->
-    <div class="sky-card">
-      <span class="section-eyebrow">Recuerdos</span>
-      <h2 class="section-title">Galería</h2>
-      <div class="section-rule"></div>
-      <div class="gallery-main" id="gallery-main" ontouchstart="gTouchStart(event)" ontouchend="gTouchEnd(event)">
-        <div class="gallery-slide active" data-idx="0"><img src="https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?w=800&q=80" alt="El bautismo"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">El bautismo</span><span class="cap-num">01 / 06</span></div></div>
-        <div class="gallery-slide" data-idx="1"><img src="https://images.unsplash.com/photo-1721862650498-1e7274dec2ec?w=800&q=80" alt="Con el sacerdote"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">Con el sacerdote</span><span class="cap-num">02 / 06</span></div></div>
-        <div class="gallery-slide" data-idx="2"><img src="https://images.unsplash.com/photo-1762399940362-9ed7d199b72e?w=800&q=80" alt="La pila bautismal"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">La pila bautismal</span><span class="cap-num">03 / 06</span></div></div>
-        <div class="gallery-slide" data-idx="3"><img src="https://images.unsplash.com/photo-1732904956376-446fcf39214c?w=800&q=80" alt="La vela del bautizo"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">La vela del bautizo</span><span class="cap-num">04 / 06</span></div></div>
-        <div class="gallery-slide" data-idx="4"><img src="https://images.unsplash.com/photo-1721862822882-61221b0d62bd?w=800&q=80" alt="Agua bendita"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">Agua bendita</span><span class="cap-num">05 / 06</span></div></div>
-        <div class="gallery-slide" data-idx="5"><img src="https://images.unsplash.com/photo-1766305306658-6a80707d09f2?w=800&q=80" alt="Familia y bendición"/><div class="slide-overlay"></div><div class="slide-caption"><span class="cap-text">Familia y bendición</span><span class="cap-num">06 / 06</span></div></div>
-        <button class="nav-btn prev" onclick="gGo(-1)">‹</button>
-        <button class="nav-btn next" onclick="gGo(1)">›</button>
+    <!-- ══ GALLERY ══ -->
+    <div style="background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1.5px solid rgba(240,180,200,.5);border-radius:20px;box-shadow:0 6px 30px rgba(210,100,150,.12);padding:2rem 1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,#e8a0b4,#e8c84a,#e8a0b4,transparent)"></div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span style="font-family:'Lato',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#c06090;display:block;margin-bottom:.4rem">Momentos</span>
+        <h2 style="font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.5rem);font-weight:700;color:#c0366a">Galería</h2>
       </div>
-      <div class="thumbs" id="thumbs">
-        <div class="thumb active" onclick="gSet(0)"><img src="https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?w=200&q=60" alt=""/></div>
-        <div class="thumb" onclick="gSet(1)"><img src="https://images.unsplash.com/photo-1721862650498-1e7274dec2ec?w=200&q=60" alt=""/></div>
-        <div class="thumb" onclick="gSet(2)"><img src="https://images.unsplash.com/photo-1762399940362-9ed7d199b72e?w=200&q=60" alt=""/></div>
-        <div class="thumb" onclick="gSet(3)"><img src="https://images.unsplash.com/photo-1732904956376-446fcf39214c?w=200&q=60" alt=""/></div>
-        <div class="thumb" onclick="gSet(4)"><img src="https://images.unsplash.com/photo-1721862822882-61221b0d62bd?w=200&q=60" alt=""/></div>
-        <div class="thumb" onclick="gSet(5)"><img src="https://images.unsplash.com/photo-1766305306658-6a80707d09f2?w=200&q=60" alt=""/></div>
-      </div>
-      <div class="dots" id="dots">
-        <button class="dot active" onclick="gSet(0)"></button>
-        <button class="dot" onclick="gSet(1)"></button>
-        <button class="dot" onclick="gSet(2)"></button>
-        <button class="dot" onclick="gSet(3)"></button>
-        <button class="dot" onclick="gSet(4)"></button>
-        <button class="dot" onclick="gSet(5)"></button>
-      </div>
+      <div style="position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;margin-bottom:10px" id="gallery-main"></div>
+      <div id="gallery-thumbs" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px"></div>
+      <div id="gallery-dots" style="display:flex;justify-content:center;gap:8px"></div>
     </div>
 
-    <!-- ── RSVP ── -->
-    <div id="rsvp" class="sky-card">
-      <span class="section-eyebrow">Confirmar</span>
-      <h2 class="section-title">Asistencia</h2>
-      <div class="section-rule"></div>
-      <p style="text-align:center;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#5a8fc2;margin-bottom:1.5rem">Confírmanos antes del 30 de julio de 2026</p>
-      <div id="rsvp-form-wrap">
-        <form class="rsvp-form" onsubmit="rsvpSubmit(event)">
-          <div class="field"><input type="text" id="rsvp-name" placeholder="Nombre completo" required /></div>
-          <div class="field"><input type="text" id="rsvp-guests" placeholder="Número de acompañantes" /></div>
-          <div class="field"><textarea id="rsvp-msg" placeholder="Mensaje para la familia…" rows="3"></textarea></div>
-          <button type="submit" class="submit-btn">Confirmar Asistencia</button>
+    <!-- ══ RSVP ══ -->
+    <div id="rsvp" style="background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1.5px solid rgba(240,180,200,.5);border-radius:20px;box-shadow:0 6px 30px rgba(210,100,150,.12);padding:2rem 1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,#e8a0b4,#e8c84a,#e8a0b4,transparent)"></div>
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span style="font-family:'Lato',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#c06090;display:block;margin-bottom:.4rem">Confirmar</span>
+        <h2 style="font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.5rem);font-weight:700;color:#c0366a">Asistencia</h2>
+      </div>
+      <p id="rsvp-sub" style="text-align:center;font-family:'Lato',sans-serif;font-weight:300;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#c06090;margin-bottom:1.5rem"></p>
+      <div id="rsvp-form-area">
+        <form id="rsvp-form" style="max-width:320px;margin:0 auto">
+          <div style="border-bottom:1.5px solid rgba(210,100,150,.3);margin-bottom:1.5rem;padding-bottom:4px">
+            <input id="rsvp-name" type="text" placeholder="Nombre completo" required style="width:100%;background:transparent;border:none;outline:none;font-family:'Dancing Script',cursive;font-style:italic;font-size:1.1rem;color:#c0366a;padding:4px 0"/>
+          </div>
+          <div style="border-bottom:1.5px solid rgba(210,100,150,.3);margin-bottom:1.5rem;padding-bottom:4px">
+            <input id="rsvp-guests" type="text" placeholder="Número de invitados" style="width:100%;background:transparent;border:none;outline:none;font-family:'Dancing Script',cursive;font-style:italic;font-size:1.1rem;color:#c0366a;padding:4px 0"/>
+          </div>
+          <div style="border-bottom:1.5px solid rgba(210,100,150,.3);margin-bottom:1.5rem;padding-bottom:4px">
+            <textarea id="rsvp-msg" placeholder="Mensaje para la familia…" rows="3" style="width:100%;background:transparent;border:none;outline:none;resize:none;font-family:'Dancing Script',cursive;font-style:italic;font-size:1.1rem;color:#c0366a"></textarea>
+          </div>
+          <button type="submit" style="width:100%;padding:.9rem;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:white;background:linear-gradient(135deg,#d4608a 0%,#b8366a 100%);border:none;border-radius:50px;cursor:pointer;box-shadow:0 4px 18px rgba(184,54,106,.4)">♥ Confirmar Asistencia ♥</button>
         </form>
       </div>
     </div>
 
-  </div>
+  </div><!-- /inner -->
 
   <!-- Footer -->
-  <footer>
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:1.25rem">
-      <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(90,143,194,.6))"></div>
-      <svg width="16" height="20.8" viewBox="0 0 22 29" fill="none"><rect x="8.36" y="0" width="5.28" height="29" rx="1.5" fill="#5a8fc2"/><rect x="0" y="6.16" width="22" height="5.28" rx="1.5" fill="#5a8fc2"/></svg>
-      <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(90,143,194,.6))"></div>
+  <footer style="text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(232,160,180,.35);position:relative;z-index:10;background:rgba(255,255,255,.3)">
+    <div style="margin-bottom:1rem">
+      <svg width="36" height="26" viewBox="0 0 60 43" fill="none">
+        <defs><linearGradient id="cgf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs>
+        <path d="M5 35 L5 10 L18 25 L30 5 L42 25 L55 10 L55 35 Z" fill="url(#cgf)"/>
+        <rect x="5" y="34" width="50" height="6" rx="2" fill="url(#cgf)"/>
+        <circle cx="30" cy="6" r="3.5" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+        <circle cx="5" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+        <circle cx="55" cy="11" r="3" fill="#f9d0e0" stroke="#e8c84a" stroke-width="1"/>
+      </svg>
     </div>
-    <h3>Emilio André</h3>
-    <p class="footer-date">15 de Agosto, 2026 · Tepoztlán, Morelos</p>
-    <p class="footer-quote">"Dejad que los niños vengan a mí."</p>
-    <div class="hanging-stars" style="justify-content:center">
-      <div class="star-col" style="margin-top:12px"><div class="star-thread" style="height:32px"></div><svg width="18" height="18" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
-      <div class="star-col"><div class="star-thread" style="height:20px"></div><svg width="28" height="28" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
-      <div class="star-col" style="margin-top:18px"><div class="star-thread" style="height:28px"></div><svg width="22" height="22" viewBox="0 0 24 24" fill="#e8c84a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
-    </div>
-    <p class="footer-love">Con amor ✦ la familia</p>
+    <h3 id="footer-name" style="font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;color:#c0366a;margin-bottom:.25rem"></h3>
+    <p id="footer-age" style="font-family:'Dancing Script',cursive;font-style:italic;font-size:1.2rem;color:#c06090;margin-bottom:.5rem"></p>
+    <p id="footer-date" style="font-family:'Lato',sans-serif;font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#c06090;margin-bottom:1rem"></p>
+    <p style="font-family:'Dancing Script',cursive;font-style:italic;font-size:1rem;color:#d4608a;animation:blink 3s infinite">"Made with love ♥"</p>
   </footer>
 </div>
 
 <script>
-  // ── Config ──
-  const WHATSAPP = ""; // pon el número con código de país ej: "521234567890"
-  const EVENT_DATE = new Date("2026-08-15T11:00:00");
+// ══════════════════════════════════════════════════
+//  ✏️  PERSONALIZA AQUÍ TU INVITACIÓN
+// ══════════════════════════════════════════════════
+const CFG = {
+  name:        "Aadhya",          // Nombre del festejado/a
+  age:         1,                  // Edad que cumple
+  eventDate:   "2026-08-15T16:00:00",  // Fecha y hora del evento (ISO)
+  dateDisplay: "Sábado, 15 de Agosto 2026",
+  dateLine1:   "Sábado",
+  dateLine2:   "Agosto",
+  dateDay:     "15",
+  dateYear:    "2026",
+  time:        "4:00 PM",
+  venue:       "The Party Palace",
+  address:     "123 Av. Celebración, Happyville",
+  phone:       "123-456-7890",
+  rsvpTo:      "Mamá",
+  // 📷 Foto principal (URL directa a imagen)
+  photo: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&q=80",
+  // 🖼️ Galería de fotos
+  gallery: [
+    { src: "https://images.unsplash.com/photo-1734943842257-268c716c2701?w=800&q=80", cap: "La festejada" },
+    { src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap: "El pastel" },
+    { src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap: "Globos y flores" },
+    { src: "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap: "La celebración" },
+    { src: "https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=800&q=80", cap: "Momentos especiales" },
+    { src: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap: "Con amor" },
+  ],
+  // 📋 Programa del día
+  program: [
+    { time: "3:30 pm", title: "Llegada de invitados", desc: "Bienvenida y recepción" },
+    { time: "4:00 pm", title: "¡Hora de la fiesta!", desc: "Juegos y actividades" },
+    { time: "5:00 pm", title: "El pastel y festejo", desc: "Happy Birthday 🎂" },
+    { time: "6:00 pm", title: "Convivencia familiar", desc: "Música y alegría" },
+    { time: "7:00 pm", title: "Despedida", desc: "Gracias por venir ♥" },
+  ],
+};
+// ══════════════════════════════════════════════════
 
-  // ── Splash ──
-  function closeSplash() { document.getElementById('splash').style.display='none'; }
-  setTimeout(closeSplash, 3500);
+// ── Populate static fields ────────────────────────
+document.getElementById("splash-name").textContent = CFG.name;
+document.getElementById("hero-photo").src = CFG.photo;
+document.getElementById("hero-photo").alt = CFG.name;
+document.getElementById("hero-name").textContent = CFG.name;
+document.getElementById("hero-age").textContent = CFG.age;
+document.getElementById("date-line1").textContent = CFG.dateLine1;
+document.getElementById("date-line2").textContent = CFG.dateLine2;
+document.getElementById("date-day").textContent = CFG.dateDay;
+document.getElementById("date-year").textContent = CFG.dateYear;
+document.getElementById("event-time").textContent = CFG.time;
+document.getElementById("event-venue").textContent = CFG.venue;
+document.getElementById("event-address").textContent = CFG.address;
+document.getElementById("rsvp-to-banner").textContent = CFG.rsvpTo;
+document.getElementById("rsvp-phone-banner").textContent = CFG.phone;
+document.getElementById("rsvp-sub").textContent = "♥ RSVP a " + CFG.rsvpTo + " · " + CFG.phone + " ♥";
+document.getElementById("cd-date").textContent = CFG.dateDisplay;
+document.getElementById("footer-name").textContent = CFG.name;
+document.getElementById("footer-age").textContent = "turns " + CFG.age + " !";
+document.getElementById("footer-date").textContent = CFG.dateDisplay;
 
-  // ── Countdown ──
-  function updateCountdown() {
-    const diff = Math.max(0, EVENT_DATE - Date.now());
-    const pad = n => String(n).padStart(2,'0');
-    document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
-    document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
-    document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
-    document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
-  }
-  updateCountdown(); setInterval(updateCountdown, 1000);
+// ── Splash ────────────────────────────────────────
+function closeSplash() {
+  const s = document.getElementById("splash");
+  s.style.transition = "opacity 0.5s";
+  s.style.opacity = "0";
+  setTimeout(() => s.style.display = "none", 500);
+}
+setTimeout(closeSplash, 3500); // auto-close after 3.5s
 
-  // ── Gallery ──
-  let gIdx = 0, gTX = 0;
-  const TOTAL = 6;
-  function gSet(i) {
-    document.querySelectorAll('.gallery-slide')[gIdx].classList.remove('active');
-    document.querySelectorAll('.thumb')[gIdx].classList.remove('active');
-    document.querySelectorAll('.dot')[gIdx].classList.remove('active');
-    gIdx = (i + TOTAL) % TOTAL;
-    document.querySelectorAll('.gallery-slide')[gIdx].classList.add('active');
-    document.querySelectorAll('.thumb')[gIdx].classList.add('active');
-    document.querySelectorAll('.dot')[gIdx].classList.add('active');
-  }
-  function gGo(dir) { gSet(gIdx + dir); }
-  function gTouchStart(e) { gTX = e.touches[0].clientX; }
-  function gTouchEnd(e) { const d = gTX - e.changedTouches[0].clientX; if(Math.abs(d)>50) gGo(d>0?1:-1); }
+// ── Countdown ─────────────────────────────────────
+function updateCountdown() {
+  const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
+  document.getElementById("cd-d").textContent = String(Math.floor(diff / 86400000)).padStart(2,"0");
+  document.getElementById("cd-h").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,"0");
+  document.getElementById("cd-m").textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,"0");
+  document.getElementById("cd-s").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,"0");
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-  // ── RSVP ──
-  function rsvpSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('rsvp-name').value.trim();
-    const guests = document.getElementById('rsvp-guests').value.trim();
-    const msg = document.getElementById('rsvp-msg').value.trim();
-    if (!name) return;
-    if (WHATSAPP) {
-      let text = `Hola, soy ${name}. Confirmo mi asistencia al Bautizo de Emilio André`;
-      if (guests) text += ` con ${guests} acompañante(s)`;
-      if (msg) text += ". " + msg;
-      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank');
-    }
-    document.getElementById('rsvp-form-wrap').innerHTML = `
-      <div class="sent-msg">
-        <svg width="32" height="41.6" viewBox="0 0 22 29" fill="none"><rect x="8.36" y="0" width="5.28" height="29" rx="1.5" fill="#5a8fc2"/><rect x="0" y="6.16" width="22" height="5.28" rx="1.5" fill="#5a8fc2"/></svg>
-        <h3>Gracias</h3>
-        <p>Tu confirmación ha sido enviada.</p>
-      </div>`;
-  }
+// ── Program ───────────────────────────────────────
+const progList = document.getElementById("program-list");
+CFG.program.forEach((item, i) => {
+  progList.innerHTML += `
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:12px 8px 12px 0;border-bottom:${i < CFG.program.length-1 ? "1px solid rgba(232,160,180,.2)" : "none"}">
+      <div style="flex-shrink:0;width:20px;display:flex;justify-content:center;margin-top:6px">
+        <div style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#e8a0b4,#d4608a);box-shadow:0 0 8px rgba(210,96,140,.4)"></div>
+      </div>
+      <div style="flex:1">
+        <div style="font-family:'Lato',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#d4608a;font-weight:600">${item.time}</div>
+        <div style="font-family:'Dancing Script',cursive;font-size:1.1rem;color:#c0366a;margin-top:2px">${item.title}</div>
+        <div style="font-family:'Lato',sans-serif;font-size:.43rem;letter-spacing:.12em;text-transform:uppercase;color:#c06090;margin-top:2px">${item.desc}</div>
+      </div>
+    </div>`;
+});
+
+// ── Gallery ───────────────────────────────────────
+let galleryIdx = 0;
+const mainEl = document.getElementById("gallery-main");
+const thumbsEl = document.getElementById("gallery-thumbs");
+const dotsEl = document.getElementById("gallery-dots");
+
+// Build slides
+CFG.gallery.forEach((g, i) => {
+  const slide = document.createElement("div");
+  slide.style.cssText = `position:absolute;inset:0;opacity:${i===0?1:0};transition:opacity 0.55s`;
+  slide.innerHTML = `
+    <img src="${g.src}" alt="${g.cap}" style="width:100%;height:100%;object-fit:cover"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(192,54,106,.55) 0%,transparent 45%)"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:flex-end">
+      <span style="font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.9)">${g.cap}</span>
+      <span style="font-family:'Dancing Script',cursive;font-size:.85rem;color:rgba(255,255,255,.75)">${String(i+1).padStart(2,"0")} / ${String(CFG.gallery.length).padStart(2,"0")}</span>
+    </div>`;
+  mainEl.appendChild(slide);
+});
+
+// Prev/Next buttons
+["prev","next"].forEach(dir => {
+  const btn = document.createElement("button");
+  btn.textContent = dir === "prev" ? "‹" : "›";
+  btn.style.cssText = `position:absolute;top:50%;transform:translateY(-50%);${dir==="prev"?"left":"right"}:10px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.5);border:1px solid rgba(232,160,180,.6);backdrop-filter:blur(4px);cursor:pointer;color:#c0366a;font-size:1.1rem;display:flex;align-items:center;justify-content:center;z-index:10`;
+  btn.onclick = () => goTo(galleryIdx + (dir==="next" ? 1 : -1));
+  mainEl.appendChild(btn);
+});
+
+// Thumbnails + dots
+CFG.gallery.forEach((g, i) => {
+  const thumb = document.createElement("div");
+  thumb.style.cssText = `aspect-ratio:1;overflow:hidden;border-radius:8px;cursor:pointer;border:2px solid ${i===0?"#d4608a":"rgba(240,160,180,.4)"};transition:border-color 0.2s,transform 0.2s;transform:${i===0?"scale(1.05)":"scale(1)"}`;
+  thumb.innerHTML = `<img src="${g.src}" alt="${g.cap}" style="width:100%;height:100%;object-fit:cover;filter:${i===0?"none":"brightness(0.65)"};transition:filter 0.2s"/>`;
+  thumb.onclick = () => goTo(i);
+  thumbsEl.appendChild(thumb);
+
+  const dot = document.createElement("button");
+  dot.style.cssText = `height:4px;border-radius:2px;border:none;cursor:pointer;background:#d4608a;width:${i===0?"24px":"8px"};opacity:${i===0?1:0.3};transition:width 0.3s,opacity 0.3s`;
+  dot.onclick = () => goTo(i);
+  dotsEl.appendChild(dot);
+});
+
+function goTo(i) {
+  const slides = mainEl.querySelectorAll("div[style*='position:absolute']");
+  const thumbs = thumbsEl.children;
+  const dots = dotsEl.children;
+  galleryIdx = ((i % CFG.gallery.length) + CFG.gallery.length) % CFG.gallery.length;
+  slides.forEach((s, j) => s.style.opacity = j === galleryIdx ? 1 : 0);
+  Array.from(thumbs).forEach((t, j) => {
+    t.style.border = `2px solid ${j===galleryIdx?"#d4608a":"rgba(240,160,180,.4)"}`;
+    t.style.transform = j===galleryIdx ? "scale(1.05)" : "scale(1)";
+    t.querySelector("img").style.filter = j===galleryIdx ? "none" : "brightness(0.65)";
+  });
+  Array.from(dots).forEach((d, j) => {
+    d.style.width = j===galleryIdx ? "24px" : "8px";
+    d.style.opacity = j===galleryIdx ? 1 : 0.3;
+  });
+}
+
+// Swipe support
+let startX = 0;
+mainEl.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+mainEl.addEventListener("touchend", e => {
+  const d = startX - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) goTo(galleryIdx + (d > 0 ? 1 : -1));
+});
+
+// ── RSVP ──────────────────────────────────────────
+document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const name = document.getElementById("rsvp-name").value.trim();
+  if (!name) return;
+  document.getElementById("rsvp-form-area").innerHTML = `
+    <div style="text-align:center;padding:2rem 0">
+      <div style="font-size:3rem;margin-bottom:1rem">🎀</div>
+      <h3 style="font-family:'Dancing Script',cursive;font-size:2.2rem;color:#c0366a;margin:0 0 .5rem">¡Gracias!</h3>
+      <p style="font-family:'Lato',sans-serif;font-style:italic;font-size:.95rem;color:#c06090">Tu confirmación fue enviada. ¡Te esperamos!</p>
+    </div>`;
+});
 </script>
 </body>
 </html>
