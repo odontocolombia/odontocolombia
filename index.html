@@ -15,8 +15,6 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* ── ANIMATIONS ── */
     @keyframes cardIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
     @keyframes scaleIn { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
@@ -26,13 +24,38 @@
     @keyframes confettiFloat { from{transform:translateY(0) rotate(0deg)} to{transform:translateY(-20px) rotate(20deg)} }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-    /* ── BG FOOD ICONS ── */
-    .bg-food {
-      position: fixed;
-      font-size: 24px;
-      opacity: 0.055;
+    /* ── COOKIE SHAPE ── */
+    .cookie-frame {
+      position: relative;
+      display: inline-block;
+    }
+    .cookie-frame svg.clip-def { position: absolute; width: 0; height: 0; }
+    .cookie-border {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #FFD93D 0%, #FF8E53 50%, #FFD93D 100%);
+    }
+    .cookie-inner {
+      position: absolute;
+      top: 7px; left: 7px;
+      overflow: hidden;
+    }
+    .cookie-inner img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+    }
+    .cookie-chip {
+      position: absolute;
+      border-radius: 50%;
+      background: #8B4513;
+      opacity: 0.55;
       pointer-events: none;
-      z-index: 0;
+    }
+
+    /* ── BG FOOD ── */
+    .bg-food {
+      position: fixed; font-size: 24px; opacity: 0.055;
+      pointer-events: none; z-index: 0;
       animation: float 4s ease-in-out infinite alternate;
     }
 
@@ -48,21 +71,15 @@
       position: absolute; border-radius: 50%;
       animation: confettiFloat 4s ease-in-out infinite alternate;
     }
-    .splash-inner { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .splash-inner {
+      position: relative; z-index: 10; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .splash-chef { animation: bounceIn .6s both; }
+    .splash-chef img { width: 100px; }
     .splash-label { font-size: .55rem; letter-spacing: .35em; text-transform: uppercase; color: #FF6B35; font-weight: 700; animation: fadeUp .5s .3s both; }
-    .splash-photo {
-      width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
-      border: 5px solid #FF6B35;
-      box-shadow: 0 0 0 4px #FFD93D, 0 8px 32px rgba(255,107,53,.35);
-      animation: scaleIn .6s .5s both;
-    }
-    .splash-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
     .splash-name { font-family: 'Fredoka One', cursive; font-size: clamp(2.4rem,12vw,4rem); color: #FF6B35; text-shadow: 3px 3px 0 #FFD93D; line-height: 1; animation: fadeUp .5s .7s both; }
-    .splash-badge {
-      background: linear-gradient(135deg,#FF6B35,#FF8E53); border-radius: 999px; padding: 4px 24px;
-      font-weight: 800; font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
-      color: #fff; box-shadow: 0 4px 16px rgba(255,107,53,.4); animation: fadeUp .5s .8s both;
-    }
+    .splash-badge { background: linear-gradient(135deg,#FF6B35,#FF8E53); border-radius: 999px; padding: 4px 24px; font-weight: 800; font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 16px rgba(255,107,53,.4); animation: fadeUp .5s .8s both; }
     .splash-age { font-family: 'Fredoka One', cursive; font-size: clamp(4rem,18vw,7rem); color: #FF6B35; text-shadow: 4px 4px 0 #FFD93D; line-height: 1; animation: scaleIn .6s .9s both; }
     .splash-tap { font-size: .48rem; letter-spacing: .3em; text-transform: uppercase; color: #FF6B35; opacity: .7; animation: blink 2s infinite; }
 
@@ -74,7 +91,7 @@
     }
     #main-content.visible { opacity: 1; }
 
-    /* ── APRON CARD (Hero) ── */
+    /* ── APRON CARD ── */
     .apron-card {
       position: relative;
       background: linear-gradient(160deg,#FFF9F0 0%,#FFF3E8 50%,#FEF0F5 100%);
@@ -82,39 +99,26 @@
       box-shadow: 0 12px 60px rgba(255,107,53,.18), 0 4px 16px rgba(0,0,0,.06), 0 0 0 2.5px rgba(255,107,53,.2);
       animation: cardIn .8s both;
     }
-
-    /* ── HERO BANNER TOP ── */
-    .hero-banner {
-      position: relative; overflow: hidden;
-    }
+    .hero-banner { position: relative; overflow: hidden; }
     .hero-banner-svg { display: block; }
     .hero-banner-text {
       position: absolute; top: 0; left: 0; right: 0; height: 62px;
       display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 16px;
     }
-    .hero-banner-title { font-family: 'Fredoka One', cursive; font-size: clamp(1rem,4.5vw,1.25rem); color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.18); letter-spacing: .03em; line-height: 1.15; white-space: nowrap; }
+    .hero-banner-title { font-family: 'Fredoka One', cursive; font-size: clamp(1rem,4.5vw,1.25rem); color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.18); }
     .hero-banner-sub { font-weight: 800; font-size: clamp(.55rem,2vw,.7rem); color: #FFD93D; letter-spacing: .22em; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,.2); }
-
-    /* ── HERO CONTENT ── */
     .hero-content { padding: 24px 24px 20px; text-align: center; position: relative; }
     .floating-utensil { position: absolute; font-size: 22px; opacity: .15; animation: float 3s ease-in-out infinite alternate; }
     .hero-label { font-size: .5rem; letter-spacing: .35em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-bottom: 14px; }
-    .hero-mascot { margin-bottom: 16px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
-    .hero-photo-wrap { position: relative; display: inline-block; margin-bottom: 18px; }
-    .hero-photo {
-      width: 200px; height: 200px; border-radius: 50%; overflow: hidden;
-      border: 6px solid #FF6B35;
-      box-shadow: 0 0 0 5px #FFD93D, 0 0 0 9px rgba(255,107,53,.2), 0 12px 40px rgba(255,107,53,.35);
-    }
-    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .hero-badge { position: absolute; bottom: 4px; right: 4px; width: 48px; height: 48px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(255,107,53,.4); overflow: hidden; }
+    .hero-chef { margin-bottom: 16px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
+    .hero-chef img { width: 88px; }
+    .hero-photo-wrap { display: inline-block; margin-bottom: 18px; }
     .hero-name { font-family: 'Fredoka One', cursive; font-size: clamp(2.4rem,10vw,3.6rem); color: #FF6B35; text-shadow: 3px 3px 0 #FFD93D; line-height: 1; margin-bottom: 8px; }
     .hero-pill { display: inline-block; background: linear-gradient(135deg,#FF6B35,#FF8E53); border-radius: 999px; padding: 5px 24px; margin-bottom: 10px; font-weight: 800; font-size: .55rem; letter-spacing: .35em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 14px rgba(255,107,53,.4); }
     .hero-age { font-family: 'Fredoka One', cursive; font-size: clamp(4rem,16vw,6.5rem); color: #FF6B35; text-shadow: 5px 5px 0 #FFD93D; line-height: 1; margin-bottom: 8px; }
     .hero-tagline { font-weight: 700; font-size: .75rem; color: #888; letter-spacing: .05em; }
 
-    /* ── INFO GRID ── */
-    .info-grid { background: rgba(255,255,255,.75); margin: 20px 0 0; border-radius: 16px; overflow: hidden; border: 2px solid rgba(255,107,53,.18); backdrop-filter: blur(4px); }
+    .info-grid { background: rgba(255,255,255,.75); margin: 20px 0 0; border-radius: 16px; overflow: hidden; border: 2px solid rgba(255,107,53,.18); }
     .info-grid-header { padding: 8px 16px; text-align: center; background: linear-gradient(90deg,transparent,rgba(255,107,53,.12),transparent); border-bottom: 1px solid rgba(255,107,53,.12); font-size: .42rem; letter-spacing: .28em; text-transform: uppercase; color: #FF8E53; font-weight: 700; }
     .info-grid-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 18px 12px; }
     .info-col { text-align: center; padding: 0 4px; }
@@ -130,30 +134,26 @@
     .info-rsvp-label { font-size: .44rem; letter-spacing: .22em; text-transform: uppercase; color: #FF8E53; font-weight: 700; }
     .info-rsvp-phone { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #FF6B35; margin-top: 4px; }
 
-    /* ── CHECKERED RIBBON ── */
-    .checkered-ribbon { display: block; }
+    .checkered-ribbon { display: flex; width: 100%; height: 12px; }
+    .checkered-ribbon span { flex: 1; height: 100%; }
 
-    /* ── SECTION HEADER ── */
+    /* ── COUNTDOWN CARD ── */
+    .rolling-pin-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1), 0 2px 8px rgba(0,0,0,.05); border: 2px solid rgba(255,107,53,.1); animation: cardIn .6s .1s both; }
+    .rolling-pin-content { padding: 16px 24px 24px; }
     .section-header { text-align: center; margin-bottom: 24px; }
     .section-label { font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-bottom: 6px; }
     .section-emoji { font-size: 36px; margin-bottom: 4px; }
-    .section-title { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem,5vw,2rem); color: #FF6B35; letter-spacing: .02em; }
+    .section-title { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem,5vw,2rem); color: #FF6B35; }
     .section-divider { height: 3px; width: 60px; background: linear-gradient(90deg,#FF6B35,#FFD93D); border-radius: 99px; margin: 10px auto 0; }
-
-    /* ── ROLLING PIN CARD (Countdown) ── */
-    .rolling-pin-card { position: relative; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1), 0 2px 8px rgba(0,0,0,.05); border: 2px solid rgba(255,107,53,.1); animation: cardIn .6s .1s both; }
-    .rolling-pin-content { padding: 16px 24px 24px; }
-
-    /* ── COUNTDOWN ── */
     .countdown-tiles { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
     .countdown-tile { min-width: 72px; text-align: center; padding: 16px 12px; border-radius: 20px; background: linear-gradient(135deg,#fff9f0,#fff3e0); border: 2px solid #FFD93D; box-shadow: 0 4px 16px rgba(255,217,61,.25); }
     .countdown-val { font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: #FF6B35; line-height: 1; }
     .countdown-lbl { font-size: .4rem; letter-spacing: .2em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-top: 6px; }
     .countdown-date { text-align: center; margin-top: 18px; font-size: .42rem; letter-spacing: .18em; color: #FF8E53; font-weight: 600; text-transform: uppercase; }
 
-    /* ── RECIPE CARD (Program) ── */
-    .recipe-card { position: relative; background: linear-gradient(180deg,#FFFDE7 0%,#FFF8E1 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1), 0 2px 8px rgba(0,0,0,.05); border: 2px solid rgba(255,193,7,.3); animation: cardIn .6s .15s both; padding-left: 38px; }
-    .recipe-content { padding: 20px 24px 28px 16px; }
+    /* ── PROGRAM CARD ── */
+    .recipe-card { background: linear-gradient(180deg,#FFFDE7 0%,#FFF8E1 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1); border: 2px solid rgba(255,193,7,.3); animation: cardIn .6s .15s both; }
+    .recipe-content { padding: 20px 24px 28px; }
     .program-list { display: flex; flex-direction: column; position: relative; }
     .program-timeline { position: absolute; left: 23px; top: 0; bottom: 0; width: 2px; background: repeating-linear-gradient(to bottom,#FFD93D 0,#FFD93D 8px,transparent 8px,transparent 16px); }
     .program-item { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,217,61,.3); }
@@ -164,39 +164,40 @@
     .program-title { font-weight: 800; font-size: 1rem; color: #2D2D2D; margin-top: 2px; }
     .program-desc { font-size: .42rem; letter-spacing: .1em; text-transform: uppercase; color: #FF8E53; margin-top: 3px; }
 
-    /* ── CUTTING BOARD CARD (Gallery) ── */
-    .cutting-board-card { position: relative; background: linear-gradient(160deg,#FFF8F0 0%,#FFF3E8 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(212,168,90,.2), 0 2px 8px rgba(0,0,0,.06); border: 3px solid rgba(212,168,90,.35); animation: cardIn .6s .2s both; }
+    /* ── GALLERY CARD ── */
+    .cutting-board-card { background: linear-gradient(160deg,#FFF8F0 0%,#FFF3E8 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(212,168,90,.2); border: 3px solid rgba(212,168,90,.35); animation: cardIn .6s .2s both; }
     .gallery-content { padding: 12px 28px 12px; }
-    .gallery-photo-wrap { width: 230px; height: 230px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; position: relative; border: 6px solid #FF6B35; box-shadow: 0 0 0 4px #FFD93D, 0 8px 32px rgba(255,107,53,.3); cursor: grab; }
-    .gallery-photo-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity .3s; }
-    .gallery-badge { position: absolute; bottom: 6px; right: 6px; }
+    .gallery-photo-wrap { display: flex; justify-content: center; margin: 0 auto 20px; cursor: grab; }
     .gallery-caption { text-align: center; margin-bottom: 16px; }
     .gallery-caption-text { font-weight: 800; font-size: 1rem; color: #2D2D2D; }
     .gallery-counter { font-size: .38rem; letter-spacing: .22em; color: #D4A85A; margin-top: 4px; text-transform: uppercase; }
     .gallery-controls { display: flex; align-items: center; justify-content: center; gap: 16px; }
-    .gallery-btn { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #D4A85A; background: linear-gradient(135deg,#FFF8F0,#FFF3E8); color: #D4A85A; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(212,168,90,.25); }
+    .gallery-btn { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #D4A85A; background: linear-gradient(135deg,#FFF8F0,#FFF3E8); color: #D4A85A; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .gallery-dots { display: flex; gap: 6px; align-items: center; }
     .gallery-dot { height: 8px; width: 8px; border-radius: 4px; border: none; cursor: pointer; background: rgba(212,168,90,.28); padding: 0; transition: all .25s ease; }
     .gallery-dot.active { width: 24px; background: #D4A85A; }
 
-    /* ── NOTEPAD CARD (RSVP) ── */
-    .notepad-card { position: relative; background: #FFFEF5; border-radius: 0 0 20px 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,193,7,.15), 0 2px 8px rgba(0,0,0,.05), 4px 4px 0 rgba(255,107,53,.12); border: 2px solid rgba(255,193,7,.3); border-top: none; animation: cardIn .6s .25s both; }
-    .rsvp-content { padding: 16px 24px 28px 60px; }
+    /* ── RSVP CARD ── */
+    .notepad-card { background: #FFFEF5; border-radius: 0 0 20px 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,193,7,.15); border: 2px solid rgba(255,193,7,.3); border-top: none; animation: cardIn .6s .25s both; }
+    .notepad-binding { height: 40px; display: flex; align-items: center; justify-content: space-around; padding: 0 8px; background: linear-gradient(0deg,#FFECB3,#FFD93D); }
+    .binding-hole { width: 20px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,107,53,.6); background: white; opacity: 0.8; }
+    .rsvp-content { padding: 16px 24px 28px; }
     .rsvp-subtext { text-align: center; font-size: .5rem; letter-spacing: .18em; text-transform: uppercase; color: #FF8E53; margin-bottom: 24px; }
-    .rsvp-thanks { text-align: center; padding: 24px 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .rsvp-thanks-emoji { font-size: 60px; }
-    .rsvp-thanks-name { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #FF6B35; }
-    .rsvp-thanks-sub { font-size: .95rem; color: #666; }
     .rsvp-form { max-width: 320px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
     .rsvp-field { border-bottom: 2px solid #FFD93D; padding-bottom: 6px; }
     .rsvp-input { width: 100%; background: transparent; border: none; outline: none; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: #2D2D2D; }
     textarea.rsvp-input { resize: none; }
-    .rsvp-submit { padding: 14px; border-radius: 999px; cursor: pointer; background: linear-gradient(135deg,#FF6B35,#FF8E53); border: none; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 20px rgba(255,107,53,.4); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .rsvp-submit { padding: 14px; border-radius: 999px; cursor: pointer; background: linear-gradient(135deg,#FF6B35,#FF8E53); border: none; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 20px rgba(255,107,53,.4); }
+    .rsvp-thanks { text-align: center; padding: 24px 0; display: flex; flex-direction: column; align-items: center; gap: 16px; display: none; }
+    .rsvp-thanks-emoji { font-size: 60px; }
+    .rsvp-thanks-name { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #FF6B35; }
+    .rsvp-thanks-sub { font-size: .95rem; color: #666; }
     .wa-btn { display: inline-block; padding: 12px 32px; border-radius: 999px; background: linear-gradient(135deg,#25d366,#128c50); font-weight: 800; font-size: .5rem; letter-spacing: .25em; text-transform: uppercase; color: #fff; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,.4); }
 
     /* ── FOOTER ── */
-    footer { text-align: center; padding: 48px 24px; border-top: 2px solid rgba(255,107,53,.1); background: linear-gradient(180deg,rgba(255,249,240,0),rgba(255,240,224,.6)); }
-    .footer-mascot { margin-bottom: 12px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
+    footer { text-align: center; padding: 48px 24px; border-top: 2px solid rgba(255,107,53,.1); }
+    .footer-chef { margin-bottom: 12px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
+    .footer-chef img { width: 62px; }
     .footer-name { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #FF6B35; text-shadow: 2px 2px 0 #FFD93D; margin-bottom: 4px; }
     .footer-sub { font-weight: 700; font-size: .95rem; color: #888; margin-bottom: 4px; }
     .footer-date { font-size: .42rem; letter-spacing: .18em; text-transform: uppercase; color: #FF8E53; margin-bottom: 20px; }
@@ -207,54 +208,19 @@
 </head>
 <body>
 
-<!-- ══ BACKGROUND FOOD ICONS ══ -->
 <div id="bg-food"></div>
 
 <!-- ══ SPLASH ══ -->
 <div id="splash" onclick="closeSplash()">
   <div id="confetti-container"></div>
   <div class="splash-inner">
-    <div style="animation: bounceIn .6s both; display:flex; justify-content:center;">
-      <!-- Chef SVG mascot -->
-      <svg width="100" height="135" viewBox="0 0 90 122" fill="none">
-        <ellipse cx="45" cy="22" rx="20" ry="8" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-        <rect x="28" y="14" width="34" height="18" rx="4" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-        <path d="M32 22 Q36 14 40 22" fill="white" stroke="#ddd" stroke-width="1"/>
-        <path d="M40 22 Q44 14 48 22" fill="white" stroke="#ddd" stroke-width="1"/>
-        <path d="M48 22 Q52 14 56 22" fill="white" stroke="#ddd" stroke-width="1"/>
-        <rect x="28" y="28" width="34" height="5" rx="2" fill="#FF6B35" opacity="0.9"/>
-        <circle cx="45" cy="46" r="16" fill="#FDDBB4" stroke="#F0A868" stroke-width="1.2"/>
-        <path d="M30 44 Q29 36 36 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M60 44 Q61 36 54 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <ellipse cx="39" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
-        <ellipse cx="51" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
-        <circle cx="40" cy="43" r="1" fill="white"/>
-        <circle cx="52" cy="43" r="1" fill="white"/>
-        <ellipse cx="35" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
-        <ellipse cx="55" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
-        <path d="M40 52 Q45 57 50 52" stroke="#CC6644" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <rect x="41" y="61" width="8" height="6" rx="2" fill="#FDDBB4"/>
-        <path d="M22 68 Q22 62 45 62 Q68 62 68 68 L72 102 Q72 108 45 108 Q18 108 18 102 Z" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-        <rect x="35" y="82" width="20" height="14" rx="5" fill="none" stroke="#FF6B35" stroke-width="1.2" opacity="0.6"/>
-        <path d="M30 68 Q37 64 45 65 Q53 64 60 68" fill="none" stroke="#FF6B35" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M30 68 Q28 62 34 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <path d="M60 68 Q62 62 56 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <path d="M22 75 Q8 80 10 92" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <path d="M68 75 Q80 78 82 90" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
-        <line x1="82" y1="90" x2="87" y2="115" stroke="#A0735A" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M82 90 Q84 100 83 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M82 90 Q87 98 86 107" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M82 90 Q78 99 80 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="83" cy="108" rx="4" ry="3" fill="none" stroke="#A0735A" stroke-width="1.2"/>
-        <rect x="33" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
-        <rect x="46" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
-        <ellipse cx="39" cy="122" rx="8" ry="4" fill="#3D2314"/>
-        <ellipse cx="52" cy="122" rx="8" ry="4" fill="#3D2314"/>
-      </svg>
+    <div class="splash-chef">
+      <img src="https://hercules-cdn.com/file_7jUG9Z9D4DbUYsaNoJq6E22J" alt="Chef" />
     </div>
     <div class="splash-label">✦ MISIÓN CULINARIA ESPECIAL ✦</div>
-    <div class="splash-photo">
-      <img src="https://images.unsplash.com/photo-1678285901330-bb80e5432cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80" alt="Sofía" />
+    <div class="splash-photo-wrap" style="animation: scaleIn .6s .5s both; display:inline-block;">
+      <!-- cookie frame 144px -->
+      <div class="cookie-frame" id="splash-cookie" style="width:144px;height:144px;"></div>
     </div>
     <div class="splash-name">Sofía</div>
     <div class="splash-badge">CUMPLE</div>
@@ -268,7 +234,6 @@
 
   <!-- HERO CARD -->
   <div class="apron-card">
-    <!-- Banner top -->
     <div class="hero-banner">
       <svg class="hero-banner-svg" width="100%" height="80" viewBox="0 0 420 80" preserveAspectRatio="none">
         <defs>
@@ -282,140 +247,31 @@
         <rect width="420" height="62" fill="url(#heroBannerGrad)"/>
         <path d="M0,62 Q10,80 20,62 Q30,44 40,62 Q50,80 60,62 Q70,44 80,62 Q90,80 100,62 Q110,44 120,62 Q130,80 140,62 Q150,44 160,62 Q170,80 180,62 Q190,44 200,62 Q210,80 220,62 Q230,44 240,62 Q250,80 260,62 Q270,44 280,62 Q290,80 300,62 Q310,44 320,62 Q330,80 340,62 Q350,44 360,62 Q370,80 380,62 Q390,44 400,62 Q410,80 420,62 L420,80 L0,80 Z" fill="#FFF9F0"/>
         <rect width="420" height="5" fill="rgba(255,217,61,0.7)"/>
-        <rect x="0" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="10" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="20" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="30" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="40" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="50" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="60" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="70" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="80" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="90" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="100" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="110" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="120" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="130" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="140" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="150" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="160" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="170" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="180" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="190" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="200" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="210" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="220" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="230" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="240" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="250" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="260" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="270" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="280" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="290" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="300" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="310" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="320" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="330" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="340" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="350" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="360" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="370" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="380" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="390" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
-        <rect x="400" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
-        <rect x="410" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
       </svg>
       <div class="hero-banner-text">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="flex-shrink:0;opacity:.9">
-          <ellipse cx="14" cy="10" rx="10" ry="4" fill="white" opacity="0.9"/>
-          <rect x="6" y="8" width="16" height="10" rx="2" fill="white" opacity="0.9"/>
-          <rect x="6" y="15" width="16" height="4" rx="1" fill="rgba(255,217,61,0.8)"/>
-          <path d="M8 10 Q11 5 14 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
-          <path d="M14 10 Q17 5 20 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
-        </svg>
         <div style="text-align:center">
           <div class="hero-banner-title">Fiesta de Cocina</div>
           <div class="hero-banner-sub">✦ Mini Chefs ✦</div>
         </div>
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="flex-shrink:0;opacity:.9">
-          <ellipse cx="14" cy="10" rx="10" ry="4" fill="white" opacity="0.9"/>
-          <rect x="6" y="8" width="16" height="10" rx="2" fill="white" opacity="0.9"/>
-          <rect x="6" y="15" width="16" height="4" rx="1" fill="rgba(255,217,61,0.8)"/>
-          <path d="M8 10 Q11 5 14 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
-          <path d="M14 10 Q17 5 20 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
-        </svg>
       </div>
     </div>
-
-    <!-- Hero Content -->
     <div class="hero-content">
-      <div class="floating-utensil" style="top:12%;left:6%;animation-delay:0s">🍴</div>
+      <div class="floating-utensil" style="top:12%;left:6%">🍴</div>
       <div class="floating-utensil" style="top:20%;left:88%;animation-delay:.4s">🥄</div>
       <div class="floating-utensil" style="top:8%;left:78%;animation-delay:.8s">🔪</div>
       <div class="floating-utensil" style="top:18%;left:14%;animation-delay:1.2s">🥢</div>
       <div class="hero-label">✦ FIESTA DE COCINA ESPECIAL ✦</div>
-      <div class="hero-mascot">
-        <svg width="88" height="119" viewBox="0 0 90 122" fill="none">
-          <ellipse cx="45" cy="22" rx="20" ry="8" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-          <rect x="28" y="14" width="34" height="18" rx="4" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-          <path d="M32 22 Q36 14 40 22" fill="white" stroke="#ddd" stroke-width="1"/>
-          <path d="M40 22 Q44 14 48 22" fill="white" stroke="#ddd" stroke-width="1"/>
-          <path d="M48 22 Q52 14 56 22" fill="white" stroke="#ddd" stroke-width="1"/>
-          <rect x="28" y="28" width="34" height="5" rx="2" fill="#FF6B35" opacity="0.9"/>
-          <circle cx="45" cy="46" r="16" fill="#FDDBB4" stroke="#F0A868" stroke-width="1.2"/>
-          <path d="M30 44 Q29 36 36 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <path d="M60 44 Q61 36 54 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <ellipse cx="39" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
-          <ellipse cx="51" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
-          <circle cx="40" cy="43" r="1" fill="white"/>
-          <circle cx="52" cy="43" r="1" fill="white"/>
-          <ellipse cx="35" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
-          <ellipse cx="55" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
-          <path d="M40 52 Q45 57 50 52" stroke="#CC6644" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          <rect x="41" y="61" width="8" height="6" rx="2" fill="#FDDBB4"/>
-          <path d="M22 68 Q22 62 45 62 Q68 62 68 68 L72 102 Q72 108 45 108 Q18 108 18 102 Z" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-          <rect x="35" y="82" width="20" height="14" rx="5" fill="none" stroke="#FF6B35" stroke-width="1.2" opacity="0.6"/>
-          <path d="M30 68 Q37 64 45 65 Q53 64 60 68" fill="none" stroke="#FF6B35" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M30 68 Q28 62 34 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path d="M60 68 Q62 62 56 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path d="M22 75 Q8 80 10 92" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <path d="M68 75 Q80 78 82 90" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <line x1="82" y1="90" x2="87" y2="115" stroke="#A0735A" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M82 90 Q84 100 83 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-          <path d="M82 90 Q87 98 86 107" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-          <path d="M82 90 Q78 99 80 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="83" cy="108" rx="4" ry="3" fill="none" stroke="#A0735A" stroke-width="1.2"/>
-          <rect x="33" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
-          <rect x="46" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
-          <ellipse cx="39" cy="122" rx="8" ry="4" fill="#3D2314"/>
-          <ellipse cx="52" cy="122" rx="8" ry="4" fill="#3D2314"/>
-        </svg>
+      <div class="hero-chef">
+        <img src="https://hercules-cdn.com/file_7jUG9Z9D4DbUYsaNoJq6E22J" alt="Chef" />
       </div>
       <div class="hero-photo-wrap">
-        <div class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1678285901330-bb80e5432cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80" alt="Sofía" />
-        </div>
-        <div class="hero-badge">
-          <svg width="48" height="48" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="#FF6B35"/>
-            <circle cx="18" cy="18" r="15" fill="#FF8E53"/>
-            <ellipse cx="18" cy="10" rx="8" ry="3" fill="white"/>
-            <rect x="11" y="7" width="14" height="7" rx="2" fill="white"/>
-            <rect x="11" y="12" width="14" height="2" rx="1" fill="#FF6B35" opacity="0.8"/>
-            <circle cx="18" cy="20" r="6" fill="#FDDBB4"/>
-            <ellipse cx="15.5" cy="19" rx="1.2" ry="1.4" fill="#3D2314"/>
-            <ellipse cx="20.5" cy="19" rx="1.2" ry="1.4" fill="#3D2314"/>
-            <path d="M16 22 Q18 24 20 22" stroke="#CC6644" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <line x1="26" y1="15" x2="29" y2="28" stroke="#FFD93D" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="26" cy="14" r="2.5" fill="none" stroke="#FFD93D" stroke-width="1.5"/>
-          </svg>
-        </div>
+        <!-- cookie frame 192px -->
+        <div class="cookie-frame" id="hero-cookie" style="width:192px;height:192px;"></div>
       </div>
       <div class="hero-name">Sofía</div>
       <div class="hero-pill">MINI CHEF CUMPLE</div>
       <div class="hero-age">5</div>
       <div class="hero-tagline">¡Cocinamos juntos esta celebración! 🎂</div>
-
       <div class="info-grid">
         <div class="info-grid-header">🍳 DATOS DE LA CELEBRACIÓN 🍳</div>
         <div class="info-grid-cols">
@@ -430,7 +286,7 @@
             <div class="info-icon">⏰</div>
             <div class="info-lbl">Hora</div>
             <div class="info-time">3:00 PM</div>
-            <div class="info-foot">🍽️</div>
+            <div class="info-foot">🍽</div>
           </div>
           <div class="info-col">
             <div class="info-icon">📍</div>
@@ -445,41 +301,11 @@
         </div>
       </div>
     </div>
-
-    <!-- Checkered ribbon bottom -->
-    <svg class="checkered-ribbon" width="100%" height="12" viewBox="0 0 420 12" preserveAspectRatio="none">
-      <rect x="0" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="16" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="32" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="48" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="64" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="80" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="96" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="112" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="128" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="144" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="160" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="176" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="192" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="208" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="224" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="240" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="256" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="272" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="288" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="304" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="320" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="336" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="352" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="368" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="384" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="400" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-    </svg>
+    <div class="checkered-ribbon" id="ribbon-hero"></div>
   </div>
 
   <!-- COUNTDOWN CARD -->
   <div class="rolling-pin-card">
-    <!-- Rolling pin top -->
     <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block">
       <defs>
         <linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="0">
@@ -490,65 +316,13 @@
         </linearGradient>
       </defs>
       <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-      <rect x="0" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
       <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
       <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
       <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
-      <line x1="90" y1="10" x2="90" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="130" y1="10" x2="130" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="170" y1="10" x2="170" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="210" y1="10" x2="210" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="250" y1="10" x2="250" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="290" y1="10" x2="290" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-      <line x1="330" y1="10" x2="330" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
       <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
       <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-      <rect x="368" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
     </svg>
     <div class="rolling-pin-content">
-      <!-- Chef hat banner -->
-      <svg width="100%" height="56" viewBox="0 0 420 56" preserveAspectRatio="none" style="display:block;margin-bottom:16px">
-        <defs>
-          <linearGradient id="hatBg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#FFF3E0"/><stop offset="50%" stop-color="#FFF9F4"/><stop offset="100%" stop-color="#FFF3E0"/>
-          </linearGradient>
-        </defs>
-        <rect width="420" height="56" fill="url(#hatBg)"/>
-        <rect x="0" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="16" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="32" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="48" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="64" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="80" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="96" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="112" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="128" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="144" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="160" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="176" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="192" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="208" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="224" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="240" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="256" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="272" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="288" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="304" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="320" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="336" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="352" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="368" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <rect x="384" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
-        <rect x="400" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
-        <g transform="translate(210,4) scale(0.9)">
-          <ellipse cx="0" cy="14" rx="22" ry="20" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
-          <ellipse cx="-10" cy="10" rx="14" ry="16" fill="white" stroke="#FF6B35" stroke-width="1"/>
-          <ellipse cx="10" cy="10" rx="14" ry="16" fill="white" stroke="#FF6B35" stroke-width="1"/>
-          <rect x="-18" y="28" width="36" height="8" rx="2" fill="#FF6B35" opacity="0.85"/>
-          <ellipse cx="-4" cy="8" rx="5" ry="7" fill="rgba(255,255,255,0.5)"/>
-        </g>
-      </svg>
-
       <div class="section-header">
         <div class="section-label">Cocina de Cuenta Regresiva</div>
         <div class="section-emoji">⏳</div>
@@ -563,16 +337,13 @@
       </div>
       <div class="countdown-date">📅 Sábado, 3 de Octubre 2026</div>
     </div>
-    <!-- Rolling pin bottom (flipped) -->
     <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block;transform:scaleY(-1)">
       <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-      <rect x="0" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
       <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
       <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
       <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
       <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
       <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-      <rect x="368" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
     </svg>
   </div>
 
@@ -587,44 +358,19 @@
       </div>
       <div class="program-list">
         <div class="program-timeline"></div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🧁</div></div>
-          <div><div class="program-time">2:30 pm</div><div class="program-title">Bienvenida a la cocina</div><div class="program-desc">Recepción de los pequeños chefs</div></div>
-        </div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🍳</div></div>
-          <div><div class="program-time">3:00 pm</div><div class="program-title">Ponerse el delantal</div><div class="program-desc">¡Cada mini chef listo para cocinar!</div></div>
-        </div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🍰</div></div>
-          <div><div class="program-time">3:30 pm</div><div class="program-title">Decoración de cupcakes</div><div class="program-desc">Taller estrella del día</div></div>
-        </div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🎂</div></div>
-          <div><div class="program-time">4:30 pm</div><div class="program-title">El pastel y los deseos</div><div class="program-desc">¡Soplamos las velas juntos!</div></div>
-        </div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🍕</div></div>
-          <div><div class="program-time">5:00 pm</div><div class="program-title">Hora de comer</div><div class="program-desc">¡A disfrutar lo que cocinamos!</div></div>
-        </div>
-        <div class="program-item">
-          <div class="program-icon-wrap"><div class="program-icon">🎁</div></div>
-          <div><div class="program-time">6:00 pm</div><div class="program-title">Receta de recuerdo</div><div class="program-desc">Cada chef se va con su kit especial</div></div>
-        </div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🧁</div></div><div><div class="program-time">2:30 pm</div><div class="program-title">Bienvenida a la cocina</div><div class="program-desc">Recepción de los pequeños chefs</div></div></div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🍳</div></div><div><div class="program-time">3:00 pm</div><div class="program-title">Ponerse el delantal</div><div class="program-desc">¡Cada mini chef listo para cocinar!</div></div></div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🍰</div></div><div><div class="program-time">3:30 pm</div><div class="program-title">Decoración de cupcakes</div><div class="program-desc">Taller estrella del día</div></div></div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🎂</div></div><div><div class="program-time">4:30 pm</div><div class="program-title">El pastel y los deseos</div><div class="program-desc">¡Soplamos las velas juntos!</div></div></div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🍕</div></div><div><div class="program-time">5:00 pm</div><div class="program-title">Hora de comer</div><div class="program-desc">¡A disfrutar lo que cocinamos!</div></div></div>
+        <div class="program-item"><div class="program-icon-wrap"><div class="program-icon">🎁</div></div><div><div class="program-time">6:00 pm</div><div class="program-title">Receta de recuerdo</div><div class="program-desc">Cada chef se va con su kit especial</div></div></div>
       </div>
     </div>
   </div>
 
   <!-- GALLERY CARD -->
   <div class="cutting-board-card">
-    <!-- Top wood strip -->
-    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block">
-      <rect width="420" height="16" fill="#D4A85A" opacity="0.25"/>
-      <line x1="0" y1="0" x2="420" y2="2" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-      <line x1="0" y1="3" x2="420" y2="5" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-      <line x1="0" y1="6" x2="420" y2="8" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-      <line x1="0" y1="9" x2="420" y2="11" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-    </svg>
+    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block"><rect width="420" height="16" fill="#D4A85A" opacity="0.25"/><line x1="0" y1="0" x2="420" y2="2" stroke="#C49040" stroke-width="0.8" opacity="0.3"/><line x1="0" y1="3" x2="420" y2="5" stroke="#C49040" stroke-width="0.8" opacity="0.3"/><line x1="0" y1="6" x2="420" y2="8" stroke="#C49040" stroke-width="0.8" opacity="0.3"/></svg>
     <div class="gallery-content">
       <div class="section-header">
         <div class="section-label">Álbum de Recetas</div>
@@ -633,22 +379,7 @@
         <div class="section-divider"></div>
       </div>
       <div class="gallery-photo-wrap" id="gallery-wrap">
-        <img id="gallery-img" src="" alt="" />
-        <div class="gallery-badge">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="rgba(255,107,53,0.85)"/>
-            <ellipse cx="18" cy="11" rx="9" ry="4" fill="white"/>
-            <rect x="11" y="7" width="14" height="8" rx="3" fill="white"/>
-            <path d="M13 11 Q15 7 17 11" fill="white" stroke="#eee" stroke-width="0.8"/>
-            <path d="M17 11 Q19 7 21 11" fill="white" stroke="#eee" stroke-width="0.8"/>
-            <path d="M21 11 Q23 7 25 11" fill="white" stroke="#eee" stroke-width="0.8"/>
-            <rect x="11" y="13" width="14" height="3" rx="1.5" fill="#FFD93D"/>
-            <line x1="15" y1="20" x2="14" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="21" y1="20" x2="22" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M15 20 Q18 16 21 20" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            <ellipse cx="18" cy="29" rx="3" ry="1.5" fill="none" stroke="white" stroke-width="1"/>
-          </svg>
-        </div>
+        <div class="cookie-frame" id="gallery-cookie" style="width:224px;height:224px;"></div>
       </div>
       <div class="gallery-caption">
         <div class="gallery-caption-text" id="gallery-cap"></div>
@@ -660,149 +391,47 @@
         <button class="gallery-btn" onclick="galleryGo(1)">›</button>
       </div>
     </div>
-    <!-- Bottom wood strip -->
-    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block">
-      <rect width="420" height="16" fill="#D4A85A" opacity="0.25"/>
-      <line x1="0" y1="2" x2="420" y2="0" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-      <line x1="0" y1="5" x2="420" y2="3" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-      <line x1="0" y1="8" x2="420" y2="6" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
-    </svg>
+    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block"><rect width="420" height="16" fill="#D4A85A" opacity="0.25"/><line x1="0" y1="2" x2="420" y2="0" stroke="#C49040" stroke-width="0.8" opacity="0.3"/><line x1="0" y1="5" x2="420" y2="3" stroke="#C49040" stroke-width="0.8" opacity="0.3"/></svg>
   </div>
 
   <!-- RSVP CARD -->
   <div class="notepad-card">
-    <!-- Notepad top border -->
-    <svg width="100%" height="40" viewBox="0 0 420 40" preserveAspectRatio="none" style="display:block">
-      <defs>
-        <linearGradient id="noteGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FFECB3"/>
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="420" height="40" fill="url(#noteGrad)"/>
-      <ellipse cx="30" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="30" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M20,12 Q30,4 40,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="80" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="80" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M70,12 Q80,4 90,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="130" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="130" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M120,12 Q130,4 140,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="180" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="180" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M170,12 Q180,4 190,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="230" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="230" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M220,12 Q230,4 240,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="280" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="280" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M270,12 Q280,4 290,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="330" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="330" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M320,12 Q330,4 340,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <ellipse cx="380" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
-      <ellipse cx="380" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
-      <path d="M370,12 Q380,4 390,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
-      <line x1="52" y1="0" x2="52" y2="40" stroke="#FF6B35" stroke-width="1.5" opacity="0.4"/>
-    </svg>
+    <div class="notepad-binding">
+      <div class="binding-hole"></div><div class="binding-hole"></div><div class="binding-hole"></div>
+      <div class="binding-hole"></div><div class="binding-hole"></div><div class="binding-hole"></div>
+      <div class="binding-hole"></div><div class="binding-hole"></div><div class="binding-hole"></div>
+    </div>
     <div class="rsvp-content">
       <div class="section-header">
         <div class="section-label">¡Queremos Contarte!</div>
-        <div class="section-emoji">✉️</div>
+        <div class="section-emoji">✉</div>
         <div class="section-title">Confirmar Asistencia</div>
         <div class="section-divider"></div>
       </div>
       <p class="rsvp-subtext">RSVP a Mamá · 1234567890</p>
-      <div id="rsvp-thanks" class="rsvp-thanks" style="display:none">
+      <div id="rsvp-thanks" class="rsvp-thanks">
         <div class="rsvp-thanks-emoji">🎉</div>
         <div class="rsvp-thanks-name" id="rsvp-thanks-name">¡Gracias!</div>
         <div class="rsvp-thanks-sub">Tu mensaje está listo 🍳</div>
-        <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
+        <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
       </div>
       <form id="rsvp-form" class="rsvp-form" onsubmit="submitRsvp(event)">
-        <div class="rsvp-field">
-          <input type="text" id="rsvp-name" class="rsvp-input" placeholder="Tu nombre completo" required />
-        </div>
-        <div class="rsvp-field">
-          <input type="text" id="rsvp-guests" class="rsvp-input" placeholder="Número de invitados (ej: 2)" />
-        </div>
-        <div class="rsvp-field">
-          <textarea id="rsvp-msg" class="rsvp-input" rows="3" placeholder="Mensaje para la familia…"></textarea>
-        </div>
+        <div class="rsvp-field"><input type="text" id="rsvp-name" class="rsvp-input" placeholder="Tu nombre completo" required /></div>
+        <div class="rsvp-field"><input type="text" id="rsvp-guests" class="rsvp-input" placeholder="Número de invitados (ej: 2)" /></div>
+        <div class="rsvp-field"><textarea id="rsvp-msg" class="rsvp-input" rows="3" placeholder="Mensaje para la familia…"></textarea></div>
         <button type="submit" class="rsvp-submit">🍳 ¡Confirmar mi lugar en la cocina! 🍳</button>
       </form>
     </div>
   </div>
-
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer id="footer" style="display:none">
-  <div style="max-width:300px;margin:0 auto 24px">
-    <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block">
-      <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-      <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
-      <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
-      <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
-      <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
-      <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
-    </svg>
-  </div>
-  <div class="footer-mascot">
-    <svg width="62" height="68" viewBox="0 0 56 62" fill="none">
-      <ellipse cx="28" cy="8" rx="13" ry="5" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
-      <rect x="17" y="4" width="22" height="12" rx="3" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
-      <path d="M20 9 Q24 4 27 9" fill="white" stroke="#ddd" stroke-width="0.8"/>
-      <path d="M27 9 Q30 4 33 9" fill="white" stroke="#ddd" stroke-width="0.8"/>
-      <rect x="17" y="13" width="22" height="3" rx="1.5" fill="#FF6B35" opacity="0.85"/>
-      <circle cx="28" cy="27" r="11" fill="#FDDBB4" stroke="#F0A868" stroke-width="1"/>
-      <ellipse cx="23.5" cy="26" rx="2" ry="2.3" fill="#3D2314"/>
-      <ellipse cx="32.5" cy="26" rx="2" ry="2.3" fill="#3D2314"/>
-      <circle cx="24.2" cy="25.2" r="0.7" fill="white"/>
-      <circle cx="33.2" cy="25.2" r="0.7" fill="white"/>
-      <ellipse cx="21" cy="30" rx="3" ry="1.8" fill="#FFB0A0" opacity="0.5"/>
-      <ellipse cx="35" cy="30" rx="3" ry="1.8" fill="#FFB0A0" opacity="0.5"/>
-      <path d="M24 32 Q28 36 32 32" stroke="#CC6644" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-      <path d="M14 40 Q14 36 28 36 Q42 36 42 40 L44 58 Q44 62 28 62 Q12 62 12 58 Z" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
-      <path d="M18 40 Q23 37 28 38 Q33 37 38 40" fill="none" stroke="#FF6B35" stroke-width="1" stroke-linecap="round"/>
-      <path d="M14 43 Q4 47 5 56" stroke="#FDDBB4" stroke-width="6" stroke-linecap="round" fill="none"/>
-      <path d="M42 43 Q52 47 51 56" stroke="#FDDBB4" stroke-width="6" stroke-linecap="round" fill="none"/>
-    </svg>
-  </div>
+  <div class="footer-chef"><img src="https://hercules-cdn.com/file_7jUG9Z9D4DbUYsaNoJq6E22J" alt="Chef" /></div>
   <div class="footer-name">Sofía</div>
   <div class="footer-sub">¡Cumple 5 con sabor!</div>
   <div class="footer-date">Sábado, 3 de Octubre 2026</div>
   <div class="footer-quote">"La cocina es arte, y este día es nuestra obra maestra" 🍰</div>
-  <div style="max-width:300px;margin:0 auto">
-    <svg width="100%" height="12" viewBox="0 0 420 12" preserveAspectRatio="none" style="display:block">
-      <rect x="0" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="16" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="32" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="48" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="64" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="80" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="96" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="112" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="128" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="144" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="160" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="176" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="192" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="208" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="224" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="240" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="256" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="272" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="288" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="304" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="320" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-      <rect x="336" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
-      <rect x="352" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
-      <rect x="368" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
-      <rect x="384" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
-      <rect x="400" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
-    </svg>
-  </div>
   <div class="footer-food">
     <span style="animation-delay:0s">🍕</span>
     <span style="animation-delay:.25s">🍰</span>
@@ -813,135 +442,173 @@
 </footer>
 
 <script>
-  /* ── CONFIG ── */
-  const CFG = {
-    name: "Sofía", age: 5,
-    eventDate: "2026-10-03T15:00:00",
-    phone: "1234567890",
-    rsvpTo: "Mamá",
-    dateDisplay: "Sábado, 3 de Octubre 2026",
-    time: "3:00 PM", venue: "Cocina de las Delicias",
-    gallery: [
-      { src: "https://images.unsplash.com/photo-1631224096135-cf6d76693bf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡La Mini Chef en acción!" },
-      { src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Cupcakes de colores" },
-      { src: "https://images.unsplash.com/photo-1611692276815-cd6efa0b2dac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Helados y más!" },
-      { src: "https://images.unsplash.com/photo-1680580735621-4371027734eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Postres mágicos" },
-      { src: "https://images.unsplash.com/photo-1474625342403-1b8a2c0f7215?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Que rico!" },
-      { src: "https://images.unsplash.com/photo-1699206332834-8fa9f45a906c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Mini chef lista" },
-    ]
-  };
+/* ── CONFIG ── */
+const CFG = {
+  name: "Sofía", age: 5,
+  eventDate: "2026-10-03T15:00:00",
+  phone: "1234567890",
+  rsvpTo: "Mamá",
+  dateDisplay: "Sábado, 3 de Octubre 2026",
+  time: "3:00 PM",
+  venue: "Cocina de las Delicias",
+  chefImg: "https://hercules-cdn.com/file_7jUG9Z9D4DbUYsaNoJq6E22J",
+  gallery: [
+    { src: "https://images.unsplash.com/photo-1631224096135-cf6d76693bf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡La Mini Chef en acción!" },
+    { src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Cupcakes de colores" },
+    { src: "https://images.unsplash.com/photo-1611692276815-cd6efa0b2dac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Helados y más!" },
+    { src: "https://images.unsplash.com/photo-1680580735621-4371027734eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Postres mágicos" },
+    { src: "https://images.unsplash.com/photo-1474625342403-1b8a2c0f7215?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Qué rico!" },
+  ]
+};
 
-  /* ── BG FOOD ── */
-  const bgFood = document.getElementById('bg-food');
-  ["🍕","🧁","🍳","🥐","🍩","🥧","🍫","🍪","🥞","🍦"].forEach((e, i) => {
-    const d = document.createElement('div');
-    d.className = 'bg-food';
-    d.textContent = e;
-    d.style.left = `${(i*11)%90}%`;
-    d.style.top = `${(i*13)%85}%`;
-    d.style.animationDelay = `${i*0.35}s`;
-    d.style.animationDuration = `${4+i*0.6}s`;
-    bgFood.appendChild(d);
+/* ── COOKIE SHAPE PATH (objectBoundingBox) ── */
+const COOKIE_PATH = "M0.5,0.04 C0.58,0.02 0.66,0.00 0.72,0.05 C0.79,0.10 0.78,0.05 0.84,0.08 C0.92,0.12 0.96,0.20 0.97,0.28 C0.99,0.34 0.96,0.34 0.97,0.40 C0.99,0.48 1.00,0.56 0.97,0.63 C0.94,0.70 0.96,0.70 0.94,0.76 C0.90,0.84 0.84,0.90 0.76,0.93 C0.70,0.96 0.70,0.94 0.64,0.96 C0.57,0.99 0.50,1.00 0.43,0.98 C0.36,0.96 0.36,0.98 0.30,0.95 C0.22,0.91 0.16,0.85 0.11,0.78 C0.07,0.72 0.09,0.70 0.07,0.64 C0.03,0.56 0.01,0.48 0.02,0.40 C0.03,0.33 0.01,0.33 0.03,0.27 C0.07,0.18 0.13,0.11 0.21,0.07 C0.27,0.04 0.27,0.07 0.34,0.05 C0.39,0.03 0.44,0.02 0.5,0.04Z";
+const CHIP_POSITIONS = [
+  {cx:"18%",cy:"28%"},{cx:"76%",cy:"18%"},{cx:"82%",cy:"62%"},
+  {cx:"22%",cy:"74%"},{cx:"50%",cy:"88%"},{cx:"88%",cy:"38%"}
+];
+
+let cookieIdCounter = 0;
+function buildCookie(container, src, alt) {
+  const size = parseInt(container.style.width);
+  const uid = "ck" + (++cookieIdCounter);
+  container.innerHTML = `
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <clipPath id="${uid}" clipPathUnits="objectBoundingBox">
+          <path d="${COOKIE_PATH}"/>
+        </clipPath>
+      </defs>
+    </svg>
+    <div style="position:absolute;inset:0;clip-path:url(#${uid});background:linear-gradient(135deg,#FFD93D 0%,#FF8E53 50%,#FFD93D 100%);"></div>
+    <div style="position:absolute;top:7px;left:7px;width:${size-14}px;height:${size-14}px;clip-path:url(#${uid});overflow:hidden;">
+      <img src="${src}" alt="${alt}" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:opacity .3s"/>
+    </div>
+    ${CHIP_POSITIONS.map(p => `<div style="position:absolute;width:${size*0.07}px;height:${size*0.07}px;border-radius:50%;background:#8B4513;top:${p.cy};left:${p.cx};opacity:.55;pointer-events:none;"></div>`).join('')}
+  `;
+}
+
+/* ── RIBBON ── */
+const ribbonColors = ["#6BCB77","#4D96FF","#FF6BDD","#FFD93D","#FF6B35"];
+document.querySelectorAll('[id^="ribbon"]').forEach(el => {
+  for(let i=0;i<30;i++){
+    const s = document.createElement('span');
+    s.style.background = ribbonColors[i%5];
+    el.appendChild(s);
+  }
+});
+
+/* ── BG FOOD ── */
+const bgFood = document.getElementById('bg-food');
+["🍕","🧁","🍳","🥐","🍩","🥧","🍫","🍪","🥞","🍦"].forEach((e,i) => {
+  const d = document.createElement('div');
+  d.className = 'bg-food';
+  d.textContent = e;
+  d.style.left = `${(i*11)%90}%`;
+  d.style.top = `${(i*13)%85}%`;
+  d.style.animationDelay = `${i*0.35}s`;
+  d.style.animationDuration = `${4+i*0.6}s`;
+  bgFood.appendChild(d);
+});
+
+/* ── CONFETTI ── */
+const confettiColors = ["#FF6B6B","#FF8E53","#FFD93D","#6BCB77","#4D96FF","#FF6BDD"];
+const cc = document.getElementById('confetti-container');
+for(let i=0;i<26;i++){
+  const d = document.createElement('div');
+  d.className = 'confetti-dot';
+  d.style.width = (10+Math.random()*14)+'px';
+  d.style.height = (10+Math.random()*14)+'px';
+  d.style.borderRadius = Math.random()>.5?'50%':'3px';
+  d.style.left = Math.random()*100+'%';
+  d.style.top = Math.random()*100+'%';
+  d.style.background = confettiColors[Math.floor(Math.random()*6)];
+  d.style.opacity = 0.35+Math.random()*0.4;
+  d.style.animationDuration = (3+Math.random()*4)+'s';
+  d.style.animationDelay = Math.random()*3+'s';
+  cc.appendChild(d);
+}
+
+/* ── INIT COOKIES ── */
+const mainPhoto = CFG.gallery[0].src;
+buildCookie(document.getElementById('splash-cookie'), mainPhoto, CFG.name);
+buildCookie(document.getElementById('hero-cookie'), mainPhoto, CFG.name);
+
+/* ── SPLASH ── */
+let splashTimeout = setTimeout(closeSplash, 4500);
+function closeSplash() {
+  clearTimeout(splashTimeout);
+  const s = document.getElementById('splash');
+  s.classList.add('hiding');
+  setTimeout(() => {
+    s.style.display = 'none';
+    document.getElementById('main-content').classList.add('visible');
+    document.getElementById('footer').style.display = 'block';
+  }, 600);
+}
+
+/* ── COUNTDOWN ── */
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
+  document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+  document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
+}
+tick(); setInterval(tick,1000);
+
+/* ── GALLERY ── */
+let gIdx = 0, gBusy = false;
+function renderGallery(){
+  const g = CFG.gallery[gIdx];
+  buildCookie(document.getElementById('gallery-cookie'), g.src, g.cap);
+  document.getElementById('gallery-cap').textContent = g.cap;
+  document.getElementById('gallery-counter').textContent = pad(gIdx+1)+' / '+pad(CFG.gallery.length);
+  const dots = document.getElementById('gallery-dots');
+  dots.innerHTML='';
+  CFG.gallery.forEach((_,i)=>{
+    const b = document.createElement('button');
+    b.className = 'gallery-dot'+(i===gIdx?' active':'');
+    b.onclick = ()=>{ if(!gBusy){gIdx=i;renderGallery();} };
+    dots.appendChild(b);
   });
-
-  /* ── CONFETTI ── */
-  const confettiColors = ["#FF6B6B","#FF8E53","#FFD93D","#6BCB77","#4D96FF","#FF6BDD"];
-  const cc = document.getElementById('confetti-container');
-  for (let i = 0; i < 26; i++) {
-    const d = document.createElement('div');
-    d.className = 'confetti-dot';
-    d.style.width = (10 + Math.random()*14) + 'px';
-    d.style.height = (10 + Math.random()*14) + 'px';
-    d.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
-    d.style.left = Math.random()*100 + '%';
-    d.style.top = Math.random()*100 + '%';
-    d.style.background = confettiColors[Math.floor(Math.random()*6)];
-    d.style.opacity = 0.35 + Math.random()*0.4;
-    d.style.animationDuration = (3 + Math.random()*4) + 's';
-    d.style.animationDelay = Math.random()*3 + 's';
-    cc.appendChild(d);
-  }
-
-  /* ── SPLASH ── */
-  let splashTimeout = setTimeout(closeSplash, 4500);
-  function closeSplash() {
-    clearTimeout(splashTimeout);
-    const s = document.getElementById('splash');
-    s.classList.add('hiding');
-    setTimeout(() => {
-      s.style.display = 'none';
-      document.getElementById('main-content').classList.add('visible');
-      document.getElementById('footer').style.display = 'block';
-    }, 600);
-  }
-
-  /* ── COUNTDOWN ── */
-  function pad(n) { return String(n).padStart(2,'0'); }
-  function tick() {
-    const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
-    document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
-    document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
-    document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
-    document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
-  }
-  tick(); setInterval(tick, 1000);
-
-  /* ── GALLERY ── */
-  let gIdx = 0, gBusy = false;
-  const gImg = document.getElementById('gallery-img');
-  const gCap = document.getElementById('gallery-cap');
-  const gCnt = document.getElementById('gallery-counter');
-  const gDots = document.getElementById('gallery-dots');
-  const gWrap = document.getElementById('gallery-wrap');
-
-  function renderGallery() {
-    const g = CFG.gallery[gIdx];
-    gImg.src = g.src; gImg.alt = g.cap;
-    gCap.textContent = g.cap;
-    gCnt.textContent = String(gIdx+1).padStart(2,'0') + ' / ' + String(CFG.gallery.length).padStart(2,'0');
-    gDots.innerHTML = '';
-    CFG.gallery.forEach((_,i) => {
-      const b = document.createElement('button');
-      b.className = 'gallery-dot' + (i===gIdx?' active':'');
-      b.onclick = () => { if(!gBusy){gIdx=i;renderGallery();} };
-      gDots.appendChild(b);
-    });
-  }
-  function galleryGo(dir) {
-    if(gBusy) return; gBusy=true;
-    gIdx = ((gIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
-    renderGallery();
-    setTimeout(()=>gBusy=false,350);
-  }
-  // Touch swipe
-  let touchX = 0;
-  gWrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
-  gWrap.addEventListener('touchend', e => {
-    const dx = touchX - e.changedTouches[0].clientX;
-    if(Math.abs(dx)>40) galleryGo(dx>0?1:-1);
-  });
+}
+function galleryGo(dir){
+  if(gBusy) return; gBusy=true;
+  gIdx = ((gIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
   renderGallery();
+  setTimeout(()=>gBusy=false,350);
+}
+let touchX=0;
+document.getElementById('gallery-wrap').addEventListener('touchstart',e=>{ touchX=e.touches[0].clientX; });
+document.getElementById('gallery-wrap').addEventListener('touchend',e=>{
+  const dx = touchX-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>40) galleryGo(dx>0?1:-1);
+});
+renderGallery();
 
-  /* ── RSVP ── */
-  function submitRsvp(e) {
-    e.preventDefault();
-    const name = document.getElementById('rsvp-name').value;
-    const guests = document.getElementById('rsvp-guests').value;
-    const msg = document.getElementById('rsvp-msg').value;
-    if(!name.trim()) return;
-    let text = `¡Hola! Confirmo mi asistencia a la Fiesta de Cocina de *${CFG.name}* 🍳\n\n`;
-    text += `👤 *Nombre:* ${name}\n`;
-    if(guests) text += `👥 *Invitados:* ${guests}\n`;
-    if(msg) text += `💬 *Mensaje:* ${msg}\n`;
-    text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}`;
-    text += `\n📍 ${CFG.venue}`;
-    const url = `https://wa.me/${CFG.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
-    document.getElementById('rsvp-form').style.display = 'none';
-    document.getElementById('rsvp-thanks').style.display = 'flex';
-    document.getElementById('rsvp-thanks-name').textContent = `¡Gracias, ${name}!`;
-    document.querySelector('#rsvp-thanks .wa-btn').href = url;
-    window.open(url,'_blank');
-  }
+/* ── RSVP ── */
+function submitRsvp(e){
+  e.preventDefault();
+  const name = document.getElementById('rsvp-name').value;
+  const guests = document.getElementById('rsvp-guests').value;
+  const msg = document.getElementById('rsvp-msg').value;
+  if(!name.trim()) return;
+  let text = `¡Hola! Confirmo mi asistencia a la Fiesta de Cocina de *${CFG.name}* 🍳\n\n`;
+  text += `👤 *Nombre:* ${name}\n`;
+  if(guests) text += `👥 *Invitados:* ${guests}\n`;
+  if(msg) text += `💬 *Mensaje:* ${msg}\n`;
+  text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}`;
+  text += `\n📍 ${CFG.venue}`;
+  const url = `https://wa.me/${CFG.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+  document.getElementById('rsvp-form').style.display='none';
+  const thanks = document.getElementById('rsvp-thanks');
+  thanks.style.display='flex';
+  document.getElementById('rsvp-thanks-name').textContent=`¡Gracias, ${name}!`;
+  document.getElementById('wa-link').href=url;
+  window.open(url,'_blank');
+}
 </script>
 </body>
 </html>
