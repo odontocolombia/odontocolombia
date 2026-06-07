@@ -9,30 +9,30 @@
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1E 100%);min-height:100vh;font-family:'Exo 2',sans-serif;color:#fff;overflow-x:hidden}
+body{
+  background:linear-gradient(180deg,#0a0012 0%,#100020 25%,#15002e 50%,#0a0018 100%);
+  min-height:100vh;font-family:'Exo 2',sans-serif;color:#fff;overflow-x:hidden
+}
 
 /* ── SPLASH ── */
 #splash{
   position:fixed;inset:0;z-index:100;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#000510 0%,#001525 30%,#002035 60%,#000D1E 100%);
-  cursor:pointer;overflow:hidden;
-  transition:opacity .7s ease;
+  background:linear-gradient(180deg,#0a0012 0%,#120020 30%,#1a0035 60%,#0a0018 100%);
+  cursor:pointer;overflow:hidden;transition:opacity .7s ease;
 }
 #splash.hidden{opacity:0;pointer-events:none}
 
-/* ── SPLASH WATER LINES ── */
 .water-line{
   position:absolute;width:100%;height:2px;
   animation:water-move ease-in-out infinite alternate;
 }
 @keyframes water-move{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
 
-/* ── SONAR RINGS ── */
 .sonar-ring{
   position:absolute;border-radius:50%;
   top:50%;left:50%;
-  border:1px solid rgba(0,220,200,.06);
+  border:1px solid rgba(180,80,255,.07);
   animation:pulse-ring ease-in-out infinite;
 }
 @keyframes pulse-ring{
@@ -43,7 +43,7 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 /* ── BUBBLES ── */
 .bubble{
   position:fixed;border-radius:50%;
-  border:1px solid rgba(0,255,255,.18);
+  border:1px solid rgba(200,100,255,.2);
   pointer-events:none;z-index:1;
   animation:bubble-rise linear infinite;
 }
@@ -68,25 +68,23 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
   opacity:.18;pointer-events:none;z-index:2;
 }
 .depth-mark{display:flex;align-items:center;gap:4px}
-.depth-mark::before{content:'';display:block;width:8px;height:1px;background:#22d3ee}
-.depth-mark span{font-size:.28rem;letter-spacing:.1em;color:rgba(0,220,200,.9)}
+.depth-mark::before{content:'';display:block;width:8px;height:1px;background:#c084fc}
+.depth-mark span{font-size:.28rem;letter-spacing:.1em;color:rgba(192,132,252,.9)}
 
 /* ── AMBIENT GLOW ── */
 #ambient{
   position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(0,120,100,.12),transparent);
+  background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(120,0,180,.14),transparent);
 }
 
 /* ── SPLASH CONTENT ── */
 .splash-inner{
-  position:relative;z-index:10;
-  text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  padding:20px;
+  position:relative;z-index:10;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;
 }
 .splash-label{
   font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;
-  color:rgba(0,220,200,.8);font-weight:300;
+  color:rgba(200,140,255,.85);font-weight:300;
   animation:fade-up .7s .3s both;
 }
 .splash-sub-wrap{animation:scale-in .6s .5s both}
@@ -94,13 +92,12 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 .splash-text-wrap{animation:fade-up .6s .9s both;display:flex;flex-direction:column;align-items:center;gap:6px}
 .splash-tap{
   font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;
-  color:rgba(0,220,200,.7);
-  animation:blink 2s infinite;
+  color:rgba(200,140,255,.7);animation:blink 2s infinite;
 }
 .sonar-ping{
   position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
   width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(34,211,238,.3);
+  border:1px solid rgba(192,132,252,.35);
   animation:sonar-out 2s ease-out infinite;
 }
 @keyframes sonar-out{from{transform:translateX(-50%) scale(1);opacity:.6}to{transform:translateX(-50%) scale(2.5);opacity:0}}
@@ -112,47 +109,45 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 .porthole-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center}
 .porthole-outer{
   position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from 15deg,#0a3040,#1a5060,#0d4050,#1a6070,#0a3040,#1a5060,#0a3040);
+  background:conic-gradient(from 15deg,#2a0a40,#4a1a70,#380d55,#5a1a80,#2a0a40,#4a1a70,#2a0a40);
 }
 .porthole-bezel{
   position:absolute;border-radius:50%;
-  background:linear-gradient(135deg,rgba(0,80,100,.9),rgba(0,30,50,.95),rgba(0,60,80,.9));
-  box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 -1px 3px rgba(0,220,200,.15),0 0 0 1px rgba(0,180,160,.4);
+  background:linear-gradient(135deg,rgba(80,20,120,.9),rgba(30,5,60,.95),rgba(60,10,100,.9));
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 -1px 3px rgba(180,80,255,.15),0 0 0 1px rgba(140,60,200,.4);
 }
 .porthole-glass{
   position:absolute;border-radius:50%;overflow:hidden;
-  box-shadow:inset 0 4px 16px rgba(0,0,0,.8),inset 0 0 30px rgba(0,30,60,.6);
+  box-shadow:inset 0 4px 16px rgba(0,0,0,.8),inset 0 0 30px rgba(60,0,80,.6);
 }
 .porthole-glass img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .porthole-glare{
   position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse 60% 45% at 38% 28%,rgba(255,255,255,.12),transparent 70%);
+  background:radial-gradient(ellipse 60% 45% at 38% 28%,rgba(255,200,255,.1),transparent 70%);
 }
 .porthole-tint{
   position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,20,40,.55) 100%);
+  background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(30,0,50,.55) 100%);
 }
 .porthole-shine{
   position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:conic-gradient(from 0deg,transparent 30%,rgba(0,220,200,.08) 50%,transparent 70%);
+  background:conic-gradient(from 0deg,transparent 30%,rgba(180,80,255,.1) 50%,transparent 70%);
   animation:spin 8s linear infinite;
 }
 .porthole-bolt{
   position:absolute;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,rgba(0,160,140,.8),rgba(0,50,70,.9));
-  border:1.5px solid rgba(0,220,200,.55);
-  box-shadow:0 0 6px rgba(0,220,200,.35),inset 0 1px 2px rgba(255,255,255,.1);
+  background:radial-gradient(circle at 35% 35%,rgba(160,60,220,.8),rgba(50,10,80,.9));
+  border:1.5px solid rgba(180,80,255,.6);
+  box-shadow:0 0 6px rgba(180,80,255,.4),inset 0 1px 2px rgba(255,200,255,.1);
   top:50%;left:50%;
   display:flex;align-items:center;justify-content:center;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── MAIN CONTENT ── */
+/* ── MAIN ── */
 #main{
-  position:relative;z-index:10;
-  max-width:460px;margin:0 auto;
-  padding:32px 16px 64px;
-  display:flex;flex-direction:column;gap:22px;
+  position:relative;z-index:10;max-width:460px;margin:0 auto;
+  padding:32px 16px 64px;display:flex;flex-direction:column;gap:22px;
   opacity:0;transition:opacity .6s ease;
 }
 #main.visible{opacity:1}
@@ -161,14 +156,14 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 /* ── SUB CARD ── */
 .sub-card{
   position:relative;overflow:hidden;
-  background:linear-gradient(160deg,rgba(0,30,50,.97) 0%,rgba(0,15,35,.99) 100%);
-  border:1.5px solid rgba(0,220,200,.25);border-radius:20px;
-  box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 60px rgba(0,200,180,.08),inset 0 1px 0 rgba(0,220,200,.15);
+  background:linear-gradient(160deg,rgba(30,5,55,.97) 0%,rgba(15,2,35,.99) 100%);
+  border:1.5px solid rgba(180,80,255,.25);border-radius:20px;
+  box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 60px rgba(140,0,200,.08),inset 0 1px 0 rgba(180,80,255,.15);
   animation:card-in .7s both;
 }
 @keyframes card-in{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-.card-top-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(0,220,200,.6),transparent)}
-.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(0,180,160,.3);border:1px solid rgba(0,220,200,.3)}
+.card-top-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(180,80,255,.6),transparent)}
+.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(140,60,200,.3);border:1px solid rgba(180,80,255,.35)}
 .screw.tl{top:12px;left:12px}.screw.tr{top:12px;right:12px}
 .screw.bl{bottom:12px;left:12px}.screw.br{bottom:12px;right:12px}
 .card-body{padding:24px}
@@ -176,214 +171,194 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 /* ── EYEBROW ── */
 .eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
 .eyebrow-line{height:1px;width:32px;flex-shrink:0}
-.eyebrow-text{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,220,200,.8);font-weight:600;white-space:nowrap}
+.eyebrow-text{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,140,255,.85);font-weight:600;white-space:nowrap}
 
 /* ── SECTION TITLE ── */
 .section-title{
   font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(1.4rem,5vw,2rem);
-  color:#00FFDC;
-  text-shadow:0 0 30px rgba(0,255,220,.5),0 0 60px rgba(0,255,220,.2);
+  font-size:clamp(1.4rem,5vw,2rem);color:#e879f9;
+  text-shadow:0 0 30px rgba(232,121,249,.5),0 0 60px rgba(232,121,249,.2);
   letter-spacing:.04em;text-align:center;margin-bottom:1.5rem;
 }
 
 /* ── HERO CARD ── */
 .hero-card{
   position:relative;overflow:hidden;
-  background:linear-gradient(170deg,rgba(0,20,40,.98) 0%,rgba(0,10,25,.99) 100%);
-  border:1.5px solid rgba(0,220,200,.3);border-radius:24px;
-  box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(0,200,180,.1);
+  background:linear-gradient(170deg,rgba(20,5,40,.98) 0%,rgba(10,2,25,.99) 100%);
+  border:1.5px solid rgba(180,80,255,.32);border-radius:24px;
+  box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(140,0,200,.12);
   animation:card-in .8s both;
 }
-.hull-stripe{height:10px;background:repeating-linear-gradient(90deg,rgba(0,180,160,.6) 0,rgba(0,180,160,.6) 18px,rgba(0,40,60,.4) 18px,rgba(0,40,60,.4) 36px)}
-.hull-line{height:4px;background:linear-gradient(90deg,rgba(0,100,120,.6),rgba(0,220,200,.8),rgba(0,100,120,.6))}
+.hull-stripe{height:10px;background:repeating-linear-gradient(90deg,rgba(140,60,200,.6) 0,rgba(140,60,200,.6) 18px,rgba(40,10,70,.4) 18px,rgba(40,10,70,.4) 36px)}
+.hull-line{height:4px;background:linear-gradient(90deg,rgba(100,20,160,.6),rgba(200,80,255,.85),rgba(100,20,160,.6))}
 .hero-body{padding:28px 24px;text-align:center;position:relative;overflow:hidden}
 .hero-sonar{position:absolute;inset:0;pointer-events:none}
 .hero-sonar-ring{
-  position:absolute;border-radius:50%;
-  top:50%;left:50%;
-  border:1px solid rgba(0,220,200,.04);
+  position:absolute;border-radius:50%;top:50%;left:50%;
+  border:1px solid rgba(180,80,255,.04);
   animation:pulse-ring ease-in-out infinite;
 }
 .hero-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
 @keyframes float{0%,100%{transform:translateY(-4px)}50%{transform:translateY(4px)}}
-.mission-label{
-  font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;
-  color:rgba(0,220,200,.75);font-weight:300;margin-bottom:14px;
-}
+.mission-label{font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(200,140,255,.75);font-weight:300;margin-bottom:14px}
 .hero-name{
   font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(2.4rem,12vw,4.5rem);
-  color:#00FFDC;
-  text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.25);
+  font-size:clamp(2.4rem,12vw,4.5rem);color:#e879f9;
+  text-shadow:0 0 40px rgba(232,121,249,.7),0 0 80px rgba(232,121,249,.25);
   line-height:1;display:block;margin-bottom:6px;
 }
 .hero-badge-wrap{display:flex;justify-content:center;margin-bottom:6px}
 .hero-badge{
-  background:linear-gradient(90deg,rgba(0,60,80,.5),rgba(0,160,140,.4),rgba(0,60,80,.5));
-  border:1px solid rgba(0,220,200,.35);border-radius:3px;
-  padding:3px 20px;
-  font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;
-  color:rgba(0,220,200,.9);font-weight:600;
+  background:linear-gradient(90deg,rgba(60,10,100,.5),rgba(160,60,220,.4),rgba(60,10,100,.5));
+  border:1px solid rgba(180,80,255,.38);border-radius:3px;
+  padding:3px 20px;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(220,160,255,.95);font-weight:600;
 }
 .hero-age{
   font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(4rem,18vw,7rem);
-  color:#00FFDC;
-  text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);
+  font-size:clamp(4rem,18vw,7rem);color:#e879f9;
+  text-shadow:0 0 50px rgba(232,121,249,.8),0 0 100px rgba(232,121,249,.3);
   line-height:1;display:block;
 }
 
 /* ── INFO BLOCK ── */
-.info-block{margin:0 16px 16px;border-radius:12px;overflow:hidden;background:rgba(0,15,30,.95);border:1px solid rgba(0,220,200,.2)}
+.info-block{margin:0 16px 16px;border-radius:12px;overflow:hidden;background:rgba(15,2,35,.95);border:1px solid rgba(180,80,255,.2)}
 .info-header{
   padding:8px;text-align:center;
-  background:linear-gradient(90deg,transparent,rgba(0,80,100,.3),transparent);
-  border-bottom:1px solid rgba(0,220,200,.15);
-  font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,200,180,.6);
+  background:linear-gradient(90deg,transparent,rgba(100,20,160,.3),transparent);
+  border-bottom:1px solid rgba(180,80,255,.15);
+  font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,140,255,.65);
 }
 .info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;gap:0}
 .info-col{text-align:center}
-.info-col.border-r{border-right:1px dashed rgba(0,220,200,.2);padding-right:8px}
-.info-col.border-l{border-left:1px dashed rgba(0,220,200,.2);padding-left:8px}
-.info-lbl{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,220,200,.7);margin-bottom:3px}
-.info-sub{font-size:.42rem;letter-spacing:.12em;color:rgba(0,180,160,.6);margin-bottom:2px}
-.info-day{font-family:'Cinzel Decorative',cursive;font-size:2.6rem;color:#00FFDC;line-height:1;text-shadow:0 0 20px rgba(0,255,220,.5)}
-.info-year{font-size:.38rem;color:rgba(0,180,160,.5);letter-spacing:.1em}
-.info-time{font-family:'Cinzel Decorative',cursive;font-size:1.3rem;color:#00FFDC;line-height:1;text-shadow:0 0 15px rgba(0,255,220,.5)}
+.info-col.border-r{border-right:1px dashed rgba(180,80,255,.2);padding-right:8px}
+.info-col.border-l{border-left:1px dashed rgba(180,80,255,.2);padding-left:8px}
+.info-lbl{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,140,255,.75);margin-bottom:3px}
+.info-sub{font-size:.42rem;letter-spacing:.12em;color:rgba(160,100,220,.65);margin-bottom:2px}
+.info-day{font-family:'Cinzel Decorative',cursive;font-size:2.6rem;color:#e879f9;line-height:1;text-shadow:0 0 20px rgba(232,121,249,.5)}
+.info-year{font-size:.38rem;color:rgba(160,100,220,.55);letter-spacing:.1em}
+.info-time{font-family:'Cinzel Decorative',cursive;font-size:1.3rem;color:#e879f9;line-height:1;text-shadow:0 0 15px rgba(232,121,249,.5)}
 .sonar-spin{width:24px;height:24px;margin:8px auto 0;animation:spin 4s linear infinite}
-.info-venue{font-family:'Cinzel',serif;font-size:.82rem;color:#00FFDC;margin-bottom:4px}
-.info-addr{font-size:.36rem;color:rgba(0,180,160,.55);line-height:1.6}
+.info-venue{font-family:'Cinzel',serif;font-size:.82rem;color:#e879f9;margin-bottom:4px}
+.info-addr{font-size:.36rem;color:rgba(160,100,220,.6);line-height:1.6}
 .rsvp-strip{
   padding:12px;text-align:center;
-  background:linear-gradient(135deg,rgba(0,60,80,.6),rgba(0,40,60,.7));
-  border-top:1px solid rgba(0,220,200,.2);
+  background:linear-gradient(135deg,rgba(60,10,100,.6),rgba(40,5,80,.7));
+  border-top:1px solid rgba(180,80,255,.2);
 }
-.rsvp-strip-lbl{font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(0,200,180,.65)}
-.rsvp-strip-phone{font-family:'Cinzel Decorative',cursive;font-size:1.4rem;color:#00FFDC;text-shadow:0 0 20px rgba(0,255,220,.5);margin-top:3px}
+.rsvp-strip-lbl{font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(200,140,255,.7)}
+.rsvp-strip-phone{font-family:'Cinzel Decorative',cursive;font-size:1.4rem;color:#e879f9;text-shadow:0 0 20px rgba(232,121,249,.5);margin-top:3px}
 
 /* ── COUNTDOWN ── */
 .countdown-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 .cd-box{
   text-align:center;min-width:68px;padding:16px;border-radius:16px;position:relative;
-  background:linear-gradient(135deg,rgba(0,60,80,.8),rgba(0,30,50,.9));
-  border:1.5px solid rgba(0,220,200,.3);
-  box-shadow:0 0 20px rgba(0,200,180,.15),inset 0 1px 0 rgba(0,220,200,.1);
+  background:linear-gradient(135deg,rgba(70,15,120,.8),rgba(35,5,70,.9));
+  border:1.5px solid rgba(180,80,255,.3);
+  box-shadow:0 0 20px rgba(140,0,200,.15),inset 0 1px 0 rgba(180,80,255,.1);
   transition:transform .2s;
 }
 .cd-box:hover{transform:scale(1.06)}
-.cd-val{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 20px rgba(0,255,220,.7);line-height:1}
-.cd-lbl{font-size:.4rem;letter-spacing:.25em;color:rgba(0,220,200,.7);margin-top:6px;text-transform:uppercase}
+.cd-val{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 20px rgba(232,121,249,.7);line-height:1}
+.cd-lbl{font-size:.4rem;letter-spacing:.25em;color:rgba(200,140,255,.75);margin-top:6px;text-transform:uppercase}
 .cd-date-row{
   display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
-  font-size:.42rem;letter-spacing:.18em;color:rgba(0,200,180,.6);text-transform:uppercase;
+  font-size:.42rem;letter-spacing:.18em;color:rgba(180,120,255,.65);text-transform:uppercase;
 }
 .cd-line{height:1px;width:36px;flex-shrink:0}
-.cd-line-l{background:linear-gradient(to right,transparent,rgba(0,220,200,.4))}
-.cd-line-r{background:linear-gradient(to left,transparent,rgba(0,220,200,.4))}
+.cd-line-l{background:linear-gradient(to right,transparent,rgba(180,80,255,.45))}
+.cd-line-r{background:linear-gradient(to left,transparent,rgba(180,80,255,.45))}
 
 /* ── PROGRAM ── */
-.program-list{position:relative;padding-left:0}
-.program-timeline{position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(0,220,200,.5),rgba(0,220,200,.05))}
+.program-list{position:relative}
+.program-timeline{position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(180,80,255,.5),rgba(180,80,255,.05))}
 .program-item{
   display:flex;gap:16px;align-items:flex-start;
-  padding:14px 0;
-  border-bottom:1px solid rgba(0,220,200,.1);
+  padding:14px 0;border-bottom:1px solid rgba(180,80,255,.1);
 }
 .program-item:last-child{border-bottom:none}
 .prog-dot-col{flex-shrink:0;width:38px;display:flex;justify-content:center;margin-top:4px}
-.prog-dot{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,#00FFDC,rgba(0,180,160,.5));box-shadow:0 0 10px rgba(0,255,220,.7)}
-.prog-time{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:#00FFDC;font-weight:700}
-.prog-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(200,255,250,.9);margin-top:2px}
-.prog-desc{font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,200,180,.6);margin-top:3px}
+.prog-dot{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,#e879f9,rgba(160,60,220,.5));box-shadow:0 0 10px rgba(232,121,249,.7)}
+.prog-time{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:#e879f9;font-weight:700}
+.prog-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(240,200,255,.9);margin-top:2px}
+.prog-desc{font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,120,255,.65);margin-top:3px}
 
 /* ── GALLERY ── */
 .gallery-porthole-wrap{position:relative;width:260px;height:260px;margin:0 auto 20px}
 .gallery-porthole{
   position:absolute;inset:0;border-radius:50%;overflow:hidden;
-  background:rgba(0,10,20,.9);
-  border:8px solid rgba(0,60,80,.8);
-  box-shadow:0 0 0 2px rgba(0,220,200,.3),0 0 40px rgba(0,200,180,.2),inset 0 0 30px rgba(0,0,0,.6);
+  background:rgba(15,2,30,.9);
+  border:8px solid rgba(60,10,100,.85);
+  box-shadow:0 0 0 2px rgba(180,80,255,.3),0 0 40px rgba(140,0,200,.22),inset 0 0 30px rgba(0,0,0,.6);
 }
-.gallery-porthole img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  transition:opacity .3s,transform .3s;
-}
-.gallery-vignette{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 60%,rgba(0,10,20,.8) 100%)}
-.gallery-glare{position:absolute;top:10%;left:12%;width:35%;height:30%;background:radial-gradient(ellipse,rgba(255,255,255,.08),transparent);pointer-events:none}
+.gallery-porthole img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.gallery-vignette{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 60%,rgba(10,0,20,.8) 100%)}
+.gallery-glare{position:absolute;top:10%;left:12%;width:35%;height:30%;background:radial-gradient(ellipse,rgba(255,200,255,.07),transparent);pointer-events:none}
 .gallery-caption{text-align:center;margin-bottom:16px}
-.gallery-cap-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(200,255,250,.85)}
-.gallery-cap-count{font-size:.38rem;letter-spacing:.25em;color:rgba(0,200,180,.5);text-transform:uppercase;margin-top:4px}
+.gallery-cap-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(240,200,255,.88)}
+.gallery-cap-count{font-size:.38rem;letter-spacing:.25em;color:rgba(180,120,255,.55);text-transform:uppercase;margin-top:4px}
 .gallery-controls{display:flex;align-items:center;justify-content:center;gap:16px}
 .gallery-btn{
   width:40px;height:40px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(0,80,90,.7),rgba(0,40,60,.9));
-  border:1.5px solid rgba(0,220,200,.35);color:#00FFDC;font-size:1.4rem;
-  box-shadow:0 4px 16px rgba(0,200,180,.2);cursor:pointer;
+  background:linear-gradient(135deg,rgba(90,20,140,.7),rgba(50,10,90,.9));
+  border:1.5px solid rgba(180,80,255,.38);color:#e879f9;font-size:1.4rem;
+  box-shadow:0 4px 16px rgba(140,0,200,.22);cursor:pointer;
   transition:transform .15s,box-shadow .15s;line-height:1;
 }
-.gallery-btn:hover{transform:scale(1.1);box-shadow:0 4px 24px rgba(0,200,180,.4)}
+.gallery-btn:hover{transform:scale(1.1);box-shadow:0 4px 24px rgba(180,80,255,.45)}
 .gallery-btn:active{transform:scale(.9)}
 .gallery-dots{display:flex;gap:7px;align-items:center}
-.gallery-dot{
-  height:8px;border-radius:4px;border:none;cursor:pointer;
-  transition:all .25s ease;background:rgba(0,220,200,.25);padding:0;
-}
+.gallery-dot{height:8px;border-radius:4px;border:none;cursor:pointer;transition:all .25s ease;background:rgba(180,80,255,.25);padding:0}
 
 /* ── RSVP ── */
-.rsvp-note{
-  text-align:center;font-size:.5rem;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(0,200,180,.65);margin-bottom:24px;
-}
+.rsvp-note{text-align:center;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(180,120,255,.7);margin-bottom:24px}
 .rsvp-form{max-width:320px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
-.rsvp-field{border-bottom:1.5px solid rgba(0,220,200,.3);padding-bottom:6px}
+.rsvp-field{border-bottom:1.5px solid rgba(180,80,255,.3);padding-bottom:6px}
 .rsvp-field input,.rsvp-field textarea{
   width:100%;background:transparent;border:none;outline:none;
-  font-family:'Cinzel',serif;font-style:italic;font-size:.95rem;color:#00FFDC;
+  font-family:'Cinzel',serif;font-style:italic;font-size:.95rem;color:#e879f9;
 }
 .rsvp-field textarea{resize:none}
-.rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:rgba(0,180,160,.45)}
+.rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:rgba(160,80,220,.4)}
 .rsvp-submit{
   width:100%;padding:13px;border-radius:999px;cursor:pointer;
-  background:linear-gradient(135deg,rgba(0,180,160,.8),rgba(0,120,130,.9));
-  border:1.5px solid rgba(0,220,200,.5);
+  background:linear-gradient(135deg,rgba(140,40,200,.8),rgba(100,20,160,.9));
+  border:1.5px solid rgba(180,80,255,.55);
   font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
-  letter-spacing:.35em;text-transform:uppercase;color:#00FFDC;
-  box-shadow:0 4px 20px rgba(0,200,180,.3);
-  transition:transform .15s,box-shadow .15s;
+  letter-spacing:.35em;text-transform:uppercase;color:#e879f9;
+  box-shadow:0 4px 20px rgba(140,0,200,.35);transition:transform .15s,box-shadow .15s;
 }
-.rsvp-submit:hover{box-shadow:0 6px 28px rgba(0,200,180,.5)}
+.rsvp-submit:hover{box-shadow:0 6px 28px rgba(180,80,255,.55)}
 .rsvp-submit:active{transform:scale(.97)}
 .rsvp-thanks{text-align:center;padding:28px 0;display:flex;flex-direction:column;align-items:center;gap:14px}
-.rsvp-thanks-title{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.6)}
-.rsvp-thanks-msg{font-family:'Exo 2',sans-serif;font-style:italic;font-size:.9rem;color:rgba(200,255,250,.7)}
+.rsvp-thanks-title{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 30px rgba(232,121,249,.6)}
+.rsvp-thanks-msg{font-family:'Exo 2',sans-serif;font-style:italic;font-size:.9rem;color:rgba(220,180,255,.75)}
 .wa-btn{
   display:inline-block;padding:12px 32px;border-radius:999px;
   background:linear-gradient(135deg,#25d366,#128c50);
   font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
   letter-spacing:.3em;text-transform:uppercase;color:#fff;text-decoration:none;
-  box-shadow:0 4px 18px rgba(37,211,102,.4);
-  transition:transform .15s,box-shadow .15s;
+  box-shadow:0 4px 18px rgba(37,211,102,.4);transition:transform .15s,box-shadow .15s;
 }
 .wa-btn:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(37,211,102,.6)}
 
 /* ── FOOTER ── */
 #site-footer{
   text-align:center;padding:48px 24px;
-  border-top:1px solid rgba(0,220,200,.15);
-  background:rgba(0,5,15,.7);
+  border-top:1px solid rgba(180,80,255,.15);
+  background:rgba(5,0,15,.75);
 }
 .footer-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
-.footer-name{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.5);margin-bottom:4px}
-.footer-cumple{font-family:'Cinzel',serif;font-style:italic;font-size:1.1rem;color:rgba(200,255,250,.7);margin-bottom:6px}
-.footer-date{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,200,180,.5);margin-bottom:16px}
-.footer-quote{font-family:'Cinzel',serif;font-style:italic;font-size:.9rem;color:rgba(0,220,200,.6);animation:blink 3s infinite}
+.footer-name{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 30px rgba(232,121,249,.5);margin-bottom:4px}
+.footer-cumple{font-family:'Cinzel',serif;font-style:italic;font-size:1.1rem;color:rgba(220,180,255,.72);margin-bottom:6px}
+.footer-date{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(180,120,255,.55);margin-bottom:16px}
+.footer-quote{font-family:'Cinzel',serif;font-style:italic;font-size:.9rem;color:rgba(180,80,255,.65);animation:blink 3s infinite}
 .sonar-footer{display:flex;justify-content:center;margin-top:24px}
-.sonar-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,220,200,.6);position:relative}
+.sonar-dot{width:8px;height:8px;border-radius:50%;background:rgba(180,80,255,.65);position:relative}
 .sonar-wave{
   position:absolute;border-radius:50%;
-  border:1px solid rgba(34,211,238,.2);
+  border:1px solid rgba(192,132,252,.22);
   top:50%;left:50%;
   animation:sonar-expand 2s ease-out infinite;
 }
@@ -400,29 +375,23 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 
 <!-- ═══ SPLASH ═══ -->
 <div id="splash" onclick="closeSplash()">
+  <div class="water-line" style="top:22%;background:linear-gradient(to right,transparent,rgba(140,60,200,.12),transparent);animation-duration:5s"></div>
+  <div class="water-line" style="top:42%;background:linear-gradient(to right,transparent,rgba(160,80,220,.14),transparent);animation-duration:4s;animation-delay:.5s"></div>
+  <div class="water-line" style="top:63%;background:linear-gradient(to right,transparent,rgba(120,40,180,.1),transparent);animation-duration:6s;animation-delay:1s"></div>
+  <div class="water-line" style="top:80%;background:linear-gradient(to right,transparent,rgba(180,100,240,.09),transparent);animation-duration:4.5s;animation-delay:.3s"></div>
 
-  <!-- Water shimmer lines -->
-  <div class="water-line" style="top:22%;background:linear-gradient(to right,transparent,rgba(0,150,180,.1),transparent);animation-duration:5s"></div>
-  <div class="water-line" style="top:42%;background:linear-gradient(to right,transparent,rgba(0,170,190,.12),transparent);animation-duration:4s;animation-delay:.5s"></div>
-  <div class="water-line" style="top:63%;background:linear-gradient(to right,transparent,rgba(0,160,200,.09),transparent);animation-duration:6s;animation-delay:1s"></div>
-  <div class="water-line" style="top:80%;background:linear-gradient(to right,transparent,rgba(0,140,180,.08),transparent);animation-duration:4.5s;animation-delay:.3s"></div>
-
-  <!-- Sonar pressure rings -->
   <div class="sonar-ring" style="width:300px;height:300px;animation-duration:3s"></div>
   <div class="sonar-ring" style="width:440px;height:440px;animation-duration:3.6s;animation-delay:.4s"></div>
   <div class="sonar-ring" style="width:580px;height:580px;animation-duration:4.2s;animation-delay:.8s"></div>
 
-  <!-- Content -->
   <div class="splash-inner">
     <div class="splash-label">◈ MISIÓN DE EXPLORACIÓN ◈</div>
-
-    <!-- Submarine -->
     <div class="splash-sub-wrap" id="splash-sub"></div>
 
-    <!-- Hero photo porthole in splash -->
+    <!-- Porthole foto en splash -->
     <div class="splash-porthole-wrap">
       <div class="porthole-wrap" style="width:140px;height:140px">
-        <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(0,220,200,.5),0 0 35px rgba(0,200,180,.55),0 0 70px rgba(0,200,180,.2)"></div>
+        <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(180,80,255,.55),0 0 35px rgba(160,60,220,.6),0 0 70px rgba(140,0,200,.22)"></div>
         <div class="porthole-bezel" style="inset:11px"></div>
         <div class="porthole-glass" style="inset:20px">
           <img id="splash-photo" src="" alt=""/>
@@ -434,45 +403,38 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
       </div>
     </div>
 
-    <!-- Name & age -->
     <div class="splash-text-wrap">
-      <span id="splash-name" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2.6rem,13vw,4.5rem);color:#00FFDC;text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.3);line-height:1"></span>
-      <div style="background:linear-gradient(90deg,rgba(0,80,100,.6),rgba(0,180,160,.4),rgba(0,80,100,.6));border:1px solid rgba(0,220,200,.35);border-radius:4px;padding:4px 24px">
-        <span style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(0,220,200,.9);font-weight:600">CUMPLE</span>
+      <span id="splash-name" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2.6rem,13vw,4.5rem);color:#e879f9;text-shadow:0 0 40px rgba(232,121,249,.7),0 0 80px rgba(232,121,249,.3);line-height:1"></span>
+      <div style="background:linear-gradient(90deg,rgba(60,10,100,.6),rgba(160,60,220,.45),rgba(60,10,100,.6));border:1px solid rgba(180,80,255,.38);border-radius:4px;padding:4px 24px">
+        <span style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(220,160,255,.95);font-weight:600">CUMPLE</span>
       </div>
-      <span id="splash-age" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(3.8rem,18vw,7rem);color:#00FFDC;text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);line-height:1"></span>
+      <span id="splash-age" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(3.8rem,18vw,7rem);color:#e879f9;text-shadow:0 0 50px rgba(232,121,249,.8),0 0 100px rgba(232,121,249,.3);line-height:1"></span>
     </div>
 
     <p class="splash-tap">▼ Toca para sumergirte ▼</p>
   </div>
-
   <div class="sonar-ping"></div>
 </div>
 
 <!-- ═══ MAIN ═══ -->
 <div id="main">
 
-  <!-- ── HERO CARD ── -->
+  <!-- ── HERO ── -->
   <div class="hero-card">
     <div class="hull-stripe"></div>
     <div class="hull-line"></div>
     <div class="hero-body">
-      <!-- Sonar rings background -->
       <div class="hero-sonar">
         <div class="hero-sonar-ring" style="width:200px;height:200px;animation-duration:3s"></div>
         <div class="hero-sonar-ring" style="width:310px;height:310px;animation-duration:3.7s;animation-delay:.5s"></div>
         <div class="hero-sonar-ring" style="width:420px;height:420px;animation-duration:4.4s;animation-delay:1s"></div>
       </div>
-
-      <!-- Floating submarine -->
       <div class="hero-float" id="hero-sub"></div>
-
       <div class="mission-label">◈ MISIÓN SUBMARINA ESPECIAL ◈</div>
 
-      <!-- Hero porthole photo -->
       <div style="display:flex;justify-content:center;margin-bottom:16px">
         <div class="porthole-wrap" style="width:210px;height:210px">
-          <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(0,220,200,.5),0 0 45px rgba(0,200,180,.55),0 0 90px rgba(0,200,180,.2),inset 0 2px 4px rgba(255,255,255,.08)"></div>
+          <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(180,80,255,.55),0 0 45px rgba(160,60,220,.6),0 0 90px rgba(140,0,200,.22),inset 0 2px 4px rgba(255,200,255,.06)"></div>
           <div class="porthole-bezel" style="inset:11px"></div>
           <div class="porthole-glass" style="inset:20px">
             <img id="hero-photo" src="" alt=""/>
@@ -489,9 +451,8 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
       <span class="hero-age" id="hero-age"></span>
     </div>
 
-    <!-- Info block -->
     <div class="info-block">
-      <div class="info-header">⚓ DATOS DE LA MISIÓN ⚓</div>
+      <div class="info-header">✦ DATOS DE LA MISIÓN ✦</div>
       <div class="info-grid">
         <div class="info-col border-r">
           <div class="info-lbl" id="i-line1"></div>
@@ -503,9 +464,9 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
           <div class="info-lbl">Hora</div>
           <div class="info-time" id="i-time"></div>
           <svg class="sonar-spin" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(0,220,200,.2)" stroke-width="1"/>
-            <circle cx="12" cy="12" r="6"  fill="none" stroke="rgba(0,220,200,.15)" stroke-width="1"/>
-            <line x1="12" y1="12" x2="12" y2="3" stroke="rgba(0,220,200,.7)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(180,80,255,.22)" stroke-width="1"/>
+            <circle cx="12" cy="12" r="6"  fill="none" stroke="rgba(180,80,255,.16)" stroke-width="1"/>
+            <line x1="12" y1="12" x2="12" y2="3" stroke="rgba(220,120,255,.75)" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="info-col border-l">
@@ -519,7 +480,6 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
         <div class="rsvp-strip-phone" id="i-phone"></div>
       </div>
     </div>
-
     <div class="hull-line"></div>
     <div class="hull-stripe"></div>
   </div>
@@ -616,22 +576,16 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
       <p class="rsvp-note" id="rsvp-note"></p>
       <div id="rsvp-content">
         <form class="rsvp-form" onsubmit="submitRsvp(event)">
-          <div class="rsvp-field">
-            <input type="text" id="rsvp-name" placeholder="Nombre completo" required autocomplete="name"/>
-          </div>
-          <div class="rsvp-field">
-            <input type="text" id="rsvp-guests" placeholder="Número de invitados (ej: 2)" autocomplete="off"/>
-          </div>
-          <div class="rsvp-field">
-            <textarea id="rsvp-msg" rows="3" placeholder="Mensaje para la familia…"></textarea>
-          </div>
+          <div class="rsvp-field"><input type="text" id="rsvp-name" placeholder="Nombre completo" required autocomplete="name"/></div>
+          <div class="rsvp-field"><input type="text" id="rsvp-guests" placeholder="Número de invitados (ej: 2)" autocomplete="off"/></div>
+          <div class="rsvp-field"><textarea id="rsvp-msg" rows="3" placeholder="Mensaje para la familia…"></textarea></div>
           <button type="submit" class="rsvp-submit">◈ Confirmar Embarque ◈</button>
         </form>
       </div>
     </div>
   </div>
 
-</div><!-- /#main -->
+</div>
 
 <!-- ═══ FOOTER ═══ -->
 <footer id="site-footer">
@@ -650,10 +604,10 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 </footer>
 
 <script>
-/* ════════════════════════════════════════════
-   ██████  CONFIG — edita aquí tu invitación
-   ════════════════════════════════════════════ */
-const CFG = {
+/* ══════════════════════════════
+   CONFIG
+══════════════════════════════ */
+var CFG = {
   name:        "Sofía",
   age:         5,
   eventDate:   "2026-10-03T15:00:00",
@@ -679,335 +633,293 @@ const CFG = {
   program: [
     { time:"2:30 pm", title:"Embarque de tripulantes",    desc:"Bienvenida a bordo del submarino" },
     { time:"3:00 pm", title:"Inmersión al fondo del mar", desc:"¡Comienza la aventura oceánica!" },
-    { time:"4:00 pm", title:"El pastel y festejo",        desc:"Celebración bioluminiscente 🎂" },
+    { time:"4:00 pm", title:"El pastel y festejo",        desc:"Celebración mágica 🎂" },
     { time:"5:00 pm", title:"Exploración marina",         desc:"Juegos y descubrimientos" },
     { time:"6:00 pm", title:"Regreso a la superficie",    desc:"Gracias por navegar con nosotros ★" },
   ],
 };
 
-/* ════════════════════════════════════════
-   SUBMARINE SVG
-   ════════════════════════════════════════ */
+/* ══════════════════════════════
+   SUBMARINE SVG (violet)
+══════════════════════════════ */
+var _svgCount = 0;
 function subSVG(w) {
-  const h = Math.round(w * 0.55);
-  const uid = 'g' + Math.random().toString(36).slice(2,6);
-  return `<svg width="${w}" height="${h}" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="hG${uid}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="rgba(0,60,70,.95)"/>
-      <stop offset="100%" stop-color="rgba(0,20,40,.95)"/>
-    </linearGradient>
-    <linearGradient id="tG${uid}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="rgba(0,80,90,.9)"/>
-      <stop offset="100%" stop-color="rgba(0,40,55,.9)"/>
-    </linearGradient>
-    <linearGradient id="bG${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="rgba(0,40,50,.9)"/>
-      <stop offset="100%" stop-color="rgba(0,60,70,.95)"/>
-    </linearGradient>
-    <radialGradient id="pG${uid}" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="rgba(0,80,90,.9)"/>
-      <stop offset="100%" stop-color="rgba(0,30,50,.9)"/>
-    </radialGradient>
-    <radialGradient id="piG${uid}" cx="35%" cy="35%" r="65%">
-      <stop offset="0%"   stop-color="rgba(0,180,220,.5)"/>
-      <stop offset="100%" stop-color="rgba(0,30,60,.8)"/>
-    </radialGradient>
-  </defs>
-  <!-- hull -->
-  <ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hG${uid})" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-  <!-- conning tower -->
-  <rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tG${uid})" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-  <!-- periscope -->
-  <rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-  <rect x="96" y="12" width="16" height="5"  rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-  <circle cx="112" cy="14.5" r="3"   fill="rgba(0,255,220,.8)"/>
-  <circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>
-  <!-- propeller -->
-  <g transform="translate(195,72)">
-    <ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(-20)"/>
-    <ellipse cx="0" cy="10"  rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(20)"/>
-    <circle cx="0" cy="0" r="4" fill="rgba(0,220,200,.5)" stroke="rgba(0,255,220,.6)" stroke-width="1"/>
-  </g>
-  <!-- bow -->
-  <path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bG${uid})" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-  <!-- portholes -->
-  ${[55,85,115,145].map(cx => `
-  <circle cx="${cx}" cy="72" r="11"  fill="url(#pG${uid})"  stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-  <circle cx="${cx}" cy="72" r="7.5" fill="url(#piG${uid})"/>
-  <circle cx="${cx-3}" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
-  `).join('')}
-  <!-- antenna -->
-  <line x1="103" y1="38" x2="103" y2="28" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-  <circle cx="103" cy="27" r="1.5" fill="rgba(0,255,220,.8)"/>
-  <!-- ballast vents -->
-  ${[40,60,80,100,120,140,160].map(x =>
-    `<rect x="${x}" y="100" width="8" height="4" rx="1" fill="none" stroke="rgba(0,220,200,.22)" stroke-width=".8"/>`
-  ).join('')}
-</svg>`;
+  var h   = Math.round(w * 0.55);
+  var uid = 'v' + (++_svgCount);
+  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">\n'+
+  '<defs>\n'+
+  '<linearGradient id="hG'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(60,10,90,.95)"/><stop offset="100%" stop-color="rgba(20,3,45,.95)"/></linearGradient>\n'+
+  '<linearGradient id="tG'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(80,15,120,.9)"/><stop offset="100%" stop-color="rgba(40,8,70,.9)"/></linearGradient>\n'+
+  '<linearGradient id="bG'+uid+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(40,8,65,.9)"/><stop offset="100%" stop-color="rgba(60,12,90,.95)"/></linearGradient>\n'+
+  '<radialGradient id="pG'+uid+'" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(80,15,120,.9)"/><stop offset="100%" stop-color="rgba(30,5,60,.9)"/></radialGradient>\n'+
+  '<radialGradient id="piG'+uid+'" cx="35%" cy="35%" r="65%"><stop offset="0%" stop-color="rgba(180,80,255,.45)"/><stop offset="100%" stop-color="rgba(40,5,80,.8)"/></radialGradient>\n'+
+  '</defs>\n'+
+  '<ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hG'+uid+')" stroke="rgba(180,80,255,.5)" stroke-width="1.5"/>\n'+
+  '<rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tG'+uid+')" stroke="rgba(180,80,255,.4)" stroke-width="1"/>\n'+
+  '<rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(140,40,200,.7)" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
+  '<rect x="96" y="12" width="16" height="5" rx="2" fill="rgba(140,40,200,.7)" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
+  '<circle cx="112" cy="14.5" r="3" fill="rgba(220,100,255,.85)"/>\n'+
+  '<circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>\n'+
+  '<g transform="translate(195,72)">\n'+
+  '<ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(140,40,200,.6)" stroke="rgba(180,80,255,.4)" stroke-width=".8" transform="rotate(-20)"/>\n'+
+  '<ellipse cx="0" cy="10"  rx="4" ry="10" fill="rgba(140,40,200,.6)" stroke="rgba(180,80,255,.4)" stroke-width=".8" transform="rotate(20)"/>\n'+
+  '<circle cx="0" cy="0" r="4" fill="rgba(180,80,255,.55)" stroke="rgba(220,120,255,.65)" stroke-width="1"/>\n'+
+  '</g>\n'+
+  '<path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bG'+uid+')" stroke="rgba(180,80,255,.4)" stroke-width="1"/>\n'+
+  [55,85,115,145].map(function(cx){
+    return '<circle cx="'+cx+'" cy="72" r="11" fill="url(#pG'+uid+')" stroke="rgba(180,80,255,.5)" stroke-width="1.5"/>\n'+
+           '<circle cx="'+cx+'" cy="72" r="7.5" fill="url(#piG'+uid+')"/>\n'+
+           '<circle cx="'+(cx-3)+'" cy="69" r="2" fill="rgba(255,200,255,.35)"/>\n';
+  }).join('')+
+  '<line x1="103" y1="38" x2="103" y2="28" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
+  '<circle cx="103" cy="27" r="1.5" fill="rgba(220,100,255,.85)"/>\n'+
+  [40,60,80,100,120,140,160].map(function(x){
+    return '<rect x="'+x+'" y="100" width="8" height="4" rx="1" fill="none" stroke="rgba(180,80,255,.22)" stroke-width=".8"/>\n';
+  }).join('')+
+  '</svg>';
 }
 
-/* ════════════════════════════════════════
-   BOLTS — pernos de presión
-   ════════════════════════════════════════ */
+/* ══════════════════════════════
+   BOLTS
+══════════════════════════════ */
 function makeBolts(container, radius, size) {
   size = size || 14;
   [0,45,90,135,180,225,270,315].forEach(function(deg) {
     var b = document.createElement('div');
     b.className = 'porthole-bolt';
-    b.style.width  = size + 'px';
-    b.style.height = size + 'px';
-    b.style.marginTop  = -(size/2) + 'px';
-    b.style.marginLeft = -(size/2) + 'px';
-    b.style.transform = 'rotate(' + deg + 'deg) translateY(-' + radius + 'px)';
-    b.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" style="position:absolute;inset:0">' +
-      '<line x1="' + (size/2) + '" y1="2" x2="' + (size/2) + '" y2="' + (size-2) + '" stroke="rgba(0,180,160,.5)" stroke-width="1"/>' +
-      '<line x1="2" y1="' + (size/2) + '" x2="' + (size-2) + '" y2="' + (size/2) + '" stroke="rgba(0,180,160,.5)" stroke-width="1"/>' +
-    '</svg>';
+    b.style.width      = size+'px';
+    b.style.height     = size+'px';
+    b.style.marginTop  = -(size/2)+'px';
+    b.style.marginLeft = -(size/2)+'px';
+    b.style.transform  = 'rotate('+deg+'deg) translateY(-'+radius+'px)';
+    b.innerHTML =
+      '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" style="position:absolute;inset:0">'+
+      '<line x1="'+(size/2)+'" y1="2" x2="'+(size/2)+'" y2="'+(size-2)+'" stroke="rgba(180,100,255,.5)" stroke-width="1"/>'+
+      '<line x1="2" y1="'+(size/2)+'" x2="'+(size-2)+'" y2="'+(size/2)+'" stroke="rgba(180,100,255,.5)" stroke-width="1"/>'+
+      '</svg>';
     container.appendChild(b);
   });
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    BUBBLES
-   ════════════════════════════════════════ */
+══════════════════════════════ */
 function createBubbles() {
-  for (var i = 0; i < 24; i++) {
+  for (var i=0;i<24;i++) {
     var b  = document.createElement('div');
     b.className = 'bubble';
-    var x   = Math.random() * 100;
-    var sz  = 4 + Math.random() * 16;
-    var dur = 7 + Math.random() * 11;
-    var del = Math.random() * 10;
-    var op  = 0.1 + Math.random() * 0.4;
-    b.style.cssText = [
-      'left:' + x + '%',
-      'bottom:-40px',
-      'width:' + sz + 'px',
-      'height:' + sz + 'px',
-      'background:radial-gradient(circle at 35% 35%,rgba(0,255,255,' + op + '),transparent)',
-      'animation-duration:' + dur + 's',
-      'animation-delay:' + del + 's'
-    ].join(';');
+    var x   = Math.random()*100;
+    var sz  = 4+Math.random()*16;
+    var dur = 7+Math.random()*11;
+    var del = Math.random()*10;
+    var op  = 0.1+Math.random()*0.4;
+    b.style.cssText =
+      'left:'+x+'%;bottom:-40px;width:'+sz+'px;height:'+sz+'px;'+
+      'background:radial-gradient(circle at 35% 35%,rgba(200,100,255,'+op+'),transparent);'+
+      'animation-duration:'+dur+'s;animation-delay:'+del+'s';
     document.body.appendChild(b);
   }
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    FISH
-   ════════════════════════════════════════ */
+══════════════════════════════ */
 function createFish() {
-  var fish = [
-    {dir:1,  y:14},
-    {dir:-1, y:42},
-    {dir:1,  y:68},
-  ];
-  var svgRight = '<svg width="60" height="28" viewBox="0 0 60 28" fill="none"><ellipse cx="28" cy="14" rx="20" ry="8" fill="rgba(0,200,180,.25)" stroke="rgba(0,255,220,.4)" stroke-width=".8"/><path d="M48 14 Q56 8 60 14 Q56 20 48 14Z" fill="rgba(0,200,180,.2)" stroke="rgba(0,255,220,.35)" stroke-width=".8"/><circle cx="16" cy="12" r="2" fill="rgba(0,255,220,.5)"/><line x1="22" y1="9" x2="22" y2="19" stroke="rgba(0,255,220,.12)" stroke-width=".5"/><line x1="32" y1="8" x2="32" y2="20" stroke="rgba(0,255,220,.12)" stroke-width=".5"/><line x1="42" y1="9" x2="42" y2="19" stroke="rgba(0,255,220,.12)" stroke-width=".5"/></svg>';
-
-  fish.forEach(function(f) {
+  var svgFish =
+    '<svg width="60" height="28" viewBox="0 0 60 28" fill="none">'+
+    '<ellipse cx="28" cy="14" rx="20" ry="8" fill="rgba(160,60,220,.25)" stroke="rgba(200,100,255,.4)" stroke-width=".8"/>'+
+    '<path d="M48 14 Q56 8 60 14 Q56 20 48 14Z" fill="rgba(160,60,220,.2)" stroke="rgba(200,100,255,.35)" stroke-width=".8"/>'+
+    '<circle cx="16" cy="12" r="2" fill="rgba(220,120,255,.55)"/>'+
+    '<line x1="22" y1="9" x2="22" y2="19" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
+    '<line x1="32" y1="8" x2="32" y2="20" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
+    '<line x1="42" y1="9" x2="42" y2="19" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
+    '</svg>';
+  [{dir:1,y:14},{dir:-1,y:42},{dir:1,y:68}].forEach(function(f) {
     var el  = document.createElement('div');
-    var dur = 16 + Math.random() * 12;
-    var del = Math.random() * 6;
-    el.className = f.dir > 0 ? 'fish-right' : 'fish-left';
-    el.style.cssText = 'top:' + f.y + '%;animation-duration:' + dur + 's;animation-delay:' + del + 's';
-    el.innerHTML = svgRight;
+    var dur = 16+Math.random()*12;
+    var del = Math.random()*6;
+    el.className = f.dir>0 ? 'fish-right' : 'fish-left';
+    el.style.cssText = 'top:'+f.y+'%;animation-duration:'+dur+'s;animation-delay:'+del+'s';
+    el.innerHTML = svgFish;
     document.body.appendChild(el);
   });
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    DEPTH MARKERS
-   ════════════════════════════════════════ */
+══════════════════════════════ */
 function createDepthMarkers() {
   var el = document.getElementById('depth-marks');
   [10,50,100,200,300,500].forEach(function(d) {
     var row = document.createElement('div');
     row.className = 'depth-mark';
     var sp = document.createElement('span');
-    sp.textContent = d + 'm';
+    sp.textContent = d+'m';
     row.appendChild(sp);
     el.appendChild(row);
   });
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    COUNTDOWN
-   ════════════════════════════════════════ */
+══════════════════════════════ */
+function pad(n){return String(n).padStart(2,'0')}
 function updateCountdown() {
-  var diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff / 86400000));
-  document.getElementById('cd-h').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-  document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000)  / 60000));
-  document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000)    / 1000));
+  var diff = Math.max(0, new Date(CFG.eventDate).getTime()-Date.now());
+  document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+  document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
 }
-function pad(n) { return String(n).padStart(2,'0'); }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    GALLERY
-   ════════════════════════════════════════ */
-var galIdx  = 0;
-var galBusy = false;
-
+══════════════════════════════ */
+var galIdx=0, galBusy=false;
 function renderGallery() {
-  var g = CFG.gallery[galIdx];
+  var g   = CFG.gallery[galIdx];
   var img = document.getElementById('gallery-img');
-  img.style.opacity = '0';
-  img.src = g.src;
-  img.alt = g.cap;
-  img.onload = function() { img.style.opacity = '1'; };
+  img.style.opacity='0';
+  img.src=g.src; img.alt=g.cap;
+  img.onload=function(){img.style.opacity='1';};
   document.getElementById('gallery-cap').textContent   = g.cap;
-  document.getElementById('gallery-count').textContent = pad(galIdx + 1) + ' — ' + pad(CFG.gallery.length);
-
-  var dots = document.getElementById('gallery-dots');
-  dots.innerHTML = '';
-  CFG.gallery.forEach(function(_, i) {
-    var d = document.createElement('button');
-    d.className  = 'gallery-dot';
-    d.setAttribute('aria-label', 'Foto ' + (i+1));
-    d.style.width      = (i === galIdx ? 24 : 8) + 'px';
-    d.style.background = i === galIdx ? '#00FFDC' : 'rgba(0,220,200,.25)';
-    d.onclick = function() { if (!galBusy) { galIdx = i; renderGallery(); } };
+  document.getElementById('gallery-count').textContent = pad(galIdx+1)+' — '+pad(CFG.gallery.length);
+  var dots=document.getElementById('gallery-dots');
+  dots.innerHTML='';
+  CFG.gallery.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.className='gallery-dot';
+    d.setAttribute('aria-label','Foto '+(i+1));
+    d.style.width =(i===galIdx?24:8)+'px';
+    d.style.background=i===galIdx?'#e879f9':'rgba(180,80,255,.25)';
+    d.onclick=function(){if(!galBusy){galIdx=i;renderGallery();}};
     dots.appendChild(d);
   });
 }
-
 function galleryGo(dir) {
-  if (galBusy) return;
-  galBusy = true;
-  galIdx  = ((galIdx + dir) % CFG.gallery.length + CFG.gallery.length) % CFG.gallery.length;
+  if(galBusy)return;
+  galBusy=true;
+  galIdx=((galIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
   renderGallery();
-  setTimeout(function() { galBusy = false; }, 380);
+  setTimeout(function(){galBusy=false;},380);
 }
-
-// touch swipe
-var touchStartX = 0;
-document.addEventListener('touchstart', function(e) {
-  if (e.target.closest('.gallery-porthole')) touchStartX = e.touches[0].clientX;
-}, { passive: true });
-document.addEventListener('touchend', function(e) {
-  if (!e.target.closest('.gallery-porthole')) return;
-  var dx = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(dx) > 40) galleryGo(dx > 0 ? 1 : -1);
+var touchStartX=0;
+document.addEventListener('touchstart',function(e){if(e.target.closest('.gallery-porthole'))touchStartX=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(!e.target.closest('.gallery-porthole'))return;
+  var dx=touchStartX-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>40)galleryGo(dx>0?1:-1);
 });
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    RSVP
-   ════════════════════════════════════════ */
+══════════════════════════════ */
 function submitRsvp(e) {
   e.preventDefault();
-  var name   = document.getElementById('rsvp-name').value.trim();
-  var guests = document.getElementById('rsvp-guests').value.trim();
-  var msg    = document.getElementById('rsvp-msg').value.trim();
-  if (!name) return;
-
-  var text = '¡Hola! Confirmo mi asistencia a la fiesta de *' + CFG.name + '* 🌊\n\n';
-  text += '👤 *Nombre:* ' + name + '\n';
-  if (guests) text += '👥 *Invitados:* ' + guests + '\n';
-  if (msg)    text += '💬 *Mensaje:* '   + msg    + '\n';
-  text += '\n📅 ' + CFG.dateDisplay + ' a las ' + CFG.time;
-  text += '\n📍 ' + CFG.venue;
-
-  var phone = CFG.phone.replace(/\D/g, '');
-  var url   = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
-
-  document.getElementById('rsvp-content').innerHTML =
-    '<div class="rsvp-thanks">' +
-      subSVG(120) +
-      '<div class="rsvp-thanks-title">¡Gracias, ' + name + '!</div>' +
-      '<div class="rsvp-thanks-msg">Tu mensaje está listo para WhatsApp 🌊</div>' +
-      '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>' +
+  var name  =document.getElementById('rsvp-name').value.trim();
+  var guests=document.getElementById('rsvp-guests').value.trim();
+  var msg   =document.getElementById('rsvp-msg').value.trim();
+  if(!name)return;
+  var text='¡Hola! Confirmo mi asistencia a la fiesta de *'+CFG.name+'* 🌊\n\n';
+  text+='👤 *Nombre:* '+name+'\n';
+  if(guests)text+='👥 *Invitados:* '+guests+'\n';
+  if(msg)   text+='💬 *Mensaje:* '+msg+'\n';
+  text+='\n📅 '+CFG.dateDisplay+' a las '+CFG.time;
+  text+='\n📍 '+CFG.venue;
+  var phone=CFG.phone.replace(/\D/g,'');
+  var url='https://wa.me/'+phone+'?text='+encodeURIComponent(text);
+  document.getElementById('rsvp-content').innerHTML=
+    '<div class="rsvp-thanks">'+subSVG(120)+
+    '<div class="rsvp-thanks-title">¡Gracias, '+name+'!</div>'+
+    '<div class="rsvp-thanks-msg">Tu mensaje está listo para WhatsApp 💜</div>'+
+    '<a href="'+url+'" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>'+
     '</div>';
-
-  window.open(url, '_blank');
+  window.open(url,'_blank');
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    SPLASH
-   ════════════════════════════════════════ */
-var splashTimer = null;
-
+══════════════════════════════ */
+var splashTimer=null;
 function closeSplash() {
   clearTimeout(splashTimer);
-  var splash = document.getElementById('splash');
-  splash.classList.add('hidden');
-  setTimeout(function() {
-    splash.style.display = 'none';
+  var sp=document.getElementById('splash');
+  sp.classList.add('hidden');
+  setTimeout(function(){
+    sp.style.display='none';
     document.getElementById('main').classList.add('visible');
-    document.getElementById('site-footer').style.display = 'block';
-  }, 700);
+    document.getElementById('site-footer').style.display='block';
+  },700);
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════
    INIT
-   ════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', function() {
+══════════════════════════════ */
+document.addEventListener('DOMContentLoaded',function(){
+  // splash
+  document.getElementById('splash-photo').src=CFG.photo;
+  document.getElementById('splash-photo').alt=CFG.name;
+  document.getElementById('splash-name').textContent=CFG.name;
+  document.getElementById('splash-age').textContent=CFG.age;
+  document.getElementById('splash-sub').innerHTML=subSVG(190);
+  makeBolts(document.getElementById('splash-bolts'),66,12);
 
-  /* ── splash ── */
-  document.getElementById('splash-photo').src = CFG.photo;
-  document.getElementById('splash-photo').alt = CFG.name;
-  document.getElementById('splash-name').textContent = CFG.name;
-  document.getElementById('splash-age').textContent  = CFG.age;
-  document.getElementById('splash-sub').innerHTML    = subSVG(190);
-  makeBolts(document.getElementById('splash-bolts'), 66, 12);
+  // hero
+  document.getElementById('hero-sub').innerHTML=subSVG(240);
+  document.getElementById('hero-photo').src=CFG.photo;
+  document.getElementById('hero-photo').alt=CFG.name;
+  document.getElementById('hero-name').textContent=CFG.name;
+  document.getElementById('hero-age').textContent=CFG.age;
+  makeBolts(document.getElementById('hero-bolts'),99,14);
 
-  /* ── hero ── */
-  document.getElementById('hero-sub').innerHTML   = subSVG(240);
-  document.getElementById('hero-photo').src       = CFG.photo;
-  document.getElementById('hero-photo').alt       = CFG.name;
-  document.getElementById('hero-name').textContent = CFG.name;
-  document.getElementById('hero-age').textContent  = CFG.age;
-  makeBolts(document.getElementById('hero-bolts'), 99, 14);
+  // info
+  document.getElementById('i-line1').textContent=CFG.dateLine1;
+  document.getElementById('i-line2').textContent=CFG.dateLine2;
+  document.getElementById('i-day').textContent=CFG.dateDay;
+  document.getElementById('i-year').textContent=CFG.dateYear;
+  document.getElementById('i-time').textContent=CFG.time;
+  document.getElementById('i-venue').textContent=CFG.venue;
+  document.getElementById('i-addr').textContent=CFG.address;
+  document.getElementById('i-rsvp-lbl').textContent='◈ RSVP a '+CFG.rsvpTo+' ◈';
+  document.getElementById('i-phone').textContent=CFG.phone;
 
-  /* ── info block ── */
-  document.getElementById('i-line1').textContent = CFG.dateLine1;
-  document.getElementById('i-line2').textContent = CFG.dateLine2;
-  document.getElementById('i-day').textContent   = CFG.dateDay;
-  document.getElementById('i-year').textContent  = CFG.dateYear;
-  document.getElementById('i-time').textContent  = CFG.time;
-  document.getElementById('i-venue').textContent = CFG.venue;
-  document.getElementById('i-addr').textContent  = CFG.address;
-  document.getElementById('i-rsvp-lbl').textContent = '◈ RSVP a ' + CFG.rsvpTo + ' ◈';
-  document.getElementById('i-phone').textContent    = CFG.phone;
-
-  /* ── countdown ── */
-  document.getElementById('cd-display').textContent = CFG.dateDisplay;
+  // countdown
+  document.getElementById('cd-display').textContent=CFG.dateDisplay;
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+  setInterval(updateCountdown,1000);
 
-  /* ── program ── */
-  var pl = document.getElementById('program-items');
-  CFG.program.forEach(function(item) {
-    pl.innerHTML +=
-      '<div class="program-item">' +
-        '<div class="prog-dot-col"><div class="prog-dot"></div></div>' +
-        '<div>' +
-          '<div class="prog-time">' + item.time + '</div>' +
-          '<div class="prog-title">' + item.title + '</div>' +
-          '<div class="prog-desc">' + item.desc + '</div>' +
-        '</div>' +
-      '</div>';
+  // program
+  var pl=document.getElementById('program-items');
+  CFG.program.forEach(function(item){
+    pl.innerHTML+=
+      '<div class="program-item">'+
+      '<div class="prog-dot-col"><div class="prog-dot"></div></div>'+
+      '<div>'+
+      '<div class="prog-time">'+item.time+'</div>'+
+      '<div class="prog-title">'+item.title+'</div>'+
+      '<div class="prog-desc">'+item.desc+'</div>'+
+      '</div></div>';
   });
 
-  /* ── gallery ── */
-  makeBolts(document.getElementById('gallery-bolts'), 142, 12);
+  // gallery
+  makeBolts(document.getElementById('gallery-bolts'),142,12);
   renderGallery();
 
-  /* ── rsvp ── */
-  document.getElementById('rsvp-note').textContent = '◈ RSVP a ' + CFG.rsvpTo + ' · ' + CFG.phone + ' ◈';
+  // rsvp
+  document.getElementById('rsvp-note').textContent='◈ RSVP a '+CFG.rsvpTo+' · '+CFG.phone+' ◈';
 
-  /* ── footer ── */
-  document.getElementById('footer-sub').innerHTML     = subSVG(140);
-  document.getElementById('footer-name').textContent  = CFG.name;
-  document.getElementById('footer-cumple').textContent = '¡cumple ' + CFG.age + '!';
-  document.getElementById('footer-date').textContent  = CFG.dateDisplay;
+  // footer
+  document.getElementById('footer-sub').innerHTML=subSVG(140);
+  document.getElementById('footer-name').textContent=CFG.name;
+  document.getElementById('footer-cumple').textContent='¡cumple '+CFG.age+'!';
+  document.getElementById('footer-date').textContent=CFG.dateDisplay;
 
-  /* ── ambient elements ── */
+  // ambient
   createDepthMarkers();
   createBubbles();
   createFish();
 
-  /* ── auto-close splash ── */
-  splashTimer = setTimeout(closeSplash, 4500);
+  splashTimer=setTimeout(closeSplash,4500);
 });
 </script>
 </body>
