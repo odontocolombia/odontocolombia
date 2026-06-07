@@ -1,926 +1,947 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Invitación Sofía Cumple 5</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:ital,wght@0,400;0,700;1,400&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-<style>
-/* ── RESET ── */
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:linear-gradient(180deg,#0a0012 0%,#100020 25%,#15002e 50%,#0a0018 100%);
-  min-height:100vh;font-family:'Exo 2',sans-serif;color:#fff;overflow-x:hidden
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fiesta de Cocina — Sofía 🍳</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(160deg, #FFF9F0 0%, #FFF0E0 40%, #FCE4EC 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-/* ── SPLASH ── */
-#splash{
-  position:fixed;inset:0;z-index:100;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#0a0012 0%,#120020 30%,#1a0035 60%,#0a0018 100%);
-  cursor:pointer;overflow:hidden;transition:opacity .7s ease;
-}
-#splash.hidden{opacity:0;pointer-events:none}
+    /* ── ANIMATIONS ── */
+    @keyframes cardIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+    @keyframes bounceIn { 0%{opacity:0;transform:scale(0)} 60%{transform:scale(1.2)} 100%{opacity:1;transform:scale(1)} }
+    @keyframes blink { 0%,100%{opacity:.3} 50%{opacity:1} }
+    @keyframes float { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(5px)} }
+    @keyframes confettiFloat { from{transform:translateY(0) rotate(0deg)} to{transform:translateY(-20px) rotate(20deg)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-.water-line{
-  position:absolute;width:100%;height:2px;
-  animation:water-move ease-in-out infinite alternate;
-}
-@keyframes water-move{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+    /* ── BG FOOD ICONS ── */
+    .bg-food {
+      position: fixed;
+      font-size: 24px;
+      opacity: 0.055;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 4s ease-in-out infinite alternate;
+    }
 
-.sonar-ring{
-  position:absolute;border-radius:50%;
-  top:50%;left:50%;
-  border:1px solid rgba(180,80,255,.07);
-  animation:pulse-ring ease-in-out infinite;
-}
-@keyframes pulse-ring{
-  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.35}
-  50%{transform:translate(-50%,-50%) scale(1.05);opacity:.65}
-}
+    /* ── SPLASH ── */
+    #splash {
+      position: fixed; inset: 0; z-index: 100; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #fff9f0 0%, #fff3e0 40%, #fce4ec 100%);
+      transition: opacity .6s ease; overflow: hidden;
+    }
+    #splash.hiding { opacity: 0; pointer-events: none; }
+    .confetti-dot {
+      position: absolute; border-radius: 50%;
+      animation: confettiFloat 4s ease-in-out infinite alternate;
+    }
+    .splash-inner { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .splash-label { font-size: .55rem; letter-spacing: .35em; text-transform: uppercase; color: #FF6B35; font-weight: 700; animation: fadeUp .5s .3s both; }
+    .splash-photo {
+      width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
+      border: 5px solid #FF6B35;
+      box-shadow: 0 0 0 4px #FFD93D, 0 8px 32px rgba(255,107,53,.35);
+      animation: scaleIn .6s .5s both;
+    }
+    .splash-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .splash-name { font-family: 'Fredoka One', cursive; font-size: clamp(2.4rem,12vw,4rem); color: #FF6B35; text-shadow: 3px 3px 0 #FFD93D; line-height: 1; animation: fadeUp .5s .7s both; }
+    .splash-badge {
+      background: linear-gradient(135deg,#FF6B35,#FF8E53); border-radius: 999px; padding: 4px 24px;
+      font-weight: 800; font-size: .55rem; letter-spacing: .3em; text-transform: uppercase;
+      color: #fff; box-shadow: 0 4px 16px rgba(255,107,53,.4); animation: fadeUp .5s .8s both;
+    }
+    .splash-age { font-family: 'Fredoka One', cursive; font-size: clamp(4rem,18vw,7rem); color: #FF6B35; text-shadow: 4px 4px 0 #FFD93D; line-height: 1; animation: scaleIn .6s .9s both; }
+    .splash-tap { font-size: .48rem; letter-spacing: .3em; text-transform: uppercase; color: #FF6B35; opacity: .7; animation: blink 2s infinite; }
 
-/* ── BUBBLES ── */
-.bubble{
-  position:fixed;border-radius:50%;
-  border:1px solid rgba(200,100,255,.2);
-  pointer-events:none;z-index:1;
-  animation:bubble-rise linear infinite;
-}
-@keyframes bubble-rise{
-  0%{transform:translateY(0) translateX(0);opacity:0}
-  10%{opacity:1}
-  50%{transform:translateY(-50vh) translateX(8px)}
-  90%{opacity:.7}
-  100%{transform:translateY(-110vh) translateX(-8px);opacity:0}
-}
+    /* ── MAIN CONTENT ── */
+    #main-content {
+      position: relative; z-index: 10; max-width: 460px; margin: 0 auto;
+      padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 28px;
+      opacity: 0; transition: opacity .6s ease;
+    }
+    #main-content.visible { opacity: 1; }
 
-/* ── FISH ── */
-.fish-right{position:fixed;pointer-events:none;z-index:1;animation:swim-right linear infinite}
-.fish-left {position:fixed;pointer-events:none;z-index:1;transform:scaleX(-1);animation:swim-left  linear infinite}
-@keyframes swim-right{from{left:-120px}to{left:110vw}}
-@keyframes swim-left {from{right:-120px}to{right:110vw}}
+    /* ── APRON CARD (Hero) ── */
+    .apron-card {
+      position: relative;
+      background: linear-gradient(160deg,#FFF9F0 0%,#FFF3E8 50%,#FEF0F5 100%);
+      border-radius: 28px; overflow: hidden;
+      box-shadow: 0 12px 60px rgba(255,107,53,.18), 0 4px 16px rgba(0,0,0,.06), 0 0 0 2.5px rgba(255,107,53,.2);
+      animation: cardIn .8s both;
+    }
 
-/* ── DEPTH MARKERS ── */
-#depth-marks{
-  position:fixed;left:12px;top:0;bottom:0;
-  display:flex;flex-direction:column;justify-content:space-around;
-  opacity:.18;pointer-events:none;z-index:2;
-}
-.depth-mark{display:flex;align-items:center;gap:4px}
-.depth-mark::before{content:'';display:block;width:8px;height:1px;background:#c084fc}
-.depth-mark span{font-size:.28rem;letter-spacing:.1em;color:rgba(192,132,252,.9)}
+    /* ── HERO BANNER TOP ── */
+    .hero-banner {
+      position: relative; overflow: hidden;
+    }
+    .hero-banner-svg { display: block; }
+    .hero-banner-text {
+      position: absolute; top: 0; left: 0; right: 0; height: 62px;
+      display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 16px;
+    }
+    .hero-banner-title { font-family: 'Fredoka One', cursive; font-size: clamp(1rem,4.5vw,1.25rem); color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,.18); letter-spacing: .03em; line-height: 1.15; white-space: nowrap; }
+    .hero-banner-sub { font-weight: 800; font-size: clamp(.55rem,2vw,.7rem); color: #FFD93D; letter-spacing: .22em; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,.2); }
 
-/* ── AMBIENT GLOW ── */
-#ambient{
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(120,0,180,.14),transparent);
-}
+    /* ── HERO CONTENT ── */
+    .hero-content { padding: 24px 24px 20px; text-align: center; position: relative; }
+    .floating-utensil { position: absolute; font-size: 22px; opacity: .15; animation: float 3s ease-in-out infinite alternate; }
+    .hero-label { font-size: .5rem; letter-spacing: .35em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-bottom: 14px; }
+    .hero-mascot { margin-bottom: 16px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
+    .hero-photo-wrap { position: relative; display: inline-block; margin-bottom: 18px; }
+    .hero-photo {
+      width: 200px; height: 200px; border-radius: 50%; overflow: hidden;
+      border: 6px solid #FF6B35;
+      box-shadow: 0 0 0 5px #FFD93D, 0 0 0 9px rgba(255,107,53,.2), 0 12px 40px rgba(255,107,53,.35);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .hero-badge { position: absolute; bottom: 4px; right: 4px; width: 48px; height: 48px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(255,107,53,.4); overflow: hidden; }
+    .hero-name { font-family: 'Fredoka One', cursive; font-size: clamp(2.4rem,10vw,3.6rem); color: #FF6B35; text-shadow: 3px 3px 0 #FFD93D; line-height: 1; margin-bottom: 8px; }
+    .hero-pill { display: inline-block; background: linear-gradient(135deg,#FF6B35,#FF8E53); border-radius: 999px; padding: 5px 24px; margin-bottom: 10px; font-weight: 800; font-size: .55rem; letter-spacing: .35em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 14px rgba(255,107,53,.4); }
+    .hero-age { font-family: 'Fredoka One', cursive; font-size: clamp(4rem,16vw,6.5rem); color: #FF6B35; text-shadow: 5px 5px 0 #FFD93D; line-height: 1; margin-bottom: 8px; }
+    .hero-tagline { font-weight: 700; font-size: .75rem; color: #888; letter-spacing: .05em; }
 
-/* ── SPLASH CONTENT ── */
-.splash-inner{
-  position:relative;z-index:10;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;
-}
-.splash-label{
-  font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;
-  color:rgba(200,140,255,.85);font-weight:300;
-  animation:fade-up .7s .3s both;
-}
-.splash-sub-wrap{animation:scale-in .6s .5s both}
-.splash-porthole-wrap{animation:scale-in .6s .7s both}
-.splash-text-wrap{animation:fade-up .6s .9s both;display:flex;flex-direction:column;align-items:center;gap:6px}
-.splash-tap{
-  font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;
-  color:rgba(200,140,255,.7);animation:blink 2s infinite;
-}
-.sonar-ping{
-  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(192,132,252,.35);
-  animation:sonar-out 2s ease-out infinite;
-}
-@keyframes sonar-out{from{transform:translateX(-50%) scale(1);opacity:.6}to{transform:translateX(-50%) scale(2.5);opacity:0}}
-@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes scale-in{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
-@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+    /* ── INFO GRID ── */
+    .info-grid { background: rgba(255,255,255,.75); margin: 20px 0 0; border-radius: 16px; overflow: hidden; border: 2px solid rgba(255,107,53,.18); backdrop-filter: blur(4px); }
+    .info-grid-header { padding: 8px 16px; text-align: center; background: linear-gradient(90deg,transparent,rgba(255,107,53,.12),transparent); border-bottom: 1px solid rgba(255,107,53,.12); font-size: .42rem; letter-spacing: .28em; text-transform: uppercase; color: #FF8E53; font-weight: 700; }
+    .info-grid-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 18px 12px; }
+    .info-col { text-align: center; padding: 0 4px; }
+    .info-col:not(:last-child) { border-right: 1px dashed rgba(255,107,53,.22); }
+    .info-icon { font-size: 18px; margin-bottom: 4px; }
+    .info-lbl { font-size: .44rem; letter-spacing: .18em; text-transform: uppercase; color: #FF8E53; font-weight: 700; }
+    .info-sub { font-size: .4rem; color: #bba; margin-bottom: 2px; }
+    .info-day { font-family: 'Fredoka One', cursive; font-size: 2.6rem; color: #FF6B35; line-height: 1; }
+    .info-time { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #FF6B35; line-height: 1; }
+    .info-venue { font-weight: 800; font-size: .82rem; color: #FF6B35; line-height: 1.2; }
+    .info-foot { font-size: .34rem; color: #999; margin-top: 4px; }
+    .info-rsvp { padding: 12px 16px; text-align: center; background: linear-gradient(135deg,rgba(255,107,53,.08),rgba(255,217,61,.08)); border-top: 1px solid rgba(255,107,53,.1); }
+    .info-rsvp-label { font-size: .44rem; letter-spacing: .22em; text-transform: uppercase; color: #FF8E53; font-weight: 700; }
+    .info-rsvp-phone { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #FF6B35; margin-top: 4px; }
 
-/* ── PORTHOLE ── */
-.porthole-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center}
-.porthole-outer{
-  position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from 15deg,#2a0a40,#4a1a70,#380d55,#5a1a80,#2a0a40,#4a1a70,#2a0a40);
-}
-.porthole-bezel{
-  position:absolute;border-radius:50%;
-  background:linear-gradient(135deg,rgba(80,20,120,.9),rgba(30,5,60,.95),rgba(60,10,100,.9));
-  box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 -1px 3px rgba(180,80,255,.15),0 0 0 1px rgba(140,60,200,.4);
-}
-.porthole-glass{
-  position:absolute;border-radius:50%;overflow:hidden;
-  box-shadow:inset 0 4px 16px rgba(0,0,0,.8),inset 0 0 30px rgba(60,0,80,.6);
-}
-.porthole-glass img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.porthole-glare{
-  position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse 60% 45% at 38% 28%,rgba(255,200,255,.1),transparent 70%);
-}
-.porthole-tint{
-  position:absolute;inset:0;pointer-events:none;border-radius:50%;
-  background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(30,0,50,.55) 100%);
-}
-.porthole-shine{
-  position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:conic-gradient(from 0deg,transparent 30%,rgba(180,80,255,.1) 50%,transparent 70%);
-  animation:spin 8s linear infinite;
-}
-.porthole-bolt{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,rgba(160,60,220,.8),rgba(50,10,80,.9));
-  border:1.5px solid rgba(180,80,255,.6);
-  box-shadow:0 0 6px rgba(180,80,255,.4),inset 0 1px 2px rgba(255,200,255,.1);
-  top:50%;left:50%;
-  display:flex;align-items:center;justify-content:center;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+    /* ── CHECKERED RIBBON ── */
+    .checkered-ribbon { display: block; }
 
-/* ── MAIN ── */
-#main{
-  position:relative;z-index:10;max-width:460px;margin:0 auto;
-  padding:32px 16px 64px;display:flex;flex-direction:column;gap:22px;
-  opacity:0;transition:opacity .6s ease;
-}
-#main.visible{opacity:1}
-#site-footer{display:none;position:relative;z-index:10}
+    /* ── SECTION HEADER ── */
+    .section-header { text-align: center; margin-bottom: 24px; }
+    .section-label { font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-bottom: 6px; }
+    .section-emoji { font-size: 36px; margin-bottom: 4px; }
+    .section-title { font-family: 'Fredoka One', cursive; font-size: clamp(1.5rem,5vw,2rem); color: #FF6B35; letter-spacing: .02em; }
+    .section-divider { height: 3px; width: 60px; background: linear-gradient(90deg,#FF6B35,#FFD93D); border-radius: 99px; margin: 10px auto 0; }
 
-/* ── SUB CARD ── */
-.sub-card{
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,rgba(30,5,55,.97) 0%,rgba(15,2,35,.99) 100%);
-  border:1.5px solid rgba(180,80,255,.25);border-radius:20px;
-  box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 60px rgba(140,0,200,.08),inset 0 1px 0 rgba(180,80,255,.15);
-  animation:card-in .7s both;
-}
-@keyframes card-in{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-.card-top-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(180,80,255,.6),transparent)}
-.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(140,60,200,.3);border:1px solid rgba(180,80,255,.35)}
-.screw.tl{top:12px;left:12px}.screw.tr{top:12px;right:12px}
-.screw.bl{bottom:12px;left:12px}.screw.br{bottom:12px;right:12px}
-.card-body{padding:24px}
+    /* ── ROLLING PIN CARD (Countdown) ── */
+    .rolling-pin-card { position: relative; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1), 0 2px 8px rgba(0,0,0,.05); border: 2px solid rgba(255,107,53,.1); animation: cardIn .6s .1s both; }
+    .rolling-pin-content { padding: 16px 24px 24px; }
 
-/* ── EYEBROW ── */
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
-.eyebrow-line{height:1px;width:32px;flex-shrink:0}
-.eyebrow-text{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,140,255,.85);font-weight:600;white-space:nowrap}
+    /* ── COUNTDOWN ── */
+    .countdown-tiles { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .countdown-tile { min-width: 72px; text-align: center; padding: 16px 12px; border-radius: 20px; background: linear-gradient(135deg,#fff9f0,#fff3e0); border: 2px solid #FFD93D; box-shadow: 0 4px 16px rgba(255,217,61,.25); }
+    .countdown-val { font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: #FF6B35; line-height: 1; }
+    .countdown-lbl { font-size: .4rem; letter-spacing: .2em; text-transform: uppercase; color: #FF8E53; font-weight: 700; margin-top: 6px; }
+    .countdown-date { text-align: center; margin-top: 18px; font-size: .42rem; letter-spacing: .18em; color: #FF8E53; font-weight: 600; text-transform: uppercase; }
 
-/* ── SECTION TITLE ── */
-.section-title{
-  font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(1.4rem,5vw,2rem);color:#e879f9;
-  text-shadow:0 0 30px rgba(232,121,249,.5),0 0 60px rgba(232,121,249,.2);
-  letter-spacing:.04em;text-align:center;margin-bottom:1.5rem;
-}
+    /* ── RECIPE CARD (Program) ── */
+    .recipe-card { position: relative; background: linear-gradient(180deg,#FFFDE7 0%,#FFF8E1 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,107,53,.1), 0 2px 8px rgba(0,0,0,.05); border: 2px solid rgba(255,193,7,.3); animation: cardIn .6s .15s both; padding-left: 38px; }
+    .recipe-content { padding: 20px 24px 28px 16px; }
+    .program-list { display: flex; flex-direction: column; position: relative; }
+    .program-timeline { position: absolute; left: 23px; top: 0; bottom: 0; width: 2px; background: repeating-linear-gradient(to bottom,#FFD93D 0,#FFD93D 8px,transparent 8px,transparent 16px); }
+    .program-item { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,217,61,.3); }
+    .program-item:last-child { border-bottom: none; }
+    .program-icon-wrap { flex-shrink: 0; width: 46px; display: flex; justify-content: center; margin-top: 2px; }
+    .program-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg,#FF6B35,#FFD93D); box-shadow: 0 3px 10px rgba(255,107,53,.35); font-size: 16px; position: relative; z-index: 1; }
+    .program-time { font-size: .54rem; letter-spacing: .18em; text-transform: uppercase; color: #FF6B35; font-weight: 800; }
+    .program-title { font-weight: 800; font-size: 1rem; color: #2D2D2D; margin-top: 2px; }
+    .program-desc { font-size: .42rem; letter-spacing: .1em; text-transform: uppercase; color: #FF8E53; margin-top: 3px; }
 
-/* ── HERO CARD ── */
-.hero-card{
-  position:relative;overflow:hidden;
-  background:linear-gradient(170deg,rgba(20,5,40,.98) 0%,rgba(10,2,25,.99) 100%);
-  border:1.5px solid rgba(180,80,255,.32);border-radius:24px;
-  box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(140,0,200,.12);
-  animation:card-in .8s both;
-}
-.hull-stripe{height:10px;background:repeating-linear-gradient(90deg,rgba(140,60,200,.6) 0,rgba(140,60,200,.6) 18px,rgba(40,10,70,.4) 18px,rgba(40,10,70,.4) 36px)}
-.hull-line{height:4px;background:linear-gradient(90deg,rgba(100,20,160,.6),rgba(200,80,255,.85),rgba(100,20,160,.6))}
-.hero-body{padding:28px 24px;text-align:center;position:relative;overflow:hidden}
-.hero-sonar{position:absolute;inset:0;pointer-events:none}
-.hero-sonar-ring{
-  position:absolute;border-radius:50%;top:50%;left:50%;
-  border:1px solid rgba(180,80,255,.04);
-  animation:pulse-ring ease-in-out infinite;
-}
-.hero-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
-@keyframes float{0%,100%{transform:translateY(-4px)}50%{transform:translateY(4px)}}
-.mission-label{font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(200,140,255,.75);font-weight:300;margin-bottom:14px}
-.hero-name{
-  font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(2.4rem,12vw,4.5rem);color:#e879f9;
-  text-shadow:0 0 40px rgba(232,121,249,.7),0 0 80px rgba(232,121,249,.25);
-  line-height:1;display:block;margin-bottom:6px;
-}
-.hero-badge-wrap{display:flex;justify-content:center;margin-bottom:6px}
-.hero-badge{
-  background:linear-gradient(90deg,rgba(60,10,100,.5),rgba(160,60,220,.4),rgba(60,10,100,.5));
-  border:1px solid rgba(180,80,255,.38);border-radius:3px;
-  padding:3px 20px;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;
-  color:rgba(220,160,255,.95);font-weight:600;
-}
-.hero-age{
-  font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(4rem,18vw,7rem);color:#e879f9;
-  text-shadow:0 0 50px rgba(232,121,249,.8),0 0 100px rgba(232,121,249,.3);
-  line-height:1;display:block;
-}
+    /* ── CUTTING BOARD CARD (Gallery) ── */
+    .cutting-board-card { position: relative; background: linear-gradient(160deg,#FFF8F0 0%,#FFF3E8 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(212,168,90,.2), 0 2px 8px rgba(0,0,0,.06); border: 3px solid rgba(212,168,90,.35); animation: cardIn .6s .2s both; }
+    .gallery-content { padding: 12px 28px 12px; }
+    .gallery-photo-wrap { width: 230px; height: 230px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; position: relative; border: 6px solid #FF6B35; box-shadow: 0 0 0 4px #FFD93D, 0 8px 32px rgba(255,107,53,.3); cursor: grab; }
+    .gallery-photo-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity .3s; }
+    .gallery-badge { position: absolute; bottom: 6px; right: 6px; }
+    .gallery-caption { text-align: center; margin-bottom: 16px; }
+    .gallery-caption-text { font-weight: 800; font-size: 1rem; color: #2D2D2D; }
+    .gallery-counter { font-size: .38rem; letter-spacing: .22em; color: #D4A85A; margin-top: 4px; text-transform: uppercase; }
+    .gallery-controls { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .gallery-btn { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #D4A85A; background: linear-gradient(135deg,#FFF8F0,#FFF3E8); color: #D4A85A; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(212,168,90,.25); }
+    .gallery-dots { display: flex; gap: 6px; align-items: center; }
+    .gallery-dot { height: 8px; width: 8px; border-radius: 4px; border: none; cursor: pointer; background: rgba(212,168,90,.28); padding: 0; transition: all .25s ease; }
+    .gallery-dot.active { width: 24px; background: #D4A85A; }
 
-/* ── INFO BLOCK ── */
-.info-block{margin:0 16px 16px;border-radius:12px;overflow:hidden;background:rgba(15,2,35,.95);border:1px solid rgba(180,80,255,.2)}
-.info-header{
-  padding:8px;text-align:center;
-  background:linear-gradient(90deg,transparent,rgba(100,20,160,.3),transparent);
-  border-bottom:1px solid rgba(180,80,255,.15);
-  font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,140,255,.65);
-}
-.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;gap:0}
-.info-col{text-align:center}
-.info-col.border-r{border-right:1px dashed rgba(180,80,255,.2);padding-right:8px}
-.info-col.border-l{border-left:1px dashed rgba(180,80,255,.2);padding-left:8px}
-.info-lbl{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,140,255,.75);margin-bottom:3px}
-.info-sub{font-size:.42rem;letter-spacing:.12em;color:rgba(160,100,220,.65);margin-bottom:2px}
-.info-day{font-family:'Cinzel Decorative',cursive;font-size:2.6rem;color:#e879f9;line-height:1;text-shadow:0 0 20px rgba(232,121,249,.5)}
-.info-year{font-size:.38rem;color:rgba(160,100,220,.55);letter-spacing:.1em}
-.info-time{font-family:'Cinzel Decorative',cursive;font-size:1.3rem;color:#e879f9;line-height:1;text-shadow:0 0 15px rgba(232,121,249,.5)}
-.sonar-spin{width:24px;height:24px;margin:8px auto 0;animation:spin 4s linear infinite}
-.info-venue{font-family:'Cinzel',serif;font-size:.82rem;color:#e879f9;margin-bottom:4px}
-.info-addr{font-size:.36rem;color:rgba(160,100,220,.6);line-height:1.6}
-.rsvp-strip{
-  padding:12px;text-align:center;
-  background:linear-gradient(135deg,rgba(60,10,100,.6),rgba(40,5,80,.7));
-  border-top:1px solid rgba(180,80,255,.2);
-}
-.rsvp-strip-lbl{font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(200,140,255,.7)}
-.rsvp-strip-phone{font-family:'Cinzel Decorative',cursive;font-size:1.4rem;color:#e879f9;text-shadow:0 0 20px rgba(232,121,249,.5);margin-top:3px}
+    /* ── NOTEPAD CARD (RSVP) ── */
+    .notepad-card { position: relative; background: #FFFEF5; border-radius: 0 0 20px 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(255,193,7,.15), 0 2px 8px rgba(0,0,0,.05), 4px 4px 0 rgba(255,107,53,.12); border: 2px solid rgba(255,193,7,.3); border-top: none; animation: cardIn .6s .25s both; }
+    .rsvp-content { padding: 16px 24px 28px 60px; }
+    .rsvp-subtext { text-align: center; font-size: .5rem; letter-spacing: .18em; text-transform: uppercase; color: #FF8E53; margin-bottom: 24px; }
+    .rsvp-thanks { text-align: center; padding: 24px 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .rsvp-thanks-emoji { font-size: 60px; }
+    .rsvp-thanks-name { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #FF6B35; }
+    .rsvp-thanks-sub { font-size: .95rem; color: #666; }
+    .rsvp-form { max-width: 320px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+    .rsvp-field { border-bottom: 2px solid #FFD93D; padding-bottom: 6px; }
+    .rsvp-input { width: 100%; background: transparent; border: none; outline: none; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: #2D2D2D; }
+    textarea.rsvp-input { resize: none; }
+    .rsvp-submit { padding: 14px; border-radius: 999px; cursor: pointer; background: linear-gradient(135deg,#FF6B35,#FF8E53); border: none; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; color: #fff; box-shadow: 0 4px 20px rgba(255,107,53,.4); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .wa-btn { display: inline-block; padding: 12px 32px; border-radius: 999px; background: linear-gradient(135deg,#25d366,#128c50); font-weight: 800; font-size: .5rem; letter-spacing: .25em; text-transform: uppercase; color: #fff; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,.4); }
 
-/* ── COUNTDOWN ── */
-.countdown-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.cd-box{
-  text-align:center;min-width:68px;padding:16px;border-radius:16px;position:relative;
-  background:linear-gradient(135deg,rgba(70,15,120,.8),rgba(35,5,70,.9));
-  border:1.5px solid rgba(180,80,255,.3);
-  box-shadow:0 0 20px rgba(140,0,200,.15),inset 0 1px 0 rgba(180,80,255,.1);
-  transition:transform .2s;
-}
-.cd-box:hover{transform:scale(1.06)}
-.cd-val{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 20px rgba(232,121,249,.7);line-height:1}
-.cd-lbl{font-size:.4rem;letter-spacing:.25em;color:rgba(200,140,255,.75);margin-top:6px;text-transform:uppercase}
-.cd-date-row{
-  display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
-  font-size:.42rem;letter-spacing:.18em;color:rgba(180,120,255,.65);text-transform:uppercase;
-}
-.cd-line{height:1px;width:36px;flex-shrink:0}
-.cd-line-l{background:linear-gradient(to right,transparent,rgba(180,80,255,.45))}
-.cd-line-r{background:linear-gradient(to left,transparent,rgba(180,80,255,.45))}
-
-/* ── PROGRAM ── */
-.program-list{position:relative}
-.program-timeline{position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(180,80,255,.5),rgba(180,80,255,.05))}
-.program-item{
-  display:flex;gap:16px;align-items:flex-start;
-  padding:14px 0;border-bottom:1px solid rgba(180,80,255,.1);
-}
-.program-item:last-child{border-bottom:none}
-.prog-dot-col{flex-shrink:0;width:38px;display:flex;justify-content:center;margin-top:4px}
-.prog-dot{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,#e879f9,rgba(160,60,220,.5));box-shadow:0 0 10px rgba(232,121,249,.7)}
-.prog-time{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:#e879f9;font-weight:700}
-.prog-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(240,200,255,.9);margin-top:2px}
-.prog-desc{font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,120,255,.65);margin-top:3px}
-
-/* ── GALLERY ── */
-.gallery-porthole-wrap{position:relative;width:260px;height:260px;margin:0 auto 20px}
-.gallery-porthole{
-  position:absolute;inset:0;border-radius:50%;overflow:hidden;
-  background:rgba(15,2,30,.9);
-  border:8px solid rgba(60,10,100,.85);
-  box-shadow:0 0 0 2px rgba(180,80,255,.3),0 0 40px rgba(140,0,200,.22),inset 0 0 30px rgba(0,0,0,.6);
-}
-.gallery-porthole img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s}
-.gallery-vignette{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 60%,rgba(10,0,20,.8) 100%)}
-.gallery-glare{position:absolute;top:10%;left:12%;width:35%;height:30%;background:radial-gradient(ellipse,rgba(255,200,255,.07),transparent);pointer-events:none}
-.gallery-caption{text-align:center;margin-bottom:16px}
-.gallery-cap-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(240,200,255,.88)}
-.gallery-cap-count{font-size:.38rem;letter-spacing:.25em;color:rgba(180,120,255,.55);text-transform:uppercase;margin-top:4px}
-.gallery-controls{display:flex;align-items:center;justify-content:center;gap:16px}
-.gallery-btn{
-  width:40px;height:40px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(90,20,140,.7),rgba(50,10,90,.9));
-  border:1.5px solid rgba(180,80,255,.38);color:#e879f9;font-size:1.4rem;
-  box-shadow:0 4px 16px rgba(140,0,200,.22);cursor:pointer;
-  transition:transform .15s,box-shadow .15s;line-height:1;
-}
-.gallery-btn:hover{transform:scale(1.1);box-shadow:0 4px 24px rgba(180,80,255,.45)}
-.gallery-btn:active{transform:scale(.9)}
-.gallery-dots{display:flex;gap:7px;align-items:center}
-.gallery-dot{height:8px;border-radius:4px;border:none;cursor:pointer;transition:all .25s ease;background:rgba(180,80,255,.25);padding:0}
-
-/* ── RSVP ── */
-.rsvp-note{text-align:center;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(180,120,255,.7);margin-bottom:24px}
-.rsvp-form{max-width:320px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
-.rsvp-field{border-bottom:1.5px solid rgba(180,80,255,.3);padding-bottom:6px}
-.rsvp-field input,.rsvp-field textarea{
-  width:100%;background:transparent;border:none;outline:none;
-  font-family:'Cinzel',serif;font-style:italic;font-size:.95rem;color:#e879f9;
-}
-.rsvp-field textarea{resize:none}
-.rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:rgba(160,80,220,.4)}
-.rsvp-submit{
-  width:100%;padding:13px;border-radius:999px;cursor:pointer;
-  background:linear-gradient(135deg,rgba(140,40,200,.8),rgba(100,20,160,.9));
-  border:1.5px solid rgba(180,80,255,.55);
-  font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
-  letter-spacing:.35em;text-transform:uppercase;color:#e879f9;
-  box-shadow:0 4px 20px rgba(140,0,200,.35);transition:transform .15s,box-shadow .15s;
-}
-.rsvp-submit:hover{box-shadow:0 6px 28px rgba(180,80,255,.55)}
-.rsvp-submit:active{transform:scale(.97)}
-.rsvp-thanks{text-align:center;padding:28px 0;display:flex;flex-direction:column;align-items:center;gap:14px}
-.rsvp-thanks-title{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 30px rgba(232,121,249,.6)}
-.rsvp-thanks-msg{font-family:'Exo 2',sans-serif;font-style:italic;font-size:.9rem;color:rgba(220,180,255,.75)}
-.wa-btn{
-  display:inline-block;padding:12px 32px;border-radius:999px;
-  background:linear-gradient(135deg,#25d366,#128c50);
-  font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
-  letter-spacing:.3em;text-transform:uppercase;color:#fff;text-decoration:none;
-  box-shadow:0 4px 18px rgba(37,211,102,.4);transition:transform .15s,box-shadow .15s;
-}
-.wa-btn:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(37,211,102,.6)}
-
-/* ── FOOTER ── */
-#site-footer{
-  text-align:center;padding:48px 24px;
-  border-top:1px solid rgba(180,80,255,.15);
-  background:rgba(5,0,15,.75);
-}
-.footer-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
-.footer-name{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#e879f9;text-shadow:0 0 30px rgba(232,121,249,.5);margin-bottom:4px}
-.footer-cumple{font-family:'Cinzel',serif;font-style:italic;font-size:1.1rem;color:rgba(220,180,255,.72);margin-bottom:6px}
-.footer-date{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(180,120,255,.55);margin-bottom:16px}
-.footer-quote{font-family:'Cinzel',serif;font-style:italic;font-size:.9rem;color:rgba(180,80,255,.65);animation:blink 3s infinite}
-.sonar-footer{display:flex;justify-content:center;margin-top:24px}
-.sonar-dot{width:8px;height:8px;border-radius:50%;background:rgba(180,80,255,.65);position:relative}
-.sonar-wave{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(192,132,252,.22);
-  top:50%;left:50%;
-  animation:sonar-expand 2s ease-out infinite;
-}
-@keyframes sonar-expand{
-  from{width:8px;height:8px;transform:translate(-50%,-50%);opacity:.5}
-  to{width:52px;height:52px;transform:translate(-50%,-50%);opacity:0}
-}
-</style>
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 48px 24px; border-top: 2px solid rgba(255,107,53,.1); background: linear-gradient(180deg,rgba(255,249,240,0),rgba(255,240,224,.6)); }
+    .footer-mascot { margin-bottom: 12px; animation: float 3s ease-in-out infinite; display: flex; justify-content: center; }
+    .footer-name { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #FF6B35; text-shadow: 2px 2px 0 #FFD93D; margin-bottom: 4px; }
+    .footer-sub { font-weight: 700; font-size: .95rem; color: #888; margin-bottom: 4px; }
+    .footer-date { font-size: .42rem; letter-spacing: .18em; text-transform: uppercase; color: #FF8E53; margin-bottom: 20px; }
+    .footer-quote { font-style: italic; font-size: .88rem; color: rgba(255,107,53,.6); margin-bottom: 24px; }
+    .footer-food { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+    .footer-food span { font-size: 20px; opacity: .55; animation: float 2.5s ease-in-out infinite alternate; }
+  </style>
 </head>
 <body>
 
-<div id="ambient"></div>
-<div id="depth-marks"></div>
+<!-- ══ BACKGROUND FOOD ICONS ══ -->
+<div id="bg-food"></div>
 
-<!-- ═══ SPLASH ═══ -->
+<!-- ══ SPLASH ══ -->
 <div id="splash" onclick="closeSplash()">
-  <div class="water-line" style="top:22%;background:linear-gradient(to right,transparent,rgba(140,60,200,.12),transparent);animation-duration:5s"></div>
-  <div class="water-line" style="top:42%;background:linear-gradient(to right,transparent,rgba(160,80,220,.14),transparent);animation-duration:4s;animation-delay:.5s"></div>
-  <div class="water-line" style="top:63%;background:linear-gradient(to right,transparent,rgba(120,40,180,.1),transparent);animation-duration:6s;animation-delay:1s"></div>
-  <div class="water-line" style="top:80%;background:linear-gradient(to right,transparent,rgba(180,100,240,.09),transparent);animation-duration:4.5s;animation-delay:.3s"></div>
-
-  <div class="sonar-ring" style="width:300px;height:300px;animation-duration:3s"></div>
-  <div class="sonar-ring" style="width:440px;height:440px;animation-duration:3.6s;animation-delay:.4s"></div>
-  <div class="sonar-ring" style="width:580px;height:580px;animation-duration:4.2s;animation-delay:.8s"></div>
-
+  <div id="confetti-container"></div>
   <div class="splash-inner">
-    <div class="splash-label">◈ MISIÓN DE EXPLORACIÓN ◈</div>
-    <div class="splash-sub-wrap" id="splash-sub"></div>
-
-    <!-- Porthole foto en splash -->
-    <div class="splash-porthole-wrap">
-      <div class="porthole-wrap" style="width:140px;height:140px">
-        <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(180,80,255,.55),0 0 35px rgba(160,60,220,.6),0 0 70px rgba(140,0,200,.22)"></div>
-        <div class="porthole-bezel" style="inset:11px"></div>
-        <div class="porthole-glass" style="inset:20px">
-          <img id="splash-photo" src="" alt=""/>
-          <div class="porthole-glare"></div>
-          <div class="porthole-tint"></div>
-        </div>
-        <div id="splash-bolts"></div>
-        <div class="porthole-shine"></div>
-      </div>
+    <div style="animation: bounceIn .6s both; display:flex; justify-content:center;">
+      <!-- Chef SVG mascot -->
+      <svg width="100" height="135" viewBox="0 0 90 122" fill="none">
+        <ellipse cx="45" cy="22" rx="20" ry="8" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+        <rect x="28" y="14" width="34" height="18" rx="4" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+        <path d="M32 22 Q36 14 40 22" fill="white" stroke="#ddd" stroke-width="1"/>
+        <path d="M40 22 Q44 14 48 22" fill="white" stroke="#ddd" stroke-width="1"/>
+        <path d="M48 22 Q52 14 56 22" fill="white" stroke="#ddd" stroke-width="1"/>
+        <rect x="28" y="28" width="34" height="5" rx="2" fill="#FF6B35" opacity="0.9"/>
+        <circle cx="45" cy="46" r="16" fill="#FDDBB4" stroke="#F0A868" stroke-width="1.2"/>
+        <path d="M30 44 Q29 36 36 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M60 44 Q61 36 54 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <ellipse cx="39" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
+        <ellipse cx="51" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
+        <circle cx="40" cy="43" r="1" fill="white"/>
+        <circle cx="52" cy="43" r="1" fill="white"/>
+        <ellipse cx="35" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
+        <ellipse cx="55" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
+        <path d="M40 52 Q45 57 50 52" stroke="#CC6644" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <rect x="41" y="61" width="8" height="6" rx="2" fill="#FDDBB4"/>
+        <path d="M22 68 Q22 62 45 62 Q68 62 68 68 L72 102 Q72 108 45 108 Q18 108 18 102 Z" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+        <rect x="35" y="82" width="20" height="14" rx="5" fill="none" stroke="#FF6B35" stroke-width="1.2" opacity="0.6"/>
+        <path d="M30 68 Q37 64 45 65 Q53 64 60 68" fill="none" stroke="#FF6B35" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M30 68 Q28 62 34 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M60 68 Q62 62 56 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M22 75 Q8 80 10 92" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <path d="M68 75 Q80 78 82 90" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <line x1="82" y1="90" x2="87" y2="115" stroke="#A0735A" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M82 90 Q84 100 83 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M82 90 Q87 98 86 107" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M82 90 Q78 99 80 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="83" cy="108" rx="4" ry="3" fill="none" stroke="#A0735A" stroke-width="1.2"/>
+        <rect x="33" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
+        <rect x="46" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
+        <ellipse cx="39" cy="122" rx="8" ry="4" fill="#3D2314"/>
+        <ellipse cx="52" cy="122" rx="8" ry="4" fill="#3D2314"/>
+      </svg>
     </div>
-
-    <div class="splash-text-wrap">
-      <span id="splash-name" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2.6rem,13vw,4.5rem);color:#e879f9;text-shadow:0 0 40px rgba(232,121,249,.7),0 0 80px rgba(232,121,249,.3);line-height:1"></span>
-      <div style="background:linear-gradient(90deg,rgba(60,10,100,.6),rgba(160,60,220,.45),rgba(60,10,100,.6));border:1px solid rgba(180,80,255,.38);border-radius:4px;padding:4px 24px">
-        <span style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(220,160,255,.95);font-weight:600">CUMPLE</span>
-      </div>
-      <span id="splash-age" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(3.8rem,18vw,7rem);color:#e879f9;text-shadow:0 0 50px rgba(232,121,249,.8),0 0 100px rgba(232,121,249,.3);line-height:1"></span>
+    <div class="splash-label">✦ MISIÓN CULINARIA ESPECIAL ✦</div>
+    <div class="splash-photo">
+      <img src="https://images.unsplash.com/photo-1678285901330-bb80e5432cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80" alt="Sofía" />
     </div>
-
-    <p class="splash-tap">▼ Toca para sumergirte ▼</p>
+    <div class="splash-name">Sofía</div>
+    <div class="splash-badge">CUMPLE</div>
+    <div class="splash-age">5</div>
+    <p class="splash-tap">▼ Toca para ingresar a la cocina ▼</p>
   </div>
-  <div class="sonar-ping"></div>
 </div>
 
-<!-- ═══ MAIN ═══ -->
-<div id="main">
+<!-- ══ MAIN CONTENT ══ -->
+<div id="main-content">
 
-  <!-- ── HERO ── -->
-  <div class="hero-card">
-    <div class="hull-stripe"></div>
-    <div class="hull-line"></div>
-    <div class="hero-body">
-      <div class="hero-sonar">
-        <div class="hero-sonar-ring" style="width:200px;height:200px;animation-duration:3s"></div>
-        <div class="hero-sonar-ring" style="width:310px;height:310px;animation-duration:3.7s;animation-delay:.5s"></div>
-        <div class="hero-sonar-ring" style="width:420px;height:420px;animation-duration:4.4s;animation-delay:1s"></div>
-      </div>
-      <div class="hero-float" id="hero-sub"></div>
-      <div class="mission-label">◈ MISIÓN SUBMARINA ESPECIAL ◈</div>
-
-      <div style="display:flex;justify-content:center;margin-bottom:16px">
-        <div class="porthole-wrap" style="width:210px;height:210px">
-          <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(180,80,255,.55),0 0 45px rgba(160,60,220,.6),0 0 90px rgba(140,0,200,.22),inset 0 2px 4px rgba(255,200,255,.06)"></div>
-          <div class="porthole-bezel" style="inset:11px"></div>
-          <div class="porthole-glass" style="inset:20px">
-            <img id="hero-photo" src="" alt=""/>
-            <div class="porthole-glare"></div>
-            <div class="porthole-tint"></div>
-          </div>
-          <div id="hero-bolts"></div>
-          <div class="porthole-shine"></div>
+  <!-- HERO CARD -->
+  <div class="apron-card">
+    <!-- Banner top -->
+    <div class="hero-banner">
+      <svg class="hero-banner-svg" width="100%" height="80" viewBox="0 0 420 80" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="heroBannerGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FF6B35"/>
+            <stop offset="40%" stop-color="#FF8E53"/>
+            <stop offset="60%" stop-color="#FF8E53"/>
+            <stop offset="100%" stop-color="#FF6B35"/>
+          </linearGradient>
+        </defs>
+        <rect width="420" height="62" fill="url(#heroBannerGrad)"/>
+        <path d="M0,62 Q10,80 20,62 Q30,44 40,62 Q50,80 60,62 Q70,44 80,62 Q90,80 100,62 Q110,44 120,62 Q130,80 140,62 Q150,44 160,62 Q170,80 180,62 Q190,44 200,62 Q210,80 220,62 Q230,44 240,62 Q250,80 260,62 Q270,44 280,62 Q290,80 300,62 Q310,44 320,62 Q330,80 340,62 Q350,44 360,62 Q370,80 380,62 Q390,44 400,62 Q410,80 420,62 L420,80 L0,80 Z" fill="#FFF9F0"/>
+        <rect width="420" height="5" fill="rgba(255,217,61,0.7)"/>
+        <rect x="0" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="10" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="20" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="30" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="40" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="50" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="60" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="70" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="80" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="90" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="100" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="110" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="120" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="130" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="140" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="150" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="160" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="170" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="180" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="190" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="200" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="210" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="220" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="230" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="240" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="250" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="260" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="270" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="280" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="290" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="300" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="310" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="320" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="330" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="340" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="350" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="360" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="370" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="380" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="390" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+        <rect x="400" y="5" width="10" height="6" fill="rgba(255,217,61,0.55)"/>
+        <rect x="410" y="5" width="10" height="6" fill="rgba(255,255,255,0.15)"/>
+      </svg>
+      <div class="hero-banner-text">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="flex-shrink:0;opacity:.9">
+          <ellipse cx="14" cy="10" rx="10" ry="4" fill="white" opacity="0.9"/>
+          <rect x="6" y="8" width="16" height="10" rx="2" fill="white" opacity="0.9"/>
+          <rect x="6" y="15" width="16" height="4" rx="1" fill="rgba(255,217,61,0.8)"/>
+          <path d="M8 10 Q11 5 14 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
+          <path d="M14 10 Q17 5 20 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
+        </svg>
+        <div style="text-align:center">
+          <div class="hero-banner-title">Fiesta de Cocina</div>
+          <div class="hero-banner-sub">✦ Mini Chefs ✦</div>
         </div>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style="flex-shrink:0;opacity:.9">
+          <ellipse cx="14" cy="10" rx="10" ry="4" fill="white" opacity="0.9"/>
+          <rect x="6" y="8" width="16" height="10" rx="2" fill="white" opacity="0.9"/>
+          <rect x="6" y="15" width="16" height="4" rx="1" fill="rgba(255,217,61,0.8)"/>
+          <path d="M8 10 Q11 5 14 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
+          <path d="M14 10 Q17 5 20 10" fill="white" stroke="rgba(255,107,53,0.3)" stroke-width="0.5"/>
+        </svg>
       </div>
-
-      <span class="hero-name" id="hero-name"></span>
-      <div class="hero-badge-wrap"><div class="hero-badge">CUMPLE</div></div>
-      <span class="hero-age" id="hero-age"></span>
     </div>
 
-    <div class="info-block">
-      <div class="info-header">✦ DATOS DE LA MISIÓN ✦</div>
-      <div class="info-grid">
-        <div class="info-col border-r">
-          <div class="info-lbl" id="i-line1"></div>
-          <div class="info-sub" id="i-line2"></div>
-          <div class="info-day" id="i-day"></div>
-          <div class="info-year" id="i-year"></div>
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="floating-utensil" style="top:12%;left:6%;animation-delay:0s">🍴</div>
+      <div class="floating-utensil" style="top:20%;left:88%;animation-delay:.4s">🥄</div>
+      <div class="floating-utensil" style="top:8%;left:78%;animation-delay:.8s">🔪</div>
+      <div class="floating-utensil" style="top:18%;left:14%;animation-delay:1.2s">🥢</div>
+      <div class="hero-label">✦ FIESTA DE COCINA ESPECIAL ✦</div>
+      <div class="hero-mascot">
+        <svg width="88" height="119" viewBox="0 0 90 122" fill="none">
+          <ellipse cx="45" cy="22" rx="20" ry="8" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+          <rect x="28" y="14" width="34" height="18" rx="4" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+          <path d="M32 22 Q36 14 40 22" fill="white" stroke="#ddd" stroke-width="1"/>
+          <path d="M40 22 Q44 14 48 22" fill="white" stroke="#ddd" stroke-width="1"/>
+          <path d="M48 22 Q52 14 56 22" fill="white" stroke="#ddd" stroke-width="1"/>
+          <rect x="28" y="28" width="34" height="5" rx="2" fill="#FF6B35" opacity="0.9"/>
+          <circle cx="45" cy="46" r="16" fill="#FDDBB4" stroke="#F0A868" stroke-width="1.2"/>
+          <path d="M30 44 Q29 36 36 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M60 44 Q61 36 54 34" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <ellipse cx="39" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
+          <ellipse cx="51" cy="44" rx="3" ry="3.5" fill="#3D2314"/>
+          <circle cx="40" cy="43" r="1" fill="white"/>
+          <circle cx="52" cy="43" r="1" fill="white"/>
+          <ellipse cx="35" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
+          <ellipse cx="55" cy="49" rx="4" ry="2.5" fill="#FFB0A0" opacity="0.5"/>
+          <path d="M40 52 Q45 57 50 52" stroke="#CC6644" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <rect x="41" y="61" width="8" height="6" rx="2" fill="#FDDBB4"/>
+          <path d="M22 68 Q22 62 45 62 Q68 62 68 68 L72 102 Q72 108 45 108 Q18 108 18 102 Z" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+          <rect x="35" y="82" width="20" height="14" rx="5" fill="none" stroke="#FF6B35" stroke-width="1.2" opacity="0.6"/>
+          <path d="M30 68 Q37 64 45 65 Q53 64 60 68" fill="none" stroke="#FF6B35" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M30 68 Q28 62 34 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M60 68 Q62 62 56 60" stroke="#FFD93D" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M22 75 Q8 80 10 92" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M68 75 Q80 78 82 90" stroke="#FDDBB4" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <line x1="82" y1="90" x2="87" y2="115" stroke="#A0735A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M82 90 Q84 100 83 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M82 90 Q87 98 86 107" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M82 90 Q78 99 80 108" stroke="#C8966E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="83" cy="108" rx="4" ry="3" fill="none" stroke="#A0735A" stroke-width="1.2"/>
+          <rect x="33" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
+          <rect x="46" y="108" width="11" height="14" rx="4" fill="#4D96FF" opacity="0.85"/>
+          <ellipse cx="39" cy="122" rx="8" ry="4" fill="#3D2314"/>
+          <ellipse cx="52" cy="122" rx="8" ry="4" fill="#3D2314"/>
+        </svg>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1678285901330-bb80e5432cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80" alt="Sofía" />
         </div>
-        <div class="info-col" style="padding:0 6px">
-          <div class="info-lbl">Hora</div>
-          <div class="info-time" id="i-time"></div>
-          <svg class="sonar-spin" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(180,80,255,.22)" stroke-width="1"/>
-            <circle cx="12" cy="12" r="6"  fill="none" stroke="rgba(180,80,255,.16)" stroke-width="1"/>
-            <line x1="12" y1="12" x2="12" y2="3" stroke="rgba(220,120,255,.75)" stroke-width="1.5" stroke-linecap="round"/>
+        <div class="hero-badge">
+          <svg width="48" height="48" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="#FF6B35"/>
+            <circle cx="18" cy="18" r="15" fill="#FF8E53"/>
+            <ellipse cx="18" cy="10" rx="8" ry="3" fill="white"/>
+            <rect x="11" y="7" width="14" height="7" rx="2" fill="white"/>
+            <rect x="11" y="12" width="14" height="2" rx="1" fill="#FF6B35" opacity="0.8"/>
+            <circle cx="18" cy="20" r="6" fill="#FDDBB4"/>
+            <ellipse cx="15.5" cy="19" rx="1.2" ry="1.4" fill="#3D2314"/>
+            <ellipse cx="20.5" cy="19" rx="1.2" ry="1.4" fill="#3D2314"/>
+            <path d="M16 22 Q18 24 20 22" stroke="#CC6644" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <line x1="26" y1="15" x2="29" y2="28" stroke="#FFD93D" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="26" cy="14" r="2.5" fill="none" stroke="#FFD93D" stroke-width="1.5"/>
           </svg>
         </div>
-        <div class="info-col border-l">
-          <div class="info-lbl">Lugar</div>
-          <div class="info-venue" id="i-venue"></div>
-          <div class="info-addr" id="i-addr"></div>
+      </div>
+      <div class="hero-name">Sofía</div>
+      <div class="hero-pill">MINI CHEF CUMPLE</div>
+      <div class="hero-age">5</div>
+      <div class="hero-tagline">¡Cocinamos juntos esta celebración! 🎂</div>
+
+      <div class="info-grid">
+        <div class="info-grid-header">🍳 DATOS DE LA CELEBRACIÓN 🍳</div>
+        <div class="info-grid-cols">
+          <div class="info-col">
+            <div class="info-icon">📅</div>
+            <div class="info-lbl">Sábado</div>
+            <div class="info-sub">Octubre</div>
+            <div class="info-day">3</div>
+            <div class="info-foot">2026</div>
+          </div>
+          <div class="info-col">
+            <div class="info-icon">⏰</div>
+            <div class="info-lbl">Hora</div>
+            <div class="info-time">3:00 PM</div>
+            <div class="info-foot">🍽️</div>
+          </div>
+          <div class="info-col">
+            <div class="info-icon">📍</div>
+            <div class="info-lbl">Lugar</div>
+            <div class="info-venue">Cocina de las Delicias</div>
+            <div class="info-foot">Av. Pastelería #123, Col. Sabor</div>
+          </div>
+        </div>
+        <div class="info-rsvp">
+          <div class="info-rsvp-label">◈ RSVP a Mamá ◈</div>
+          <div class="info-rsvp-phone">1234567890</div>
         </div>
       </div>
-      <div class="rsvp-strip">
-        <div class="rsvp-strip-lbl" id="i-rsvp-lbl"></div>
-        <div class="rsvp-strip-phone" id="i-phone"></div>
-      </div>
     </div>
-    <div class="hull-line"></div>
-    <div class="hull-stripe"></div>
+
+    <!-- Checkered ribbon bottom -->
+    <svg class="checkered-ribbon" width="100%" height="12" viewBox="0 0 420 12" preserveAspectRatio="none">
+      <rect x="0" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="16" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="32" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="48" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="64" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="80" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="96" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="112" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="128" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="144" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="160" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="176" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="192" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="208" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="224" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="240" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="256" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="272" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="288" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="304" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="320" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="336" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="352" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="368" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="384" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="400" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+    </svg>
   </div>
 
-  <!-- ── COUNTDOWN ── -->
-  <div class="sub-card" style="animation-delay:.1s">
-    <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div>
-    <div class="screw bl"></div><div class="screw br"></div>
-    <div class="card-body">
-      <div class="eyebrow">
-        <div class="eyebrow-line cd-line-l"></div>
-        <span class="eyebrow-text">Sistema de Navegación</span>
-        <div class="eyebrow-line cd-line-r"></div>
+  <!-- COUNTDOWN CARD -->
+  <div class="rolling-pin-card">
+    <!-- Rolling pin top -->
+    <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block">
+      <defs>
+        <linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#FF6B35"/><stop offset="50%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FF6B35"/>
+        </linearGradient>
+        <linearGradient id="handleGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FF8E53"/><stop offset="100%" stop-color="#CC4A18"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+      <rect x="0" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
+      <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+      <line x1="90" y1="10" x2="90" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="130" y1="10" x2="130" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="170" y1="10" x2="170" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="210" y1="10" x2="210" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="250" y1="10" x2="250" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="290" y1="10" x2="290" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <line x1="330" y1="10" x2="330" y2="34" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+      <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+      <rect x="368" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+    </svg>
+    <div class="rolling-pin-content">
+      <!-- Chef hat banner -->
+      <svg width="100%" height="56" viewBox="0 0 420 56" preserveAspectRatio="none" style="display:block;margin-bottom:16px">
+        <defs>
+          <linearGradient id="hatBg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FFF3E0"/><stop offset="50%" stop-color="#FFF9F4"/><stop offset="100%" stop-color="#FFF3E0"/>
+          </linearGradient>
+        </defs>
+        <rect width="420" height="56" fill="url(#hatBg)"/>
+        <rect x="0" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="16" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="32" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="48" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="64" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="80" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="96" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="112" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="128" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="144" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="160" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="176" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="192" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="208" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="224" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="240" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="256" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="272" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="288" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="304" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="320" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="336" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="352" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="368" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <rect x="384" y="46" width="16" height="10" fill="#FF6B35" opacity="0.75"/>
+        <rect x="400" y="46" width="16" height="10" fill="#FFD93D" opacity="0.75"/>
+        <g transform="translate(210,4) scale(0.9)">
+          <ellipse cx="0" cy="14" rx="22" ry="20" fill="white" stroke="#FF6B35" stroke-width="1.5"/>
+          <ellipse cx="-10" cy="10" rx="14" ry="16" fill="white" stroke="#FF6B35" stroke-width="1"/>
+          <ellipse cx="10" cy="10" rx="14" ry="16" fill="white" stroke="#FF6B35" stroke-width="1"/>
+          <rect x="-18" y="28" width="36" height="8" rx="2" fill="#FF6B35" opacity="0.85"/>
+          <ellipse cx="-4" cy="8" rx="5" ry="7" fill="rgba(255,255,255,0.5)"/>
+        </g>
+      </svg>
+
+      <div class="section-header">
+        <div class="section-label">Cocina de Cuenta Regresiva</div>
+        <div class="section-emoji">⏳</div>
+        <div class="section-title">¡Faltan...</div>
+        <div class="section-divider"></div>
       </div>
-      <div class="section-title">Cuenta Regresiva</div>
-      <div class="countdown-grid">
-        <div class="cd-box"><div class="cd-val" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
+      <div class="countdown-tiles">
+        <div class="countdown-tile"><div class="countdown-val" id="cd-d">00</div><div class="countdown-lbl">Días</div></div>
+        <div class="countdown-tile"><div class="countdown-val" id="cd-h">00</div><div class="countdown-lbl">Horas</div></div>
+        <div class="countdown-tile"><div class="countdown-val" id="cd-m">00</div><div class="countdown-lbl">Min</div></div>
+        <div class="countdown-tile"><div class="countdown-val" id="cd-s">00</div><div class="countdown-lbl">Seg</div></div>
       </div>
-      <div class="cd-date-row">
-        <div class="cd-line cd-line-l"></div>
-        <span id="cd-display"></span>
-        <div class="cd-line cd-line-r"></div>
-      </div>
+      <div class="countdown-date">📅 Sábado, 3 de Octubre 2026</div>
     </div>
+    <!-- Rolling pin bottom (flipped) -->
+    <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block;transform:scaleY(-1)">
+      <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+      <rect x="0" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+      <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
+      <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+      <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+      <rect x="368" y="18" width="52" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+    </svg>
   </div>
 
-  <!-- ── PROGRAM ── -->
-  <div class="sub-card" style="animation-delay:.15s">
-    <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div>
-    <div class="screw bl"></div><div class="screw br"></div>
-    <div class="card-body">
-      <div class="eyebrow">
-        <div class="eyebrow-line cd-line-l"></div>
-        <span class="eyebrow-text">Bitácora de Misión</span>
-        <div class="eyebrow-line cd-line-r"></div>
+  <!-- PROGRAM CARD -->
+  <div class="recipe-card">
+    <div class="recipe-content">
+      <div class="section-header">
+        <div class="section-label">Receta del Día</div>
+        <div class="section-emoji">📋</div>
+        <div class="section-title">Programa Culinario</div>
+        <div class="section-divider"></div>
       </div>
-      <div class="section-title">Programa del Día</div>
       <div class="program-list">
         <div class="program-timeline"></div>
-        <div id="program-items"></div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🧁</div></div>
+          <div><div class="program-time">2:30 pm</div><div class="program-title">Bienvenida a la cocina</div><div class="program-desc">Recepción de los pequeños chefs</div></div>
+        </div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🍳</div></div>
+          <div><div class="program-time">3:00 pm</div><div class="program-title">Ponerse el delantal</div><div class="program-desc">¡Cada mini chef listo para cocinar!</div></div>
+        </div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🍰</div></div>
+          <div><div class="program-time">3:30 pm</div><div class="program-title">Decoración de cupcakes</div><div class="program-desc">Taller estrella del día</div></div>
+        </div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🎂</div></div>
+          <div><div class="program-time">4:30 pm</div><div class="program-title">El pastel y los deseos</div><div class="program-desc">¡Soplamos las velas juntos!</div></div>
+        </div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🍕</div></div>
+          <div><div class="program-time">5:00 pm</div><div class="program-title">Hora de comer</div><div class="program-desc">¡A disfrutar lo que cocinamos!</div></div>
+        </div>
+        <div class="program-item">
+          <div class="program-icon-wrap"><div class="program-icon">🎁</div></div>
+          <div><div class="program-time">6:00 pm</div><div class="program-title">Receta de recuerdo</div><div class="program-desc">Cada chef se va con su kit especial</div></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── GALLERY ── -->
-  <div class="sub-card" style="animation-delay:.2s">
-    <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div>
-    <div class="screw bl"></div><div class="screw br"></div>
-    <div class="card-body">
-      <div class="eyebrow">
-        <div class="eyebrow-line cd-line-l"></div>
-        <span class="eyebrow-text">Archivo Visual</span>
-        <div class="eyebrow-line cd-line-r"></div>
+  <!-- GALLERY CARD -->
+  <div class="cutting-board-card">
+    <!-- Top wood strip -->
+    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block">
+      <rect width="420" height="16" fill="#D4A85A" opacity="0.25"/>
+      <line x1="0" y1="0" x2="420" y2="2" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+      <line x1="0" y1="3" x2="420" y2="5" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+      <line x1="0" y1="6" x2="420" y2="8" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+      <line x1="0" y1="9" x2="420" y2="11" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+    </svg>
+    <div class="gallery-content">
+      <div class="section-header">
+        <div class="section-label">Álbum de Recetas</div>
+        <div class="section-emoji">📸</div>
+        <div class="section-title">Galería</div>
+        <div class="section-divider"></div>
       </div>
-      <div class="section-title">Galería</div>
-      <div class="gallery-porthole-wrap">
-        <div class="gallery-porthole">
-          <img id="gallery-img" src="" alt=""/>
-          <div class="gallery-vignette"></div>
-          <div class="gallery-glare"></div>
+      <div class="gallery-photo-wrap" id="gallery-wrap">
+        <img id="gallery-img" src="" alt="" />
+        <div class="gallery-badge">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="rgba(255,107,53,0.85)"/>
+            <ellipse cx="18" cy="11" rx="9" ry="4" fill="white"/>
+            <rect x="11" y="7" width="14" height="8" rx="3" fill="white"/>
+            <path d="M13 11 Q15 7 17 11" fill="white" stroke="#eee" stroke-width="0.8"/>
+            <path d="M17 11 Q19 7 21 11" fill="white" stroke="#eee" stroke-width="0.8"/>
+            <path d="M21 11 Q23 7 25 11" fill="white" stroke="#eee" stroke-width="0.8"/>
+            <rect x="11" y="13" width="14" height="3" rx="1.5" fill="#FFD93D"/>
+            <line x1="15" y1="20" x2="14" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="21" y1="20" x2="22" y2="30" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 20 Q18 16 21 20" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <ellipse cx="18" cy="29" rx="3" ry="1.5" fill="none" stroke="white" stroke-width="1"/>
+          </svg>
         </div>
-        <div id="gallery-bolts"></div>
       </div>
       <div class="gallery-caption">
-        <div class="gallery-cap-title" id="gallery-cap"></div>
-        <div class="gallery-cap-count" id="gallery-count"></div>
+        <div class="gallery-caption-text" id="gallery-cap"></div>
+        <div class="gallery-counter" id="gallery-counter"></div>
       </div>
       <div class="gallery-controls">
-        <button class="gallery-btn" onclick="galleryGo(-1)" aria-label="Anterior">&#8249;</button>
+        <button class="gallery-btn" onclick="galleryGo(-1)">‹</button>
         <div class="gallery-dots" id="gallery-dots"></div>
-        <button class="gallery-btn" onclick="galleryGo(1)" aria-label="Siguiente">&#8250;</button>
+        <button class="gallery-btn" onclick="galleryGo(1)">›</button>
       </div>
     </div>
+    <!-- Bottom wood strip -->
+    <svg width="100%" height="16" viewBox="0 0 420 16" preserveAspectRatio="none" style="display:block">
+      <rect width="420" height="16" fill="#D4A85A" opacity="0.25"/>
+      <line x1="0" y1="2" x2="420" y2="0" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+      <line x1="0" y1="5" x2="420" y2="3" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+      <line x1="0" y1="8" x2="420" y2="6" stroke="#C49040" stroke-width="0.8" opacity="0.3"/>
+    </svg>
   </div>
 
-  <!-- ── RSVP ── -->
-  <div class="sub-card" style="animation-delay:.25s">
-    <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div>
-    <div class="screw bl"></div><div class="screw br"></div>
-    <div class="card-body">
-      <div class="eyebrow">
-        <div class="eyebrow-line cd-line-l"></div>
-        <span class="eyebrow-text">Comunicado al Mando</span>
-        <div class="eyebrow-line cd-line-r"></div>
+  <!-- RSVP CARD -->
+  <div class="notepad-card">
+    <!-- Notepad top border -->
+    <svg width="100%" height="40" viewBox="0 0 420 40" preserveAspectRatio="none" style="display:block">
+      <defs>
+        <linearGradient id="noteGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FFECB3"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="420" height="40" fill="url(#noteGrad)"/>
+      <ellipse cx="30" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="30" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M20,12 Q30,4 40,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="80" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="80" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M70,12 Q80,4 90,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="130" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="130" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M120,12 Q130,4 140,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="180" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="180" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M170,12 Q180,4 190,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="230" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="230" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M220,12 Q230,4 240,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="280" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="280" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M270,12 Q280,4 290,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="330" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="330" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M320,12 Q330,4 340,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <ellipse cx="380" cy="20" rx="10" ry="8" fill="white" opacity="0.8"/>
+      <ellipse cx="380" cy="20" rx="10" ry="8" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+      <path d="M370,12 Q380,4 390,12" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.5"/>
+      <line x1="52" y1="0" x2="52" y2="40" stroke="#FF6B35" stroke-width="1.5" opacity="0.4"/>
+    </svg>
+    <div class="rsvp-content">
+      <div class="section-header">
+        <div class="section-label">¡Queremos Contarte!</div>
+        <div class="section-emoji">✉️</div>
+        <div class="section-title">Confirmar Asistencia</div>
+        <div class="section-divider"></div>
       </div>
-      <div class="section-title">Confirmar Asistencia</div>
-      <p class="rsvp-note" id="rsvp-note"></p>
-      <div id="rsvp-content">
-        <form class="rsvp-form" onsubmit="submitRsvp(event)">
-          <div class="rsvp-field"><input type="text" id="rsvp-name" placeholder="Nombre completo" required autocomplete="name"/></div>
-          <div class="rsvp-field"><input type="text" id="rsvp-guests" placeholder="Número de invitados (ej: 2)" autocomplete="off"/></div>
-          <div class="rsvp-field"><textarea id="rsvp-msg" rows="3" placeholder="Mensaje para la familia…"></textarea></div>
-          <button type="submit" class="rsvp-submit">◈ Confirmar Embarque ◈</button>
-        </form>
+      <p class="rsvp-subtext">RSVP a Mamá · 1234567890</p>
+      <div id="rsvp-thanks" class="rsvp-thanks" style="display:none">
+        <div class="rsvp-thanks-emoji">🎉</div>
+        <div class="rsvp-thanks-name" id="rsvp-thanks-name">¡Gracias!</div>
+        <div class="rsvp-thanks-sub">Tu mensaje está listo 🍳</div>
+        <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
       </div>
+      <form id="rsvp-form" class="rsvp-form" onsubmit="submitRsvp(event)">
+        <div class="rsvp-field">
+          <input type="text" id="rsvp-name" class="rsvp-input" placeholder="Tu nombre completo" required />
+        </div>
+        <div class="rsvp-field">
+          <input type="text" id="rsvp-guests" class="rsvp-input" placeholder="Número de invitados (ej: 2)" />
+        </div>
+        <div class="rsvp-field">
+          <textarea id="rsvp-msg" class="rsvp-input" rows="3" placeholder="Mensaje para la familia…"></textarea>
+        </div>
+        <button type="submit" class="rsvp-submit">🍳 ¡Confirmar mi lugar en la cocina! 🍳</button>
+      </form>
     </div>
   </div>
 
 </div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer id="site-footer">
-  <div class="footer-float" id="footer-sub"></div>
-  <div class="footer-name" id="footer-name"></div>
-  <div class="footer-cumple" id="footer-cumple"></div>
-  <div class="footer-date" id="footer-date"></div>
-  <div class="footer-quote">"A las profundidades y más allá"</div>
-  <div class="sonar-footer">
-    <div class="sonar-dot">
-      <div class="sonar-wave"></div>
-      <div class="sonar-wave" style="animation-delay:.5s"></div>
-      <div class="sonar-wave" style="animation-delay:1s"></div>
-    </div>
+<!-- ══ FOOTER ══ -->
+<footer id="footer" style="display:none">
+  <div style="max-width:300px;margin:0 auto 24px">
+    <svg width="100%" height="44" viewBox="0 0 420 44" preserveAspectRatio="none" style="display:block">
+      <rect x="0" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+      <ellipse cx="52" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="52" y="10" width="316" height="24" rx="12" fill="url(#pinGrad)"/>
+      <rect x="60" y="12" width="300" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+      <ellipse cx="368" cy="22" rx="8" ry="8" fill="#CC4A18"/>
+      <rect x="368" y="16" width="52" height="12" rx="6" fill="url(#handleGrad)"/>
+    </svg>
+  </div>
+  <div class="footer-mascot">
+    <svg width="62" height="68" viewBox="0 0 56 62" fill="none">
+      <ellipse cx="28" cy="8" rx="13" ry="5" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
+      <rect x="17" y="4" width="22" height="12" rx="3" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
+      <path d="M20 9 Q24 4 27 9" fill="white" stroke="#ddd" stroke-width="0.8"/>
+      <path d="M27 9 Q30 4 33 9" fill="white" stroke="#ddd" stroke-width="0.8"/>
+      <rect x="17" y="13" width="22" height="3" rx="1.5" fill="#FF6B35" opacity="0.85"/>
+      <circle cx="28" cy="27" r="11" fill="#FDDBB4" stroke="#F0A868" stroke-width="1"/>
+      <ellipse cx="23.5" cy="26" rx="2" ry="2.3" fill="#3D2314"/>
+      <ellipse cx="32.5" cy="26" rx="2" ry="2.3" fill="#3D2314"/>
+      <circle cx="24.2" cy="25.2" r="0.7" fill="white"/>
+      <circle cx="33.2" cy="25.2" r="0.7" fill="white"/>
+      <ellipse cx="21" cy="30" rx="3" ry="1.8" fill="#FFB0A0" opacity="0.5"/>
+      <ellipse cx="35" cy="30" rx="3" ry="1.8" fill="#FFB0A0" opacity="0.5"/>
+      <path d="M24 32 Q28 36 32 32" stroke="#CC6644" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <path d="M14 40 Q14 36 28 36 Q42 36 42 40 L44 58 Q44 62 28 62 Q12 62 12 58 Z" fill="white" stroke="#FF6B35" stroke-width="1.2"/>
+      <path d="M18 40 Q23 37 28 38 Q33 37 38 40" fill="none" stroke="#FF6B35" stroke-width="1" stroke-linecap="round"/>
+      <path d="M14 43 Q4 47 5 56" stroke="#FDDBB4" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M42 43 Q52 47 51 56" stroke="#FDDBB4" stroke-width="6" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="footer-name">Sofía</div>
+  <div class="footer-sub">¡Cumple 5 con sabor!</div>
+  <div class="footer-date">Sábado, 3 de Octubre 2026</div>
+  <div class="footer-quote">"La cocina es arte, y este día es nuestra obra maestra" 🍰</div>
+  <div style="max-width:300px;margin:0 auto">
+    <svg width="100%" height="12" viewBox="0 0 420 12" preserveAspectRatio="none" style="display:block">
+      <rect x="0" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="16" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="32" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="48" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="64" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="80" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="96" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="112" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="128" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="144" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="160" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="176" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="192" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="208" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="224" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="240" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="256" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="272" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="288" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="304" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="320" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+      <rect x="336" y="0" width="16" height="12" fill="#FFD93D" opacity="0.82"/>
+      <rect x="352" y="0" width="16" height="12" fill="#6BCB77" opacity="0.82"/>
+      <rect x="368" y="0" width="16" height="12" fill="#4D96FF" opacity="0.82"/>
+      <rect x="384" y="0" width="16" height="12" fill="#FF6BDD" opacity="0.82"/>
+      <rect x="400" y="0" width="16" height="12" fill="#FF6B35" opacity="0.82"/>
+    </svg>
+  </div>
+  <div class="footer-food">
+    <span style="animation-delay:0s">🍕</span>
+    <span style="animation-delay:.25s">🍰</span>
+    <span style="animation-delay:.5s">🧁</span>
+    <span style="animation-delay:.75s">🍩</span>
+    <span style="animation-delay:1s">🎂</span>
   </div>
 </footer>
 
 <script>
-/* ══════════════════════════════
-   CONFIG
-══════════════════════════════ */
-var CFG = {
-  name:        "Sofía",
-  age:         5,
-  eventDate:   "2026-10-03T15:00:00",
-  dateDisplay: "Sábado, 3 de Octubre 2026",
-  dateLine1:   "Sábado",
-  dateLine2:   "Octubre",
-  dateDay:     "3",
-  dateYear:    "2026",
-  time:        "3:00 PM",
-  venue:       "Salón de Fiestas",
-  address:     "Dirección del festejo aquí",
-  phone:       "1234567890",
-  rsvpTo:      "Mamá",
-  photo:       "https://images.unsplash.com/photo-1674279293147-4398a39b1847?w=800&q=80",
-  gallery: [
-    { src:"https://images.unsplash.com/photo-1631255661382-e8559e2038f7?w=800&q=80", cap:"La festejada" },
-    { src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap:"El pastel" },
-    { src:"https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap:"La celebración" },
-    { src:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap:"Con amor" },
-    { src:"https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80", cap:"Momentos mágicos" },
-    { src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap:"Recuerdos" },
-  ],
-  program: [
-    { time:"2:30 pm", title:"Embarque de tripulantes",    desc:"Bienvenida a bordo del submarino" },
-    { time:"3:00 pm", title:"Inmersión al fondo del mar", desc:"¡Comienza la aventura oceánica!" },
-    { time:"4:00 pm", title:"El pastel y festejo",        desc:"Celebración mágica 🎂" },
-    { time:"5:00 pm", title:"Exploración marina",         desc:"Juegos y descubrimientos" },
-    { time:"6:00 pm", title:"Regreso a la superficie",    desc:"Gracias por navegar con nosotros ★" },
-  ],
-};
+  /* ── CONFIG ── */
+  const CFG = {
+    name: "Sofía", age: 5,
+    eventDate: "2026-10-03T15:00:00",
+    phone: "1234567890",
+    rsvpTo: "Mamá",
+    dateDisplay: "Sábado, 3 de Octubre 2026",
+    time: "3:00 PM", venue: "Cocina de las Delicias",
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1631224096135-cf6d76693bf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡La Mini Chef en acción!" },
+      { src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Cupcakes de colores" },
+      { src: "https://images.unsplash.com/photo-1611692276815-cd6efa0b2dac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Helados y más!" },
+      { src: "https://images.unsplash.com/photo-1680580735621-4371027734eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Postres mágicos" },
+      { src: "https://images.unsplash.com/photo-1474625342403-1b8a2c0f7215?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "¡Que rico!" },
+      { src: "https://images.unsplash.com/photo-1699206332834-8fa9f45a906c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80", cap: "Mini chef lista" },
+    ]
+  };
 
-/* ══════════════════════════════
-   SUBMARINE SVG (violet)
-══════════════════════════════ */
-var _svgCount = 0;
-function subSVG(w) {
-  var h   = Math.round(w * 0.55);
-  var uid = 'v' + (++_svgCount);
-  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">\n'+
-  '<defs>\n'+
-  '<linearGradient id="hG'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(60,10,90,.95)"/><stop offset="100%" stop-color="rgba(20,3,45,.95)"/></linearGradient>\n'+
-  '<linearGradient id="tG'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(80,15,120,.9)"/><stop offset="100%" stop-color="rgba(40,8,70,.9)"/></linearGradient>\n'+
-  '<linearGradient id="bG'+uid+'" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(40,8,65,.9)"/><stop offset="100%" stop-color="rgba(60,12,90,.95)"/></linearGradient>\n'+
-  '<radialGradient id="pG'+uid+'" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(80,15,120,.9)"/><stop offset="100%" stop-color="rgba(30,5,60,.9)"/></radialGradient>\n'+
-  '<radialGradient id="piG'+uid+'" cx="35%" cy="35%" r="65%"><stop offset="0%" stop-color="rgba(180,80,255,.45)"/><stop offset="100%" stop-color="rgba(40,5,80,.8)"/></radialGradient>\n'+
-  '</defs>\n'+
-  '<ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hG'+uid+')" stroke="rgba(180,80,255,.5)" stroke-width="1.5"/>\n'+
-  '<rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tG'+uid+')" stroke="rgba(180,80,255,.4)" stroke-width="1"/>\n'+
-  '<rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(140,40,200,.7)" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
-  '<rect x="96" y="12" width="16" height="5" rx="2" fill="rgba(140,40,200,.7)" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
-  '<circle cx="112" cy="14.5" r="3" fill="rgba(220,100,255,.85)"/>\n'+
-  '<circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>\n'+
-  '<g transform="translate(195,72)">\n'+
-  '<ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(140,40,200,.6)" stroke="rgba(180,80,255,.4)" stroke-width=".8" transform="rotate(-20)"/>\n'+
-  '<ellipse cx="0" cy="10"  rx="4" ry="10" fill="rgba(140,40,200,.6)" stroke="rgba(180,80,255,.4)" stroke-width=".8" transform="rotate(20)"/>\n'+
-  '<circle cx="0" cy="0" r="4" fill="rgba(180,80,255,.55)" stroke="rgba(220,120,255,.65)" stroke-width="1"/>\n'+
-  '</g>\n'+
-  '<path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bG'+uid+')" stroke="rgba(180,80,255,.4)" stroke-width="1"/>\n'+
-  [55,85,115,145].map(function(cx){
-    return '<circle cx="'+cx+'" cy="72" r="11" fill="url(#pG'+uid+')" stroke="rgba(180,80,255,.5)" stroke-width="1.5"/>\n'+
-           '<circle cx="'+cx+'" cy="72" r="7.5" fill="url(#piG'+uid+')"/>\n'+
-           '<circle cx="'+(cx-3)+'" cy="69" r="2" fill="rgba(255,200,255,.35)"/>\n';
-  }).join('')+
-  '<line x1="103" y1="38" x2="103" y2="28" stroke="rgba(180,80,255,.4)" stroke-width=".8"/>\n'+
-  '<circle cx="103" cy="27" r="1.5" fill="rgba(220,100,255,.85)"/>\n'+
-  [40,60,80,100,120,140,160].map(function(x){
-    return '<rect x="'+x+'" y="100" width="8" height="4" rx="1" fill="none" stroke="rgba(180,80,255,.22)" stroke-width=".8"/>\n';
-  }).join('')+
-  '</svg>';
-}
-
-/* ══════════════════════════════
-   BOLTS
-══════════════════════════════ */
-function makeBolts(container, radius, size) {
-  size = size || 14;
-  [0,45,90,135,180,225,270,315].forEach(function(deg) {
-    var b = document.createElement('div');
-    b.className = 'porthole-bolt';
-    b.style.width      = size+'px';
-    b.style.height     = size+'px';
-    b.style.marginTop  = -(size/2)+'px';
-    b.style.marginLeft = -(size/2)+'px';
-    b.style.transform  = 'rotate('+deg+'deg) translateY(-'+radius+'px)';
-    b.innerHTML =
-      '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" style="position:absolute;inset:0">'+
-      '<line x1="'+(size/2)+'" y1="2" x2="'+(size/2)+'" y2="'+(size-2)+'" stroke="rgba(180,100,255,.5)" stroke-width="1"/>'+
-      '<line x1="2" y1="'+(size/2)+'" x2="'+(size-2)+'" y2="'+(size/2)+'" stroke="rgba(180,100,255,.5)" stroke-width="1"/>'+
-      '</svg>';
-    container.appendChild(b);
+  /* ── BG FOOD ── */
+  const bgFood = document.getElementById('bg-food');
+  ["🍕","🧁","🍳","🥐","🍩","🥧","🍫","🍪","🥞","🍦"].forEach((e, i) => {
+    const d = document.createElement('div');
+    d.className = 'bg-food';
+    d.textContent = e;
+    d.style.left = `${(i*11)%90}%`;
+    d.style.top = `${(i*13)%85}%`;
+    d.style.animationDelay = `${i*0.35}s`;
+    d.style.animationDuration = `${4+i*0.6}s`;
+    bgFood.appendChild(d);
   });
-}
 
-/* ══════════════════════════════
-   BUBBLES
-══════════════════════════════ */
-function createBubbles() {
-  for (var i=0;i<24;i++) {
-    var b  = document.createElement('div');
-    b.className = 'bubble';
-    var x   = Math.random()*100;
-    var sz  = 4+Math.random()*16;
-    var dur = 7+Math.random()*11;
-    var del = Math.random()*10;
-    var op  = 0.1+Math.random()*0.4;
-    b.style.cssText =
-      'left:'+x+'%;bottom:-40px;width:'+sz+'px;height:'+sz+'px;'+
-      'background:radial-gradient(circle at 35% 35%,rgba(200,100,255,'+op+'),transparent);'+
-      'animation-duration:'+dur+'s;animation-delay:'+del+'s';
-    document.body.appendChild(b);
+  /* ── CONFETTI ── */
+  const confettiColors = ["#FF6B6B","#FF8E53","#FFD93D","#6BCB77","#4D96FF","#FF6BDD"];
+  const cc = document.getElementById('confetti-container');
+  for (let i = 0; i < 26; i++) {
+    const d = document.createElement('div');
+    d.className = 'confetti-dot';
+    d.style.width = (10 + Math.random()*14) + 'px';
+    d.style.height = (10 + Math.random()*14) + 'px';
+    d.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+    d.style.left = Math.random()*100 + '%';
+    d.style.top = Math.random()*100 + '%';
+    d.style.background = confettiColors[Math.floor(Math.random()*6)];
+    d.style.opacity = 0.35 + Math.random()*0.4;
+    d.style.animationDuration = (3 + Math.random()*4) + 's';
+    d.style.animationDelay = Math.random()*3 + 's';
+    cc.appendChild(d);
   }
-}
 
-/* ══════════════════════════════
-   FISH
-══════════════════════════════ */
-function createFish() {
-  var svgFish =
-    '<svg width="60" height="28" viewBox="0 0 60 28" fill="none">'+
-    '<ellipse cx="28" cy="14" rx="20" ry="8" fill="rgba(160,60,220,.25)" stroke="rgba(200,100,255,.4)" stroke-width=".8"/>'+
-    '<path d="M48 14 Q56 8 60 14 Q56 20 48 14Z" fill="rgba(160,60,220,.2)" stroke="rgba(200,100,255,.35)" stroke-width=".8"/>'+
-    '<circle cx="16" cy="12" r="2" fill="rgba(220,120,255,.55)"/>'+
-    '<line x1="22" y1="9" x2="22" y2="19" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
-    '<line x1="32" y1="8" x2="32" y2="20" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
-    '<line x1="42" y1="9" x2="42" y2="19" stroke="rgba(200,100,255,.12)" stroke-width=".5"/>'+
-    '</svg>';
-  [{dir:1,y:14},{dir:-1,y:42},{dir:1,y:68}].forEach(function(f) {
-    var el  = document.createElement('div');
-    var dur = 16+Math.random()*12;
-    var del = Math.random()*6;
-    el.className = f.dir>0 ? 'fish-right' : 'fish-left';
-    el.style.cssText = 'top:'+f.y+'%;animation-duration:'+dur+'s;animation-delay:'+del+'s';
-    el.innerHTML = svgFish;
-    document.body.appendChild(el);
+  /* ── SPLASH ── */
+  let splashTimeout = setTimeout(closeSplash, 4500);
+  function closeSplash() {
+    clearTimeout(splashTimeout);
+    const s = document.getElementById('splash');
+    s.classList.add('hiding');
+    setTimeout(() => {
+      s.style.display = 'none';
+      document.getElementById('main-content').classList.add('visible');
+      document.getElementById('footer').style.display = 'block';
+    }, 600);
+  }
+
+  /* ── COUNTDOWN ── */
+  function pad(n) { return String(n).padStart(2,'0'); }
+  function tick() {
+    const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
+    document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── GALLERY ── */
+  let gIdx = 0, gBusy = false;
+  const gImg = document.getElementById('gallery-img');
+  const gCap = document.getElementById('gallery-cap');
+  const gCnt = document.getElementById('gallery-counter');
+  const gDots = document.getElementById('gallery-dots');
+  const gWrap = document.getElementById('gallery-wrap');
+
+  function renderGallery() {
+    const g = CFG.gallery[gIdx];
+    gImg.src = g.src; gImg.alt = g.cap;
+    gCap.textContent = g.cap;
+    gCnt.textContent = String(gIdx+1).padStart(2,'0') + ' / ' + String(CFG.gallery.length).padStart(2,'0');
+    gDots.innerHTML = '';
+    CFG.gallery.forEach((_,i) => {
+      const b = document.createElement('button');
+      b.className = 'gallery-dot' + (i===gIdx?' active':'');
+      b.onclick = () => { if(!gBusy){gIdx=i;renderGallery();} };
+      gDots.appendChild(b);
+    });
+  }
+  function galleryGo(dir) {
+    if(gBusy) return; gBusy=true;
+    gIdx = ((gIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
+    renderGallery();
+    setTimeout(()=>gBusy=false,350);
+  }
+  // Touch swipe
+  let touchX = 0;
+  gWrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  gWrap.addEventListener('touchend', e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if(Math.abs(dx)>40) galleryGo(dx>0?1:-1);
   });
-}
-
-/* ══════════════════════════════
-   DEPTH MARKERS
-══════════════════════════════ */
-function createDepthMarkers() {
-  var el = document.getElementById('depth-marks');
-  [10,50,100,200,300,500].forEach(function(d) {
-    var row = document.createElement('div');
-    row.className = 'depth-mark';
-    var sp = document.createElement('span');
-    sp.textContent = d+'m';
-    row.appendChild(sp);
-    el.appendChild(row);
-  });
-}
-
-/* ══════════════════════════════
-   COUNTDOWN
-══════════════════════════════ */
-function pad(n){return String(n).padStart(2,'0')}
-function updateCountdown() {
-  var diff = Math.max(0, new Date(CFG.eventDate).getTime()-Date.now());
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
-  document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
-  document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
-  document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
-}
-
-/* ══════════════════════════════
-   GALLERY
-══════════════════════════════ */
-var galIdx=0, galBusy=false;
-function renderGallery() {
-  var g   = CFG.gallery[galIdx];
-  var img = document.getElementById('gallery-img');
-  img.style.opacity='0';
-  img.src=g.src; img.alt=g.cap;
-  img.onload=function(){img.style.opacity='1';};
-  document.getElementById('gallery-cap').textContent   = g.cap;
-  document.getElementById('gallery-count').textContent = pad(galIdx+1)+' — '+pad(CFG.gallery.length);
-  var dots=document.getElementById('gallery-dots');
-  dots.innerHTML='';
-  CFG.gallery.forEach(function(_,i){
-    var d=document.createElement('button');
-    d.className='gallery-dot';
-    d.setAttribute('aria-label','Foto '+(i+1));
-    d.style.width =(i===galIdx?24:8)+'px';
-    d.style.background=i===galIdx?'#e879f9':'rgba(180,80,255,.25)';
-    d.onclick=function(){if(!galBusy){galIdx=i;renderGallery();}};
-    dots.appendChild(d);
-  });
-}
-function galleryGo(dir) {
-  if(galBusy)return;
-  galBusy=true;
-  galIdx=((galIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
-  renderGallery();
-  setTimeout(function(){galBusy=false;},380);
-}
-var touchStartX=0;
-document.addEventListener('touchstart',function(e){if(e.target.closest('.gallery-porthole'))touchStartX=e.touches[0].clientX;},{passive:true});
-document.addEventListener('touchend',function(e){
-  if(!e.target.closest('.gallery-porthole'))return;
-  var dx=touchStartX-e.changedTouches[0].clientX;
-  if(Math.abs(dx)>40)galleryGo(dx>0?1:-1);
-});
-
-/* ══════════════════════════════
-   RSVP
-══════════════════════════════ */
-function submitRsvp(e) {
-  e.preventDefault();
-  var name  =document.getElementById('rsvp-name').value.trim();
-  var guests=document.getElementById('rsvp-guests').value.trim();
-  var msg   =document.getElementById('rsvp-msg').value.trim();
-  if(!name)return;
-  var text='¡Hola! Confirmo mi asistencia a la fiesta de *'+CFG.name+'* 🌊\n\n';
-  text+='👤 *Nombre:* '+name+'\n';
-  if(guests)text+='👥 *Invitados:* '+guests+'\n';
-  if(msg)   text+='💬 *Mensaje:* '+msg+'\n';
-  text+='\n📅 '+CFG.dateDisplay+' a las '+CFG.time;
-  text+='\n📍 '+CFG.venue;
-  var phone=CFG.phone.replace(/\D/g,'');
-  var url='https://wa.me/'+phone+'?text='+encodeURIComponent(text);
-  document.getElementById('rsvp-content').innerHTML=
-    '<div class="rsvp-thanks">'+subSVG(120)+
-    '<div class="rsvp-thanks-title">¡Gracias, '+name+'!</div>'+
-    '<div class="rsvp-thanks-msg">Tu mensaje está listo para WhatsApp 💜</div>'+
-    '<a href="'+url+'" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>'+
-    '</div>';
-  window.open(url,'_blank');
-}
-
-/* ══════════════════════════════
-   SPLASH
-══════════════════════════════ */
-var splashTimer=null;
-function closeSplash() {
-  clearTimeout(splashTimer);
-  var sp=document.getElementById('splash');
-  sp.classList.add('hidden');
-  setTimeout(function(){
-    sp.style.display='none';
-    document.getElementById('main').classList.add('visible');
-    document.getElementById('site-footer').style.display='block';
-  },700);
-}
-
-/* ══════════════════════════════
-   INIT
-══════════════════════════════ */
-document.addEventListener('DOMContentLoaded',function(){
-  // splash
-  document.getElementById('splash-photo').src=CFG.photo;
-  document.getElementById('splash-photo').alt=CFG.name;
-  document.getElementById('splash-name').textContent=CFG.name;
-  document.getElementById('splash-age').textContent=CFG.age;
-  document.getElementById('splash-sub').innerHTML=subSVG(190);
-  makeBolts(document.getElementById('splash-bolts'),66,12);
-
-  // hero
-  document.getElementById('hero-sub').innerHTML=subSVG(240);
-  document.getElementById('hero-photo').src=CFG.photo;
-  document.getElementById('hero-photo').alt=CFG.name;
-  document.getElementById('hero-name').textContent=CFG.name;
-  document.getElementById('hero-age').textContent=CFG.age;
-  makeBolts(document.getElementById('hero-bolts'),99,14);
-
-  // info
-  document.getElementById('i-line1').textContent=CFG.dateLine1;
-  document.getElementById('i-line2').textContent=CFG.dateLine2;
-  document.getElementById('i-day').textContent=CFG.dateDay;
-  document.getElementById('i-year').textContent=CFG.dateYear;
-  document.getElementById('i-time').textContent=CFG.time;
-  document.getElementById('i-venue').textContent=CFG.venue;
-  document.getElementById('i-addr').textContent=CFG.address;
-  document.getElementById('i-rsvp-lbl').textContent='◈ RSVP a '+CFG.rsvpTo+' ◈';
-  document.getElementById('i-phone').textContent=CFG.phone;
-
-  // countdown
-  document.getElementById('cd-display').textContent=CFG.dateDisplay;
-  updateCountdown();
-  setInterval(updateCountdown,1000);
-
-  // program
-  var pl=document.getElementById('program-items');
-  CFG.program.forEach(function(item){
-    pl.innerHTML+=
-      '<div class="program-item">'+
-      '<div class="prog-dot-col"><div class="prog-dot"></div></div>'+
-      '<div>'+
-      '<div class="prog-time">'+item.time+'</div>'+
-      '<div class="prog-title">'+item.title+'</div>'+
-      '<div class="prog-desc">'+item.desc+'</div>'+
-      '</div></div>';
-  });
-
-  // gallery
-  makeBolts(document.getElementById('gallery-bolts'),142,12);
   renderGallery();
 
-  // rsvp
-  document.getElementById('rsvp-note').textContent='◈ RSVP a '+CFG.rsvpTo+' · '+CFG.phone+' ◈';
-
-  // footer
-  document.getElementById('footer-sub').innerHTML=subSVG(140);
-  document.getElementById('footer-name').textContent=CFG.name;
-  document.getElementById('footer-cumple').textContent='¡cumple '+CFG.age+'!';
-  document.getElementById('footer-date').textContent=CFG.dateDisplay;
-
-  // ambient
-  createDepthMarkers();
-  createBubbles();
-  createFish();
-
-  splashTimer=setTimeout(closeSplash,4500);
-});
+  /* ── RSVP ── */
+  function submitRsvp(e) {
+    e.preventDefault();
+    const name = document.getElementById('rsvp-name').value;
+    const guests = document.getElementById('rsvp-guests').value;
+    const msg = document.getElementById('rsvp-msg').value;
+    if(!name.trim()) return;
+    let text = `¡Hola! Confirmo mi asistencia a la Fiesta de Cocina de *${CFG.name}* 🍳\n\n`;
+    text += `👤 *Nombre:* ${name}\n`;
+    if(guests) text += `👥 *Invitados:* ${guests}\n`;
+    if(msg) text += `💬 *Mensaje:* ${msg}\n`;
+    text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}`;
+    text += `\n📍 ${CFG.venue}`;
+    const url = `https://wa.me/${CFG.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-thanks').style.display = 'flex';
+    document.getElementById('rsvp-thanks-name').textContent = `¡Gracias, ${name}!`;
+    document.querySelector('#rsvp-thanks .wa-btn').href = url;
+    window.open(url,'_blank');
+  }
 </script>
 </body>
 </html>
