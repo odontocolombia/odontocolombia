@@ -56,9 +56,7 @@ body{
 /* ---------- LAYOUT ---------- */
 .container{ position:relative; z-index:10; max-width:440px; margin:0 auto; padding:1.5rem 1rem 3rem; display:flex; flex-direction:column; gap:1.25rem; }
 .card{ background:rgba(29,8,56,.9); backdrop-filter:blur(10px); border:1.5px solid rgba(255,105,180,.35);
-  border-radius:24px; overflow:hidden; box-shadow:0 6px 30px rgba(10,5,30,.7),0 0 40px rgba(224,64,251,.12); position:relative;
-  opacity:0; transform:scale(0.85) translateY(50px); transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.card.visible{ opacity:1; transform:scale(1) translateY(0); }
+  border-radius:24px; overflow:hidden; box-shadow:0 6px 30px rgba(10,5,30,.7),0 0 40px rgba(224,64,251,.12); position:relative; }
 .card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px;
   background:linear-gradient(to right,transparent,var(--violet),var(--gold),var(--pink),transparent); }
 .card-body{ padding:1.75rem; }
@@ -69,12 +67,157 @@ body{
 .dline-l{ width:36px; height:1px; background:linear-gradient(to right,transparent,var(--pink)); }
 .dline-r{ width:36px; height:1px; background:linear-gradient(to left,transparent,var(--pink)); }
 
+/* ---------- CARD FOLD (EFECTO FLIX STUDIO) ---------- */
+.foldable-card {
+  background:rgba(29,8,56,.9);
+  backdrop-filter:blur(10px);
+  border:1.5px solid rgba(255,105,180,.35);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 6px 30px rgba(10,5,30,.7),0 0 40px rgba(224,64,251,.12);
+  position:relative;
+  transform-style: preserve-3d;
+}
+
+.foldable-card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(to right,transparent,var(--violet),var(--gold),var(--pink),transparent);
+}
+
+.fold-header {
+  padding: 1.25rem 1.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: background 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.fold-header:hover {
+  background: rgba(255,105,180,.08);
+}
+
+.fold-header-content {
+  flex: 1;
+  text-align: center;
+}
+
+.fold-eyebrow {
+  font-size: .55rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--pink);
+  display: block;
+  margin-bottom: .3rem;
+}
+
+.fold-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.7rem, 6.5vw, 2.3rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.fold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: .5rem;
+}
+
+.fold-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), var(--violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(255,110,180,.5);
+}
+
+.foldable-card.open .fold-icon {
+  transform: rotate(180deg);
+}
+
+.fold-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease,
+    padding 0.4s ease;
+  padding: 0 1.75rem;
+  transform-origin: top center;
+}
+
+.foldable-card.open .fold-body {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 0 1.75rem 1.75rem;
+  animation: unfoldFade 0.5s ease 0.15s both;
+}
+
+@keyframes unfoldFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación de despliegue de la tarjeta */
+.foldable-card {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.foldable-card.open {
+  box-shadow:0 10px 40px rgba(10,5,30,.85),0 0 50px rgba(224,64,251,.2);
+}
+
+/* Borde animado al abrir */
+.foldable-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  background: linear-gradient(45deg, var(--pink), var(--gold), var(--violet), var(--pink));
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  animation: borderShift 4s ease infinite;
+}
+
+.foldable-card.open::after {
+  opacity: 0.7;
+}
+
+@keyframes borderShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* ---------- HERO ---------- */
 .hero-card{ background:linear-gradient(170deg,var(--bg1) 0%,var(--bg2) 45%,var(--bg3) 100%);
   border:2px solid rgba(255,105,180,.5); border-radius:24px; overflow:hidden;
-  box-shadow:0 10px 50px rgba(45,10,75,.8),0 0 60px rgba(224,64,251,.2);
-  opacity:0; transform:scale(0.9) translateY(30px); transition:opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
-.hero-card.visible{ opacity:1; transform:scale(1) translateY(0); }
+  box-shadow:0 10px 50px rgba(45,10,75,.8),0 0 60px rgba(224,64,251,.2); }
 .hero-body{ padding:1.25rem 1.5rem .5rem; text-align:center; position:relative; }
 .hero-info{ background:#1E083A; padding:1.5rem 1.25rem 1.75rem; }
 .info-grid{ display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; margin-bottom:1.25rem; }
@@ -207,275 +350,7 @@ const ICONS = {
   star:'<svg viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
 };
 const SPARKLE = c => `<svg width="12" height="12" viewBox="0 0 20 20"><path d="M10 3 Q12 1 14 3 Q16 1 18 3 Q18 8 14 11 Q12 13 10 11 Q8 13 6 11 Q2 8 2 3 Q4 1 6 3 Q8 1 10 3Z" fill="${c}"/></svg>`;
-</script>
 
-<div id="starfield"></div>
-
-<!-- ===== SPLASH ===== -->
-<div id="splash" onclick="closeSplash()">
-  <div class="stripe-pink top-pink"></div><div class="stripe-gold top-gold"></div>
-  <div style="position:relative;z-index:10;text-align:center;padding:0 2rem">
-    <p class="fade-up" style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink)">LLAMANDO A TODAS LAS</p>
-    <p class="fade-up" style="animation-delay:.1s;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:.75rem">GUARDIANAS ESTELARES</p>
-    <div class="pop" style="animation-delay:.3s"><div class="photo-ring"><div class="photo-inner"><img id="splash-photo" src="" alt=""/></div></div></div>
-    <div class="pop" style="animation-delay:.5s"><span class="ts-name" id="splash-name"></span></div>
-    <div class="pop" style="animation-delay:.65s;display:flex;justify-content:center"><div class="cumple-wrap"><span class="cumple">CUMPLE</span></div></div>
-    <div class="pop" style="animation-delay:.8s"><span class="ts-age" id="splash-age"></span></div>
-    <p class="blink" style="font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-top:1rem">★ Toca para abrir ★</p>
-  </div>
-  <div class="stripe-gold bot-gold"></div><div class="stripe-pink bot-pink"></div>
-</div>
-
-<!-- ===== MAIN ===== -->
-<div id="main"><div class="container">
-
-  <!-- HERO -->
-  <div class="hero-card">
-    <div style="height:10px;background:repeating-linear-gradient(90deg,var(--pink) 0,var(--pink) 18px,#fff 18px,#fff 36px)"></div>
-    <div style="height:5px;background:linear-gradient(90deg,var(--gold),var(--violet),var(--gold))"></div>
-    <div class="hero-body">
-      <p style="font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink)">LLAMANDO A TODAS LAS</p>
-      <p style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:.75rem">GUARDIANAS ESTELARES</p>
-      <div style="display:flex;justify-content:center;margin-bottom:.75rem"><div class="photo-ring" style="width:160px;height:160px"><div class="photo-inner"><img id="hero-photo" src="" alt=""/></div></div></div>
-      <span class="ts-name" id="hero-name" style="font-size:clamp(3rem,14vw,5rem)"></span>
-      <div style="display:flex;justify-content:center"><div class="cumple-wrap"><span class="cumple">CUMPLE</span></div></div>
-      <span class="ts-age" id="hero-age" style="font-size:clamp(5rem,20vw,7rem)"></span>
-    </div>
-    <div class="hero-info">
-      <div class="info-grid">
-        <div class="info-date">
-          <div class="lbl-sm" id="info-line1"></div><div class="lbl-xs" id="info-line2"></div>
-          <div class="date-big" id="info-day"></div><div class="year-sm" id="info-year"></div>
-        </div>
-        <div class="info-time"><p class="italic-sm">a las</p><div class="time-big" id="info-time"></div></div>
-        <div class="info-venue"><div class="lbl-xs">Lugar</div><div class="venue-name" id="info-venue"></div><div class="venue-addr" id="info-addr"></div></div>
-      </div>
-      <div class="rsvp-banner"><div class="rsvp-label">♡ RSVP a <span id="rsvp-to"></span> ♡</div><div class="rsvp-phone" id="rsvp-phone"></div></div>
-    </div>
-    <div style="height:5px;background:linear-gradient(90deg,var(--gold),var(--violet),var(--gold))"></div>
-    <div style="height:10px;background:repeating-linear-gradient(90deg,var(--pink) 0,var(--pink) 18px,#fff 18px,#fff 36px)"></div>
-  </div>
-
-  <!-- COUNTDOWN -->
-  <div class="card"><div class="card-body">
-    <div class="title-block"><span class="eyebrow">El Gran Día</span><h2 class="sec-title">Cuenta Regresiva</h2>
-      <div class="divider"><div class="dline-l"></div><span id="cd-spark"></span><div class="dline-r"></div></div></div>
-    <div class="cd-grid">
-      <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
-    </div>
-    <div class="cd-foot" id="cd-date"></div>
-    <div class="cd-tag">¡Prepara tu traje espacial, despegamos pronto!</div>
-  </div></div>
-
-  <!-- PROGRAM -->
-  <div class="card"><div class="card-body">
-    <div class="title-block"><span class="eyebrow">La Misión</span><h2 class="sec-title">Programa del Día</h2>
-      <div class="divider"><div class="dline-l"></div><span id="pr-spark"></span><div class="dline-r"></div></div></div>
-    <div class="timeline" id="program-list"></div>
-  </div></div>
-
-  <!-- GALLERY -->
-  <div class="card"><div class="card-body">
-    <div class="title-block"><span class="eyebrow">Momentos</span><h2 class="sec-title">Galería</h2>
-      <div class="divider"><div class="dline-l"></div><span id="gl-spark"></span><div class="dline-r"></div></div></div>
-    <div class="gal-wrap">
-      <div class="gal-side gal-prev" onclick="galGo(galIdx-1,-1)"><img id="gal-prev-img" src="" alt=""/></div>
-      <div class="gal-main">
-        <img id="gal-img-a" src="" alt="" class="active"/><img id="gal-img-b" src="" alt="" class="enter"/>
-        <div class="gal-overlay"></div>
-        <div class="gal-caption"><div class="gal-cap-title" id="gal-cap"></div><div class="gal-cap-count" id="gal-count"></div></div>
-        <div class="gal-badge">★ GALERÍA</div>
-      </div>
-      <div class="gal-side gal-next" onclick="galGo(galIdx+1,1)"><img id="gal-next-img" src="" alt=""/></div>
-    </div>
-    <div class="gal-nav">
-      <button class="gal-btn" onclick="galGo(galIdx-1,-1)">&#8249;</button>
-      <div class="gal-dots" id="gal-dots"></div>
-      <button class="gal-btn" onclick="galGo(galIdx+1,1)">&#8250;</button>
-    </div>
-  </div></div>
-
-  <!-- RSVP -->
-  <div class="card"><div class="card-body">
-    <div class="title-block"><span class="eyebrow">Confirmar</span><h2 class="sec-title">Asistencia</h2>
-      <div class="divider"><div class="dline-l"></div><span id="rs-spark"></span><div class="dline-r"></div></div></div>
-    <p style="text-align:center;margin-bottom:1.5rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)">
-      ♡ RSVP a <span id="rsvp-to2"></span> · <span id="rsvp-phone2"></span> ♡</p>
-    <div id="rsvp-thanks" class="rsvp-thanks">
-      <div style="font-size:3rem;margin-bottom:.5rem">🎀</div>
-      <p class="thanks-title">¡Gracias!</p>
-      <p class="thanks-sub">Abriendo WhatsApp para confirmar…</p>
-      <a id="wa-link" href="#" target="_blank" rel="noopener" class="wa-btn">Abrir WhatsApp</a>
-    </div>
-    <form id="rsvp-form" class="rsvp-form" onsubmit="rsvpSubmit(event)">
-      <div class="rsvp-field"><input id="rsvp-name" class="rsvp-input" type="text" placeholder="Nombre completo" required/></div>
-      <div class="rsvp-field"><input id="rsvp-guests" class="rsvp-input" type="text" placeholder="Número de invitados"/></div>
-      <div class="rsvp-field"><textarea id="rsvp-msg" class="rsvp-textarea" rows="3" placeholder="Mensaje para la familia…"></textarea></div>
-      <button type="submit" class="rsvp-submit">♡ Confirmar Asistencia ♡</button>
-    </form>
-  </div></div>
-
-</div>
-
-<footer>
-  <p class="footer-name" id="footer-name"></p>
-  <p class="footer-turns" id="footer-turns"></p>
-  <p class="footer-date" id="footer-date"></p>
-  <p class="footer-tag blink">"Al Infinito y Más Allá ✨"</p>
-</footer>
-</div>
-
-<script>
-function init(){
-  document.getElementById('splash-photo').src = CFG.photo;
-  document.getElementById('splash-name').textContent = CFG.name;
-  document.getElementById('splash-age').textContent  = CFG.age;
-  document.getElementById('hero-photo').src  = CFG.photo;
-  document.getElementById('hero-name').textContent = CFG.name;
-  document.getElementById('hero-age').textContent  = CFG.age;
-  document.getElementById('info-line1').textContent = CFG.dateLine1;
-  document.getElementById('info-line2').textContent = CFG.dateLine2;
-  document.getElementById('info-day').textContent   = CFG.dateDay;
-  document.getElementById('info-year').textContent  = CFG.dateYear;
-  document.getElementById('info-time').textContent  = CFG.time;
-  document.getElementById('info-venue').textContent = CFG.venue;
-  document.getElementById('info-addr').textContent  = CFG.address;
-  document.getElementById('rsvp-to').textContent    = CFG.rsvpTo;
-  document.getElementById('rsvp-phone').textContent = CFG.phone;
-  document.getElementById('rsvp-to2').textContent   = CFG.rsvpTo;
-  document.getElementById('rsvp-phone2').textContent= CFG.phone;
-  document.getElementById('footer-name').textContent  = CFG.name;
-  document.getElementById('footer-turns').textContent = '¡cumple ' + CFG.age + '!';
-  document.getElementById('footer-date').textContent  = CFG.dateDisplay;
-  document.getElementById('cd-date').textContent      = CFG.dateDisplay;
-  ['cd-spark','pr-spark','gl-spark','rs-spark'].forEach(id=>document.getElementById(id).innerHTML=SPARKLE('#FF6EB4'));
-
-  const pl = document.getElementById('program-list');
-  CFG.program.forEach(it=>{
-    pl.innerHTML += `<div class="tl-item"><div class="tl-dot">${ICONS[it.icon]||ICONS.star}</div>
-      <div><div class="tl-time">${it.time}</div><div class="tl-title">${it.title}</div><div class="tl-desc">${it.desc}</div></div></div>`;
-  });
-  buildStars(); galInit(); initScrollAnimations();
-}
-
-function closeSplash(){
-  const s=document.getElementById('splash'); s.classList.add('hide');
-  setTimeout(()=>{ 
-    s.style.display='none'; 
-    document.getElementById('main').classList.add('show');
-    // Activar la primera tarjeta (hero) inmediatamente
-    setTimeout(() => {
-      document.querySelector('.hero-card').classList.add('visible');
-    }, 100);
-  },500);
-}
-setTimeout(closeSplash,3800);
-
-function buildStars(){
-  const sf=document.getElementById('starfield');
-  const colors=['#FFD700','#FF6EB4','#E040FB','#F8BBD0','#fff'];
-  for(let i=0;i<70;i++){
-    const d=document.createElement('div'); d.className='star';
-    const r=Math.random()*2+.6;
-    d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${r*2}px;height:${r*2}px;background:${colors[i%5]};box-shadow:0 0 ${r*4}px ${colors[i%5]};--dur:${1.8+Math.random()*2.4}s;--delay:${Math.random()*3}s;`;
-    sf.appendChild(d);
-  }
-}
-
-// Scroll animations - efecto fix.studio
-function initScrollAnimations(){
-  const cards = document.querySelectorAll('.card');
-  
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -100px 0px',
-    threshold: 0.1
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
-  
-  cards.forEach(card => observer.observe(card));
-}
-
-function tick(){
-  const diff=Math.max(0,new Date(CFG.eventDate).getTime()-Date.now());
-  const p=n=>String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent=p(Math.floor(diff/86400000));
-  document.getElementById('cd-h').textContent=p(Math.floor((diff%86400000)/3600000));
-  document.getElementById('cd-m').textContent=p(Math.floor((diff%3600000)/60000));
-  document.getElementById('cd-s').textContent=p(Math.floor((diff%60000)/1000));
-}
-tick(); setInterval(tick,1000);
-
-let galIdx=0, galBusy=false, galActive='a';
-function galMod(i){const t=CFG.gallery.length;return((i%t)+t)%t;}
-function galInit(){
-  const dots=document.getElementById('gal-dots');
-  CFG.gallery.forEach((_,i)=>{
-    const b=document.createElement('button'); b.className='gal-dot'+(i===0?' active':'');
-    b.onclick=()=>galGo(i,i>galIdx?1:-1); dots.appendChild(b);
-  });
-  document.getElementById('gal-img-a').src=CFG.gallery[0].src;
-  galRender(0);
-  const w=document.querySelector('.gal-wrap'); let sx=0;
-  w.addEventListener('touchstart',e=>sx=e.touches[0].clientX);
-  w.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40)galGo(galIdx+(d>0?1:-1),d>0?1:-1);});
-}
-function galRender(i){
-  const t=CFG.gallery.length;
-  document.getElementById('gal-prev-img').src=CFG.gallery[galMod(i-1)].src;
-  document.getElementById('gal-next-img').src=CFG.gallery[galMod(i+1)].src;
-  document.getElementById('gal-cap').textContent=CFG.gallery[i].cap;
-  document.getElementById('gal-count').textContent=String(i+1).padStart(2,'0')+' — '+String(t).padStart(2,'0');
-  document.querySelectorAll('.gal-dot').forEach((d,k)=>d.classList.toggle('active',k===i));
-}
-function galGo(raw,dir){
-  if(galBusy)return; galBusy=true;
-  const next=galMod(raw);
-  const a=document.getElementById('gal-img-a'),b=document.getElementById('gal-img-b');
-  const cur=galActive==='a'?a:b, inc=galActive==='a'?b:a;
-  inc.src=CFG.gallery[next].src;
-  inc.style.transition='none';
-  inc.style.transform=dir>0?'translateX(60px) scale(.92)':'translateX(-60px) scale(.92)'; inc.style.opacity='0';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    cur.style.transition='opacity .4s ease,transform .4s ease';
-    cur.style.opacity='0'; cur.style.transform=dir>0?'translateX(-60px) scale(.92)':'translateX(60px) scale(.92)';
-    inc.style.transition='opacity .4s ease,transform .4s ease';
-    inc.style.opacity='1'; inc.style.transform='none';
-    setTimeout(()=>{
-      cur.style.transition=''; cur.style.opacity=''; cur.style.transform=''; cur.className='enter'; inc.className='active';
-      galActive=galActive==='a'?'b':'a'; galIdx=next; galRender(next); galBusy=false;
-    },420);
-  }));
-}
-
-function rsvpSubmit(e){
-  e.preventDefault();
-  const name=document.getElementById('rsvp-name').value.trim();
-  const guests=document.getElementById('rsvp-guests').value.trim();
-  const msg=document.getElementById('rsvp-msg').value.trim();
-  if(!name)return;
-  let text=`¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🎀\n\n👤 *Nombre:* ${name}\n`;
-  if(guests)text+=`👥 *Invitados:* ${guests}\n`;
-  if(msg)text+=`💬 *Mensaje:* ${msg}\n`;
-  text+=`\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
-  const wa=`https://wa.me/${CFG.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
-  document.getElementById('rsvp-form').style.display='none';
-  document.getElementById('rsvp-thanks').classList.add('show');
-  document.getElementById('wa-link').href=wa;
-  window.open(wa,'_blank');
-}
-
-init();
-</script>
-</body>
-</html>
+// Función para desplegar/pl
+</parameter>
+</function>
