@@ -6,405 +6,639 @@
 <title>Invitación Sofía Cumple 5</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:ital,wght@0,400;0,700;1,400&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
+/* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1E 100%);min-height:100vh;font-family:'Exo 2',sans-serif;color:#fff;overflow-x:hidden}
 
 /* ── SPLASH ── */
-#splash{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#000510 0%,#001525 30%,#002035 60%,#000D1E 100%);cursor:pointer;overflow:hidden;transition:opacity .6s}
+#splash{
+  position:fixed;inset:0;z-index:100;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#000510 0%,#001525 30%,#002035 60%,#000D1E 100%);
+  cursor:pointer;overflow:hidden;
+  transition:opacity .7s ease;
+}
 #splash.hidden{opacity:0;pointer-events:none}
-.splash-content{position:relative;z-index:10;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
-.splash-label{font-family:'Exo 2',sans-serif;font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(0,220,200,.8);font-weight:300;animation:fadein .8s .3s both}
-.splash-sub{animation:scalein .6s .5s both}
-.splash-photo{animation:scalein .6s .7s both}
-.splash-name{animation:slidein .6s .9s both}
-.blink{animation:blink 2s infinite;font-family:'Exo 2',sans-serif;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,220,200,.7)}
-@keyframes fadein{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
-@keyframes scalein{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
-@keyframes slidein{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
-@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ── RINGS ── */
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,220,200,.05);animation:pulse 3s infinite}
-@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.4}50%{transform:translate(-50%,-50%) scale(1.04);opacity:.7}}
+/* ── SPLASH WATER LINES ── */
+.water-line{
+  position:absolute;width:100%;height:2px;
+  animation:water-move ease-in-out infinite alternate;
+}
+@keyframes water-move{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+
+/* ── SONAR RINGS ── */
+.sonar-ring{
+  position:absolute;border-radius:50%;
+  top:50%;left:50%;
+  border:1px solid rgba(0,220,200,.06);
+  animation:pulse-ring ease-in-out infinite;
+}
+@keyframes pulse-ring{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.35}
+  50%{transform:translate(-50%,-50%) scale(1.05);opacity:.65}
+}
 
 /* ── BUBBLES ── */
-.bubble{position:fixed;border-radius:50%;border:1px solid rgba(0,255,255,.15);pointer-events:none;animation:rise linear infinite}
-@keyframes rise{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-110vh);opacity:0}}
+.bubble{
+  position:fixed;border-radius:50%;
+  border:1px solid rgba(0,255,255,.18);
+  pointer-events:none;z-index:1;
+  animation:bubble-rise linear infinite;
+}
+@keyframes bubble-rise{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  10%{opacity:1}
+  50%{transform:translateY(-50vh) translateX(8px)}
+  90%{opacity:.7}
+  100%{transform:translateY(-110vh) translateX(-8px);opacity:0}
+}
 
 /* ── FISH ── */
-.fish{position:fixed;pointer-events:none;animation:swim linear infinite}
-.fish.left{animation-name:swimleft}
-.fish.right{animation-name:swimright}
-@keyframes swimright{from{left:-120px}to{left:110vw}}
-@keyframes swimleft{from{right:-120px}to{right:110vw}}
+.fish-right{position:fixed;pointer-events:none;z-index:1;animation:swim-right linear infinite}
+.fish-left {position:fixed;pointer-events:none;z-index:1;transform:scaleX(-1);animation:swim-left  linear infinite}
+@keyframes swim-right{from{left:-120px}to{left:110vw}}
+@keyframes swim-left {from{right:-120px}to{right:110vw}}
 
 /* ── DEPTH MARKERS ── */
-#depth{position:fixed;left:12px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-around;opacity:.15;pointer-events:none;z-index:1}
+#depth-marks{
+  position:fixed;left:12px;top:0;bottom:0;
+  display:flex;flex-direction:column;justify-content:space-around;
+  opacity:.18;pointer-events:none;z-index:2;
+}
 .depth-mark{display:flex;align-items:center;gap:4px}
-.depth-mark span{font-size:.3rem;letter-spacing:.1em;color:rgba(0,220,200,.8)}
 .depth-mark::before{content:'';display:block;width:8px;height:1px;background:#22d3ee}
+.depth-mark span{font-size:.28rem;letter-spacing:.1em;color:rgba(0,220,200,.9)}
 
 /* ── AMBIENT GLOW ── */
-#glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(0,120,100,.12),transparent);z-index:0}
+#ambient{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(0,120,100,.12),transparent);
+}
 
-/* ── MAIN ── */
-#main{position:relative;z-index:10;max-width:448px;margin:0 auto;padding:32px 16px 64px;display:flex;flex-direction:column;gap:20px;opacity:0;transition:opacity .5s}
-#main.visible{opacity:1}
-
-/* ── SUB-CARD ── */
-.sub-card{position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(0,30,50,.95) 0%,rgba(0,15,35,.98) 100%);border:1.5px solid rgba(0,220,200,.25);border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 60px rgba(0,200,180,.08),inset 0 1px 0 rgba(0,220,200,.15);animation:cardin .7s both}
-@keyframes cardin{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-.card-top-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(0,220,200,.6),transparent)}
-.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(0,180,160,.3);border:1px solid rgba(0,220,200,.3)}
-.screw.tl{top:12px;left:12px}.screw.tr{top:12px;right:12px}.screw.bl{bottom:12px;left:12px}.screw.br{bottom:12px;right:12px}
-
-/* ── EYEBROW + TITLE ── */
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
-.eyebrow-line{height:1px;width:32px}
-.eyebrow-line.l{background:linear-gradient(to right,transparent,rgba(0,220,200,.5))}
-.eyebrow-line.r{background:linear-gradient(to left,transparent,rgba(0,220,200,.5))}
-.eyebrow-text{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,220,200,.8);font-weight:600}
-.section-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.5rem,5vw,2.2rem);color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.5),0 0 60px rgba(0,255,220,.2);letter-spacing:.05em;text-align:center;margin-bottom:1.5rem}
-
-/* ── HERO CARD ── */
-.hero-card{position:relative;overflow:hidden;background:linear-gradient(170deg,rgba(0,20,40,.98) 0%,rgba(0,10,25,.99) 100%);border:1.5px solid rgba(0,220,200,.3);border-radius:24px;box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(0,200,180,.1);animation:cardin .8s both}
-.hull-stripe{height:10px;background:repeating-linear-gradient(90deg,rgba(0,180,160,.6) 0,rgba(0,180,160,.6) 18px,rgba(0,40,60,.4) 18px,rgba(0,40,60,.4) 36px)}
-.hull-line{height:4px;background:linear-gradient(90deg,rgba(0,100,120,.6),rgba(0,220,200,.8),rgba(0,100,120,.6))}
-.hero-body{padding:24px;text-align:center;position:relative}
-.sonar-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.sonar-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,220,200,.04);top:50%;left:50%;transform:translate(-50%,-50%);animation:sonarring 3s infinite}
-@keyframes sonarring{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.3}50%{transform:translate(-50%,-50%) scale(1.15);opacity:.6}}
-.sub-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
-@keyframes float{0%,100%{transform:translateY(-4px)}50%{transform:translateY(4px)}}
-.mission-label{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(0,220,200,.75);font-weight:300;margin-bottom:12px}
+/* ── SPLASH CONTENT ── */
+.splash-inner{
+  position:relative;z-index:10;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding:20px;
+}
+.splash-label{
+  font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(0,220,200,.8);font-weight:300;
+  animation:fade-up .7s .3s both;
+}
+.splash-sub-wrap{animation:scale-in .6s .5s both}
+.splash-porthole-wrap{animation:scale-in .6s .7s both}
+.splash-text-wrap{animation:fade-up .6s .9s both;display:flex;flex-direction:column;align-items:center;gap:6px}
+.splash-tap{
+  font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(0,220,200,.7);
+  animation:blink 2s infinite;
+}
+.sonar-ping{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(34,211,238,.3);
+  animation:sonar-out 2s ease-out infinite;
+}
+@keyframes sonar-out{from{transform:translateX(-50%) scale(1);opacity:.6}to{transform:translateX(-50%) scale(2.5);opacity:0}}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes scale-in{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
 
 /* ── PORTHOLE ── */
-.porthole-wrap{position:relative;display:inline-block;width:200px;height:200px;margin-bottom:16px}
-.porthole-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 15deg,#0a3040,#1a5060,#0d4050,#1a6070,#0a3040,#1a5060,#0a3040);box-shadow:0 0 0 2px rgba(0,220,200,.5),0 0 40px rgba(0,200,180,.5),0 0 80px rgba(0,200,180,.2),inset 0 2px 4px rgba(255,255,255,.08)}
-.porthole-bezel{position:absolute;border-radius:50%;inset:10px;background:linear-gradient(135deg,rgba(0,80,100,.9),rgba(0,30,50,.95),rgba(0,60,80,.9));box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 -1px 3px rgba(0,220,200,.15),0 0 0 1px rgba(0,180,160,.4)}
-.porthole-glass{position:absolute;border-radius:50%;overflow:hidden;inset:18px;box-shadow:inset 0 4px 16px rgba(0,0,0,.8),inset 0 0 30px rgba(0,30,60,.6)}
-.porthole-glass img{width:100%;height:100%;object-fit:cover;object-position:top}
-.porthole-glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 38% 28%,rgba(255,255,255,.12),transparent 70%)}
-.porthole-tint{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,20,40,.55) 100%)}
-.porthole-bolt{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(0,160,140,.8),rgba(0,50,70,.9));border:1.5px solid rgba(0,220,200,.55);box-shadow:0 0 6px rgba(0,220,200,.35),inset 0 1px 2px rgba(255,255,255,.1);top:50%;left:50%;margin-top:-7px;margin-left:-7px}
-.porthole-shine{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 30%,rgba(0,220,200,.08) 50%,transparent 70%);animation:spin 8s linear infinite}
+.porthole-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.porthole-outer{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 15deg,#0a3040,#1a5060,#0d4050,#1a6070,#0a3040,#1a5060,#0a3040);
+}
+.porthole-bezel{
+  position:absolute;border-radius:50%;
+  background:linear-gradient(135deg,rgba(0,80,100,.9),rgba(0,30,50,.95),rgba(0,60,80,.9));
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.7),inset 0 -1px 3px rgba(0,220,200,.15),0 0 0 1px rgba(0,180,160,.4);
+}
+.porthole-glass{
+  position:absolute;border-radius:50%;overflow:hidden;
+  box-shadow:inset 0 4px 16px rgba(0,0,0,.8),inset 0 0 30px rgba(0,30,60,.6);
+}
+.porthole-glass img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.porthole-glare{
+  position:absolute;inset:0;pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse 60% 45% at 38% 28%,rgba(255,255,255,.12),transparent 70%);
+}
+.porthole-tint{
+  position:absolute;inset:0;pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,20,40,.55) 100%);
+}
+.porthole-shine{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 30%,rgba(0,220,200,.08) 50%,transparent 70%);
+  animation:spin 8s linear infinite;
+}
+.porthole-bolt{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(0,160,140,.8),rgba(0,50,70,.9));
+  border:1.5px solid rgba(0,220,200,.55);
+  box-shadow:0 0 6px rgba(0,220,200,.35),inset 0 1px 2px rgba(255,255,255,.1);
+  top:50%;left:50%;
+  display:flex;align-items:center;justify-content:center;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MAIN CONTENT ── */
+#main{
+  position:relative;z-index:10;
+  max-width:460px;margin:0 auto;
+  padding:32px 16px 64px;
+  display:flex;flex-direction:column;gap:22px;
+  opacity:0;transition:opacity .6s ease;
+}
+#main.visible{opacity:1}
+#site-footer{display:none;position:relative;z-index:10}
+
+/* ── SUB CARD ── */
+.sub-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(0,30,50,.97) 0%,rgba(0,15,35,.99) 100%);
+  border:1.5px solid rgba(0,220,200,.25);border-radius:20px;
+  box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 60px rgba(0,200,180,.08),inset 0 1px 0 rgba(0,220,200,.15);
+  animation:card-in .7s both;
+}
+@keyframes card-in{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.card-top-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(0,220,200,.6),transparent)}
+.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(0,180,160,.3);border:1px solid rgba(0,220,200,.3)}
+.screw.tl{top:12px;left:12px}.screw.tr{top:12px;right:12px}
+.screw.bl{bottom:12px;left:12px}.screw.br{bottom:12px;right:12px}
+.card-body{padding:24px}
+
+/* ── EYEBROW ── */
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.eyebrow-line{height:1px;width:32px;flex-shrink:0}
+.eyebrow-text{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,220,200,.8);font-weight:600;white-space:nowrap}
+
+/* ── SECTION TITLE ── */
+.section-title{
+  font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(1.4rem,5vw,2rem);
+  color:#00FFDC;
+  text-shadow:0 0 30px rgba(0,255,220,.5),0 0 60px rgba(0,255,220,.2);
+  letter-spacing:.04em;text-align:center;margin-bottom:1.5rem;
+}
+
+/* ── HERO CARD ── */
+.hero-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(170deg,rgba(0,20,40,.98) 0%,rgba(0,10,25,.99) 100%);
+  border:1.5px solid rgba(0,220,200,.3);border-radius:24px;
+  box-shadow:0 12px 60px rgba(0,0,0,.8),0 0 80px rgba(0,200,180,.1);
+  animation:card-in .8s both;
+}
+.hull-stripe{height:10px;background:repeating-linear-gradient(90deg,rgba(0,180,160,.6) 0,rgba(0,180,160,.6) 18px,rgba(0,40,60,.4) 18px,rgba(0,40,60,.4) 36px)}
+.hull-line{height:4px;background:linear-gradient(90deg,rgba(0,100,120,.6),rgba(0,220,200,.8),rgba(0,100,120,.6))}
+.hero-body{padding:28px 24px;text-align:center;position:relative;overflow:hidden}
+.hero-sonar{position:absolute;inset:0;pointer-events:none}
+.hero-sonar-ring{
+  position:absolute;border-radius:50%;
+  top:50%;left:50%;
+  border:1px solid rgba(0,220,200,.04);
+  animation:pulse-ring ease-in-out infinite;
+}
+.hero-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
+@keyframes float{0%,100%{transform:translateY(-4px)}50%{transform:translateY(4px)}}
+.mission-label{
+  font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(0,220,200,.75);font-weight:300;margin-bottom:14px;
+}
+.hero-name{
+  font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(2.4rem,12vw,4.5rem);
+  color:#00FFDC;
+  text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.25);
+  line-height:1;display:block;margin-bottom:6px;
+}
+.hero-badge-wrap{display:flex;justify-content:center;margin-bottom:6px}
+.hero-badge{
+  background:linear-gradient(90deg,rgba(0,60,80,.5),rgba(0,160,140,.4),rgba(0,60,80,.5));
+  border:1px solid rgba(0,220,200,.35);border-radius:3px;
+  padding:3px 20px;
+  font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(0,220,200,.9);font-weight:600;
+}
+.hero-age{
+  font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(4rem,18vw,7rem);
+  color:#00FFDC;
+  text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);
+  line-height:1;display:block;
+}
 
 /* ── INFO BLOCK ── */
 .info-block{margin:0 16px 16px;border-radius:12px;overflow:hidden;background:rgba(0,15,30,.95);border:1px solid rgba(0,220,200,.2)}
-.info-header{padding:8px;text-align:center;background:linear-gradient(90deg,transparent,rgba(0,80,100,.3),transparent);border-bottom:1px solid rgba(0,220,200,.15);font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,200,180,.6)}
-.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;padding:16px 12px}
+.info-header{
+  padding:8px;text-align:center;
+  background:linear-gradient(90deg,transparent,rgba(0,80,100,.3),transparent);
+  border-bottom:1px solid rgba(0,220,200,.15);
+  font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,200,180,.6);
+}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 12px;gap:0}
 .info-col{text-align:center}
-.info-col.bl{border-right:1px dashed rgba(0,220,200,.2)}
-.info-col.br{border-left:1px dashed rgba(0,220,200,.2)}
-.info-lbl{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,220,200,.7);margin-bottom:4px}
-.info-sub{font-size:.45rem;letter-spacing:.15em;color:rgba(0,180,160,.6)}
-.info-day{font-family:'Cinzel Decorative',cursive;font-size:2.8rem;color:#00FFDC;line-height:1;text-shadow:0 0 20px rgba(0,255,220,.5)}
-.info-year{font-size:.4rem;color:rgba(0,180,160,.5);letter-spacing:.1em}
-.info-time{font-family:'Cinzel Decorative',cursive;font-size:1.4rem;color:#00FFDC;line-height:1;text-shadow:0 0 15px rgba(0,255,220,.5)}
-.sonar-mini{width:24px;height:24px;margin:8px auto 0;animation:spin 4s linear infinite}
-.info-venue{font-family:'Cinzel',serif;font-size:.85rem;color:#00FFDC}
-.info-addr{font-size:.38rem;color:rgba(0,180,160,.55);margin-top:4px;line-height:1.5}
-.rsvp-strip{padding:12px;text-align:center;background:linear-gradient(135deg,rgba(0,60,80,.6),rgba(0,40,60,.7));border-top:1px solid rgba(0,220,200,.2)}
-.rsvp-strip-lbl{font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(0,200,180,.65)}
-.rsvp-strip-phone{font-family:'Cinzel Decorative',cursive;font-size:1.5rem;color:#00FFDC;text-shadow:0 0 20px rgba(0,255,220,.5);margin-top:2px}
+.info-col.border-r{border-right:1px dashed rgba(0,220,200,.2);padding-right:8px}
+.info-col.border-l{border-left:1px dashed rgba(0,220,200,.2);padding-left:8px}
+.info-lbl{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,220,200,.7);margin-bottom:3px}
+.info-sub{font-size:.42rem;letter-spacing:.12em;color:rgba(0,180,160,.6);margin-bottom:2px}
+.info-day{font-family:'Cinzel Decorative',cursive;font-size:2.6rem;color:#00FFDC;line-height:1;text-shadow:0 0 20px rgba(0,255,220,.5)}
+.info-year{font-size:.38rem;color:rgba(0,180,160,.5);letter-spacing:.1em}
+.info-time{font-family:'Cinzel Decorative',cursive;font-size:1.3rem;color:#00FFDC;line-height:1;text-shadow:0 0 15px rgba(0,255,220,.5)}
+.sonar-spin{width:24px;height:24px;margin:8px auto 0;animation:spin 4s linear infinite}
+.info-venue{font-family:'Cinzel',serif;font-size:.82rem;color:#00FFDC;margin-bottom:4px}
+.info-addr{font-size:.36rem;color:rgba(0,180,160,.55);line-height:1.6}
+.rsvp-strip{
+  padding:12px;text-align:center;
+  background:linear-gradient(135deg,rgba(0,60,80,.6),rgba(0,40,60,.7));
+  border-top:1px solid rgba(0,220,200,.2);
+}
+.rsvp-strip-lbl{font-size:.44rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(0,200,180,.65)}
+.rsvp-strip-phone{font-family:'Cinzel Decorative',cursive;font-size:1.4rem;color:#00FFDC;text-shadow:0 0 20px rgba(0,255,220,.5);margin-top:3px}
 
 /* ── COUNTDOWN ── */
 .countdown-grid{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.cd-box{text-align:center;min-width:68px;padding:16px;border-radius:16px;position:relative;background:linear-gradient(135deg,rgba(0,60,80,.8),rgba(0,30,50,.9));border:1.5px solid rgba(0,220,200,.3);box-shadow:0 0 20px rgba(0,200,180,.15),inset 0 1px 0 rgba(0,220,200,.1);transition:transform .2s}
-.cd-box:hover{transform:scale(1.05)}
+.cd-box{
+  text-align:center;min-width:68px;padding:16px;border-radius:16px;position:relative;
+  background:linear-gradient(135deg,rgba(0,60,80,.8),rgba(0,30,50,.9));
+  border:1.5px solid rgba(0,220,200,.3);
+  box-shadow:0 0 20px rgba(0,200,180,.15),inset 0 1px 0 rgba(0,220,200,.1);
+  transition:transform .2s;
+}
+.cd-box:hover{transform:scale(1.06)}
 .cd-val{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 20px rgba(0,255,220,.7);line-height:1}
-.cd-lbl{font-size:.42rem;letter-spacing:.25em;color:rgba(0,220,200,.7);margin-top:6px}
-.cd-date{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-size:.45rem;letter-spacing:.2em;color:rgba(0,200,180,.6);text-transform:uppercase}
-.cd-line{height:1px;width:40px}
-.cd-line.l{background:linear-gradient(to right,transparent,rgba(0,220,200,.4))}
-.cd-line.r{background:linear-gradient(to left,transparent,rgba(0,220,200,.4))}
+.cd-lbl{font-size:.4rem;letter-spacing:.25em;color:rgba(0,220,200,.7);margin-top:6px;text-transform:uppercase}
+.cd-date-row{
+  display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
+  font-size:.42rem;letter-spacing:.18em;color:rgba(0,200,180,.6);text-transform:uppercase;
+}
+.cd-line{height:1px;width:36px;flex-shrink:0}
+.cd-line-l{background:linear-gradient(to right,transparent,rgba(0,220,200,.4))}
+.cd-line-r{background:linear-gradient(to left,transparent,rgba(0,220,200,.4))}
 
 /* ── PROGRAM ── */
-.program-list{position:relative}
-.program-line{position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(0,220,200,.5),rgba(0,220,200,.05))}
-.program-item{display:flex;gap:16px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(0,220,200,.1)}
-.prog-dot-wrap{flex-shrink:0;width:40px;display:flex;justify-content:center;margin-top:6px}
-.prog-dot{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#00FFDC,rgba(0,180,160,.5));box-shadow:0 0 10px rgba(0,255,220,.7)}
-.prog-time{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#00FFDC;font-weight:700}
-.prog-title{font-family:'Cinzel',serif;font-size:1.05rem;color:rgba(200,255,250,.9);margin-top:2px}
-.prog-desc{font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,200,180,.6);margin-top:2px}
+.program-list{position:relative;padding-left:0}
+.program-timeline{position:absolute;left:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(0,220,200,.5),rgba(0,220,200,.05))}
+.program-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:14px 0;
+  border-bottom:1px solid rgba(0,220,200,.1);
+}
+.program-item:last-child{border-bottom:none}
+.prog-dot-col{flex-shrink:0;width:38px;display:flex;justify-content:center;margin-top:4px}
+.prog-dot{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,#00FFDC,rgba(0,180,160,.5));box-shadow:0 0 10px rgba(0,255,220,.7)}
+.prog-time{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:#00FFDC;font-weight:700}
+.prog-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(200,255,250,.9);margin-top:2px}
+.prog-desc{font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,200,180,.6);margin-top:3px}
 
 /* ── GALLERY ── */
-.gallery-porthole-wrap{position:relative;max-width:300px;margin:0 auto 20px}
-.gallery-porthole{position:relative;width:260px;height:260px;border-radius:50%;overflow:hidden;margin:0 auto;background:rgba(0,10,20,.9);border:8px solid rgba(0,60,80,.8);box-shadow:0 0 0 2px rgba(0,220,200,.3),0 0 40px rgba(0,200,180,.2),inset 0 0 30px rgba(0,0,0,.6)}
-.gallery-porthole img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s,transform .35s}
+.gallery-porthole-wrap{position:relative;width:260px;height:260px;margin:0 auto 20px}
+.gallery-porthole{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  background:rgba(0,10,20,.9);
+  border:8px solid rgba(0,60,80,.8);
+  box-shadow:0 0 0 2px rgba(0,220,200,.3),0 0 40px rgba(0,200,180,.2),inset 0 0 30px rgba(0,0,0,.6);
+}
+.gallery-porthole img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:opacity .3s,transform .3s;
+}
 .gallery-vignette{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 60%,rgba(0,10,20,.8) 100%)}
 .gallery-glare{position:absolute;top:10%;left:12%;width:35%;height:30%;background:radial-gradient(ellipse,rgba(255,255,255,.08),transparent);pointer-events:none}
-.gallery-bolt{position:absolute;width:12px;height:12px;border-radius:50%;background:rgba(0,80,90,.7);border:1px solid rgba(0,220,200,.4);top:50%;left:50%;margin-top:-6px;margin-left:-6px;box-shadow:0 0 4px rgba(0,220,200,.2)}
 .gallery-caption{text-align:center;margin-bottom:16px}
 .gallery-cap-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(200,255,250,.85)}
-.gallery-cap-count{font-size:.4rem;letter-spacing:.25em;color:rgba(0,200,180,.5);text-transform:uppercase;margin-top:4px}
+.gallery-cap-count{font-size:.38rem;letter-spacing:.25em;color:rgba(0,200,180,.5);text-transform:uppercase;margin-top:4px}
 .gallery-controls{display:flex;align-items:center;justify-content:center;gap:16px}
-.gallery-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,80,90,.7),rgba(0,40,60,.9));border:1.5px solid rgba(0,220,200,.35);color:#00FFDC;font-size:1.3rem;box-shadow:0 4px 16px rgba(0,200,180,.2);cursor:pointer;transition:transform .15s;line-height:1}
+.gallery-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(0,80,90,.7),rgba(0,40,60,.9));
+  border:1.5px solid rgba(0,220,200,.35);color:#00FFDC;font-size:1.4rem;
+  box-shadow:0 4px 16px rgba(0,200,180,.2);cursor:pointer;
+  transition:transform .15s,box-shadow .15s;line-height:1;
+}
+.gallery-btn:hover{transform:scale(1.1);box-shadow:0 4px 24px rgba(0,200,180,.4)}
 .gallery-btn:active{transform:scale(.9)}
-.gallery-dots{display:flex;gap:8px;align-items:center}
-.gallery-dot{height:8px;border-radius:4px;background:rgba(0,220,200,.25);border:none;cursor:pointer;transition:all .2s;padding:0}
+.gallery-dots{display:flex;gap:7px;align-items:center}
+.gallery-dot{
+  height:8px;border-radius:4px;border:none;cursor:pointer;
+  transition:all .25s ease;background:rgba(0,220,200,.25);padding:0;
+}
 
 /* ── RSVP ── */
-.rsvp-note{text-align:center;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,200,180,.65);margin-bottom:24px}
+.rsvp-note{
+  text-align:center;font-size:.5rem;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(0,200,180,.65);margin-bottom:24px;
+}
 .rsvp-form{max-width:320px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
-.rsvp-field{border-bottom:1.5px solid rgba(0,220,200,.3);padding-bottom:4px}
-.rsvp-field input,.rsvp-field textarea{width:100%;background:transparent;border:none;outline:none;font-family:'Cinzel',serif;font-style:italic;font-size:1rem;color:#00FFDC}
+.rsvp-field{border-bottom:1.5px solid rgba(0,220,200,.3);padding-bottom:6px}
+.rsvp-field input,.rsvp-field textarea{
+  width:100%;background:transparent;border:none;outline:none;
+  font-family:'Cinzel',serif;font-style:italic;font-size:.95rem;color:#00FFDC;
+}
 .rsvp-field textarea{resize:none}
-.rsvp-submit{width:100%;padding:12px;border-radius:999px;cursor:pointer;background:linear-gradient(135deg,rgba(0,180,160,.8),rgba(0,120,130,.9));border:1.5px solid rgba(0,220,200,.5);font-family:'Exo 2',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.35em;text-transform:uppercase;color:#00FFDC;box-shadow:0 4px 20px rgba(0,200,180,.3);transition:transform .15s}
+.rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:rgba(0,180,160,.45)}
+.rsvp-submit{
+  width:100%;padding:13px;border-radius:999px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(0,180,160,.8),rgba(0,120,130,.9));
+  border:1.5px solid rgba(0,220,200,.5);
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#00FFDC;
+  box-shadow:0 4px 20px rgba(0,200,180,.3);
+  transition:transform .15s,box-shadow .15s;
+}
+.rsvp-submit:hover{box-shadow:0 6px 28px rgba(0,200,180,.5)}
 .rsvp-submit:active{transform:scale(.97)}
-.rsvp-thanks{text-align:center;padding:32px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
-.rsvp-thanks-title{font-family:'Cinzel Decorative',cursive;font-size:2rem;color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.6)}
+.rsvp-thanks{text-align:center;padding:28px 0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.rsvp-thanks-title{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.6)}
 .rsvp-thanks-msg{font-family:'Exo 2',sans-serif;font-style:italic;font-size:.9rem;color:rgba(200,255,250,.7)}
-.wa-btn{display:inline-block;padding:12px 32px;border-radius:999px;background:linear-gradient(135deg,#25d366,#128c50);font-family:'Exo 2',sans-serif;font-weight:700;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#fff;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.4)}
+.wa-btn{
+  display:inline-block;padding:12px 32px;border-radius:999px;
+  background:linear-gradient(135deg,#25d366,#128c50);
+  font-family:'Exo 2',sans-serif;font-weight:700;font-size:.48rem;
+  letter-spacing:.3em;text-transform:uppercase;color:#fff;text-decoration:none;
+  box-shadow:0 4px 18px rgba(37,211,102,.4);
+  transition:transform .15s,box-shadow .15s;
+}
+.wa-btn:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(37,211,102,.6)}
 
 /* ── FOOTER ── */
-#footer{position:relative;z-index:10;text-align:center;padding:40px 24px;border-top:1px solid rgba(0,220,200,.15);background:rgba(0,5,15,.7)}
+#site-footer{
+  text-align:center;padding:48px 24px;
+  border-top:1px solid rgba(0,220,200,.15);
+  background:rgba(0,5,15,.7);
+}
+.footer-float{animation:float 4s ease-in-out infinite;display:flex;justify-content:center;margin-bottom:16px}
 .footer-name{font-family:'Cinzel Decorative',cursive;font-size:2.2rem;color:#00FFDC;text-shadow:0 0 30px rgba(0,255,220,.5);margin-bottom:4px}
-.footer-sub{font-family:'Cinzel',serif;font-style:italic;font-size:1.1rem;color:rgba(200,255,250,.7);margin-bottom:6px}
-.footer-date{font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,200,180,.5);margin-bottom:12px}
-.footer-quote{font-family:'Cinzel',serif;font-style:italic;font-size:.95rem;color:rgba(0,220,200,.6);animation:blink 3s infinite}
+.footer-cumple{font-family:'Cinzel',serif;font-style:italic;font-size:1.1rem;color:rgba(200,255,250,.7);margin-bottom:6px}
+.footer-date{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,200,180,.5);margin-bottom:16px}
+.footer-quote{font-family:'Cinzel',serif;font-style:italic;font-size:.9rem;color:rgba(0,220,200,.6);animation:blink 3s infinite}
 .sonar-footer{display:flex;justify-content:center;margin-top:24px}
 .sonar-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,220,200,.6);position:relative}
-.sonar-wave{position:absolute;border-radius:50%;border:1px solid rgba(34,211,238,.2);top:50%;left:50%;transform:translate(-50%,-50%);animation:sonarwave 2s ease-out infinite}
-@keyframes sonarwave{from{width:8px;height:8px;opacity:.5}to{width:48px;height:48px;opacity:0}}
-.sonar-wave:nth-child(2){animation-delay:.5s}
-.sonar-wave:nth-child(3){animation-delay:1s}
-
-/* ── name / age text ── */
-.hero-name{font-family:'Cinzel Decorative',cursive;font-size:clamp(2.5rem,13vw,4.5rem);color:#00FFDC;text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.25);line-height:1;display:block;margin-bottom:4px}
-.hero-cumple-badge{display:flex;justify-content:center;margin-bottom:4px}
-.hero-badge{background:linear-gradient(90deg,rgba(0,60,80,.5),rgba(0,160,140,.4),rgba(0,60,80,.5));border:1px solid rgba(0,220,200,.35);border-radius:3px;padding:3px 20px;font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(0,220,200,.9);font-weight:600}
-.hero-age{font-family:'Cinzel Decorative',cursive;font-size:clamp(4.5rem,20vw,7rem);color:#00FFDC;text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);line-height:1;display:block}
+.sonar-wave{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(34,211,238,.2);
+  top:50%;left:50%;
+  animation:sonar-expand 2s ease-out infinite;
+}
+@keyframes sonar-expand{
+  from{width:8px;height:8px;transform:translate(-50%,-50%);opacity:.5}
+  to{width:52px;height:52px;transform:translate(-50%,-50%);opacity:0}
+}
 </style>
 </head>
 <body>
 
-<div id="glow"></div>
-<div id="depth"></div>
+<div id="ambient"></div>
+<div id="depth-marks"></div>
 
-<!-- SPLASH -->
+<!-- ═══ SPLASH ═══ -->
 <div id="splash" onclick="closeSplash()">
-  <div class="ring" style="width:300px;height:300px;top:50%;left:50%;animation-duration:3s;animation-delay:0s"></div>
-  <div class="ring" style="width:420px;height:420px;top:50%;left:50%;animation-duration:3.5s;animation-delay:.4s"></div>
-  <div class="ring" style="width:540px;height:540px;top:50%;left:50%;animation-duration:4s;animation-delay:.8s"></div>
 
-  <div class="splash-content">
-    <div class="splash-label">MISIÓN DE EXPLORACIÓN</div>
+  <!-- Water shimmer lines -->
+  <div class="water-line" style="top:22%;background:linear-gradient(to right,transparent,rgba(0,150,180,.1),transparent);animation-duration:5s"></div>
+  <div class="water-line" style="top:42%;background:linear-gradient(to right,transparent,rgba(0,170,190,.12),transparent);animation-duration:4s;animation-delay:.5s"></div>
+  <div class="water-line" style="top:63%;background:linear-gradient(to right,transparent,rgba(0,160,200,.09),transparent);animation-duration:6s;animation-delay:1s"></div>
+  <div class="water-line" style="top:80%;background:linear-gradient(to right,transparent,rgba(0,140,180,.08),transparent);animation-duration:4.5s;animation-delay:.3s"></div>
 
-    <div class="splash-sub">
-      <svg width="200" height="110" viewBox="0 0 220 120" fill="none">
-        <defs>
-          <linearGradient id="hG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,60,70,.95)"/><stop offset="100%" stop-color="rgba(0,20,40,.95)"/></linearGradient>
-          <linearGradient id="tG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,80,90,.9)"/><stop offset="100%" stop-color="rgba(0,40,55,.9)"/></linearGradient>
-          <linearGradient id="bG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(0,40,50,.9)"/><stop offset="100%" stop-color="rgba(0,60,70,.95)"/></linearGradient>
-          <radialGradient id="pG" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(0,80,90,.9)"/><stop offset="100%" stop-color="rgba(0,30,50,.9)"/></radialGradient>
-          <radialGradient id="piG" cx="35%" cy="35%" r="65%"><stop offset="0%" stop-color="rgba(0,180,220,.5)"/><stop offset="100%" stop-color="rgba(0,30,60,.8)"/></radialGradient>
-        </defs>
-        <ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hG)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-        <rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tG)" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-        <rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-        <rect x="96" y="12" width="16" height="5" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-        <circle cx="112" cy="14.5" r="3" fill="rgba(0,255,220,.8)"/><circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>
-        <g transform="translate(195,72)">
-          <ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(-20)"/>
-          <ellipse cx="0" cy="10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(20)"/>
-          <circle cx="0" cy="0" r="4" fill="rgba(0,220,200,.5)" stroke="rgba(0,255,220,.6)" stroke-width="1"/>
-        </g>
-        <path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bG)" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-        <circle cx="55" cy="72" r="11" fill="url(#pG)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-        <circle cx="55" cy="72" r="7.5" fill="url(#piG)"/>
-        <circle cx="52" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
-        <circle cx="85" cy="72" r="11" fill="url(#pG)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-        <circle cx="85" cy="72" r="7.5" fill="url(#piG)"/>
-        <circle cx="82" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
-        <circle cx="115" cy="72" r="11" fill="url(#pG)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-        <circle cx="115" cy="72" r="7.5" fill="url(#piG)"/>
-        <circle cx="112" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
-        <circle cx="145" cy="72" r="11" fill="url(#pG)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-        <circle cx="145" cy="72" r="7.5" fill="url(#piG)"/>
-        <circle cx="142" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
-        <line x1="103" y1="38" x2="103" y2="28" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-        <circle cx="103" cy="27" r="1.5" fill="rgba(0,255,220,.8)"/>
-      </svg>
-    </div>
+  <!-- Sonar pressure rings -->
+  <div class="sonar-ring" style="width:300px;height:300px;animation-duration:3s"></div>
+  <div class="sonar-ring" style="width:440px;height:440px;animation-duration:3.6s;animation-delay:.4s"></div>
+  <div class="sonar-ring" style="width:580px;height:580px;animation-duration:4.2s;animation-delay:.8s"></div>
 
-    <!-- Splash porthole photo -->
-    <div class="splash-photo" style="position:relative;width:130px;height:130px;margin:0 auto">
-      <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(0,220,200,.8),rgba(0,100,180,.4),rgba(0,220,200,.8));padding:3px;box-shadow:0 0 30px rgba(0,200,180,.6)">
-        <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;border:3px solid rgba(0,10,20,.9)">
-          <img id="splashPhoto" src="" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top"/>
-        </div>
-      </div>
-      <!-- bolts -->
-      <div id="splashBolts"></div>
-    </div>
+  <!-- Content -->
+  <div class="splash-inner">
+    <div class="splash-label">◈ MISIÓN DE EXPLORACIÓN ◈</div>
 
-    <div class="splash-name" style="display:flex;flex-direction:column;align-items:center;gap:4px">
-      <span id="splashName" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2.8rem,14vw,4.5rem);color:#00FFDC;text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.3);line-height:1"></span>
-      <div style="background:linear-gradient(90deg,rgba(0,80,100,.6),rgba(0,180,160,.4),rgba(0,80,100,.6));border:1px solid rgba(0,220,200,.35);border-radius:4px;padding:4px 24px">
-        <span style="font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(0,220,200,.9);font-weight:600">CUMPLE</span>
-      </div>
-      <span id="splashAge" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(4rem,20vw,7rem);color:#00FFDC;text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);line-height:1"></span>
-    </div>
+    <!-- Submarine -->
+    <div class="splash-sub-wrap" id="splash-sub"></div>
 
-    <p class="blink">▼ Toca para sumergirte ▼</p>
-  </div>
-
-  <!-- Sonar ping bottom -->
-  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%)">
-    <div style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(34,211,238,.3);animation:sonarwave 2s ease-out infinite"></div>
-  </div>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="main">
-  <!-- HERO -->
-  <div class="hero-card" id="heroCard">
-    <div class="hull-stripe"></div>
-    <div class="hull-line"></div>
-    <div class="hero-body">
-      <div class="sonar-bg">
-        <div class="sonar-ring" style="width:200px;height:200px;animation-duration:3s;animation-delay:0s"></div>
-        <div class="sonar-ring" style="width:300px;height:300px;animation-duration:3.5s;animation-delay:.5s"></div>
-        <div class="sonar-ring" style="width:400px;height:400px;animation-duration:4s;animation-delay:1s"></div>
-      </div>
-      <div class="sub-float" id="heroSub"></div>
-      <div class="mission-label">MISIÓN SUBMARINA ESPECIAL</div>
-
-      <!-- Porthole photo -->
-      <div class="porthole-wrap" style="margin:0 auto 16px">
-        <div class="porthole-outer"></div>
-        <div class="porthole-bezel"></div>
-        <div class="porthole-glass">
-          <img id="heroPhoto" src="" alt=""/>
+    <!-- Hero photo porthole in splash -->
+    <div class="splash-porthole-wrap">
+      <div class="porthole-wrap" style="width:140px;height:140px">
+        <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(0,220,200,.5),0 0 35px rgba(0,200,180,.55),0 0 70px rgba(0,200,180,.2)"></div>
+        <div class="porthole-bezel" style="inset:11px"></div>
+        <div class="porthole-glass" style="inset:20px">
+          <img id="splash-photo" src="" alt=""/>
           <div class="porthole-glare"></div>
           <div class="porthole-tint"></div>
         </div>
-        <div id="heroBolts"></div>
+        <div id="splash-bolts"></div>
         <div class="porthole-shine"></div>
       </div>
-
-      <span class="hero-name" id="heroName"></span>
-      <div class="hero-cumple-badge"><div class="hero-badge">CUMPLE</div></div>
-      <span class="hero-age" id="heroAge"></span>
     </div>
 
-    <div class="info-block">
-      <div class="info-header">DATOS DE LA MISIÓN</div>
-      <div class="info-grid">
-        <div class="info-col bl">
-          <div class="info-lbl" id="iLine1"></div>
-          <div class="info-sub" id="iLine2"></div>
-          <div class="info-day" id="iDay"></div>
-          <div class="info-year" id="iYear"></div>
+    <!-- Name & age -->
+    <div class="splash-text-wrap">
+      <span id="splash-name" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2.6rem,13vw,4.5rem);color:#00FFDC;text-shadow:0 0 40px rgba(0,255,220,.7),0 0 80px rgba(0,255,220,.3);line-height:1"></span>
+      <div style="background:linear-gradient(90deg,rgba(0,80,100,.6),rgba(0,180,160,.4),rgba(0,80,100,.6));border:1px solid rgba(0,220,200,.35);border-radius:4px;padding:4px 24px">
+        <span style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(0,220,200,.9);font-weight:600">CUMPLE</span>
+      </div>
+      <span id="splash-age" style="font-family:'Cinzel Decorative',cursive;font-size:clamp(3.8rem,18vw,7rem);color:#00FFDC;text-shadow:0 0 50px rgba(0,255,220,.8),0 0 100px rgba(0,255,220,.3);line-height:1"></span>
+    </div>
+
+    <p class="splash-tap">▼ Toca para sumergirte ▼</p>
+  </div>
+
+  <div class="sonar-ping"></div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div id="main">
+
+  <!-- ── HERO CARD ── -->
+  <div class="hero-card">
+    <div class="hull-stripe"></div>
+    <div class="hull-line"></div>
+    <div class="hero-body">
+      <!-- Sonar rings background -->
+      <div class="hero-sonar">
+        <div class="hero-sonar-ring" style="width:200px;height:200px;animation-duration:3s"></div>
+        <div class="hero-sonar-ring" style="width:310px;height:310px;animation-duration:3.7s;animation-delay:.5s"></div>
+        <div class="hero-sonar-ring" style="width:420px;height:420px;animation-duration:4.4s;animation-delay:1s"></div>
+      </div>
+
+      <!-- Floating submarine -->
+      <div class="hero-float" id="hero-sub"></div>
+
+      <div class="mission-label">◈ MISIÓN SUBMARINA ESPECIAL ◈</div>
+
+      <!-- Hero porthole photo -->
+      <div style="display:flex;justify-content:center;margin-bottom:16px">
+        <div class="porthole-wrap" style="width:210px;height:210px">
+          <div class="porthole-outer" style="box-shadow:0 0 0 2px rgba(0,220,200,.5),0 0 45px rgba(0,200,180,.55),0 0 90px rgba(0,200,180,.2),inset 0 2px 4px rgba(255,255,255,.08)"></div>
+          <div class="porthole-bezel" style="inset:11px"></div>
+          <div class="porthole-glass" style="inset:20px">
+            <img id="hero-photo" src="" alt=""/>
+            <div class="porthole-glare"></div>
+            <div class="porthole-tint"></div>
+          </div>
+          <div id="hero-bolts"></div>
+          <div class="porthole-shine"></div>
         </div>
-        <div class="info-col" style="text-align:center;padding:0 8px">
-          <div style="font-size:.4rem;color:rgba(0,180,160,.6);letter-spacing:.15em;margin-bottom:4px;text-transform:uppercase">Hora</div>
-          <div class="info-time" id="iTime"></div>
-          <svg class="sonar-mini" viewBox="0 0 24 24">
+      </div>
+
+      <span class="hero-name" id="hero-name"></span>
+      <div class="hero-badge-wrap"><div class="hero-badge">CUMPLE</div></div>
+      <span class="hero-age" id="hero-age"></span>
+    </div>
+
+    <!-- Info block -->
+    <div class="info-block">
+      <div class="info-header">⚓ DATOS DE LA MISIÓN ⚓</div>
+      <div class="info-grid">
+        <div class="info-col border-r">
+          <div class="info-lbl" id="i-line1"></div>
+          <div class="info-sub" id="i-line2"></div>
+          <div class="info-day" id="i-day"></div>
+          <div class="info-year" id="i-year"></div>
+        </div>
+        <div class="info-col" style="padding:0 6px">
+          <div class="info-lbl">Hora</div>
+          <div class="info-time" id="i-time"></div>
+          <svg class="sonar-spin" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(0,220,200,.2)" stroke-width="1"/>
-            <circle cx="12" cy="12" r="6" fill="none" stroke="rgba(0,220,200,.15)" stroke-width="1"/>
-            <line x1="12" y1="12" x2="12" y2="3" stroke="rgba(0,220,200,.6)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="6"  fill="none" stroke="rgba(0,220,200,.15)" stroke-width="1"/>
+            <line x1="12" y1="12" x2="12" y2="3" stroke="rgba(0,220,200,.7)" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="info-col br">
-          <div style="font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,220,200,.7);margin-bottom:4px">Lugar</div>
-          <div class="info-venue" id="iVenue"></div>
-          <div class="info-addr" id="iAddr"></div>
+        <div class="info-col border-l">
+          <div class="info-lbl">Lugar</div>
+          <div class="info-venue" id="i-venue"></div>
+          <div class="info-addr" id="i-addr"></div>
         </div>
       </div>
       <div class="rsvp-strip">
-        <div class="rsvp-strip-lbl" id="iRsvpLbl"></div>
-        <div class="rsvp-strip-phone" id="iPhone"></div>
+        <div class="rsvp-strip-lbl" id="i-rsvp-lbl"></div>
+        <div class="rsvp-strip-phone" id="i-phone"></div>
       </div>
     </div>
+
     <div class="hull-line"></div>
     <div class="hull-stripe"></div>
   </div>
 
-  <!-- COUNTDOWN -->
+  <!-- ── COUNTDOWN ── -->
   <div class="sub-card" style="animation-delay:.1s">
     <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-    <div style="padding:24px">
-      <div class="eyebrow"><div class="eyebrow-line l"></div><span class="eyebrow-text">Sistema de Navegación</span><div class="eyebrow-line r"></div></div>
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-body">
+      <div class="eyebrow">
+        <div class="eyebrow-line cd-line-l"></div>
+        <span class="eyebrow-text">Sistema de Navegación</span>
+        <div class="eyebrow-line cd-line-r"></div>
+      </div>
       <div class="section-title">Cuenta Regresiva</div>
       <div class="countdown-grid">
-        <div class="cd-box"><div class="cd-val" id="cd-d">00</div><div class="cd-lbl">DÍAS</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-h">00</div><div class="cd-lbl">HORAS</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-m">00</div><div class="cd-lbl">MIN</div></div>
-        <div class="cd-box"><div class="cd-val" id="cd-s">00</div><div class="cd-lbl">SEG</div></div>
+        <div class="cd-box"><div class="cd-val" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
+        <div class="cd-box"><div class="cd-val" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
+        <div class="cd-box"><div class="cd-val" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
+        <div class="cd-box"><div class="cd-val" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
       </div>
-      <div class="cd-date"><div class="cd-line l"></div><span id="cd-display"></span><div class="cd-line r"></div></div>
+      <div class="cd-date-row">
+        <div class="cd-line cd-line-l"></div>
+        <span id="cd-display"></span>
+        <div class="cd-line cd-line-r"></div>
+      </div>
     </div>
   </div>
 
-  <!-- PROGRAM -->
+  <!-- ── PROGRAM ── -->
   <div class="sub-card" style="animation-delay:.15s">
     <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-    <div style="padding:24px">
-      <div class="eyebrow"><div class="eyebrow-line l"></div><span class="eyebrow-text">Bitácora de Misión</span><div class="eyebrow-line r"></div></div>
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-body">
+      <div class="eyebrow">
+        <div class="eyebrow-line cd-line-l"></div>
+        <span class="eyebrow-text">Bitácora de Misión</span>
+        <div class="eyebrow-line cd-line-r"></div>
+      </div>
       <div class="section-title">Programa del Día</div>
-      <div class="program-list"><div class="program-line"></div><div id="programItems"></div></div>
+      <div class="program-list">
+        <div class="program-timeline"></div>
+        <div id="program-items"></div>
+      </div>
     </div>
   </div>
 
-  <!-- GALLERY -->
+  <!-- ── GALLERY ── -->
   <div class="sub-card" style="animation-delay:.2s">
     <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-    <div style="padding:24px">
-      <div class="eyebrow"><div class="eyebrow-line l"></div><span class="eyebrow-text">Archivo Visual</span><div class="eyebrow-line r"></div></div>
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-body">
+      <div class="eyebrow">
+        <div class="eyebrow-line cd-line-l"></div>
+        <span class="eyebrow-text">Archivo Visual</span>
+        <div class="eyebrow-line cd-line-r"></div>
+      </div>
       <div class="section-title">Galería</div>
       <div class="gallery-porthole-wrap">
         <div class="gallery-porthole">
-          <img id="galleryImg" src="" alt=""/>
+          <img id="gallery-img" src="" alt=""/>
           <div class="gallery-vignette"></div>
           <div class="gallery-glare"></div>
         </div>
-        <div id="galleryBolts"></div>
+        <div id="gallery-bolts"></div>
       </div>
       <div class="gallery-caption">
-        <div class="gallery-cap-title" id="galleryCap"></div>
-        <div class="gallery-cap-count" id="galleryCount"></div>
+        <div class="gallery-cap-title" id="gallery-cap"></div>
+        <div class="gallery-cap-count" id="gallery-count"></div>
       </div>
       <div class="gallery-controls">
-        <button class="gallery-btn" onclick="galleryGo(-1)">&#8249;</button>
-        <div class="gallery-dots" id="galleryDots"></div>
-        <button class="gallery-btn" onclick="galleryGo(1)">&#8250;</button>
+        <button class="gallery-btn" onclick="galleryGo(-1)" aria-label="Anterior">&#8249;</button>
+        <div class="gallery-dots" id="gallery-dots"></div>
+        <button class="gallery-btn" onclick="galleryGo(1)" aria-label="Siguiente">&#8250;</button>
       </div>
     </div>
   </div>
 
-  <!-- RSVP -->
+  <!-- ── RSVP ── -->
   <div class="sub-card" style="animation-delay:.25s">
     <div class="card-top-line"></div>
-    <div class="screw tl"></div><div class="screw tr"></div><div class="screw bl"></div><div class="screw br"></div>
-    <div style="padding:24px">
-      <div class="eyebrow"><div class="eyebrow-line l"></div><span class="eyebrow-text">Comunicado al Mando</span><div class="eyebrow-line r"></div></div>
+    <div class="screw tl"></div><div class="screw tr"></div>
+    <div class="screw bl"></div><div class="screw br"></div>
+    <div class="card-body">
+      <div class="eyebrow">
+        <div class="eyebrow-line cd-line-l"></div>
+        <span class="eyebrow-text">Comunicado al Mando</span>
+        <div class="eyebrow-line cd-line-r"></div>
+      </div>
       <div class="section-title">Confirmar Asistencia</div>
-      <p class="rsvp-note" id="rsvpNote"></p>
-      <div id="rsvpContent">
+      <p class="rsvp-note" id="rsvp-note"></p>
+      <div id="rsvp-content">
         <form class="rsvp-form" onsubmit="submitRsvp(event)">
-          <div class="rsvp-field"><input type="text" id="rsvpName" placeholder="Nombre completo" required/></div>
-          <div class="rsvp-field"><input type="text" id="rsvpGuests" placeholder="Número de invitados"/></div>
-          <div class="rsvp-field"><textarea id="rsvpMsg" rows="3" placeholder="Mensaje para la familia…"></textarea></div>
+          <div class="rsvp-field">
+            <input type="text" id="rsvp-name" placeholder="Nombre completo" required autocomplete="name"/>
+          </div>
+          <div class="rsvp-field">
+            <input type="text" id="rsvp-guests" placeholder="Número de invitados (ej: 2)" autocomplete="off"/>
+          </div>
+          <div class="rsvp-field">
+            <textarea id="rsvp-msg" rows="3" placeholder="Mensaje para la familia…"></textarea>
+          </div>
           <button type="submit" class="rsvp-submit">◈ Confirmar Embarque ◈</button>
         </form>
       </div>
     </div>
   </div>
-</div>
 
-<!-- FOOTER -->
-<footer id="footer" style="display:none">
-  <div class="sub-float" id="footerSub"></div>
-  <div class="footer-name" id="footerName"></div>
-  <div class="footer-sub" id="footerSub2"></div>
-  <div class="footer-date" id="footerDate"></div>
+</div><!-- /#main -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="site-footer">
+  <div class="footer-float" id="footer-sub"></div>
+  <div class="footer-name" id="footer-name"></div>
+  <div class="footer-cumple" id="footer-cumple"></div>
+  <div class="footer-date" id="footer-date"></div>
   <div class="footer-quote">"A las profundidades y más allá"</div>
   <div class="sonar-footer">
     <div class="sonar-dot">
@@ -416,263 +650,364 @@ body{background:linear-gradient(180deg,#000510 0%,#001020 25%,#001830 50%,#000D1
 </footer>
 
 <script>
-// ─────────── CONFIG ───────────
+/* ════════════════════════════════════════════
+   ██████  CONFIG — edita aquí tu invitación
+   ════════════════════════════════════════════ */
 const CFG = {
-  name: "Sofía",
-  age: 5,
-  eventDate: "2026-10-03T15:00:00",
+  name:        "Sofía",
+  age:         5,
+  eventDate:   "2026-10-03T15:00:00",
   dateDisplay: "Sábado, 3 de Octubre 2026",
-  dateLine1: "Sábado",
-  dateLine2: "Octubre",
-  dateDay: "3",
-  dateYear: "2026",
-  time: "3:00 PM",
-  venue: "Salón de Fiestas",
-  address: "Dirección del festejo aquí",
-  phone: "1234567890",
-  rsvpTo: "Mamá",
-  photo: "https://images.unsplash.com/photo-1674279293147-4398a39b1847?w=800&q=80",
+  dateLine1:   "Sábado",
+  dateLine2:   "Octubre",
+  dateDay:     "3",
+  dateYear:    "2026",
+  time:        "3:00 PM",
+  venue:       "Salón de Fiestas",
+  address:     "Dirección del festejo aquí",
+  phone:       "1234567890",
+  rsvpTo:      "Mamá",
+  photo:       "https://images.unsplash.com/photo-1674279293147-4398a39b1847?w=800&q=80",
   gallery: [
-    { src: "https://images.unsplash.com/photo-1631255661382-e8559e2038f7?w=800&q=80", cap: "La festejada" },
-    { src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap: "El pastel" },
-    { src: "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap: "La celebración" },
-    { src: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap: "Con amor" },
-    { src: "https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80", cap: "Momentos mágicos" },
-    { src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap: "Recuerdos" },
+    { src:"https://images.unsplash.com/photo-1631255661382-e8559e2038f7?w=800&q=80", cap:"La festejada" },
+    { src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap:"El pastel" },
+    { src:"https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap:"La celebración" },
+    { src:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap:"Con amor" },
+    { src:"https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80", cap:"Momentos mágicos" },
+    { src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap:"Recuerdos" },
   ],
   program: [
-    { time: "2:30 pm", title: "Embarque de tripulantes", desc: "Bienvenida a bordo del submarino" },
-    { time: "3:00 pm", title: "Inmersión al fondo del mar", desc: "¡Comienza la aventura oceánica!" },
-    { time: "4:00 pm", title: "El pastel y festejo", desc: "Celebración bioluminiscente 🎂" },
-    { time: "5:00 pm", title: "Exploración marina", desc: "Juegos y descubrimientos" },
-    { time: "6:00 pm", title: "Regreso a la superficie", desc: "Gracias por navegar con nosotros ★" },
+    { time:"2:30 pm", title:"Embarque de tripulantes",    desc:"Bienvenida a bordo del submarino" },
+    { time:"3:00 pm", title:"Inmersión al fondo del mar", desc:"¡Comienza la aventura oceánica!" },
+    { time:"4:00 pm", title:"El pastel y festejo",        desc:"Celebración bioluminiscente 🎂" },
+    { time:"5:00 pm", title:"Exploración marina",         desc:"Juegos y descubrimientos" },
+    { time:"6:00 pm", title:"Regreso a la superficie",    desc:"Gracias por navegar con nosotros ★" },
   ],
 };
 
-// ─────────── SUBMARINE SVG ───────────
+/* ════════════════════════════════════════
+   SUBMARINE SVG
+   ════════════════════════════════════════ */
 function subSVG(w) {
-  const h = w * 0.55;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 220 120" fill="none">
-    <defs>
-      <linearGradient id="hGm" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,60,70,.95)"/><stop offset="100%" stop-color="rgba(0,20,40,.95)"/></linearGradient>
-      <linearGradient id="tGm" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,80,90,.9)"/><stop offset="100%" stop-color="rgba(0,40,55,.9)"/></linearGradient>
-      <linearGradient id="bGm" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(0,40,50,.9)"/><stop offset="100%" stop-color="rgba(0,60,70,.95)"/></linearGradient>
-      <radialGradient id="pGm" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(0,80,90,.9)"/><stop offset="100%" stop-color="rgba(0,30,50,.9)"/></radialGradient>
-      <radialGradient id="piGm" cx="35%" cy="35%" r="65%"><stop offset="0%" stop-color="rgba(0,180,220,.5)"/><stop offset="100%" stop-color="rgba(0,30,60,.8)"/></radialGradient>
-    </defs>
-    <ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hGm)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
-    <rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tGm)" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-    <rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-    <rect x="96" y="12" width="16" height="5" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-    <circle cx="112" cy="14.5" r="3" fill="rgba(0,255,220,.8)"/>
-    <circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>
-    <g transform="translate(195,72)">
-      <ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(-20)"/>
-      <ellipse cx="0" cy="10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(20)"/>
-      <circle cx="0" cy="0" r="4" fill="rgba(0,220,200,.5)" stroke="rgba(0,255,220,.6)" stroke-width="1"/>
-    </g>
-    <path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bGm)" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
-    ${[55,85,115,145].map(cx=>`<circle cx="${cx}" cy="72" r="11" fill="url(#pGm)" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/><circle cx="${cx}" cy="72" r="7.5" fill="url(#piGm)"/><circle cx="${cx-3}" cy="69" r="2" fill="rgba(255,255,255,.35)"/>`).join('')}
-    <line x1="103" y1="38" x2="103" y2="28" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
-    <circle cx="103" cy="27" r="1.5" fill="rgba(0,255,220,.8)"/>
-  </svg>`;
+  const h = Math.round(w * 0.55);
+  const uid = 'g' + Math.random().toString(36).slice(2,6);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hG${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="rgba(0,60,70,.95)"/>
+      <stop offset="100%" stop-color="rgba(0,20,40,.95)"/>
+    </linearGradient>
+    <linearGradient id="tG${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="rgba(0,80,90,.9)"/>
+      <stop offset="100%" stop-color="rgba(0,40,55,.9)"/>
+    </linearGradient>
+    <linearGradient id="bG${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="rgba(0,40,50,.9)"/>
+      <stop offset="100%" stop-color="rgba(0,60,70,.95)"/>
+    </linearGradient>
+    <radialGradient id="pG${uid}" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="rgba(0,80,90,.9)"/>
+      <stop offset="100%" stop-color="rgba(0,30,50,.9)"/>
+    </radialGradient>
+    <radialGradient id="piG${uid}" cx="35%" cy="35%" r="65%">
+      <stop offset="0%"   stop-color="rgba(0,180,220,.5)"/>
+      <stop offset="100%" stop-color="rgba(0,30,60,.8)"/>
+    </radialGradient>
+  </defs>
+  <!-- hull -->
+  <ellipse cx="105" cy="72" rx="90" ry="34" fill="url(#hG${uid})" stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
+  <!-- conning tower -->
+  <rect x="80" y="38" width="46" height="36" rx="10" fill="url(#tG${uid})" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
+  <!-- periscope -->
+  <rect x="99" y="14" width="5" height="26" rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
+  <rect x="96" y="12" width="16" height="5"  rx="2" fill="rgba(0,180,160,.7)" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
+  <circle cx="112" cy="14.5" r="3"   fill="rgba(0,255,220,.8)"/>
+  <circle cx="112" cy="14.5" r="1.5" fill="white" opacity=".9"/>
+  <!-- propeller -->
+  <g transform="translate(195,72)">
+    <ellipse cx="0" cy="-10" rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(-20)"/>
+    <ellipse cx="0" cy="10"  rx="4" ry="10" fill="rgba(0,180,160,.6)" stroke="rgba(0,220,200,.4)" stroke-width=".8" transform="rotate(20)"/>
+    <circle cx="0" cy="0" r="4" fill="rgba(0,220,200,.5)" stroke="rgba(0,255,220,.6)" stroke-width="1"/>
+  </g>
+  <!-- bow -->
+  <path d="M15 72 Q5 60 12 52 Q4 72 12 92 Q5 84 15 72Z" fill="url(#bG${uid})" stroke="rgba(0,220,200,.4)" stroke-width="1"/>
+  <!-- portholes -->
+  ${[55,85,115,145].map(cx => `
+  <circle cx="${cx}" cy="72" r="11"  fill="url(#pG${uid})"  stroke="rgba(0,220,200,.5)" stroke-width="1.5"/>
+  <circle cx="${cx}" cy="72" r="7.5" fill="url(#piG${uid})"/>
+  <circle cx="${cx-3}" cy="69" r="2" fill="rgba(255,255,255,.35)"/>
+  `).join('')}
+  <!-- antenna -->
+  <line x1="103" y1="38" x2="103" y2="28" stroke="rgba(0,220,200,.4)" stroke-width=".8"/>
+  <circle cx="103" cy="27" r="1.5" fill="rgba(0,255,220,.8)"/>
+  <!-- ballast vents -->
+  ${[40,60,80,100,120,140,160].map(x =>
+    `<rect x="${x}" y="100" width="8" height="4" rx="1" fill="none" stroke="rgba(0,220,200,.22)" stroke-width=".8"/>`
+  ).join('')}
+</svg>`;
 }
 
-// ─────────── BOLTS ───────────
-function makeBolts(container, radius, boltSize=14) {
-  [0,45,90,135,180,225,270,315].forEach(deg => {
-    const b = document.createElement('div');
-    b.style.cssText = `position:absolute;width:${boltSize}px;height:${boltSize}px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(0,160,140,.8),rgba(0,50,70,.9));border:1.5px solid rgba(0,220,200,.55);box-shadow:0 0 6px rgba(0,220,200,.35);top:50%;left:50%;margin-top:${-boltSize/2}px;margin-left:${-boltSize/2}px;transform:rotate(${deg}deg) translateY(-${radius}px)`;
-    b.innerHTML = `<svg width="${boltSize}" height="${boltSize}" viewBox="0 0 ${boltSize} ${boltSize}" style="position:absolute;inset:0"><line x1="${boltSize/2}" y1="2" x2="${boltSize/2}" y2="${boltSize-2}" stroke="rgba(0,180,160,.5)" stroke-width="1"/><line x1="2" y1="${boltSize/2}" x2="${boltSize-2}" y2="${boltSize/2}" stroke="rgba(0,180,160,.5)" stroke-width="1"/></svg>`;
+/* ════════════════════════════════════════
+   BOLTS — pernos de presión
+   ════════════════════════════════════════ */
+function makeBolts(container, radius, size) {
+  size = size || 14;
+  [0,45,90,135,180,225,270,315].forEach(function(deg) {
+    var b = document.createElement('div');
+    b.className = 'porthole-bolt';
+    b.style.width  = size + 'px';
+    b.style.height = size + 'px';
+    b.style.marginTop  = -(size/2) + 'px';
+    b.style.marginLeft = -(size/2) + 'px';
+    b.style.transform = 'rotate(' + deg + 'deg) translateY(-' + radius + 'px)';
+    b.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '" style="position:absolute;inset:0">' +
+      '<line x1="' + (size/2) + '" y1="2" x2="' + (size/2) + '" y2="' + (size-2) + '" stroke="rgba(0,180,160,.5)" stroke-width="1"/>' +
+      '<line x1="2" y1="' + (size/2) + '" x2="' + (size-2) + '" y2="' + (size/2) + '" stroke="rgba(0,180,160,.5)" stroke-width="1"/>' +
+    '</svg>';
     container.appendChild(b);
   });
 }
 
-// ─────────── BUBBLES ───────────
+/* ════════════════════════════════════════
+   BUBBLES
+   ════════════════════════════════════════ */
 function createBubbles() {
-  for(let i=0;i<22;i++){
-    const b = document.createElement('div');
+  for (var i = 0; i < 24; i++) {
+    var b  = document.createElement('div');
     b.className = 'bubble';
-    const x = Math.random()*100;
-    const size = 4 + Math.random()*14;
-    const dur = 6 + Math.random()*10;
-    const delay = Math.random()*8;
-    const op = .1 + Math.random()*.4;
-    b.style.cssText = `left:${x}%;bottom:-40px;width:${size}px;height:${size}px;background:radial-gradient(circle at 35% 35%,rgba(0,255,255,${op}),transparent);animation-duration:${dur}s;animation-delay:${delay}s`;
+    var x   = Math.random() * 100;
+    var sz  = 4 + Math.random() * 16;
+    var dur = 7 + Math.random() * 11;
+    var del = Math.random() * 10;
+    var op  = 0.1 + Math.random() * 0.4;
+    b.style.cssText = [
+      'left:' + x + '%',
+      'bottom:-40px',
+      'width:' + sz + 'px',
+      'height:' + sz + 'px',
+      'background:radial-gradient(circle at 35% 35%,rgba(0,255,255,' + op + '),transparent)',
+      'animation-duration:' + dur + 's',
+      'animation-delay:' + del + 's'
+    ].join(';');
     document.body.appendChild(b);
   }
 }
 
-// ─────────── FISH ───────────
+/* ════════════════════════════════════════
+   FISH
+   ════════════════════════════════════════ */
 function createFish() {
-  [[1,15],[−1,45],[1,70]].forEach(([dir,y]) => {
-    const f = document.createElement('div');
-    f.className = `fish ${dir>0?'right':'left'}`;
-    const dur = 18 + Math.random()*10;
-    const delay = Math.random()*5;
-    f.style.cssText = `top:${y}%;z-index:0;animation-duration:${dur}s;animation-delay:${delay}s${dir<0?';transform:scaleX(-1)':''}`;
-    f.innerHTML = `<svg width="60" height="28" viewBox="0 0 60 28" fill="none">
-      <ellipse cx="28" cy="14" rx="20" ry="8" fill="rgba(0,200,180,.25)" stroke="rgba(0,255,220,.4)" stroke-width=".8"/>
-      <path d="M48 14 Q56 8 60 14 Q56 20 48 14Z" fill="rgba(0,200,180,.2)" stroke="rgba(0,255,220,.35)" stroke-width=".8"/>
-      <circle cx="16" cy="12" r="2" fill="rgba(0,255,220,.5)"/>
-    </svg>`;
-    document.body.appendChild(f);
+  var fish = [
+    {dir:1,  y:14},
+    {dir:-1, y:42},
+    {dir:1,  y:68},
+  ];
+  var svgRight = '<svg width="60" height="28" viewBox="0 0 60 28" fill="none"><ellipse cx="28" cy="14" rx="20" ry="8" fill="rgba(0,200,180,.25)" stroke="rgba(0,255,220,.4)" stroke-width=".8"/><path d="M48 14 Q56 8 60 14 Q56 20 48 14Z" fill="rgba(0,200,180,.2)" stroke="rgba(0,255,220,.35)" stroke-width=".8"/><circle cx="16" cy="12" r="2" fill="rgba(0,255,220,.5)"/><line x1="22" y1="9" x2="22" y2="19" stroke="rgba(0,255,220,.12)" stroke-width=".5"/><line x1="32" y1="8" x2="32" y2="20" stroke="rgba(0,255,220,.12)" stroke-width=".5"/><line x1="42" y1="9" x2="42" y2="19" stroke="rgba(0,255,220,.12)" stroke-width=".5"/></svg>';
+
+  fish.forEach(function(f) {
+    var el  = document.createElement('div');
+    var dur = 16 + Math.random() * 12;
+    var del = Math.random() * 6;
+    el.className = f.dir > 0 ? 'fish-right' : 'fish-left';
+    el.style.cssText = 'top:' + f.y + '%;animation-duration:' + dur + 's;animation-delay:' + del + 's';
+    el.innerHTML = svgRight;
+    document.body.appendChild(el);
   });
 }
 
-// ─────────── DEPTH MARKERS ───────────
-function createDepth() {
-  const el = document.getElementById('depth');
-  [10,50,100,200,300,400].forEach(d => {
-    el.innerHTML += `<div class="depth-mark"><span>${d}m</span></div>`;
+/* ════════════════════════════════════════
+   DEPTH MARKERS
+   ════════════════════════════════════════ */
+function createDepthMarkers() {
+  var el = document.getElementById('depth-marks');
+  [10,50,100,200,300,500].forEach(function(d) {
+    var row = document.createElement('div');
+    row.className = 'depth-mark';
+    var sp = document.createElement('span');
+    sp.textContent = d + 'm';
+    row.appendChild(sp);
+    el.appendChild(row);
   });
 }
 
-// ─────────── COUNTDOWN ───────────
+/* ════════════════════════════════════════
+   COUNTDOWN
+   ════════════════════════════════════════ */
 function updateCountdown() {
-  const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
-  document.getElementById('cd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
-  document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-  document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-  document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  var diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
+  document.getElementById('cd-d').textContent = pad(Math.floor(diff / 86400000));
+  document.getElementById('cd-h').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600000)  / 60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor((diff % 60000)    / 1000));
 }
+function pad(n) { return String(n).padStart(2,'0'); }
 
-// ─────────── GALLERY ───────────
-let galIdx = 0;
+/* ════════════════════════════════════════
+   GALLERY
+   ════════════════════════════════════════ */
+var galIdx  = 0;
+var galBusy = false;
+
 function renderGallery() {
-  const g = CFG.gallery[galIdx];
-  document.getElementById('galleryImg').src = g.src;
-  document.getElementById('galleryImg').alt = g.cap;
-  document.getElementById('galleryCap').textContent = g.cap;
-  document.getElementById('galleryCount').textContent = String(galIdx+1).padStart(2,'0') + ' — ' + String(CFG.gallery.length).padStart(2,'0');
-  const dots = document.getElementById('galleryDots');
+  var g = CFG.gallery[galIdx];
+  var img = document.getElementById('gallery-img');
+  img.style.opacity = '0';
+  img.src = g.src;
+  img.alt = g.cap;
+  img.onload = function() { img.style.opacity = '1'; };
+  document.getElementById('gallery-cap').textContent   = g.cap;
+  document.getElementById('gallery-count').textContent = pad(galIdx + 1) + ' — ' + pad(CFG.gallery.length);
+
+  var dots = document.getElementById('gallery-dots');
   dots.innerHTML = '';
-  CFG.gallery.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'gallery-dot';
-    d.style.width = i===galIdx ? '24px' : '8px';
-    d.style.background = i===galIdx ? '#00FFDC' : 'rgba(0,220,200,.25)';
-    d.onclick = () => { galIdx=i; renderGallery(); };
+  CFG.gallery.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className  = 'gallery-dot';
+    d.setAttribute('aria-label', 'Foto ' + (i+1));
+    d.style.width      = (i === galIdx ? 24 : 8) + 'px';
+    d.style.background = i === galIdx ? '#00FFDC' : 'rgba(0,220,200,.25)';
+    d.onclick = function() { if (!galBusy) { galIdx = i; renderGallery(); } };
     dots.appendChild(d);
   });
 }
+
 function galleryGo(dir) {
-  galIdx = ((galIdx+dir)%CFG.gallery.length+CFG.gallery.length)%CFG.gallery.length;
+  if (galBusy) return;
+  galBusy = true;
+  galIdx  = ((galIdx + dir) % CFG.gallery.length + CFG.gallery.length) % CFG.gallery.length;
   renderGallery();
+  setTimeout(function() { galBusy = false; }, 380);
 }
 
-// ─────────── RSVP ───────────
+// touch swipe
+var touchStartX = 0;
+document.addEventListener('touchstart', function(e) {
+  if (e.target.closest('.gallery-porthole')) touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', function(e) {
+  if (!e.target.closest('.gallery-porthole')) return;
+  var dx = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 40) galleryGo(dx > 0 ? 1 : -1);
+});
+
+/* ════════════════════════════════════════
+   RSVP
+   ════════════════════════════════════════ */
 function submitRsvp(e) {
   e.preventDefault();
-  const name = document.getElementById('rsvpName').value.trim();
-  if(!name) return;
-  const guests = document.getElementById('rsvpGuests').value;
-  const msg = document.getElementById('rsvpMsg').value;
-  let text = `¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🌊\n\n`;
-  text += `👤 *Nombre:* ${name}\n`;
-  if(guests) text += `👥 *Invitados:* ${guests}\n`;
-  if(msg) text += `💬 *Mensaje:* ${msg}\n`;
-  text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
-  const phone = CFG.phone.replace(/\D/g,'');
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-  document.getElementById('rsvpContent').innerHTML = `
-    <div class="rsvp-thanks">
-      ${subSVG(120)}
-      <div class="rsvp-thanks-title">¡Gracias!</div>
-      <div class="rsvp-thanks-msg">Abriendo WhatsApp…</div>
-      <a href="${url}" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
-    </div>`;
-  window.open(url,'_blank');
+  var name   = document.getElementById('rsvp-name').value.trim();
+  var guests = document.getElementById('rsvp-guests').value.trim();
+  var msg    = document.getElementById('rsvp-msg').value.trim();
+  if (!name) return;
+
+  var text = '¡Hola! Confirmo mi asistencia a la fiesta de *' + CFG.name + '* 🌊\n\n';
+  text += '👤 *Nombre:* ' + name + '\n';
+  if (guests) text += '👥 *Invitados:* ' + guests + '\n';
+  if (msg)    text += '💬 *Mensaje:* '   + msg    + '\n';
+  text += '\n📅 ' + CFG.dateDisplay + ' a las ' + CFG.time;
+  text += '\n📍 ' + CFG.venue;
+
+  var phone = CFG.phone.replace(/\D/g, '');
+  var url   = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+
+  document.getElementById('rsvp-content').innerHTML =
+    '<div class="rsvp-thanks">' +
+      subSVG(120) +
+      '<div class="rsvp-thanks-title">¡Gracias, ' + name + '!</div>' +
+      '<div class="rsvp-thanks-msg">Tu mensaje está listo para WhatsApp 🌊</div>' +
+      '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>' +
+    '</div>';
+
+  window.open(url, '_blank');
 }
 
-// ─────────── SPLASH ───────────
+/* ════════════════════════════════════════
+   SPLASH
+   ════════════════════════════════════════ */
+var splashTimer = null;
+
 function closeSplash() {
-  const s = document.getElementById('splash');
-  s.style.opacity = '0';
-  setTimeout(() => {
-    s.classList.add('hidden');
+  clearTimeout(splashTimer);
+  var splash = document.getElementById('splash');
+  splash.classList.add('hidden');
+  setTimeout(function() {
+    splash.style.display = 'none';
     document.getElementById('main').classList.add('visible');
-    document.getElementById('footer').style.display = 'block';
-  }, 600);
+    document.getElementById('site-footer').style.display = 'block';
+  }, 700);
 }
 
-// ─────────── INIT ───────────
-function init() {
-  // splash
-  document.getElementById('splashName').textContent = CFG.name;
-  document.getElementById('splashAge').textContent = CFG.age;
-  document.getElementById('splashPhoto').src = CFG.photo;
-  document.getElementById('splashPhoto').alt = CFG.name;
-  makeBolts(document.getElementById('splashBolts'), 64, 12);
+/* ════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
 
-  // hero
-  document.getElementById('heroSub').innerHTML = subSVG(240);
-  document.getElementById('heroPhoto').src = CFG.photo;
-  document.getElementById('heroPhoto').alt = CFG.name;
-  makeBolts(document.getElementById('heroBolts'), 95, 14);
-  document.getElementById('heroName').textContent = CFG.name;
-  document.getElementById('heroAge').textContent = CFG.age;
+  /* ── splash ── */
+  document.getElementById('splash-photo').src = CFG.photo;
+  document.getElementById('splash-photo').alt = CFG.name;
+  document.getElementById('splash-name').textContent = CFG.name;
+  document.getElementById('splash-age').textContent  = CFG.age;
+  document.getElementById('splash-sub').innerHTML    = subSVG(190);
+  makeBolts(document.getElementById('splash-bolts'), 66, 12);
 
-  // info block
-  document.getElementById('iLine1').textContent = CFG.dateLine1;
-  document.getElementById('iLine2').textContent = CFG.dateLine2;
-  document.getElementById('iDay').textContent = CFG.dateDay;
-  document.getElementById('iYear').textContent = CFG.dateYear;
-  document.getElementById('iTime').textContent = CFG.time;
-  document.getElementById('iVenue').textContent = CFG.venue;
-  document.getElementById('iAddr').textContent = CFG.address;
-  document.getElementById('iRsvpLbl').textContent = `◈ RSVP a ${CFG.rsvpTo} ◈`;
-  document.getElementById('iPhone').textContent = CFG.phone;
+  /* ── hero ── */
+  document.getElementById('hero-sub').innerHTML   = subSVG(240);
+  document.getElementById('hero-photo').src       = CFG.photo;
+  document.getElementById('hero-photo').alt       = CFG.name;
+  document.getElementById('hero-name').textContent = CFG.name;
+  document.getElementById('hero-age').textContent  = CFG.age;
+  makeBolts(document.getElementById('hero-bolts'), 99, 14);
 
-  // countdown
+  /* ── info block ── */
+  document.getElementById('i-line1').textContent = CFG.dateLine1;
+  document.getElementById('i-line2').textContent = CFG.dateLine2;
+  document.getElementById('i-day').textContent   = CFG.dateDay;
+  document.getElementById('i-year').textContent  = CFG.dateYear;
+  document.getElementById('i-time').textContent  = CFG.time;
+  document.getElementById('i-venue').textContent = CFG.venue;
+  document.getElementById('i-addr').textContent  = CFG.address;
+  document.getElementById('i-rsvp-lbl').textContent = '◈ RSVP a ' + CFG.rsvpTo + ' ◈';
+  document.getElementById('i-phone').textContent    = CFG.phone;
+
+  /* ── countdown ── */
   document.getElementById('cd-display').textContent = CFG.dateDisplay;
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // program
-  const pl = document.getElementById('programItems');
-  CFG.program.forEach(item => {
-    pl.innerHTML += `<div class="program-item">
-      <div class="prog-dot-wrap"><div class="prog-dot"></div></div>
-      <div>
-        <div class="prog-time">${item.time}</div>
-        <div class="prog-title">${item.title}</div>
-        <div class="prog-desc">${item.desc}</div>
-      </div>
-    </div>`;
+  /* ── program ── */
+  var pl = document.getElementById('program-items');
+  CFG.program.forEach(function(item) {
+    pl.innerHTML +=
+      '<div class="program-item">' +
+        '<div class="prog-dot-col"><div class="prog-dot"></div></div>' +
+        '<div>' +
+          '<div class="prog-time">' + item.time + '</div>' +
+          '<div class="prog-title">' + item.title + '</div>' +
+          '<div class="prog-desc">' + item.desc + '</div>' +
+        '</div>' +
+      '</div>';
   });
 
-  // gallery
-  makeBolts(document.getElementById('galleryBolts'), 140, 12);
+  /* ── gallery ── */
+  makeBolts(document.getElementById('gallery-bolts'), 142, 12);
   renderGallery();
 
-  // rsvp
-  document.getElementById('rsvpNote').textContent = `◈ RSVP a ${CFG.rsvpTo} · ${CFG.phone} ◈`;
+  /* ── rsvp ── */
+  document.getElementById('rsvp-note').textContent = '◈ RSVP a ' + CFG.rsvpTo + ' · ' + CFG.phone + ' ◈';
 
-  // footer
-  document.getElementById('footerSub').innerHTML = subSVG(140);
-  document.getElementById('footerSub2').textContent = `cumple ${CFG.age}!`;
-  document.getElementById('footerName').textContent = CFG.name;
-  document.getElementById('footerDate').textContent = CFG.dateDisplay;
+  /* ── footer ── */
+  document.getElementById('footer-sub').innerHTML     = subSVG(140);
+  document.getElementById('footer-name').textContent  = CFG.name;
+  document.getElementById('footer-cumple').textContent = '¡cumple ' + CFG.age + '!';
+  document.getElementById('footer-date').textContent  = CFG.dateDisplay;
 
-  // depth
-  createDepth();
+  /* ── ambient elements ── */
+  createDepthMarkers();
   createBubbles();
   createFish();
 
-  // auto splash close
-  setTimeout(closeSplash, 4200);
-}
-
-document.addEventListener('DOMContentLoaded', init);
-
-// touch swipe for gallery
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { if(e.target.closest('.gallery-porthole')) touchStartX = e.touches[0].clientX; });
-document.addEventListener('touchend', e => {
-  if(!e.target.closest('.gallery-porthole')) return;
-  const d = touchStartX - e.changedTouches[0].clientX;
-  if(Math.abs(d) > 40) galleryGo(d > 0 ? 1 : -1);
+  /* ── auto-close splash ── */
+  splashTimer = setTimeout(closeSplash, 4500);
 });
 </script>
 </body>
