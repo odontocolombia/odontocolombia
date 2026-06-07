@@ -7,96 +7,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Luckiest+Guy&display=swap" rel="stylesheet" />
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
   background: linear-gradient(170deg,#1A0A2E 0%,#2D0A4B 35%,#0D1B3E 65%,#1A0A2E 100%);
-  min-height: 100vh;
-  font-family: 'Lato', sans-serif;
-  color: white;
-  overflow-x: hidden;
+  min-height: 100vh; font-family: 'Lato', sans-serif; color: white; overflow-x: hidden;
 }
-
-/* ── STARFIELD / HEARTS ── */
 #starfield { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
 .star {
   position:absolute; border-radius:50%;
   animation: twinkle var(--dur) var(--delay) infinite ease-in-out;
 }
-@keyframes twinkle {
-  0%,100%{ opacity:.1; transform:scale(.8); }
-  50%    { opacity:.9; transform:scale(1.4); }
-}
-
-/* ── SPLASH ── */
+@keyframes twinkle { 0%,100%{ opacity:.1; transform:scale(.8); } 50%{ opacity:.9; transform:scale(1.4); } }
 #splash {
   position:fixed; inset:0; z-index:50;
   background: linear-gradient(160deg,#1A0A2E 0%,#2D0A4B 40%,#0D1B3E 70%,#1A0A2E 100%);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  cursor:pointer; overflow:hidden;
-  animation: splashIn .4s ease;
+  cursor:pointer; overflow:hidden; animation: splashIn .4s ease;
 }
 #splash.hide { animation: splashOut .5s ease forwards; }
 @keyframes splashIn  { from{opacity:0} to{opacity:1} }
 @keyframes splashOut { from{opacity:1} to{opacity:0;pointer-events:none} }
-
-/* Stripes */
-.stripe-pink   { position:absolute; left:0; right:0; height:12px; background:repeating-linear-gradient(90deg,#FF6EB4 0,#FF6EB4 20px,white 20px,white 40px); }
-.stripe-gold   { position:absolute; left:0; right:0; height:6px;  background:linear-gradient(90deg,#FFD700,#FF69B4,#FFD700); }
-.stripe-top-pink { top:0; }
-.stripe-top-gold { top:12px; }
-.stripe-bot-gold { bottom:0; }
-.stripe-bot-pink { bottom:6px; }
-
-/* ── TOY STORY FEMININE TEXT ── */
+.stripe-pink { position:absolute; left:0; right:0; height:12px; background:repeating-linear-gradient(90deg,#FF6EB4 0,#FF6EB4 20px,white 20px,white 40px); }
+.stripe-gold { position:absolute; left:0; right:0; height:6px;  background:linear-gradient(90deg,#FFD700,#E040FB,#FFD700); }
+.stripe-top-pink { top:0; } .stripe-top-gold { top:12px; }
+.stripe-bot-gold { bottom:0; } .stripe-bot-pink { bottom:6px; }
 .ts-name {
-  font-family:'Luckiest Guy',cursive;
-  font-size:clamp(3rem,16vw,5.5rem);
-  color:#FFD700;
-  -webkit-text-stroke:.12em #9B1FA8;
-  paint-order:stroke fill;
-  letter-spacing:.04em; line-height:1; display:block;
-  filter:drop-shadow(0 4px 0 #6A0F7A);
+  font-family:'Luckiest Guy',cursive; font-size:clamp(3rem,16vw,5.5rem);
+  color:#FFD700; -webkit-text-stroke:.12em #9B1FA8; paint-order:stroke fill;
+  letter-spacing:.04em; line-height:1; display:block; filter:drop-shadow(0 4px 0 #6A0F7A);
 }
 .ts-age {
-  font-family:'Luckiest Guy',cursive;
-  font-size:clamp(5rem,22vw,8rem);
-  color:#FFD700;
-  -webkit-text-stroke:.1em #9B1FA8;
-  paint-order:stroke fill;
-  letter-spacing:.02em; line-height:1; display:block;
-  filter:drop-shadow(0 5px 0 #6A0F7A);
+  font-family:'Luckiest Guy',cursive; font-size:clamp(5rem,22vw,8rem);
+  color:#FFD700; -webkit-text-stroke:.1em #9B1FA8; paint-order:stroke fill;
+  letter-spacing:.02em; line-height:1; display:block; filter:drop-shadow(0 5px 0 #6A0F7A);
 }
 .ts-cumple-wrap {
-  display:inline-block;
-  background:linear-gradient(135deg,#FF6EB4,#C2185B);
-  padding:.15em 1.4em;
-  clip-path:polygon(3% 0%,97% 0%,100% 100%,0% 100%);
-  margin:.1em 0;
+  display:inline-block; background:linear-gradient(135deg,#FF6EB4,#C2185B);
+  padding:.15em 1.4em; clip-path:polygon(3% 0%,97% 0%,100% 100%,0% 100%); margin:.1em 0;
 }
 .ts-cumple {
-  font-family:'Luckiest Guy',cursive;
-  font-size:clamp(1rem,5vw,1.5rem);
-  color:white;
-  -webkit-text-stroke:.05em rgba(0,0,0,.25);
-  paint-order:stroke fill;
+  font-family:'Luckiest Guy',cursive; font-size:clamp(1rem,5vw,1.5rem); color:white;
+  -webkit-text-stroke:.05em rgba(0,0,0,.25); paint-order:stroke fill;
   letter-spacing:.1em; line-height:1; display:block;
 }
-
-/* ── PHOTO CIRCLE ── */
 .photo-ring {
   width:140px; height:140px; border-radius:50%;
   background:linear-gradient(135deg,#FFD700,#FF69B4,#E040FB);
-  padding:4px;
-  box-shadow:0 0 35px rgba(255,105,180,.7);
-  margin:0 auto .75rem;
+  padding:4px; box-shadow:0 0 35px rgba(255,105,180,.7); margin:0 auto .75rem;
 }
-.photo-inner {
-  width:100%; height:100%; border-radius:50%; overflow:hidden;
-  border:3px solid #1A0A2E;
-}
+.photo-inner { width:100%; height:100%; border-radius:50%; overflow:hidden; border:3px solid #1A0A2E; }
 .photo-inner img { width:100%; height:100%; object-fit:cover; object-position:top; }
-
-/* ── ANIMATIONS ── */
 .fade-up { animation:fadeUp .5s ease forwards; opacity:0; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
 .pop { animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards; opacity:0; transform:scale(0); }
@@ -106,42 +65,26 @@ body {
 .float      { animation:float 4s ease-in-out infinite; }
 .float-slow { animation:float 3.5s ease-in-out infinite; }
 @keyframes float { 0%,100%{transform:translateY(-8px)} 50%{transform:translateY(8px)} }
-.spin-slow  { animation:spinSlow 8s linear infinite; }
-@keyframes spinSlow { to{transform:rotate(360deg)} }
-
-/* ── MAIN ── */
 #main { display:none; }
 #main.show { display:block; }
 .container {
-  position:relative; z-index:10;
-  max-width:430px; margin:0 auto;
-  padding:1.5rem 1rem 4rem;
-  display:flex; flex-direction:column; gap:1.25rem;
+  position:relative; z-index:10; max-width:430px; margin:0 auto;
+  padding:1.5rem 1rem 4rem; display:flex; flex-direction:column; gap:1.25rem;
 }
-
-/* ── HERO CARD ── */
 .hero-card {
   background:linear-gradient(170deg,#1A0A2E 0%,#2D0A4B 45%,#0D1B3E 100%);
-  border:2px solid rgba(255,105,180,.5);
-  border-radius:24px; overflow:hidden;
+  border:2px solid rgba(255,105,180,.5); border-radius:24px; overflow:hidden;
   box-shadow:0 10px 50px rgba(45,10,75,.8),0 0 60px rgba(224,64,251,.2);
   animation:fadeUp .7s ease forwards;
 }
-.hero-body {
-  padding:1.25rem 1.5rem 0; text-align:center; position:relative; overflow:hidden;
-}
+.hero-body { padding:1.25rem 1.5rem 0; text-align:center; position:relative; overflow:hidden; }
 .hero-deco-left  { position:absolute; left:8px;  top:20px; }
 .hero-deco-right { position:absolute; right:8px; top:20px; }
-
 .hero-info { background:#1E083A; padding:1.5rem 1.25rem 1.75rem; }
-.info-grid {
-  display:grid; grid-template-columns:1fr auto 1fr; gap:8px;
-  align-items:center; margin-bottom:1.25rem;
-}
+.info-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; margin-bottom:1.25rem; }
 .info-date  { text-align:center; border-right:1px dashed rgba(255,105,180,.45); padding-right:8px; }
 .info-time  { text-align:center; padding:0 8px; }
 .info-venue { text-align:center; border-left:1px dashed rgba(255,105,180,.45); padding-left:8px; }
-
 .lbl-sm  { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:#FF6EB4; font-weight:700; }
 .lbl-xs  { font-size:.5rem; letter-spacing:.15em; text-transform:uppercase; color:#FF6EB4; }
 .date-big  { font-family:'Dancing Script',cursive; font-size:3rem; font-weight:700; color:#FFD700; line-height:1; }
@@ -150,47 +93,33 @@ body {
 .venue-addr{ font-size:.42rem; color:#F8BBD0; margin-top:4px; line-height:1.5; }
 .italic-sm { font-family:'Dancing Script',cursive; font-style:italic; font-size:1rem; color:#F8BBD0; margin-bottom:4px; }
 .year-sm   { font-size:.5rem; color:#F8BBD0; }
-
 .rsvp-banner {
   background:linear-gradient(135deg,#7B1FA2,#4A0072);
   border:1px solid rgba(255,105,180,.45); border-radius:8px;
-  padding:.7rem 1rem; text-align:center;
-  box-shadow:0 0 20px rgba(224,64,251,.3);
+  padding:.7rem 1rem; text-align:center; box-shadow:0 0 20px rgba(224,64,251,.3);
 }
 .rsvp-label { font-size:.52rem; letter-spacing:.3em; text-transform:uppercase; color:#F8BBD0; font-weight:700; }
 .rsvp-phone { font-family:'Dancing Script',cursive; font-size:1.6rem; font-weight:700; color:#FFD700; margin-top:2px; }
-
-/* ── CARD ── */
 .card {
   background:rgba(29,8,56,.9); backdrop-filter:blur(10px);
   border:1.5px solid rgba(255,105,180,.35); border-radius:24px; overflow:hidden;
   box-shadow:0 6px 30px rgba(10,5,30,.7),0 0 40px rgba(224,64,251,.12);
-  position:relative;
-  animation:fadeUp .6s ease forwards;
+  position:relative; animation:fadeUp .6s ease forwards;
 }
 .card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:3px;
   background:linear-gradient(to right,transparent,#E040FB,#FFD700,#FF6EB4,transparent);
 }
 .card-body { padding:1.75rem; }
-
-/* ── SECTION TITLE ── */
 .section-eyebrow {
   font-size:.6rem; letter-spacing:.28em; text-transform:uppercase;
   color:#FF6EB4; display:block; margin-bottom:.4rem; font-weight:300;
 }
-.section-title {
-  font-family:'Dancing Script',cursive; font-size:clamp(1.9rem,6vw,2.5rem);
-  font-weight:700; color:#FFD700;
-}
-.section-divider {
-  display:flex; align-items:center; justify-content:center; gap:8px; margin-top:.5rem;
-}
+.section-title { font-family:'Dancing Script',cursive; font-size:clamp(1.9rem,6vw,2.5rem); font-weight:700; color:#FFD700; }
+.section-divider { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:.5rem; }
 .divider-line-l { width:36px; height:1px; background:linear-gradient(to right,transparent,#FF6EB4); }
 .divider-line-r { width:36px; height:1px; background:linear-gradient(to left,transparent,#FF6EB4); }
 .title-block { text-align:center; margin-bottom:1.5rem; }
-
-/* ── COUNTDOWN ── */
 .countdown-grid { display:flex; justify-content:center; gap:.625rem; flex-wrap:wrap; }
 .cd-box {
   text-align:center; min-width:68px; padding:14px 10px;
@@ -200,127 +129,50 @@ body {
 }
 .cd-num { font-family:'Dancing Script',cursive; font-weight:700; font-size:2.4rem; line-height:1; color:#FFD700; }
 .cd-lbl { font-size:.42rem; letter-spacing:.25em; text-transform:uppercase; color:#FF6EB4; margin-top:6px; }
-.cd-footer {
-  display:flex; align-items:center; justify-content:center; gap:8px; margin-top:1rem;
-  font-size:.48rem; letter-spacing:.2em; text-transform:uppercase; color:#F8BBD0;
-}
-
-/* ── PROGRAM ── */
+.cd-footer { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:1rem; font-size:.48rem; letter-spacing:.2em; text-transform:uppercase; color:#F8BBD0; }
 .timeline { position:relative; }
-.timeline::before {
-  content:''; position:absolute; left:15px; top:0; bottom:0; width:1px;
-  background:linear-gradient(to bottom,#FF6EB4,transparent);
-}
-.tl-item {
-  display:flex; align-items:flex-start; gap:14px;
-  padding:12px 8px 12px 0; border-bottom:1px solid rgba(224,64,251,.22);
-}
+.timeline::before { content:''; position:absolute; left:15px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,#FF6EB4,transparent); }
+.tl-item { display:flex; align-items:flex-start; gap:14px; padding:12px 8px 12px 0; border-bottom:1px solid rgba(224,64,251,.22); }
 .tl-item:last-child { border-bottom:none; }
 .tl-dot-wrap { flex-shrink:0; width:20px; display:flex; justify-content:center; margin-top:6px; }
-.tl-dot {
-  width:10px; height:10px; border-radius:50%;
-  background:linear-gradient(135deg,#FF6EB4,#E040FB);
-  box-shadow:0 0 10px rgba(255,110,180,.7);
-}
+.tl-dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,#FF6EB4,#E040FB); box-shadow:0 0 10px rgba(255,110,180,.7); }
 .tl-time  { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:#FFD700; font-weight:600; }
 .tl-title { font-family:'Dancing Script',cursive; font-size:1.1rem; color:#F8BBD0; margin-top:2px; }
 .tl-desc  { font-size:.43rem; letter-spacing:.12em; text-transform:uppercase; color:#FF6EB4; margin-top:2px; }
-
-/* ── GALLERY ── */
-.gallery-wrap {
-  position:relative; height:340px; display:flex; align-items:center;
-  justify-content:center; gap:.75rem; margin-bottom:1.25rem; overflow:hidden;
-}
-.gal-side {
-  position:absolute; width:42%; aspect-ratio:3/4;
-  border-radius:16px; overflow:hidden;
-  filter:brightness(.45); box-shadow:0 4px 24px rgba(0,0,0,.5);
-  cursor:pointer; transition:filter .2s;
-}
+.gallery-wrap { position:relative; height:340px; display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:1.25rem; overflow:hidden; }
+.gal-side { position:absolute; width:42%; aspect-ratio:3/4; border-radius:16px; overflow:hidden; filter:brightness(.45); box-shadow:0 4px 24px rgba(0,0,0,.5); cursor:pointer; transition:filter .2s; }
 .gal-side:hover { filter:brightness(.65); }
 .gal-prev { left:0;  transform:scale(.88) rotateY(12deg);  transform-origin:right center; }
 .gal-next { right:0; transform:scale(.88) rotateY(-12deg); transform-origin:left  center; }
 .gal-side img { width:100%; height:100%; object-fit:cover; }
-.gal-main {
-  position:relative; width:58%; aspect-ratio:3/4;
-  border-radius:24px; overflow:hidden; z-index:10;
-  box-shadow:0 12px 48px rgba(0,0,0,.7),0 0 0 2px rgba(255,215,0,.45);
-}
-.gal-main img {
-  width:100%; height:100%; object-fit:cover;
-  position:absolute; inset:0;
-  transition:opacity .35s ease, transform .35s ease;
-}
+.gal-main { position:relative; width:58%; aspect-ratio:3/4; border-radius:24px; overflow:hidden; z-index:10; box-shadow:0 12px 48px rgba(0,0,0,.7),0 0 0 2px rgba(255,215,0,.45); }
+.gal-main img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; transition:opacity .35s ease, transform .35s ease; }
 .gal-main img.enter  { opacity:0; transform:translateX(60px) scale(.92); }
 .gal-main img.active { opacity:1; transform:none; }
-.gal-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top,rgba(20,5,40,.88) 0%,transparent 50%);
-  pointer-events:none;
-}
+.gal-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(20,5,40,.88) 0%,transparent 50%); pointer-events:none; }
 .gal-caption { position:absolute; bottom:0; left:0; right:0; padding:1rem; }
 .gal-cap-title { font-family:'Luckiest Guy',cursive; font-size:.95rem; color:#FFD700; letter-spacing:.05em; text-shadow:1px 1px 0 #9B1FA8; margin-bottom:2px; }
 .gal-cap-count { font-size:.42rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,110,180,.85); }
-.gal-badge {
-  position:absolute; top:.75rem; right:.75rem;
-  background:rgba(0,0,0,.55); backdrop-filter:blur(6px);
-  border:1px solid rgba(255,215,0,.35); border-radius:20px;
-  padding:4px 8px; display:flex; align-items:center; gap:4px;
-  font-size:.4rem; letter-spacing:.2em; color:#FFD700;
-}
+.gal-badge { position:absolute; top:.75rem; right:.75rem; background:rgba(0,0,0,.55); backdrop-filter:blur(6px); border:1px solid rgba(255,215,0,.35); border-radius:20px; padding:4px 8px; display:flex; align-items:center; gap:4px; font-size:.4rem; letter-spacing:.2em; color:#FFD700; }
 .gal-nav { display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1rem; }
-.gal-btn {
-  width:40px; height:40px; border-radius:50%;
-  background:linear-gradient(135deg,#7B1FA2,#4A0072);
-  border:1.5px solid rgba(255,105,180,.45); color:#FFD700; font-size:1.3rem;
-  box-shadow:0 4px 16px rgba(224,64,251,.4);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; transition:transform .1s;
-}
+.gal-btn { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#7B1FA2,#4A0072); border:1.5px solid rgba(255,105,180,.45); color:#FFD700; font-size:1.3rem; box-shadow:0 4px 16px rgba(224,64,251,.4); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform .1s; }
 .gal-btn:active { transform:scale(.88); }
 .gal-dots { display:flex; align-items:center; gap:6px; }
-.gal-dot {
-  height:8px; min-width:8px; border-radius:4px; border:none; cursor:pointer;
-  background:rgba(255,105,180,.35); transition:width .3s, background .3s; padding:0;
-}
+.gal-dot { height:8px; min-width:8px; border-radius:4px; border:none; cursor:pointer; background:rgba(255,105,180,.35); transition:width .3s, background .3s; padding:0; }
 .gal-dot.active { width:28px !important; background:#FFD700; }
-
-/* ── RSVP ── */
 .rsvp-form { max-width:320px; margin:0 auto; }
 .rsvp-field { border-bottom:1.5px solid rgba(255,105,180,.4); margin-bottom:1.5rem; padding-bottom:4px; }
-.rsvp-input, .rsvp-textarea {
-  width:100%; background:transparent; border:none; outline:none;
-  font-family:'Dancing Script',cursive; font-style:italic;
-  font-size:1.1rem; color:#FFD700; padding:4px 0;
-}
+.rsvp-input, .rsvp-textarea { width:100%; background:transparent; border:none; outline:none; font-family:'Dancing Script',cursive; font-style:italic; font-size:1.1rem; color:#FFD700; padding:4px 0; }
 .rsvp-input::placeholder, .rsvp-textarea::placeholder { color:rgba(255,215,0,.35); }
 .rsvp-textarea { resize:none; }
-.rsvp-submit {
-  width:100%; padding:.9rem; cursor:pointer;
-  font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem;
-  letter-spacing:.3em; text-transform:uppercase; color:#1A0A2E;
-  background:linear-gradient(135deg,#FFD700,#FF69B4); border:none; border-radius:50px;
-  box-shadow:0 4px 18px rgba(255,105,180,.55); transition:transform .1s;
-}
+.rsvp-submit { width:100%; padding:.9rem; cursor:pointer; font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem; letter-spacing:.3em; text-transform:uppercase; color:#1A0A2E; background:linear-gradient(135deg,#FFD700,#FF69B4); border:none; border-radius:50px; box-shadow:0 4px 18px rgba(255,105,180,.55); transition:transform .1s; }
 .rsvp-submit:active { transform:scale(.97); }
 .rsvp-thanks { text-align:center; padding:2rem 0; display:none; }
 .rsvp-thanks.show { display:block; animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
 .thanks-title { font-family:'Dancing Script',cursive; font-size:2.2rem; color:#FFD700; margin:.5rem 0; }
 .thanks-sub   { font-style:italic; font-size:.95rem; color:#F8BBD0; margin-bottom:1.25rem; }
-.wa-btn {
-  display:inline-block; padding:.75rem 2rem; border-radius:50px; text-decoration:none;
-  font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem;
-  letter-spacing:.3em; text-transform:uppercase; color:#020a18;
-  background:linear-gradient(135deg,#25d366,#128c50);
-  box-shadow:0 4px 18px rgba(37,211,102,.4);
-}
-
-/* ── FOOTER ── */
-footer {
-  text-align:center; position:relative; z-index:10;
-  padding:2.5rem 1.5rem; border-top:1px solid rgba(255,105,180,.3);
-  background:rgba(20,5,40,.65);
-}
+.wa-btn { display:inline-block; padding:.75rem 2rem; border-radius:50px; text-decoration:none; font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem; letter-spacing:.3em; text-transform:uppercase; color:#020a18; background:linear-gradient(135deg,#25d366,#128c50); box-shadow:0 4px 18px rgba(37,211,102,.4); }
+footer { text-align:center; position:relative; z-index:10; padding:2.5rem 1.5rem; border-top:1px solid rgba(255,105,180,.3); background:rgba(20,5,40,.65); }
 .footer-name    { font-family:'Dancing Script',cursive; font-weight:700; font-size:2.4rem; color:#FFD700; margin-bottom:.25rem; }
 .footer-turns   { font-family:'Dancing Script',cursive; font-style:italic; font-size:1.2rem; color:#F8BBD0; margin-bottom:.5rem; }
 .footer-date    { font-size:.45rem; letter-spacing:.2em; text-transform:uppercase; color:#FF6EB4; margin-bottom:1rem; }
@@ -330,9 +182,6 @@ footer {
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     ✏  PERSONALIZA AQUÍ TU INVITACIÓN
-══════════════════════════════════════ -->
 <script>
 const CFG = {
   name:        "Sofía",
@@ -348,26 +197,25 @@ const CFG = {
   address:     "Dirección del festejo aquí",
   phone:       "1234567890",
   rsvpTo:      "Mamá",
-  photo:       "https://hercules-cdn.com/file_gXV6WYcBH1OEXjH5ZBfG54HK",
+  photo:       "https://hercules-cdn.com/file_tux7o5mq4QQ5kzhr6ea3Pz4W",
   gallery: [
-    { src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap:"La festejada" },
-    { src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap:"El pastel" },
-    { src:"https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap:"La celebración" },
-    { src:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap:"Con amor" },
-    { src:"https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80", cap:"Momentos mágicos" },
-    { src:"https://images.unsplash.com/photo-1734943757796-366ab4eb02b7?w=800&q=80", cap:"Recuerdos" },
+    { src:"https://images.unsplash.com/photo-1616098063625-65f32186e609?w=800&q=80",  cap:"La festejada" },
+    { src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80",  cap:"El pastel" },
+    { src:"https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80",  cap:"La celebración" },
+    { src:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80",  cap:"Con amor" },
+    { src:"https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80",  cap:"Momentos mágicos" },
+    { src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80",  cap:"Recuerdos" },
   ],
   program: [
-    { time:"2:30 pm", title:"Llegada de invitadas",    desc:"¡Al infinito y más allá!" },
-    { time:"3:00 pm", title:"¡Hora de la fiesta!",     desc:"Juegos y misiones estelares" },
-    { time:"4:00 pm", title:"El pastel y festejo",     desc:"¡Happy Birthday Cowgirl! 🎂" },
-    { time:"5:00 pm", title:"Convivencia familiar",    desc:"Música y alegría galáctica" },
-    { time:"6:00 pm", title:"Despedida",               desc:"Gracias por venir, guardiana ★" },
+    { time:"2:30 pm", title:"Llegada de invitadas",   desc:"¡Al infinito y más allá!" },
+    { time:"3:00 pm", title:"¡Hora de la fiesta!",    desc:"Juegos y misiones estelares" },
+    { time:"4:00 pm", title:"El pastel y festejo",    desc:"¡Happy Birthday Cowgirl! 🎂" },
+    { time:"5:00 pm", title:"Convivencia familiar",   desc:"Música y alegría galáctica" },
+    { time:"6:00 pm", title:"Despedida",              desc:"Gracias por venir, guardiana ★" },
   ],
 };
 </script>
 
-<!-- STARFIELD -->
 <div id="starfield"></div>
 
 <!-- ════════ SPLASH ════════ -->
@@ -375,84 +223,97 @@ const CFG = {
   <div class="stripe-pink stripe-top-pink"></div>
   <div class="stripe-gold stripe-top-gold"></div>
 
-  <!-- Jessie hat deco left -->
-  <div style="position:absolute;left:4%;top:18%" class="float">
-    <svg width="72" height="72" viewBox="0 0 80 80" fill="none">
-      <!-- Cowgirl hat -->
-      <ellipse cx="40" cy="52" rx="34" ry="10" fill="#C2185B" opacity=".9"/>
-      <ellipse cx="40" cy="52" rx="24" ry="7"  fill="#E91E8C"/>
-      <rect x="20" y="22" width="40" height="32" rx="20" fill="#E91E8C"/>
-      <rect x="24" y="26" width="32" height="24" rx="16" fill="#C2185B"/>
-      <!-- Hat band -->
-      <rect x="20" y="44" width="40" height="6" rx="2" fill="#FFD700"/>
-      <circle cx="40" cy="47" r="3" fill="#FF6EB4"/>
-      <!-- Star -->
-      <polygon points="40,28 41.2,32 45,32 42.1,34.5 43.2,38 40,36 36.8,38 37.9,34.5 35,32 38.8,32" fill="#FFD700"/>
+  <!-- Rocket left -->
+  <div style="position:absolute;left:5%;top:18%" class="float">
+    <svg width="70" height="70" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+      <ellipse cx="40" cy="14" rx="10" ry="12" fill="#E040FB"/>
+      <circle cx="40" cy="28" r="7" fill="#F8BBD0" opacity=".9"/>
+      <circle cx="40" cy="28" r="4" fill="#9B1FA8"/>
+      <rect x="26" y="40" width="28" height="14" rx="2" fill="#FF6EB4"/>
+      <rect x="26" y="46" width="28" height="8"  rx="2" fill="#C2185B"/>
+      <path d="M26 42 Q18 48 22 56 L26 54 Z" fill="#FF6EB4"/>
+      <path d="M54 42 Q62 48 58 56 L54 54 Z" fill="#FF6EB4"/>
+      <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FFD700" opacity=".9"/>
+      <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFF9C4"/>
+      <rect x="29" y="40" width="6" height="2" rx="1" fill="#FFD700"/>
+      <rect x="45" y="40" width="6" height="2" rx="1" fill="#FFD700"/>
+      <circle cx="38" cy="32" r="1.5" fill="white" opacity=".8"/>
     </svg>
   </div>
 
-  <!-- Bo Peep staff right -->
-  <div style="position:absolute;right:4%;top:12%" class="float" style="animation-delay:.5s">
-    <svg width="65" height="120" viewBox="0 0 65 120" fill="none">
-      <line x1="32" y1="10" x2="32" y2="110" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
-      <path d="M32 10 Q50 10 50 26 Q50 38 32 38" stroke="#FFD700" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <!-- Pink bow -->
-      <path d="M18 70 Q10 60 18 55 Q26 60 32 65 Q38 60 46 55 Q54 60 46 70 Q38 65 32 72 Q26 65 18 70Z" fill="#FF6EB4" opacity=".9"/>
-      <circle cx="32" cy="65" r="4" fill="#FFD700"/>
-      <!-- Stars along staff -->
-      <polygon points="12,45 12.8,48 16,48 13.5,50 14.5,53 12,51.5 9.5,53 10.5,50 8,48 11.2,48" fill="#FFD700" opacity=".7"/>
-      <polygon points="52,80 52.8,83 56,83 53.5,85 54.5,88 52,86.5 49.5,88 50.5,85 48,83 51.2,83" fill="#FF6EB4" opacity=".7"/>
+  <!-- Rocket right (flipped) -->
+  <div style="position:absolute;right:5%;top:15%;transform:scaleX(-1)" class="float" >
+    <svg width="65" height="65" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+      <ellipse cx="40" cy="14" rx="10" ry="12" fill="#E040FB"/>
+      <circle cx="40" cy="28" r="7" fill="#F8BBD0" opacity=".9"/>
+      <circle cx="40" cy="28" r="4" fill="#9B1FA8"/>
+      <rect x="26" y="40" width="28" height="14" rx="2" fill="#FF6EB4"/>
+      <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FFD700" opacity=".9"/>
+      <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFF9C4"/>
     </svg>
   </div>
 
-  <!-- Butterflies / flowers bottom left -->
-  <div style="position:absolute;left:1%;bottom:6%" class="float-slow">
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-      <!-- Butterfly -->
-      <path d="M50 50 Q20 20 10 40 Q20 65 50 55Z" fill="#FF6EB4" opacity=".85"/>
-      <path d="M50 50 Q80 20 90 40 Q80 65 50 55Z" fill="#E040FB" opacity=".85"/>
-      <path d="M50 55 Q25 70 20 85 Q35 80 50 65Z" fill="#FF6EB4" opacity=".7"/>
-      <path d="M50 55 Q75 70 80 85 Q65 80 50 65Z" fill="#E040FB" opacity=".7"/>
-      <line x1="50" y1="35" x2="50" y2="70" stroke="#4A0072" stroke-width="2"/>
-      <circle cx="45" cy="33" r="2" fill="#4A0072"/>
-      <circle cx="55" cy="33" r="2" fill="#4A0072"/>
-      <!-- Flowers -->
-      <circle cx="15" cy="85" r="6" fill="#FFD700" opacity=".8"/>
-      <circle cx="9"  cy="82" r="4" fill="#FF6EB4" opacity=".7"/>
-      <circle cx="21" cy="82" r="4" fill="#FF6EB4" opacity=".7"/>
-      <circle cx="15" cy="77" r="4" fill="#FF6EB4" opacity=".7"/>
-      <circle cx="15" cy="91" r="4" fill="#FF6EB4" opacity=".7"/>
+  <!-- Alien bottom left -->
+  <div style="position:absolute;left:2%;bottom:5%" class="float-slow">
+    <svg width="110" height="130" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/>
+      <ellipse cx="45" cy="65" rx="14" ry="10" fill="#EA80FC"/>
+      <ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/>
+      <ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#FF6EB4"/>
+      <circle cx="45" cy="37" r="4" fill="#FF6EB4"/>
+      <circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+      <circle cx="37" cy="39" r="1.5" fill="white"/>
+      <circle cx="46" cy="36" r="1.5" fill="white"/>
+      <circle cx="55" cy="39" r="1.5" fill="white"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+      <path d="M25 75 Q14 80 18 88" stroke="#E040FB" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M65 75 Q76 80 72 88" stroke="#E040FB" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M38 54 Q45 60 52 54" stroke="#FF6EB4" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#E040FB"/>
+      <circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
     </svg>
   </div>
 
-  <!-- Stars deco right bottom -->
-  <div style="position:absolute;right:1%;bottom:6%" class="float-slow" style="animation-delay:.7s">
-    <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
-      <polygon points="20,5 22.5,14 32,14 24.5,20 27,29 20,23 13,29 15.5,20 8,14 17.5,14" fill="#FFD700" opacity=".9"/>
-      <polygon points="65,30 67,37 74,37 68,41 70,48 65,44 60,48 62,41 56,37 63,37" fill="#FF6EB4" opacity=".85"/>
-      <polygon points="35,60 36.5,66 43,66 37.5,70 39.5,76 35,72 30.5,76 32.5,70 27,66 33.5,66" fill="#E040FB" opacity=".8"/>
-      <!-- Small hearts -->
-      <path d="M70 65 Q72 62 75 65 Q78 62 80 65 Q80 70 75 74 Q70 70 70 65Z" fill="#FF6EB4" opacity=".7"/>
-      <path d="M8 50 Q10 47 13 50 Q16 47 18 50 Q18 55 13 59 Q8 55 8 50Z" fill="#FFD700" opacity=".6"/>
+  <!-- Alien bottom right -->
+  <div style="position:absolute;right:2%;bottom:5%" class="float-slow" >
+    <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/>
+      <ellipse cx="45" cy="65" rx="14" ry="10" fill="#EA80FC"/>
+      <ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/>
+      <ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#FF6EB4"/>
+      <circle cx="45" cy="37" r="4" fill="#FF6EB4"/>
+      <circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+      <circle cx="37" cy="39" r="1.5" fill="white"/>
+      <circle cx="46" cy="36" r="1.5" fill="white"/>
+      <circle cx="55" cy="39" r="1.5" fill="white"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+      <path d="M38 54 Q45 60 52 54" stroke="#FF6EB4" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#E040FB"/>
+      <circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
     </svg>
   </div>
 
   <!-- Content -->
   <div style="position:relative;z-index:10;text-align:center;padding:0 2rem">
-    <!-- Crown / Jessie star icon -->
     <div class="pop" style="animation-delay:.3s;margin-bottom:.5rem">
       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style="margin:0 auto;display:block">
-        <!-- Crown -->
         <polygon points="8,52 16,20 28,38 36,14 44,38 56,20 64,52" fill="#FFD700"/>
-        <polygon points="8,52 16,20 28,38 36,14 44,38 56,20 64,52" fill="none" stroke="#FF6EB4" stroke-width="2"/>
         <rect x="8" y="52" width="56" height="10" rx="3" fill="#FF6EB4"/>
         <circle cx="8"  cy="52" r="4" fill="#E040FB"/>
         <circle cx="36" cy="14" r="4" fill="#E040FB"/>
         <circle cx="64" cy="52" r="4" fill="#E040FB"/>
-        <circle cx="22" cy="52" r="3" fill="#FFD700"/>
-        <circle cx="36" cy="52" r="3" fill="#FFD700"/>
-        <circle cx="50" cy="52" r="3" fill="#FFD700"/>
-        <!-- Star center crown -->
         <polygon points="36,30 37.4,35 42,35 38.3,38 39.7,43 36,40 32.3,43 33.7,38 30,35 34.6,35" fill="#FF6EB4"/>
       </svg>
     </div>
@@ -460,30 +321,14 @@ const CFG = {
     <p class="fade-up" style="animation-delay:.4s;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#FF6EB4;margin-bottom:.25rem;font-weight:300">LLAMANDO A TODAS LAS</p>
     <p class="fade-up" style="animation-delay:.5s;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#FF6EB4;margin-bottom:.75rem;font-weight:700">GUARDIANAS ESTELARES</p>
 
-    <!-- Photo -->
     <div class="pop" style="animation-delay:.5s">
-      <div class="photo-ring">
-        <div class="photo-inner">
-          <img id="splash-photo" src="" alt="" />
-        </div>
-      </div>
+      <div class="photo-ring"><div class="photo-inner"><img id="splash-photo" src="" alt=""/></div></div>
     </div>
-
-    <!-- Name -->
-    <div class="pop" style="animation-delay:.7s">
-      <span class="ts-name" id="splash-name"></span>
-    </div>
-
-    <!-- CUMPLE -->
+    <div class="pop" style="animation-delay:.7s"><span class="ts-name" id="splash-name"></span></div>
     <div class="pop" style="animation-delay:.9s;display:flex;justify-content:center">
       <div class="ts-cumple-wrap"><span class="ts-cumple">CUMPLE</span></div>
     </div>
-
-    <!-- Age -->
-    <div class="pop" style="animation-delay:1s">
-      <span class="ts-age" id="splash-age"></span>
-    </div>
-
+    <div class="pop" style="animation-delay:1s"><span class="ts-age" id="splash-age"></span></div>
     <p class="blink" style="font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#FF6EB4;margin-top:1rem">★ Toca para abrir ★</p>
   </div>
 
@@ -501,25 +346,30 @@ const CFG = {
     <div style="height:5px;background:linear-gradient(90deg,#FFD700,#E040FB,#FFD700)"></div>
 
     <div class="hero-body">
-      <!-- Deco hat left -->
+      <!-- Rocket deco left -->
       <div class="hero-deco-left float">
-        <svg width="50" height="50" viewBox="0 0 80 80" fill="none">
-          <ellipse cx="40" cy="52" rx="34" ry="10" fill="#C2185B" opacity=".9"/>
-          <ellipse cx="40" cy="52" rx="24" ry="7"  fill="#E91E8C"/>
-          <rect x="20" y="22" width="40" height="32" rx="20" fill="#E91E8C"/>
-          <rect x="24" y="26" width="32" height="24" rx="16" fill="#C2185B"/>
-          <rect x="20" y="44" width="40" height="6" rx="2" fill="#FFD700"/>
-          <circle cx="40" cy="47" r="3" fill="#FF6EB4"/>
-          <polygon points="40,28 41.2,32 45,32 42.1,34.5 43.2,38 40,36 36.8,38 37.9,34.5 35,32 38.8,32" fill="#FFD700"/>
+        <svg width="52" height="52" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+          <ellipse cx="40" cy="14" rx="10" ry="12" fill="#E040FB"/>
+          <circle cx="40" cy="28" r="7" fill="#F8BBD0" opacity=".9"/>
+          <circle cx="40" cy="28" r="4" fill="#9B1FA8"/>
+          <rect x="26" y="40" width="28" height="14" rx="2" fill="#FF6EB4"/>
+          <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FFD700" opacity=".9"/>
+          <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFF9C4"/>
+          <rect x="29" y="40" width="6" height="2" rx="1" fill="#FFD700"/>
+          <rect x="45" y="40" width="6" height="2" rx="1" fill="#FFD700"/>
         </svg>
       </div>
-      <!-- Deco staff right -->
-      <div class="hero-deco-right float" style="animation-delay:.6s">
-        <svg width="30" height="80" viewBox="0 0 65 120" fill="none">
-          <line x1="32" y1="10" x2="32" y2="110" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
-          <path d="M32 10 Q50 10 50 26 Q50 38 32 38" stroke="#FFD700" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M18 70 Q10 60 18 55 Q26 60 32 65 Q38 60 46 55 Q54 60 46 70 Q38 65 32 72 Q26 65 18 70Z" fill="#FF6EB4" opacity=".9"/>
-          <circle cx="32" cy="65" r="4" fill="#FFD700"/>
+      <!-- Rocket deco right (flipped) -->
+      <div class="hero-deco-right float" style="transform:scaleX(-1)">
+        <svg width="52" height="52" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+          <ellipse cx="40" cy="14" rx="10" ry="12" fill="#E040FB"/>
+          <circle cx="40" cy="28" r="7" fill="#F8BBD0" opacity=".9"/>
+          <circle cx="40" cy="28" r="4" fill="#9B1FA8"/>
+          <rect x="26" y="40" width="28" height="14" rx="2" fill="#FF6EB4"/>
+          <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FFD700" opacity=".9"/>
+          <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFF9C4"/>
         </svg>
       </div>
 
@@ -529,14 +379,11 @@ const CFG = {
       <!-- Crown + Photo -->
       <div style="display:flex;justify-content:center;margin-bottom:.75rem">
         <div style="position:relative">
-          <!-- Crown above photo -->
           <div style="position:absolute;top:-28px;left:50%;transform:translateX(-50%);z-index:2">
             <svg width="50" height="28" viewBox="0 0 72 40" fill="none">
               <polygon points="4,38 14,8 26,24 36,4 46,24 58,8 68,38" fill="#FFD700"/>
               <rect x="4" y="36" width="64" height="6" rx="2" fill="#FF6EB4"/>
-              <circle cx="36" cy="4"  r="3" fill="#E040FB"/>
-              <circle cx="14" cy="8"  r="2" fill="#E040FB"/>
-              <circle cx="58" cy="8"  r="2" fill="#E040FB"/>
+              <circle cx="36" cy="4" r="3" fill="#E040FB"/><circle cx="14" cy="8" r="2" fill="#E040FB"/><circle cx="58" cy="8" r="2" fill="#E040FB"/>
             </svg>
           </div>
           <div style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FF69B4,#E040FB);padding:4px;box-shadow:0 0 40px rgba(255,105,180,.65)">
@@ -554,28 +401,34 @@ const CFG = {
       <span class="ts-age" id="hero-age" style="font-size:clamp(5rem,20vw,7rem)"></span>
     </div>
 
-    <!-- Butterflies bottom -->
+    <!-- Aliens bottom -->
     <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:0 .5rem;margin-top:-10px">
       <div class="float-slow">
-        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
-          <path d="M50 50 Q20 20 10 40 Q20 65 50 55Z" fill="#FF6EB4" opacity=".85"/>
-          <path d="M50 50 Q80 20 90 40 Q80 65 50 55Z" fill="#E040FB" opacity=".85"/>
-          <path d="M50 55 Q25 70 20 85 Q35 80 50 65Z" fill="#FF6EB4" opacity=".7"/>
-          <path d="M50 55 Q75 70 80 85 Q65 80 50 65Z" fill="#E040FB" opacity=".7"/>
-          <line x1="50" y1="35" x2="50" y2="70" stroke="#4A0072" stroke-width="2"/>
-          <circle cx="45" cy="33" r="2" fill="#4A0072"/>
-          <circle cx="55" cy="33" r="2" fill="#4A0072"/>
+        <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+          <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/><ellipse cx="45" cy="65" rx="14" ry="10" fill="#EA80FC"/>
+          <ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+          <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+          <circle cx="36" cy="40" r="4" fill="#FF6EB4"/><circle cx="45" cy="37" r="4" fill="#FF6EB4"/><circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+          <circle cx="37" cy="39" r="1.5" fill="white"/><circle cx="46" cy="36" r="1.5" fill="white"/><circle cx="55" cy="39" r="1.5" fill="white"/>
+          <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+          <path d="M25 75 Q14 80 18 88" stroke="#E040FB" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M65 75 Q76 80 72 88" stroke="#E040FB" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M38 54 Q45 60 52 54" stroke="#FF6EB4" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+          <circle cx="45" cy="10" r="4" fill="#E040FB"/><circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
         </svg>
       </div>
       <div class="float-slow" style="animation-delay:.5s">
-        <svg width="65" height="65" viewBox="0 0 100 100" fill="none">
-          <path d="M50 50 Q22 22 12 42 Q22 67 50 57Z" fill="#FFD700" opacity=".85"/>
-          <path d="M50 50 Q78 22 88 42 Q78 67 50 57Z" fill="#FF6EB4" opacity=".85"/>
-          <path d="M50 57 Q27 72 22 87 Q37 82 50 67Z" fill="#FFD700" opacity=".7"/>
-          <path d="M50 57 Q73 72 78 87 Q63 82 50 67Z" fill="#FF6EB4" opacity=".7"/>
-          <line x1="50" y1="37" x2="50" y2="72" stroke="#4A0072" stroke-width="2"/>
-          <circle cx="45" cy="35" r="2" fill="#4A0072"/>
-          <circle cx="55" cy="35" r="2" fill="#4A0072"/>
+        <svg width="75" height="90" viewBox="0 0 90 110" fill="none">
+          <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/><ellipse cx="45" cy="65" rx="14" ry="10" fill="#EA80FC"/>
+          <ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+          <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+          <circle cx="36" cy="40" r="4" fill="#FF6EB4"/><circle cx="45" cy="37" r="4" fill="#FF6EB4"/><circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+          <circle cx="37" cy="39" r="1.5" fill="white"/><circle cx="46" cy="36" r="1.5" fill="white"/><circle cx="55" cy="39" r="1.5" fill="white"/>
+          <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+          <path d="M38 54 Q45 60 52 54" stroke="#FF6EB4" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+          <circle cx="45" cy="10" r="4" fill="#E040FB"/><circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
         </svg>
       </div>
     </div>
@@ -603,9 +456,7 @@ const CFG = {
         </div>
       </div>
       <div class="rsvp-banner">
-        <div class="rsvp-label">
-          ♡ RSVP a <span id="rsvp-to"></span> ♡
-        </div>
+        <div class="rsvp-label">♡ RSVP a <span id="rsvp-to"></span> ♡</div>
         <div class="rsvp-phone" id="rsvp-phone"></div>
       </div>
     </div>
@@ -669,9 +520,7 @@ const CFG = {
         </div>
       </div>
       <div class="gallery-wrap" id="gallery-wrap">
-        <div class="gal-side gal-prev" id="gal-prev" onclick="galGo(galIdx-1,-1)">
-          <img id="gal-prev-img" src="" alt=""/>
-        </div>
+        <div class="gal-side gal-prev" onclick="galGo(galIdx-1,-1)"><img id="gal-prev-img" src="" alt=""/></div>
         <div class="gal-main">
           <img id="gal-img-a" src="" alt="" class="active"/>
           <img id="gal-img-b" src="" alt="" class="enter"/>
@@ -685,9 +534,7 @@ const CFG = {
             GALERÍA
           </div>
         </div>
-        <div class="gal-side gal-next" id="gal-next" onclick="galGo(galIdx+1,1)">
-          <img id="gal-next-img" src="" alt=""/>
-        </div>
+        <div class="gal-side gal-next" onclick="galGo(galIdx+1,1)"><img id="gal-next-img" src="" alt=""/></div>
       </div>
       <div class="gal-nav">
         <button class="gal-btn" onclick="galGo(galIdx-1,-1)">&#8249;</button>
@@ -712,59 +559,53 @@ const CFG = {
       <p style="text-align:center;margin-bottom:1.5rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#FF6EB4">
         ♡ RSVP a <span id="rsvp-to2"></span> · <span id="rsvp-phone2"></span> ♡
       </p>
-
       <div id="rsvp-thanks" class="rsvp-thanks">
         <div style="font-size:3rem;margin-bottom:.5rem">🎀</div>
         <p class="thanks-title">¡Gracias!</p>
         <p class="thanks-sub">Abriendo WhatsApp para confirmar…</p>
         <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
       </div>
-
       <form id="rsvp-form" class="rsvp-form" onsubmit="rsvpSubmit(event)">
-        <div class="rsvp-field">
-          <input id="rsvp-name"   class="rsvp-input"   type="text" placeholder="Nombre completo"     required/>
-        </div>
-        <div class="rsvp-field">
-          <input id="rsvp-guests" class="rsvp-input"   type="text" placeholder="Número de invitados"/>
-        </div>
-        <div class="rsvp-field">
-          <textarea id="rsvp-msg" class="rsvp-textarea" rows="3"   placeholder="Mensaje para la familia…"></textarea>
-        </div>
+        <div class="rsvp-field"><input id="rsvp-name"   class="rsvp-input"   type="text" placeholder="Nombre completo"     required/></div>
+        <div class="rsvp-field"><input id="rsvp-guests" class="rsvp-input"   type="text" placeholder="Número de invitados"/></div>
+        <div class="rsvp-field"><textarea id="rsvp-msg" class="rsvp-textarea" rows="3"   placeholder="Mensaje para la familia…"></textarea></div>
         <button type="submit" class="rsvp-submit">♡ Confirmar Asistencia ♡</button>
       </form>
     </div>
   </div>
 
-</div><!-- /container -->
+</div>
 
 <!-- Footer -->
 <footer>
   <div class="footer-deco">
-    <svg width="45" height="45" viewBox="0 0 100 100" fill="none">
-      <path d="M50 50 Q20 20 10 40 Q20 65 50 55Z" fill="#FF6EB4" opacity=".85"/>
-      <path d="M50 50 Q80 20 90 40 Q80 65 50 55Z" fill="#E040FB" opacity=".85"/>
-      <path d="M50 55 Q25 70 20 85 Q35 80 50 65Z" fill="#FF6EB4" opacity=".7"/>
-      <path d="M50 55 Q75 70 80 85 Q65 80 50 65Z" fill="#E040FB" opacity=".7"/>
-      <line x1="50" y1="35" x2="50" y2="70" stroke="#4A0072" stroke-width="2"/>
-      <circle cx="45" cy="33" r="2" fill="#4A0072"/>
-      <circle cx="55" cy="33" r="2" fill="#4A0072"/>
+    <!-- Alien -->
+    <svg width="48" height="58" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/><ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#FF6EB4"/><circle cx="45" cy="37" r="4" fill="#FF6EB4"/><circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#E040FB"/><circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
     </svg>
-    <svg width="42" height="42" viewBox="0 0 72 72" fill="none">
-      <polygon points="8,52 16,20 28,38 36,14 44,38 56,20 64,52" fill="#FFD700"/>
-      <rect x="8" y="52" width="56" height="10" rx="3" fill="#FF6EB4"/>
-      <circle cx="8"  cy="52" r="4" fill="#E040FB"/>
-      <circle cx="36" cy="14" r="4" fill="#E040FB"/>
-      <circle cx="64" cy="52" r="4" fill="#E040FB"/>
-      <polygon points="36,30 37.4,35 42,35 38.3,38 39.7,43 36,40 32.3,43 33.7,38 30,35 34.6,35" fill="#FF6EB4"/>
+    <!-- Rocket -->
+    <svg width="38" height="48" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+      <ellipse cx="40" cy="14" rx="10" ry="12" fill="#E040FB"/>
+      <circle cx="40" cy="28" r="7" fill="#F8BBD0" opacity=".9"/>
+      <circle cx="40" cy="28" r="4" fill="#9B1FA8"/>
+      <rect x="26" y="40" width="28" height="14" rx="2" fill="#FF6EB4"/>
+      <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FFD700" opacity=".9"/>
+      <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFF9C4"/>
     </svg>
-    <svg width="45" height="45" viewBox="0 0 100 100" fill="none">
-      <path d="M50 50 Q22 22 12 42 Q22 67 50 57Z" fill="#FFD700" opacity=".85"/>
-      <path d="M50 50 Q78 22 88 42 Q78 67 50 57Z" fill="#FF6EB4" opacity=".85"/>
-      <path d="M50 57 Q27 72 22 87 Q37 82 50 67Z" fill="#FFD700" opacity=".7"/>
-      <path d="M50 57 Q73 72 78 87 Q63 82 50 67Z" fill="#FF6EB4" opacity=".7"/>
-      <line x1="50" y1="37" x2="50" y2="72" stroke="#4A0072" stroke-width="2"/>
-      <circle cx="45" cy="35" r="2" fill="#4A0072"/>
-      <circle cx="55" cy="35" r="2" fill="#4A0072"/>
+    <!-- Alien -->
+    <svg width="48" height="58" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#E040FB"/><ellipse cx="45" cy="42" rx="26" ry="30" fill="#E040FB"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#EA80FC"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#FF6EB4"/><circle cx="45" cy="37" r="4" fill="#FF6EB4"/><circle cx="54" cy="40" r="4" fill="#FF6EB4"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#FF6EB4"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#E040FB" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#E040FB"/><circle cx="45" cy="10" r="2.5" fill="#FFD700"/>
     </svg>
   </div>
   <p class="footer-name"    id="footer-name"></p>
@@ -772,15 +613,14 @@ const CFG = {
   <p class="footer-date"    id="footer-date"></p>
   <p class="footer-tagline">"Al Infinito y Más Allá ✨"</p>
 </footer>
-</div><!-- /main -->
+</div>
 
 <script>
-// ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
   document.getElementById('splash-photo').src = CFG.photo;
   document.getElementById('splash-photo').alt = CFG.name;
-  document.getElementById('splash-name').textContent  = CFG.name;
-  document.getElementById('splash-age').textContent   = CFG.age;
+  document.getElementById('splash-name').textContent = CFG.name;
+  document.getElementById('splash-age').textContent  = CFG.age;
   document.getElementById('hero-photo').src  = CFG.photo;
   document.getElementById('hero-photo').alt  = CFG.name;
   document.getElementById('hero-name').textContent = CFG.name;
@@ -795,61 +635,38 @@ function init() {
   document.getElementById('rsvp-to').textContent    = CFG.rsvpTo;
   document.getElementById('rsvp-phone').textContent = CFG.phone;
   document.getElementById('rsvp-to2').textContent   = CFG.rsvpTo;
-  document.getElementById('rsvp-phone2').textContent = CFG.phone;
+  document.getElementById('rsvp-phone2').textContent= CFG.phone;
   document.getElementById('footer-name').textContent  = CFG.name;
   document.getElementById('footer-turns').textContent = 'turns ' + CFG.age + '!';
   document.getElementById('footer-date').textContent  = CFG.dateDisplay;
   document.getElementById('cd-date-lbl').textContent  = CFG.dateDisplay;
-
-  // Program
   const pl = document.getElementById('program-list');
   CFG.program.forEach(item => {
-    pl.innerHTML += `
-      <div class="tl-item">
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div>
-          <div class="tl-time">${item.time}</div>
-          <div class="tl-title">${item.title}</div>
-          <div class="tl-desc">${item.desc}</div>
-        </div>
-      </div>`;
+    pl.innerHTML += `<div class="tl-item"><div class="tl-dot-wrap"><div class="tl-dot"></div></div><div><div class="tl-time">${item.time}</div><div class="tl-title">${item.title}</div><div class="tl-desc">${item.desc}</div></div></div>`;
   });
-
   buildStars();
   galInit();
 }
 
-// ─── SPLASH ───────────────────────────────────────────────────────────────────
 function closeSplash() {
   const s = document.getElementById('splash');
   s.classList.add('hide');
-  setTimeout(() => {
-    s.style.display = 'none';
-    document.getElementById('main').classList.add('show');
-  }, 500);
+  setTimeout(() => { s.style.display='none'; document.getElementById('main').classList.add('show'); }, 500);
 }
 setTimeout(closeSplash, 3800);
 
-// ─── STARFIELD (hearts + stars mix) ──────────────────────────────────────────
 function buildStars() {
   const sf = document.getElementById('starfield');
   const colors = ['#FFD700','#FF6EB4','#E040FB','#F8BBD0','#C2185B'];
-  for (let i = 0; i < 65; i++) {
+  for (let i=0;i<65;i++) {
     const d = document.createElement('div');
     d.className = 'star';
     const r = Math.random()*2+.5;
-    d.style.cssText = `
-      left:${Math.random()*100}%;top:${Math.random()*100}%;
-      width:${r*2}px;height:${r*2}px;
-      background:${colors[i%colors.length]};
-      --dur:${1.8+Math.random()*2}s;
-      --delay:${Math.random()*3}s;
-    `;
+    d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${r*2}px;height:${r*2}px;background:${colors[i%colors.length]};--dur:${1.8+Math.random()*2}s;--delay:${Math.random()*3}s;`;
     sf.appendChild(d);
   }
 }
 
-// ─── COUNTDOWN ────────────────────────────────────────────────────────────────
 function tickCountdown() {
   const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
   document.getElementById('cd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
@@ -857,111 +674,77 @@ function tickCountdown() {
   document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
   document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
 }
-tickCountdown();
-setInterval(tickCountdown, 1000);
+tickCountdown(); setInterval(tickCountdown,1000);
 
-// ─── GALLERY ──────────────────────────────────────────────────────────────────
-let galIdx = 0;
-let galBusy = false;
-let galActiveImg = 'a';
-const galTouchData = { x: 0 };
+let galIdx=0, galBusy=false, galActiveImg='a';
+const galTouchData={x:0};
 
 function galInit() {
-  const total = CFG.gallery.length;
-  const dots  = document.getElementById('gal-dots');
-  for (let i = 0; i < total; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'gal-dot' + (i===0 ? ' active' : '');
-    btn.style.width = i===0 ? '28px' : '8px';
-    btn.onclick = () => galGo(i, i > galIdx ? 1 : -1);
+  const total=CFG.gallery.length, dots=document.getElementById('gal-dots');
+  for(let i=0;i<total;i++){
+    const btn=document.createElement('button');
+    btn.className='gal-dot'+(i===0?' active':'');
+    btn.style.width=i===0?'28px':'8px';
+    btn.onclick=()=>galGo(i,i>galIdx?1:-1);
     dots.appendChild(btn);
   }
-  galRender(0, 0);
-  const wrap = document.getElementById('gallery-wrap');
-  wrap.addEventListener('touchstart', e => { galTouchData.x = e.touches[0].clientX; });
-  wrap.addEventListener('touchend',   e => {
-    const d = galTouchData.x - e.changedTouches[0].clientX;
-    if (Math.abs(d) > 40) galGo(galIdx + (d > 0 ? 1 : -1), d > 0 ? 1 : -1);
-  });
+  galRender(0);
+  const wrap=document.getElementById('gallery-wrap');
+  wrap.addEventListener('touchstart',e=>{galTouchData.x=e.touches[0].clientX;});
+  wrap.addEventListener('touchend',e=>{const d=galTouchData.x-e.changedTouches[0].clientX;if(Math.abs(d)>40)galGo(galIdx+(d>0?1:-1),d>0?1:-1);});
 }
 
-function galMod(i) {
-  const t = CFG.gallery.length;
-  return ((i % t) + t) % t;
+function galMod(i){const t=CFG.gallery.length;return((i%t)+t)%t;}
+
+function galRender(idx){
+  const total=CFG.gallery.length;
+  document.getElementById('gal-prev-img').src=CFG.gallery[galMod(idx-1)].src;
+  document.getElementById('gal-next-img').src=CFG.gallery[galMod(idx+1)].src;
+  document.getElementById('gal-cap').textContent=CFG.gallery[idx].cap;
+  document.getElementById('gal-count').textContent=String(idx+1).padStart(2,'0')+' — '+String(total).padStart(2,'0');
+  document.querySelectorAll('.gal-dot').forEach((d,i)=>{d.classList.toggle('active',i===idx);d.style.width=i===idx?'28px':'8px';});
 }
 
-function galRender(idx) {
-  const total = CFG.gallery.length;
-  document.getElementById('gal-prev-img').src = CFG.gallery[galMod(idx-1)].src;
-  document.getElementById('gal-next-img').src = CFG.gallery[galMod(idx+1)].src;
-  document.getElementById('gal-cap').textContent   = CFG.gallery[idx].cap;
-  document.getElementById('gal-count').textContent = String(idx+1).padStart(2,'0') + ' — ' + String(total).padStart(2,'0');
-  document.querySelectorAll('.gal-dot').forEach((d,i) => {
-    d.classList.toggle('active', i === idx);
-    d.style.width = i === idx ? '28px' : '8px';
-  });
+function galGo(rawIdx,dir){
+  if(galBusy)return; galBusy=true;
+  const next=galMod(rawIdx);
+  const imgA=document.getElementById('gal-img-a'),imgB=document.getElementById('gal-img-b');
+  const active=galActiveImg==='a'?imgA:imgB, incoming=galActiveImg==='a'?imgB:imgA;
+  incoming.src=CFG.gallery[next].src;
+  incoming.style.transform=dir>0?'translateX(60px) scale(.92)':'translateX(-60px) scale(.92)';
+  incoming.style.opacity='0';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    active.style.transition='opacity .35s ease, transform .35s ease';
+    active.style.opacity='0'; active.style.transform=dir>0?'translateX(-60px) scale(.92)':'translateX(60px) scale(.92)';
+    incoming.style.transition='opacity .35s ease, transform .35s ease';
+    incoming.style.opacity='1'; incoming.style.transform='none';
+    setTimeout(()=>{
+      active.style.transition=''; active.style.opacity=''; active.style.transform='';
+      active.className='enter'; incoming.className='active';
+      galActiveImg=galActiveImg==='a'?'b':'a'; galIdx=next; galRender(next); galBusy=false;
+    },370);
+  }));
 }
 
-function galGo(rawIdx, dir) {
-  if (galBusy) return;
-  galBusy = true;
-  const next  = galMod(rawIdx);
-  const imgA  = document.getElementById('gal-img-a');
-  const imgB  = document.getElementById('gal-img-b');
-  const active   = galActiveImg === 'a' ? imgA : imgB;
-  const incoming = galActiveImg === 'a' ? imgB : imgA;
-
-  incoming.src = CFG.gallery[next].src;
-  incoming.style.transform = dir > 0 ? 'translateX(60px) scale(.92)' : 'translateX(-60px) scale(.92)';
-  incoming.style.opacity   = '0';
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      active.style.transition   = 'opacity .35s ease, transform .35s ease';
-      active.style.opacity      = '0';
-      active.style.transform    = dir > 0 ? 'translateX(-60px) scale(.92)' : 'translateX(60px) scale(.92)';
-      incoming.style.transition = 'opacity .35s ease, transform .35s ease';
-      incoming.style.opacity    = '1';
-      incoming.style.transform  = 'none';
-      setTimeout(() => {
-        active.style.transition = '';
-        active.style.opacity    = '';
-        active.style.transform  = '';
-        active.className        = 'enter';
-        incoming.className      = 'active';
-        galActiveImg = galActiveImg === 'a' ? 'b' : 'a';
-        galIdx = next;
-        galRender(next);
-        galBusy = false;
-      }, 370);
-    });
-  });
-}
-
-// ─── RSVP ─────────────────────────────────────────────────────────────────────
-function rsvpSubmit(e) {
+function rsvpSubmit(e){
   e.preventDefault();
-  const name   = document.getElementById('rsvp-name').value.trim();
-  const guests = document.getElementById('rsvp-guests').value.trim();
-  const msg    = document.getElementById('rsvp-msg').value.trim();
-  if (!name) return;
-
-  let text = `¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🎀\n\n`;
-  text += `👤 *Nombre:* ${name}\n`;
-  if (guests) text += `👥 *Invitados:* ${guests}\n`;
-  if (msg)    text += `💬 *Mensaje:* ${msg}\n`;
-  text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
-
-  const phone = CFG.phone.replace(/\D/g,'');
-  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-
-  document.getElementById('rsvp-form').style.display = 'none';
+  const name=document.getElementById('rsvp-name').value.trim();
+  const guests=document.getElementById('rsvp-guests').value.trim();
+  const msg=document.getElementById('rsvp-msg').value.trim();
+  if(!name)return;
+  let text=`¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🎀\n\n`;
+  text+=`👤 *Nombre:* ${name}\n`;
+  if(guests)text+=`👥 *Invitados:* ${guests}\n`;
+  if(msg)text+=`💬 *Mensaje:* ${msg}\n`;
+  text+=`\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
+  const phone=CFG.phone.replace(/\D/g,'');
+  const waUrl=`https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+  document.getElementById('rsvp-form').style.display='none';
   document.getElementById('rsvp-thanks').classList.add('show');
-  document.getElementById('wa-link').href = waUrl;
-  window.open(waUrl, '_blank');
+  document.getElementById('wa-link').href=waUrl;
+  window.open(waUrl,'_blank');
 }
 
-// ─── BOOT ─────────────────────────────────────────────────────────────────────
 init();
 </script>
 </body>
