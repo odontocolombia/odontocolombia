@@ -1,866 +1,598 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Baby Shower · Helena Maria</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Lato', sans-serif;
-    background: #fdf6fa;
-    color: #2e1a26;
-    overflow-x: hidden;
-  }
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-thumb { background: rgba(212,160,184,.4); border-radius: 99px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Baby Shower · Mateo José</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: #f3faf6; color: #0e2e1a; overflow-x: hidden; }
+    #app { max-width: 480px; margin: 0 auto; }
 
-  .card {
-    max-width: 480px;
-    margin: 0 auto;
-    overflow-x: hidden;
-  }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(100,180,130,.4); border-radius: 99px; }
 
-  /* ── SPLASH ── */
-  #splash {
-    position: fixed; inset: 0; z-index: 50;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(160deg, #fdf8f4 0%, #faeef4 50%, #f4e6f0 100%);
-    cursor: pointer; user-select: none; overflow: hidden;
-    transition: opacity .75s ease, transform .75s ease;
-  }
-  #splash.hide { opacity: 0; transform: scale(1.06); pointer-events: none; }
-  #splash .noise {
-    position: absolute; inset: 0; pointer-events: none; opacity: .4;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  }
-  #splash .radial-glow {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 70% 65% at 50% 50%, rgba(240,180,200,.22) 0%, transparent 70%);
-  }
-  .splash-inner {
-    position: relative; z-index: 10;
-    display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2rem;
-    animation: fadeUp .9s cubic-bezier(.22,1,.36,1) forwards;
-  }
-  @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
-  .splash-kicker {
-    font-size: .58rem; letter-spacing: .65em; text-transform: uppercase; font-weight: 700;
-    color: #b06080; margin-bottom: .75rem;
-    animation: fadeIn .6s .25s both;
-  }
-  .splash-title {
-    font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1;
-    color: #2e1a26; letter-spacing: -.02em;
-    text-shadow: 0 4px 28px rgba(160,80,120,.18);
-    animation: springIn .7s .35s cubic-bezier(.175,.885,.32,1.275) both;
-  }
-  @keyframes springIn { from { opacity:0; transform: scale(.88); } to { opacity:1; transform: scale(1); } }
-  .gold-divider {
-    display: flex; align-items: center; gap: .75rem;
-    margin: .75rem auto; width: 100%; max-width: 220px;
-    animation: fadeIn .5s .5s both;
-  }
-  .gold-divider .line { flex: 1; height: 1px; }
-  .gold-divider .line-r { background: linear-gradient(to right, transparent, rgba(212,175,120,.8)); }
-  .gold-divider .line-l { background: linear-gradient(to left, transparent, rgba(212,175,120,.8)); }
-  .gold-divider .star { color: #d4af78; font-size: .65rem; }
-  .splash-name {
-    font-family: 'Playfair Display', serif; font-size: 2.6rem; font-style: italic;
-    color: #c04070; line-height: 1.1; text-shadow: 0 2px 20px rgba(192,64,112,.25);
-    animation: fadeUp .6s .75s both;
-  }
-  .splash-date {
-    font-size: .72rem; letter-spacing: .22em; margin-top: .5rem; color: #9070a0;
-    animation: fadeIn .5s .9s both;
-  }
-  .splash-cta {
-    margin-top: 1.5rem; padding: .625rem 1.5rem; border-radius: 9999px;
-    font-size: .62rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase;
-    color: #c04070; border: 1px solid rgba(192,64,112,.3);
-    background: linear-gradient(135deg, rgba(255,240,248,.7), rgba(255,228,240,.5));
-    backdrop-filter: blur(8px);
-    animation: pulse 2.4s 1.2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    /* SPLASH */
+    #splash {
+      position: fixed; inset: 0; z-index: 50;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #f4faf6 0%, #e8f5ee 50%, #ddf0e6 100%);
+      cursor: pointer; user-select: none; overflow: hidden;
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    #splash.fade-out { opacity: 0; transform: scale(1.06); pointer-events: none; }
 
-  /* corner accordions splash */
-  .corner-acc {
-    position: absolute; pointer-events: none; width: 56px; height: auto; opacity: .35;
-  }
-  .ca-tl { top: .75rem; left: .75rem; transform: rotate(-20deg); animation: floatY1 3.5s ease-in-out infinite; }
-  .ca-tr { top: .75rem; right: .75rem; transform: rotate(15deg); animation: floatY1 3.9s .3s ease-in-out infinite; }
-  .ca-bl { bottom: .75rem; left: .75rem; transform: rotate(10deg); animation: floatY1 4.1s .6s ease-in-out infinite; }
-  .ca-br { bottom: .75rem; right: .75rem; transform: rotate(-10deg); animation: floatY1 4.3s .9s ease-in-out infinite; }
-  @keyframes floatY1 { 0%,100%{transform: translateY(0) rotate(var(--r,0deg))} 50%{transform: translateY(-8px) rotate(calc(var(--r,0deg) + 5deg))} }
+    .gold-line {
+      position: relative; height: 1px; width: 100%; overflow: hidden;
+      background: linear-gradient(to right, transparent, rgba(180,210,160,.6), rgba(210,230,180,.9), rgba(180,210,160,.6), transparent);
+    }
+    .gold-line::after {
+      content: ''; position: absolute; inset-block: 0; width: 33%;
+      background: linear-gradient(to right, transparent, rgba(220,240,200,.8), transparent);
+      animation: shimmer 2.4s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+    @keyframes shimmer { 0% { left: -33%; } 100% { left: 133%; } }
 
-  /* ── FALLING ACCORDIONS ── */
-  .falling-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-  .falling-acc {
-    position: absolute; top: -80px; width: auto; height: auto; opacity: .18;
-    animation: fall linear infinite;
-  }
-  @keyframes fall {
-    0%   { transform: translateY(0vh) translateX(0px) rotate(var(--r0)); }
-    25%  { transform: translateY(27.5vh) translateX(18px) rotate(var(--r1)); }
-    50%  { transform: translateY(55vh) translateX(-14px) rotate(var(--r2)); }
-    75%  { transform: translateY(82.5vh) translateX(8px) rotate(var(--r3)); }
-    100% { transform: translateY(110vh) translateX(0px) rotate(var(--r4)); }
-  }
+    /* falling accordions */
+    .accordion-fall {
+      position: absolute; top: -80px; opacity: .15;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0)     translateX(0)  rotate(var(--rot)); }
+      25%  { transform: translateY(27.5vh) translateX(18px) rotate(calc(var(--rot) + 20deg)); }
+      50%  { transform: translateY(55vh)  translateX(-14px) rotate(calc(var(--rot) - 10deg)); }
+      75%  { transform: translateY(82.5vh) translateX(8px) rotate(calc(var(--rot) + 5deg)); }
+      100% { transform: translateY(110vh) translateX(0)  rotate(var(--rot)); }
+    }
 
-  /* ── GOLD LINE ── */
-  .gold-line {
-    position: relative; height: 1px; width: 100%; overflow: hidden;
-    background: linear-gradient(to right, transparent, rgba(212,175,120,.6), rgba(240,210,160,.9), rgba(212,175,120,.6), transparent);
-  }
-  .gold-line::after {
-    content: ''; position: absolute; inset-y: 0; width: 33%;
-    background: linear-gradient(to right, transparent, rgba(255,245,200,.8), transparent);
-    animation: shimmer 2.4s 1.5s ease-in-out infinite;
-  }
-  @keyframes shimmer { 0%{left:-33%} 100%{left:133%} }
+    .float { animation: floatY 3s ease-in-out infinite; }
+    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 
-  /* ── SECTION HEADING ── */
-  .section-heading { text-align: center; margin-bottom: 2rem; }
-  .section-kicker {
-    font-size: .58rem; letter-spacing: .6em; text-transform: uppercase;
-    font-weight: 700; color: #c090a0; display: block; margin-bottom: .5rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.1;
-    color: #2e1a26; letter-spacing: -.01em;
-  }
-  .section-ornament {
-    display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1rem;
-  }
-  .section-ornament .line-r { height:1px; width:64px; background: linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
-  .section-ornament .line-l { height:1px; width:64px; background: linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
-  .section-ornament img { width: 28px; height: auto; opacity: .55; }
+    .spin-slow { animation: spinSlow 3s ease-in-out infinite; }
+    @keyframes spinSlow { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 
-  /* ── HERO ── */
-  .hero {
-    position: relative; overflow: hidden; text-align: center;
-    padding: 3.5rem 1.5rem 4rem;
-    background: linear-gradient(170deg, #fff0f6 0%, #fce4f0 55%, #f6d8ee 100%);
-  }
-  .hero .blob1 {
-    position: absolute; top:0; left:0; width:260px; height:260px; pointer-events:none;
-    background: radial-gradient(circle, rgba(244,180,210,.35) 0%, transparent 70%); border-radius:50%;
-  }
-  .hero .blob2 {
-    position: absolute; bottom:40px; right:0; width:200px; height:200px; pointer-events:none;
-    background: radial-gradient(circle, rgba(200,160,220,.28) 0%, transparent 70%); border-radius:50%;
-  }
-  .hero-content { position: relative; z-index: 10; margin-top: 1rem; animation: fadeUp .9s cubic-bezier(.22,1,.36,1); }
-  .hero-kicker { font-size:.6rem; letter-spacing:.6em; text-transform:uppercase; font-weight:700; color:#b06080; margin-bottom:.5rem; display:block; }
-  .hero-title {
-    font-family:'Playfair Display',serif; font-size:3.6rem; line-height:1; color:#2e1a26;
-    text-shadow:0 4px 24px rgba(160,80,120,.14); letter-spacing:-.02em;
-  }
-  .hero-sub { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:#9070a0; margin-top:.375rem; }
-  .hero-acc-divider { display:flex; align-items:center; justify-content:center; gap:1rem; margin:1.25rem auto .5rem; }
-  .hero-acc-divider .l-r { height:1px; flex:1; max-width:80px; background:linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
-  .hero-acc-divider .l-l { height:1px; flex:1; max-width:80px; background:linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
-  .hero-acc-divider img { width:40px; height:auto; opacity:.6; }
-  .baby-float { position:relative; z-index:10; display:flex; justify-content:center; margin-top:.5rem; animation: floatBaby 3s ease-in-out infinite; }
-  @keyframes floatBaby { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-  .baby-shadow {
-    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
-    width:160px; height:40px; border-radius:50%;
-    background:radial-gradient(ellipse,rgba(192,80,128,.15) 0%,transparent 70%); filter:blur(14px);
-  }
-  .baby-float img { width:240px; height:auto; filter:drop-shadow(0 20px 44px rgba(160,80,120,.28)); }
-  .name-tag {
-    position:relative; z-index:10; display:inline-block; padding:.75rem 1.75rem; border-radius:9999px; margin-top:.75rem;
-    background:rgba(255,255,255,.7); border:1px solid rgba(212,175,120,.4); backdrop-filter:blur(12px);
-    box-shadow:0 4px 24px rgba(160,80,120,.12);
-    animation: fadeUp .6s .6s both;
-  }
-  .name-tag .name { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:#c04070; text-shadow:0 2px 16px rgba(192,64,112,.2); }
-  .name-tag .date { font-size:.68rem; letter-spacing:.18em; text-align:center; color:#9070a0; }
-  .hero-wave { position:absolute; bottom:0; left:0; width:100%; }
+    .blink { animation: blink 2.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
 
-  /* ── DATE SECTION ── */
-  .date-section { padding: 2.5rem 1.25rem; background:#fdf6fa; }
-  .date-cards { display:flex; gap:.75rem; }
-  .date-card {
-    flex:1; border-radius:1rem; padding:1rem; text-align:center; position:relative; overflow:hidden; cursor:default;
-    border:1px solid rgba(212,175,120,.3); background:rgba(255,255,255,.92);
-    box-shadow:0 8px 36px rgba(160,80,120,.08), inset 0 1px 0 rgba(255,255,255,.9);
-    transition: transform .2s, box-shadow .2s;
-  }
-  .date-card:hover { transform:translateY(-4px); box-shadow:0 16px 44px rgba(160,80,120,.14); }
-  .date-card .shimmer-overlay {
-    position:absolute; inset-x:0; top:0; height:50%; pointer-events:none;
-    background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent); border-radius:1rem 1rem 0 0;
-  }
-  .date-card .top-gold { position:absolute; top:0; left:1rem; right:1rem; height:1px; background:linear-gradient(to right,transparent,rgba(212,175,120,.6),transparent); }
-  .date-card .icon { font-size:1.5rem; margin-bottom:.25rem; }
-  .date-card .big { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; line-height:1; color:#2e1a26; }
-  .date-card .sub { font-family:'Playfair Display',serif; font-size:.95rem; font-style:italic; color:#9070a0; }
-  .date-card .lbl { font-size:.52rem; letter-spacing:.22em; text-transform:uppercase; font-weight:700; margin-top:.5rem; color:#d4af78; }
-  .acc-divider { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-top:1.5rem; }
-  .acc-divider .l-r { height:1px; width:48px; background:linear-gradient(to right,transparent,rgba(212,175,120,.5)); }
-  .acc-divider .l-l { height:1px; width:48px; background:linear-gradient(to left,transparent,rgba(212,175,120,.5)); }
-  .acc-divider img { width:32px; height:auto; opacity:.45; animation:spin3 3s ease-in-out infinite; }
-  @keyframes spin3 { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
+    .colon-blink { animation: blink 1s ease-in-out infinite; }
 
-  /* ── COUNTDOWN ── */
-  .countdown-section {
-    position:relative; overflow:hidden; padding:3.5rem 1.25rem; text-align:center;
-    background:linear-gradient(150deg,#4a0e30 0%,#320826 55%,#200518 100%);
-  }
-  .countdown-dots {
-    position:absolute; inset:0; pointer-events:none;
-    background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px); background-size:20px 20px;
-  }
-  .countdown-blob1 {
-    position:absolute; top:0; left:25%; width:200px; height:200px; border-radius:50%;
-    background:radial-gradient(circle,rgba(240,140,190,.1) 0%,transparent 70%); filter:blur(24px); pointer-events:none;
-  }
-  .countdown-blob2 {
-    position:absolute; bottom:0; right:25%; width:160px; height:160px; border-radius:50%;
-    background:radial-gradient(circle,rgba(160,80,200,.1) 0%,transparent 70%); filter:blur(20px); pointer-events:none;
-  }
-  .countdown-acc1 { position:absolute; right:1rem; top:1.5rem; pointer-events:none; width:52px; height:auto; opacity:.2; animation:floatAcc1 4s ease-in-out infinite; }
-  .countdown-acc2 { position:absolute; left:1rem; bottom:1.5rem; pointer-events:none; width:44px; height:auto; opacity:.18; animation:floatAcc2 3.5s .8s ease-in-out infinite; }
-  @keyframes floatAcc1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(8deg)} }
-  @keyframes floatAcc2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-6deg)} }
-  .countdown-kicker { font-size:.58rem; letter-spacing:.5em; text-transform:uppercase; font-weight:700; color:#d4af78; margin-bottom:.25rem; }
-  .countdown-title { font-family:'Playfair Display',serif; font-size:2.6rem; font-style:italic; color:#fdf0f5; margin-bottom:2rem; }
-  .flip-units { display:flex; align-items:flex-end; justify-content:center; gap:.5rem; flex-wrap:wrap; }
-  .flip-unit { display:flex; flex-direction:column; align-items:center; }
-  .flip-box {
-    min-width:72px; padding:1rem; border-radius:1rem; text-align:center; position:relative; overflow:hidden;
-    background:linear-gradient(160deg,rgba(255,235,245,.14) 0%,rgba(255,210,230,.08) 100%);
-    border:1px solid rgba(212,175,120,.3);
-    box-shadow:0 8px 32px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter:blur(16px);
-  }
-  .flip-box .inner-shimmer {
-    position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(to bottom,rgba(255,255,255,.12) 0%,transparent 50%); border-radius:1rem;
-  }
-  .flip-box .value { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; color:#fff; line-height:1; text-shadow:0 2px 12px rgba(0,0,0,.3); }
-  .flip-unit .lbl { font-size:.52rem; letter-spacing:.28em; text-transform:uppercase; font-weight:700; margin-top:.5rem; color:#d4af78; }
-  .colon { font-size:1.875rem; font-weight:700; padding-bottom:1.75rem; color:#d4af78; opacity:.7; animation:blinkColon 1s infinite; }
-  @keyframes blinkColon { 0%,100%{opacity:.35} 50%{opacity:.85} }
+    /* sections */
+    section { padding: 2.5rem 1.25rem; }
+    .section-kicker { font-size: .58rem; letter-spacing: .6em; text-transform: uppercase; font-weight: 700; color: #4a8a63; text-align: center; margin-bottom: .5rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.1; color: #0e2e1a; letter-spacing: -.01em; text-align: center; }
+    .section-ornament { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1rem; }
+    .section-ornament .line { height: 1px; width: 64px; }
+    .section-ornament .line-l { background: linear-gradient(to right, transparent, rgba(100,180,120,.7)); }
+    .section-ornament .line-r { background: linear-gradient(to left,  transparent, rgba(100,180,120,.7)); }
 
-  /* ── LOCATION ── */
-  .location-section { padding:2.5rem 1.25rem; background:#fdf0f6; }
-  .location-card {
-    border-radius:1.5rem; overflow:hidden;
-    border:1px solid rgba(212,175,120,.28); background:#fff;
-    box-shadow:0 20px 64px rgba(160,80,120,.1), inset 0 1px 0 rgba(212,175,120,.3);
-  }
-  .location-info { padding:1.25rem 1.25rem 1rem; display:flex; align-items:center; gap:1rem; }
-  .location-icon {
-    width:56px; height:56px; border-radius:1rem; display:flex; align-items:center; justify-content:center;
-    font-size:1.5rem; flex-shrink:0; color:#fff;
-    background:linear-gradient(135deg,#e080a8,#b04080); box-shadow:0 6px 20px rgba(192,80,128,.4);
-    animation:floatBaby 4s ease-in-out infinite;
-  }
-  .location-name { font-family:'Playfair Display',serif; font-size:1.6rem; color:#2e1a26; }
-  .location-addr { font-size:.75rem; margin-top:.25rem; line-height:1.25rem; color:#9070a0; }
-  .location-map { width:100%; height:210px; border:none; display:block; }
-  .location-btn-wrap { padding:1rem; }
-  .location-btn {
-    display:flex; align-items:center; justify-content:center; gap:.5rem;
-    width:100%; padding:.875rem; border-radius:1rem; color:#fff; font-size:.875rem; font-weight:700;
-    letter-spacing:.15em; text-transform:uppercase; text-decoration:none;
-    background:linear-gradient(135deg,#d06090,#a04080); box-shadow:0 6px 22px rgba(192,80,128,.35);
-    transition:transform .2s;
-  }
-  .location-btn:hover { transform:scale(1.02); }
+    /* date cards */
+    .date-grid { display: flex; gap: .75rem; }
+    .date-card {
+      flex: 1; border-radius: 1rem; padding: 1rem; text-align: center;
+      border: 1px solid rgba(80,180,120,.3);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 8px 36px rgba(30,110,69,.08), inset 0 1px 0 rgba(255,255,255,.9);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .date-card:hover { transform: translateY(-4px); box-shadow: 0 16px 44px rgba(30,110,69,.14); }
+    .date-card-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; line-height: 1; color: #0e2e1a; }
+    .date-card-sub { font-family: 'Playfair Display', serif; font-size: .95rem; font-style: italic; color: #507060; }
+    .date-card-label { font-size: .52rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: #4aaf78; margin-top: .5rem; }
 
-  /* ── ITINERARY ── */
-  .itin-section { padding:2.5rem 1.25rem; background:#fdf8fc; }
-  .itin-list { position:relative; display:flex; flex-direction:column; }
-  .itin-line {
-    position:absolute; left:27px; top:0; bottom:0; width:2px;
-    background:linear-gradient(to bottom,transparent,rgba(212,175,120,.8) 8%,rgba(192,80,128,.5) 50%,rgba(212,175,120,.8) 92%,transparent);
-    transform-origin:top; animation:growLine 1.3s cubic-bezier(.4,0,.2,1) forwards;
-    transform:scaleY(0);
-  }
-  @keyframes growLine { to{transform:scaleY(1)} }
-  .itin-item { display:flex; align-items:flex-start; gap:1.25rem; padding-bottom:2rem; }
-  .itin-item:last-child { padding-bottom:0; }
-  .itin-dot-wrap { position:relative; flex-shrink:0; z-index:10; }
-  .itin-dot {
-    width:56px; height:56px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    background:linear-gradient(135deg,#e090b8,#b04080); box-shadow:0 6px 20px rgba(192,80,128,.4);
-  }
-  .itin-dot .emoji { font-size:1.15rem; line-height:1; }
-  .itin-dot .num { font-size:.48rem; font-weight:700; color:rgba(255,255,255,.85); margin-top:2px; }
-  .itin-ring {
-    position:absolute; inset:0; border-radius:50%;
-    border:2px solid rgba(192,80,128,.4); animation:ringPulse 2.5s infinite;
-  }
-  @keyframes ringPulse { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(1.9);opacity:0} }
-  .itin-content {
-    flex:1; border-radius:1rem; padding:1rem 1.25rem; margin-top:.25rem; position:relative; overflow:hidden;
-    background:rgba(255,255,255,.94); border:1px solid rgba(212,175,120,.2); box-shadow:0 4px 20px rgba(160,80,120,.07);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .itin-content:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(160,80,120,.13); }
-  .itin-content .left-bar {
-    position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:.5rem 0 0 .5rem;
-    background:linear-gradient(to bottom,#d4af78,#e090b8,#d4af78);
-  }
-  .itin-content .top-line {
-    position:absolute; top:0; left:1rem; right:1rem; height:1px;
-    background:linear-gradient(to right,transparent,rgba(212,175,120,.4),transparent);
-  }
-  .itin-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:.25rem; padding-left:.5rem; }
-  .itin-name { font-weight:700; font-size:.875rem; font-family:'Playfair Display',serif; color:#2e1a26; }
-  .itin-time {
-    font-size:.56rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; color:#fff; letter-spacing:.1em;
-    background:linear-gradient(135deg,#d4af78,#b07830);
-  }
-  .itin-desc { font-size:.75rem; padding-left:.5rem; line-height:1.5rem; color:#9070a0; }
+    /* countdown */
+    #countdown-section {
+      background: linear-gradient(150deg, #0a2818 0%, #0d3320 55%, #061a10 100%);
+      padding: 3.5rem 1.25rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .flip-box {
+      min-width: 72px; padding: 1rem; border-radius: 1rem; display: inline-block;
+      background: linear-gradient(160deg, rgba(180,240,200,.14) 0%, rgba(140,210,170,.08) 100%);
+      border: 1px solid rgba(100,200,140,.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12);
+      backdrop-filter: blur(16px);
+    }
+    .flip-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
+    .flip-label { font-size: .52rem; letter-spacing: .28em; text-transform: uppercase; font-weight: 700; color: #6dbf8a; margin-top: .5rem; }
+    .countdown-units { display: flex; align-items: flex-end; justify-content: center; gap: .5rem; flex-wrap: wrap; }
+    .countdown-colon { font-size: 1.8rem; font-weight: 700; color: #6dbf8a; opacity: .7; padding-bottom: 1.75rem; }
 
-  /* ── GIFT ── */
-  .gift-section { padding:2.5rem 1.25rem; background:#fdf0f6; }
-  .gift-list { display:flex; flex-direction:column; gap:.75rem; }
-  .gift-panel { border-radius:1rem; overflow:hidden; transition:transform .2s; }
-  .gift-panel:hover { transform:scale(1.01); }
-  .gift-header {
-    width:100%; display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem;
-    background:transparent; border:none; cursor:pointer; text-align:left;
-  }
-  .gift-icon {
-    width:44px; height:44px; border-radius:.75rem; display:flex; align-items:center; justify-content:center;
-    font-size:1.5rem; flex-shrink:0; background:rgba(255,255,255,.88); box-shadow:0 2px 10px rgba(0,0,0,.07);
-  }
-  .gift-label { font-size:.875rem; font-weight:700; font-family:'Playfair Display',serif; }
-  .gift-sub { font-size:.72rem; margin-top:2px; color:#9070a0; }
-  .gift-arrow { font-size:.8rem; margin-left:auto; transition:transform .3s; }
-  .gift-arrow.open { transform:rotate(180deg); }
-  .gift-body { overflow:hidden; max-height:0; transition:max-height .35s ease, opacity .3s; opacity:0; }
-  .gift-body.open { max-height:600px; opacity:1; }
-  .gift-inner { padding:.25rem 1rem 1.25rem; }
-  .gift-form-wrap {
-    border-radius:1rem; padding:1.25rem;
-    background:rgba(255,255,255,.95); border:1px solid rgba(212,175,120,.2); box-shadow:0 12px 40px rgba(160,80,120,.07);
-  }
-  .gift-form-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:#2e1a26; text-align:center; margin:.75rem 0; }
-  .gift-input {
-    width:100%; padding:.75rem 1rem; border-radius:.75rem; font-size:.875rem; outline:none; margin-bottom:.75rem; display:block;
-    border:1px solid rgba(200,120,160,.25); background:#fff5f8; color:#2e1a26; font-family:'Lato',sans-serif;
-  }
-  .gift-btn {
-    width:100%; padding:.75rem; border-radius:.75rem; color:#fff; font-size:.875rem; font-weight:700;
-    letter-spacing:.15em; text-transform:uppercase; cursor:pointer; border:none;
-    background:linear-gradient(135deg,#c04070,#8a3090); box-shadow:0 6px 22px rgba(160,60,120,.35);
-    font-family:'Lato',sans-serif;
-  }
-  .gift-qr { display:flex; justify-content:center; margin-top:1.25rem; }
-  .gift-qr img { border-radius:1rem; box-shadow:0 8px 28px rgba(0,0,0,.12); }
+    /* location */
+    .map-card { border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(80,180,120,.28); background: #fff; box-shadow: 0 20px 64px rgba(30,110,69,.1); }
+    .map-card iframe { width: 100%; border: none; display: block; height: 210px; }
+    .btn-green {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: .875rem; border-radius: 1rem;
+      color: #fff; font-size: .875rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      text-decoration: none; background: linear-gradient(135deg, #2e9460, #1e6e45);
+      box-shadow: 0 6px 22px rgba(30,110,69,.35); transition: transform .2s;
+    }
+    .btn-green:hover { transform: scale(1.02); }
 
-  /* ── RSVP ── */
-  .rsvp-section {
-    position:relative; padding:3.5rem 1.25rem; overflow:hidden;
-    background:linear-gradient(160deg,#fff0f6 0%,#fce4f0 55%,#f6d8ee 100%);
-  }
-  .rsvp-glow {
-    position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(240,160,200,.1) 0%,transparent 70%);
-  }
-  .rsvp-acc1 { position:absolute; top:1rem; right:1rem; pointer-events:none; width:50px; height:auto; opacity:.28; animation:rsvpAcc1 3.5s ease-in-out infinite; }
-  .rsvp-acc2 { position:absolute; bottom:1rem; left:1rem; pointer-events:none; width:44px; height:auto; opacity:.22; animation:rsvpAcc2 4s .6s ease-in-out infinite; }
-  @keyframes rsvpAcc1 { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
-  @keyframes rsvpAcc2 { 0%,100%{transform:rotate(10deg)} 50%{transform:rotate(-10deg)} }
-  .rsvp-inner { position:relative; z-index:10; }
-  .rsvp-note { font-size:.875rem; font-style:italic; text-align:center; margin-bottom:1.5rem; line-height:1.75rem; color:#9070a0; }
-  .rsvp-note strong { color:#c04070; }
-  .rsvp-fields { display:flex; flex-direction:column; gap:.75rem; }
-  .rsvp-input {
-    width:100%; padding:.875rem 1rem; border-radius:.75rem; font-size:.875rem; outline:none; display:block;
-    border:1px solid rgba(200,120,160,.25); background:rgba(255,255,255,.88); color:#2e1a26;
-    font-family:'Lato',sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.04);
-  }
-  .rsvp-toggle { display:flex; gap:.75rem; }
-  .rsvp-btn-yn {
-    flex:1; padding:.75rem; border-radius:.75rem; font-size:.875rem; cursor:pointer;
-    font-family:'Lato',sans-serif; font-weight:500; transition:all .2s;
-    border:1.5px solid rgba(200,120,160,.2); background:rgba(255,255,255,.6); color:#9070a0;
-  }
-  .rsvp-btn-yn.active { border-color:#c04070; background:rgba(192,64,112,.1); color:#c04070; }
-  .rsvp-error { font-size:.75rem; color:#c04070; }
-  .rsvp-submit {
-    width:100%; padding:.875rem; border-radius:.75rem; color:#fff; font-size:.875rem; font-weight:700;
-    letter-spacing:.15em; text-transform:uppercase; cursor:pointer; border:none;
-    background:linear-gradient(135deg,#c04070,#8a3090); box-shadow:0 8px 28px rgba(160,60,120,.35);
-    font-family:'Lato',sans-serif;
-  }
-  .rsvp-submit:disabled { opacity:.6; cursor:default; }
-  .rsvp-hint { font-size:.62rem; text-align:center; margin-top:.25rem; letter-spacing:.05em; color:#b090b0; }
-  .rsvp-success { text-align:center; padding:1rem 0; }
-  .rsvp-success h3 { font-family:'Playfair Display',serif; font-size:3rem; font-style:italic; color:#c04070; }
-  .rsvp-success p { font-size:.875rem; font-style:italic; margin-top:.5rem; line-height:1.75rem; color:#9070a0; }
-  .rsvp-baby { width:7rem; margin:0 auto 1rem; animation:floatBaby 2.8s ease-in-out infinite; }
-  .rsvp-acc-thanks { width:80px; height:auto; opacity:.7; margin:0 auto 1rem; animation:spin3 2.5s ease-in-out infinite; }
+    /* itinerary */
+    .itin-line {
+      position: absolute; left: 27px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(80,180,120,.8) 8%, rgba(30,110,69,.5) 50%, rgba(80,180,120,.8) 92%, transparent);
+    }
+    .itin-list { position: relative; display: flex; flex-direction: column; }
+    .itin-item { display: flex; align-items: flex-start; gap: 1.25rem; padding-bottom: 2rem; }
+    .itin-item:last-child { padding-bottom: 0; }
+    .itin-dot {
+      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #4aaf78, #1e6e45);
+      box-shadow: 0 6px 20px rgba(30,110,69,.4);
+    }
+    .itin-dot span { font-size: .48rem; font-weight: 700; color: rgba(255,255,255,.85); margin-top: 2px; }
+    .itin-card {
+      flex: 1; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: .25rem;
+      background: rgba(255,255,255,.94); border: 1px solid rgba(80,180,120,.2);
+      box-shadow: 0 4px 20px rgba(30,110,69,.07); position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .itin-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(30,110,69,.13); }
+    .itin-card .left-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: .25rem 0 0 .25rem; background: linear-gradient(to bottom, #4aaf78, #2e9460, #4aaf78); }
+    .itin-card-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: .875rem; color: #0e2e1a; }
+    .itin-card-time { font-size: .56rem; font-weight: 700; padding: .25rem .75rem; border-radius: 999px; color: #fff; background: linear-gradient(135deg, #4aaf78, #1e6e45); }
+    .itin-card-desc { font-size: .75rem; color: #507060; line-height: 1.6; padding-left: .5rem; }
 
-  /* ── FOOTER ── */
-  footer {
-    position:relative; padding:3.5rem 1.5rem 2.5rem; text-align:center; overflow:hidden;
-    background:linear-gradient(170deg,#fff5f8 0%,#f8eaf4 60%,#f0dce8 100%);
-  }
-  footer .foot-glow {
-    position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(ellipse 90% 70% at 50% 100%,rgba(200,120,160,.07) 0%,transparent 70%);
-  }
-  .foot-ornament { display:flex; align-items:center; justify-content:center; gap:.75rem; margin:1.75rem 0 0; }
-  .foot-ornament .l-r { height:1px; width:56px; background:linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
-  .foot-ornament .l-l { height:1px; width:56px; background:linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
-  .foot-ornament .a1 { width:34px; height:auto; opacity:.5; animation:spin3 2.8s ease-in-out infinite; }
-  .foot-ornament .a2 { width:26px; height:auto; opacity:.35; animation:spin3r 3.2s .5s ease-in-out infinite; }
-  .foot-ornament .a3 { width:34px; height:auto; opacity:.5; animation:spin3 2.8s .2s ease-in-out infinite; }
-  @keyframes spin3r { 0%,100%{transform:rotate(6deg)} 50%{transform:rotate(-6deg)} }
-  .foot-note { font-style:italic; font-size:1rem; line-height:2rem; margin:1.25rem 0; color:#9070a0; }
-  .foot-signature-tag {
-    display:inline-block; padding:.75rem 2rem; border-radius:9999px;
-    background:rgba(255,255,255,.7); border:1px solid rgba(212,175,120,.4); backdrop-filter:blur(10px);
-  }
-  .foot-signature-tag p { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:#c04070; text-shadow:0 4px 20px rgba(192,64,112,.22); }
+    /* gifts */
+    .gift-panel { border-radius: 1rem; overflow: hidden; margin-bottom: .75rem; }
+    .gift-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; cursor: pointer; background: transparent; width: 100%; text-align: left; border: none; }
+    .gift-icon { width: 44px; height: 44px; border-radius: .75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; background: rgba(255,255,255,.88); box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+    .gift-label { font-family: 'Playfair Display', serif; font-size: .875rem; font-weight: 700; }
+    .gift-sub { font-size: .72rem; margin-top: 2px; color: #507060; }
+    .gift-chevron { margin-left: auto; font-size: .8rem; transition: transform .3s; }
+    .gift-chevron.open { transform: rotate(180deg); }
+    .gift-body { overflow: hidden; max-height: 0; transition: max-height .35s ease; }
+    .gift-body.open { max-height: 600px; }
+    .gift-inner { padding: .25rem 1rem 1.25rem; }
+    .gift-form { background: rgba(255,255,255,.95); border: 1px solid rgba(100,180,120,.2); border-radius: 1rem; padding: 1.25rem; box-shadow: 0 12px 40px rgba(30,110,69,.07); }
+    .gift-input {
+      width: 100%; padding: .75rem 1rem; border-radius: .75rem; border: 1px solid rgba(80,160,100,.25);
+      background: #f3faf6; color: #0e2e1a; font-family: 'Lato', sans-serif; font-size: .875rem;
+      outline: none; display: block; margin-bottom: .75rem;
+    }
+    .qr-result { display: flex; justify-content: center; margin-top: 1.25rem; }
+    .qr-result img { border-radius: 1rem; box-shadow: 0 8px 28px rgba(0,0,0,.12); }
 
-  /* ── WATERMARK ── */
-  .watermark { padding:2rem 1.5rem; text-align:center; background:#f6ecf2; border-top:1px solid rgba(212,175,120,.2); }
-  .watermark img { width:11rem; margin:1.25rem auto 1rem; opacity:.8; display:block; }
-  .watermark-note { font-size:.63rem; line-height:1.5rem; max-width:20rem; margin:0 auto; color:rgba(46,26,38,.42); }
-  .watermark-copy { font-size:.58rem; margin-top:.5rem; color:rgba(46,26,38,.28); }
-</style>
+    /* rsvp */
+    #rsvp-section { background: linear-gradient(160deg, #eaf7f0 0%, #d6f0e4 55%, #c8ecd8 100%); padding: 3.5rem 1.25rem; position: relative; overflow: hidden; }
+    .rsvp-input { width: 100%; padding: .875rem 1rem; border-radius: .75rem; border: 1px solid rgba(80,160,100,.25); background: rgba(255,255,255,.88); color: #0e2e1a; font-family: 'Lato', sans-serif; font-size: .875rem; outline: none; display: block; margin-bottom: .75rem; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .rsvp-radio { display: flex; gap: .75rem; margin-bottom: .75rem; }
+    .rsvp-btn { flex: 1; padding: .75rem; border-radius: .75rem; border: 1.5px solid rgba(80,160,100,.2); background: rgba(255,255,255,.6); color: #507060; font-family: 'Lato', sans-serif; font-weight: 500; font-size: .875rem; cursor: pointer; transition: all .2s; }
+    .rsvp-btn.active { border-color: #1e6e45; background: rgba(30,110,69,.1); color: #1e6e45; }
+
+    /* footer */
+    footer { background: linear-gradient(170deg, #f3faf6 0%, #e8f5ee 60%, #ddf0e6 100%); padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+
+    /* watermark */
+    .watermark { padding: 2rem 1.5rem; text-align: center; background: #e2f2e8; border-top: 1px solid rgba(80,180,120,.2); }
+
+    /* name tag */
+    .name-tag { display: inline-block; padding: .75rem 1.75rem; border-radius: 999px; background: rgba(255,255,255,.75); border: 1px solid rgba(80,180,120,.4); backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(30,110,69,.12); }
+    .name-italic { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; color: #1e6e45; text-shadow: 0 2px 16px rgba(30,110,69,.2); }
+
+    /* hero wave bg */
+    #hero { background: linear-gradient(170deg, #eaf7f0 0%, #d6f0e4 55%, #c8ecd8 100%); position: relative; overflow: hidden; text-align: center; padding: 3.5rem 1.5rem 4rem; }
+    #hero svg.wave { position: absolute; bottom: 0; left: 0; width: 100%; }
+
+    .hero-divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0 .5rem; }
+    .hero-divider .line { height: 1px; flex: 1; max-width: 80px; }
+  </style>
 </head>
 <body>
-<div class="card">
+<div id="app">
 
-<!-- ══ SPLASH ══════════════════════════════════════════════════════════ -->
-<div id="splash" onclick="closeSplash()">
-  <div class="noise"></div>
-  <div class="radial-glow"></div>
-  <div class="gold-line" style="position:absolute;top:0;left:0;right:0;"></div>
-  <div class="falling-container" id="splash-falling"></div>
+  <!-- SPLASH -->
+  <div id="splash" onclick="closeSplash()">
+    <div class="gold-line" style="position:absolute;top:0;left:0;right:0;"></div>
+    <div id="splash-accordions"></div>
 
-  <img class="corner-acc ca-tl" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <img class="corner-acc ca-tr" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <img class="corner-acc ca-bl" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <img class="corner-acc ca-br" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+    <!-- corner ornaments -->
+    <img id="c1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:12px;left:12px;width:56px;height:auto;opacity:.3;transform:rotate(-20deg);animation:floatY 3.5s ease-in-out infinite;" />
+    <img id="c2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:12px;right:12px;width:56px;height:auto;opacity:.3;transform:rotate(15deg);animation:floatY 3.9s ease-in-out infinite .3s;" />
+    <img id="c3" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:12px;left:12px;width:56px;height:auto;opacity:.3;transform:rotate(10deg);animation:floatY 4.3s ease-in-out infinite .6s;" />
+    <img id="c4" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:12px;right:12px;width:56px;height:auto;opacity:.3;transform:rotate(-10deg);animation:floatY 3.7s ease-in-out infinite .9s;" />
 
-  <div class="splash-inner">
-    <p class="splash-kicker">Una celebración especial</p>
-    <h1 class="splash-title">Baby Shower</h1>
-    <div class="gold-divider">
-      <div class="line line-r"></div>
-      <span class="star">✦</span>
-      <div class="line line-l"></div>
-    </div>
-    <div style="animation:floatBaby 3s ease-in-out infinite">
-      <img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña"
-        style="width:180px;height:auto;filter:drop-shadow(0 20px 40px rgba(160,80,120,.3))" />
-    </div>
-    <p class="splash-name">Helena Maria</p>
-    <p class="splash-date">26 de Octubre · 2026 · 3:00 PM</p>
-    <div class="splash-cta">✿ Toca para abrir ✿</div>
-  </div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 65% at 50% 50%, rgba(100,200,140,.18) 0%, transparent 70%);pointer-events:none;"></div>
 
-  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
-</div>
+    <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 2rem;">
+      <p style="font-size:.58rem;letter-spacing:.65em;text-transform:uppercase;font-weight:700;color:#2e7d52;margin-bottom:.75rem;">Una celebración especial</p>
+      <h1 style="font-family:'Playfair Display',serif;font-size:3.8rem;line-height:1;color:#0e2e1a;letter-spacing:-.02em;text-shadow:0 4px 28px rgba(30,110,69,.18);">Baby Shower</h1>
 
-<!-- ══ HERO ════════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="falling-container" id="hero-falling"></div>
-  <div class="blob1"></div>
-  <div class="blob2"></div>
-  <div class="gold-line"></div>
-  <div class="hero-content">
-    <span class="hero-kicker">Estás invitada</span>
-    <h1 class="hero-title">Baby Shower</h1>
-    <p class="hero-sub">a un momento lleno de amor</p>
-    <div class="hero-acc-divider">
-      <div class="l-r"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-      <div class="l-l"></div>
-    </div>
-  </div>
-  <div class="baby-float">
-    <div class="baby-shadow"></div>
-    <img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña" />
-  </div>
-  <div class="name-tag">
-    <div class="name">Helena Maria</div>
-    <div class="date">26 Octubre · 2026 · 3:00 PM</div>
-  </div>
-  <svg class="hero-wave" viewBox="0 0 480 56" preserveAspectRatio="none">
-    <path d="M0,28 C80,56 160,0 240,28 C320,56 400,0 480,28 L480,56 L0,56 Z" fill="#fdf6fa"/>
-    <path d="M0,42 C100,56 200,20 300,42 C380,56 440,28 480,42 L480,56 L0,56 Z" fill="#fdf6fa" opacity=".5"/>
-  </svg>
-</section>
-
-<!-- ══ DATE ════════════════════════════════════════════════════════════ -->
-<section class="date-section">
-  <div class="section-heading">
-    <span class="section-kicker">Cuando nos vemos</span>
-    <h2 class="section-title">La fecha</h2>
-    <div class="section-ornament">
-      <div class="line-r"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-      <div class="line-l"></div>
-    </div>
-  </div>
-  <div class="date-cards">
-    <div class="date-card">
-      <div class="shimmer-overlay"></div><div class="top-gold"></div>
-      <div class="icon">🌸</div>
-      <div class="big">26</div>
-      <div class="lbl">Día</div>
-    </div>
-    <div class="date-card">
-      <div class="shimmer-overlay"></div><div class="top-gold"></div>
-      <div class="icon">📅</div>
-      <div class="sub">Oct 2026</div>
-      <div class="lbl">Mes · Año</div>
-    </div>
-    <div class="date-card">
-      <div class="shimmer-overlay"></div><div class="top-gold"></div>
-      <div class="icon">🕐</div>
-      <div class="big">3:00</div>
-      <div class="lbl">PM</div>
-    </div>
-  </div>
-  <div class="acc-divider">
-    <div class="l-r"></div>
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-    <div class="l-l"></div>
-  </div>
-</section>
-
-<!-- ══ COUNTDOWN ══════════════════════════════════════════════════════ -->
-<section class="countdown-section">
-  <div class="countdown-dots"></div>
-  <div class="countdown-blob1"></div>
-  <div class="countdown-blob2"></div>
-  <div class="gold-line"></div>
-  <img class="countdown-acc1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <img class="countdown-acc2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <div style="position:relative;z-index:10">
-    <p class="countdown-kicker">Cuenta regresiva</p>
-    <h2 class="countdown-title">¡Falta poco!</h2>
-    <div class="flip-units" id="flip-units">
-      <div class="flip-unit">
-        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-days">--</div></div>
-        <div class="lbl">Días</div>
+      <div style="display:flex;align-items:center;gap:.75rem;margin:1rem 0;width:100%;max-width:220px;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(100,180,120,.8));"></div>
+        <span style="color:#4aaf78;font-size:.65rem;">✦</span>
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(100,180,120,.8));"></div>
       </div>
-      <div class="colon">:</div>
-      <div class="flip-unit">
-        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-hours">--</div></div>
-        <div class="lbl">Horas</div>
+
+      <div class="float">
+        <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="Bebé niño" style="width:180px;height:auto;filter:drop-shadow(0 20px 40px rgba(30,110,69,.25));" />
       </div>
-      <div class="colon">:</div>
-      <div class="flip-unit">
-        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-mins">--</div></div>
-        <div class="lbl">Min</div>
-      </div>
-      <div class="colon">:</div>
-      <div class="flip-unit">
-        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-secs">--</div></div>
-        <div class="lbl">Seg</div>
+
+      <p style="font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#1e6e45;line-height:1.1;text-shadow:0 2px 20px rgba(30,110,69,.2);margin-top:.5rem;">Mateo José</p>
+      <p style="font-size:.72rem;letter-spacing:.22em;margin-top:.5rem;color:#507060;">26 de Octubre · 2026 · 3:00 PM</p>
+
+      <div class="blink" style="margin-top:1.5rem;padding:.625rem 1.5rem;border-radius:999px;color:#1e6e45;border:1px solid rgba(30,110,69,.3);background:linear-gradient(135deg,rgba(232,247,238,.7),rgba(210,240,220,.5));backdrop-filter:blur(8px);font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;">
+        ✿ Toca para abrir ✿
       </div>
     </div>
+    <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
   </div>
-  <div class="gold-line" style="margin-top:0"></div>
-</section>
 
-<!-- ══ LOCATION ═══════════════════════════════════════════════════════ -->
-<section class="location-section">
-  <div class="section-heading">
-    <span class="section-kicker">¿Dónde nos vemos?</span>
-    <h2 class="section-title">El lugar</h2>
-    <div class="section-ornament">
-      <div class="line-r"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-      <div class="line-l"></div>
-    </div>
-  </div>
-  <div class="location-card">
+  <!-- HERO -->
+  <section id="hero">
+    <div id="hero-accordions"></div>
     <div class="gold-line"></div>
-    <div class="location-info">
-      <div class="location-icon">📍</div>
-      <div>
-        <div class="location-name">Mi Casa</div>
-        <div class="location-addr">Avenida Conceição, 1234, São Bernardo – SP</div>
+    <div style="position:absolute;top:0;left:0;width:260px;height:260px;background:radial-gradient(circle,rgba(100,210,150,.3) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+    <div style="position:absolute;bottom:40px;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(80,180,200,.22) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+    <div style="position:relative;z-index:1;margin-top:1rem;">
+      <p style="font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;font-weight:700;color:#2e7d52;margin-bottom:.5rem;">Estás invitado</p>
+      <h1 style="font-family:'Playfair Display',serif;font-size:3.6rem;line-height:1;color:#0e2e1a;text-shadow:0 4px 24px rgba(30,110,69,.14);letter-spacing:-.02em;">Baby Shower</h1>
+      <p style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:#507060;margin-top:.375rem;">a un momento lleno de amor</p>
+
+      <div class="hero-divider">
+        <div class="line" style="background:linear-gradient(to right,transparent,rgba(80,180,120,.7));"></div>
+        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:40px;height:auto;opacity:.55;" />
+        <div class="line" style="background:linear-gradient(to left,transparent,rgba(80,180,120,.7));"></div>
+      </div>
+
+      <div style="display:flex;justify-content:center;margin-top:.5rem;">
+        <div style="position:relative;" class="float">
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:160px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(30,110,69,.12) 0%,transparent 70%);filter:blur(14px);pointer-events:none;"></div>
+          <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="Bebé niño" style="width:240px;height:auto;filter:drop-shadow(0 20px 44px rgba(30,110,69,.22));" />
+        </div>
+      </div>
+
+      <div class="name-tag" style="margin-top:.75rem;">
+        <p class="name-italic">Mateo José</p>
+        <p style="font-size:.68rem;letter-spacing:.18em;text-align:center;color:#507060;">26 Octubre · 2026 · 3:00 PM</p>
       </div>
     </div>
-    <iframe class="location-map" title="Mapa del evento"
-      src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed"
-      allowfullscreen loading="lazy"></iframe>
-    <div class="location-btn-wrap">
-      <a class="location-btn"
-        href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP"
-        target="_blank" rel="noopener">📍 Cómo llegar</a>
-    </div>
-  </div>
-</section>
 
-<!-- ══ ITINERARY ═══════════════════════════════════════════════════════ -->
-<section class="itin-section">
-  <div class="section-heading">
-    <span class="section-kicker">El programa del día</span>
+    <svg class="wave" viewBox="0 0 480 56" preserveAspectRatio="none">
+      <path d="M0,28 C80,56 160,0 240,28 C320,56 400,0 480,28 L480,56 L0,56 Z" fill="#f3faf6"/>
+      <path d="M0,42 C100,56 200,20 300,42 C380,56 440,28 480,42 L480,56 L0,56 Z" fill="#f3faf6" opacity=".5"/>
+    </svg>
+  </section>
+
+  <!-- DATE -->
+  <section style="background:#f3faf6;">
+    <p class="section-kicker">Cuando nos vemos</p>
+    <h2 class="section-title">La fecha</h2>
+    <div class="section-ornament" style="margin-bottom:2rem;">
+      <div class="line line-l"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
+      <div class="line line-r"></div>
+    </div>
+    <div class="date-grid">
+      <div class="date-card">
+        <div style="font-size:1.5rem;margin-bottom:.25rem;">🌿</div>
+        <div class="date-card-num">26</div>
+        <div class="date-card-label">Día</div>
+      </div>
+      <div class="date-card">
+        <div style="font-size:1.5rem;margin-bottom:.25rem;">📅</div>
+        <div class="date-card-sub">Oct 2026</div>
+        <div class="date-card-label">Mes · Año</div>
+      </div>
+      <div class="date-card">
+        <div style="font-size:1.5rem;margin-bottom:.25rem;">🕐</div>
+        <div class="date-card-num">3:00</div>
+        <div class="date-card-label">PM</div>
+      </div>
+    </div>
+    <div class="section-ornament" style="margin-top:1.5rem;margin-bottom:0;">
+      <div class="line line-l"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:32px;height:auto;opacity:.4;animation:spinSlow 3s ease-in-out infinite;" />
+      <div class="line line-r"></div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section id="countdown-section">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);background-size:20px 20px;pointer-events:none;"></div>
+    <div style="position:absolute;top:0;left:25%;width:200px;height:200px;background:radial-gradient(circle,rgba(80,200,130,.1) 0%,transparent 70%);border-radius:50%;filter:blur(24px);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:0;right:25%;width:160px;height:160px;background:radial-gradient(circle,rgba(60,180,200,.1) 0%,transparent 70%);border-radius:50%;filter:blur(20px);pointer-events:none;"></div>
+    <div class="gold-line"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;" class="gold-line"></div>
+    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;right:16px;top:24px;width:52px;height:auto;opacity:.18;animation:floatY 4s ease-in-out infinite;" />
+    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;left:16px;bottom:24px;width:44px;height:auto;opacity:.15;animation:floatY 3.5s ease-in-out infinite .8s;" />
+
+    <div style="position:relative;z-index:1;">
+      <p style="font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;font-weight:700;color:#6dbf8a;margin-bottom:.25rem;">Cuenta regresiva</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#e8f7ee;text-shadow:0 2px 20px rgba(255,255,255,.07);margin-bottom:2rem;">¡Falta poco!</h2>
+      <div class="countdown-units" id="countdown">
+        <div><div class="flip-box"><div class="flip-num" id="cd-days">--</div></div><div class="flip-label">Días</div></div>
+        <div class="countdown-colon colon-blink">:</div>
+        <div><div class="flip-box"><div class="flip-num" id="cd-hours">--</div></div><div class="flip-label">Horas</div></div>
+        <div class="countdown-colon colon-blink">:</div>
+        <div><div class="flip-box"><div class="flip-num" id="cd-mins">--</div></div><div class="flip-label">Min</div></div>
+        <div class="countdown-colon colon-blink">:</div>
+        <div><div class="flip-box"><div class="flip-num" id="cd-secs">--</div></div><div class="flip-label">Seg</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section style="background:#eaf7f0;">
+    <p class="section-kicker">¿Dónde nos vemos?</p>
+    <h2 class="section-title">El lugar</h2>
+    <div class="section-ornament" style="margin-bottom:2rem;">
+      <div class="line line-l"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
+      <div class="line line-r"></div>
+    </div>
+    <div class="map-card">
+      <div class="gold-line"></div>
+      <div style="display:flex;align-items:center;gap:1rem;padding:1.25rem;">
+        <div style="width:56px;height:56px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;background:linear-gradient(135deg,#4aaf78,#1e6e45);box-shadow:0 6px 20px rgba(30,110,69,.4);animation:floatY 4s ease-in-out infinite;">📍</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#0e2e1a;">Mi Casa</div>
+          <div style="font-size:.75rem;margin-top:.25rem;line-height:1.5;color:#507060;">Avenida Conceição, 1234, São Bernardo – SP</div>
+        </div>
+      </div>
+      <iframe title="Mapa del evento"
+        src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed"
+        allowfullscreen loading="lazy"></iframe>
+      <div style="padding:1rem;">
+        <a href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP" target="_blank" rel="noopener" class="btn-green">📍 Cómo llegar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARY -->
+  <section style="background:#f3faf6;">
+    <p class="section-kicker">El programa del día</p>
     <h2 class="section-title">Itinerario</h2>
-    <div class="section-ornament">
-      <div class="line-r"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-      <div class="line-l"></div>
+    <div class="section-ornament" style="margin-bottom:2rem;">
+      <div class="line line-l"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
+      <div class="line line-r"></div>
     </div>
-  </div>
-  <div class="itin-list" id="itin-list">
-    <div class="itin-line"></div>
-  </div>
-</section>
+    <div class="itin-list" id="itin-list">
+      <div class="itin-line"></div>
+    </div>
+  </section>
 
-<!-- ══ GIFT ════════════════════════════════════════════════════════════ -->
-<section class="gift-section">
-  <div class="section-heading">
-    <span class="section-kicker">Si deseas obsequiar</span>
+  <!-- GIFTS -->
+  <section style="background:#eaf7f0;">
+    <p class="section-kicker">Si deseas obsequiar</p>
     <h2 class="section-title">Regalo con amor</h2>
-    <div class="section-ornament">
-      <div class="line-r"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-      <div class="line-l"></div>
+    <div class="section-ornament" style="margin-bottom:2rem;">
+      <div class="line line-l"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
+      <div class="line line-r"></div>
     </div>
-  </div>
-  <div class="gift-list" id="gift-list"></div>
-</section>
+    <div id="gifts-container"></div>
+  </section>
 
-<!-- ══ RSVP ════════════════════════════════════════════════════════════ -->
-<section class="rsvp-section">
-  <div class="gold-line"></div>
-  <div class="rsvp-glow"></div>
-  <img class="rsvp-acc1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <img class="rsvp-acc2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-  <div class="rsvp-inner" id="rsvp-inner">
-    <div class="section-heading">
-      <span class="section-kicker">Confirma tu presencia</span>
+  <!-- RSVP -->
+  <section id="rsvp-section">
+    <div class="gold-line"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(80,200,130,.08) 0%,transparent 70%);pointer-events:none;"></div>
+    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:16px;right:16px;width:50px;height:auto;opacity:.22;animation:spinSlow 3.5s ease-in-out infinite;" />
+    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:16px;left:16px;width:44px;height:auto;opacity:.18;animation:spinSlow 4s ease-in-out infinite .6s;" />
+    <div style="position:relative;z-index:1;">
+      <p class="section-kicker">Confirma tu presencia</p>
       <h2 class="section-title">¿Nos acompañas?</h2>
-      <div class="section-ornament">
-        <div class="line-r"></div>
-        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-        <div class="line-l"></div>
+      <div class="section-ornament" style="margin-bottom:1.5rem;">
+        <div class="line line-l"></div>
+        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
+        <div class="line line-r"></div>
+      </div>
+      <p style="font-size:.875rem;font-style:italic;text-align:center;margin-bottom:1.5rem;line-height:1.75;color:#507060;">
+        Tu presencia hace este momento más especial.<br>
+        Confirma antes del <strong style="color:#1e6e45;">15 de Octubre</strong>
+      </p>
+      <div id="rsvp-form">
+        <input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo" />
+        <input class="rsvp-input" id="rsvp-guests" type="number" min="1" max="5" placeholder="¿Cuántos asistirán?" />
+        <div class="rsvp-radio">
+          <button class="rsvp-btn active" id="btn-yes" onclick="setAttendance('yes')">🌿 Sí asistiré</button>
+          <button class="rsvp-btn" id="btn-no" onclick="setAttendance('no')">💙 No podré ir</button>
+        </div>
+        <p id="rsvp-error" style="font-size:.75rem;color:#1e6e45;margin-bottom:.5rem;display:none;"></p>
+        <button onclick="submitRSVP()" id="rsvp-submit" class="btn-green" style="border:none;cursor:pointer;font-size:.875rem;">Confirmar asistencia</button>
+        <p style="font-size:.62rem;text-align:center;margin-top:.25rem;letter-spacing:.08em;color:#7aaa8a;">Confirma antes del 15 de Octubre · Cupos limitados</p>
+      </div>
+      <div id="rsvp-thanks" style="text-align:center;padding:1rem 0;display:none;">
+        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:80px;height:auto;opacity:.65;margin:0 auto 1rem;display:block;animation:spinSlow 2.5s ease-in-out infinite;" />
+        <div class="float" style="display:inline-block;">
+          <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="" style="width:112px;height:auto;margin:0 auto 1rem;display:block;filter:drop-shadow(0 8px 20px rgba(30,110,69,.2));" />
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;color:#1e6e45;">¡Gracias!</h3>
+        <p style="font-size:.875rem;font-style:italic;margin-top:.5rem;line-height:1.75;color:#507060;">Tu respuesta ha sido registrada.<br>¡Te esperamos con mucho amor! 🌿</p>
       </div>
     </div>
-    <p class="rsvp-note">Tu presencia hace este momento más especial.<br/>Confirma antes del <strong>15 de Octubre</strong></p>
-    <div class="rsvp-fields">
-      <input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo" type="text" />
-      <input class="rsvp-input" id="rsvp-guests" placeholder="¿Cuántos asistirán?" type="number" min="1" max="5" />
-      <div class="rsvp-toggle">
-        <button class="rsvp-btn-yn active" id="btn-yes" onclick="setAttendance('yes')">💐 Sí asistiré</button>
-        <button class="rsvp-btn-yn" id="btn-no" onclick="setAttendance('no')">💔 No podré ir</button>
-      </div>
-      <p class="rsvp-error" id="rsvp-error" style="display:none"></p>
-      <button class="rsvp-submit" id="rsvp-submit" onclick="submitRSVP()">Confirmar asistencia</button>
-      <p class="rsvp-hint">Confirma antes del 15 de Octubre · Cupos limitados</p>
+    <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="gold-line"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 100%,rgba(80,180,120,.07) 0%,transparent 70%);pointer-events:none;"></div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1.75rem 0 1.5rem;">
+      <div style="height:1px;width:56px;background:linear-gradient(to right,transparent,rgba(80,180,120,.7));"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:34px;height:auto;opacity:.45;animation:spinSlow 2.8s ease-in-out infinite;" />
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:26px;height:auto;opacity:.3;animation:spinSlow 3.2s ease-in-out infinite .5s;" />
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:34px;height:auto;opacity:.45;animation:spinSlow 2.8s ease-in-out infinite .2s;" />
+      <div style="height:1px;width:56px;background:linear-gradient(to left,transparent,rgba(80,180,120,.7));"></div>
     </div>
-  </div>
-  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
-</section>
+    <p style="font-style:italic;font-size:1rem;line-height:2;margin-bottom:1.25rem;color:#507060;">
+      Con todo el amor del mundo<br>celebraremos la llegada de este<br>personito tan esperado.
+    </p>
+    <div class="name-tag">
+      <p style="font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:#1e6e45;text-shadow:0 4px 20px rgba(30,110,69,.2);">Con amor, Valentina</p>
+    </div>
+  </footer>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
-<footer>
-  <div class="gold-line"></div>
-  <div class="foot-glow"></div>
-  <div class="foot-ornament">
-    <div class="l-r"></div>
-    <img class="a1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-    <img class="a2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-    <img class="a3" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
-    <div class="l-l"></div>
+  <!-- WATERMARK -->
+  <div class="watermark">
+    <div class="gold-line"></div>
+    <img src="https://hercules-cdn.com/file_5Nlw98yeCDV1Ql9oTlbILPf5" alt="Gueka Ideas" style="width:176px;margin:1.25rem auto 1rem;display:block;opacity:.8;" />
+    <p style="font-size:.63rem;line-height:1.6;max-width:320px;margin:0 auto;color:rgba(14,46,26,.42);">
+      Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.
+    </p>
+    <p style="font-size:.58rem;margin-top:.5rem;color:rgba(14,46,26,.28);">© <span id="year"></span> Gueka Ideas · Todos los derechos reservados</p>
   </div>
-  <p class="foot-note">Con todo el amor del mundo<br/>celebraremos la llegada de la<br/>personita más esperada.</p>
-  <div class="foot-signature-tag">
-    <p>Con amor, Valentina</p>
-  </div>
-</footer>
 
-<!-- ══ WATERMARK ═══════════════════════════════════════════════════════ -->
-<div class="watermark">
-  <div class="gold-line"></div>
-  <img src="https://hercules-cdn.com/file_5Nlw98yeCDV1Ql9oTlbILPf5" alt="Gueka Ideas" />
-  <p class="watermark-note">Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.</p>
-  <p class="watermark-copy">© <span id="yr"></span> Gueka Ideas · Todos los derechos reservados</p>
-</div>
-
-</div><!-- .card -->
+</div><!-- #app -->
 
 <script>
-const ACC = "https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T";
+// ── YEAR ──────────────────────────────────────────────────────────────────────
+document.getElementById('year').textContent = new Date().getFullYear();
 
-// ── COPYRIGHT YEAR
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-// ── SPLASH
+// ── SPLASH ────────────────────────────────────────────────────────────────────
 function closeSplash() {
   const s = document.getElementById('splash');
-  s.classList.add('hide');
-  setTimeout(() => s.remove(), 800);
+  s.classList.add('fade-out');
+  setTimeout(() => s.style.display = 'none', 800);
 }
 
-// ── FALLING ACCORDIONS
+// Falling accordions (splash + hero)
+const ACCORDION_IMG = 'https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T';
 function createFallingAccordions(containerId, count) {
   const c = document.getElementById(containerId);
   if (!c) return;
+  c.style.cssText = 'pointer-events:none;position:absolute;inset:0;overflow:hidden;';
   for (let i = 0; i < count; i++) {
     const img = document.createElement('img');
-    img.src = ACC; img.alt = '';
-    const left   = 4 + (i * 9.5) % 92;
-    const delay  = (i * 0.7) % 5;
-    const dur    = 7 + (i * 1.3) % 6;
-    const size   = 36 + (i * 7) % 28;
-    const rotate = -15 + (i * 13) % 30;
-    img.className = 'falling-acc';
-    img.style.cssText = `left:${left}%;width:${size}px;--r0:${rotate}deg;--r1:${rotate+7}deg;--r2:${rotate-4}deg;--r3:${rotate+12}deg;--r4:${rotate}deg;animation-duration:${dur}s;animation-delay:-${delay}s;`;
+    img.src = ACCORDION_IMG;
+    img.alt = '';
+    const left = `${4 + (i * 9.5) % 92}%`;
+    const delay = `${(i * 0.7) % 5}s`;
+    const dur = `${7 + (i * 1.3) % 6}s`;
+    const size = 36 + (i * 7) % 28;
+    const rot = -15 + (i * 13) % 30;
+    img.className = 'accordion-fall';
+    img.style.cssText = `left:${left};width:${size}px;height:auto;--rot:${rot}deg;animation-duration:${dur};animation-delay:${delay};`;
     c.appendChild(img);
   }
 }
-createFallingAccordions('splash-falling', 10);
-createFallingAccordions('hero-falling', 10);
+createFallingAccordions('splash-accordions', 10);
+createFallingAccordions('hero-accordions', 10);
 
-// ── COUNTDOWN
-const EVENT = new Date("2026-10-26T15:00:00");
+// ── COUNTDOWN ─────────────────────────────────────────────────────────────────
+const EVENT = new Date('2026-10-26T15:00:00');
+function pad(n) { return String(n).padStart(2, '0'); }
 function updateCountdown() {
   const diff = Math.max(0, EVENT.getTime() - Date.now());
   if (diff === 0) {
-    document.getElementById('flip-units').innerHTML =
-      '<p style="font-family:\'Playfair Display\',serif;font-size:2rem;color:#f4c8d8;animation:pulse 1.5s infinite">🌸 ¡Ya llegó el gran día! 🌸</p>';
+    document.getElementById('countdown').innerHTML = '<p style="font-family:\'Playfair Display\',serif;font-size:2rem;color:#a8d8b8;">🌿 ¡Ya llegó el gran día! 🌿</p>';
     return;
   }
   const s = Math.floor(diff / 1000);
-  const d = Math.floor(s / 86400);
-  const h = Math.floor((s % 86400) / 3600);
-  const m = Math.floor((s % 3600) / 60);
-  const sc = s % 60;
-  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(sc).padStart(2,'0');
+  document.getElementById('cd-days').textContent  = pad(Math.floor(s / 86400));
+  document.getElementById('cd-hours').textContent = pad(Math.floor((s % 86400) / 3600));
+  document.getElementById('cd-mins').textContent  = pad(Math.floor((s % 3600) / 60));
+  document.getElementById('cd-secs').textContent  = pad(s % 60);
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── ITINERARY
+// ── ITINERARY ─────────────────────────────────────────────────────────────────
 const ITIN = [
-  { emoji:"🌸", time:"3:00 PM", name:"Llegada y recepción",  desc:"Bienvenida con floral tea y bocadillos dulces" },
-  { emoji:"🎀", time:"3:30 PM", name:"Juegos y sorpresas",   desc:"Adivina la panza, lluvia de palabras y más" },
-  { emoji:"🎂", time:"4:30 PM", name:"Pastel y postres",     desc:"Pastel rosa con decoración floral y mesa dulce" },
-  { emoji:"💝", time:"5:00 PM", name:"Apertura de regalos",  desc:"Momentos mágicos junto a mamá" },
-  { emoji:"📸", time:"5:30 PM", name:"Fotos y recuerdos",    desc:"Photobooth floral para llevarte a casa" },
+  { emoji: '🌿', time: '3:00 PM', name: 'Llegada y recepción',  desc: 'Bienvenida con bocadillos y bebidas frescas' },
+  { emoji: '🎈', time: '3:30 PM', name: 'Juegos y sorpresas',   desc: 'Adivina el nombre, lluvia de predicciones y más' },
+  { emoji: '🎂', time: '4:30 PM', name: 'Pastel y postres',     desc: 'Pastel temático y mesa dulce para celebrar' },
+  { emoji: '🎁', time: '5:00 PM', name: 'Apertura de regalos',  desc: 'Momentos mágicos junto a mamá y papá' },
+  { emoji: '📸', time: '5:30 PM', name: 'Fotos y recuerdos',    desc: 'Photobooth especial para llevarte a casa' },
 ];
-const itinList = document.getElementById('itin-list');
+const itinEl = document.getElementById('itin-list');
 ITIN.forEach((item, i) => {
-  const div = document.createElement('div');
-  div.className = 'itin-item';
-  div.innerHTML = `
-    <div class="itin-dot-wrap">
-      <div class="itin-dot">
-        <span class="emoji">${item.emoji}</span>
-        <span class="num">${String(i+1).padStart(2,'0')}</span>
-      </div>
-      <div class="itin-ring" style="animation-delay:${i*0.4}s"></div>
+  const row = document.createElement('div');
+  row.className = 'itin-item';
+  row.innerHTML = `
+    <div class="itin-dot" style="flex-shrink:0;">
+      <span style="font-size:1.15rem;line-height:1;">${item.emoji}</span>
+      <span>${String(i+1).padStart(2,'0')}</span>
     </div>
-    <div class="itin-content">
+    <div class="itin-card">
       <div class="left-bar"></div>
-      <div class="top-line"></div>
-      <div class="itin-row">
-        <div class="itin-name">${item.name}</div>
-        <span class="itin-time">${item.time}</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;padding-left:.5rem;">
+        <div class="itin-card-name">${item.name}</div>
+        <span class="itin-card-time">${item.time}</span>
       </div>
-      <div class="itin-desc">${item.desc}</div>
+      <div class="itin-card-desc">${item.desc}</div>
     </div>`;
-  itinList.appendChild(div);
+  itinEl.appendChild(row);
 });
 
-// ── GIFT PANELS
+// ── GIFTS ─────────────────────────────────────────────────────────────────────
 const GIFTS = [
-  { key:"nequi",     emoji:"💜", label:"Nequi",     sub:"Envío digital · Colombia", color:"#7b4fa0", bg:"rgba(123,79,160,.07)",  border:"rgba(123,79,160,.22)" },
-  { key:"daviplata", emoji:"🌹", label:"Daviplata", sub:"Envío digital · Colombia", color:"#c0506a", bg:"rgba(192,80,106,.07)",  border:"rgba(192,80,106,.22)" },
-  { key:"pse",       emoji:"✨", label:"PSE",       sub:"Pago seguro en línea",     color:"#b07840", bg:"rgba(176,120,64,.07)",  border:"rgba(176,120,64,.22)"  },
+  { key: 'nequi',     emoji: '💚', label: 'Nequi',     sub: 'Envío digital · Colombia', color: '#1e6e45', bg: 'rgba(30,110,69,.07)',   border: 'rgba(30,110,69,.22)'  },
+  { key: 'daviplata', emoji: '🌱', label: 'Daviplata', sub: 'Envío digital · Colombia', color: '#2e7d52', bg: 'rgba(46,125,82,.07)',   border: 'rgba(46,125,82,.22)'  },
+  { key: 'pse',       emoji: '✨', label: 'PSE',       sub: 'Pago seguro en línea',     color: '#b07840', bg: 'rgba(176,120,64,.07)',  border: 'rgba(176,120,64,.22)' },
 ];
-const giftList = document.getElementById('gift-list');
+const gc = document.getElementById('gifts-container');
 GIFTS.forEach(g => {
-  const div = document.createElement('div');
-  div.className = 'gift-panel';
-  div.style.cssText = `border:1px solid ${g.border};background:${g.bg};backdrop-filter:blur(8px)`;
-  div.innerHTML = `
-    <button class="gift-header" onclick="toggleGift('${g.key}')">
+  const panel = document.createElement('div');
+  panel.className = 'gift-panel';
+  panel.style.cssText = `border:1px solid ${g.border};background:${g.bg};`;
+  panel.innerHTML = `
+    <button class="gift-header" onclick="toggleGift(this)">
       <div class="gift-icon">${g.emoji}</div>
       <div>
-        <div class="gift-label" style="color:${g.color}">${g.label}</div>
+        <div class="gift-label" style="color:${g.color};">${g.label}</div>
         <div class="gift-sub">${g.sub}</div>
       </div>
-      <span class="gift-arrow" id="arr-${g.key}" style="color:${g.color}">▼</span>
+      <span class="gift-chevron">▼</span>
     </button>
-    <div class="gift-body" id="body-${g.key}">
+    <div class="gift-body">
       <div class="gift-inner">
-        <div class="gift-form-wrap">
-          <div class="gold-line"></div>
-          <div class="gift-form-title">${g.emoji} Pagar con ${g.label}</div>
-          <input class="gift-input" id="gname-${g.key}" placeholder="Tu nombre" type="text" />
-          <input class="gift-input" id="gamt-${g.key}" placeholder="Monto (COP)" type="number" />
-          <button class="gift-btn" onclick="generateQR('${g.key}')">Generar QR de pago</button>
-          <div class="gift-qr" id="qr-${g.key}"></div>
+        <div class="gift-form">
+          <div class="gold-line" style="margin-bottom:1rem;"></div>
+          <p style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#0e2e1a;text-align:center;margin-bottom:1rem;">${g.emoji} Pagar con ${g.label}</p>
+          <input class="gift-input" placeholder="Tu nombre" id="name-${g.key}" />
+          <input class="gift-input" type="number" placeholder="Monto (COP)" id="amt-${g.key}" />
+          <button onclick="genQR('${g.key}','${g.label}')" style="width:100%;padding:.75rem;border-radius:.75rem;color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;background:linear-gradient(135deg,#2e9460,#1e6e45);box-shadow:0 6px 22px rgba(30,110,69,.35);border:none;">Generar QR de pago</button>
+          <div class="qr-result" id="qr-${g.key}"></div>
         </div>
       </div>
     </div>`;
-  giftList.appendChild(div);
+  gc.appendChild(panel);
 });
-
-function toggleGift(key) {
-  const body = document.getElementById('body-'+key);
-  const arr  = document.getElementById('arr-'+key);
-  const isOpen = body.classList.contains('open');
-  document.querySelectorAll('.gift-body').forEach(b => b.classList.remove('open'));
-  document.querySelectorAll('.gift-arrow').forEach(a => a.classList.remove('open'));
-  if (!isOpen) { body.classList.add('open'); arr.classList.add('open'); }
+function toggleGift(btn) {
+  const body = btn.nextElementSibling;
+  const chev = btn.querySelector('.gift-chevron');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
 }
-
-function generateQR(key) {
-  const name = document.getElementById('gname-'+key).value || 'Invitado';
-  const amt  = document.getElementById('gamt-'+key).value  || '0';
+function genQR(key, label) {
+  const name = document.getElementById('name-'+key).value || 'Invitado';
+  const amt  = document.getElementById('amt-'+key).value  || '0';
   const text = `PAGO ${key.toUpperCase()} | ${name} | COP ${amt}`;
-  const wrap = document.getElementById('qr-'+key);
-  wrap.innerHTML = '';
-  const canvas = document.createElement('canvas');
-  wrap.appendChild(canvas);
-  QRCode.toCanvas(canvas, text, { width:200, margin:1, color:{dark:'#2e1a26',light:'#fff8fc'} });
+  const el   = document.getElementById('qr-'+key);
+  QRCode.toDataURL(text, { width: 200, margin: 1, color: { dark: '#0e2e1a', light: '#f3faf6' } }, (err, url) => {
+    if (!err) { el.innerHTML = `<img src="${url}" alt="QR" style="border-radius:1rem;box-shadow:0 8px 28px rgba(0,0,0,.12);" />`; }
+  });
 }
 
-// ── RSVP
+// ── RSVP ──────────────────────────────────────────────────────────────────────
 let attendance = 'yes';
 function setAttendance(v) {
   attendance = v;
-  document.getElementById('btn-yes').classList.toggle('active', v==='yes');
-  document.getElementById('btn-no').classList.toggle('active', v==='no');
+  document.getElementById('btn-yes').classList.toggle('active', v === 'yes');
+  document.getElementById('btn-no').classList.toggle('active',  v === 'no');
 }
-
 function submitRSVP() {
   const name = document.getElementById('rsvp-name').value.trim();
   const err  = document.getElementById('rsvp-error');
-  const btn  = document.getElementById('rsvp-submit');
-  if (!name) { err.textContent = 'Por favor ingresa tu nombre'; err.style.display='block'; return; }
-  err.style.display='none';
-  btn.disabled = true; btn.textContent = 'Enviando…';
+  if (!name) { err.textContent = 'Por favor ingresa tu nombre'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  const btn = document.getElementById('rsvp-submit');
+  btn.textContent = 'Enviando…'; btn.disabled = true;
   setTimeout(() => {
-    const inner = document.getElementById('rsvp-inner');
-    inner.innerHTML = `
-      <div class="rsvp-success">
-        <img class="rsvp-acc-thanks" src="${ACC}" alt="" />
-        <img class="rsvp-baby" src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="" />
-        <h3>¡Gracias!</h3>
-        <p>Tu respuesta ha sido registrada.<br/>¡Te esperamos con mucho amor! 🌸</p>
-      </div>`;
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-thanks').style.display = 'block';
   }, 900);
 }
 </script>
