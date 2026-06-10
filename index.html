@@ -4,261 +4,494 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Baby Shower · Helena Maria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Lato',sans-serif;background:#fdf6fa;color:#2e1a26;overflow-x:hidden}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:rgba(212,160,184,.4);border-radius:99px}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: #fdf6fa;
+    color: #2e1a26;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: rgba(212,160,184,.4); border-radius: 99px; }
 
-:root{
-  --rose:#c04070;--rose-dk:#8a3090;--rose-lt:#e090b8;
-  --gold:#d4af78;--gold-lt:#f0d090;--gold-dk:#b07830;
-  --plum:#2e1a26;--muted:#9070a0;--cream:#fdf6fa;
-}
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
 
-/* KEYFRAMES */
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes floatSm{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
-@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
-@keyframes blink{0%,100%{opacity:.35}50%{opacity:.85}}
-@keyframes shimmerLine{0%{left:-100%}100%{left:300%}}
-@keyframes ringPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.9);opacity:0}}
-@keyframes lineDraw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes rotateFloat{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-@keyframes rotateFloatR{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
-@keyframes fallDown{0%{transform:translateY(-80px) rotate(var(--r)) translateX(0);opacity:0}5%{opacity:1}90%{opacity:.18}100%{transform:translateY(110vh) rotate(calc(var(--r) + 20deg)) translateX(18px);opacity:0}}
-@keyframes flipNum{from{opacity:.6;transform:rotateX(-28deg)}to{opacity:1;transform:rotateX(0)}}
-@keyframes goldShimmer{0%{transform:scaleY(1);opacity:.6}50%{transform:scaleY(1.3);opacity:1}100%{transform:scaleY(1);opacity:.6}}
+  /* ── SPLASH ── */
+  #splash {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #fdf8f4 0%, #faeef4 50%, #f4e6f0 100%);
+    cursor: pointer; user-select: none; overflow: hidden;
+    transition: opacity .75s ease, transform .75s ease;
+  }
+  #splash.hide { opacity: 0; transform: scale(1.06); pointer-events: none; }
+  #splash .noise {
+    position: absolute; inset: 0; pointer-events: none; opacity: .4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+  #splash .radial-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 65% at 50% 50%, rgba(240,180,200,.22) 0%, transparent 70%);
+  }
+  .splash-inner {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2rem;
+    animation: fadeUp .9s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
+  .splash-kicker {
+    font-size: .58rem; letter-spacing: .65em; text-transform: uppercase; font-weight: 700;
+    color: #b06080; margin-bottom: .75rem;
+    animation: fadeIn .6s .25s both;
+  }
+  .splash-title {
+    font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1;
+    color: #2e1a26; letter-spacing: -.02em;
+    text-shadow: 0 4px 28px rgba(160,80,120,.18);
+    animation: springIn .7s .35s cubic-bezier(.175,.885,.32,1.275) both;
+  }
+  @keyframes springIn { from { opacity:0; transform: scale(.88); } to { opacity:1; transform: scale(1); } }
+  .gold-divider {
+    display: flex; align-items: center; gap: .75rem;
+    margin: .75rem auto; width: 100%; max-width: 220px;
+    animation: fadeIn .5s .5s both;
+  }
+  .gold-divider .line { flex: 1; height: 1px; }
+  .gold-divider .line-r { background: linear-gradient(to right, transparent, rgba(212,175,120,.8)); }
+  .gold-divider .line-l { background: linear-gradient(to left, transparent, rgba(212,175,120,.8)); }
+  .gold-divider .star { color: #d4af78; font-size: .65rem; }
+  .splash-name {
+    font-family: 'Playfair Display', serif; font-size: 2.6rem; font-style: italic;
+    color: #c04070; line-height: 1.1; text-shadow: 0 2px 20px rgba(192,64,112,.25);
+    animation: fadeUp .6s .75s both;
+  }
+  .splash-date {
+    font-size: .72rem; letter-spacing: .22em; margin-top: .5rem; color: #9070a0;
+    animation: fadeIn .5s .9s both;
+  }
+  .splash-cta {
+    margin-top: 1.5rem; padding: .625rem 1.5rem; border-radius: 9999px;
+    font-size: .62rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase;
+    color: #c04070; border: 1px solid rgba(192,64,112,.3);
+    background: linear-gradient(135deg, rgba(255,240,248,.7), rgba(255,228,240,.5));
+    backdrop-filter: blur(8px);
+    animation: pulse 2.4s 1.2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.55} 50%{opacity:1} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-/* GOLD LINE */
-.gold-line{position:relative;height:1px;width:100%;overflow:hidden;background:linear-gradient(to right,transparent,rgba(212,175,120,.6),rgba(240,210,160,.9),rgba(212,175,120,.6),transparent)}
-.gold-line::after{content:'';position:absolute;inset-y:0;width:33%;background:linear-gradient(to right,transparent,rgba(255,245,200,.8),transparent);animation:shimmerLine 2.4s ease-in-out infinite;animation-delay:0s}
+  /* corner accordions splash */
+  .corner-acc {
+    position: absolute; pointer-events: none; width: 56px; height: auto; opacity: .35;
+  }
+  .ca-tl { top: .75rem; left: .75rem; transform: rotate(-20deg); animation: floatY1 3.5s ease-in-out infinite; }
+  .ca-tr { top: .75rem; right: .75rem; transform: rotate(15deg); animation: floatY1 3.9s .3s ease-in-out infinite; }
+  .ca-bl { bottom: .75rem; left: .75rem; transform: rotate(10deg); animation: floatY1 4.1s .6s ease-in-out infinite; }
+  .ca-br { bottom: .75rem; right: .75rem; transform: rotate(-10deg); animation: floatY1 4.3s .9s ease-in-out infinite; }
+  @keyframes floatY1 { 0%,100%{transform: translateY(0) rotate(var(--r,0deg))} 50%{transform: translateY(-8px) rotate(calc(var(--r,0deg) + 5deg))} }
 
-/* FALLING ACCORDIONS */
-.accordion-fall{position:absolute;top:-80px;pointer-events:none;opacity:.18;animation:fallDown linear infinite}
+  /* ── FALLING ACCORDIONS ── */
+  .falling-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .falling-acc {
+    position: absolute; top: -80px; width: auto; height: auto; opacity: .18;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(0vh) translateX(0px) rotate(var(--r0)); }
+    25%  { transform: translateY(27.5vh) translateX(18px) rotate(var(--r1)); }
+    50%  { transform: translateY(55vh) translateX(-14px) rotate(var(--r2)); }
+    75%  { transform: translateY(82.5vh) translateX(8px) rotate(var(--r3)); }
+    100% { transform: translateY(110vh) translateX(0px) rotate(var(--r4)); }
+  }
 
-/* SPLASH */
-#splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none;overflow:hidden;background:linear-gradient(160deg,#fdf8f4 0%,#faeef4 50%,#f4e6f0 100%);transition:opacity .75s cubic-bezier(.4,0,.2,1),transform .75s cubic-bezier(.4,0,.2,1)}
-#splash.hide{opacity:0;transform:scale(1.06);pointer-events:none}
-.splash-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 65% at 50% 50%,rgba(240,180,200,.22) 0%,transparent 70%)}
-.splash-content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 2rem}
-.splash-kicker{font-size:.58rem;letter-spacing:.65em;text-transform:uppercase;font-weight:700;color:#b06080;margin-bottom:.75rem;animation:fadeUp .6s .2s both}
-.splash-title{font-family:'Playfair Display',serif;font-size:3.8rem;line-height:1;color:#2e1a26;letter-spacing:-.02em;text-shadow:0 4px 28px rgba(160,80,120,.18);animation:scaleIn .7s .35s both}
-.splash-divider{display:flex;align-items:center;gap:.75rem;margin:.75rem auto;width:220px;animation:scaleIn .6s .5s both}
-.splash-divider .line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,120,.8))}
-.splash-divider .line.r{background:linear-gradient(to left,transparent,rgba(212,175,120,.8))}
-.splash-divider .dot{color:#d4af78;font-size:.65rem}
-.splash-baby{animation:float 3s ease-in-out infinite}
-.splash-baby img{width:180px;height:auto;filter:drop-shadow(0 20px 40px rgba(160,80,120,.3))}
-.splash-name{font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#c04070;line-height:1.1;text-shadow:0 2px 20px rgba(192,64,112,.25);animation:fadeUp .6s .75s both}
-.splash-date{font-size:.72rem;letter-spacing:.22em;color:#9070a0;margin-top:.5rem;animation:fadeUp .5s .9s both}
-.splash-cta{margin-top:1.5rem;padding:.5rem 1.5rem;border-radius:99px;font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#c04070;border:1px solid rgba(192,64,112,.3);background:linear-gradient(135deg,rgba(255,240,248,.7),rgba(255,228,240,.5));animation:pulse 2.4s ease-in-out infinite}
-.corner-acc{position:absolute;pointer-events:none}
-.corner-acc img{width:56px;height:auto;opacity:.35;animation:floatSm ease-in-out infinite}
+  /* ── GOLD LINE ── */
+  .gold-line {
+    position: relative; height: 1px; width: 100%; overflow: hidden;
+    background: linear-gradient(to right, transparent, rgba(212,175,120,.6), rgba(240,210,160,.9), rgba(212,175,120,.6), transparent);
+  }
+  .gold-line::after {
+    content: ''; position: absolute; inset-y: 0; width: 33%;
+    background: linear-gradient(to right, transparent, rgba(255,245,200,.8), transparent);
+    animation: shimmer 2.4s 1.5s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0%{left:-33%} 100%{left:133%} }
 
-/* HERO */
-#hero{position:relative;overflow:hidden;text-align:center;padding:3.5rem 1.5rem 5rem;background:linear-gradient(170deg,#fff0f6 0%,#fce4f0 55%,#f6d8ee 100%)}
-.hero-blob{position:absolute;border-radius:50%;pointer-events:none}
-.hero-kicker{font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;font-weight:700;color:#b06080;margin-bottom:.5rem;animation:fadeUp .6s .2s both}
-.hero-title{font-family:'Playfair Display',serif;font-size:3.6rem;line-height:1;color:#2e1a26;letter-spacing:-.02em;text-shadow:0 4px 24px rgba(160,80,120,.14);animation:scaleIn .8s .35s both}
-.hero-subtitle{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:#9070a0;margin-top:.4rem;animation:fadeUp .5s .5s both}
-.hero-acc-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.25rem 0 .5rem;animation:fadeUp .5s .55s both}
-.hero-acc-divider .line{height:1px;width:80px}
-.hero-acc-divider .line.l{background:linear-gradient(to right,transparent,rgba(212,175,120,.7))}
-.hero-acc-divider .line.r{background:linear-gradient(to left,transparent,rgba(212,175,120,.7))}
-.hero-acc-divider img{width:40px;opacity:.6}
-.hero-baby-wrap{position:relative;display:flex;justify-content:center;margin-top:.5rem;animation:float 3s ease-in-out infinite}
-.hero-baby-wrap img{width:240px;height:auto;filter:drop-shadow(0 20px 44px rgba(160,80,120,.28));position:relative;z-index:1}
-.hero-baby-glow{position:absolute;bottom:.5rem;left:50%;transform:translateX(-50%);width:160px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(192,80,128,.15) 0%,transparent 70%);filter:blur(14px);pointer-events:none}
-.hero-name-tag{display:inline-block;padding:.75rem 1.75rem;border-radius:99px;background:rgba(255,255,255,.7);border:1px solid rgba(212,175,120,.4);backdrop-filter:blur(12px);box-shadow:0 4px 24px rgba(160,80,120,.12);margin-top:.75rem;animation:fadeUp .6s .6s both}
-.hero-name-tag .name{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:#c04070;text-shadow:0 2px 16px rgba(192,64,112,.2)}
-.hero-name-tag .date{font-size:.68rem;letter-spacing:.18em;color:#9070a0;text-align:center;margin-top:.2rem}
-.hero-wave{position:absolute;bottom:0;left:0;width:100%}
+  /* ── SECTION HEADING ── */
+  .section-heading { text-align: center; margin-bottom: 2rem; }
+  .section-kicker {
+    font-size: .58rem; letter-spacing: .6em; text-transform: uppercase;
+    font-weight: 700; color: #c090a0; display: block; margin-bottom: .5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.1;
+    color: #2e1a26; letter-spacing: -.01em;
+  }
+  .section-ornament {
+    display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1rem;
+  }
+  .section-ornament .line-r { height:1px; width:64px; background: linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
+  .section-ornament .line-l { height:1px; width:64px; background: linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
+  .section-ornament img { width: 28px; height: auto; opacity: .55; }
 
-/* SECTION HEADING */
-.section-heading{text-align:center;margin-bottom:2rem}
-.section-kicker{font-size:.58rem;letter-spacing:.6em;text-transform:uppercase;font-weight:700;color:#c090a0;margin-bottom:.5rem}
-.section-title{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.1;color:#2e1a26;letter-spacing:-.01em}
-.section-divider{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:1rem}
-.section-divider .line{height:1px;width:64px}
-.section-divider .line.l{background:linear-gradient(to right,transparent,rgba(212,175,120,.7))}
-.section-divider .line.r{background:linear-gradient(to left,transparent,rgba(212,175,120,.7))}
-.section-divider img{width:28px;height:auto;opacity:.55}
+  /* ── HERO ── */
+  .hero {
+    position: relative; overflow: hidden; text-align: center;
+    padding: 3.5rem 1.5rem 4rem;
+    background: linear-gradient(170deg, #fff0f6 0%, #fce4f0 55%, #f6d8ee 100%);
+  }
+  .hero .blob1 {
+    position: absolute; top:0; left:0; width:260px; height:260px; pointer-events:none;
+    background: radial-gradient(circle, rgba(244,180,210,.35) 0%, transparent 70%); border-radius:50%;
+  }
+  .hero .blob2 {
+    position: absolute; bottom:40px; right:0; width:200px; height:200px; pointer-events:none;
+    background: radial-gradient(circle, rgba(200,160,220,.28) 0%, transparent 70%); border-radius:50%;
+  }
+  .hero-content { position: relative; z-index: 10; margin-top: 1rem; animation: fadeUp .9s cubic-bezier(.22,1,.36,1); }
+  .hero-kicker { font-size:.6rem; letter-spacing:.6em; text-transform:uppercase; font-weight:700; color:#b06080; margin-bottom:.5rem; display:block; }
+  .hero-title {
+    font-family:'Playfair Display',serif; font-size:3.6rem; line-height:1; color:#2e1a26;
+    text-shadow:0 4px 24px rgba(160,80,120,.14); letter-spacing:-.02em;
+  }
+  .hero-sub { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:#9070a0; margin-top:.375rem; }
+  .hero-acc-divider { display:flex; align-items:center; justify-content:center; gap:1rem; margin:1.25rem auto .5rem; }
+  .hero-acc-divider .l-r { height:1px; flex:1; max-width:80px; background:linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
+  .hero-acc-divider .l-l { height:1px; flex:1; max-width:80px; background:linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
+  .hero-acc-divider img { width:40px; height:auto; opacity:.6; }
+  .baby-float { position:relative; z-index:10; display:flex; justify-content:center; margin-top:.5rem; animation: floatBaby 3s ease-in-out infinite; }
+  @keyframes floatBaby { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  .baby-shadow {
+    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+    width:160px; height:40px; border-radius:50%;
+    background:radial-gradient(ellipse,rgba(192,80,128,.15) 0%,transparent 70%); filter:blur(14px);
+  }
+  .baby-float img { width:240px; height:auto; filter:drop-shadow(0 20px 44px rgba(160,80,120,.28)); }
+  .name-tag {
+    position:relative; z-index:10; display:inline-block; padding:.75rem 1.75rem; border-radius:9999px; margin-top:.75rem;
+    background:rgba(255,255,255,.7); border:1px solid rgba(212,175,120,.4); backdrop-filter:blur(12px);
+    box-shadow:0 4px 24px rgba(160,80,120,.12);
+    animation: fadeUp .6s .6s both;
+  }
+  .name-tag .name { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:#c04070; text-shadow:0 2px 16px rgba(192,64,112,.2); }
+  .name-tag .date { font-size:.68rem; letter-spacing:.18em; text-align:center; color:#9070a0; }
+  .hero-wave { position:absolute; bottom:0; left:0; width:100%; }
 
-/* DATE */
-#date-section{padding:2.5rem 1.25rem;background:#fdf6fa}
-.date-cards{display:flex;gap:.75rem}
-.date-card{flex:1;border-radius:1rem;padding:1rem;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(212,175,120,.3);background:rgba(255,255,255,.92);box-shadow:0 8px 36px rgba(160,80,120,.08),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .3s,box-shadow .3s}
-.date-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(160,80,120,.14)}
-.date-card::before{content:'';position:absolute;top:0;left:1rem;right:1rem;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,120,.6),transparent)}
-.date-card::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);pointer-events:none;border-radius:1rem 1rem 0 0}
-.date-icon{font-size:1.5rem;margin-bottom:.25rem}
-.date-big{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1;color:#2e1a26}
-.date-sub{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:#9070a0}
-.date-label{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:#d4af78;margin-top:.5rem}
-.date-acc-divider{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:1.5rem}
-.date-acc-divider .line{height:1px;width:48px}
-.date-acc-divider .line.l{background:linear-gradient(to right,transparent,rgba(212,175,120,.5))}
-.date-acc-divider .line.r{background:linear-gradient(to left,transparent,rgba(212,175,120,.5))}
-.date-acc-divider img{width:32px;animation:rotateFloat 3s ease-in-out infinite}
+  /* ── DATE SECTION ── */
+  .date-section { padding: 2.5rem 1.25rem; background:#fdf6fa; }
+  .date-cards { display:flex; gap:.75rem; }
+  .date-card {
+    flex:1; border-radius:1rem; padding:1rem; text-align:center; position:relative; overflow:hidden; cursor:default;
+    border:1px solid rgba(212,175,120,.3); background:rgba(255,255,255,.92);
+    box-shadow:0 8px 36px rgba(160,80,120,.08), inset 0 1px 0 rgba(255,255,255,.9);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .date-card:hover { transform:translateY(-4px); box-shadow:0 16px 44px rgba(160,80,120,.14); }
+  .date-card .shimmer-overlay {
+    position:absolute; inset-x:0; top:0; height:50%; pointer-events:none;
+    background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent); border-radius:1rem 1rem 0 0;
+  }
+  .date-card .top-gold { position:absolute; top:0; left:1rem; right:1rem; height:1px; background:linear-gradient(to right,transparent,rgba(212,175,120,.6),transparent); }
+  .date-card .icon { font-size:1.5rem; margin-bottom:.25rem; }
+  .date-card .big { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; line-height:1; color:#2e1a26; }
+  .date-card .sub { font-family:'Playfair Display',serif; font-size:.95rem; font-style:italic; color:#9070a0; }
+  .date-card .lbl { font-size:.52rem; letter-spacing:.22em; text-transform:uppercase; font-weight:700; margin-top:.5rem; color:#d4af78; }
+  .acc-divider { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-top:1.5rem; }
+  .acc-divider .l-r { height:1px; width:48px; background:linear-gradient(to right,transparent,rgba(212,175,120,.5)); }
+  .acc-divider .l-l { height:1px; width:48px; background:linear-gradient(to left,transparent,rgba(212,175,120,.5)); }
+  .acc-divider img { width:32px; height:auto; opacity:.45; animation:spin3 3s ease-in-out infinite; }
+  @keyframes spin3 { 0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)} }
 
-/* COUNTDOWN */
-#countdown{position:relative;overflow:hidden;padding:3.5rem 1.25rem;text-align:center;background:linear-gradient(150deg,#4a0e30 0%,#320826 55%,#200518 100%)}
-#countdown .dots-bg{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:20px 20px}
-.cntd-kicker{font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;font-weight:700;color:#d4af78;margin-bottom:.25rem}
-.cntd-title{font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#fdf0f5;text-shadow:0 2px 20px rgba(255,255,255,.07);margin-bottom:2rem}
-.cntd-units{display:flex;align-items:flex-end;justify-content:center;gap:.5rem;flex-wrap:wrap}
-.cntd-sep{font-size:2.5rem;font-weight:700;color:#d4af78;opacity:.7;padding-bottom:1.75rem;animation:blink 1s ease-in-out infinite}
-.flip-card{display:flex;flex-direction:column;align-items:center}
-.flip-box{border-radius:1rem;overflow:hidden;position:relative;min-width:72px;padding:1rem;text-align:center;background:linear-gradient(160deg,rgba(255,235,245,.14) 0%,rgba(255,210,230,.08) 100%);border:1px solid rgba(212,175,120,.3);backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.12)}
-.flip-box::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,.12),transparent);pointer-events:none;border-radius:1rem 1rem 0 0}
-.flip-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.3);animation:flipNum .3s ease both}
-.flip-label{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:#d4af78;margin-top:.5rem}
-.cntd-acc{position:absolute;pointer-events:none;opacity:.2}
-.cntd-acc.r{right:1rem;top:1.5rem;width:52px;animation:floatSm 4s ease-in-out infinite}
-.cntd-acc.l{left:1rem;bottom:1.5rem;width:44px;animation:floatSm 3.5s ease-in-out .8s infinite}
+  /* ── COUNTDOWN ── */
+  .countdown-section {
+    position:relative; overflow:hidden; padding:3.5rem 1.25rem; text-align:center;
+    background:linear-gradient(150deg,#4a0e30 0%,#320826 55%,#200518 100%);
+  }
+  .countdown-dots {
+    position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px); background-size:20px 20px;
+  }
+  .countdown-blob1 {
+    position:absolute; top:0; left:25%; width:200px; height:200px; border-radius:50%;
+    background:radial-gradient(circle,rgba(240,140,190,.1) 0%,transparent 70%); filter:blur(24px); pointer-events:none;
+  }
+  .countdown-blob2 {
+    position:absolute; bottom:0; right:25%; width:160px; height:160px; border-radius:50%;
+    background:radial-gradient(circle,rgba(160,80,200,.1) 0%,transparent 70%); filter:blur(20px); pointer-events:none;
+  }
+  .countdown-acc1 { position:absolute; right:1rem; top:1.5rem; pointer-events:none; width:52px; height:auto; opacity:.2; animation:floatAcc1 4s ease-in-out infinite; }
+  .countdown-acc2 { position:absolute; left:1rem; bottom:1.5rem; pointer-events:none; width:44px; height:auto; opacity:.18; animation:floatAcc2 3.5s .8s ease-in-out infinite; }
+  @keyframes floatAcc1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(8deg)} }
+  @keyframes floatAcc2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-6deg)} }
+  .countdown-kicker { font-size:.58rem; letter-spacing:.5em; text-transform:uppercase; font-weight:700; color:#d4af78; margin-bottom:.25rem; }
+  .countdown-title { font-family:'Playfair Display',serif; font-size:2.6rem; font-style:italic; color:#fdf0f5; margin-bottom:2rem; }
+  .flip-units { display:flex; align-items:flex-end; justify-content:center; gap:.5rem; flex-wrap:wrap; }
+  .flip-unit { display:flex; flex-direction:column; align-items:center; }
+  .flip-box {
+    min-width:72px; padding:1rem; border-radius:1rem; text-align:center; position:relative; overflow:hidden;
+    background:linear-gradient(160deg,rgba(255,235,245,.14) 0%,rgba(255,210,230,.08) 100%);
+    border:1px solid rgba(212,175,120,.3);
+    box-shadow:0 8px 32px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter:blur(16px);
+  }
+  .flip-box .inner-shimmer {
+    position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(to bottom,rgba(255,255,255,.12) 0%,transparent 50%); border-radius:1rem;
+  }
+  .flip-box .value { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; color:#fff; line-height:1; text-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .flip-unit .lbl { font-size:.52rem; letter-spacing:.28em; text-transform:uppercase; font-weight:700; margin-top:.5rem; color:#d4af78; }
+  .colon { font-size:1.875rem; font-weight:700; padding-bottom:1.75rem; color:#d4af78; opacity:.7; animation:blinkColon 1s infinite; }
+  @keyframes blinkColon { 0%,100%{opacity:.35} 50%{opacity:.85} }
 
-/* LOCATION */
-#location{padding:2.5rem 1.25rem;background:#fdf0f6}
-.loc-card{border-radius:1.5rem;overflow:hidden;border:1px solid rgba(212,175,120,.28);background:#fff;box-shadow:0 20px 64px rgba(160,80,120,.1),inset 0 1px 0 rgba(212,175,120,.3)}
-.loc-header{padding:1.25rem 1.25rem 1rem;display:flex;align-items:center;gap:1rem}
-.loc-icon{width:56px;height:56px;border-radius:1rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,#e080a8,#b04080);box-shadow:0 6px 20px rgba(192,80,128,.4);animation:floatSm 4s ease-in-out infinite}
-.loc-name{font-family:'Playfair Display',serif;font-size:1.6rem;color:#2e1a26}
-.loc-address{font-size:.78rem;color:#9070a0;margin-top:.25rem;line-height:1.5}
-.loc-map iframe{width:100%;height:210px;border:none;display:block}
-.loc-btn-wrap{padding:1rem}
-.loc-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:1rem;border-radius:1rem;color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:linear-gradient(135deg,#d06090,#a04080);box-shadow:0 6px 22px rgba(192,80,128,.35);transition:transform .2s,box-shadow .2s}
-.loc-btn:hover{transform:scale(1.02);box-shadow:0 10px 32px rgba(192,80,128,.5)}
+  /* ── LOCATION ── */
+  .location-section { padding:2.5rem 1.25rem; background:#fdf0f6; }
+  .location-card {
+    border-radius:1.5rem; overflow:hidden;
+    border:1px solid rgba(212,175,120,.28); background:#fff;
+    box-shadow:0 20px 64px rgba(160,80,120,.1), inset 0 1px 0 rgba(212,175,120,.3);
+  }
+  .location-info { padding:1.25rem 1.25rem 1rem; display:flex; align-items:center; gap:1rem; }
+  .location-icon {
+    width:56px; height:56px; border-radius:1rem; display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; flex-shrink:0; color:#fff;
+    background:linear-gradient(135deg,#e080a8,#b04080); box-shadow:0 6px 20px rgba(192,80,128,.4);
+    animation:floatBaby 4s ease-in-out infinite;
+  }
+  .location-name { font-family:'Playfair Display',serif; font-size:1.6rem; color:#2e1a26; }
+  .location-addr { font-size:.75rem; margin-top:.25rem; line-height:1.25rem; color:#9070a0; }
+  .location-map { width:100%; height:210px; border:none; display:block; }
+  .location-btn-wrap { padding:1rem; }
+  .location-btn {
+    display:flex; align-items:center; justify-content:center; gap:.5rem;
+    width:100%; padding:.875rem; border-radius:1rem; color:#fff; font-size:.875rem; font-weight:700;
+    letter-spacing:.15em; text-transform:uppercase; text-decoration:none;
+    background:linear-gradient(135deg,#d06090,#a04080); box-shadow:0 6px 22px rgba(192,80,128,.35);
+    transition:transform .2s;
+  }
+  .location-btn:hover { transform:scale(1.02); }
 
-/* ITINERARY */
-#itinerary{padding:2.5rem 1.25rem;background:#fdf8fc}
-.itin-list{position:relative;display:flex;flex-direction:column}
-.itin-line{position:absolute;left:27px;top:0;bottom:0;width:2px;transform-origin:top;background:linear-gradient(to bottom,transparent,rgba(212,175,120,.8) 8%,rgba(192,80,128,.5) 50%,rgba(212,175,120,.8) 92%,transparent);animation:lineDraw 1.3s cubic-bezier(.4,0,.2,1) both}
-.itin-item{display:flex;align-items:flex-start;gap:1.25rem;padding-bottom:2rem}
-.itin-item:last-child{padding-bottom:0}
-.itin-bubble{width:56px;height:56px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,#e090b8,#b04080);box-shadow:0 6px 20px rgba(192,80,128,.4)}
-.itin-bubble .ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(192,80,128,.4);animation:ringPulse 2.5s ease-out infinite}
-.itin-bubble-emoji{font-size:1.15rem;line-height:1}
-.itin-bubble-num{font-size:.48rem;font-weight:700;color:rgba(255,255,255,.85);margin-top:2px}
-.itin-card{flex:1;border-radius:1rem;padding:1rem 1.25rem;position:relative;overflow:hidden;margin-top:.25rem;background:rgba(255,255,255,.94);border:1px solid rgba(212,175,120,.2);box-shadow:0 4px 20px rgba(160,80,120,.07);transition:transform .2s,box-shadow .2s}
-.itin-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(160,80,120,.13)}
-.itin-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:1rem 0 0 1rem;background:linear-gradient(to bottom,#d4af78,#e090b8,#d4af78)}
-.itin-card::after{content:'';position:absolute;top:0;left:1rem;right:1rem;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,120,.4),transparent)}
-.itin-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;padding-left:.5rem}
-.itin-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#2e1a26}
-.itin-time{font-size:.56rem;font-weight:700;padding:.2rem .75rem;border-radius:99px;color:#fff;letter-spacing:.06em;background:linear-gradient(135deg,#d4af78,#b07830)}
-.itin-desc{font-size:.78rem;line-height:1.65;color:#9070a0;padding-left:.5rem}
+  /* ── ITINERARY ── */
+  .itin-section { padding:2.5rem 1.25rem; background:#fdf8fc; }
+  .itin-list { position:relative; display:flex; flex-direction:column; }
+  .itin-line {
+    position:absolute; left:27px; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom,transparent,rgba(212,175,120,.8) 8%,rgba(192,80,128,.5) 50%,rgba(212,175,120,.8) 92%,transparent);
+    transform-origin:top; animation:growLine 1.3s cubic-bezier(.4,0,.2,1) forwards;
+    transform:scaleY(0);
+  }
+  @keyframes growLine { to{transform:scaleY(1)} }
+  .itin-item { display:flex; align-items:flex-start; gap:1.25rem; padding-bottom:2rem; }
+  .itin-item:last-child { padding-bottom:0; }
+  .itin-dot-wrap { position:relative; flex-shrink:0; z-index:10; }
+  .itin-dot {
+    width:56px; height:56px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,#e090b8,#b04080); box-shadow:0 6px 20px rgba(192,80,128,.4);
+  }
+  .itin-dot .emoji { font-size:1.15rem; line-height:1; }
+  .itin-dot .num { font-size:.48rem; font-weight:700; color:rgba(255,255,255,.85); margin-top:2px; }
+  .itin-ring {
+    position:absolute; inset:0; border-radius:50%;
+    border:2px solid rgba(192,80,128,.4); animation:ringPulse 2.5s infinite;
+  }
+  @keyframes ringPulse { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(1.9);opacity:0} }
+  .itin-content {
+    flex:1; border-radius:1rem; padding:1rem 1.25rem; margin-top:.25rem; position:relative; overflow:hidden;
+    background:rgba(255,255,255,.94); border:1px solid rgba(212,175,120,.2); box-shadow:0 4px 20px rgba(160,80,120,.07);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .itin-content:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(160,80,120,.13); }
+  .itin-content .left-bar {
+    position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:.5rem 0 0 .5rem;
+    background:linear-gradient(to bottom,#d4af78,#e090b8,#d4af78);
+  }
+  .itin-content .top-line {
+    position:absolute; top:0; left:1rem; right:1rem; height:1px;
+    background:linear-gradient(to right,transparent,rgba(212,175,120,.4),transparent);
+  }
+  .itin-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:.25rem; padding-left:.5rem; }
+  .itin-name { font-weight:700; font-size:.875rem; font-family:'Playfair Display',serif; color:#2e1a26; }
+  .itin-time {
+    font-size:.56rem; font-weight:700; padding:.25rem .75rem; border-radius:9999px; color:#fff; letter-spacing:.1em;
+    background:linear-gradient(135deg,#d4af78,#b07830);
+  }
+  .itin-desc { font-size:.75rem; padding-left:.5rem; line-height:1.5rem; color:#9070a0; }
 
-/* GIFT */
-#gift{padding:2.5rem 1.25rem;background:#fdf0f6}
-.gift-list{display:flex;flex-direction:column;gap:.75rem}
-.gift-btn{display:flex;align-items:center;gap:1rem;width:100%;padding:1rem 1.25rem;border-radius:1rem;text-align:left;cursor:pointer;border:none;font-family:'Lato',sans-serif;transition:transform .15s;background:transparent}
-.gift-btn:hover{transform:scale(1.01)}
-.gift-btn-icon{width:44px;height:44px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:rgba(255,255,255,.88);box-shadow:0 2px 10px rgba(0,0,0,.07)}
-.gift-btn-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700}
-.gift-btn-sub{font-size:.72rem;margin-top:.1rem;color:#9070a0}
-.gift-btn-arrow{margin-left:auto;font-size:.8rem;transition:transform .3s;opacity:.8}
-.gift-btn.open .gift-btn-arrow{transform:rotate(180deg)}
-.gift-panel{overflow:hidden;max-height:0;transition:max-height .35s ease,opacity .35s ease;opacity:0}
-.gift-panel.open{max-height:600px;opacity:1}
-.gift-panel-inner{border-radius:1rem;padding:1.25rem;margin-top:.5rem;background:rgba(255,255,255,.95);border:1px solid rgba(212,175,120,.2);box-shadow:0 12px 40px rgba(160,80,120,.07)}
-.gift-panel-title{font-family:'Playfair Display',serif;font-size:1.3rem;text-align:center;color:#2e1a26;margin:1rem 0}
-.gift-input{width:100%;padding:.85rem 1rem;border-radius:.875rem;border:1px solid rgba(200,120,160,.25);background:#fff5f8;color:#2e1a26;font-family:'Lato',sans-serif;font-size:.9rem;outline:none;margin-bottom:.7rem;display:block}
-.gift-gen-btn{width:100%;padding:.75rem;border-radius:1rem;color:#fff;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;font-family:'Lato',sans-serif;background:linear-gradient(135deg,#c04070,#8a3090);box-shadow:0 6px 22px rgba(160,60,120,.35);transition:transform .15s,box-shadow .15s}
-.gift-gen-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(160,60,120,.5)}
-.gift-qr-wrap{display:flex;justify-content:center;margin-top:1.25rem}
-.gift-qr-wrap canvas,.gift-qr-wrap img{border-radius:1rem;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+  /* ── GIFT ── */
+  .gift-section { padding:2.5rem 1.25rem; background:#fdf0f6; }
+  .gift-list { display:flex; flex-direction:column; gap:.75rem; }
+  .gift-panel { border-radius:1rem; overflow:hidden; transition:transform .2s; }
+  .gift-panel:hover { transform:scale(1.01); }
+  .gift-header {
+    width:100%; display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem;
+    background:transparent; border:none; cursor:pointer; text-align:left;
+  }
+  .gift-icon {
+    width:44px; height:44px; border-radius:.75rem; display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; flex-shrink:0; background:rgba(255,255,255,.88); box-shadow:0 2px 10px rgba(0,0,0,.07);
+  }
+  .gift-label { font-size:.875rem; font-weight:700; font-family:'Playfair Display',serif; }
+  .gift-sub { font-size:.72rem; margin-top:2px; color:#9070a0; }
+  .gift-arrow { font-size:.8rem; margin-left:auto; transition:transform .3s; }
+  .gift-arrow.open { transform:rotate(180deg); }
+  .gift-body { overflow:hidden; max-height:0; transition:max-height .35s ease, opacity .3s; opacity:0; }
+  .gift-body.open { max-height:600px; opacity:1; }
+  .gift-inner { padding:.25rem 1rem 1.25rem; }
+  .gift-form-wrap {
+    border-radius:1rem; padding:1.25rem;
+    background:rgba(255,255,255,.95); border:1px solid rgba(212,175,120,.2); box-shadow:0 12px 40px rgba(160,80,120,.07);
+  }
+  .gift-form-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:#2e1a26; text-align:center; margin:.75rem 0; }
+  .gift-input {
+    width:100%; padding:.75rem 1rem; border-radius:.75rem; font-size:.875rem; outline:none; margin-bottom:.75rem; display:block;
+    border:1px solid rgba(200,120,160,.25); background:#fff5f8; color:#2e1a26; font-family:'Lato',sans-serif;
+  }
+  .gift-btn {
+    width:100%; padding:.75rem; border-radius:.75rem; color:#fff; font-size:.875rem; font-weight:700;
+    letter-spacing:.15em; text-transform:uppercase; cursor:pointer; border:none;
+    background:linear-gradient(135deg,#c04070,#8a3090); box-shadow:0 6px 22px rgba(160,60,120,.35);
+    font-family:'Lato',sans-serif;
+  }
+  .gift-qr { display:flex; justify-content:center; margin-top:1.25rem; }
+  .gift-qr img { border-radius:1rem; box-shadow:0 8px 28px rgba(0,0,0,.12); }
 
-/* RSVP */
-#rsvp{position:relative;padding:3.5rem 1.25rem;overflow:hidden;background:linear-gradient(160deg,#fff0f6 0%,#fce4f0 55%,#f6d8ee 100%)}
-#rsvp .rsvp-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(240,160,200,.1) 0%,transparent 70%)}
-.rsvp-acc{position:absolute;pointer-events:none}
-.rsvp-acc.tr{top:1rem;right:1rem;width:50px;opacity:.28;animation:rotateFloat 3.5s ease-in-out infinite}
-.rsvp-acc.bl{bottom:1rem;left:1rem;width:44px;opacity:.22;animation:rotateFloatR 4s ease-in-out infinite}
-.rsvp-desc{font-size:.88rem;font-style:italic;color:#9070a0;margin-bottom:1.5rem;line-height:1.8;text-align:center}
-.rsvp-input{width:100%;padding:1rem 1.2rem;border-radius:1rem;border:1px solid rgba(200,120,160,.25);background:rgba(255,255,255,.88);color:#2e1a26;font-family:'Lato',sans-serif;font-size:.92rem;outline:none;margin-bottom:.8rem;box-shadow:0 2px 10px rgba(0,0,0,.04);display:block}
-.rsvp-toggle{display:flex;gap:.75rem;margin-bottom:1rem}
-.rsvp-toggle-btn{flex:1;padding:.75rem;border-radius:1rem;font-size:.88rem;cursor:pointer;font-weight:500;border:1.5px solid rgba(200,120,160,.2);background:rgba(255,255,255,.6);color:#9070a0;font-family:'Lato',sans-serif;transition:.2s}
-.rsvp-toggle-btn.sel{border-color:#c04070;background:rgba(192,64,112,.1);color:#c04070}
-.rsvp-submit{width:100%;padding:1rem;border-radius:1rem;color:#fff;font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;font-family:'Lato',sans-serif;background:linear-gradient(135deg,#c04070,#8a3090);box-shadow:0 8px 28px rgba(160,60,120,.35);transition:.2s}
-.rsvp-submit:hover{transform:scale(1.02);box-shadow:0 12px 36px rgba(160,60,120,.5)}
-.rsvp-submit:disabled{opacity:.6;cursor:not-allowed}
-.rsvp-hint{font-size:.68rem;margin-top:.75rem;letter-spacing:.05em;color:#b090b0;text-align:center}
-.rsvp-error{font-size:.8rem;color:#c04070;margin-bottom:.75rem}
-.rsvp-done{text-align:center;animation:scaleIn .5s both}
-.rsvp-done .acc-done{width:80px;margin:0 auto 1rem;display:block;opacity:.7;animation:rotateFloat 2.5s ease-in-out infinite}
-.rsvp-done .baby-done{width:112px;height:auto;margin:0 auto 1rem;display:block;filter:drop-shadow(0 10px 28px rgba(160,80,120,.25));animation:float 2.8s ease-in-out infinite}
-.rsvp-done-title{font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;color:#c04070}
-.rsvp-done-msg{font-size:.9rem;font-style:italic;color:#9070a0;margin-top:.5rem;line-height:1.8}
+  /* ── RSVP ── */
+  .rsvp-section {
+    position:relative; padding:3.5rem 1.25rem; overflow:hidden;
+    background:linear-gradient(160deg,#fff0f6 0%,#fce4f0 55%,#f6d8ee 100%);
+  }
+  .rsvp-glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(240,160,200,.1) 0%,transparent 70%);
+  }
+  .rsvp-acc1 { position:absolute; top:1rem; right:1rem; pointer-events:none; width:50px; height:auto; opacity:.28; animation:rsvpAcc1 3.5s ease-in-out infinite; }
+  .rsvp-acc2 { position:absolute; bottom:1rem; left:1rem; pointer-events:none; width:44px; height:auto; opacity:.22; animation:rsvpAcc2 4s .6s ease-in-out infinite; }
+  @keyframes rsvpAcc1 { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
+  @keyframes rsvpAcc2 { 0%,100%{transform:rotate(10deg)} 50%{transform:rotate(-10deg)} }
+  .rsvp-inner { position:relative; z-index:10; }
+  .rsvp-note { font-size:.875rem; font-style:italic; text-align:center; margin-bottom:1.5rem; line-height:1.75rem; color:#9070a0; }
+  .rsvp-note strong { color:#c04070; }
+  .rsvp-fields { display:flex; flex-direction:column; gap:.75rem; }
+  .rsvp-input {
+    width:100%; padding:.875rem 1rem; border-radius:.75rem; font-size:.875rem; outline:none; display:block;
+    border:1px solid rgba(200,120,160,.25); background:rgba(255,255,255,.88); color:#2e1a26;
+    font-family:'Lato',sans-serif; box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .rsvp-toggle { display:flex; gap:.75rem; }
+  .rsvp-btn-yn {
+    flex:1; padding:.75rem; border-radius:.75rem; font-size:.875rem; cursor:pointer;
+    font-family:'Lato',sans-serif; font-weight:500; transition:all .2s;
+    border:1.5px solid rgba(200,120,160,.2); background:rgba(255,255,255,.6); color:#9070a0;
+  }
+  .rsvp-btn-yn.active { border-color:#c04070; background:rgba(192,64,112,.1); color:#c04070; }
+  .rsvp-error { font-size:.75rem; color:#c04070; }
+  .rsvp-submit {
+    width:100%; padding:.875rem; border-radius:.75rem; color:#fff; font-size:.875rem; font-weight:700;
+    letter-spacing:.15em; text-transform:uppercase; cursor:pointer; border:none;
+    background:linear-gradient(135deg,#c04070,#8a3090); box-shadow:0 8px 28px rgba(160,60,120,.35);
+    font-family:'Lato',sans-serif;
+  }
+  .rsvp-submit:disabled { opacity:.6; cursor:default; }
+  .rsvp-hint { font-size:.62rem; text-align:center; margin-top:.25rem; letter-spacing:.05em; color:#b090b0; }
+  .rsvp-success { text-align:center; padding:1rem 0; }
+  .rsvp-success h3 { font-family:'Playfair Display',serif; font-size:3rem; font-style:italic; color:#c04070; }
+  .rsvp-success p { font-size:.875rem; font-style:italic; margin-top:.5rem; line-height:1.75rem; color:#9070a0; }
+  .rsvp-baby { width:7rem; margin:0 auto 1rem; animation:floatBaby 2.8s ease-in-out infinite; }
+  .rsvp-acc-thanks { width:80px; height:auto; opacity:.7; margin:0 auto 1rem; animation:spin3 2.5s ease-in-out infinite; }
 
-/* FOOTER */
-footer{position:relative;overflow:hidden;padding:3.5rem 1.5rem 3rem;text-align:center;background:linear-gradient(170deg,#fff5f8 0%,#f8eaf4 60%,#f0dce8 100%)}
-.footer-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% 100%,rgba(200,120,160,.07) 0%,transparent 70%)}
-.footer-ornament{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.75rem;margin-top:1rem}
-.footer-ornament .line{height:1px;width:56px}
-.footer-ornament .line.l{background:linear-gradient(to right,transparent,rgba(212,175,120,.7))}
-.footer-ornament .line.r{background:linear-gradient(to left,transparent,rgba(212,175,120,.7))}
-.footer-ornament img:nth-child(1){width:34px;opacity:.5;animation:rotateFloat 2.8s ease-in-out infinite}
-.footer-ornament img:nth-child(2){width:26px;opacity:.35;animation:rotateFloatR 3.2s ease-in-out .5s infinite}
-.footer-ornament img:nth-child(3){width:34px;opacity:.5;animation:rotateFloat 2.8s ease-in-out .2s infinite}
-.footer-quote{font-style:italic;font-size:1.05rem;line-height:2;color:#9070a0;margin-bottom:1.5rem}
-.footer-sig-wrap{display:inline-block;padding:.75rem 2rem;border-radius:99px;background:rgba(255,255,255,.7);border:1px solid rgba(212,175,120,.4);backdrop-filter:blur(10px)}
-.footer-sig{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:#c04070;text-shadow:0 4px 20px rgba(192,64,112,.22)}
-.watermark{padding:2rem 1.5rem 1.5rem;text-align:center;background:#f6ecf2;border-top:1px solid rgba(212,175,120,.2)}
-.watermark img{width:176px;height:auto;margin:1.25rem auto 1rem;display:block;opacity:.8}
-.watermark p{font-size:.63rem;line-height:1.7;max-width:300px;margin:0 auto;color:rgba(46,26,38,.42)}
-.watermark .copy{font-size:.58rem;margin-top:.5rem;color:rgba(46,26,38,.28)}
+  /* ── FOOTER ── */
+  footer {
+    position:relative; padding:3.5rem 1.5rem 2.5rem; text-align:center; overflow:hidden;
+    background:linear-gradient(170deg,#fff5f8 0%,#f8eaf4 60%,#f0dce8 100%);
+  }
+  footer .foot-glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 90% 70% at 50% 100%,rgba(200,120,160,.07) 0%,transparent 70%);
+  }
+  .foot-ornament { display:flex; align-items:center; justify-content:center; gap:.75rem; margin:1.75rem 0 0; }
+  .foot-ornament .l-r { height:1px; width:56px; background:linear-gradient(to right,transparent,rgba(212,175,120,.7)); }
+  .foot-ornament .l-l { height:1px; width:56px; background:linear-gradient(to left,transparent,rgba(212,175,120,.7)); }
+  .foot-ornament .a1 { width:34px; height:auto; opacity:.5; animation:spin3 2.8s ease-in-out infinite; }
+  .foot-ornament .a2 { width:26px; height:auto; opacity:.35; animation:spin3r 3.2s .5s ease-in-out infinite; }
+  .foot-ornament .a3 { width:34px; height:auto; opacity:.5; animation:spin3 2.8s .2s ease-in-out infinite; }
+  @keyframes spin3r { 0%,100%{transform:rotate(6deg)} 50%{transform:rotate(-6deg)} }
+  .foot-note { font-style:italic; font-size:1rem; line-height:2rem; margin:1.25rem 0; color:#9070a0; }
+  .foot-signature-tag {
+    display:inline-block; padding:.75rem 2rem; border-radius:9999px;
+    background:rgba(255,255,255,.7); border:1px solid rgba(212,175,120,.4); backdrop-filter:blur(10px);
+  }
+  .foot-signature-tag p { font-family:'Playfair Display',serif; font-size:2rem; font-style:italic; color:#c04070; text-shadow:0 4px 20px rgba(192,64,112,.22); }
+
+  /* ── WATERMARK ── */
+  .watermark { padding:2rem 1.5rem; text-align:center; background:#f6ecf2; border-top:1px solid rgba(212,175,120,.2); }
+  .watermark img { width:11rem; margin:1.25rem auto 1rem; opacity:.8; display:block; }
+  .watermark-note { font-size:.63rem; line-height:1.5rem; max-width:20rem; margin:0 auto; color:rgba(46,26,38,.42); }
+  .watermark-copy { font-size:.58rem; margin-top:.5rem; color:rgba(46,26,38,.28); }
 </style>
 </head>
 <body>
+<div class="card">
 
-<!-- SPLASH -->
+<!-- ══ SPLASH ══════════════════════════════════════════════════════════ -->
 <div id="splash" onclick="closeSplash()">
-  <div class="splash-glow"></div>
-  <div class="gold-line" style="position:absolute;top:0;left:0;right:0"></div>
-  <!-- corner accordions -->
-  <div class="corner-acc" style="top:.75rem;left:.75rem"><img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" style="transform:rotate(-20deg);animation-duration:3.5s"></div>
-  <div class="corner-acc" style="top:.75rem;right:.75rem"><img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" style="transform:rotate(15deg);animation-duration:3.9s;animation-delay:.3s"></div>
-  <div class="corner-acc" style="bottom:.75rem;left:.75rem"><img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" style="transform:rotate(10deg);animation-duration:4s;animation-delay:.6s"></div>
-  <div class="corner-acc" style="bottom:.75rem;right:.75rem"><img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" style="transform:rotate(-10deg);animation-duration:3.7s;animation-delay:.9s"></div>
-  <div class="splash-content">
+  <div class="noise"></div>
+  <div class="radial-glow"></div>
+  <div class="gold-line" style="position:absolute;top:0;left:0;right:0;"></div>
+  <div class="falling-container" id="splash-falling"></div>
+
+  <img class="corner-acc ca-tl" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <img class="corner-acc ca-tr" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <img class="corner-acc ca-bl" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <img class="corner-acc ca-br" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+
+  <div class="splash-inner">
     <p class="splash-kicker">Una celebración especial</p>
     <h1 class="splash-title">Baby Shower</h1>
-    <div class="splash-divider"><div class="line"></div><span class="dot">✦</span><div class="line r"></div></div>
-    <div class="splash-baby"><img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña"></div>
+    <div class="gold-divider">
+      <div class="line line-r"></div>
+      <span class="star">✦</span>
+      <div class="line line-l"></div>
+    </div>
+    <div style="animation:floatBaby 3s ease-in-out infinite">
+      <img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña"
+        style="width:180px;height:auto;filter:drop-shadow(0 20px 40px rgba(160,80,120,.3))" />
+    </div>
     <p class="splash-name">Helena Maria</p>
     <p class="splash-date">26 de Octubre · 2026 · 3:00 PM</p>
     <div class="splash-cta">✿ Toca para abrir ✿</div>
   </div>
-  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0"></div>
+
+  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
 </div>
 
-<!-- HERO -->
-<section id="hero">
+<!-- ══ HERO ════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="falling-container" id="hero-falling"></div>
+  <div class="blob1"></div>
+  <div class="blob2"></div>
   <div class="gold-line"></div>
-  <div class="hero-blob" style="width:260px;height:260px;top:-60px;left:-60px;background:radial-gradient(circle,rgba(244,180,210,.35) 0%,transparent 70%)"></div>
-  <div class="hero-blob" style="width:200px;height:200px;bottom:40px;right:-40px;background:radial-gradient(circle,rgba(200,160,220,.28) 0%,transparent 70%)"></div>
-  <div style="position:relative;z-index:1">
-    <p class="hero-kicker">Estás invitada</p>
+  <div class="hero-content">
+    <span class="hero-kicker">Estás invitada</span>
     <h1 class="hero-title">Baby Shower</h1>
-    <p class="hero-subtitle">a un momento lleno de amor</p>
+    <p class="hero-sub">a un momento lleno de amor</p>
     <div class="hero-acc-divider">
-      <div class="line l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-      <div class="line r"></div>
+      <div class="l-r"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+      <div class="l-l"></div>
     </div>
   </div>
-  <div class="hero-baby-wrap" style="position:relative;z-index:1">
-    <div class="hero-baby-glow"></div>
-    <img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña">
+  <div class="baby-float">
+    <div class="baby-shadow"></div>
+    <img src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="Bebé niña" />
   </div>
-  <div class="hero-name-tag" style="position:relative;z-index:1">
+  <div class="name-tag">
     <div class="name">Helena Maria</div>
     <div class="date">26 Octubre · 2026 · 3:00 PM</div>
   </div>
@@ -268,81 +501,120 @@ footer{position:relative;overflow:hidden;padding:3.5rem 1.5rem 3rem;text-align:c
   </svg>
 </section>
 
-<!-- DATE -->
-<section id="date-section">
+<!-- ══ DATE ════════════════════════════════════════════════════════════ -->
+<section class="date-section">
   <div class="section-heading">
-    <p class="section-kicker">Cuando nos vemos</p>
+    <span class="section-kicker">Cuando nos vemos</span>
     <h2 class="section-title">La fecha</h2>
-    <div class="section-divider">
-      <div class="line l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-      <div class="line r"></div>
+    <div class="section-ornament">
+      <div class="line-r"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+      <div class="line-l"></div>
     </div>
   </div>
   <div class="date-cards">
-    <div class="date-card"><div class="date-icon">🌸</div><div class="date-big">26</div><div class="date-label">Día</div></div>
-    <div class="date-card"><div class="date-icon">📅</div><div class="date-sub">Oct 2026</div><div class="date-label">Mes · Año</div></div>
-    <div class="date-card"><div class="date-icon">🕐</div><div class="date-big">3:00</div><div class="date-label">PM</div></div>
-  </div>
-  <div class="date-acc-divider">
-    <div class="line l"></div>
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-    <div class="line r"></div>
-  </div>
-</section>
-
-<!-- COUNTDOWN -->
-<section id="countdown">
-  <div class="dots-bg"></div>
-  <div class="gold-line"></div>
-  <img class="cntd-acc r" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-  <img class="cntd-acc l" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0"></div>
-  <div style="position:relative;z-index:1">
-    <p class="cntd-kicker">Cuenta regresiva</p>
-    <p class="cntd-title">¡Falta poco!</p>
-    <div class="cntd-units" id="cntd-units"></div>
-  </div>
-</section>
-
-<!-- LOCATION -->
-<section id="location">
-  <div class="section-heading">
-    <p class="section-kicker">¿Dónde nos vemos?</p>
-    <h2 class="section-title">El lugar</h2>
-    <div class="section-divider">
-      <div class="line l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-      <div class="line r"></div>
+    <div class="date-card">
+      <div class="shimmer-overlay"></div><div class="top-gold"></div>
+      <div class="icon">🌸</div>
+      <div class="big">26</div>
+      <div class="lbl">Día</div>
+    </div>
+    <div class="date-card">
+      <div class="shimmer-overlay"></div><div class="top-gold"></div>
+      <div class="icon">📅</div>
+      <div class="sub">Oct 2026</div>
+      <div class="lbl">Mes · Año</div>
+    </div>
+    <div class="date-card">
+      <div class="shimmer-overlay"></div><div class="top-gold"></div>
+      <div class="icon">🕐</div>
+      <div class="big">3:00</div>
+      <div class="lbl">PM</div>
     </div>
   </div>
-  <div class="loc-card">
-    <div class="gold-line"></div>
-    <div class="loc-header">
-      <div class="loc-icon">📍</div>
-      <div>
-        <div class="loc-name">Mi Casa</div>
-        <div class="loc-address">Avenida Conceição, 1234, São Bernardo – SP</div>
+  <div class="acc-divider">
+    <div class="l-r"></div>
+    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+    <div class="l-l"></div>
+  </div>
+</section>
+
+<!-- ══ COUNTDOWN ══════════════════════════════════════════════════════ -->
+<section class="countdown-section">
+  <div class="countdown-dots"></div>
+  <div class="countdown-blob1"></div>
+  <div class="countdown-blob2"></div>
+  <div class="gold-line"></div>
+  <img class="countdown-acc1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <img class="countdown-acc2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <div style="position:relative;z-index:10">
+    <p class="countdown-kicker">Cuenta regresiva</p>
+    <h2 class="countdown-title">¡Falta poco!</h2>
+    <div class="flip-units" id="flip-units">
+      <div class="flip-unit">
+        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-days">--</div></div>
+        <div class="lbl">Días</div>
+      </div>
+      <div class="colon">:</div>
+      <div class="flip-unit">
+        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-hours">--</div></div>
+        <div class="lbl">Horas</div>
+      </div>
+      <div class="colon">:</div>
+      <div class="flip-unit">
+        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-mins">--</div></div>
+        <div class="lbl">Min</div>
+      </div>
+      <div class="colon">:</div>
+      <div class="flip-unit">
+        <div class="flip-box"><div class="inner-shimmer"></div><div class="value" id="cd-secs">--</div></div>
+        <div class="lbl">Seg</div>
       </div>
     </div>
-    <div class="loc-map">
-      <iframe title="Mapa" src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="gold-line" style="margin-top:0"></div>
+</section>
+
+<!-- ══ LOCATION ═══════════════════════════════════════════════════════ -->
+<section class="location-section">
+  <div class="section-heading">
+    <span class="section-kicker">¿Dónde nos vemos?</span>
+    <h2 class="section-title">El lugar</h2>
+    <div class="section-ornament">
+      <div class="line-r"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+      <div class="line-l"></div>
     </div>
-    <div class="loc-btn-wrap">
-      <a href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP" target="_blank" rel="noopener" class="loc-btn">📍 Cómo llegar</a>
+  </div>
+  <div class="location-card">
+    <div class="gold-line"></div>
+    <div class="location-info">
+      <div class="location-icon">📍</div>
+      <div>
+        <div class="location-name">Mi Casa</div>
+        <div class="location-addr">Avenida Conceição, 1234, São Bernardo – SP</div>
+      </div>
+    </div>
+    <iframe class="location-map" title="Mapa del evento"
+      src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed"
+      allowfullscreen loading="lazy"></iframe>
+    <div class="location-btn-wrap">
+      <a class="location-btn"
+        href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP"
+        target="_blank" rel="noopener">📍 Cómo llegar</a>
     </div>
   </div>
 </section>
 
-<!-- ITINERARY -->
-<section id="itinerary">
+<!-- ══ ITINERARY ═══════════════════════════════════════════════════════ -->
+<section class="itin-section">
   <div class="section-heading">
-    <p class="section-kicker">El programa del día</p>
+    <span class="section-kicker">El programa del día</span>
     <h2 class="section-title">Itinerario</h2>
-    <div class="section-divider">
-      <div class="line l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-      <div class="line r"></div>
+    <div class="section-ornament">
+      <div class="line-r"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+      <div class="line-l"></div>
     </div>
   </div>
   <div class="itin-list" id="itin-list">
@@ -350,254 +622,247 @@ footer{position:relative;overflow:hidden;padding:3.5rem 1.5rem 3rem;text-align:c
   </div>
 </section>
 
-<!-- GIFT -->
-<section id="gift">
+<!-- ══ GIFT ════════════════════════════════════════════════════════════ -->
+<section class="gift-section">
   <div class="section-heading">
-    <p class="section-kicker">Si deseas obsequiar</p>
+    <span class="section-kicker">Si deseas obsequiar</span>
     <h2 class="section-title">Regalo con amor</h2>
-    <div class="section-divider">
-      <div class="line l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-      <div class="line r"></div>
+    <div class="section-ornament">
+      <div class="line-r"></div>
+      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+      <div class="line-l"></div>
     </div>
   </div>
   <div class="gift-list" id="gift-list"></div>
 </section>
 
-<!-- RSVP -->
-<section id="rsvp">
+<!-- ══ RSVP ════════════════════════════════════════════════════════════ -->
+<section class="rsvp-section">
   <div class="gold-line"></div>
   <div class="rsvp-glow"></div>
-  <img class="rsvp-acc tr" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-  <img class="rsvp-acc bl" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-  <div style="position:relative;z-index:1" id="rsvp-content"></div>
-  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0"></div>
+  <img class="rsvp-acc1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <img class="rsvp-acc2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+  <div class="rsvp-inner" id="rsvp-inner">
+    <div class="section-heading">
+      <span class="section-kicker">Confirma tu presencia</span>
+      <h2 class="section-title">¿Nos acompañas?</h2>
+      <div class="section-ornament">
+        <div class="line-r"></div>
+        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+        <div class="line-l"></div>
+      </div>
+    </div>
+    <p class="rsvp-note">Tu presencia hace este momento más especial.<br/>Confirma antes del <strong>15 de Octubre</strong></p>
+    <div class="rsvp-fields">
+      <input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo" type="text" />
+      <input class="rsvp-input" id="rsvp-guests" placeholder="¿Cuántos asistirán?" type="number" min="1" max="5" />
+      <div class="rsvp-toggle">
+        <button class="rsvp-btn-yn active" id="btn-yes" onclick="setAttendance('yes')">💐 Sí asistiré</button>
+        <button class="rsvp-btn-yn" id="btn-no" onclick="setAttendance('no')">💔 No podré ir</button>
+      </div>
+      <p class="rsvp-error" id="rsvp-error" style="display:none"></p>
+      <button class="rsvp-submit" id="rsvp-submit" onclick="submitRSVP()">Confirmar asistencia</button>
+      <p class="rsvp-hint">Confirma antes del 15 de Octubre · Cupos limitados</p>
+    </div>
+  </div>
+  <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
 <footer>
   <div class="gold-line"></div>
-  <div class="footer-glow"></div>
-  <div class="footer-ornament">
-    <div class="line l"></div>
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-    <div class="line r"></div>
+  <div class="foot-glow"></div>
+  <div class="foot-ornament">
+    <div class="l-r"></div>
+    <img class="a1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+    <img class="a2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+    <img class="a3" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" />
+    <div class="l-l"></div>
   </div>
-  <p class="footer-quote">Con todo el amor del mundo<br>celebraremos la llegada de la<br>personita más esperada.</p>
-  <div class="footer-sig-wrap"><p class="footer-sig">Con amor, Valentina</p></div>
+  <p class="foot-note">Con todo el amor del mundo<br/>celebraremos la llegada de la<br/>personita más esperada.</p>
+  <div class="foot-signature-tag">
+    <p>Con amor, Valentina</p>
+  </div>
 </footer>
 
+<!-- ══ WATERMARK ═══════════════════════════════════════════════════════ -->
 <div class="watermark">
   <div class="gold-line"></div>
-  <img src="https://hercules-cdn.com/file_5Nlw98yeCDV1Ql9oTlbILPf5" alt="Gueka Ideas">
-  <p>Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.</p>
-  <p class="copy">© <span id="year"></span> Gueka Ideas · Todos los derechos reservados</p>
+  <img src="https://hercules-cdn.com/file_5Nlw98yeCDV1Ql9oTlbILPf5" alt="Gueka Ideas" />
+  <p class="watermark-note">Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.</p>
+  <p class="watermark-copy">© <span id="yr"></span> Gueka Ideas · Todos los derechos reservados</p>
 </div>
 
+</div><!-- .card -->
+
 <script>
-/* ── YEAR ── */
-document.getElementById('year').textContent = new Date().getFullYear();
+const ACC = "https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T";
 
-/* ── FALLING ACCORDIONS ── */
-(function(){
-  const ACC = 'https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T';
-  const sections = ['#splash','#hero','#rsvp'];
-  sections.forEach(sel => {
-    const el = document.querySelector(sel);
-    if(!el) return;
-    for(let i=0;i<8;i++){
-      const img = document.createElement('img');
-      img.src = ACC; img.alt='';
-      const size = 36 + (i*7)%28;
-      const rot = -15 + (i*13)%30;
-      img.className = 'accordion-fall';
-      img.style.cssText = `
-        left:${4+(i*9.5)%92}%;
-        width:${size}px;
-        --r:${rot}deg;
-        animation-duration:${7+(i*1.3)%6}s;
-        animation-delay:${(i*.7)%5}s;
-      `;
-      el.appendChild(img);
-    }
-  });
-})();
+// ── COPYRIGHT YEAR
+document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* ── SPLASH ── */
-function closeSplash(){
-  document.getElementById('splash').classList.add('hide');
-  setTimeout(()=>{ const s=document.getElementById('splash'); if(s) s.remove(); },900);
+// ── SPLASH
+function closeSplash() {
+  const s = document.getElementById('splash');
+  s.classList.add('hide');
+  setTimeout(() => s.remove(), 800);
 }
 
-/* ── COUNTDOWN ── */
-const TARGET = new Date('2026-10-26T15:00:00').getTime();
-function pad(n){ return String(n).padStart(2,'0'); }
-function renderCountdown(){
-  const container = document.getElementById('cntd-units');
-  const diff = TARGET - Date.now();
-  if(diff <= 0){
-    container.innerHTML = '<p style="font-family:\'Playfair Display\',serif;font-size:2rem;color:#f4c8d8;animation:pulse 1.5s infinite">🌸 ¡Ya llegó el gran día! 🌸</p>';
+// ── FALLING ACCORDIONS
+function createFallingAccordions(containerId, count) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  for (let i = 0; i < count; i++) {
+    const img = document.createElement('img');
+    img.src = ACC; img.alt = '';
+    const left   = 4 + (i * 9.5) % 92;
+    const delay  = (i * 0.7) % 5;
+    const dur    = 7 + (i * 1.3) % 6;
+    const size   = 36 + (i * 7) % 28;
+    const rotate = -15 + (i * 13) % 30;
+    img.className = 'falling-acc';
+    img.style.cssText = `left:${left}%;width:${size}px;--r0:${rotate}deg;--r1:${rotate+7}deg;--r2:${rotate-4}deg;--r3:${rotate+12}deg;--r4:${rotate}deg;animation-duration:${dur}s;animation-delay:-${delay}s;`;
+    c.appendChild(img);
+  }
+}
+createFallingAccordions('splash-falling', 10);
+createFallingAccordions('hero-falling', 10);
+
+// ── COUNTDOWN
+const EVENT = new Date("2026-10-26T15:00:00");
+function updateCountdown() {
+  const diff = Math.max(0, EVENT.getTime() - Date.now());
+  if (diff === 0) {
+    document.getElementById('flip-units').innerHTML =
+      '<p style="font-family:\'Playfair Display\',serif;font-size:2rem;color:#f4c8d8;animation:pulse 1.5s infinite">🌸 ¡Ya llegó el gran día! 🌸</p>';
     return;
   }
-  const s = Math.floor(diff/1000);
-  const units = [
-    {n:pad(Math.floor(s/86400)), label:'Días'},
-    {n:pad(Math.floor((s%86400)/3600)), label:'Horas'},
-    {n:pad(Math.floor((s%3600)/60)), label:'Min'},
-    {n:pad(s%60), label:'Seg'},
-  ];
-  units.forEach((u,i)=>{
-    if(i>0){
-      const sep = document.getElementById('cntd-sep-'+i) || (()=>{
-        const sp = document.createElement('span');
-        sp.className='cntd-sep'; sp.id='cntd-sep-'+i; sp.textContent=':';
-        container.appendChild(sp); return sp;
-      })();
-    }
-    let card = document.getElementById('flip-'+u.label);
-    if(!card){
-      const fc = document.createElement('div'); fc.className='flip-card';
-      const fb = document.createElement('div'); fb.className='flip-box';
-      const fn = document.createElement('div'); fn.className='flip-num'; fn.id='flip-'+u.label; fn.textContent=u.n;
-      const fl = document.createElement('div'); fl.className='flip-label'; fl.textContent=u.label;
-      fb.appendChild(fn); fc.appendChild(fb); fc.appendChild(fl); container.appendChild(fc);
-    } else {
-      if(card.textContent !== u.n){
-        card.style.animation='none'; card.textContent=u.n; card.offsetHeight; card.style.animation='flipNum .3s ease both';
-      }
-    }
-  });
+  const s = Math.floor(diff / 1000);
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sc = s % 60;
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(sc).padStart(2,'0');
 }
-renderCountdown();
-setInterval(renderCountdown,1000);
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-/* ── ITINERARY ── */
+// ── ITINERARY
 const ITIN = [
-  {emoji:'🌸',time:'3:00 PM',name:'Llegada y recepción',desc:'Bienvenida con floral tea y bocadillos dulces'},
-  {emoji:'🎀',time:'3:30 PM',name:'Juegos y sorpresas',desc:'Adivina la panza, lluvia de palabras y más'},
-  {emoji:'🎂',time:'4:30 PM',name:'Pastel y postres',desc:'Pastel rosa con decoración floral y mesa dulce'},
-  {emoji:'💝',time:'5:00 PM',name:'Apertura de regalos',desc:'Momentos mágicos junto a mamá'},
-  {emoji:'📸',time:'5:30 PM',name:'Fotos y recuerdos',desc:'Photobooth floral para llevarte a casa'},
+  { emoji:"🌸", time:"3:00 PM", name:"Llegada y recepción",  desc:"Bienvenida con floral tea y bocadillos dulces" },
+  { emoji:"🎀", time:"3:30 PM", name:"Juegos y sorpresas",   desc:"Adivina la panza, lluvia de palabras y más" },
+  { emoji:"🎂", time:"4:30 PM", name:"Pastel y postres",     desc:"Pastel rosa con decoración floral y mesa dulce" },
+  { emoji:"💝", time:"5:00 PM", name:"Apertura de regalos",  desc:"Momentos mágicos junto a mamá" },
+  { emoji:"📸", time:"5:30 PM", name:"Fotos y recuerdos",    desc:"Photobooth floral para llevarte a casa" },
 ];
-const itinEl = document.getElementById('itin-list');
-ITIN.forEach((item,i)=>{
-  const div = document.createElement('div'); div.className='itin-item';
-  div.innerHTML=`
-    <div class="itin-bubble">
-      <div class="ring" style="animation-delay:${i*.4}s"></div>
-      <div class="itin-bubble-emoji">${item.emoji}</div>
-      <div class="itin-bubble-num">${String(i+1).padStart(2,'0')}</div>
+const itinList = document.getElementById('itin-list');
+ITIN.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'itin-item';
+  div.innerHTML = `
+    <div class="itin-dot-wrap">
+      <div class="itin-dot">
+        <span class="emoji">${item.emoji}</span>
+        <span class="num">${String(i+1).padStart(2,'0')}</span>
+      </div>
+      <div class="itin-ring" style="animation-delay:${i*0.4}s"></div>
     </div>
-    <div class="itin-card">
-      <div class="itin-top">
+    <div class="itin-content">
+      <div class="left-bar"></div>
+      <div class="top-line"></div>
+      <div class="itin-row">
         <div class="itin-name">${item.name}</div>
         <span class="itin-time">${item.time}</span>
       </div>
       <div class="itin-desc">${item.desc}</div>
     </div>`;
-  itinEl.appendChild(div);
+  itinList.appendChild(div);
 });
 
-/* ── GIFTS ── */
+// ── GIFT PANELS
 const GIFTS = [
-  {key:'nequi',emoji:'💜',label:'Nequi',sub:'Envío digital · Colombia',color:'#7b4fa0',bg:'rgba(123,79,160,.07)',border:'rgba(123,79,160,.22)'},
-  {key:'daviplata',emoji:'🌹',label:'Daviplata',sub:'Envío digital · Colombia',color:'#c0506a',bg:'rgba(192,80,106,.07)',border:'rgba(192,80,106,.22)'},
-  {key:'pse',emoji:'✨',label:'PSE',sub:'Pago seguro en línea',color:'#b07840',bg:'rgba(176,120,64,.07)',border:'rgba(176,120,64,.22)'},
+  { key:"nequi",     emoji:"💜", label:"Nequi",     sub:"Envío digital · Colombia", color:"#7b4fa0", bg:"rgba(123,79,160,.07)",  border:"rgba(123,79,160,.22)" },
+  { key:"daviplata", emoji:"🌹", label:"Daviplata", sub:"Envío digital · Colombia", color:"#c0506a", bg:"rgba(192,80,106,.07)",  border:"rgba(192,80,106,.22)" },
+  { key:"pse",       emoji:"✨", label:"PSE",       sub:"Pago seguro en línea",     color:"#b07840", bg:"rgba(176,120,64,.07)",  border:"rgba(176,120,64,.22)"  },
 ];
-const giftListEl = document.getElementById('gift-list');
-GIFTS.forEach(g=>{
-  const wrap = document.createElement('div');
-  wrap.style.cssText=`border-radius:1rem;overflow:hidden;border:1px solid ${g.border};background:${g.bg}`;
-  const btn = document.createElement('button');
-  btn.className='gift-btn'; btn.dataset.key=g.key;
-  btn.innerHTML=`
-    <div class="gift-btn-icon">${g.emoji}</div>
-    <div>
-      <div class="gift-btn-name" style="color:${g.color}">${g.label}</div>
-      <div class="gift-btn-sub">${g.sub}</div>
-    </div>
-    <span class="gift-btn-arrow" style="color:${g.color}">▼</span>`;
-  const panel = document.createElement('div'); panel.className='gift-panel'; panel.id='panel-'+g.key;
-  panel.innerHTML=`
-    <div class="gift-panel-inner">
-      <div class="gold-line"></div>
-      <p class="gift-panel-title">${g.emoji} Pagar con ${g.label}</p>
-      <input class="gift-input" id="name-${g.key}" placeholder="Tu nombre">
-      <input class="gift-input" id="amt-${g.key}" type="number" placeholder="Monto (COP)">
-      <button class="gift-gen-btn" onclick="generateQR('${g.key}')">Generar QR de pago</button>
-      <div class="gift-qr-wrap" id="qr-${g.key}" style="display:none"></div>
+const giftList = document.getElementById('gift-list');
+GIFTS.forEach(g => {
+  const div = document.createElement('div');
+  div.className = 'gift-panel';
+  div.style.cssText = `border:1px solid ${g.border};background:${g.bg};backdrop-filter:blur(8px)`;
+  div.innerHTML = `
+    <button class="gift-header" onclick="toggleGift('${g.key}')">
+      <div class="gift-icon">${g.emoji}</div>
+      <div>
+        <div class="gift-label" style="color:${g.color}">${g.label}</div>
+        <div class="gift-sub">${g.sub}</div>
+      </div>
+      <span class="gift-arrow" id="arr-${g.key}" style="color:${g.color}">▼</span>
+    </button>
+    <div class="gift-body" id="body-${g.key}">
+      <div class="gift-inner">
+        <div class="gift-form-wrap">
+          <div class="gold-line"></div>
+          <div class="gift-form-title">${g.emoji} Pagar con ${g.label}</div>
+          <input class="gift-input" id="gname-${g.key}" placeholder="Tu nombre" type="text" />
+          <input class="gift-input" id="gamt-${g.key}" placeholder="Monto (COP)" type="number" />
+          <button class="gift-btn" onclick="generateQR('${g.key}')">Generar QR de pago</button>
+          <div class="gift-qr" id="qr-${g.key}"></div>
+        </div>
+      </div>
     </div>`;
-  btn.addEventListener('click',()=>{
-    const isOpen = panel.classList.contains('open');
-    document.querySelectorAll('.gift-panel').forEach(p=>p.classList.remove('open'));
-    document.querySelectorAll('.gift-btn').forEach(b=>b.classList.remove('open'));
-    if(!isOpen){ panel.classList.add('open'); btn.classList.add('open'); }
-  });
-  wrap.appendChild(btn); wrap.appendChild(panel); giftListEl.appendChild(wrap);
+  giftList.appendChild(div);
 });
-function generateQR(key){
-  const name = document.getElementById('name-'+key).value || 'Invitado';
-  const amt  = document.getElementById('amt-'+key).value  || '0';
+
+function toggleGift(key) {
+  const body = document.getElementById('body-'+key);
+  const arr  = document.getElementById('arr-'+key);
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.gift-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.gift-arrow').forEach(a => a.classList.remove('open'));
+  if (!isOpen) { body.classList.add('open'); arr.classList.add('open'); }
+}
+
+function generateQR(key) {
+  const name = document.getElementById('gname-'+key).value || 'Invitado';
+  const amt  = document.getElementById('gamt-'+key).value  || '0';
   const text = `PAGO ${key.toUpperCase()} | ${name} | COP ${amt}`;
   const wrap = document.getElementById('qr-'+key);
-  wrap.innerHTML=''; wrap.style.display='flex';
-  new QRCode(wrap,{text,width:200,height:200,colorDark:'#2e1a26',colorLight:'#fff5f8',correctLevel:QRCode.CorrectLevel.M});
-  setTimeout(()=>{ const c=wrap.querySelector('canvas,img'); if(c) c.style.cssText='border-radius:1rem;box-shadow:0 8px 28px rgba(0,0,0,.12)'; },100);
+  wrap.innerHTML = '';
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  QRCode.toCanvas(canvas, text, { width:200, margin:1, color:{dark:'#2e1a26',light:'#fff8fc'} });
 }
 
-/* ── RSVP ── */
-let rsvpDone=false, rsvpAttendance='yes';
-function renderRSVP(){
-  const el=document.getElementById('rsvp-content');
-  if(rsvpDone){
-    el.innerHTML=`
-      <div class="rsvp-done">
-        <img class="acc-done" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-        <img class="baby-done" src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="">
-        <h3 class="rsvp-done-title">¡Gracias!</h3>
-        <p class="rsvp-done-msg">Tu respuesta ha sido registrada.<br>¡Te esperamos con mucho amor! 🌸</p>
-      </div>`;
-    return;
-  }
-  el.innerHTML=`
-    <div class="section-heading">
-      <p class="section-kicker">Confirma tu presencia</p>
-      <h2 class="section-title">¿Nos acompañas?</h2>
-      <div class="section-divider">
-        <div class="line l"></div>
-        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="">
-        <div class="line r"></div>
-      </div>
-    </div>
-    <p class="rsvp-desc">Tu presencia hace este momento más especial.<br>Confirma antes del <strong style="color:#c04070">15 de Octubre</strong></p>
-    <input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo">
-    <input class="rsvp-input" id="rsvp-guests" type="number" min="1" max="5" placeholder="¿Cuántos asistirán?">
-    <div class="rsvp-toggle">
-      <button class="rsvp-toggle-btn ${rsvpAttendance==='yes'?'sel':''}" onclick="setAtt('yes')">💐 Sí asistiré</button>
-      <button class="rsvp-toggle-btn ${rsvpAttendance==='no'?'sel':''}" onclick="setAtt('no')">💔 No podré ir</button>
-    </div>
-    <div id="rsvp-error" class="rsvp-error" style="display:none"></div>
-    <button class="rsvp-submit" id="rsvp-btn" onclick="submitRSVP()">Confirmar asistencia</button>
-    <p class="rsvp-hint">Confirma antes del 15 de Octubre · Cupos limitados</p>`;
+// ── RSVP
+let attendance = 'yes';
+function setAttendance(v) {
+  attendance = v;
+  document.getElementById('btn-yes').classList.toggle('active', v==='yes');
+  document.getElementById('btn-no').classList.toggle('active', v==='no');
 }
-function setAtt(v){
-  rsvpAttendance=v;
-  document.querySelectorAll('.rsvp-toggle-btn').forEach((b,i)=>{
-    b.classList.toggle('sel',(i===0&&v==='yes')||(i===1&&v==='no'));
-  });
-}
-function submitRSVP(){
-  const name=(document.getElementById('rsvp-name')||{}).value?.trim();
-  const err=document.getElementById('rsvp-error');
-  if(!name){ err.textContent='Por favor ingresa tu nombre'; err.style.display='block'; return; }
+
+function submitRSVP() {
+  const name = document.getElementById('rsvp-name').value.trim();
+  const err  = document.getElementById('rsvp-error');
+  const btn  = document.getElementById('rsvp-submit');
+  if (!name) { err.textContent = 'Por favor ingresa tu nombre'; err.style.display='block'; return; }
   err.style.display='none';
-  const btn=document.getElementById('rsvp-btn');
-  btn.disabled=true; btn.textContent='Enviando…';
-  setTimeout(()=>{ rsvpDone=true; renderRSVP(); },900);
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  setTimeout(() => {
+    const inner = document.getElementById('rsvp-inner');
+    inner.innerHTML = `
+      <div class="rsvp-success">
+        <img class="rsvp-acc-thanks" src="${ACC}" alt="" />
+        <img class="rsvp-baby" src="https://hercules-cdn.com/file_xryd5HqcdDG27D8bFHoGtOOl" alt="" />
+        <h3>¡Gracias!</h3>
+        <p>Tu respuesta ha sido registrada.<br/>¡Te esperamos con mucho amor! 🌸</p>
+      </div>`;
+  }, 900);
 }
-renderRSVP();
 </script>
 </body>
 </html>
