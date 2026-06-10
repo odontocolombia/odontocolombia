@@ -1,600 +1,797 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Baby Shower · Mateo José</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Lato', sans-serif; background: #f3faf6; color: #0e2e1a; overflow-x: hidden; }
-    #app { max-width: 480px; margin: 0 auto; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Baby Shower · Mateo José</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fffbf0;font-family:'Quicksand',sans-serif;color:#3a2800;overflow-x:hidden}
+button{font-family:'Quicksand',sans-serif;cursor:pointer}
+a{text-decoration:none}
+input,button{outline:none}
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: rgba(100,180,130,.4); border-radius: 99px; }
+/* ── variables ── */
+:root{
+  --gold:#c8900a;--goldLt:#e8c840;--goldDk:#a06400;--amber:#e07820;
+  --cream:#fffbf0;--creamAlt:#fff8e0;--brown:#3a2800;
+  --brownMd:#a08030;--brownLt:#c4a060;--dark1:#2a1a00;--dark2:#3e2600;
+}
 
-    /* SPLASH */
-    #splash {
-      position: fixed; inset: 0; z-index: 50;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, #f4faf6 0%, #e8f5ee 50%, #ddf0e6 100%);
-      cursor: pointer; user-select: none; overflow: hidden;
-      transition: opacity .75s ease, transform .75s ease;
-    }
-    #splash.fade-out { opacity: 0; transform: scale(1.06); pointer-events: none; }
+/* ── keyframes ── */
+@keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:.5}90%{opacity:.3}100%{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinRev{to{transform:rotate(-360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes expandLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rotateRing{to{transform:rotate(360deg)}}
+@keyframes timelineDraw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes tickFlip{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes confettiRise{to{opacity:0;transform:translateY(-120px) scale(.5)}}
+@keyframes glowBorder{0%,100%{border-color:rgba(232,200,64,.4)}50%{border-color:rgba(232,200,64,.9)}}
+@keyframes shine{to{transform:translateX(300%)}}
 
-    .gold-line {
-      position: relative; height: 1px; width: 100%; overflow: hidden;
-      background: linear-gradient(to right, transparent, rgba(180,210,160,.6), rgba(210,230,180,.9), rgba(180,210,160,.6), transparent);
-    }
-    .gold-line::after {
-      content: ''; position: absolute; inset-block: 0; width: 33%;
-      background: linear-gradient(to right, transparent, rgba(220,240,200,.8), transparent);
-      animation: shimmer 2.4s ease-in-out infinite;
-      animation-delay: 1.5s;
-    }
-    @keyframes shimmer { 0% { left: -33%; } 100% { left: 133%; } }
+/* ── shimmer text ── */
+.shimmer{
+  background:linear-gradient(90deg,var(--goldDk) 0%,var(--goldLt) 40%,#fff8a0 50%,var(--goldLt) 60%,var(--goldDk) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 3s linear infinite;
+}
 
-    /* falling accordions */
-    .accordion-fall {
-      position: absolute; top: -80px; opacity: .15;
-      animation: fall linear infinite;
-    }
-    @keyframes fall {
-      0%   { transform: translateY(0)     translateX(0)  rotate(var(--rot)); }
-      25%  { transform: translateY(27.5vh) translateX(18px) rotate(calc(var(--rot) + 20deg)); }
-      50%  { transform: translateY(55vh)  translateX(-14px) rotate(calc(var(--rot) - 10deg)); }
-      75%  { transform: translateY(82.5vh) translateX(8px) rotate(calc(var(--rot) + 5deg)); }
-      100% { transform: translateY(110vh) translateX(0)  rotate(var(--rot)); }
-    }
+/* ── floating petals ── */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;top:-40px;user-select:none;animation:floatUp linear infinite}
 
-    .float { animation: floatY 3s ease-in-out infinite; }
-    @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+/* ── app wrapper ── */
+#app{max-width:480px;margin:0 auto;position:relative;background:var(--cream)}
 
-    .spin-slow { animation: spinSlow 3s ease-in-out infinite; }
-    @keyframes spinSlow { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+/* ── splash ── */
+#splash{
+  position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;overflow:hidden;
+  background:linear-gradient(135deg,#fffbf0,#fff8d0,#fffbf0,#fff3c0);
+  background-size:400% 400%;
+  animation:gradShift 4s ease infinite;
+  transition:opacity .9s ease,transform .9s ease;
+}
+#splash.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+#splash img.floral{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;pointer-events:none}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(232,200,64,.25);animation:rotateRing 20s linear infinite}
+.ring2{position:absolute;border-radius:50%;border:1px dashed rgba(200,144,10,.2);animation:rotateRing 14s linear infinite reverse}
+#splash .content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:2rem}
+.kicker{font-size:.55rem;letter-spacing:.65em;text-transform:uppercase;font-weight:700;color:var(--goldDk);margin-bottom:.5rem}
+.splash-title{font-family:'Pacifico',cursive;font-size:3.6rem;line-height:1.1;animation:scaleIn .5s ease both .4s}
+.splash-de{font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--brownLt);margin-top:.25rem}
+.splash-name{font-family:'Pacifico',cursive;font-size:2.2rem;color:var(--amber);margin-top:.25rem;animation:fadeInLeft .5s ease both .7s}
+.divider-row{display:flex;align-items:center;gap:.75rem;margin:1rem 0;width:100%;max-width:220px;animation:fadeInUp .5s ease both .9s}
+.div-line{flex:1;height:1px}
+.div-line.left{background:linear-gradient(to right,transparent,var(--goldLt))}
+.div-line.right{background:linear-gradient(to left,transparent,var(--goldLt))}
+.rot-flower{color:var(--goldLt);animation:spin 10s linear infinite;display:inline-block}
+.splash-baby{width:170px;height:auto;filter:drop-shadow(0 16px 36px rgba(200,144,10,.25));animation:bob 3s ease-in-out infinite,scaleIn .5s ease both 1s}
+.splash-date{font-size:.75rem;letter-spacing:.2em;margin-top:.5rem;color:var(--brownMd);animation:fadeInUp .4s ease both 1.2s}
+.tap-btn{
+  margin-top:1.75rem;padding:.7rem 1.75rem;border-radius:999px;color:var(--gold);
+  border:1px solid rgba(200,144,10,.4);background:rgba(255,253,230,.9);
+  font-size:.62rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;
+  animation:pulse 2s ease infinite 1.4s;
+}
 
-    .blink { animation: blink 2.4s ease-in-out infinite; }
-    @keyframes blink { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+/* ── section ── */
+section,footer{position:relative;overflow:hidden}
+.floral-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.z1{position:relative;z-index:1}
 
-    .colon-blink { animation: blink 1s ease-in-out infinite; }
+/* ── section header ── */
+.sec-kicker{font-size:.55rem;letter-spacing:.65em;text-transform:uppercase;font-weight:700;color:var(--goldDk);text-align:center;margin-bottom:.4rem}
+.sec-title{font-family:'Pacifico',cursive;font-size:2.4rem;text-align:center;margin-bottom:0}
+.sec-divider{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:.75rem 0 1.75rem}
+.sd-line{height:1px;width:60px}
+.sd-line.l{background:linear-gradient(to right,transparent,var(--goldLt))}
+.sd-line.r{background:linear-gradient(to left,transparent,var(--goldLt))}
+.sd-big{color:var(--goldLt);font-size:1rem;animation:spin 8s linear infinite;display:inline-block}
+.sd-sml{color:#f0d880;font-size:.65rem;animation:pulse 2s ease-in-out infinite;display:inline-block}
+.sd-rev{color:var(--goldLt);font-size:1rem;animation:spinRev 8s linear infinite;display:inline-block}
 
-    /* sections */
-    section { padding: 2.5rem 1.25rem; }
-    .section-kicker { font-size: .58rem; letter-spacing: .6em; text-transform: uppercase; font-weight: 700; color: #4a8a63; text-align: center; margin-bottom: .5rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.1; color: #0e2e1a; letter-spacing: -.01em; text-align: center; }
-    .section-ornament { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1rem; }
-    .section-ornament .line { height: 1px; width: 64px; }
-    .section-ornament .line-l { background: linear-gradient(to right, transparent, rgba(100,180,120,.7)); }
-    .section-ornament .line-r { background: linear-gradient(to left,  transparent, rgba(100,180,120,.7)); }
+/* ── reveal helper ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.vis{opacity:1;transform:none}
+.reveal-scale{opacity:0;transform:scale(.85);transition:opacity .7s ease,transform .7s ease}
+.reveal-scale.vis{opacity:1;transform:none}
 
-    /* date cards */
-    .date-grid { display: flex; gap: .75rem; }
-    .date-card {
-      flex: 1; border-radius: 1rem; padding: 1rem; text-align: center;
-      border: 1px solid rgba(80,180,120,.3);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 8px 36px rgba(30,110,69,.08), inset 0 1px 0 rgba(255,255,255,.9);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .date-card:hover { transform: translateY(-4px); box-shadow: 0 16px 44px rgba(30,110,69,.14); }
-    .date-card-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; line-height: 1; color: #0e2e1a; }
-    .date-card-sub { font-family: 'Playfair Display', serif; font-size: .95rem; font-style: italic; color: #507060; }
-    .date-card-label { font-size: .52rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: #4aaf78; margin-top: .5rem; }
+/* ── hero ── */
+#hero{padding:0;text-align:center}
+#hero .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,252,220,.7),rgba(255,244,180,.8),rgba(255,248,200,.6));background-size:400% 400%;animation:gradShift 6s ease infinite}
+#hero .content{position:relative;z-index:1;padding:3.5rem 1.5rem 2rem}
+#hero h1{font-family:'Pacifico',cursive;font-size:3.6rem;line-height:1.1;animation:scaleIn .5s ease both .2s}
+#hero .hero-de{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--brownLt);margin-top:.25rem}
+#hero .hero-name{font-family:'Pacifico',cursive;font-size:2.1rem;color:var(--amber);margin-top:.25rem;animation:fadeInLeft .5s ease both .45s}
+#hero .hero-divider{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1.25rem 0;animation:fadeInUp .6s ease both .6s}
+#hero .hero-divider .div-line.l2{height:1px;width:70px;background:linear-gradient(to right,transparent,var(--goldLt))}
+#hero .hero-divider .div-line.r2{height:1px;width:70px;background:linear-gradient(to left,transparent,var(--goldLt))}
+#hero .baby-wrap{animation:scaleIn .5s ease both .7s}
+#hero img.baby{width:240px;height:auto;filter:drop-shadow(0 20px 40px rgba(200,144,10,.3));animation:bob 3.5s ease-in-out infinite}
+.date-chip{display:inline-block;padding:.875rem 2rem;border-radius:999px;background:rgba(255,255,255,.88);border:1px solid rgba(232,200,64,.45);backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(200,144,10,.2);margin-top:1rem;animation:fadeInUp .5s ease both .85s;transition:transform .2s,box-shadow .2s}
+.date-chip:hover{transform:scale(1.03);box-shadow:0 12px 48px rgba(200,144,10,.35)}
+.date-chip p:first-child{font-family:'Pacifico',cursive;font-size:1.7rem;color:var(--amber)}
+.date-chip p:last-child{font-size:.68rem;letter-spacing:.18em;color:var(--brownMd);margin-top:.25rem}
+.scallop{display:block;width:100%;position:relative;z-index:2;margin-top:-1px}
 
-    /* countdown */
-    #countdown-section {
-      background: linear-gradient(150deg, #0a2818 0%, #0d3320 55%, #061a10 100%);
-      padding: 3.5rem 1.25rem; text-align: center; position: relative; overflow: hidden;
-    }
-    .flip-box {
-      min-width: 72px; padding: 1rem; border-radius: 1rem; display: inline-block;
-      background: linear-gradient(160deg, rgba(180,240,200,.14) 0%, rgba(140,210,170,.08) 100%);
-      border: 1px solid rgba(100,200,140,.3);
-      box-shadow: 0 8px 32px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12);
-      backdrop-filter: blur(16px);
-    }
-    .flip-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
-    .flip-label { font-size: .52rem; letter-spacing: .28em; text-transform: uppercase; font-weight: 700; color: #6dbf8a; margin-top: .5rem; }
-    .countdown-units { display: flex; align-items: flex-end; justify-content: center; gap: .5rem; flex-wrap: wrap; }
-    .countdown-colon { font-size: 1.8rem; font-weight: 700; color: #6dbf8a; opacity: .7; padding-bottom: 1.75rem; }
+/* ── date cards ── */
+#sec-date{padding:2.5rem 1.25rem 3rem}
+.date-cards{display:flex;gap:.75rem}
+.date-card{flex:1;border-radius:1.25rem;padding:1.25rem .5rem;text-align:center;border:1px solid rgba(232,200,64,.3);background:rgba(255,255,255,.9);box-shadow:0 8px 32px rgba(200,144,10,.1);backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.date-card:hover{transform:scale(1.05);box-shadow:0 16px 48px rgba(200,144,10,.25)}
+.date-card .glow-top{position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(to right,transparent,var(--goldLt),transparent);border-radius:999px}
+.date-card .dc-emoji{font-size:1.6rem;margin-bottom:.5rem;display:block;animation:pulse 3s ease-in-out infinite}
+.date-card .dc-num{font-family:'Pacifico',cursive;font-size:2.6rem;line-height:1;color:var(--gold)}
+.date-card .dc-sub{font-family:'Dancing Script',cursive;font-size:1.05rem;color:var(--goldDk)}
+.date-card .dc-lbl{font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:var(--goldLt);margin-top:.5rem}
 
-    /* location */
-    .map-card { border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(80,180,120,.28); background: #fff; box-shadow: 0 20px 64px rgba(30,110,69,.1); }
-    .map-card iframe { width: 100%; border: none; display: block; height: 210px; }
-    .btn-green {
-      display: flex; align-items: center; justify-content: center; gap: .5rem;
-      width: 100%; padding: .875rem; border-radius: 1rem;
-      color: #fff; font-size: .875rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-      text-decoration: none; background: linear-gradient(135deg, #2e9460, #1e6e45);
-      box-shadow: 0 6px 22px rgba(30,110,69,.35); transition: transform .2s;
-    }
-    .btn-green:hover { transform: scale(1.02); }
+/* ── countdown ── */
+#sec-countdown{padding:4rem 1.25rem;text-align:center;background:linear-gradient(150deg,var(--dark1),var(--dark2),var(--dark1));background-size:400% 400%;animation:gradShift 5s ease infinite}
+#sec-countdown .floral-top{position:absolute;top:0;left:0;right:0;width:100%;height:80px;object-fit:cover;object-position:top;opacity:.25;pointer-events:none}
+#sec-countdown .floral-bot{position:absolute;bottom:0;left:0;right:0;width:100%;height:80px;object-fit:cover;object-position:bottom;opacity:.25;pointer-events:none}
+#sec-countdown .dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+#sec-countdown .orbit{position:absolute;top:50%;left:50%;width:300px;height:300px;margin-left:-150px;margin-top:-150px;border-radius:50%;border:1px solid rgba(232,200,64,.1);animation:rotateRing 20s linear infinite}
+#sec-countdown .cd-kicker{font-size:.58rem;letter-spacing:.55em;text-transform:uppercase;font-weight:700;color:var(--goldLt);margin-bottom:.3rem}
+#sec-countdown h2{font-family:'Dancing Script',cursive;font-size:2.8rem;color:#f8e88a;margin-bottom:2.25rem}
+.countdown-row{display:flex;align-items:flex-end;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.cd-unit{display:flex;align-items:flex-end;gap:.5rem}
+.cd-box{text-align:center}
+.cd-glass{min-width:72px;padding:1rem .5rem;border-radius:1.25rem;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.05));box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15),0 0 20px rgba(200,144,10,.3);border:1px solid rgba(232,200,64,.35);backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:transform .2s}
+.cd-glass:hover{transform:scale(1.06)}
+.cd-shine{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);animation:shine 2.5s ease-in-out infinite;transform:translateX(-100%)}
+.cd-num{font-family:'Pacifico',cursive;font-size:2.6rem;color:#fff;line-height:1;position:relative}
+.cd-lbl{font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--goldLt);margin-top:.5rem}
+.cd-sep{font-size:2rem;font-weight:900;color:var(--goldLt);padding-bottom:1.8rem;animation:blink 1s ease-in-out infinite}
 
-    /* itinerary */
-    .itin-line {
-      position: absolute; left: 27px; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(to bottom, transparent, rgba(80,180,120,.8) 8%, rgba(30,110,69,.5) 50%, rgba(80,180,120,.8) 92%, transparent);
-    }
-    .itin-list { position: relative; display: flex; flex-direction: column; }
-    .itin-item { display: flex; align-items: flex-start; gap: 1.25rem; padding-bottom: 2rem; }
-    .itin-item:last-child { padding-bottom: 0; }
-    .itin-dot {
-      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; z-index: 1;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #4aaf78, #1e6e45);
-      box-shadow: 0 6px 20px rgba(30,110,69,.4);
-    }
-    .itin-dot span { font-size: .48rem; font-weight: 700; color: rgba(255,255,255,.85); margin-top: 2px; }
-    .itin-card {
-      flex: 1; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: .25rem;
-      background: rgba(255,255,255,.94); border: 1px solid rgba(80,180,120,.2);
-      box-shadow: 0 4px 20px rgba(30,110,69,.07); position: relative; overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .itin-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(30,110,69,.13); }
-    .itin-card .left-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: .25rem 0 0 .25rem; background: linear-gradient(to bottom, #4aaf78, #2e9460, #4aaf78); }
-    .itin-card-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: .875rem; color: #0e2e1a; }
-    .itin-card-time { font-size: .56rem; font-weight: 700; padding: .25rem .75rem; border-radius: 999px; color: #fff; background: linear-gradient(135deg, #4aaf78, #1e6e45); }
-    .itin-card-desc { font-size: .75rem; color: #507060; line-height: 1.6; padding-left: .5rem; }
+/* ── location ── */
+#sec-location{padding:2.5rem 1.25rem 3rem;background:var(--creamAlt)}
+.loc-card{border-radius:1.5rem;overflow:hidden;border:1px solid rgba(232,200,64,.3);background:#fff;box-shadow:0 24px 72px rgba(200,144,10,.12);transition:box-shadow .3s}
+.loc-card:hover{box-shadow:0 28px 80px rgba(200,144,10,.22)}
+.loc-header{display:flex;align-items:center;gap:1rem;padding:1.25rem}
+.loc-icon{width:58px;height:58px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;background:linear-gradient(135deg,var(--goldLt),var(--gold));box-shadow:0 8px 24px rgba(180,130,0,.4);animation:pulse 2s ease-in-out infinite}
+.loc-title{font-family:'Pacifico',cursive;font-size:1.4rem;color:var(--gold)}
+.loc-addr{font-size:.75rem;margin-top:.25rem;line-height:1.5;color:var(--brownMd)}
+.loc-card iframe{width:100%;border:none;display:block;height:220px}
+.loc-footer{padding:1rem}
+.loc-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem;border-radius:1rem;color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,var(--goldLt),var(--gold));box-shadow:0 8px 28px rgba(160,100,0,.35);border:none;transition:transform .2s,box-shadow .2s}
+.loc-btn:hover{transform:scale(1.02);box-shadow:0 12px 40px rgba(160,100,0,.5)}
 
-    /* gifts */
-    .gift-panel { border-radius: 1rem; overflow: hidden; margin-bottom: .75rem; }
-    .gift-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; cursor: pointer; background: transparent; width: 100%; text-align: left; border: none; }
-    .gift-icon { width: 44px; height: 44px; border-radius: .75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; background: rgba(255,255,255,.88); box-shadow: 0 2px 10px rgba(0,0,0,.07); }
-    .gift-label { font-family: 'Playfair Display', serif; font-size: .875rem; font-weight: 700; }
-    .gift-sub { font-size: .72rem; margin-top: 2px; color: #507060; }
-    .gift-chevron { margin-left: auto; font-size: .8rem; transition: transform .3s; }
-    .gift-chevron.open { transform: rotate(180deg); }
-    .gift-body { overflow: hidden; max-height: 0; transition: max-height .35s ease; }
-    .gift-body.open { max-height: 600px; }
-    .gift-inner { padding: .25rem 1rem 1.25rem; }
-    .gift-form { background: rgba(255,255,255,.95); border: 1px solid rgba(100,180,120,.2); border-radius: 1rem; padding: 1.25rem; box-shadow: 0 12px 40px rgba(30,110,69,.07); }
-    .gift-input {
-      width: 100%; padding: .75rem 1rem; border-radius: .75rem; border: 1px solid rgba(80,160,100,.25);
-      background: #f3faf6; color: #0e2e1a; font-family: 'Lato', sans-serif; font-size: .875rem;
-      outline: none; display: block; margin-bottom: .75rem;
-    }
-    .qr-result { display: flex; justify-content: center; margin-top: 1.25rem; }
-    .qr-result img { border-radius: 1rem; box-shadow: 0 8px 28px rgba(0,0,0,.12); }
+/* ── gallery ── */
+#sec-gallery{padding:2.5rem 1.25rem 3rem}
+.gallery-main{position:relative;border-radius:1.5rem;overflow:hidden;box-shadow:0 24px 72px rgba(200,144,10,.25),0 0 0 1px rgba(232,200,64,.3);height:240px}
+.gallery-img{position:absolute;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease,transform .5s ease}
+.gallery-img.active{opacity:1;z-index:1}
+.gallery-img.prev-slide{opacity:0;z-index:0;transform:translateX(-100%)}
+.gallery-img.next-slide{opacity:0;z-index:0;transform:translateX(100%)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1rem .875rem;background:linear-gradient(to top,rgba(42,26,0,.7),transparent);z-index:2}
+.gallery-caption p{font-family:'Dancing Script',cursive;font-size:1.15rem;color:#fff;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.gallery-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);border:1px solid rgba(232,200,64,.5);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--gold);z-index:3;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform .2s,background .2s}
+.gallery-btn:hover{transform:translateY(-50%) scale(1.15);background:#fff}
+.gallery-btn.prev{left:10px}
+.gallery-btn.next{right:10px}
+.gallery-counter{position:absolute;top:12px;right:14px;padding:.2rem .7rem;border-radius:999px;background:rgba(255,255,255,.9);font-size:.6rem;font-weight:700;color:var(--gold);letter-spacing:.1em;z-index:3}
+.gallery-thumbs{display:flex;gap:.5rem;margin-top:.875rem;justify-content:center}
+.thumb{width:50px;height:50px;border-radius:.75rem;overflow:hidden;border:2.5px solid rgba(232,200,64,.25);padding:0;flex-shrink:0;transition:transform .2s,opacity .2s,border-color .2s;opacity:.55}
+.thumb.active{border-color:var(--gold);opacity:1}
+.thumb:hover{transform:scale(1.1)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-dots{display:flex;gap:.5rem;justify-content:center;margin-top:.75rem}
+.dot{height:8px;border-radius:999px;border:none;background:rgba(232,200,64,.3);padding:0;transition:width .3s,background .3s;width:8px}
+.dot.active{background:var(--gold);width:24px}
 
-    /* rsvp */
-    #rsvp-section { background: linear-gradient(160deg, #eaf7f0 0%, #d6f0e4 55%, #c8ecd8 100%); padding: 3.5rem 1.25rem; position: relative; overflow: hidden; }
-    .rsvp-input { width: 100%; padding: .875rem 1rem; border-radius: .75rem; border: 1px solid rgba(80,160,100,.25); background: rgba(255,255,255,.88); color: #0e2e1a; font-family: 'Lato', sans-serif; font-size: .875rem; outline: none; display: block; margin-bottom: .75rem; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
-    .rsvp-radio { display: flex; gap: .75rem; margin-bottom: .75rem; }
-    .rsvp-btn { flex: 1; padding: .75rem; border-radius: .75rem; border: 1.5px solid rgba(80,160,100,.2); background: rgba(255,255,255,.6); color: #507060; font-family: 'Lato', sans-serif; font-weight: 500; font-size: .875rem; cursor: pointer; transition: all .2s; }
-    .rsvp-btn.active { border-color: #1e6e45; background: rgba(30,110,69,.1); color: #1e6e45; }
+/* ── itinerary ── */
+#sec-itinerary{padding:2.5rem 1.25rem 3rem}
+.timeline{position:relative;display:flex;flex-direction:column}
+.tl-line{position:absolute;left:27px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--goldLt) 8%,rgba(160,100,0,.4) 50%,var(--goldLt) 92%,transparent);transform-origin:top;animation:timelineDraw 1.5s ease both .3s}
+.tl-item{display:flex;align-items:flex-start;gap:1.25rem;padding-bottom:2rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{width:56px;height:56px;border-radius:50%;flex-shrink:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--goldLt),var(--gold));box-shadow:0 8px 24px rgba(180,130,0,.4);position:relative;transition:transform .2s,box-shadow .2s}
+.tl-dot:hover{transform:scale(1.12) rotate(5deg)}
+.tl-pulse{position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--goldLt);animation:pulse 2.5s ease-in-out infinite}
+.tl-dot span.emoji{font-size:1.1rem;line-height:1}
+.tl-dot span.num{font-size:.44rem;font-weight:700;color:rgba(255,255,255,.9);margin-top:2px}
+.tl-card{flex:1;border-radius:1.25rem;padding:1rem 1.25rem;margin-top:.25rem;background:rgba(255,255,255,.92);border:1px solid rgba(232,200,64,.2);box-shadow:0 6px 24px rgba(200,144,10,.1);position:relative;overflow:hidden;backdrop-filter:blur(8px);transition:transform .2s,box-shadow .2s}
+.tl-card:hover{transform:translateX(4px);box-shadow:0 10px 36px rgba(200,144,10,.2)}
+.tl-card .bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:.25rem 0 0 .25rem;background:linear-gradient(to bottom,var(--goldLt),var(--gold),var(--goldLt))}
+.tl-card .row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem;padding-left:.5rem}
+.tl-card .item-name{font-weight:700;font-size:.875rem;color:var(--brown)}
+.tl-card .time-badge{font-size:.52rem;font-weight:700;padding:.25rem .75rem;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--goldLt),var(--gold));animation:pulse 2s ease-in-out infinite}
+.tl-card .item-desc{font-size:.75rem;color:var(--brownMd);line-height:1.6;padding-left:.5rem}
 
-    /* footer */
-    footer { background: linear-gradient(170deg, #f3faf6 0%, #e8f5ee 60%, #ddf0e6 100%); padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+/* ── gifts ── */
+#sec-gifts{padding:2.5rem 1.25rem 3rem;background:var(--creamAlt)}
+.gift-panel{border-radius:1.25rem;overflow:hidden;margin-bottom:.875rem;border:1px solid rgba(232,200,64,.25);background:linear-gradient(145deg,rgba(255,253,240,.85),rgba(255,248,220,.7));backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(200,144,10,.12);transition:transform .2s,box-shadow .2s}
+.gift-panel:hover{transform:scale(1.015);box-shadow:0 12px 48px rgba(200,144,10,.22)}
+.gift-header{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.25rem;background:transparent;width:100%;text-align:left;border:none}
+.gift-icon{width:48px;height:48px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,rgba(232,200,64,.3),rgba(200,144,10,.2));border:1px solid rgba(232,200,64,.4);box-shadow:0 4px 16px rgba(200,144,10,.2)}
+.gift-label{font-family:'Dancing Script',cursive;font-size:1.2rem;font-weight:700;color:var(--gold)}
+.gift-sub{font-size:.72rem;margin-top:2px;color:var(--brownMd)}
+.gift-arrow{margin-left:auto;color:var(--goldLt);font-size:.9rem;transition:transform .35s;display:inline-block}
+.gift-arrow.open{transform:rotate(180deg)}
+.gift-body{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .4s ease;opacity:0}
+.gift-body.open{max-height:600px;opacity:1}
+.gift-inner{padding:.25rem 1rem 1.25rem}
+.gift-box{background:rgba(255,255,255,.9);border:1px solid rgba(232,200,64,.2);border-radius:1rem;padding:1.5rem;box-shadow:0 16px 48px rgba(200,144,10,.1)}
+.gift-box p{font-family:'Dancing Script',cursive;font-size:1.5rem;color:var(--gold);text-align:center;margin-bottom:1.25rem}
+.gift-input{width:100%;padding:.875rem 1rem;border-radius:.875rem;border:1px solid rgba(232,200,64,.25);background:rgba(255,253,240,.7);color:var(--brown);font-family:'Quicksand',sans-serif;font-size:.875rem;display:block;margin-bottom:.75rem;backdrop-filter:blur(8px)}
+.gift-qr-btn{width:100%;padding:.875rem;border-radius:.875rem;color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,var(--goldLt),var(--gold));border:none;font-family:'Quicksand',sans-serif;box-shadow:0 8px 28px rgba(160,100,0,.35);transition:transform .2s,box-shadow .2s}
+.gift-qr-btn:hover{transform:scale(1.02);box-shadow:0 12px 36px rgba(160,100,0,.5)}
+.gift-qr-wrap{display:flex;justify-content:center;margin-top:1.5rem}
+.gift-qr-wrap canvas,.gift-qr-wrap img{border-radius:1.25rem;box-shadow:0 12px 40px rgba(0,0,0,.15)}
 
-    /* watermark */
-    .watermark { padding: 2rem 1.5rem; text-align: center; background: #e2f2e8; border-top: 1px solid rgba(80,180,120,.2); }
+/* ── rsvp ── */
+#sec-rsvp{padding:3.5rem 1.25rem 4rem}
+#sec-rsvp .rsvp-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,248,210,.88),rgba(255,236,160,.88),rgba(255,220,120,.88));background-size:400% 400%;animation:gradShift 5s ease infinite}
+.rsvp-sub{font-size:.875rem;font-style:italic;text-align:center;margin-bottom:1.75rem;line-height:1.85;color:var(--brownMd)}
+.rsvp-input{width:100%;padding:.9rem 1rem;border-radius:.875rem;border:1px solid rgba(232,200,64,.3);background:rgba(255,255,255,.85);color:var(--brown);font-family:'Quicksand',sans-serif;font-size:.875rem;display:block;margin-bottom:.75rem;box-shadow:0 2px 12px rgba(200,144,10,.06);backdrop-filter:blur(8px)}
+.rsvp-toggle{display:flex;gap:.75rem;margin-bottom:.875rem}
+.toggle-btn{flex:1;padding:.875rem;border-radius:.875rem;border:1.5px solid rgba(232,200,64,.25);background:rgba(255,255,255,.65);color:var(--brownMd);font-weight:600;font-size:.875rem;backdrop-filter:blur(8px);transition:all .2s}
+.toggle-btn.active{border-color:var(--gold);background:rgba(200,144,10,.12);color:var(--gold)}
+.rsvp-error{font-size:.75rem;color:var(--goldDk);margin-bottom:.6rem}
+.rsvp-submit{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:1rem;border-radius:1rem;color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,var(--goldLt),var(--gold));border:none;font-family:'Quicksand',sans-serif;box-shadow:0 8px 28px rgba(160,100,0,.35);transition:transform .2s,box-shadow .2s}
+.rsvp-submit:hover{transform:scale(1.02);box-shadow:0 14px 40px rgba(160,100,0,.5)}
+.rsvp-note{font-size:.62rem;text-align:center;margin-top:.4rem;letter-spacing:.08em;color:var(--brownMd)}
+#rsvp-thanks{display:none;text-align:center;padding:1.5rem 0;position:relative}
+#rsvp-thanks h3{font-family:'Dancing Script',cursive;font-size:3.2rem;color:var(--gold)}
+#rsvp-thanks p{font-size:.875rem;font-style:italic;margin-top:.6rem;line-height:1.85;color:var(--brownMd)}
+#rsvp-thanks img{width:120px;height:auto;margin:0 auto 1.25rem;display:block;filter:drop-shadow(0 10px 24px rgba(200,144,10,.25));animation:bob 3s ease-in-out infinite}
+.confetti-piece{position:absolute;font-size:1.4rem;pointer-events:none;animation:confettiRise 1.5s ease-out both}
 
-    /* name tag */
-    .name-tag { display: inline-block; padding: .75rem 1.75rem; border-radius: 999px; background: rgba(255,255,255,.75); border: 1px solid rgba(80,180,120,.4); backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(30,110,69,.12); }
-    .name-italic { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; color: #1e6e45; text-shadow: 0 2px 16px rgba(30,110,69,.2); }
+/* ── footer ── */
+footer{padding:4rem 1.5rem 3rem;text-align:center}
+footer .foot-bg{position:absolute;inset:0;background:linear-gradient(170deg,rgba(255,252,230,.82),rgba(255,248,200,.88),rgba(255,236,160,.88))}
+.foot-content{position:relative;z-index:1}
+.foot-msg{font-style:italic;font-size:1.05rem;line-height:2.1;margin-bottom:1.5rem;color:var(--brownMd)}
+.foot-sig{display:inline-block;padding:.875rem 2rem;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid rgba(232,200,64,.45);backdrop-filter:blur(16px);box-shadow:0 8px 32px rgba(200,144,10,.2);animation:pulse 3s ease-in-out infinite}
+.foot-sig p{font-family:'Dancing Script',cursive;font-size:2rem;color:var(--gold)}
 
-    /* hero wave bg */
-    #hero { background: linear-gradient(170deg, #eaf7f0 0%, #d6f0e4 55%, #c8ecd8 100%); position: relative; overflow: hidden; text-align: center; padding: 3.5rem 1.5rem 4rem; }
-    #hero svg.wave { position: absolute; bottom: 0; left: 0; width: 100%; }
-
-    .hero-divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0 .5rem; }
-    .hero-divider .line { height: 1px; flex: 1; max-width: 80px; }
-  </style>
+/* ── watermark ── */
+#watermark{position:relative;overflow:hidden;padding:2.25rem 1.5rem;text-align:center;border-top:1px solid rgba(232,200,64,.2)}
+#watermark::before{content:'';position:absolute;inset:0;background:#fff8cc}
+#watermark .floral-bg{opacity:.08}
+#watermark .wm-inner{position:relative;z-index:1}
+#watermark img{width:180px;margin:0 auto 1rem;display:block;opacity:.8;transition:opacity .2s,transform .2s}
+#watermark img:hover{opacity:1;transform:scale(1.04)}
+#watermark .wm-legal{font-size:.63rem;line-height:1.7;max-width:320px;margin:0 auto;color:rgba(58,40,0,.42)}
+#watermark .wm-copy{font-size:.58rem;margin-top:.5rem;color:rgba(58,40,0,.28)}
+</style>
 </head>
 <body>
+<div id="petals"></div>
 <div id="app">
 
-  <!-- SPLASH -->
-  <div id="splash" onclick="closeSplash()">
-    <div class="gold-line" style="position:absolute;top:0;left:0;right:0;"></div>
-    <div id="splash-accordions"></div>
-
-    <!-- corner ornaments -->
-    <img id="c1" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:12px;left:12px;width:56px;height:auto;opacity:.3;transform:rotate(-20deg);animation:floatY 3.5s ease-in-out infinite;" />
-    <img id="c2" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:12px;right:12px;width:56px;height:auto;opacity:.3;transform:rotate(15deg);animation:floatY 3.9s ease-in-out infinite .3s;" />
-    <img id="c3" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:12px;left:12px;width:56px;height:auto;opacity:.3;transform:rotate(10deg);animation:floatY 4.3s ease-in-out infinite .6s;" />
-    <img id="c4" src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:12px;right:12px;width:56px;height:auto;opacity:.3;transform:rotate(-10deg);animation:floatY 3.7s ease-in-out infinite .9s;" />
-
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 65% at 50% 50%, rgba(100,200,140,.18) 0%, transparent 70%);pointer-events:none;"></div>
-
-    <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 2rem;">
-      <p style="font-size:.58rem;letter-spacing:.65em;text-transform:uppercase;font-weight:700;color:#2e7d52;margin-bottom:.75rem;">Una celebración especial</p>
-      <h1 style="font-family:'Playfair Display',serif;font-size:3.8rem;line-height:1;color:#0e2e1a;letter-spacing:-.02em;text-shadow:0 4px 28px rgba(30,110,69,.18);">Baby Shower</h1>
-
-      <div style="display:flex;align-items:center;gap:.75rem;margin:1rem 0;width:100%;max-width:220px;">
-        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(100,180,120,.8));"></div>
-        <span style="color:#4aaf78;font-size:.65rem;">✦</span>
-        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(100,180,120,.8));"></div>
-      </div>
-
-      <div class="float">
-        <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="Bebé niño" style="width:180px;height:auto;filter:drop-shadow(0 20px 40px rgba(30,110,69,.25));" />
-      </div>
-
-      <p style="font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#1e6e45;line-height:1.1;text-shadow:0 2px 20px rgba(30,110,69,.2);margin-top:.5rem;">Mateo José</p>
-      <p style="font-size:.72rem;letter-spacing:.22em;margin-top:.5rem;color:#507060;">26 de Octubre · 2026 · 3:00 PM</p>
-
-      <div class="blink" style="margin-top:1.5rem;padding:.625rem 1.5rem;border-radius:999px;color:#1e6e45;border:1px solid rgba(30,110,69,.3);background:linear-gradient(135deg,rgba(232,247,238,.7),rgba(210,240,220,.5));backdrop-filter:blur(8px);font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;">
-        ✿ Toca para abrir ✿
-      </div>
+<!-- ══ SPLASH ══ -->
+<div id="splash" onclick="closeSplash()">
+  <img class="floral" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" />
+  <div class="ring" style="width:340px;height:340px"></div>
+  <div class="ring2" style="width:280px;height:280px"></div>
+  <div class="content">
+    <p class="kicker">Una celebración especial</p>
+    <h1 class="splash-title"><span class="shimmer">Baby Shower</span></h1>
+    <p class="splash-de">de</p>
+    <p class="splash-name">Mateo José</p>
+    <div class="divider-row">
+      <span class="div-line left"></span>
+      <span class="rot-flower">✿</span>
+      <span class="div-line right"></span>
     </div>
-    <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
+    <img class="splash-baby" src="https://hercules-cdn.com/file_aH6w5m77WGl1tHAv1akJ5OXc" alt="Bebé" />
+    <p class="splash-date">26 de Octubre · 2026 · 3:00 PM</p>
+    <div class="tap-btn">✿ Toca para abrir ✿</div>
   </div>
+</div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div id="hero-accordions"></div>
-    <div class="gold-line"></div>
-    <div style="position:absolute;top:0;left:0;width:260px;height:260px;background:radial-gradient(circle,rgba(100,210,150,.3) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
-    <div style="position:absolute;bottom:40px;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(80,180,200,.22) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.55" />
+  <div class="content">
+    <p class="kicker">Estás invitado</p>
+    <h1><span class="shimmer">Baby Shower</span></h1>
+    <p class="hero-de">de</p>
+    <p class="hero-name">Mateo José</p>
+    <div class="hero-divider">
+      <span class="div-line l2"></span>
+      <span class="rot-flower" style="font-size:1.1rem">✿</span>
+      <span style="color:#f0d880;font-size:.7rem;animation:pulse 1.5s ease-in-out infinite;display:inline-block">✿</span>
+      <span class="rot-flower" style="font-size:1.1rem;animation-direction:reverse">✿</span>
+      <span class="div-line r2"></span>
+    </div>
+    <div class="baby-wrap">
+      <img class="baby" src="https://hercules-cdn.com/file_aH6w5m77WGl1tHAv1akJ5OXc" alt="Bebé niña" />
+    </div>
+    <div class="date-chip">
+      <p>Mateo José</p>
+      <p>26 Octubre · 2026 · 3:00 PM</p>
+    </div>
+  </div>
+  <svg class="scallop" viewBox="0 0 480 64" preserveAspectRatio="none">
+    <path d="M0,0 C20,44 60,44 80,22 C100,0 120,0 140,22 C160,44 200,44 220,22 C240,0 260,0 280,22 C300,44 340,44 360,22 C380,0 400,0 420,22 C440,44 460,44 480,22 L480,64 L0,64 Z" fill="#fffbf0"/>
+  </svg>
+</section>
 
-    <div style="position:relative;z-index:1;margin-top:1rem;">
-      <p style="font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;font-weight:700;color:#2e7d52;margin-bottom:.5rem;">Estás invitado</p>
-      <h1 style="font-family:'Playfair Display',serif;font-size:3.6rem;line-height:1;color:#0e2e1a;text-shadow:0 4px 24px rgba(30,110,69,.14);letter-spacing:-.02em;">Baby Shower</h1>
-      <p style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:#507060;margin-top:.375rem;">a un momento lleno de amor</p>
-
-      <div class="hero-divider">
-        <div class="line" style="background:linear-gradient(to right,transparent,rgba(80,180,120,.7));"></div>
-        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:40px;height:auto;opacity:.55;" />
-        <div class="line" style="background:linear-gradient(to left,transparent,rgba(80,180,120,.7));"></div>
+<!-- ══ DATE ══ -->
+<section id="sec-date">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.1" />
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">Cuando nos vemos</p>
+      <h2 class="sec-title"><span class="shimmer">La fecha</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span>
+        <span class="sd-big">✿</span>
+        <span class="sd-sml">✿</span>
+        <span class="sd-rev">✿</span>
+        <span class="sd-line r"></span>
       </div>
+    </div>
+    <div class="date-cards">
+      <div class="date-card reveal-scale">
+        <div class="glow-top"></div>
+        <span class="dc-emoji">🌸</span>
+        <div class="dc-num">26</div>
+        <div class="dc-lbl">Día</div>
+      </div>
+      <div class="date-card reveal-scale" style="transition-delay:.1s">
+        <div class="glow-top"></div>
+        <span class="dc-emoji">📅</span>
+        <div class="dc-sub">Oct 2026</div>
+        <div class="dc-lbl">Mes · Año</div>
+      </div>
+      <div class="date-card reveal-scale" style="transition-delay:.2s">
+        <div class="glow-top"></div>
+        <span class="dc-emoji">🕐</span>
+        <div class="dc-num">3:00</div>
+        <div class="dc-lbl">PM</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div style="display:flex;justify-content:center;margin-top:.5rem;">
-        <div style="position:relative;" class="float">
-          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:160px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(30,110,69,.12) 0%,transparent 70%);filter:blur(14px);pointer-events:none;"></div>
-          <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="Bebé niño" style="width:240px;height:auto;filter:drop-shadow(0 20px 44px rgba(30,110,69,.22));" />
+<!-- ══ COUNTDOWN ══ -->
+<section id="sec-countdown">
+  <img class="floral-top" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" />
+  <img class="floral-bot" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" />
+  <div class="dot-grid"></div>
+  <div class="orbit"></div>
+  <div class="z1">
+    <div class="reveal">
+      <p class="cd-kicker">Cuenta regresiva</p>
+      <h2>¡Falta poco!</h2>
+    </div>
+    <div class="countdown-row">
+      <div class="cd-unit">
+        <div class="cd-box">
+          <div class="cd-glass"><div class="cd-shine"></div><div class="cd-num" id="cd-days">00</div></div>
+          <div class="cd-lbl">Días</div>
+        </div>
+        <div class="cd-sep">:</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-box">
+          <div class="cd-glass"><div class="cd-shine"></div><div class="cd-num" id="cd-hours">00</div></div>
+          <div class="cd-lbl">Horas</div>
+        </div>
+        <div class="cd-sep">:</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-box">
+          <div class="cd-glass"><div class="cd-shine"></div><div class="cd-num" id="cd-mins">00</div></div>
+          <div class="cd-lbl">Min</div>
+        </div>
+        <div class="cd-sep">:</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-box">
+          <div class="cd-glass"><div class="cd-shine"></div><div class="cd-num" id="cd-secs">00</div></div>
+          <div class="cd-lbl">Seg</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="name-tag" style="margin-top:.75rem;">
-        <p class="name-italic">Mateo José</p>
-        <p style="font-size:.68rem;letter-spacing:.18em;text-align:center;color:#507060;">26 Octubre · 2026 · 3:00 PM</p>
+<!-- ══ LOCATION ══ -->
+<section id="sec-location">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.1" />
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">¿Dónde nos vemos?</p>
+      <h2 class="sec-title"><span class="shimmer">El lugar</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span><span class="sd-big">✿</span><span class="sd-sml">✿</span><span class="sd-rev">✿</span><span class="sd-line r"></span>
       </div>
     </div>
-
-    <svg class="wave" viewBox="0 0 480 56" preserveAspectRatio="none">
-      <path d="M0,28 C80,56 160,0 240,28 C320,56 400,0 480,28 L480,56 L0,56 Z" fill="#f3faf6"/>
-      <path d="M0,42 C100,56 200,20 300,42 C380,56 440,28 480,42 L480,56 L0,56 Z" fill="#f3faf6" opacity=".5"/>
-    </svg>
-  </section>
-
-  <!-- DATE -->
-  <section style="background:#f3faf6;">
-    <p class="section-kicker">Cuando nos vemos</p>
-    <h2 class="section-title">La fecha</h2>
-    <div class="section-ornament" style="margin-bottom:2rem;">
-      <div class="line line-l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
-      <div class="line line-r"></div>
-    </div>
-    <div class="date-grid">
-      <div class="date-card">
-        <div style="font-size:1.5rem;margin-bottom:.25rem;">🌿</div>
-        <div class="date-card-num">26</div>
-        <div class="date-card-label">Día</div>
-      </div>
-      <div class="date-card">
-        <div style="font-size:1.5rem;margin-bottom:.25rem;">📅</div>
-        <div class="date-card-sub">Oct 2026</div>
-        <div class="date-card-label">Mes · Año</div>
-      </div>
-      <div class="date-card">
-        <div style="font-size:1.5rem;margin-bottom:.25rem;">🕐</div>
-        <div class="date-card-num">3:00</div>
-        <div class="date-card-label">PM</div>
-      </div>
-    </div>
-    <div class="section-ornament" style="margin-top:1.5rem;margin-bottom:0;">
-      <div class="line line-l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:32px;height:auto;opacity:.4;animation:spinSlow 3s ease-in-out infinite;" />
-      <div class="line line-r"></div>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section id="countdown-section">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);background-size:20px 20px;pointer-events:none;"></div>
-    <div style="position:absolute;top:0;left:25%;width:200px;height:200px;background:radial-gradient(circle,rgba(80,200,130,.1) 0%,transparent 70%);border-radius:50%;filter:blur(24px);pointer-events:none;"></div>
-    <div style="position:absolute;bottom:0;right:25%;width:160px;height:160px;background:radial-gradient(circle,rgba(60,180,200,.1) 0%,transparent 70%);border-radius:50%;filter:blur(20px);pointer-events:none;"></div>
-    <div class="gold-line"></div>
-    <div style="position:absolute;bottom:0;left:0;right:0;" class="gold-line"></div>
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;right:16px;top:24px;width:52px;height:auto;opacity:.18;animation:floatY 4s ease-in-out infinite;" />
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;left:16px;bottom:24px;width:44px;height:auto;opacity:.15;animation:floatY 3.5s ease-in-out infinite .8s;" />
-
-    <div style="position:relative;z-index:1;">
-      <p style="font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;font-weight:700;color:#6dbf8a;margin-bottom:.25rem;">Cuenta regresiva</p>
-      <h2 style="font-family:'Playfair Display',serif;font-size:2.6rem;font-style:italic;color:#e8f7ee;text-shadow:0 2px 20px rgba(255,255,255,.07);margin-bottom:2rem;">¡Falta poco!</h2>
-      <div class="countdown-units" id="countdown">
-        <div><div class="flip-box"><div class="flip-num" id="cd-days">--</div></div><div class="flip-label">Días</div></div>
-        <div class="countdown-colon colon-blink">:</div>
-        <div><div class="flip-box"><div class="flip-num" id="cd-hours">--</div></div><div class="flip-label">Horas</div></div>
-        <div class="countdown-colon colon-blink">:</div>
-        <div><div class="flip-box"><div class="flip-num" id="cd-mins">--</div></div><div class="flip-label">Min</div></div>
-        <div class="countdown-colon colon-blink">:</div>
-        <div><div class="flip-box"><div class="flip-num" id="cd-secs">--</div></div><div class="flip-label">Seg</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section style="background:#eaf7f0;">
-    <p class="section-kicker">¿Dónde nos vemos?</p>
-    <h2 class="section-title">El lugar</h2>
-    <div class="section-ornament" style="margin-bottom:2rem;">
-      <div class="line line-l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
-      <div class="line line-r"></div>
-    </div>
-    <div class="map-card">
-      <div class="gold-line"></div>
-      <div style="display:flex;align-items:center;gap:1rem;padding:1.25rem;">
-        <div style="width:56px;height:56px;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;background:linear-gradient(135deg,#4aaf78,#1e6e45);box-shadow:0 6px 20px rgba(30,110,69,.4);animation:floatY 4s ease-in-out infinite;">📍</div>
+    <div class="reveal loc-card">
+      <div class="loc-header">
+        <div class="loc-icon">📍</div>
         <div>
-          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#0e2e1a;">Mi Casa</div>
-          <div style="font-size:.75rem;margin-top:.25rem;line-height:1.5;color:#507060;">Avenida Conceição, 1234, São Bernardo – SP</div>
+          <div class="loc-title">Mi Casa</div>
+          <div class="loc-addr">Avenida Conceição, 1234, São Bernardo – SP</div>
         </div>
       </div>
-      <iframe title="Mapa del evento"
-        src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed"
-        allowfullscreen loading="lazy"></iframe>
-      <div style="padding:1rem;">
-        <a href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP" target="_blank" rel="noopener" class="btn-green">📍 Cómo llegar</a>
+      <iframe title="Mapa" src="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP&output=embed" loading="lazy"></iframe>
+      <div class="loc-footer">
+        <a class="loc-btn" href="https://maps.google.com/maps?q=Avenida+Concei%C3%A7%C3%A3o,+1234,+S%C3%A3o+Bernardo+%E2%80%93+SP" target="_blank" rel="noopener">📍 Cómo llegar</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ITINERARY -->
-  <section style="background:#f3faf6;">
-    <p class="section-kicker">El programa del día</p>
-    <h2 class="section-title">Itinerario</h2>
-    <div class="section-ornament" style="margin-bottom:2rem;">
-      <div class="line line-l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
-      <div class="line line-r"></div>
+<!-- ══ GALLERY ══ -->
+<section id="sec-gallery">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.1" />
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">Un vistazo al día especial</p>
+      <h2 class="sec-title"><span class="shimmer">Galería</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span><span class="sd-big">✿</span><span class="sd-sml">✿</span><span class="sd-rev">✿</span><span class="sd-line r"></span>
+      </div>
     </div>
-    <div class="itin-list" id="itin-list">
-      <div class="itin-line"></div>
+    <div class="reveal">
+      <div class="gallery-main" id="gallery-main">
+        <img id="gimg-0" class="gallery-img active" src="https://hercules-cdn.com/file_pbGy3C3u3WgrP4AAgHLdFThk" alt="Decoración del salón" />
+        <img id="gimg-1" class="gallery-img" src="https://hercules-cdn.com/file_MjYy7GA1xDg0pj2C1S2QGx39" alt="Mesa de dulces" />
+        <img id="gimg-2" class="gallery-img" src="https://hercules-cdn.com/file_Oiuzsyr68kjp6PV1oldDTcTB" alt="Detalles del evento" />
+        <img id="gimg-3" class="gallery-img" src="https://hercules-cdn.com/file_5xAaU1fD1Y9jYFcnU6nA5qhy" alt="Regalos con amor" />
+        <img id="gimg-4" class="gallery-img" src="https://hercules-cdn.com/file_Fle5PWNivDi4aIQHDeap837H" alt="Photobooth" />
+        <div class="gallery-caption"><p id="gallery-cap">Decoración del salón</p></div>
+        <button class="gallery-btn prev" onclick="galleryPrev()">‹</button>
+        <button class="gallery-btn next" onclick="galleryNext()">›</button>
+        <div class="gallery-counter"><span id="gallery-cur">1</span> / 5</div>
+      </div>
+      <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      <div class="gallery-dots" id="gallery-dots"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GIFTS -->
-  <section style="background:#eaf7f0;">
-    <p class="section-kicker">Si deseas obsequiar</p>
-    <h2 class="section-title">Regalo con amor</h2>
-    <div class="section-ornament" style="margin-bottom:2rem;">
-      <div class="line line-l"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
-      <div class="line line-r"></div>
+<!-- ══ ITINERARY ══ -->
+<section id="sec-itinerary">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.09" />
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">El programa del día</p>
+      <h2 class="sec-title"><span class="shimmer">Itinerario</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span><span class="sd-big">✿</span><span class="sd-sml">✿</span><span class="sd-rev">✿</span><span class="sd-line r"></span>
+      </div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ══ GIFTS ══ -->
+<section id="sec-gifts">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.1" />
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">Si deseas obsequiar</p>
+      <h2 class="sec-title"><span class="shimmer">Regalo con amor</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span><span class="sd-big">✿</span><span class="sd-sml">✿</span><span class="sd-rev">✿</span><span class="sd-line r"></span>
+      </div>
     </div>
     <div id="gifts-container"></div>
-  </section>
-
-  <!-- RSVP -->
-  <section id="rsvp-section">
-    <div class="gold-line"></div>
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(80,200,130,.08) 0%,transparent 70%);pointer-events:none;"></div>
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;top:16px;right:16px;width:50px;height:auto;opacity:.22;animation:spinSlow 3.5s ease-in-out infinite;" />
-    <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="position:absolute;bottom:16px;left:16px;width:44px;height:auto;opacity:.18;animation:spinSlow 4s ease-in-out infinite .6s;" />
-    <div style="position:relative;z-index:1;">
-      <p class="section-kicker">Confirma tu presencia</p>
-      <h2 class="section-title">¿Nos acompañas?</h2>
-      <div class="section-ornament" style="margin-bottom:1.5rem;">
-        <div class="line line-l"></div>
-        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:28px;height:auto;opacity:.5;" />
-        <div class="line line-r"></div>
-      </div>
-      <p style="font-size:.875rem;font-style:italic;text-align:center;margin-bottom:1.5rem;line-height:1.75;color:#507060;">
-        Tu presencia hace este momento más especial.<br>
-        Confirma antes del <strong style="color:#1e6e45;">15 de Octubre</strong>
-      </p>
-      <div id="rsvp-form">
-        <input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo" />
-        <input class="rsvp-input" id="rsvp-guests" type="number" min="1" max="5" placeholder="¿Cuántos asistirán?" />
-        <div class="rsvp-radio">
-          <button class="rsvp-btn active" id="btn-yes" onclick="setAttendance('yes')">🌿 Sí asistiré</button>
-          <button class="rsvp-btn" id="btn-no" onclick="setAttendance('no')">💙 No podré ir</button>
-        </div>
-        <p id="rsvp-error" style="font-size:.75rem;color:#1e6e45;margin-bottom:.5rem;display:none;"></p>
-        <button onclick="submitRSVP()" id="rsvp-submit" class="btn-green" style="border:none;cursor:pointer;font-size:.875rem;">Confirmar asistencia</button>
-        <p style="font-size:.62rem;text-align:center;margin-top:.25rem;letter-spacing:.08em;color:#7aaa8a;">Confirma antes del 15 de Octubre · Cupos limitados</p>
-      </div>
-      <div id="rsvp-thanks" style="text-align:center;padding:1rem 0;display:none;">
-        <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:80px;height:auto;opacity:.65;margin:0 auto 1rem;display:block;animation:spinSlow 2.5s ease-in-out infinite;" />
-        <div class="float" style="display:inline-block;">
-          <img src="https://hercules-cdn.com/file_2L34j9mg3TiVnx45kOLjaobj" alt="" style="width:112px;height:auto;margin:0 auto 1rem;display:block;filter:drop-shadow(0 8px 20px rgba(30,110,69,.2));" />
-        </div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;color:#1e6e45;">¡Gracias!</h3>
-        <p style="font-size:.875rem;font-style:italic;margin-top:.5rem;line-height:1.75;color:#507060;">Tu respuesta ha sido registrada.<br>¡Te esperamos con mucho amor! 🌿</p>
-      </div>
-    </div>
-    <div class="gold-line" style="position:absolute;bottom:0;left:0;right:0;"></div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="gold-line"></div>
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 100%,rgba(80,180,120,.07) 0%,transparent 70%);pointer-events:none;"></div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1.75rem 0 1.5rem;">
-      <div style="height:1px;width:56px;background:linear-gradient(to right,transparent,rgba(80,180,120,.7));"></div>
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:34px;height:auto;opacity:.45;animation:spinSlow 2.8s ease-in-out infinite;" />
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:26px;height:auto;opacity:.3;animation:spinSlow 3.2s ease-in-out infinite .5s;" />
-      <img src="https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T" alt="" style="width:34px;height:auto;opacity:.45;animation:spinSlow 2.8s ease-in-out infinite .2s;" />
-      <div style="height:1px;width:56px;background:linear-gradient(to left,transparent,rgba(80,180,120,.7));"></div>
-    </div>
-    <p style="font-style:italic;font-size:1rem;line-height:2;margin-bottom:1.25rem;color:#507060;">
-      Con todo el amor del mundo<br>celebraremos la llegada de este<br>personito tan esperado.
-    </p>
-    <div class="name-tag">
-      <p style="font-family:'Playfair Display',serif;font-size:2rem;font-style:italic;color:#1e6e45;text-shadow:0 4px 20px rgba(30,110,69,.2);">Con amor, Valentina</p>
-    </div>
-  </footer>
-
-  <!-- WATERMARK -->
-  <div class="watermark">
-    <div class="gold-line"></div>
-    <img src="https://hercules-cdn.com/file_5Nlw98yeCDV1Ql9oTlbILPf5" alt="Gueka Ideas" style="width:176px;margin:1.25rem auto 1rem;display:block;opacity:.8;" />
-    <p style="font-size:.63rem;line-height:1.6;max-width:320px;margin:0 auto;color:rgba(14,46,26,.42);">
-      Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.
-    </p>
-    <p style="font-size:.58rem;margin-top:.5rem;color:rgba(14,46,26,.28);">© <span id="year"></span> Gueka Ideas · Todos los derechos reservados</p>
   </div>
+</section>
+
+<!-- ══ RSVP ══ -->
+<section id="sec-rsvp">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.14" />
+  <div class="rsvp-bg"></div>
+  <div class="z1">
+    <div class="reveal">
+      <p class="sec-kicker">Confirma tu presencia</p>
+      <h2 class="sec-title"><span class="shimmer">¿Nos acompañas?</span></h2>
+      <div class="sec-divider">
+        <span class="sd-line l"></span><span class="sd-big">✿</span><span class="sd-sml">✿</span><span class="sd-rev">✿</span><span class="sd-line r"></span>
+      </div>
+    </div>
+    <p class="rsvp-sub reveal">
+      Tu presencia hace este momento más especial.<br/>
+      Confirma antes del <strong style="color:var(--goldDk)">15 de Octubre</strong>
+    </p>
+    <div id="rsvp-form">
+      <div class="reveal"><input class="rsvp-input" id="rsvp-name" placeholder="Tu nombre completo" /></div>
+      <div class="reveal"><input class="rsvp-input" type="number" id="rsvp-guests" placeholder="¿Cuántos asistirán?" min="1" max="5" /></div>
+      <div class="reveal rsvp-toggle">
+        <button class="toggle-btn active" id="btn-yes" onclick="setAttendance('yes')">🌸 Sí asistiré</button>
+        <button class="toggle-btn" id="btn-no" onclick="setAttendance('no')">💙 No podré ir</button>
+      </div>
+      <p class="rsvp-error" id="rsvp-error" style="display:none"></p>
+      <div class="reveal">
+        <button class="rsvp-submit" onclick="submitRSVP()">Confirmar asistencia ✿</button>
+        <p class="rsvp-note">Confirma antes del 15 de Octubre · Cupos limitados</p>
+      </div>
+    </div>
+    <div id="rsvp-thanks">
+      <img src="https://hercules-cdn.com/file_aH6w5m77WGl1tHAv1akJ5OXc" alt="" />
+      <h3>¡Gracias!</h3>
+      <p>Tu respuesta ha sido registrada.<br/>¡Te esperamos con mucho amor! 🌸</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" style="opacity:.35" />
+  <div class="foot-bg"></div>
+  <div class="foot-content reveal">
+    <div class="sec-divider" style="margin-bottom:1.75rem">
+      <span class="sd-line l" style="width:64px"></span>
+      <span class="sd-big" style="font-size:1.2rem">✿</span>
+      <span class="sd-sml" style="font-size:.75rem">✿</span>
+      <span class="sd-rev" style="font-size:1.2rem">✿</span>
+      <span class="sd-line r" style="width:64px"></span>
+    </div>
+    <p class="foot-msg">
+      Con todo el amor del mundo<br/>celebraremos la llegada de este<br/>personito tan esperado.
+    </p>
+    <div class="foot-sig">
+      <p>Con amor, Valentina</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ WATERMARK ══ -->
+<div id="watermark">
+  <img class="floral-bg" src="https://hercules-cdn.com/file_hWaV8uCbP8IWXpT8P3U6PeLe" alt="" />
+  <div class="wm-inner">
+    <img src="https://hercules-cdn.com/file_JGJqflixK2qPnIdXkuoEZCS5" alt="Gueka Ideas" />
+    <p class="wm-legal">Esta plantilla digital es propiedad exclusiva de Gueka Ideas. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.</p>
+    <p class="wm-copy">© <span id="year"></span> Gueka Ideas · Todos los derechos reservados</p>
+  </div>
+</div>
 
 </div><!-- #app -->
 
 <script>
-// ── YEAR ──────────────────────────────────────────────────────────────────────
+// ── copyright year ──────────────────────────────────────────────────────────
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ── SPLASH ────────────────────────────────────────────────────────────────────
-function closeSplash() {
+// ── floating petals ─────────────────────────────────────────────────────────
+(function(){
+  const petals = document.getElementById('petals');
+  const emojis = ['🌸','✿','🌼','⭐','✨'];
+  for(let i=0;i<18;i++){
+    const el = document.createElement('span');
+    el.className = 'petal';
+    const left = Math.random()*100;
+    const delay = Math.random()*8;
+    const dur = 6+Math.random()*6;
+    const size = 10+Math.random()*18;
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText = `left:${left}%;font-size:${size}px;animation-duration:${dur}s;animation-delay:${delay}s;`;
+    petals.appendChild(el);
+  }
+})();
+
+// ── splash ──────────────────────────────────────────────────────────────────
+function closeSplash(){
   const s = document.getElementById('splash');
-  s.classList.add('fade-out');
-  setTimeout(() => s.style.display = 'none', 800);
+  s.classList.add('hide');
+  setTimeout(()=>{ s.style.display='none'; }, 950);
 }
 
-// Falling accordions (splash + hero)
-const ACCORDION_IMG = 'https://hercules-cdn.com/file_JAtluOb6s185EDdxZEK2Ok5T';
-function createFallingAccordions(containerId, count) {
-  const c = document.getElementById(containerId);
-  if (!c) return;
-  c.style.cssText = 'pointer-events:none;position:absolute;inset:0;overflow:hidden;';
-  for (let i = 0; i < count; i++) {
-    const img = document.createElement('img');
-    img.src = ACCORDION_IMG;
-    img.alt = '';
-    const left = `${4 + (i * 9.5) % 92}%`;
-    const delay = `${(i * 0.7) % 5}s`;
-    const dur = `${7 + (i * 1.3) % 6}s`;
-    const size = 36 + (i * 7) % 28;
-    const rot = -15 + (i * 13) % 30;
-    img.className = 'accordion-fall';
-    img.style.cssText = `left:${left};width:${size}px;height:auto;--rot:${rot}deg;animation-duration:${dur};animation-delay:${delay};`;
-    c.appendChild(img);
-  }
-}
-createFallingAccordions('splash-accordions', 10);
-createFallingAccordions('hero-accordions', 10);
-
-// ── COUNTDOWN ─────────────────────────────────────────────────────────────────
+// ── countdown ───────────────────────────────────────────────────────────────
 const EVENT = new Date('2026-10-26T15:00:00');
-function pad(n) { return String(n).padStart(2, '0'); }
-function updateCountdown() {
-  const diff = Math.max(0, EVENT.getTime() - Date.now());
-  if (diff === 0) {
-    document.getElementById('countdown').innerHTML = '<p style="font-family:\'Playfair Display\',serif;font-size:2rem;color:#a8d8b8;">🌿 ¡Ya llegó el gran día! 🌿</p>';
-    return;
-  }
-  const s = Math.floor(diff / 1000);
-  document.getElementById('cd-days').textContent  = pad(Math.floor(s / 86400));
-  document.getElementById('cd-hours').textContent = pad(Math.floor((s % 86400) / 3600));
-  document.getElementById('cd-mins').textContent  = pad(Math.floor((s % 3600) / 60));
-  document.getElementById('cd-secs').textContent  = pad(s % 60);
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = Math.max(0, EVENT.getTime()-Date.now());
+  const s = Math.floor(diff/1000);
+  document.getElementById('cd-days').textContent  = pad(Math.floor(s/86400));
+  document.getElementById('cd-hours').textContent = pad(Math.floor((s%86400)/3600));
+  document.getElementById('cd-mins').textContent  = pad(Math.floor((s%3600)/60));
+  document.getElementById('cd-secs').textContent  = pad(s%60);
 }
-updateCountdown();
-setInterval(updateCountdown, 1000);
+tick(); setInterval(tick,1000);
 
-// ── ITINERARY ─────────────────────────────────────────────────────────────────
-const ITIN = [
-  { emoji: '🌿', time: '3:00 PM', name: 'Llegada y recepción',  desc: 'Bienvenida con bocadillos y bebidas frescas' },
-  { emoji: '🎈', time: '3:30 PM', name: 'Juegos y sorpresas',   desc: 'Adivina el nombre, lluvia de predicciones y más' },
-  { emoji: '🎂', time: '4:30 PM', name: 'Pastel y postres',     desc: 'Pastel temático y mesa dulce para celebrar' },
-  { emoji: '🎁', time: '5:00 PM', name: 'Apertura de regalos',  desc: 'Momentos mágicos junto a mamá y papá' },
-  { emoji: '📸', time: '5:30 PM', name: 'Fotos y recuerdos',    desc: 'Photobooth especial para llevarte a casa' },
+// ── gallery ─────────────────────────────────────────────────────────────────
+const GALLERY = [
+  { url:'https://hercules-cdn.com/file_pbGy3C3u3WgrP4AAgHLdFThk', caption:'Decoración del salón' },
+  { url:'https://hercules-cdn.com/file_MjYy7GA1xDg0pj2C1S2QGx39', caption:'Mesa de dulces' },
+  { url:'https://hercules-cdn.com/file_Oiuzsyr68kjp6PV1oldDTcTB', caption:'Detalles del evento' },
+  { url:'https://hercules-cdn.com/file_5xAaU1fD1Y9jYFcnU6nA5qhy', caption:'Regalos con amor' },
+  { url:'https://hercules-cdn.com/file_Fle5PWNivDi4aIQHDeap837H', caption:'Photobooth' },
 ];
-const itinEl = document.getElementById('itin-list');
-ITIN.forEach((item, i) => {
-  const row = document.createElement('div');
-  row.className = 'itin-item';
-  row.innerHTML = `
-    <div class="itin-dot" style="flex-shrink:0;">
-      <span style="font-size:1.15rem;line-height:1;">${item.emoji}</span>
-      <span>${String(i+1).padStart(2,'0')}</span>
-    </div>
-    <div class="itin-card">
-      <div class="left-bar"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem;padding-left:.5rem;">
-        <div class="itin-card-name">${item.name}</div>
-        <span class="itin-card-time">${item.time}</span>
-      </div>
-      <div class="itin-card-desc">${item.desc}</div>
-    </div>`;
-  itinEl.appendChild(row);
-});
+let galCur = 0;
 
-// ── GIFTS ─────────────────────────────────────────────────────────────────────
-const GIFTS = [
-  { key: 'nequi',     emoji: '💚', label: 'Nequi',     sub: 'Envío digital · Colombia', color: '#1e6e45', bg: 'rgba(30,110,69,.07)',   border: 'rgba(30,110,69,.22)'  },
-  { key: 'daviplata', emoji: '🌱', label: 'Daviplata', sub: 'Envío digital · Colombia', color: '#2e7d52', bg: 'rgba(46,125,82,.07)',   border: 'rgba(46,125,82,.22)'  },
-  { key: 'pse',       emoji: '✨', label: 'PSE',       sub: 'Pago seguro en línea',     color: '#b07840', bg: 'rgba(176,120,64,.07)',  border: 'rgba(176,120,64,.22)' },
-];
-const gc = document.getElementById('gifts-container');
-GIFTS.forEach(g => {
-  const panel = document.createElement('div');
-  panel.className = 'gift-panel';
-  panel.style.cssText = `border:1px solid ${g.border};background:${g.bg};`;
-  panel.innerHTML = `
-    <button class="gift-header" onclick="toggleGift(this)">
-      <div class="gift-icon">${g.emoji}</div>
-      <div>
-        <div class="gift-label" style="color:${g.color};">${g.label}</div>
-        <div class="gift-sub">${g.sub}</div>
+// build thumbs & dots
+(function(){
+  const thumbs = document.getElementById('gallery-thumbs');
+  const dots   = document.getElementById('gallery-dots');
+  GALLERY.forEach((g,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'thumb'+(i===0?' active':'');
+    btn.id = `thumb-${i}`;
+    btn.onclick = ()=>goGallery(i);
+    const img = document.createElement('img');
+    img.src = g.url; img.alt = g.caption;
+    btn.appendChild(img); thumbs.appendChild(btn);
+
+    const d = document.createElement('button');
+    d.className = 'dot'+(i===0?' active':'');
+    d.id = `dot-${i}`;
+    d.onclick = ()=>goGallery(i);
+    dots.appendChild(d);
+  });
+})();
+
+function goGallery(idx){
+  document.getElementById(`gimg-${galCur}`).className='gallery-img';
+  document.getElementById(`thumb-${galCur}`).classList.remove('active');
+  document.getElementById(`dot-${galCur}`).classList.remove('active');
+  galCur = idx;
+  document.getElementById(`gimg-${galCur}`).className='gallery-img active';
+  document.getElementById(`thumb-${galCur}`).classList.add('active');
+  document.getElementById(`dot-${galCur}`).classList.add('active');
+  document.getElementById('gallery-cap').textContent = GALLERY[galCur].caption;
+  document.getElementById('gallery-cur').textContent = galCur+1;
+}
+function galleryPrev(){ goGallery((galCur-1+GALLERY.length)%GALLERY.length); }
+function galleryNext(){ goGallery((galCur+1)%GALLERY.length); }
+
+// swipe
+(function(){
+  const el = document.getElementById('gallery-main');
+  let sx=null;
+  el.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; });
+  el.addEventListener('touchend',e=>{
+    if(sx===null)return;
+    const diff=sx-e.changedTouches[0].clientX;
+    if(diff>40)galleryNext(); else if(diff<-40)galleryPrev();
+    sx=null;
+  });
+})();
+
+// ── itinerary ───────────────────────────────────────────────────────────────
+(function(){
+  const ITINERARY = [
+    { emoji:'🌸', time:'3:00 PM', name:'Llegada y recepción',  desc:'Bienvenida con bocadillos y bebidas frescas' },
+    { emoji:'🎈', time:'3:30 PM', name:'Juegos y sorpresas',   desc:'Adivina el nombre, lluvia de predicciones y más' },
+    { emoji:'🎂', time:'4:30 PM', name:'Pastel y postres',     desc:'Pastel temático y mesa dulce para celebrar' },
+    { emoji:'🎁', time:'5:00 PM', name:'Apertura de regalos',  desc:'Momentos mágicos junto a mamá y papá' },
+    { emoji:'📸', time:'5:30 PM', name:'Fotos y recuerdos',    desc:'Photobooth especial para llevarte a casa' },
+  ];
+  const tl = document.getElementById('timeline');
+  const line = document.createElement('div');
+  line.className='tl-line'; tl.appendChild(line);
+  ITINERARY.forEach((item,i)=>{
+    const wrap = document.createElement('div');
+    wrap.className='tl-item reveal-left';
+    wrap.style.transitionDelay = (i*0.12)+'s';
+    wrap.innerHTML=`
+      <div class="tl-dot">
+        <div class="tl-pulse"></div>
+        <span class="emoji">${item.emoji}</span>
+        <span class="num">${String(i+1).padStart(2,'0')}</span>
       </div>
-      <span class="gift-chevron">▼</span>
-    </button>
-    <div class="gift-body">
-      <div class="gift-inner">
-        <div class="gift-form">
-          <div class="gold-line" style="margin-bottom:1rem;"></div>
-          <p style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#0e2e1a;text-align:center;margin-bottom:1rem;">${g.emoji} Pagar con ${g.label}</p>
-          <input class="gift-input" placeholder="Tu nombre" id="name-${g.key}" />
-          <input class="gift-input" type="number" placeholder="Monto (COP)" id="amt-${g.key}" />
-          <button onclick="genQR('${g.key}','${g.label}')" style="width:100%;padding:.75rem;border-radius:.75rem;color:#fff;font-size:.875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;background:linear-gradient(135deg,#2e9460,#1e6e45);box-shadow:0 6px 22px rgba(30,110,69,.35);border:none;">Generar QR de pago</button>
-          <div class="qr-result" id="qr-${g.key}"></div>
+      <div class="tl-card">
+        <div class="bar"></div>
+        <div class="row">
+          <div class="item-name">${item.name}</div>
+          <span class="time-badge">${item.time}</span>
+        </div>
+        <div class="item-desc">${item.desc}</div>
+      </div>
+    `;
+    tl.appendChild(wrap);
+  });
+})();
+
+// ── gifts ───────────────────────────────────────────────────────────────────
+(function(){
+  const GIFTS = [
+    { key:'nequi',     emoji:'💚', label:'Nequi',     sub:'Envío digital · Colombia' },
+    { key:'daviplata', emoji:'🌱', label:'Daviplata', sub:'Envío digital · Colombia' },
+    { key:'pse',       emoji:'✨', label:'PSE',       sub:'Pago seguro en línea' },
+  ];
+  const container = document.getElementById('gifts-container');
+  GIFTS.forEach((g,i)=>{
+    const panel = document.createElement('div');
+    panel.className='gift-panel reveal';
+    panel.style.transitionDelay=(i*0.1)+'s';
+    panel.innerHTML=`
+      <button class="gift-header" onclick="toggleGift('${g.key}')">
+        <div class="gift-icon">${g.emoji}</div>
+        <div>
+          <div class="gift-label">${g.label}</div>
+          <div class="gift-sub">${g.sub}</div>
+        </div>
+        <span class="gift-arrow" id="arrow-${g.key}">▼</span>
+      </button>
+      <div class="gift-body" id="body-${g.key}">
+        <div class="gift-inner">
+          <div class="gift-box">
+            <p>${g.emoji} Pagar con ${g.label}</p>
+            <input class="gift-input" id="gname-${g.key}" placeholder="Tu nombre" />
+            <input class="gift-input" type="number" id="gamt-${g.key}" placeholder="Monto (COP)" />
+            <button class="gift-qr-btn" onclick="genQR('${g.key}','${g.label}')">Generar QR de pago</button>
+            <div class="gift-qr-wrap" id="qr-${g.key}"></div>
+          </div>
         </div>
       </div>
-    </div>`;
-  gc.appendChild(panel);
-});
-function toggleGift(btn) {
-  const body = btn.nextElementSibling;
-  const chev = btn.querySelector('.gift-chevron');
-  body.classList.toggle('open');
-  chev.classList.toggle('open');
+    `;
+    container.appendChild(panel);
+  });
+})();
+
+function toggleGift(key){
+  const body  = document.getElementById('body-'+key);
+  const arrow = document.getElementById('arrow-'+key);
+  const open  = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
 }
-function genQR(key, label) {
-  const name = document.getElementById('name-'+key).value || 'Invitado';
-  const amt  = document.getElementById('amt-'+key).value  || '0';
-  const text = `PAGO ${key.toUpperCase()} | ${name} | COP ${amt}`;
-  const el   = document.getElementById('qr-'+key);
-  QRCode.toDataURL(text, { width: 200, margin: 1, color: { dark: '#0e2e1a', light: '#f3faf6' } }, (err, url) => {
-    if (!err) { el.innerHTML = `<img src="${url}" alt="QR" style="border-radius:1rem;box-shadow:0 8px 28px rgba(0,0,0,.12);" />`; }
+
+function genQR(key, label){
+  const name   = document.getElementById('gname-'+key).value || 'Invitado';
+  const amount = document.getElementById('gamt-'+key).value  || '0';
+  const wrap   = document.getElementById('qr-'+key);
+  wrap.innerHTML = '';
+  const div = document.createElement('div');
+  wrap.appendChild(div);
+  new QRCode(div, {
+    text: `PAGO ${key.toUpperCase()} | ${name} | COP ${amount}`,
+    width: 220, height: 220,
+    colorDark: '#2a1a00', colorLight: '#fffdf0',
+    correctLevel: QRCode.CorrectLevel.M
   });
 }
 
-// ── RSVP ──────────────────────────────────────────────────────────────────────
+// ── rsvp ────────────────────────────────────────────────────────────────────
 let attendance = 'yes';
-function setAttendance(v) {
+function setAttendance(v){
   attendance = v;
-  document.getElementById('btn-yes').classList.toggle('active', v === 'yes');
-  document.getElementById('btn-no').classList.toggle('active',  v === 'no');
+  document.getElementById('btn-yes').classList.toggle('active', v==='yes');
+  document.getElementById('btn-no').classList.toggle('active', v==='no');
 }
-function submitRSVP() {
+function submitRSVP(){
   const name = document.getElementById('rsvp-name').value.trim();
   const err  = document.getElementById('rsvp-error');
-  if (!name) { err.textContent = 'Por favor ingresa tu nombre'; err.style.display = 'block'; return; }
-  err.style.display = 'none';
-  const btn = document.getElementById('rsvp-submit');
-  btn.textContent = 'Enviando…'; btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('rsvp-form').style.display = 'none';
-    document.getElementById('rsvp-thanks').style.display = 'block';
-  }, 900);
+  if(!name){ err.textContent='Por favor ingresa tu nombre'; err.style.display='block'; return; }
+  err.style.display='none';
+  setTimeout(()=>{
+    document.getElementById('rsvp-form').style.display='none';
+    const thanks = document.getElementById('rsvp-thanks');
+    thanks.style.display='block';
+    // confetti
+    const CONF = ['🌸','✨','🌼','⭐','🎉'];
+    for(let i=0;i<12;i++){
+      const c = document.createElement('div');
+      c.className='confetti-piece';
+      c.textContent = CONF[i%5];
+      c.style.cssText=`left:${20+Math.random()*60}%;top:50%;animation-delay:${i*0.08}s;animation-duration:1.5s;`;
+      thanks.appendChild(c);
+    }
+  }, 400);
 }
+
+// ── scroll reveal ────────────────────────────────────────────────────────────
+(function(){
+  const els = document.querySelectorAll('.reveal,.reveal-left,.reveal-scale');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+  },{ threshold:0.12, rootMargin:'-60px' });
+  els.forEach(el=>obs.observe(el));
+})();
 </script>
 </body>
 </html>
