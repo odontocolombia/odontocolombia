@@ -1,999 +1,1251 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>XV Años · Sofía Valentina — Fashion Edition</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XV Años · Sofía Valentina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Bodoni+Moda:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+    body {
+      background: #1a0010;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+    input { font-family: inherit; }
+    button { font-family: inherit; cursor: pointer; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-
-    <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      body {
-        background: #080808;
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-      #app { max-width: 480px; margin: 0 auto; overflow-x: hidden; position: relative; }
-      #petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 8888; }
-
-      /* ── Palette ── */
-      /* --gold:   #C9A84C   --gold-light: #F0D474   --gold-dark: #7A5C1E */
-      /* --fuchsia: #FF2D78  --fuchsia-dark: #B30050 */
-      /* --bg:     #080808   --surface: #111111 */
-
-      /* ── Animations ── */
-      @keyframes goldShimmer { 0%{background-position:0% center} 100%{background-position:200% center} }
-      @keyframes fuchsiaShimmer { 0%{background-position:0% center} 100%{background-position:200% center} }
-      @keyframes fadeInUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
-      @keyframes scaleIn { from{opacity:0;transform:scale(0.88)} to{opacity:1;transform:scale(1)} }
-      @keyframes pulseGlow { 0%,100%{box-shadow:0 8px 32px rgba(255,45,120,0.4),0 0 0 0 rgba(255,45,120,0)} 50%{box-shadow:0 12px 48px rgba(255,45,120,0.65),0 0 0 6px rgba(255,45,120,0.15)} }
-      @keyframes blinkColon { 0%,100%{opacity:1} 50%{opacity:0.1} }
-      @keyframes shimmerBox { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
-      @keyframes tickerMove { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-      @keyframes sealPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
-      @keyframes cdFlip { 0%{transform:rotateX(0)} 50%{transform:rotateX(-90deg)} 100%{transform:rotateX(0)} }
-      @keyframes scanline { 0%{background-position:0 0} 100%{background-position:0 100%} }
-
-      .gold-shimmer-text {
-        background: linear-gradient(135deg,#7A5C1E 0%,#C9A84C 25%,#F0D474 50%,#C9A84C 75%,#7A5C1E 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        animation: goldShimmer 3s linear infinite;
-      }
-      .fuchsia-shimmer-text {
-        background: linear-gradient(135deg,#B30050 0%,#FF2D78 40%,#FF8AB4 55%,#FF2D78 75%,#B30050 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        animation: fuchsiaShimmer 4s linear infinite;
-      }
-
-      /* ── TICKER ── */
-      .ticker-wrap { overflow: hidden; background: #FF2D78; padding: 8px 0; }
-      .ticker-inner { display: flex; white-space: nowrap; animation: tickerMove 18s linear infinite; }
-      .ticker-item { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.18em; color: #fff; padding: 0 2.5rem; }
-      .ticker-sep { color: rgba(255,255,255,0.5); padding: 0; }
-
-      /* ── SPLASH ── */
-      #splash {
-        position: fixed; inset: 0; z-index: 9999;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        cursor: pointer; user-select: none; overflow: hidden;
-        background: #080808;
-        transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1);
-      }
-      #splash.closing { opacity: 0; transform: scale(1.06) translateY(-20px); pointer-events: none; }
-      #splash .splash-bg {
-        position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-        opacity: 0.22; filter: grayscale(40%);
-      }
-      #splash .vignette {
-        position: absolute; inset: 0;
-        background: radial-gradient(ellipse 80% 80% at 50% 50%,rgba(8,8,8,0.65) 20%,rgba(8,8,8,0.92) 100%);
-      }
-      /* diagonal gold lines */
-      #splash .diag {
-        position: absolute; inset: 0; pointer-events: none;
-        background: repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(201,168,76,0.04) 38px,rgba(201,168,76,0.04) 39px);
-      }
-      /* floating diamonds */
-      .diamond-svg {
-        position: absolute;
-        width: 36px; height: 36px;
-        pointer-events: none;
-        filter: drop-shadow(0 0 6px rgba(201,168,76,0.7));
-        animation: floatDiamond 3s ease-in-out infinite;
-      }
-      .diamond-tl { top: 18px; left: 18px; animation-delay: 0s; }
-      .diamond-tr { top: 18px; right: 18px; animation-delay: 0.75s; }
-      .diamond-bl { bottom: 18px; left: 18px; animation-delay: 1.5s; }
-      .diamond-br { bottom: 18px; right: 18px; animation-delay: 2.25s; }
-      @keyframes floatDiamond {
-        0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
-        50% { transform: translateY(-8px) rotate(8deg); opacity: 1; }
-      }
-
-      #splash .content {
-        position: relative; z-index: 10;
-        display: flex; flex-direction: column; align-items: center; text-align: center;
-        padding: 0 2.5rem;
-        animation: fadeInUp 1s cubic-bezier(0.22,1,0.36,1) 0.4s both;
-      }
-      #splash .fashion-tag {
-        font-family: 'Bebas Neue', sans-serif; font-size: 0.65rem; letter-spacing: 0.78em;
-        color: #FF2D78; margin-bottom: 1.2rem; text-transform: uppercase;
-      }
-      #splash h1 {
-        font-family: 'Bebas Neue', sans-serif; font-size: 9rem; line-height: 0.82;
-        letter-spacing: 0.04em;
-        filter: drop-shadow(0 2px 24px rgba(201,168,76,0.45));
-      }
-      #splash .xv-label {
-        font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.55em;
-        color: rgba(201,168,76,0.75); margin-bottom: 0.4rem;
-      }
-      #splash .splash-script {
-        font-family: 'Great Vibes', cursive; font-size: 3rem;
-        color: rgba(255,255,255,0.92); filter: drop-shadow(0 1px 10px rgba(255,45,120,0.3));
-        margin-bottom: 1.5rem;
-      }
-      #splash .date-strip {
-        border: 1px solid rgba(201,168,76,0.4); border-radius: 2px;
-        padding: 0.55rem 1.8rem; margin-bottom: 1.75rem;
-        font-family: 'Bebas Neue', sans-serif; font-size: 0.8rem; letter-spacing: 0.38em;
-        color: rgba(201,168,76,0.85);
-        background: rgba(201,168,76,0.06);
-      }
-      #splash .open-btn {
-        border: none; cursor: pointer; border-radius: 2px;
-        display: flex; align-items: center; gap: 10px; color: #080808; font-weight: 900;
-        padding: 1rem 2.8rem;
-        background: linear-gradient(135deg,#C9A84C 0%,#F0D474 50%,#C9A84C 100%);
-        background-size: 200% auto; animation: goldShimmer 2.5s linear infinite, pulseGlow 2.8s ease-in-out infinite 2s;
-        font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem; letter-spacing: 0.48em;
-        position: relative; overflow: visible;
-        --font-size: 0.88rem;
-      }
-      #splash .tap-hint { font-size: 0.5rem; letter-spacing: 0.18em; color: rgba(255,255,255,0.3); margin-top: 0.75rem; font-family: 'Bebas Neue', sans-serif; }
-
-      /* ── MAIN ── */
-      #main { display: none; }
-
-      /* ── HERO ── */
-      #hero {
-        position: relative; text-align: center; overflow: hidden;
-        display: flex; flex-direction: column; min-height: 95vh;
-        background: #080808;
-      }
-      #hero .hero-bg {
-        position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-        opacity: 0.18; filter: grayscale(50%);
-      }
-      #hero .hero-veil {
-        position: absolute; inset: 0; pointer-events: none; z-index: 2;
-        background: linear-gradient(to bottom,rgba(8,8,8,0.7) 0%,rgba(8,8,8,0.35) 45%,rgba(8,8,8,0.85) 100%);
-      }
-      #hero .diag { position: absolute; inset: 0; pointer-events: none; z-index: 1; background: repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(201,168,76,0.03) 38px,rgba(201,168,76,0.03) 39px); }
-      #hero .inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; padding: 5rem 2rem 4rem; flex: 1; }
-      #hero .kicker { font-family: 'Bebas Neue', sans-serif; font-size: 0.65rem; letter-spacing: 0.72em; text-transform: uppercase; color: #FF2D78; margin-bottom: 0.5rem; }
-      #hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 10rem; line-height: 0.78; letter-spacing: 0.04em; filter: drop-shadow(0 3px 24px rgba(201,168,76,0.4)); }
-      #hero .anos { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.6em; color: rgba(240,212,116,0.7); margin-bottom: 0.5rem; }
-      #hero .de { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; letter-spacing: 0.22em; color: rgba(255,255,255,0.4); margin: 0.25rem 0; }
-      #hero .name { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: rgba(255,255,255,0.95); filter: drop-shadow(0 1px 14px rgba(255,45,120,0.35)); margin-bottom: 2rem; }
-      #hero .invite-card {
-        width: 100%; max-width: 340px; border-radius: 2px; position: relative; overflow: hidden; margin-bottom: 2.5rem;
-        padding: 1.75rem 1.75rem 1.5rem;
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.35);
-        backdrop-filter: blur(24px);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.5),inset 0 1px 0 rgba(201,168,76,0.15);
-      }
-      #hero .invite-card .top-line { position: absolute; top: 0; left: 10%; right: 10%; height: 1.5px; background: linear-gradient(to right,transparent,#C9A84C,transparent); }
-      #hero .invite-card .inv-kicker { font-family: 'Bebas Neue', sans-serif; font-size: 0.55rem; letter-spacing: 0.55em; color: rgba(201,168,76,0.65); margin-bottom: 0.5rem; }
-      #hero .invite-card .inv-name { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #F0D474; margin-bottom: 0.75rem; }
-      #hero .invite-card .div { height: 1px; margin: 0.75rem 0; background: linear-gradient(to right,transparent,rgba(201,168,76,0.35),transparent); }
-      #hero .invite-card .facts { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
-      #hero .invite-card .fact-sep { width: 1px; background: rgba(201,168,76,0.2); }
-      #hero .invite-card .fact { text-align: center; }
-      #hero .invite-card .fact-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.46rem; letter-spacing: 0.42em; color: rgba(201,168,76,0.55); margin-bottom: 2px; }
-      #hero .invite-card .fact-value { font-family: 'Bodoni Moda', serif; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.9); }
-      #hero .bottom-line { position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right,transparent,rgba(201,168,76,0.3),transparent); }
-      #hero .wave-svg { display: block; width: 100%; position: relative; z-index: 10; margin-top: auto; }
-
-      /* ── Ticker strip ── */
-      .ticker-section { background: #FF2D78; overflow: hidden; }
-
-      /* ── Section Header ── */
-      .sec-header { text-align: center; margin-bottom: 2rem; }
-      .sec-kicker { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 0.55rem; letter-spacing: 0.72em; text-transform: uppercase; color: #FF2D78; margin-bottom: 0.5rem; }
-      .sec-kicker-light { color: rgba(255,45,120,0.75); }
-      .sec-title { font-family: 'Bebas Neue', sans-serif; font-size: 3.4rem; letter-spacing: 0.06em; line-height: 1.15; }
-
-      /* ── DATE ── */
-      #date-sec { padding: 3.5rem 1.5rem 4rem; background: #0d0d0d; }
-      .date-cards { display: flex; gap: 12px; }
-      .date-card {
-        flex: 1; border-radius: 2px; text-align: center;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        position: relative; overflow: hidden; padding: 1.75rem 0.5rem 1.5rem;
-        background: #111; border: 1px solid rgba(201,168,76,0.2);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      }
-      .date-card .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right,transparent,#C9A84C,transparent); }
-      .date-card .card-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.5rem; letter-spacing: 0.45em; color: rgba(201,168,76,0.55); margin-bottom: 0.6rem; }
-      .date-card .card-big { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; color: #F0D474; }
-      .date-card .card-sub { font-family: 'Bodoni Moda', serif; font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.55); line-height: 1.4; white-space: pre; }
-
-      /* ── COUNTDOWN ── */
-      #countdown-sec { padding: 5rem 1.5rem; text-align: center; position: relative; overflow: hidden; background: #080808; }
-      #countdown-sec .scanlines { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom,transparent 0px,transparent 3px,rgba(0,0,0,0.15) 3px,rgba(0,0,0,0.15) 4px); animation: scanline 8s linear infinite; opacity: 0.3; }
-      .cd-grid { display: flex; align-items: flex-start; justify-content: center; gap: 10px; margin-top: 1rem; }
-      .cd-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-      .cd-box {
-        position: relative; overflow: hidden; border-radius: 2px;
-        display: flex; align-items: center; justify-content: center;
-        width: 72px; height: 84px;
-        background: #111; border: 1px solid rgba(201,168,76,0.25);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.1);
-      }
-      .cd-box .top-gloss { position: absolute; top: 0; left: 0; right: 0; bottom: 50%; background: rgba(255,255,255,0.03); }
-      .cd-box .shimmer { position: absolute; inset: 0; background: linear-gradient(110deg,transparent 20%,rgba(201,168,76,0.07) 50%,transparent 80%); animation: shimmerBox 3s ease-in-out infinite; }
-      .cd-num {
-        font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.04em;
-        background: linear-gradient(180deg,#F0D474 0%,#C9A84C 100%);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        line-height: 1; position: relative; z-index: 1; transition: all 0.15s;
-      }
-      .cd-num.flip { animation: cdFlip 0.4s cubic-bezier(0.22,1,0.36,1); }
-      .cd-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.48rem; letter-spacing: 0.38em; color: rgba(201,168,76,0.45); }
-      .cd-colon { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: rgba(255,45,120,0.45); padding-bottom: 2.2rem; animation: blinkColon 1.2s ease-in-out infinite; }
-
-      /* ── LOCATION ── */
-      #location-sec { padding: 3.5rem 1.5rem 4rem; background: #0d0d0d; }
-      .loc-card { border-radius: 2px; overflow: hidden; border: 1px solid rgba(201,168,76,0.2); background: #111; box-shadow: 0 24px 72px rgba(0,0,0,0.5); }
-      .loc-header { display: flex; align-items: center; gap: 18px; padding: 1.5rem 1.5rem 1.25rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
-      .loc-icon { flex-shrink: 0; border-radius: 2px; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: linear-gradient(145deg,#FF2D78,#B30050); box-shadow: 0 8px 28px rgba(255,45,120,0.45); }
-      .loc-name { font-family: 'Bodoni Moda', serif; font-size: 1.05rem; font-weight: 700; color: rgba(255,255,255,0.95); margin-bottom: 3px; }
-      .loc-addr { font-size: 0.76rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
-      .loc-map { width: 100%; height: 220px; }
-      .loc-map iframe { width: 100%; height: 100%; border: none; display: block; }
-      .loc-btn-wrap { padding: 1.25rem; }
-      .loc-btn {
-        display: flex; align-items: center; justify-content: center; gap: 10px;
-        width: 100%; border-radius: 2px; color: #080808; cursor: pointer; border: none;
-        text-decoration: none; padding: 1rem;
-        background: linear-gradient(135deg,#C9A84C 0%,#F0D474 100%);
-        box-shadow: 0 10px 32px rgba(201,168,76,0.35);
-        font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; font-weight: 700;
-        transition: transform 0.2s;
-        position: relative; overflow: visible; --font-size: 0.75rem;
-      }
-      .loc-btn:hover { transform: scale(1.02); }
-
-      /* ── GALLERY ── */
-      #gallery-sec { padding: 3.5rem 1.5rem 4rem; background: #080808; }
-      .gallery-main { position: relative; border-radius: 2px; overflow: hidden; height: 300px; box-shadow: 0 24px 72px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.2); }
-      .gallery-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; filter: grayscale(20%); }
-      .gallery-main .grad-overlay { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to top,rgba(8,8,8,0.8) 0%,transparent 55%); }
-      .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; text-align: center; padding: 1.5rem 1.25rem 1rem; }
-      .gallery-caption p { font-family: 'Great Vibes', cursive; font-size: 1.5rem; color: rgba(255,255,255,0.96); text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
-      .gallery-badge { position: absolute; top: 14px; right: 14px; z-index: 10; border-radius: 1px; padding: 5px 14px; background: #FF2D78; font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; font-weight: 700; color: white; letter-spacing: 0.2em; }
-      .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; align-items: center; justify-content: center; border-radius: 1px; width: 42px; height: 42px; cursor: pointer; background: rgba(8,8,8,0.85); border: 1px solid rgba(201,168,76,0.3); font-size: 1.4rem; color: #C9A84C; backdrop-filter: blur(8px); transition: transform 0.2s; }
-      .gallery-arrow:hover { transform: translateY(-50%) scale(1.1); }
-      .gallery-arrow.prev { left: 10px; }
-      .gallery-arrow.next { right: 10px; }
-      .gallery-thumbs { display: flex; gap: 8px; margin-top: 14px; justify-content: center; flex-wrap: wrap; }
-      .gallery-thumb { border-radius: 1px; overflow: hidden; flex-shrink: 0; width: 48px; height: 48px; cursor: pointer; border: 2px solid rgba(201,168,76,0.15); opacity: 0.45; transform: scale(1); transition: all 0.2s; }
-      .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(30%); }
-      .gallery-thumb.active { border-color: #FF2D78; opacity: 1; transform: scale(1.12); box-shadow: 0 4px 16px rgba(255,45,120,0.45); }
-      .gallery-dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
-      .gallery-dot { height: 3px; border-radius: 0; cursor: pointer; border: none; transition: all 0.2s; background: rgba(201,168,76,0.2); width: 5px; padding: 0; }
-      .gallery-dot.active { width: 28px; background: #FF2D78; }
-
-      /* ── ITINERARY ── */
-      #itinerary-sec { padding: 3.5rem 1.5rem 4rem; background: #0d0d0d; }
-      .itin-list { position: relative; }
-      .itin-line { position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom,transparent,rgba(201,168,76,0.4) 8%,rgba(201,168,76,0.2) 50%,rgba(201,168,76,0.4) 92%,transparent); transform-origin: top; transform: scaleY(0); transition: transform 1.8s cubic-bezier(0.22,1,0.36,1); }
-      .itin-line.visible { transform: scaleY(1); }
-      .itin-item { display: flex; align-items: flex-start; gap: 18px; padding-bottom: 1.875rem; }
-      .itin-item:last-child { padding-bottom: 0; }
-      .itin-circle { flex-shrink: 0; border-radius: 2px; z-index: 10; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: linear-gradient(145deg,#FF2D78,#B30050); box-shadow: 0 6px 24px rgba(255,45,120,0.45); }
-      .itin-card { flex: 1; border-radius: 2px; position: relative; overflow: hidden; margin-top: 0.45rem; padding: 1rem 1.25rem; background: #111; border: 1px solid rgba(201,168,76,0.15); box-shadow: 0 6px 28px rgba(0,0,0,0.3); transition: transform 0.3s; }
-      .itin-card:hover { transform: translateX(4px); }
-      .itin-card .left-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom,#F0D474,#C9A84C,#7A5C1E); }
-      .itin-card .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; padding-left: 6px; }
-      .itin-card .itin-name { font-family: 'Bodoni Moda', serif; font-size: 0.84rem; font-weight: 700; color: rgba(255,255,255,0.92); }
-      .itin-card .itin-time { border-radius: 1px; color: #080808; flex-shrink: 0; white-space: nowrap; margin-left: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 0.5rem; letter-spacing: 0.25em; font-weight: 700; padding: 0.3rem 0.75rem; background: linear-gradient(135deg,#C9A84C,#F0D474); box-shadow: 0 3px 12px rgba(201,168,76,0.35); }
-      .itin-card .itin-desc { font-size: 0.75rem; color: rgba(255,255,255,0.38); line-height: 1.55; padding-left: 6px; }
-
-      /* ── GIFTS ── */
-      #gifts-sec { padding: 3.5rem 1.5rem 4rem; background: #080808; }
-      .gift-card { border-radius: 2px; overflow: hidden; margin-bottom: 14px; border: 1px solid rgba(201,168,76,0.18); background: #111; transition: box-shadow 0.3s; }
-      .gift-card.open { box-shadow: 0 14px 48px rgba(255,45,120,0.12); border-color: rgba(255,45,120,0.3); }
-      .gift-toggle { display: flex; align-items: center; gap: 1rem; width: 100%; text-align: left; cursor: pointer; border: none; background: transparent; padding: 1.25rem 1.5rem; }
-      .gift-icon { flex-shrink: 0; border-radius: 2px; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
-      .gift-label-wrap { flex: 1; text-align: left; }
-      .gift-label { font-family: 'Bodoni Moda', serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.92); }
-      .gift-sub { font-size: 0.7rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
-      .gift-chevron { transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); color: rgba(201,168,76,0.5); }
-      .gift-card.open .gift-chevron { transform: rotate(180deg); }
-      .gift-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease-in-out; }
-      .gift-card.open .gift-body { max-height: 600px; }
-      .gift-inner { padding: 0 1.5rem 1.5rem; }
-      .gift-box { border-radius: 2px; padding: 1.5rem; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.12); }
-      .gift-box-title { font-family: 'Great Vibes', cursive; font-size: 1.6rem; color: #F0D474; text-align: center; margin-bottom: 1.25rem; }
-      .gift-input { width: 100%; border-radius: 2px; display: block; margin-bottom: 0.75rem; padding: 0.9rem 1.1rem; border: 1px solid rgba(201,168,76,0.2); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.88); font-size: 0.88rem; font-family: inherit; outline: none; transition: all 0.2s; }
-      .gift-input::placeholder { color: rgba(255,255,255,0.25); }
-      .gift-input:focus { border-color: rgba(255,45,120,0.5); box-shadow: 0 0 0 2px rgba(255,45,120,0.1); }
-      .gift-qr-btn { width: 100%; border-radius: 2px; color: #080808; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.925rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.38em; font-weight: 700; background: linear-gradient(135deg,#C9A84C 0%,#F0D474 100%); box-shadow: 0 8px 28px rgba(201,168,76,0.35); transition: transform 0.2s; position: relative; overflow: visible; --font-size: 0.75rem; }
-      .gift-qr-btn:hover { transform: scale(1.02); }
-      .gift-qr-img { display: flex; justify-content: center; margin-top: 1.5rem; }
-      .gift-qr-img .qr-wrap { border-radius: 2px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-
-      /* ── RSVP ── */
-      #rsvp-sec { padding: 4rem 1.5rem 5rem; position: relative; overflow: hidden; background: #080808; }
-      #rsvp-sec::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(255,45,120,0.02) 38px,rgba(255,45,120,0.02) 39px); }
-      .rsvp-inner { position: relative; z-index: 10; }
-      .rsvp-sub { text-align: center; margin-bottom: 2rem; font-size: 0.88rem; font-style: italic; color: rgba(255,255,255,0.45); line-height: 1.8; }
-      .rsvp-card { border-radius: 2px; padding: 2rem 1.75rem; background: #111; border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.4),inset 0 1px 0 rgba(201,168,76,0.08); }
-      .rsvp-input { width: 100%; border-radius: 2px; display: block; margin-bottom: 0.75rem; padding: 0.95rem 1.2rem; border: 1px solid rgba(201,168,76,0.18); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.88); font-size: 0.9rem; font-family: inherit; outline: none; }
-      .rsvp-input::placeholder { color: rgba(255,255,255,0.25); }
-      .rsvp-toggle { display: flex; gap: 0.75rem; margin-bottom: 18px; }
-      .rsvp-btn { flex: 1; border-radius: 2px; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 0.65rem; letter-spacing: 0.35em; padding: 0.9rem; border: 1px solid rgba(201,168,76,0.3); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.55); transition: all 0.25s; position: relative; overflow: visible; --font-size: 0.65rem; }
-      .rsvp-btn.active { border-color: #FF2D78; background: rgba(255,45,120,0.15); color: rgba(255,255,255,0.92); box-shadow: 0 4px 20px rgba(255,45,120,0.25); }
-      .rsvp-error { font-size: 0.72rem; color: #FF2D78; margin-bottom: 8px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; }
-      .rsvp-submit { width: 100%; border-radius: 2px; color: #080808; cursor: pointer; border: none; padding: 1.1rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.8rem; letter-spacing: 0.38em; font-weight: 700; background: linear-gradient(135deg,#C9A84C 0%,#F0D474 100%); box-shadow: 0 10px 36px rgba(201,168,76,0.4); transition: transform 0.2s; position: relative; overflow: visible; --font-size: 0.8rem; }
-      .rsvp-submit:hover { transform: scale(1.02); }
-
-      /* ── Sparkle button effect ── */
-      .sparkle-btn {
-        --hover: 0.4;
-        --pos: 0;
-        --font-size: 0.88rem;
-        --shadow: rgba(201,168,76,0.7);
-        --glare: hsl(0 0% 100% / 0.80);
-        position: relative;
-        overflow: visible;
-      }
-      .sparkle-btn:hover { --hover: 1; --pos: 1; }
-      .sparkle-btn:active { --hover: 0; }
-
-      /* text shadow lift */
-      .sparkle-btn .sbtn-text {
-        display: inline-block;
-        position: relative;
-        z-index: 1;
-        transition: transform 0.2s;
+    /* ── Animations ── */
+    @keyframes goldShimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes neonGlow {
+      0%,100% {
         text-shadow:
-          calc(var(--hover) * (var(--font-size) * -0.06)) calc(var(--hover) * (var(--font-size) * 0.06)) var(--shadow),
-          calc(var(--hover) * (var(--font-size) * -0.1)) calc(var(--hover) * (var(--font-size) * 0.1)) var(--shadow);
-        transform: translate(calc(var(--hover) * (var(--font-size) * 0.1)), calc(var(--hover) * (var(--font-size) * -0.1)));
+          0 0 4px #fff,
+          0 0 11px #fff,
+          0 0 19px #FFD700,
+          0 0 40px #FFD700,
+          0 0 80px #FFD700;
+        filter: brightness(1.0);
       }
-      /* glare overlay */
-      .sparkle-btn .sbtn-glare {
-        position: absolute;
-        inset: 0;
-        display: flex; align-items: center; justify-content: center;
-        background: linear-gradient(
-          108deg,
-          transparent 0 55%,
-          var(--glare) 55% 60%,
-          transparent 60% 70%,
-          var(--glare) 70% 85%,
-          transparent 85%
-        ) calc(var(--pos) * -200%) 0% / 200% 100%, transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        font-family: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit;
-        z-index: 2;
-        text-shadow: none;
-        pointer-events: none;
-        transition: transform 0.2s, background-position 0s;
-        transform: translate(calc(var(--hover) * (var(--font-size) * 0.1)), calc(var(--hover) * (var(--font-size) * -0.1)));
+      50% {
+        text-shadow:
+          0 0 4px #fff,
+          0 0 11px rgba(255,255,255,0.7),
+          0 0 19px rgba(255,215,0,0.7),
+          0 0 40px rgba(255,215,0,0.5),
+          0 0 80px rgba(255,215,0,0.2);
+        filter: brightness(0.92);
       }
-      .sparkle-btn:hover .sbtn-glare {
-        transition: transform 0.2s, background-position calc(var(--hover) * 1.5s) calc(var(--hover) * 0.25s);
-      }
+    }
+    @keyframes diamondFloat {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-12px) rotate(8deg); }
+    }
+    @keyframes blinkColon {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    @keyframes cdFlip {
+      0%   { transform: rotateX(0deg); opacity: 1; }
+      50%  { transform: rotateX(-90deg); opacity: 0.3; }
+      100% { transform: rotateX(0deg); opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    @keyframes spineGrow {
+      from { transform: translateX(-50%) scaleY(0); }
+      to   { transform: translateX(-50%) scaleY(1); }
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes splashFadeOut {
+      to { opacity: 0; transform: scale(1.06) translateY(-20px); }
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+    @keyframes fizzyRise {
+      0%   { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+      20%  { opacity: 1; transform: translate(calc(var(--dx)*0.3), calc(var(--dy)*0.3)) scale(1); }
+      80%  { opacity: 0.8; }
+      100% { transform: translate(calc(var(--dx) + var(--sx)), calc(var(--dy) - var(--ry))) scale(0); opacity: 0; }
+    }
+    @keyframes contentReveal {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-      /* sparkle SVGs */
-      .sparkle-btn .sp-svg {
-        position: absolute;
-        z-index: 3;
-        width: calc(var(--font-size) * 5);
-        aspect-ratio: 1;
-        pointer-events: none;
-        transform: translate(-50%, -50%) scale(0);
-        --delay-step: 0.15;
-      }
-      .sparkle-btn .sp-svg path { fill: var(--glare); }
-      .sparkle-btn:hover .sp-svg { animation: spkl 0.75s calc((var(--delay-step) * var(--d)) * 1s) both; }
-      @keyframes spkl {
-        50% { transform: translate(-50%, -50%) scale(var(--s, 1)); }
-      }
-      .sparkle-btn .sp-svg:nth-of-type(1) { top:20%; left:0%;   --s:1.1;  --d:1; }
-      .sparkle-btn .sp-svg:nth-of-type(2) { top:80%; left:15%;  --s:1.25; --d:2; }
-      .sparkle-btn .sp-svg:nth-of-type(3) { top:40%; left:45%;  --s:1.1;  --d:3; }
-      .sparkle-btn .sp-svg:nth-of-type(4) { top:60%; left:75%;  --s:0.9;  --d:2; }
-      .sparkle-btn .sp-svg:nth-of-type(5) { top:30%; left:100%; --s:0.8;  --d:4; }
-      .rsvp-hint { text-align: center; margin-top: 0.75rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.48rem; letter-spacing: 0.18em; color: rgba(255,255,255,0.2); }
-      .rsvp-thanks { text-align: center; padding: 2.5rem 0; animation: scaleIn 0.55s cubic-bezier(0.22,1,0.36,1); }
-      .rsvp-thanks-icon { border-radius: 2px; display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; margin: 0 auto 1.25rem; background: linear-gradient(145deg,#C9A84C,#7A5C1E); box-shadow: 0 14px 44px rgba(201,168,76,0.45); }
-      .rsvp-thanks h3 { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #F0D474; line-height: 1; filter: drop-shadow(0 2px 12px rgba(201,168,76,0.4)); }
-      .rsvp-thanks p { font-size: 0.9rem; font-style: italic; margin-top: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; }
+    /* ── Gold shimmer text ── */
+    .gold-shimmer-text {
+      background: linear-gradient(90deg,#B8860B 0%,#FFD700 35%,#FFF176 50%,#FFD700 65%,#B8860B 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 3s linear infinite, neonGlow 2.5s ease-in-out infinite;
+      /* neonGlow won't show on clipped text in all browsers but adds brightness */
+      filter: drop-shadow(0 0 8px rgba(255,215,0,0.5));
+    }
 
-      /* ── FOOTER ── */
-      #footer-sec { padding: 5rem 1.5rem 3.5rem; text-align: center; position: relative; overflow: hidden; background: #050505; }
-      #footer-sec .top-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right,transparent,rgba(201,168,76,0.5),transparent); }
-      #footer-sec .seal { width: 90px; height: 90px; border-radius: 2px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.2); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-      #footer-sec .poem { font-style: italic; line-height: 2; margin-bottom: 1.5rem; color: rgba(255,255,255,0.35); font-size: 0.95rem; }
-      #footer-sec .signature-pill { display: inline-block; margin-bottom: 2rem; border-radius: 1px; padding: 0.95rem 2.5rem; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.25); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
-      #footer-sec .signature-text { font-family: 'Great Vibes', cursive; font-size: 2.4rem; color: #F0D474; filter: drop-shadow(0 1px 8px rgba(201,168,76,0.3)); }
-      #footer-sec .brand-area { padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(201,168,76,0.08); }
-      #footer-sec .brand-logo { height: 90px; display: block; margin: 0 auto 14px; filter: brightness(0) invert(1) opacity(0.7); }
-      #footer-sec .brand-notice { font-size: 0.7rem; color: rgba(255,255,255,0.25); max-width: 300px; margin: 0 auto; line-height: 1.7; letter-spacing: 0.02em; }
-      #footer-sec .brand-notice strong { color: rgba(255,255,255,0.5); }
-      #footer-sec .brand-copy { margin-top: 14px; font-size: 0.65rem; color: rgba(255,255,255,0.15); letter-spacing: 0.1em; font-family: 'Bebas Neue', sans-serif; }
+    /* ── Petals canvas ── */
+    #petal-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -30px;
+      width: 10px;
+      height: 14px;
+      border-radius: 50% 50% 50% 0;
+      opacity: 0.75;
+      animation: petalFall linear infinite;
+    }
 
-      /* ── Ornament divider ── */
-      .orn-div { display: flex; justify-content: center; margin-top: 0.5rem; }
-    </style>
-  </head>
-  <body>
-    <canvas id="petal-canvas"></canvas>
-    <div id="app">
+    /* ── Splash ── */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      background: linear-gradient(160deg,#a8005a 0%,#cc006e 40%,#ff1493 70%,#ff3fa8 100%);
+      transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1);
+    }
+    #splash.closing {
+      opacity: 0;
+      transform: scale(1.06) translateY(-20px);
+      pointer-events: none;
+    }
+    #splash .splash-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+      filter: grayscale(60%) hue-rotate(200deg);
+    }
+    #splash .splash-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%,transparent 20%,rgba(200,0,100,0.4) 100%);
+    }
+    #splash .splash-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(0,240,255,0.025) 38px,rgba(0,240,255,0.025) 39px);
+    }
+    .splash-heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      animation: diamondFloat 3s ease-in-out infinite;
+    }
+    .splash-heart:nth-child(1) { top:20px; left:20px; animation-delay:0s; }
+    .splash-heart:nth-child(2) { top:20px; right:20px; animation-delay:0.9s; }
+    .splash-heart:nth-child(3) { bottom:20px; left:20px; animation-delay:1.8s; }
+    .splash-heart:nth-child(4) { bottom:20px; right:20px; animation-delay:2.7s; }
+    #splash-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 2.5rem;
+      animation: contentReveal 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+    }
 
-      <!-- SPLASH -->
-      <div id="splash" onclick="closeSplash()">
-        <img class="splash-bg" src="https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
-        <div class="vignette"></div>
-        <div class="diag"></div>
-        <!-- Floating diamonds -->
-        <svg class="diamond-svg diamond-tl" viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,18 18,34 2,18" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.9)" stroke-width="1.5"/><polygon points="18,8 28,18 18,28 8,18" fill="rgba(201,168,76,0.10)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/></svg>
-        <svg class="diamond-svg diamond-tr" viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,18 18,34 2,18" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.9)" stroke-width="1.5"/><polygon points="18,8 28,18 18,28 8,18" fill="rgba(201,168,76,0.10)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/></svg>
-        <svg class="diamond-svg diamond-bl" viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,18 18,34 2,18" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.9)" stroke-width="1.5"/><polygon points="18,8 28,18 18,28 8,18" fill="rgba(201,168,76,0.10)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/></svg>
-        <svg class="diamond-svg diamond-br" viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,18 18,34 2,18" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.9)" stroke-width="1.5"/><polygon points="18,8 28,18 18,28 8,18" fill="rgba(201,168,76,0.10)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/></svg>
+    /* ── Gold border block ── */
+    .gold-border-line {
+      height: 2px;
+      background: linear-gradient(to right,transparent,#B8860B 15%,#FFD700 40%,#FFF176 50%,#FFD700 60%,#B8860B 85%,transparent);
+      box-shadow: 0 0 10px rgba(255,215,0,0.5), 0 0 20px rgba(255,215,0,0.2);
+    }
+    .block-wrap {
+      border-left: 1px solid rgba(255,215,0,0.25);
+      border-right: 1px solid rgba(255,215,0,0.25);
+      box-shadow: inset 4px 0 18px rgba(0,0,0,0.12), inset -4px 0 18px rgba(0,0,0,0.12);
+    }
 
-        <div class="content">
-          <p class="fashion-tag">Fashion Edition · XV Años</p>
-          <h1 class="gold-shimmer-text">15</h1>
-          <p class="xv-label">Años de</p>
-          <p class="splash-script">Sofía Valentina</p>
-          <div class="date-strip">15 · NOV · 2026 &nbsp;|&nbsp; 7:00 PM</div>
-          <button class="open-btn sparkle-btn" onclick="closeSplash()">
-            <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-            <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-            <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-            <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-            <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-            <span class="sbtn-text">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-              Abrir Invitación
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            </span>
-            <span class="sbtn-glare" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-              Abrir Invitación
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            </span>
-          </button>
-          <p class="tap-hint">Toca en cualquier lugar para abrir</p>
+    /* ── Main content ── */
+    #main-content {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(90deg,#1a0010,#3d0025,#1a0010);
+      padding: 9px 0;
+      border-top: 1px solid rgba(255,215,0,0.3);
+      border-bottom: 1px solid rgba(255,215,0,0.3);
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: tickerScroll 16s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .ticker-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      color: #FFD700;
+      text-shadow: 0 0 10px rgba(255,215,0,0.4);
+      padding: 0 2.5rem;
+    }
+    .ticker-star { color: rgba(255,215,0,0.5); }
+
+    /* ── Countdown ── */
+    .cd-box-num {
+      transition: transform 0.4s;
+    }
+    .cd-box-num.flip { animation: cdFlip 0.4s ease-in-out; }
+
+    /* ── Gifts accordion ── */
+    .gift-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease-in-out;
+    }
+    .gift-body.open { max-height: 600px; }
+    .gift-chevron {
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gift-chevron.open { transform: rotate(180deg); }
+
+    /* ── Itinerary spine ── */
+    .iti-spine {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(to bottom,transparent,rgba(255,215,0,0.8) 10%,rgba(255,255,255,0.4) 50%,rgba(255,215,0,0.8) 90%,transparent);
+      box-shadow: 0 0 10px rgba(255,215,0,0.3);
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      transition: transform 2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .iti-spine.visible { transform: translateX(-50%) scaleY(1); }
+
+    /* ── Gallery carousel ── */
+    .gallery-slide-container {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,215,0,0.25), 0 32px 80px rgba(0,0,0,0.5), 0 0 60px rgba(255,20,147,0.1);
+      height: 340px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .gallery-slide-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.45s cubic-bezier(0.25,0.1,0.25,1), transform 0.45s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .gallery-progress-bar {
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+    .gallery-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#FFD700,#ff1493);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .gallery-thumb-strip {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      justify-content: center;
+    }
+    .gallery-thumb-strip::-webkit-scrollbar { display: none; }
+    .gallery-thumb {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.15);
+      opacity: 0.5;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+      transition: border-color 0.25s, opacity 0.25s, box-shadow 0.25s;
+    }
+    .gallery-thumb.active {
+      border: 2.5px solid #FFD700;
+      opacity: 1;
+      box-shadow: 0 0 14px rgba(255,215,0,0.5);
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .gallery-dot {
+      height: 4px;
+      border-radius: 3px;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      background: rgba(255,255,255,0.3);
+      width: 6px;
+      transition: width 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+    .gallery-dot.active {
+      width: 28px;
+      background: #FFD700;
+      box-shadow: 0 0 8px rgba(255,215,0,0.6);
+    }
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      animation: scaleIn 0.3s ease;
+    }
+    #lightbox.open { display: flex; }
+
+    /* ── Fizzy button ── */
+    .fizzy-btn {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .fizzy-btn .fizzy-particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 5;
+      animation: fizzyRise var(--dur) var(--delay) ease-out forwards;
+    }
+    .fizzy-btn .fizzy-shimmer {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.07);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 4;
+      transition: opacity 0.2s;
+    }
+    .fizzy-btn:hover .fizzy-shimmer { opacity: 1; }
+    .fizzy-btn .fizzy-content {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: inherit;
+      width: 100%;
+    }
+
+    /* ── OrnDivider ── */
+    .orn-divider { display: flex; justify-content: center; margin-top: 8px; }
+
+    /* ── Inputs ── */
+    input[type=text], input[type=number] {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+    input::placeholder { color: rgba(255,255,255,0.45); }
+    input:focus { border-color: rgba(255,215,0,0.5); }
+
+    /* ── Utilities ── */
+    .invisible { visibility: hidden; }
+    .text-center { text-align: center; }
+    .block { display: block; }
+    .w-full { width: 100%; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+
+<!-- Petals -->
+<div id="petal-canvas"></div>
+
+<!-- Splash -->
+<div id="splash" onclick="openInvitation()">
+  <img class="splash-bg-img" src="https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
+  <div class="splash-radial"></div>
+  <div class="splash-grid"></div>
+
+  <!-- Floating hearts -->
+  <svg class="splash-heart" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 6px rgba(255,255,255,0.6))">
+    <path d="M21 36 C21 36 6 26 6 16 C6 10.477 10.477 6 16 6 C18.8 6 21 8.5 21 8.5 C21 8.5 23.2 6 26 6 C31.523 6 36 10.477 36 16 C36 26 21 36 21 36 Z" fill="rgba(255,255,255,0.9)"/>
+  </svg>
+  <svg class="splash-heart" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 6px rgba(255,50,150,0.7))">
+    <path d="M21 36 C21 36 6 26 6 16 C6 10.477 10.477 6 16 6 C18.8 6 21 8.5 21 8.5 C21 8.5 23.2 6 26 6 C31.523 6 36 10.477 36 16 C36 26 21 36 21 36 Z" fill="rgba(255,50,150,0.95)"/>
+  </svg>
+  <svg class="splash-heart" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 6px rgba(255,50,150,0.7))">
+    <path d="M21 36 C21 36 6 26 6 16 C6 10.477 10.477 6 16 6 C18.8 6 21 8.5 21 8.5 C21 8.5 23.2 6 26 6 C31.523 6 36 10.477 36 16 C36 26 21 36 21 36 Z" fill="rgba(255,50,150,0.95)"/>
+  </svg>
+  <svg class="splash-heart" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 6px rgba(255,255,255,0.6))">
+    <path d="M21 36 C21 36 6 26 6 16 C6 10.477 10.477 6 16 6 C18.8 6 21 8.5 21 8.5 C21 8.5 23.2 6 26 6 C31.523 6 36 10.477 36 16 C36 26 21 36 21 36 Z" fill="rgba(255,255,255,0.9)"/>
+  </svg>
+
+  <div id="splash-content">
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.78em;color:rgba(255,255,255,0.9);text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,0.3);margin-bottom:1.25rem;">
+      Luxury Edition · XV Años
+    </p>
+    <h1 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:9.5rem;line-height:0.82;letter-spacing:0.04em;">15</h1>
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.55em;color:#FFD700;text-shadow:0 0 12px rgba(255,215,0,0.4);margin-bottom:0.25rem;">
+      Años de
+    </p>
+    <p style="font-family:'Great Vibes',cursive;font-size:3.2rem;color:rgba(255,255,255,0.95);filter:drop-shadow(0 1px 14px rgba(255,0,144,0.6)) drop-shadow(0 0 30px rgba(255,0,144,0.3));margin-bottom:1.5rem;">
+      Sofía Valentina
+    </p>
+    <div style="border:1px solid rgba(255,255,255,0.45);padding:0.6rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.4em;color:#fff;background:rgba(40,0,25,0.55);backdrop-filter:blur(8px);margin-bottom:1.75rem;border-radius:2px;">
+      15 · NOV · 2026 &nbsp;|&nbsp; 7:00 PM
+    </div>
+    <button onclick="openInvitation()" class="fizzy-btn" style="padding:1.05rem 2.8rem;border:none;color:#030312;font-weight:900;font-family:'Bebas Neue',sans-serif;font-size:0.88rem;letter-spacing:0.48em;background:linear-gradient(135deg,#B8860B 0%,#FFD700 40%,#FFF176 55%,#FFD700 70%,#B8860B 100%);background-size:200% auto;animation:goldShimmer 2s linear infinite;box-shadow:0 6px 30px rgba(255,215,0,0.5),0 0 60px rgba(255,215,0,0.15);border-radius:2px;display:inline-flex;align-items:center;gap:8px;">
+      <div class="fizzy-shimmer"></div>
+      <div class="fizzy-content">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        Abrir Invitación
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+      </div>
+    </button>
+    <p style="font-size:0.5rem;letter-spacing:0.18em;color:rgba(255,255,255,0.25);font-family:'Bebas Neue',sans-serif;margin-top:0.75rem;">
+      Toca en cualquier lugar para abrir
+    </p>
+  </div>
+</div>
+
+<!-- Main content (shown after splash) -->
+<div id="main-content">
+
+  <!-- ── HERO ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;text-align:center;overflow:hidden;display:flex;flex-direction:column;min-height:95vh;background:linear-gradient(160deg,#c4006a 0%,#e8007e 40%,#ff1493 70%,#ff3fa8 100%);">
+      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.1;filter:grayscale(60%);" src="https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
+      <div style="position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(to bottom,rgba(120,0,60,0.45) 0%,rgba(120,0,60,0.1) 45%,rgba(80,0,40,0.55) 100%);"></div>
+      <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;flex:1;padding:5rem 2rem 4rem;">
+        <p style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.6em;text-transform:uppercase;color:rgba(255,255,255,0.9);text-shadow:0 1px 8px rgba(0,0,0,0.4);margin-bottom:0.5rem;">
+          Estás invitada a mis
+        </p>
+        <h1 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:10.5rem;line-height:0.78;letter-spacing:0.04em;">15</h1>
+        <p style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.6em;color:#FFD700;text-shadow:0 0 16px rgba(255,215,0,0.5);margin-bottom:0.5rem;">AÑOS</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;letter-spacing:0.22em;color:rgba(255,255,255,0.7);margin:0.25rem 0;">de</p>
+        <p style="font-family:'Great Vibes',cursive;font-size:3.4rem;color:#fff;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.4));margin-bottom:2rem;">Sofía Valentina</p>
+        <div style="margin-bottom:2rem;">
+          <svg width="230" height="14" viewBox="0 0 230 14" fill="none">
+            <line x1="0" y1="7" x2="88" y2="7" stroke="url(#hLf)" stroke-width="0.8"/>
+            <rect x="109" y="4" width="12" height="6" fill="#FFD700" opacity="0.95" transform="rotate(45 115 7)"/>
+            <circle cx="100" cy="7" r="1.8" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="130" cy="7" r="1.8" fill="rgba(255,255,255,0.7)"/>
+            <line x1="142" y1="7" x2="230" y2="7" stroke="url(#hRf)" stroke-width="0.8"/>
+            <defs>
+              <linearGradient id="hLf" x1="0" y1="0" x2="88" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(255,255,255,0.7)"/></linearGradient>
+              <linearGradient id="hRf" x1="142" y1="0" x2="230" y2="0"><stop offset="0%" stop-color="rgba(255,255,255,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <!-- Invite card -->
+        <div style="width:100%;max-width:340px;border-radius:2px;position:relative;overflow:hidden;margin-bottom:2.5rem;padding:1.75rem 1.75rem 1.5rem;background:rgba(40,0,25,0.78);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(24px);box-shadow:0 20px 60px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.15);">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,rgba(255,255,255,0.8),#FFD700,transparent);"></div>
+          <p style="font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.55em;color:rgba(255,255,255,0.65);margin-bottom:0.5rem;">Invitación Oficial</p>
+          <p style="font-family:'Great Vibes',cursive;font-size:2.2rem;color:#FFD700;text-shadow:0 0 14px rgba(255,215,0,0.4);margin-bottom:0.75rem;">Sofía Valentina</p>
+          <div style="height:1px;margin:0.75rem 0;background:linear-gradient(to right,transparent,rgba(255,255,255,0.3),rgba(255,215,0,0.4),transparent);"></div>
+          <div style="display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap;">
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:0.46rem;letter-spacing:0.42em;color:rgba(255,255,255,0.6);margin-bottom:2px;">Fecha</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:0.88rem;font-weight:700;color:#fff;">15 Nov 2026</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:0.46rem;letter-spacing:0.42em;color:rgba(255,255,255,0.6);margin-bottom:2px;">Hora</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:0.88rem;font-weight:700;color:#fff;">7:00 PM</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:0.46rem;letter-spacing:0.42em;color:rgba(255,255,255,0.6);margin-bottom:2px;">Lugar</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:0.88rem;font-weight:700;color:#fff;">Bogotá</div>
+            </div>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,215,0,0.4),rgba(255,255,255,0.3),transparent);"></div>
         </div>
       </div>
+      <svg style="display:block;width:100%;position:relative;z-index:10;margin-top:auto;" viewBox="0 0 480 48" preserveAspectRatio="none">
+        <path d="M0,0 C18,36 54,36 72,18 C90,0 108,0 126,18 C144,36 180,36 198,18 C216,0 234,0 252,18 C270,36 306,36 324,18 C342,0 360,0 378,18 C396,36 432,36 450,18 C468,0 474,12 480,18 L480,48 L0,48 Z" fill="#2a0020"/>
+      </svg>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
 
-      <!-- MAIN -->
-      <div id="main">
+  <!-- ── TICKER ── -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker-track"></div>
+  </div>
 
-        <!-- HERO -->
-        <section id="hero">
-          <img class="hero-bg" src="https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
-          <div class="diag"></div>
-          <div class="hero-veil"></div>
-          <div class="inner">
-            <p class="kicker">Estás invitada a mis</p>
-            <h1 class="gold-shimmer-text">15</h1>
-            <p class="anos">AÑOS</p>
-            <p class="de">de</p>
-            <p class="name">Sofía Valentina</p>
-            <!-- Gold ornament -->
-            <div style="margin-bottom:2rem">
-              <svg width="230" height="14" viewBox="0 0 230 14" fill="none">
-                <line x1="0" y1="7" x2="88" y2="7" stroke="url(#hLf)" stroke-width="0.8"/>
-                <rect x="109" y="4" width="12" height="6" fill="#FF2D78" opacity="0.9" transform="rotate(45 115 7)"/>
-                <circle cx="100" cy="7" r="1.8" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="130" cy="7" r="1.8" fill="rgba(201,168,76,0.5)"/>
-                <line x1="142" y1="7" x2="230" y2="7" stroke="url(#hRf)" stroke-width="0.8"/>
-                <defs>
-                  <linearGradient id="hLf" x1="0" y1="0" x2="88" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="hRf" x1="142" y1="0" x2="230" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <!-- Invite card -->
-            <div class="invite-card">
-              <div class="top-line"></div>
-              <p class="inv-kicker">Invitación Oficial</p>
-              <p class="inv-name">Sofía Valentina</p>
-              <div class="div"></div>
-              <div class="facts">
-                <div class="fact"><div class="fact-label">Fecha</div><div class="fact-value">15 Nov 2026</div></div>
-                <div class="fact-sep"></div>
-                <div class="fact"><div class="fact-label">Hora</div><div class="fact-value">7:00 PM</div></div>
-                <div class="fact-sep"></div>
-                <div class="fact"><div class="fact-label">Lugar</div><div class="fact-value">Bogotá</div></div>
-              </div>
-              <div class="bottom-line"></div>
-            </div>
-          </div>
-          <svg class="wave-svg" viewBox="0 0 480 48" preserveAspectRatio="none">
-            <path d="M0,0 C18,36 54,36 72,18 C90,0 108,0 126,18 C144,36 180,36 198,18 C216,0 234,0 252,18 C270,36 306,36 324,18 C342,0 360,0 378,18 C396,36 432,36 450,18 C468,0 474,12 480,18 L480,48 L0,48 Z" fill="#0d0d0d"/>
+  <!-- ── DATE SECTION ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#2a0020 0%,#4a0035 60%,#3d002a 100%);">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">La noche más especial</span>
+        <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;">La Fecha</h2>
+        <div class="orn-divider">
+          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
+            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL1)" stroke-width="0.7"/>
+            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity="0.9" transform="rotate(45 90 7)"/>
+            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR1)" stroke-width="0.7"/>
+            <defs>
+              <linearGradient id="oL1" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity="0.8"/></linearGradient>
+              <linearGradient id="oR1" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
           </svg>
-        </section>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.75rem;position:relative;z-index:1;">
+        <!-- Day -->
+        <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem 0.5rem 1.5rem;background:rgba(40,0,25,0.78);border:1px solid rgba(255,255,255,0.28);box-shadow:0 10px 30px rgba(0,0,0,0.25);backdrop-filter:blur(12px);">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.5rem;letter-spacing:0.45em;color:rgba(255,255,255,0.6);margin-bottom:0.6rem;">DÍA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,0.5);">15</div>
+        </div>
+        <!-- Month/Year -->
+        <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem 0.5rem 1.5rem;background:rgba(40,0,25,0.78);border:1px solid rgba(255,255,255,0.28);box-shadow:0 10px 30px rgba(0,0,0,0.25);backdrop-filter:blur(12px);">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.5rem;letter-spacing:0.45em;color:rgba(255,255,255,0.6);margin-bottom:0.6rem;">MES · AÑO</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.4;">Nov<br>2026</div>
+        </div>
+        <!-- Hour -->
+        <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem 0.5rem 1.5rem;background:rgba(40,0,25,0.78);border:1px solid rgba(255,255,255,0.28);box-shadow:0 10px 30px rgba(0,0,0,0.25);backdrop-filter:blur(12px);">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:0.5rem;letter-spacing:0.45em;color:rgba(255,255,255,0.6);margin-bottom:0.6rem;">HORA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,0.5);">7</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,0.85);">PM</div>
+        </div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
 
-        <!-- TICKER -->
-        <div class="ticker-section">
-          <div class="ticker-wrap">
-            <div class="ticker-inner" id="ticker-inner"></div>
+  <!-- ── COUNTDOWN ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;overflow:hidden;text-align:center;padding:5rem 1.5rem;background:linear-gradient(160deg,#1a0010 0%,#2e0020 50%,#1a0010 100%);">
+      <div style="position:relative;z-index:10;">
+        <div style="text-align:center;margin-bottom:2rem;">
+          <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">Cuenta regresiva</span>
+          <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;line-height:1.15;">¡Falta poco!</h2>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:center;gap:10px;">
+          <div class="cd-unit">
+            <div style="position:relative;overflow:hidden;border-radius:2px;display:flex;align-items:center;justify-content:center;width:72px;height:84px;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.28);box-shadow:0 8px 28px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.12);backdrop-filter:blur(12px);">
+              <div style="position:absolute;inset:0;top:0;bottom:50%;background:rgba(255,255,255,0.04);"></div>
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <span id="cd-days" class="cd-box-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;color:#FFD700;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));">00</span>
+            </div>
+            <span style="display:block;margin-top:8px;font-family:'Bebas Neue',sans-serif;font-size:0.48rem;letter-spacing:0.38em;color:rgba(255,255,255,0.75);">DÍAS</span>
+          </div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:rgba(255,255,255,0.75);padding-bottom:2.2rem;animation:blinkColon 1.2s ease-in-out infinite;">:</span>
+          <div class="cd-unit">
+            <div style="position:relative;overflow:hidden;border-radius:2px;display:flex;align-items:center;justify-content:center;width:72px;height:84px;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.28);box-shadow:0 8px 28px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.12);backdrop-filter:blur(12px);">
+              <div style="position:absolute;inset:0;top:0;bottom:50%;background:rgba(255,255,255,0.04);"></div>
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <span id="cd-hours" class="cd-box-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;color:#FFD700;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));">00</span>
+            </div>
+            <span style="display:block;margin-top:8px;font-family:'Bebas Neue',sans-serif;font-size:0.48rem;letter-spacing:0.38em;color:rgba(255,255,255,0.75);">HORAS</span>
+          </div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:rgba(255,255,255,0.75);padding-bottom:2.2rem;animation:blinkColon 1.2s ease-in-out infinite;">:</span>
+          <div class="cd-unit">
+            <div style="position:relative;overflow:hidden;border-radius:2px;display:flex;align-items:center;justify-content:center;width:72px;height:84px;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.28);box-shadow:0 8px 28px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.12);backdrop-filter:blur(12px);">
+              <div style="position:absolute;inset:0;top:0;bottom:50%;background:rgba(255,255,255,0.04);"></div>
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <span id="cd-mins" class="cd-box-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;color:#FFD700;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));">00</span>
+            </div>
+            <span style="display:block;margin-top:8px;font-family:'Bebas Neue',sans-serif;font-size:0.48rem;letter-spacing:0.38em;color:rgba(255,255,255,0.75);">MIN</span>
+          </div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:rgba(255,255,255,0.75);padding-bottom:2.2rem;animation:blinkColon 1.2s ease-in-out infinite;">:</span>
+          <div class="cd-unit">
+            <div style="position:relative;overflow:hidden;border-radius:2px;display:flex;align-items:center;justify-content:center;width:72px;height:84px;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.28);box-shadow:0 8px 28px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.12);backdrop-filter:blur(12px);">
+              <div style="position:absolute;inset:0;top:0;bottom:50%;background:rgba(255,255,255,0.04);"></div>
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <span id="cd-secs" class="cd-box-num" style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;color:#FFD700;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));">00</span>
+            </div>
+            <span style="display:block;margin-top:8px;font-family:'Bebas Neue',sans-serif;font-size:0.48rem;letter-spacing:0.38em;color:rgba(255,255,255,0.75);">SEG</span>
           </div>
         </div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
 
-        <!-- DATE -->
-        <section id="date-sec">
-          <div class="sec-header">
-            <span class="sec-kicker">La noche más especial</span>
-            <h2 class="sec-title gold-shimmer-text">La Fecha</h2>
-            <div class="orn-div">
-              <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-                <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLd)" stroke-width="0.7"/>
-                <rect x="85" y="4" width="10" height="6" fill="#FF2D78" opacity="0.85" transform="rotate(45 90 7)"/>
-                <circle cx="76" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="104" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRd)" stroke-width="0.7"/>
-                <defs>
-                  <linearGradient id="oLd" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="oRd" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
+  <!-- ── LOCATION ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#ff1493 0%,#d4006b 60%,#b8005a 100%);">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">¿Dónde será la magia?</span>
+        <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;">El Lugar</h2>
+        <div class="orn-divider">
+          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
+            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL2)" stroke-width="0.7"/>
+            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity="0.9" transform="rotate(45 90 7)"/>
+            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR2)" stroke-width="0.7"/>
+            <defs>
+              <linearGradient id="oL2" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity="0.8"/></linearGradient>
+              <linearGradient id="oR2" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div style="border-radius:2px;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(255,255,255,0.28);background:rgba(40,0,25,0.82);backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(0,0,0,0.3);">
+        <div style="display:flex;align-items:center;gap:1rem;padding:1.5rem 1.5rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.12);">
+          <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:linear-gradient(145deg,#FFD700,#b8860b);box-shadow:0 8px 28px rgba(255,215,0,0.4);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(60,20,0,0.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'Bodoni Moda',serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:3px;">Salón de Eventos</div>
+            <div style="font-size:0.76rem;color:rgba(255,255,255,0.6);line-height:1.5;">Calle de los Sueños 123<br>Bogotá, Colombia</div>
+          </div>
+        </div>
+        <div style="height:220px;">
+          <iframe title="Mapa" src="https://maps.google.com/maps?q=Bogot%C3%A1,+Colombia&output=embed" style="width:100%;height:100%;display:block;border:none;" loading="lazy"></iframe>
+        </div>
+        <div style="padding:1.25rem;">
+          <button onclick="window.open('https://maps.google.com/maps?q=Bogotá,+Colombia','_blank')" class="fizzy-btn" style="width:100%;padding:1rem;border:none;color:#3a1000;font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.4em;font-weight:700;background:linear-gradient(135deg,#B8860B 0%,#FFD700 50%,#FFF176 65%,#FFD700 80%,#B8860B 100%);background-size:200% auto;animation:goldShimmer 2.5s linear infinite;box-shadow:0 10px 32px rgba(255,215,0,0.4);border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <div class="fizzy-shimmer"></div>
+            <div class="fizzy-content">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              Cómo llegar
             </div>
-          </div>
-          <div class="date-cards">
-            <div class="date-card"><div class="top-bar"></div><div class="card-label">DÍA</div><div class="card-big">15</div></div>
-            <div class="date-card"><div class="top-bar"></div><div class="card-label">MES · AÑO</div><div class="card-sub">Nov&#10;2026</div></div>
-            <div class="date-card"><div class="top-bar"></div><div class="card-label">HORA</div><div class="card-big">7</div><div class="card-sub">PM</div></div>
-          </div>
-        </section>
+          </button>
+        </div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
 
-        <!-- COUNTDOWN -->
-        <section id="countdown-sec">
-          <div class="scanlines"></div>
-          <div style="position:relative;z-index:10">
-            <div class="sec-header">
-              <span class="sec-kicker sec-kicker-light">Cuenta regresiva</span>
-              <h2 class="sec-title fuchsia-shimmer-text">¡Falta poco!</h2>
+  <!-- ── GALLERY ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="padding:3.5rem 0 4rem;background:linear-gradient(160deg,#2a0020 0%,#4a0035 60%,#3d002a 100%);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:10%;left:-10%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,147,0.12) 0%,transparent 70%);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:10%;right:-10%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+      <div style="text-align:center;margin-bottom:2rem;padding:0 1.5rem;">
+        <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Momentos para recordar</span>
+        <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;margin:0.1rem 0;">Galería</h2>
+        <div class="orn-divider">
+          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
+            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL3)" stroke-width="0.7"/>
+            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity="0.9" transform="rotate(45 90 7)"/>
+            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR3)" stroke-width="0.7"/>
+            <defs>
+              <linearGradient id="oL3" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity="0.8"/></linearGradient>
+              <linearGradient id="oR3" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div style="max-width:520px;margin:0 auto;padding:0 1.25rem;">
+        <!-- Slide -->
+        <div class="gallery-slide-container" onclick="openLightbox(window._galleryIdx)">
+          <img id="gallery-img" class="gallery-slide-img" src="" alt="" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(30,0,20,0.92) 0%,rgba(30,0,20,0.3) 40%,transparent 65%);pointer-events:none;"></div>
+          <div id="gallery-caption" style="position:absolute;bottom:0;left:0;right:0;padding:1.75rem 1.5rem 1.25rem;pointer-events:none;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.7rem;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.6);margin:0;"></p>
+            <div style="margin-top:6px;height:2px;width:48px;background:linear-gradient(90deg,#FFD700,transparent);border-radius:2px;"></div>
+          </div>
+          <div id="gallery-counter" style="position:absolute;top:14px;right:14px;z-index:10;background:rgba(20,0,15,0.75);border:1px solid rgba(255,215,0,0.35);border-radius:8px;padding:3px 10px;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;color:#FFD700;letter-spacing:0.2em;backdrop-filter:blur(8px);"></div>
+          <div style="position:absolute;top:14px;left:14px;z-index:10;background:rgba(20,0,15,0.75);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:5px 8px;backdrop-filter:blur(8px);color:rgba(255,255,255,0.7);font-size:0.75rem;">⛶</div>
+          <!-- Arrows -->
+          <button onclick="event.stopPropagation();galleryPrev()" class="fizzy-btn" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(20,0,15,0.75);border:1px solid rgba(255,215,0,0.3);color:#FFD700;font-size:1.3rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
+            <div class="fizzy-shimmer"></div>
+            <div class="fizzy-content">‹</div>
+          </button>
+          <button onclick="event.stopPropagation();galleryNext()" class="fizzy-btn" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(20,0,15,0.75);border:1px solid rgba(255,215,0,0.3);color:#FFD700;font-size:1.3rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
+            <div class="fizzy-shimmer"></div>
+            <div class="fizzy-content">›</div>
+          </button>
+        </div>
+        <!-- Progress bar -->
+        <div class="gallery-progress-bar">
+          <div class="gallery-progress-fill" id="gallery-progress" style="width:0%"></div>
+        </div>
+        <!-- Thumbnails -->
+        <div class="gallery-thumb-strip" id="gallery-thumbs"></div>
+        <!-- Dots -->
+        <div class="gallery-dots" id="gallery-dots"></div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
+
+  <!-- ── ITINERARY ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;overflow:hidden;padding:3.5rem 1rem 4rem;background:linear-gradient(160deg,#ff1493 0%,#e0007a 50%,#c4006a 100%);">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">La noche de ensueño</span>
+        <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;">Programa</h2>
+        <div class="orn-divider">
+          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
+            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL4)" stroke-width="0.7"/>
+            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity="0.9" transform="rotate(45 90 7)"/>
+            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR4)" stroke-width="0.7"/>
+            <defs>
+              <linearGradient id="oL4" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity="0.8"/></linearGradient>
+              <linearGradient id="oR4" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div style="position:relative;max-width:700px;margin:0 auto;padding-bottom:1rem;">
+        <div class="iti-spine" id="iti-spine"></div>
+        <div id="itinerary-list"></div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
+
+  <!-- ── GIFTS ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#ff1493 0%,#d4006b 50%,#aa0055 100%);">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">Si deseas obsequiar</span>
+        <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;">Regalo con Amor</h2>
+        <div class="orn-divider">
+          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
+            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL5)" stroke-width="0.7"/>
+            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity="0.9" transform="rotate(45 90 7)"/>
+            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,0.7)"/>
+            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR5)" stroke-width="0.7"/>
+            <defs>
+              <linearGradient id="oL5" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity="0.8"/></linearGradient>
+              <linearGradient id="oR5" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity="0.8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div id="gifts-list" style="display:flex;flex-direction:column;gap:0.875rem;"></div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
+
+  <!-- ── RSVP ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <section style="position:relative;overflow:hidden;padding:4rem 1.5rem 5rem;background:linear-gradient(160deg,#1a0010 0%,#2e0020 50%,#1a0010 100%);">
+      <div style="position:relative;z-index:10;">
+        <div style="text-align:center;margin-bottom:2rem;">
+          <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.72em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.3);">Confirma tu presencia</span>
+          <h2 class="gold-shimmer-text" style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.06em;">¿Nos acompañas?</h2>
+        </div>
+        <p style="text-align:center;font-size:0.88rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.8;font-family:'Cormorant Garamond',serif;margin-bottom:2rem;">
+          Tu presencia hará esta noche aún más especial.<br>
+          Confirma antes del <strong style="color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,0.4);">1 de Noviembre</strong>
+        </p>
+        <div style="border-radius:2px;padding:2rem 1.75rem;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.1);">
+          <div id="rsvp-form">
+            <input type="text" id="rsvp-name" placeholder="Tu nombre completo" />
+            <input type="number" id="rsvp-guests" min="1" max="5" placeholder="¿Cuántos asistirán?" />
+            <div style="display:flex;gap:0.75rem;margin-bottom:1rem;">
+              <button id="rsvp-yes" onclick="setAttendance('yes')" class="fizzy-btn" style="flex:1;padding:0.9rem;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.35em;border-radius:2px;border:1px solid #FFD700;background:rgba(255,215,0,0.15);color:#FFD700;box-shadow:0 4px 20px rgba(255,215,0,0.25);">
+                <div class="fizzy-shimmer"></div>
+                <div class="fizzy-content">Sí asistiré ✓</div>
+              </button>
+              <button id="rsvp-no" onclick="setAttendance('no')" class="fizzy-btn" style="flex:1;padding:0.9rem;font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.35em;border-radius:2px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);">
+                <div class="fizzy-shimmer"></div>
+                <div class="fizzy-content">No podré ir</div>
+              </button>
             </div>
-            <div class="cd-grid">
-              <div class="cd-col">
-                <div class="cd-box"><div class="top-gloss"></div><div class="shimmer"></div><span class="cd-num" id="cd-days">000</span></div>
-                <span class="cd-label">DÍAS</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-col">
-                <div class="cd-box"><div class="top-gloss"></div><div class="shimmer"></div><span class="cd-num" id="cd-hours">00</span></div>
-                <span class="cd-label">HORAS</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-col">
-                <div class="cd-box"><div class="top-gloss"></div><div class="shimmer"></div><span class="cd-num" id="cd-mins">00</span></div>
-                <span class="cd-label">MIN</span>
-              </div>
-              <span class="cd-colon">:</span>
-              <div class="cd-col">
-                <div class="cd-box"><div class="top-gloss"></div><div class="shimmer"></div><span class="cd-num" id="cd-secs">00</span></div>
-                <span class="cd-label">SEG</span>
-              </div>
+            <p id="rsvp-error" style="font-family:'Bebas Neue',sans-serif;font-size:0.72rem;color:#FFD700;letter-spacing:0.08em;display:none;margin-bottom:0.5rem;"></p>
+            <button onclick="submitRsvp()" class="fizzy-btn w-full" style="width:100%;padding:1.1rem;border:none;color:#3a1000;font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.38em;font-weight:700;background:linear-gradient(135deg,#B8860B 0%,#FFD700 50%,#FFF176 65%,#FFD700 80%,#B8860B 100%);background-size:200% auto;animation:goldShimmer 2s linear infinite;box-shadow:0 10px 36px rgba(255,215,0,0.4);border-radius:2px;">
+              <div class="fizzy-shimmer"></div>
+              <div class="fizzy-content">Confirmar asistencia</div>
+            </button>
+            <p style="text-align:center;margin-top:0.75rem;font-family:'Bebas Neue',sans-serif;font-size:0.48rem;letter-spacing:0.18em;color:rgba(255,255,255,0.45);">Confirma antes del 1 de Noviembre · Cupos limitados</p>
+          </div>
+          <div id="rsvp-success" style="display:none;text-align:center;padding:2.5rem 0;animation:scaleIn 0.55s cubic-bezier(0.22,1,0.36,1);">
+            <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border-radius:2px;width:80px;height:80px;background:linear-gradient(145deg,#FFD700,#b8860b);box-shadow:0 14px 44px rgba(255,215,0,0.4);">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3a1000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
+            <h3 style="font-family:'Great Vibes',cursive;font-size:4rem;color:#FFD700;line-height:1;filter:drop-shadow(0 2px 12px rgba(255,215,0,0.4));">¡Gracias!</h3>
+            <p style="margin-top:0.875rem;font-size:0.9rem;font-style:italic;color:rgba(255,255,255,0.8);line-height:1.8;font-family:'Cormorant Garamond',serif;">
+              Tu respuesta ha sido registrada.<br>¡Te esperamos con todo el amor!
+            </p>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
+    <div class="gold-border-line"></div>
+  </div>
 
-        <!-- LOCATION -->
-        <section id="location-sec">
-          <div class="sec-header">
-            <span class="sec-kicker">¿Dónde será la magia?</span>
-            <h2 class="sec-title gold-shimmer-text">El Lugar</h2>
-            <div class="orn-div">
-              <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-                <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLl)" stroke-width="0.7"/>
-                <rect x="85" y="4" width="10" height="6" fill="#FF2D78" opacity="0.85" transform="rotate(45 90 7)"/>
-                <circle cx="76" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="104" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRl)" stroke-width="0.7"/>
-                <defs>
-                  <linearGradient id="oLl" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="oRl" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-          <div class="loc-card">
-            <div class="loc-header">
-              <div class="loc-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              </div>
-              <div>
-                <div class="loc-name">Salón de Eventos</div>
-                <div class="loc-addr">Calle de los Sueños 123<br>Bogotá, Colombia</div>
-              </div>
-            </div>
-            <div class="loc-map">
-              <iframe title="Mapa" src="https://maps.google.com/maps?q=Bogot%C3%A1,+Colombia&output=embed" loading="lazy"></iframe>
-            </div>
-            <div class="loc-btn-wrap">
-              <a class="loc-btn sparkle-btn" href="https://maps.google.com/maps?q=Bogotá,+Colombia" target="_blank" rel="noopener noreferrer">
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <span class="sbtn-text">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  Cómo llegar
-                </span>
-                <span class="sbtn-glare" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  Cómo llegar
-                </span>
-              </a>
-            </div>
-          </div>
-        </section>
+  <!-- ── FOOTER ── -->
+  <div class="block-wrap">
+    <div class="gold-border-line"></div>
+    <footer style="position:relative;overflow:hidden;text-align:center;padding:5rem 1.5rem 3.5rem;background:linear-gradient(160deg,#ff1493 0%,#e0007a 40%,#c4006a 100%);">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.5),#FFD700,rgba(255,255,255,0.5),transparent);"></div>
+      <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;border-radius:2px;width:90px;height:90px;background:rgba(40,0,25,0.65);border:1px solid rgba(255,255,255,0.28);box-shadow:0 10px 40px rgba(0,0,0,0.2);backdrop-filter:blur(12px);">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,215,0,0.85)" stroke-width="1.2" stroke-linecap="round">
+          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+        </svg>
+      </div>
+      <p style="font-style:italic;line-height:2;color:rgba(255,255,255,0.82);font-size:0.95rem;font-family:'Cormorant Garamond',serif;margin-bottom:1.5rem;">
+        Hoy comienzas a escribir<br>el capítulo más hermoso<br>de tu historia.
+      </p>
+      <div style="display:inline-block;margin-bottom:2rem;border-radius:2px;padding:0.95rem 2.5rem;background:rgba(40,0,25,0.65);border:1px solid rgba(255,215,0,0.4);backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,0.2);">
+        <p style="font-family:'Great Vibes',cursive;font-size:2.4rem;color:#FFD700;filter:drop-shadow(0 1px 10px rgba(255,215,0,0.4));margin:0;">Con amor, Sofía</p>
+      </div>
+      <div style="padding-top:2rem;margin-top:2rem;border-top:1px solid rgba(255,255,255,0.18);">
+        <p style="font-size:0.7rem;color:rgba(255,255,255,0.65);max-width:300px;margin:0 auto;line-height:1.7;letter-spacing:0.02em;">
+          Esta plantilla digital es propiedad exclusiva de <strong style="color:#fff;">Gueka Ideas</strong>. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.
+        </p>
+        <p style="margin-top:0.875rem;font-size:0.65rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;font-family:'Bebas Neue',sans-serif;">
+          © <span id="year"></span> Gueka Ideas · Todos los derechos reservados
+        </p>
+      </div>
+    </footer>
+    <div class="gold-border-line"></div>
+  </div>
 
-        <!-- GALLERY -->
-        <section id="gallery-sec">
-          <div class="sec-header">
-            <span class="sec-kicker">Momentos para recordar</span>
-            <h2 class="sec-title gold-shimmer-text">Galería</h2>
-            <div class="orn-div">
-              <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-                <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLg)" stroke-width="0.7"/>
-                <rect x="85" y="4" width="10" height="6" fill="#FF2D78" opacity="0.85" transform="rotate(45 90 7)"/>
-                <circle cx="76" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="104" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRg)" stroke-width="0.7"/>
-                <defs>
-                  <linearGradient id="oLg" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="oRg" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-          <div class="gallery-main">
-            <img id="gallery-img" src="" alt="" />
-            <div class="grad-overlay"></div>
-            <div class="gallery-caption"><p id="gallery-caption"></p></div>
-            <div class="gallery-badge" id="gallery-badge"></div>
-            <button class="gallery-arrow prev" onclick="galleryGo(-1)">&#8249;</button>
-            <button class="gallery-arrow next" onclick="galleryGo(1)">&#8250;</button>
-          </div>
-          <div class="gallery-thumbs" id="gallery-thumbs"></div>
-          <div class="gallery-dots" id="gallery-dots"></div>
-        </section>
+</div><!-- /#main-content -->
 
-        <!-- ITINERARY -->
-        <section id="itinerary-sec">
-          <div class="sec-header">
-            <span class="sec-kicker">La noche de ensueño</span>
-            <h2 class="sec-title gold-shimmer-text">Programa</h2>
-            <div class="orn-div">
-              <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-                <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLi)" stroke-width="0.7"/>
-                <rect x="85" y="4" width="10" height="6" fill="#FF2D78" opacity="0.85" transform="rotate(45 90 7)"/>
-                <circle cx="76" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="104" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRi)" stroke-width="0.7"/>
-                <defs>
-                  <linearGradient id="oLi" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="oRi" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-          <div class="itin-list" id="itin-list">
-            <div class="itin-line" id="itin-line"></div>
-          </div>
-        </section>
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div style="max-width:700px;width:100%;position:relative;" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="" style="width:100%;border-radius:16px;box-shadow:0 0 0 1px rgba(255,215,0,0.3),0 40px 100px rgba(0,0,0,0.7);display:block;max-height:70vh;object-fit:cover;" />
+    <div style="text-align:center;margin-top:1rem;">
+      <p id="lightbox-caption" style="font-family:'Great Vibes',cursive;font-size:1.8rem;color:#fff;margin:0;"></p>
+    </div>
+    <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:rgba(255,20,147,0.9);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+    <button onclick="lightboxPrev()" style="position:absolute;left:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(20,0,15,0.9);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+    <button onclick="lightboxNext()" style="position:absolute;right:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(20,0,15,0.9);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+  </div>
+</div>
 
-        <!-- GIFTS -->
-        <section id="gifts-sec">
-          <div class="sec-header">
-            <span class="sec-kicker">Si deseas obsequiar</span>
-            <h2 class="sec-title gold-shimmer-text">Regalo con Amor</h2>
-            <div class="orn-div">
-              <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-                <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLgi)" stroke-width="0.7"/>
-                <rect x="85" y="4" width="10" height="6" fill="#FF2D78" opacity="0.85" transform="rotate(45 90 7)"/>
-                <circle cx="76" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <circle cx="104" cy="7" r="1.6" fill="rgba(201,168,76,0.5)"/>
-                <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRgi)" stroke-width="0.7"/>
-                <defs>
-                  <linearGradient id="oLgi" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="rgba(201,168,76,0.7)"/></linearGradient>
-                  <linearGradient id="oRgi" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="rgba(201,168,76,0.7)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-          <div id="gifts-list"></div>
-        </section>
+<script>
+// ── DATA ──
+const EVENT_DATE = new Date("2026-11-15T19:00:00");
+const GALLERY = [
+  { url: "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La quinceañera" },
+  { url: "https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Elegancia pura" },
+  { url: "https://images.unsplash.com/photo-1571924848943-25c2c95bbb4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Vestido de ensueño" },
+  { url: "https://images.unsplash.com/photo-1603122630570-7fd434d470d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La protagonista" },
+  { url: "https://images.unsplash.com/photo-1733322991133-2de13aa12c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Fashion moment" },
+  { url: "https://images.unsplash.com/photo-1779974797051-0c8b15b85c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Celebración especial" },
+  { url: "https://images.unsplash.com/photo-1748551204321-845c277c1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Luces y magia" },
+  { url: "https://images.unsplash.com/photo-1632459114930-2087067fb986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "El brindis" },
+];
+const ITINERARY = [
+  { time:"7:00 PM", name:"Recepción de invitados", desc:"Bienvenida con cóctel y música en vivo", icon:"M8 22V19M16 22V19M7 10L5 19H19L17 10M9 10V6a3 3 0 0 1 6 0v4M6 10h12" },
+  { time:"8:00 PM", name:"Entrada de la quinceañera", desc:"El gran momento de Sofía Valentina con su corte de honor", icon:"M2 19h20M4 19L2 7l5 4 5-8 5 8 5-4-2 12M9 19v-3a3 3 0 0 1 6 0v3" },
+  { time:"8:30 PM", name:"Vals y coreografía", desc:"El primer vals y la sorpresa coreográfica de la corte", icon:"M12 3C10.343 3 9 4.343 9 6c0 1.306.835 2.417 2 2.83V22h2V8.83C14.165 8.417 15 7.306 15 6c0-1.657-1.343-3-3-3z" },
+  { time:"9:30 PM", name:"Cena y brindis", desc:"Banquete especial y palabras desde el corazón", icon:"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" },
+  { time:"10:30 PM", name:"Pastel y sorpresas", desc:"Corte del pastel, lluvia de regalos y más sorpresas", icon:"M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s1-1 2-1 2 1 3 1 2-1 3-1 2 1 3 1 2-1 3-1M2 21h20M7 8v2M12 8v2M17 8v2" },
+  { time:"11:00 PM", name:"Baile y fiesta", desc:"¡Pista de baile abierta hasta que el cuerpo aguante!", icon:"M9 18V5l12-2v13M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" },
+];
+const GIFTS = [
+  { key:"nequi", label:"Nequi", sub:"Envío digital · Colombia", grad:"linear-gradient(135deg,#FF0090,#7A005A)" },
+  { key:"daviplata", label:"Daviplata", sub:"Envío digital · Colombia", grad:"linear-gradient(135deg,#FFD700,#B8860B)" },
+  { key:"pse", label:"PSE", sub:"Pago seguro en línea", grad:"linear-gradient(135deg,#00F0FF,#006680)" },
+];
+const TICKER_PHRASES = ["LUXURY · XV AÑOS","SOFÍA VALENTINA","15 NOVIEMBRE 2026","THE SHOW STARTS AT 7PM","YOU ARE INVITED","UNA NOCHE ÚNICA"];
+const FIZZY_COLORS = ["#FFD700","#FFF176","#ff69b4","#FFB6C1","#ffffff","#ffa500","#FF1493","#ffe066","#ffaacc","#B8860B"];
 
-        <!-- RSVP -->
-        <section id="rsvp-sec">
-          <div class="rsvp-inner">
-            <div class="sec-header">
-              <span class="sec-kicker sec-kicker-light">Confirma tu presencia</span>
-              <h2 class="sec-title fuchsia-shimmer-text">¿Nos acompañas?</h2>
-            </div>
-            <p class="rsvp-sub">Tu presencia hará esta noche aún más especial.<br>Confirma antes del <strong style="color:rgba(255,45,120,0.9)">1 de Noviembre</strong></p>
-            <div class="rsvp-card">
-              <div id="rsvp-form">
-                <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Tu nombre completo" />
-                <input class="rsvp-input" type="number" id="rsvp-guests" min="1" max="5" placeholder="¿Cuántos asistirán?" />
-                <div class="rsvp-toggle">
-                  <button class="rsvp-btn active sparkle-btn" id="rsvp-yes" onclick="setAttendance('yes')">
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <span class="sbtn-text">Sí asistiré ✓</span>
-                    <span class="sbtn-glare" aria-hidden="true">Sí asistiré ✓</span>
-                  </button>
-                  <button class="rsvp-btn sparkle-btn" id="rsvp-no" onclick="setAttendance('no')">
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                    <span class="sbtn-text">No podré ir</span>
-                    <span class="sbtn-glare" aria-hidden="true">No podré ir</span>
-                  </button>
-                </div>
-                <p class="rsvp-error" id="rsvp-error" style="display:none"></p>
-                <button class="rsvp-submit sparkle-btn" onclick="submitRsvp()">
-                  <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                  <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                  <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                  <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                  <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                  <span class="sbtn-text">Confirmar asistencia</span>
-                  <span class="sbtn-glare" aria-hidden="true">Confirmar asistencia</span>
-                </button>
-                <p class="rsvp-hint">Confirma antes del 1 de Noviembre · Cupos limitados</p>
-              </div>
-              <div id="rsvp-thanks" class="rsvp-thanks" style="display:none">
-                <div class="rsvp-thanks-icon">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#080808" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <h3>¡Gracias!</h3>
-                <p>Tu respuesta ha sido registrada.<br>¡Te esperamos con todo el amor!</p>
-              </div>
-            </div>
-          </div>
-        </section>
+// ── Year ──
+document.getElementById('year').textContent = new Date().getFullYear();
 
-        <!-- FOOTER -->
-        <footer id="footer-sec">
-          <div class="top-line"></div>
-          <div class="seal">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.6)" stroke-width="1.2" stroke-linecap="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-          </div>
-          <p class="poem">Hoy comienzas a escribir<br>el capítulo más hermoso<br>de tu historia.</p>
-          <div class="signature-pill"><p class="signature-text">Con amor, Sofía</p></div>
-          <div class="brand-area">
-            <img class="brand-logo" src="https://hercules-cdn.com/file_nH7iWERcWepR4K5IcsMh7fRZ" alt="Gueka Ideas" />
-            <p class="brand-notice">Esta plantilla digital es propiedad exclusiva de <strong>Gueka Ideas</strong>. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.</p>
-            <p class="brand-copy">© <span id="year"></span> Gueka Ideas · Todos los derechos reservados</p>
-          </div>
-        </footer>
+// ── Petals ──
+(function(){
+  const canvas = document.getElementById('petal-canvas');
+  const colors = ['#ff1493','#ff69b4','#FFD700','#ffb6c1','#ff3fa8','#fff176'];
+  for(let i=0;i<22;i++){
+    const p = document.createElement('div');
+    p.className='petal';
+    p.style.cssText=`
+      left:${Math.random()*100}%;
+      width:${6+Math.random()*8}px;
+      height:${8+Math.random()*10}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      opacity:${0.5+Math.random()*0.45};
+      animation-duration:${5+Math.random()*10}s;
+      animation-delay:${-Math.random()*12}s;
+      transform:rotate(${Math.random()*360}deg);
+    `;
+    canvas.appendChild(p);
+  }
+})();
 
-      </div><!-- #main -->
-    </div><!-- #app -->
+// ── Ticker ──
+(function(){
+  const track = document.getElementById('ticker-track');
+  const phrases = [...TICKER_PHRASES, ...TICKER_PHRASES];
+  phrases.forEach(phrase => {
+    const span = document.createElement('span');
+    span.className='ticker-item';
+    span.innerHTML=`<span class="ticker-text">${phrase}</span><span class="ticker-star">✦</span>`;
+    track.appendChild(span);
+  });
+})();
 
-    <script>
-    // ── DATA ──
-    const EVENT_DATE = new Date('2026-11-15T19:00:00');
+// ── Splash ──
+function openInvitation(){
+  const splash = document.getElementById('splash');
+  splash.classList.add('closing');
+  setTimeout(()=>{
+    splash.style.display='none';
+    document.getElementById('main-content').style.display='block';
+    initGallery();
+    initItinerary();
+    initGifts();
+    startCountdown();
+  }, 900);
+}
 
-    const GALLERY = [
-      { url:'https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'La quinceañera' },
-      { url:'https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'Elegancia pura' },
-      { url:'https://images.unsplash.com/photo-1571924848943-25c2c95bbb4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'Vestido de ensueño' },
-      { url:'https://images.unsplash.com/photo-1603122630570-7fd434d470d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'La protagonista' },
-      { url:'https://images.unsplash.com/photo-1733322991133-2de13aa12c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'Fashion moment' },
-      { url:'https://images.unsplash.com/photo-1779974797051-0c8b15b85c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'Celebración especial' },
-      { url:'https://images.unsplash.com/photo-1748551204321-845c277c1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'Luces y magia' },
-      { url:'https://images.unsplash.com/photo-1632459114930-2087067fb986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800', caption:'El brindis' },
-    ];
-
-    const ITINERARY = [
-      { icon:'M8 22V19M16 22V19M7 10L5 19H19L17 10M9 10V6a3 3 0 0 1 6 0v4M6 10h12', time:'7:00 PM', name:'Recepción de invitados', desc:'Bienvenida con cóctel y música en vivo' },
-      { icon:'M2 19h20M4 19L2 7l5 4 5-8 5 8 5-4-2 12M9 19v-3a3 3 0 0 1 6 0v3', time:'8:00 PM', name:'Entrada de la quinceañera', desc:'El gran momento de Sofía Valentina con su corte de honor' },
-      { icon:'M12 3a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 7.5C6 6 7 5 8.5 5H10l2 4-3 3 1 5H8l-1-5-1-4.5zM16 5h1.5C19 5 20 6 20 7.5L19 12l-1 5h-2l1-5-3-3 2-4z', time:'8:30 PM', name:'Vals y coreografía', desc:'El primer vals y la sorpresa coreográfica de la corte' },
-      { icon:'M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7', time:'9:30 PM', name:'Cena y brindis', desc:'Banquete especial y palabras desde el corazón' },
-      { icon:'M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s1-1 2-1 2 1 3 1 2-1 3-1 2 1 3 1 2-1 3-1M2 21h20M7 8v2M12 8v2M17 8v2', time:'10:30 PM', name:'Pastel y sorpresas', desc:'Corte del pastel, lluvia de regalos y más sorpresas' },
-      { icon:'M9 18V5l12-2v13M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6z', time:'11:00 PM', name:'Baile y fiesta', desc:'¡Pista de baile abierta hasta que el cuerpo aguante!' },
-    ];
-
-    const GIFTS = [
-      { key:'nequi',    label:'Nequi',     sub:'Envío digital · Colombia', grad:'linear-gradient(135deg,#FF2D78,#B30050)' },
-      { key:'daviplata',label:'Daviplata', sub:'Envío digital · Colombia', grad:'linear-gradient(135deg,#C9A84C,#7A5C1E)' },
-      { key:'pse',      label:'PSE',       sub:'Pago seguro en línea',     grad:'linear-gradient(135deg,#444,#222)' },
-    ];
-
-    // ── TICKER ──
-    const tickerPhrases = ['FASHION · XV AÑOS', 'SOFÍA VALENTINA', '15 NOVIEMBRE 2026', 'THE SHOW STARTS AT 7PM', 'YOU ARE INVITED', 'UNA NOCHE ÚNICA'];
-    const inner = document.getElementById('ticker-inner');
-    [...tickerPhrases, ...tickerPhrases].forEach(p => {
-      const span = document.createElement('span');
-      span.className = 'ticker-item';
-      span.textContent = p;
-      const sep = document.createElement('span');
-      sep.className = 'ticker-item ticker-sep';
-      sep.textContent = '★';
-      inner.appendChild(span);
-      inner.appendChild(sep);
-    });
-
-    // ── SPLASH ──
-    function closeSplash() {
-      const s = document.getElementById('splash');
-      s.classList.add('closing');
-      setTimeout(() => { s.style.display='none'; document.getElementById('main').style.display='block'; }, 900);
-    }
-
-    // ── PETAL CANVAS (sparkling gold/fuchsia confetti) ──
-    (function() {
-      const canvas = document.getElementById('petal-canvas');
-      const ctx = canvas.getContext('2d');
-      function resize() { canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-      resize(); window.addEventListener('resize', resize);
-      const COLORS = ['rgba(201,168,76,A)','rgba(240,212,116,A)','rgba(255,45,120,A)','rgba(255,140,180,A)','rgba(180,130,40,A)'];
-      const petals = Array.from({length:28},()=>({
-        x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight,
-        size:3+Math.random()*6, speed:0.35+Math.random()*0.6,
-        drift:(Math.random()-0.5)*0.45, rot:Math.random()*Math.PI*2,
-        rotSpeed:(Math.random()-0.5)*0.04, alpha:0.2+Math.random()*0.4,
-        color:COLORS[Math.floor(Math.random()*COLORS.length)]
-      }));
-      function loop() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        petals.forEach(p=>{
-          p.y+=p.speed; p.x+=p.drift; p.rot+=p.rotSpeed;
-          if(p.y>canvas.height+20){p.y=-20;p.x=Math.random()*canvas.width;}
-          if(p.x>canvas.width+20)p.x=-20; if(p.x<-20)p.x=canvas.width+20;
-          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-          ctx.fillStyle=p.color.replace('A',String(p.alpha));
-          // draw diamond shape
-          ctx.beginPath(); ctx.moveTo(0,-p.size); ctx.lineTo(p.size*0.4,0); ctx.lineTo(0,p.size); ctx.lineTo(-p.size*0.4,0); ctx.closePath(); ctx.fill();
-          ctx.restore();
-        }); requestAnimationFrame(loop);
+// ── Countdown ──
+function pad(n){ return String(n).padStart(2,'0'); }
+let prevVals = { days:-1, hours:-1, mins:-1, secs:-1 };
+function startCountdown(){
+  function tick(){
+    const diff = Math.max(0, EVENT_DATE.getTime() - Date.now());
+    const s = Math.floor(diff/1000);
+    const vals = {
+      days: Math.floor(s/86400),
+      hours: Math.floor((s%86400)/3600),
+      mins: Math.floor((s%3600)/60),
+      secs: s%60
+    };
+    ['days','hours','mins','secs'].forEach(k=>{
+      const el = document.getElementById('cd-'+k);
+      if(!el) return;
+      if(prevVals[k] !== vals[k]){
+        el.classList.remove('flip');
+        void el.offsetWidth;
+        el.classList.add('flip');
+        prevVals[k] = vals[k];
       }
-      loop();
-    })();
-
-    // ── COUNTDOWN ──
-    function pad(n){return String(n).padStart(2,'0');}
-    const cdEls = { days:document.getElementById('cd-days'), hours:document.getElementById('cd-hours'), mins:document.getElementById('cd-mins'), secs:document.getElementById('cd-secs') };
-    const prevVals = [0,0,0,0];
-    function tickCd() {
-      const diff = Math.max(0, EVENT_DATE.getTime()-Date.now());
-      const s = Math.floor(diff/1000);
-      const vals = [Math.floor(s/86400), Math.floor((s%86400)/3600), Math.floor((s%3600)/60), s%60];
-      const keys = ['days','hours','mins','secs'];
-      vals.forEach((v,i)=>{
-        const el = cdEls[keys[i]];
-        if(v!==prevVals[i]){ el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
-        el.textContent = pad(v); prevVals[i]=v;
-      });
-    }
-    tickCd(); setInterval(tickCd,1000);
-
-    // ── GALLERY ──
-    let galleryIdx = 0;
-    function renderGallery() {
-      const g = GALLERY[galleryIdx];
-      document.getElementById('gallery-img').src = g.url;
-      document.getElementById('gallery-img').alt = g.caption;
-      document.getElementById('gallery-caption').textContent = g.caption;
-      document.getElementById('gallery-badge').textContent = (galleryIdx+1)+' / '+GALLERY.length;
-      document.querySelectorAll('.gallery-thumb').forEach((el,i)=>{ el.classList.toggle('active',i===galleryIdx); });
-      document.querySelectorAll('.gallery-dot').forEach((el,i)=>{ el.classList.toggle('active',i===galleryIdx); });
-    }
-    function galleryGo(dir) { galleryIdx=(galleryIdx+dir+GALLERY.length)%GALLERY.length; renderGallery(); }
-    const thumbsEl = document.getElementById('gallery-thumbs');
-    const dotsEl = document.getElementById('gallery-dots');
-    GALLERY.forEach((g,i)=>{
-      const t = document.createElement('button'); t.className='gallery-thumb'; t.onclick=()=>{galleryIdx=i;renderGallery();};
-      const img=document.createElement('img'); img.src=g.url; img.alt=g.caption; t.appendChild(img); thumbsEl.appendChild(t);
-      const d=document.createElement('button'); d.className='gallery-dot'; d.onclick=()=>{galleryIdx=i;renderGallery();}; dotsEl.appendChild(d);
+      el.textContent = pad(vals[k]);
     });
-    renderGallery();
+  }
+  tick();
+  setInterval(tick, 1000);
+}
 
-    // ── ITINERARY ──
-    const itinList = document.getElementById('itin-list');
-    ITINERARY.forEach(item=>{
-      const div=document.createElement('div'); div.className='itin-item';
-      div.innerHTML=`
-        <div class="itin-circle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${item.icon}"/></svg>
+// ── Gallery ──
+window._galleryIdx = 0;
+let _autoplayTimer = null;
+function initGallery(){
+  const thumbsEl = document.getElementById('gallery-thumbs');
+  const dotsEl   = document.getElementById('gallery-dots');
+  GALLERY.forEach((g,i)=>{
+    // thumbs
+    const btn = document.createElement('button');
+    btn.className='gallery-thumb'+(i===0?' active':'');
+    btn.innerHTML=`<img src="${g.url}" alt="${g.caption}" />`;
+    btn.onclick=()=>setGalleryIdx(i);
+    thumbsEl.appendChild(btn);
+    // dots
+    const dot = document.createElement('button');
+    dot.className='gallery-dot'+(i===0?' active':'');
+    dot.onclick=()=>setGalleryIdx(i);
+    dotsEl.appendChild(dot);
+  });
+  updateGalleryUI(0);
+  startGalleryAutoplay();
+}
+function updateGalleryUI(idx){
+  const g = GALLERY[idx];
+  const img = document.getElementById('gallery-img');
+  img.style.opacity='0';
+  setTimeout(()=>{
+    img.src = g.url;
+    img.alt = g.caption;
+    img.style.opacity='1';
+  },200);
+  document.getElementById('gallery-counter').textContent=`${idx+1} / ${GALLERY.length}`;
+  document.getElementById('gallery-caption').querySelector('p').textContent=g.caption;
+  // thumbs
+  document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.querySelectorAll('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  // progress
+  const pct = ((idx+1)/GALLERY.length*100).toFixed(1);
+  document.getElementById('gallery-progress').style.width=pct+'%';
+  // scroll thumb
+  const thumbsEl = document.getElementById('gallery-thumbs');
+  const th = thumbsEl.children[idx];
+  if(th) thumbsEl.scrollTo({left: th.offsetLeft - thumbsEl.offsetWidth/2 + th.offsetWidth/2, behavior:'smooth'});
+}
+function setGalleryIdx(i){
+  window._galleryIdx = (i + GALLERY.length) % GALLERY.length;
+  updateGalleryUI(window._galleryIdx);
+}
+function galleryNext(){ stopGalleryAutoplay(); setGalleryIdx(window._galleryIdx+1); }
+function galleryPrev(){ stopGalleryAutoplay(); setGalleryIdx(window._galleryIdx-1); }
+function startGalleryAutoplay(){
+  _autoplayTimer = setInterval(()=>setGalleryIdx(window._galleryIdx+1), 4000);
+}
+function stopGalleryAutoplay(){
+  if(_autoplayTimer){ clearInterval(_autoplayTimer); _autoplayTimer=null; }
+}
+
+// ── Lightbox ──
+function openLightbox(idx){
+  stopGalleryAutoplay();
+  document.getElementById('lightbox').classList.add('open');
+  document.getElementById('lightbox-img').src=GALLERY[idx].url;
+  document.getElementById('lightbox-caption').textContent=GALLERY[idx].caption;
+  window._lightboxIdx=idx;
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  startGalleryAutoplay();
+}
+function lightboxPrev(){
+  window._lightboxIdx=(window._lightboxIdx-1+GALLERY.length)%GALLERY.length;
+  openLightbox(window._lightboxIdx);
+}
+function lightboxNext(){
+  window._lightboxIdx=(window._lightboxIdx+1)%GALLERY.length;
+  openLightbox(window._lightboxIdx);
+}
+
+// ── Itinerary ──
+function initItinerary(){
+  const list = document.getElementById('itinerary-list');
+  ITINERARY.forEach((item,idx)=>{
+    const isOdd = idx%2===0;
+    const card=`<div style="border-radius:2px;padding:0.875rem;max-width:260px;width:100%;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,0.25);${isOdd?'border-right:3px solid #FFD700':'border-left:3px solid #fff'}">
+      <div style="font-family:'Bodoni Moda',serif;font-size:0.82rem;font-weight:700;color:#fff;margin-bottom:4px;">${item.name}</div>
+      <p style="font-size:0.72rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0;">${item.desc}</p>
+    </div>`;
+    const row = document.createElement('div');
+    row.style.cssText='display:grid;grid-template-columns:1fr 52px 1fr;align-items:start;margin-bottom:2.25rem;';
+    row.innerHTML=`
+      <div style="display:flex;justify-content:flex-end;padding-right:1rem;">${isOdd?card:'<div style="visibility:hidden;height:1px;"></div>'}</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0;z-index:10;padding-top:4px;">
+        <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;background:linear-gradient(145deg,#FFD700,#b8860b);box-shadow:0 0 18px rgba(255,215,0,0.6);transform:rotate(45deg);border-radius:4px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(60,20,0,0.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-45deg)"><path d="${item.icon}"/></svg>
         </div>
-        <div class="itin-card">
-          <div class="left-bar"></div>
-          <div class="row">
-            <span class="itin-name">${item.name}</span>
-            <span class="itin-time">${item.time}</span>
-          </div>
-          <p class="itin-desc">${item.desc}</p>
-        </div>`;
-      itinList.appendChild(div);
-    });
-    const itinLine = document.getElementById('itin-line');
-    const obs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){itinLine.classList.add('visible');obs.unobserve(e.target);} });
-    },{rootMargin:'-40px'});
-    obs.observe(itinLine);
+        <span style="margin-top:8px;white-space:nowrap;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.2em;text-shadow:0 1px 4px rgba(0,0,0,0.3);">${item.time}</span>
+      </div>
+      <div style="display:flex;justify-content:flex-start;padding-left:1rem;">${!isOdd?card:'<div style="visibility:hidden;height:1px;"></div>'}</div>`;
+    list.appendChild(row);
+  });
+  // Observe spine
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ document.getElementById('iti-spine').classList.add('visible'); obs.disconnect(); } });
+  },{rootMargin:'-40px'});
+  obs.observe(document.getElementById('iti-spine'));
+}
 
-    // ── GIFTS ──
-    const giftsList = document.getElementById('gifts-list');
-    GIFTS.forEach(g=>{
-      const card=document.createElement('div'); card.className='gift-card'; card.id='gift-card-'+g.key;
-      card.innerHTML=`
-        <button class="gift-toggle" onclick="toggleGift('${g.key}')">
-          <div class="gift-icon" style="background:${g.grad}">
+// ── Gifts ──
+function initGifts(){
+  const container = document.getElementById('gifts-list');
+  GIFTS.forEach(g=>{
+    const div=document.createElement('div');
+    div.id=`gift-${g.key}`;
+    div.style.cssText='border-radius:2px;overflow:hidden;background:rgba(40,0,25,0.80);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(12px);';
+    div.innerHTML=`
+      <button onclick="toggleGift('${g.key}')" class="fizzy-btn" style="display:flex;align-items:center;gap:1rem;width:100%;text-align:left;background:transparent;border:none;padding:1.25rem 1.5rem;">
+        <div class="fizzy-shimmer"></div>
+        <div class="fizzy-content" style="display:flex;align-items:center;gap:1rem;width:100%;">
+          <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:${g.grad};box-shadow:0 6px 20px rgba(0,0,0,0.3);">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
           </div>
-          <div class="gift-label-wrap">
-            <div class="gift-label">${g.label}</div>
-            <div class="gift-sub">${g.sub}</div>
+          <div style="flex:1;">
+            <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#fff;">${g.label}</div>
+            <div style="font-size:0.7rem;color:rgba(255,255,255,0.55);margin-top:2px;">${g.sub}</div>
           </div>
-          <svg class="gift-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="gift-body">
-          <div class="gift-inner">
-            <div class="gift-box">
-              <p class="gift-box-title">Regalar con ${g.label}</p>
-              <input class="gift-input" type="text" id="gift-name-${g.key}" placeholder="Tu nombre" />
-              <input class="gift-input" type="number" id="gift-amount-${g.key}" placeholder="Monto (COP)" />
-              <button class="gift-qr-btn sparkle-btn" onclick="genQR('${g.key}','${g.label}')">
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <svg class="sp-svg" viewBox="0 0 96 96" fill="none"><path d="M93.781 51.578C95 50.969 96 49.359 96 48c0-1.375-1-2.969-2.219-3.578 0 0-22.868-1.514-31.781-10.422-8.915-8.91-10.438-31.781-10.438-31.781C50.969 1 49.375 0 48 0s-2.969 1-3.594 2.219c0 0-1.5 22.87-10.406 31.781-8.908 8.913-31.781 10.422-31.781 10.422C1 45.031 0 46.625 0 48c0 1.359 1 2.969 2.219 3.578 0 0 22.873 1.51 31.781 10.422 8.906 8.911 10.406 31.781 10.406 31.781C45.031 95 46.625 96 48 96s2.969-1 3.562-2.219c0 0 1.523-22.871 10.438-31.781 8.913-8.908 31.781-10.422 31.781-10.422Z"/></svg>
-                <span class="sbtn-text">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM17 14h.01M14 14h.01M20 14h.01M14 17h.01M17 17h.01M20 17h.01M14 20h.01M17 20h.01M20 20h.01"/></svg>
-                  Generar QR
-                </span>
-                <span class="sbtn-glare" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM17 14h.01M14 14h.01M20 14h.01M14 17h.01M17 17h.01M20 17h.01M14 20h.01M17 20h.01M20 20h.01"/></svg>
-                  Generar QR
-                </span>
-              </button>
-              <div class="gift-qr-img" id="gift-qr-${g.key}"></div>
+          <svg id="chevron-${g.key}" class="gift-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </button>
+      <div id="body-${g.key}" class="gift-body">
+        <div style="padding:0 1.5rem 1.5rem;">
+          <div style="border-radius:2px;padding:1.5rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);">
+            <p style="text-align:center;font-family:'Great Vibes',cursive;font-size:1.6rem;color:#FFD700;text-shadow:0 0 14px rgba(255,215,0,0.4);margin-bottom:1.25rem;">Regalar con ${g.label}</p>
+            <input type="text" id="name-${g.key}" placeholder="Tu nombre" />
+            <input type="number" id="amount-${g.key}" placeholder="Monto (COP)" />
+            <button onclick="generateQR('${g.key}','${g.label}')" class="fizzy-btn w-full" style="width:100%;padding:0.925rem;border:none;color:#3a1000;font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.38em;font-weight:700;background:linear-gradient(135deg,#B8860B 0%,#FFD700 100%);box-shadow:0 8px 28px rgba(255,215,0,0.4);border-radius:2px;margin-bottom:0.5rem;">
+              <div class="fizzy-shimmer"></div>
+              <div class="fizzy-content">Generar QR</div>
+            </button>
+            <div id="qr-${g.key}" style="display:none;text-align:center;margin-top:1.5rem;">
+              <div style="display:inline-block;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.3);">
+                <canvas id="qrcanvas-${g.key}"></canvas>
+              </div>
             </div>
           </div>
-        </div>`;
-      giftsList.appendChild(card);
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+function toggleGift(key){
+  const body=document.getElementById(`body-${key}`);
+  const chevron=document.getElementById(`chevron-${key}`);
+  const wrap=document.getElementById(`gift-${key}`);
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  chevron.classList.toggle('open',!isOpen);
+  wrap.style.border=!isOpen?'1px solid rgba(255,215,0,0.5)':'1px solid rgba(255,255,255,0.22)';
+  wrap.style.boxShadow=!isOpen?'0 14px 40px rgba(0,0,0,0.25)':'none';
+}
+async function generateQR(key,label){
+  const name=document.getElementById(`name-${key}`).value||'Invitado';
+  const amount=document.getElementById(`amount-${key}`).value||'0';
+  const data=`PAGO ${label.toUpperCase()} | ${name} | COP ${amount}`;
+  try{
+    const canvas=document.getElementById(`qrcanvas-${key}`);
+    await QRCode.toCanvas(canvas,data,{width:200,color:{dark:'#3a0025',light:'#FFD700'}});
+    document.getElementById(`qr-${key}`).style.display='block';
+  }catch(e){ console.error(e); }
+}
+
+// ── RSVP ──
+let _attendance='yes';
+function setAttendance(val){
+  _attendance=val;
+  const yes=document.getElementById('rsvp-yes');
+  const no=document.getElementById('rsvp-no');
+  if(val==='yes'){
+    yes.style.border='1px solid #FFD700';yes.style.background='rgba(255,215,0,0.15)';yes.style.color='#FFD700';yes.style.boxShadow='0 4px 20px rgba(255,215,0,0.25)';
+    no.style.border='1px solid rgba(255,255,255,0.22)';no.style.background='rgba(255,255,255,0.05)';no.style.color='rgba(255,255,255,0.6)';no.style.boxShadow='none';
+  } else {
+    no.style.border='1px solid #FFD700';no.style.background='rgba(255,215,0,0.15)';no.style.color='#FFD700';no.style.boxShadow='0 4px 20px rgba(255,215,0,0.25)';
+    yes.style.border='1px solid rgba(255,255,255,0.22)';yes.style.background='rgba(255,255,255,0.05)';yes.style.color='rgba(255,255,255,0.6)';yes.style.boxShadow='none';
+  }
+}
+function submitRsvp(){
+  const name=document.getElementById('rsvp-name').value.trim();
+  const errEl=document.getElementById('rsvp-error');
+  if(!name){ errEl.style.display='block'; errEl.textContent='Por favor ingresa tu nombre'; return; }
+  errEl.style.display='none';
+  setTimeout(()=>{
+    document.getElementById('rsvp-form').style.display='none';
+    document.getElementById('rsvp-success').style.display='block';
+  },300);
+}
+
+// ── Fizzy button particles ──
+(function(){
+  const PARTICLE_COUNT=24;
+  function seededRand(seed){ const x=Math.sin(seed+1)*10000; return x-Math.floor(x); }
+  function spawnParticles(btn,count){
+    for(let i=0;i<count;i++){
+      const p=document.createElement('span');
+      p.className='fizzy-particle';
+      const sx=seededRand(i*3)*100;
+      const sy=seededRand(i*3+1)*100;
+      const dx=(seededRand(i*3+2)-0.5)*20;
+      const ry=10+seededRand(i*5+7)*22;
+      const size=5+Math.floor(seededRand(i*7+4)*9);
+      const color=FIZZY_COLORS[i%FIZZY_COLORS.length];
+      const delay=seededRand(i*11+9)*0.5;
+      const dur=0.5+seededRand(i*13+6)*0.5;
+      p.style.cssText=`
+        left:${sx}%;top:${sy}%;
+        width:${size}px;height:${size}px;
+        background:${color};
+        box-shadow:0 0 ${size*2}px ${color};
+        margin-left:${-size/2}px;margin-top:${-size/2}px;
+        --dx:${dx}px;--dy:0px;--sx:${(seededRand(i*3+2)-0.5)*10}px;--ry:${ry}px;
+        --delay:${delay}s;--dur:${dur}s;
+        animation-fill-mode:forwards;
+      `;
+      btn.appendChild(p);
+      p.addEventListener('animationend',()=>p.remove());
+    }
+  }
+  function addFizzy(btn){
+    let interval=null;
+    btn.addEventListener('mouseenter',()=>{
+      spawnParticles(btn,PARTICLE_COUNT);
+      interval=setInterval(()=>spawnParticles(btn,PARTICLE_COUNT),600);
     });
-    function toggleGift(key) { document.getElementById('gift-card-'+key).classList.toggle('open'); }
-    async function genQR(key,label) {
-      const name=document.getElementById('gift-name-'+key).value||'Invitado';
-      const amount=document.getElementById('gift-amount-'+key).value||'0';
-      const data=`PAGO ${label.toUpperCase()} | ${name} | COP ${amount}`;
-      try {
-        const url=await QRCode.toDataURL(data,{width:200,color:{dark:'#080808',light:'#f0d474'}});
-        document.getElementById('gift-qr-'+key).innerHTML=`<div class="qr-wrap"><img src="${url}" alt="QR"></div>`;
-      } catch(e){}
-    }
-
-    // ── RSVP ──
-    let attendance='yes';
-    function setAttendance(val) {
-      attendance=val;
-      document.getElementById('rsvp-yes').classList.toggle('active',val==='yes');
-      document.getElementById('rsvp-no').classList.toggle('active',val==='no');
-    }
-    function submitRsvp() {
-      const name=document.getElementById('rsvp-name').value.trim();
-      const err=document.getElementById('rsvp-error');
-      if(!name){ err.textContent='Por favor ingresa tu nombre'; err.style.display='block'; return; }
-      err.style.display='none';
-      setTimeout(()=>{ document.getElementById('rsvp-form').style.display='none'; document.getElementById('rsvp-thanks').style.display='block'; },300);
-    }
-
-    // ── YEAR ──
-    document.getElementById('year').textContent=new Date().getFullYear();
-    </script>
-  </body>
+    btn.addEventListener('mouseleave',()=>{
+      if(interval){clearInterval(interval);interval=null;}
+    });
+    btn.addEventListener('touchstart',()=>spawnParticles(btn,PARTICLE_COUNT),{passive:true});
+  }
+  document.querySelectorAll('.fizzy-btn').forEach(addFizzy);
+  // Observer for dynamically added buttons
+  const mo=new MutationObserver(muts=>{
+    muts.forEach(m=>m.addedNodes.forEach(n=>{
+      if(n.nodeType===1){
+        if(n.classList&&n.classList.contains('fizzy-btn')) addFizzy(n);
+        n.querySelectorAll&&n.querySelectorAll('.fizzy-btn').forEach(addFizzy);
+      }
+    }));
+  });
+  mo.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+</body>
 </html>
