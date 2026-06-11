@@ -3,23 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>XV Años – Sofía Valentina</title>
+  <title>XV Años · Sofía Valentina</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #050300; color: #f5e0a0; font-family: 'Cormorant Garamond', Georgia, serif; overflow-x: hidden; }
 
-    body {
-      background: #050300;
-      color: #f5e0a0;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      overflow-x: hidden;
-    }
-
-    /* ── Layout ── */
     .card-outer {
       min-height: 100vh;
       display: flex;
@@ -39,52 +31,11 @@
       border-right: 1px solid rgba(255,215,0,.15);
       box-shadow: inset 4px 0 18px rgba(0,0,0,.2), inset -4px 0 18px rgba(0,0,0,.2);
     }
-
-    /* ── Animations ── */
-    @keyframes goldShimmer {
-      0%   { background-position: 0% center }
-      100% { background-position: 200% center }
-    }
-    @keyframes blinkColon {
-      0%, 100% { opacity: 1 }
-      50%       { opacity: .25 }
-    }
-    @keyframes tickerScroll {
-      from { transform: translateX(0) }
-      to   { transform: translateX(-50%) }
-    }
-    @keyframes heartFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg) }
-      50%       { transform: translateY(-12px) rotate(8deg) }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(32px) }
-      to   { opacity: 1; transform: translateY(0) }
-    }
-    @keyframes spineGrow {
-      from { transform: translateX(-50%) scaleY(0) }
-      to   { transform: translateX(-50%) scaleY(1) }
-    }
-
-    /* ── Gold line ── */
     .gold-line {
       height: 2px;
-      background: linear-gradient(to right,transparent,#8B6914 15%,#FFD700 40%,#FFF8DC 50%,#FFD700 60%,#8B6914 85%,transparent);
+      background: linear-gradient(to right, transparent, #8B6914 15%, #FFD700 40%, #FFF8DC 50%, #FFD700 60%, #8B6914 85%, transparent);
       box-shadow: 0 0 12px rgba(255,215,0,.5), 0 0 24px rgba(255,215,0,.2);
     }
-
-    /* ── Gold shimmer text ── */
-    .gold-shimmer {
-      background: linear-gradient(90deg,#8B6914 0%,#C9A84C 25%,#FFD700 40%,#FFF8DC 50%,#FFD700 60%,#C9A84C 75%,#8B6914 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldShimmer 3s linear infinite;
-      filter: drop-shadow(0 0 10px rgba(255,215,0,.55));
-    }
-
-    /* ── Gold button ── */
     .btn-gold {
       background: linear-gradient(135deg,#8B6914 0%,#C9A84C 30%,#FFD700 45%,#FFF8DC 55%,#FFD700 65%,#C9A84C 80%,#8B6914 100%);
       background-size: 200% auto;
@@ -103,13 +54,33 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: 100%;
       transition: opacity .15s;
+      width: 100%;
     }
     .btn-gold:hover { opacity: .88; }
 
-    /* ── Section eyebrow ── */
-    .eyebrow {
+    @keyframes goldShimmer { 0% { background-position: 0% center } 100% { background-position: 200% center } }
+    @keyframes blinkColon { 0%,100% { opacity:1 } 50% { opacity:.25 } }
+    @keyframes tickerScroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    @keyframes heartFloat { 0%,100% { transform: translateY(0) rotate(0deg) } 50% { transform: translateY(-12px) rotate(8deg) } }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(32px) } to { opacity:1; transform: translateY(0) } }
+    @keyframes spineGrow { from { transform: translateX(-50%) scaleY(0) } to { transform: translateX(-50%) scaleY(1) } }
+
+    .gold-text {
+      background: linear-gradient(90deg,#8B6914 0%,#C9A84C 25%,#FFD700 40%,#FFF8DC 50%,#FFD700 60%,#C9A84C 75%,#8B6914 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 3s linear infinite;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,.55));
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: .06em;
+      line-height: 1.15;
+      display: block;
+    }
+    .section-eyebrow {
       display: block;
       font-family: 'Bebas Neue', sans-serif;
       font-size: .55rem;
@@ -119,25 +90,12 @@
       text-shadow: 0 0 8px rgba(255,215,0,.3);
       margin-bottom: .25rem;
     }
-
-    /* ── Gold title ── */
-    .gold-title {
-      display: block;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.5rem;
-      letter-spacing: .06em;
-      line-height: 1.15;
-    }
-
-    /* ── Ornament row ── */
     .ornament-row {
       display: flex;
       justify-content: center;
       margin-top: 8px;
       margin-bottom: 2rem;
     }
-
-    /* ── Glass card ── */
     .glass-card {
       border-radius: 2px;
       background: rgba(10,7,0,.88);
@@ -152,951 +110,730 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(to right,transparent,#C9A84C,#FFD700,#FFF8DC,#FFD700,#C9A84C,transparent);
+      background: linear-gradient(to right, transparent, #C9A84C, #FFD700, #FFF8DC, #FFD700, #C9A84C, transparent);
     }
 
-    /* ── Ticker ── */
-    .ticker-wrap {
-      overflow: hidden;
-      background: linear-gradient(90deg,#0a0700,#1a1200,#0a0700);
-      padding: 9px 0;
-      border-top: 1px solid rgba(255,215,0,.3);
-      border-bottom: 1px solid rgba(255,215,0,.3);
-    }
-    .ticker-inner {
-      display: flex;
-      white-space: nowrap;
-      animation: tickerScroll 16s linear infinite;
-    }
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 2rem;
-    }
-    .ticker-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: .95rem;
-      letter-spacing: .2em;
-      color: #FFD700;
-      text-shadow: 0 0 10px rgba(255,215,0,.4);
-      padding: 0 2.5rem;
-    }
-    .ticker-sep { color: rgba(255,215,0,.5); }
-
-    /* ── Countdown ── */
+    /* Countdown */
     .cd-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .cd-num-wrap {
-      position: relative;
-      overflow: hidden;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 72px;
-      height: 84px;
-      background: rgba(10,7,0,.88);
-      border: 1px solid rgba(255,215,0,.35);
+      position: relative; overflow: hidden; border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      width: 72px; height: 84px;
+      background: rgba(10,7,0,.88); border: 1px solid rgba(255,215,0,.35);
       box-shadow: 0 8px 32px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,215,0,.15);
       backdrop-filter: blur(12px);
     }
-    .cd-num-wrap::before {
+    .cd-box::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right,transparent,#FFD700,transparent);
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, #FFD700, transparent);
     }
     .cd-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      letter-spacing: .04em;
-      color: #FFD700;
-      line-height: 1;
+      font-size: 2.5rem; letter-spacing: .04em;
+      color: #FFD700; line-height: 1;
       filter: drop-shadow(0 0 8px rgba(255,215,0,.6));
     }
     .cd-label {
-      display: block;
-      margin-top: 8px;
+      display: block; margin-top: 8px;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: .48rem;
-      letter-spacing: .38em;
+      font-size: .48rem; letter-spacing: .38em;
       color: rgba(255,215,0,.6);
     }
     .cd-colon {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem;
-      color: rgba(255,215,0,.6);
+      font-size: 2.4rem; color: rgba(255,215,0,.6);
       padding-bottom: 2.2rem;
       animation: blinkColon 1.2s ease-in-out infinite;
     }
 
-    /* ── Gallery ── */
-    .gallery-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity .2s;
-    }
-    .gallery-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(5,3,0,.8);
-      border: 1px solid rgba(255,215,0,.35);
-      color: #FFD700;
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-    }
-    .thumb-btn {
-      flex-shrink: 0;
-      width: 52px;
-      height: 52px;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      padding: 0;
-      background: none;
-      border: 2px solid rgba(255,215,0,.15);
-      opacity: 0.5;
-      transition: all .25s;
-    }
-    .thumb-btn.active {
-      border: 2.5px solid #FFD700;
-      opacity: 1;
-      box-shadow: 0 0 14px rgba(255,215,0,.5);
-    }
-    .dot-btn {
-      height: 4px;
-      border-radius: 3px;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      background: rgba(255,215,0,.25);
-      width: 6px;
-      transition: all .25s;
-    }
-    .dot-btn.active {
-      background: #FFD700;
-      width: 28px;
-      box-shadow: 0 0 8px rgba(255,215,0,.6);
-    }
+    /* Ticker */
+    .ticker-wrap { overflow: hidden; background: linear-gradient(90deg,#0a0700,#1a1200,#0a0700); padding: 9px 0; border-top: 1px solid rgba(255,215,0,.3); border-bottom: 1px solid rgba(255,215,0,.3); }
+    .ticker-track { display: flex; white-space: nowrap; animation: tickerScroll 16s linear infinite; }
+    .ticker-item { font-family: 'Bebas Neue', sans-serif; font-size: .95rem; letter-spacing: .2em; color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,.4); padding: 0 2.5rem; }
 
-    /* ── Lightbox ── */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,.94);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      backdrop-filter: blur(10px);
-    }
-    .lightbox.open { display: flex; }
+    /* Gallery */
+    .gallery-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .2s; }
+    .gallery-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(5,3,0,.8); border: 1px solid rgba(255,215,0,.35); color: #FFD700; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(8px); }
+    .thumb-btn { flex-shrink: 0; width: 52px; height: 52px; border-radius: 10px; overflow: hidden; cursor: pointer; padding: 0; background: none; transition: all .25s; }
 
-    /* ── Gift accordion ── */
-    .gift-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .45s ease-in-out;
-    }
-    .gift-body.open { max-height: 600px; }
-    .gift-chevron {
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-    }
-    .gift-chevron.open { transform: rotate(180deg); }
-
-    /* ── Input ── */
-    .gold-input {
-      display: block;
-      width: 100%;
-      padding: .9rem 1.1rem;
+    /* RSVP input */
+    .rsvp-input {
+      display: block; width: 100%; padding: .9rem 1.1rem;
       border: 1px solid rgba(255,215,0,.25);
       background: rgba(255,215,0,.07);
-      color: #fff;
-      font-size: .88rem;
-      outline: none;
-      border-radius: 2px;
-      margin-bottom: .75rem;
+      color: #fff; font-size: .88rem; outline: none;
+      border-radius: 2px; margin-bottom: .75rem;
       font-family: 'Cormorant Garamond', serif;
     }
-    .gold-input::placeholder { color: rgba(255,215,0,.35); }
-    .gold-input:focus { border-color: rgba(255,215,0,.5); }
-
-    /* ── RSVP buttons ── */
-    .rsvp-btn {
-      flex: 1;
-      padding: .9rem;
+    .attendance-btn {
+      flex: 1; padding: .9rem;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: .65rem;
-      letter-spacing: .35em;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all .2s;
-      border: 1px solid rgba(255,215,0,.2);
-      background: rgba(255,215,0,.04);
-      color: rgba(255,215,0,.45);
-    }
-    .rsvp-btn.active {
-      border-color: #FFD700;
-      background: rgba(255,215,0,.15);
-      color: #FFD700;
-      box-shadow: 0 4px 20px rgba(255,215,0,.25);
+      font-size: .65rem; letter-spacing: .35em;
+      border-radius: 2px; cursor: pointer; transition: all .2s;
     }
 
-    /* ── Itinerary timeline spine ── */
-    .timeline-spine {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 2px;
-      background: linear-gradient(to bottom,transparent,rgba(255,215,0,.8) 10%,rgba(255,241,176,.4) 50%,rgba(255,215,0,.8) 90%,transparent);
-      box-shadow: 0 0 10px rgba(255,215,0,.3);
-      transform: translateX(-50%) scaleY(0);
-      transform-origin: top;
-      transition: transform 2s cubic-bezier(.22,1,.36,1);
-    }
-    .timeline-spine.grown { transform: translateX(-50%) scaleY(1); }
+    /* Gift accordion */
+    .gift-panel { border-radius: 2px; overflow: hidden; background: rgba(10,7,0,.88); border: 1px solid rgba(255,215,0,.2); backdrop-filter: blur(12px); transition: border-color .25s, box-shadow .25s; margin-bottom: .875rem; }
+    .gift-panel.open { border-color: rgba(255,215,0,.5); box-shadow: 0 14px 40px rgba(0,0,0,.35); }
+    .gift-header { display: flex; align-items: center; gap: 1rem; width: 100%; text-align: left; background: transparent; border: none; padding: 1.25rem 1.5rem; cursor: pointer; }
+    .gift-body { max-height: 0; overflow: hidden; transition: max-height .45s ease-in-out; }
+    .gift-body.open { max-height: 600px; }
 
-    /* ── Splash ── */
-    #splash-enter { animation: fadeUp .9s .4s both ease; }
+    /* Lightbox */
+    #lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.94); align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(10px); }
+    #lightbox.active { display: flex; }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════
-     SPLASH
-════════════════════════════════════════════════════ -->
-<div id="splash-screen" class="card-outer">
+<!-- ═══════════════ SPLASH ═══════════════ -->
+<div class="card-outer" id="splash">
   <div class="card-inner">
-    <div id="splash-click" onclick="openInvitation()" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;min-height:100vh;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 40%,#3d2d00 70%,#2a1e00 100%);">
-      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;filter:grayscale(80%) sepia(100%) hue-rotate(10deg)" src="https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 20%,rgba(10,7,0,.6) 100%)"></div>
-      <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(255,215,0,.015) 38px,rgba(255,215,0,.015) 39px)"></div>
+    <div onclick="openInvitation()" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;min-height:100vh;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 40%,#3d2d00 70%,#2a1e00 100%);">
+      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;filter:grayscale(80%) sepia(100%) hue-rotate(10deg);" src="https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="" />
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 20%,rgba(10,7,0,.6) 100%);"></div>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(255,215,0,.015) 38px,rgba(255,215,0,.015) 39px);"></div>
 
       <!-- Corner hearts -->
-      <div style="position:absolute;top:20px;left:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5))">
-        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 0s infinite"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,215,0,.9)"/></svg>
+      <div style="position:absolute;top:20px;left:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5));">
+        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 0s infinite;"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,215,0,.9)"/></svg>
       </div>
-      <div style="position:absolute;top:20px;right:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5))">
-        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out .9s infinite"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,241,176,.75)"/></svg>
+      <div style="position:absolute;top:20px;right:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5));">
+        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out .9s infinite;"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,241,176,.75)"/></svg>
       </div>
-      <div style="position:absolute;bottom:20px;left:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5))">
-        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 1.8s infinite"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,215,0,.9)"/></svg>
+      <div style="position:absolute;bottom:20px;left:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5));">
+        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 1.8s infinite;"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,215,0,.9)"/></svg>
       </div>
-      <div style="position:absolute;bottom:20px;right:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5))">
-        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 2.7s infinite"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,241,176,.75)"/></svg>
+      <div style="position:absolute;bottom:20px;right:20px;filter:drop-shadow(0 0 8px rgba(255,215,0,.5));">
+        <svg width="40" height="40" viewBox="0 0 42 42" style="animation:heartFloat 3s ease-in-out 2.7s infinite;"><path d="M21 36C21 36 6 26 6 16C6 10.5 10.5 6 16 6C18.8 6 21 8.5 21 8.5C21 8.5 23.2 6 26 6C31.5 6 36 10.5 36 16C36 26 21 36 21 36Z" fill="rgba(255,241,176,.75)"/></svg>
       </div>
 
-      <div id="splash-enter" style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 2.5rem">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.78em;color:rgba(255,215,0,.7);text-transform:uppercase;margin-bottom:1.25rem">Luxury Edition · XV Años</p>
-        <span class="gold-shimmer" style="font-family:'Bebas Neue',sans-serif;font-size:9.5rem;line-height:.82;letter-spacing:.04em">15</span>
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.55em;color:#FFD700;text-shadow:0 0 12px rgba(255,215,0,.4);margin-bottom:.25rem">Años de</p>
-        <p style="font-family:'Great Vibes',cursive;font-size:3.2rem;color:rgba(255,241,176,.95);filter:drop-shadow(0 1px 14px rgba(255,215,0,.4));margin-bottom:1.5rem">Sofía Valentina</p>
-        <div style="border:1px solid rgba(255,215,0,.4);padding:.6rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.4em;color:#FFD700;background:rgba(10,7,0,.6);backdrop-filter:blur(8px);margin-bottom:1.75rem;border-radius:2px">
+      <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 2.5rem;animation:fadeUp .9s .4s both ease;">
+        <p style="font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.78em;color:rgba(255,215,0,.7);text-transform:uppercase;margin-bottom:1.25rem;">Luxury Edition · XV Años</p>
+        <span style="background:linear-gradient(90deg,#8B6914 0%,#C9A84C 25%,#FFD700 40%,#FFF8DC 50%,#FFD700 60%,#C9A84C 75%,#8B6914 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:goldShimmer 3s linear infinite;filter:drop-shadow(0 0 14px rgba(255,215,0,.6));font-family:'Bebas Neue',sans-serif;font-size:9.5rem;line-height:.82;letter-spacing:.04em;">15</span>
+        <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.55em;color:#FFD700;text-shadow:0 0 12px rgba(255,215,0,.4);margin-bottom:.25rem;">Años de</p>
+        <p style="font-family:'Great Vibes',cursive;font-size:3.2rem;color:rgba(255,241,176,.95);filter:drop-shadow(0 1px 14px rgba(255,215,0,.4)) drop-shadow(0 0 30px rgba(180,140,0,.3));margin-bottom:1.5rem;">Sofía Valentina</p>
+        <div style="border:1px solid rgba(255,215,0,.4);padding:.6rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.4em;color:#FFD700;background:rgba(10,7,0,.6);backdrop-filter:blur(8px);margin-bottom:1.75rem;border-radius:2px;">
           15 · NOV · 2026 &nbsp;|&nbsp; 7:00 PM
         </div>
-        <button class="btn-gold" onclick="event.stopPropagation();openInvitation()" style="padding:1.05rem 2.8rem">
+        <button class="btn-gold" onclick="openInvitation()" style="padding:1.05rem 2.8rem;">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
           Abrir Invitación
           <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
         </button>
-        <p style="font-size:.5rem;letter-spacing:.18em;color:rgba(255,215,0,.3);font-family:'Bebas Neue',sans-serif;margin-top:.75rem">Toca en cualquier lugar para abrir</p>
+        <p style="font-size:.5rem;letter-spacing:.18em;color:rgba(255,215,0,.3);font-family:'Bebas Neue',sans-serif;margin-top:.75rem;">Toca en cualquier lugar para abrir</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     FULL INVITATION
-════════════════════════════════════════════════════ -->
-<div id="invitation-screen" style="display:none" class="card-outer">
+<!-- ═══════════════ FULL INVITATION ═══════════════ -->
+<div class="card-outer" id="invitation" style="display:none;">
   <div class="card-inner">
+    <div>
 
-    <!-- ── BLOQUE 1: HERO ── -->
-    <div class="block-wrap">
-      <section style="background:#0c0900;overflow:hidden">
+      <!-- ── HERO ── -->
+      <div class="block-wrap">
+        <section style="background:#0c0900;overflow:hidden;">
 
-        <!-- Band 1: header rule -->
-        <div style="padding:1.5rem 1.75rem .8rem;display:flex;align-items:center;gap:1rem">
-          <div style="height:1px;flex:1;background:rgba(255,215,0,.25)"></div>
-          <span style="font-family:'Bebas Neue',sans-serif;font-size:.46rem;letter-spacing:.7em;color:rgba(255,215,0,.45);white-space:nowrap">XV AÑOS · INVITACIÓN</span>
-          <div style="height:1px;flex:1;background:rgba(255,215,0,.25)"></div>
-        </div>
-
-        <!-- Band 2: XV centered -->
-        <div style="padding:0 1.75rem;text-align:center">
-          <div style="line-height:.82;user-select:none">
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:11rem;color:transparent;-webkit-text-stroke:1.5px rgba(255,215,0,.55);display:block;letter-spacing:-.02em">XV</span>
+          <!-- Band 1: thin header -->
+          <div style="padding:1.5rem 1.75rem .8rem;display:flex;align-items:center;gap:1rem;">
+            <div style="height:1px;flex:1;background:rgba(255,215,0,.25);"></div>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:.46rem;letter-spacing:.7em;color:rgba(255,215,0,.45);white-space:nowrap;">XV AÑOS · INVITACIÓN</span>
+            <div style="height:1px;flex:1;background:rgba(255,215,0,.25);"></div>
           </div>
-          <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.28em;font-style:italic;color:rgba(255,215,0,.5);margin-bottom:.45rem">celebra sus</span>
-          <span style="display:block;font-family:'Bodoni Moda',serif;font-size:1.65rem;font-weight:700;letter-spacing:.06em;color:#FFD700;line-height:1.1;text-shadow:0 0 20px rgba(255,215,0,.3);margin-bottom:.6rem">QUINCE AÑOS</span>
-          <div style="width:48px;height:1px;background:linear-gradient(to right,transparent,#FFD700,transparent);margin:0 auto .6rem"></div>
-          <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:.44rem;letter-spacing:.6em;color:rgba(255,215,0,.4);margin-bottom:.25rem">15 · NOV · 2026</span>
-        </div>
 
-        <!-- Band 3: portrait photo -->
-        <div style="padding:0 1.75rem">
-          <div style="position:relative;height:420px;overflow:hidden;outline:1px solid rgba(255,215,0,.3);outline-offset:-1px">
-            <img src="https://images.unsplash.com/photo-1626253257807-3b1c1ba60879?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Sofía Valentina" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block" />
-            <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,#0c0900 100%)"></div>
-            <!-- Corner ornaments -->
-            <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;top:8px;left:8px"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
-            <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;top:8px;right:8px;transform:rotate(90deg)"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
-            <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;bottom:8px;left:8px;transform:rotate(270deg)"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
-            <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;bottom:8px;right:8px;transform:rotate(180deg)"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
+          <!-- Band 2: big XV centered -->
+          <div style="padding:0 1.75rem;text-align:center;">
+            <div style="line-height:.82;user-select:none;">
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:11rem;color:transparent;-webkit-text-stroke:1.5px rgba(255,215,0,.55);display:block;letter-spacing:-.02em;">XV</span>
+            </div>
+            <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.28em;font-style:italic;color:rgba(255,215,0,.5);margin-bottom:.45rem;">celebra sus</span>
+            <span style="display:block;font-family:'Bodoni Moda',serif;font-size:1.65rem;font-weight:700;letter-spacing:.06em;color:#FFD700;line-height:1.1;text-shadow:0 0 20px rgba(255,215,0,.3);margin-bottom:.6rem;">QUINCE AÑOS</span>
+            <div style="width:48px;height:1px;background:linear-gradient(to right,transparent,#FFD700,transparent);margin:0 auto .6rem;"></div>
+            <span style="display:block;font-family:'Bebas Neue',sans-serif;font-size:.44rem;letter-spacing:.6em;color:rgba(255,215,0,.4);margin-bottom:.25rem;">15 · NOV · 2026</span>
           </div>
-        </div>
 
-        <!-- Band 4: name -->
-        <div style="padding:1.75rem 1.75rem 0;text-align:center">
-          <p style="font-family:'Great Vibes',cursive;font-size:3.4rem;color:#FFF8DC;line-height:1;filter:drop-shadow(0 2px 16px rgba(255,215,0,.4));margin-bottom:.5rem">Sofía Valentina</p>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:.7rem;letter-spacing:.42em;font-style:italic;color:rgba(255,215,0,.45)">García Montoya</p>
-        </div>
+          <!-- Band 3: portrait photo -->
+          <div style="padding:0 1.75rem;">
+            <div style="position:relative;height:420px;overflow:hidden;outline:1px solid rgba(255,215,0,.3);outline-offset:-1px;">
+              <img src="https://images.unsplash.com/photo-1626253257807-3b1c1ba60879?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Sofía Valentina" style="width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block;" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,#0c0900 100%);"></div>
+              <!-- corner ornaments -->
+              <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;top:8px;left:8px;"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;top:8px;right:8px;transform:rotate(90deg);"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;bottom:8px;left:8px;transform:rotate(270deg);"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" style="position:absolute;bottom:8px;right:8px;transform:rotate(180deg);"><path d="M1 17 L1 1 L17 1" fill="none" stroke="rgba(255,215,0,.7)" stroke-width="1.2"/></svg>
+            </div>
+          </div>
 
-        <!-- Band 5: data pills -->
-        <div style="margin:1.75rem 1.75rem 0;display:flex;gap:.75rem">
-          <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px">FECHA</div>
-            <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700">15 Nov · 2026</div>
+          <!-- Band 4: name -->
+          <div style="padding:1.75rem 1.75rem 0;text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:3.4rem;color:#FFF8DC;line-height:1;filter:drop-shadow(0 2px 16px rgba(255,215,0,.4));margin-bottom:.5rem;">Sofía Valentina</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:.7rem;letter-spacing:.42em;font-style:italic;color:rgba(255,215,0,.45);">García Montoya</p>
           </div>
-          <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px">HORA</div>
-            <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700">7:00 PM</div>
-          </div>
-          <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px">LUGAR</div>
-            <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700">Bogotá, Col</div>
-          </div>
-        </div>
 
-        <!-- Band 6: quote -->
-        <div style="padding:1.75rem 2.25rem 2rem;text-align:center;border-top:1px solid rgba(255,215,0,.1);margin-top:1.75rem">
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:rgba(255,215,0,.55);line-height:1.6;letter-spacing:.03em">
-            "Una noche donde los sueños se vuelven realidad y la magia comienza a las siete."
+          <!-- Band 5: data pills -->
+          <div style="margin:1.75rem 1.75rem 0;display:flex;gap:.75rem;">
+            <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px;">FECHA</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700;">15 Nov · 2026</div>
+            </div>
+            <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px;">HORA</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700;">7:00 PM</div>
+            </div>
+            <div style="flex:1;padding:.9rem .5rem;border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.4rem;letter-spacing:.55em;color:rgba(255,215,0,.4);margin-bottom:5px;">LUGAR</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:.75rem;font-weight:700;color:#FFD700;">Bogotá, Col</div>
+            </div>
+          </div>
+
+          <!-- Band 6: quote -->
+          <div style="padding:1.75rem 2.25rem 2rem;text-align:center;border-top:1px solid rgba(255,215,0,.1);margin-top:1.75rem;">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:rgba(255,215,0,.55);line-height:1.6;letter-spacing:.03em;">
+              "Una noche donde los sueños se vuelven realidad y la magia comienza a las siete."
+            </p>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── TICKER ── -->
+      <div class="ticker-wrap">
+        <div class="ticker-track" id="ticker"></div>
+      </div>
+
+      <!-- ── COUNTDOWN ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;text-align:center;padding:5rem 1.5rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%);">
+          <span class="section-eyebrow">Cuenta regresiva</span>
+          <span class="gold-text">¡Falta poco!</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL1)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR1)" stroke-width="0.7"/><defs><linearGradient id="oL1" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR1" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <div style="display:flex;justify-content:center;align-items:flex-start;gap:10px;">
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="cd-box"><span class="cd-num" id="cd-days">00</span></div><span class="cd-label">DÍAS</span></div>
+            <span class="cd-colon">:</span>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="cd-box"><span class="cd-num" id="cd-hours">00</span></div><span class="cd-label">HORAS</span></div>
+            <span class="cd-colon">:</span>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="cd-box"><span class="cd-num" id="cd-mins">00</span></div><span class="cd-label">MIN</span></div>
+            <span class="cd-colon">:</span>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="cd-box"><span class="cd-num" id="cd-secs">00</span></div><span class="cd-label">SEG</span></div>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── DATE ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 60%,#1a1200 100%);text-align:center;">
+          <span class="section-eyebrow">La noche más especial</span>
+          <span class="gold-text">La Fecha</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL2)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR2)" stroke-width="0.7"/><defs><linearGradient id="oL2" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR2" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <div style="display:flex;gap:.75rem;">
+            <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px);">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem;">DÍA</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,.5);">15</div>
+            </div>
+            <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px);">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem;">MES · AÑO</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-style:italic;color:rgba(255,215,0,.8);line-height:1.4;">Nov<br>2026</div>
+            </div>
+            <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px);">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent);"></div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem;">HORA</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,.5);">7</div>
+              <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-style:italic;color:rgba(255,215,0,.8);line-height:1.4;">PM</div>
+            </div>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── ITINERARY ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;padding:3.5rem 1rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 50%,#1a1200 100%);">
+          <div style="text-align:center;">
+            <span class="section-eyebrow">La noche de ensueño</span>
+            <span class="gold-text">Programa</span>
+            <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL3)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR3)" stroke-width="0.7"/><defs><linearGradient id="oL3" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR3" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          </div>
+          <div style="position:relative;max-width:700px;margin:0 auto;padding-bottom:1rem;" id="itinerary-wrap">
+            <div id="spine" style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(to bottom,transparent,rgba(255,215,0,.8) 10%,rgba(255,241,176,.4) 50%,rgba(255,215,0,.8) 90%,transparent);box-shadow:0 0 10px rgba(255,215,0,.3);transform:translateX(-50%) scaleY(0);transform-origin:top;transition:transform 2s cubic-bezier(.22,1,.36,1);"></div>
+            <!-- items injected by JS -->
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── GALLERY ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="padding:3.5rem 0 4rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 60%,#0f0a00 100%);position:relative;overflow:hidden;">
+          <div style="text-align:center;margin-bottom:2rem;padding:0 1.5rem;">
+            <span class="section-eyebrow">Momentos para recordar</span>
+            <span class="gold-text">Galería</span>
+            <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL4)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR4)" stroke-width="0.7"/><defs><linearGradient id="oL4" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR4" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          </div>
+          <div style="max-width:520px;margin:0 auto;padding:0 1.25rem;">
+            <div onclick="openLightbox(galleryIdx)" style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,215,0,.3),0 32px 80px rgba(0,0,0,.6);height:340px;cursor:pointer;">
+              <img id="gallery-main" src="" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s;" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,3,0,.95) 0%,rgba(5,3,0,.3) 40%,transparent 65%);pointer-events:none;"></div>
+              <div style="position:absolute;bottom:0;left:0;right:0;padding:1.75rem 1.5rem 1.25rem;pointer-events:none;">
+                <p id="gallery-caption" style="font-family:'Great Vibes',cursive;font-size:1.7rem;color:#FFD700;text-shadow:0 2px 16px rgba(0,0,0,.6);margin:0;filter:drop-shadow(0 0 8px rgba(255,215,0,.4));"></p>
+                <div style="margin-top:6px;height:2px;width:48px;background:linear-gradient(90deg,#FFD700,transparent);border-radius:2px;"></div>
+              </div>
+              <div id="gallery-counter" style="position:absolute;top:14px;right:14px;z-index:10;background:rgba(5,3,0,.8);border:1px solid rgba(255,215,0,.4);border-radius:8px;padding:3px 10px;font-family:'Bebas Neue',sans-serif;font-size:.65rem;color:#FFD700;letter-spacing:.2em;backdrop-filter:blur(8px);"></div>
+              <button onclick="event.stopPropagation();prevGallery()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.8);border:1px solid rgba(255,215,0,.35);color:#FFD700;font-size:1.3rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);">‹</button>
+              <button onclick="event.stopPropagation();nextGallery()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.8);border:1px solid rgba(255,215,0,.35);color:#FFD700;font-size:1.3rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);">›</button>
+            </div>
+            <div style="height:2px;background:rgba(255,215,0,.15);border-radius:2px;margin-top:12px;overflow:hidden;">
+              <div id="gallery-progress" style="height:100%;background:linear-gradient(90deg,#8B6914,#FFD700,#C9A84C);border-radius:2px;transition:width .3s;"></div>
+            </div>
+            <div id="gallery-thumbs" style="display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;justify-content:center;"></div>
+            <div id="gallery-dots" style="display:flex;gap:6px;justify-content:center;margin-top:12px;"></div>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── LOCATION ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 60%,#1a1200 100%);text-align:center;">
+          <span class="section-eyebrow">¿Dónde será la magia?</span>
+          <span class="gold-text">El Lugar</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL5)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR5)" stroke-width="0.7"/><defs><linearGradient id="oL5" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR5" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <div style="border-radius:2px;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(255,215,0,.3);background:rgba(10,7,0,.88);backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(0,0,0,.35);">
+            <!-- Pin icon area (replaces map) -->
+            <div style="height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 60%,rgba(255,215,0,0.07) 0%,transparent 70%);gap:.75rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" style="width:90px;height:108px;filter:drop-shadow(0 0 18px rgba(255,215,0,0.55));">
+                <path d="M100 20 C55 20 20 60 20 110 C20 150 50 190 100 220 C150 190 180 150 180 110 C180 60 145 20 100 20 Z" fill="#FDB813"/>
+                <circle cx="100" cy="90" r="25" fill="white"/>
+                <ellipse cx="100" cy="210" rx="70" ry="20" fill="none" stroke="#FDB813" stroke-width="12"/>
+              </svg>
+              <div style="text-align:center;">
+                <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;letter-spacing:0.08em;">Salón de Eventos</div>
+                <div style="font-size:0.75rem;color:rgba(255,215,0,0.55);margin-top:4px;">Calle de los Sueños 123 · Bogotá, Colombia</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem;">
+              <button class="btn-gold" onclick="window.open('https://maps.google.com/maps?q=Bogot%C3%A1,+Colombia','_blank')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                Cómo llegar
+              </button>
+            </div>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── GIFTS ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%);text-align:center;">
+          <span class="section-eyebrow">Si deseas obsequiar</span>
+          <span class="gold-text">Regalo con Amor</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL6)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR6)" stroke-width="0.7"/><defs><linearGradient id="oL6" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR6" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <div id="gifts-container"></div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- ── DRESS CODE ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 50%,#1a1200 100%);text-align:center;">
+          <span class="section-eyebrow">Viste para la ocasión</span>
+          <span class="gold-text">Código de Vestimenta</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL7)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR7)" stroke-width="0.7"/><defs><linearGradient id="oL7" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR7" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:.92rem;font-style:italic;color:rgba(255,215,0,.65);line-height:1.9;margin-bottom:2rem;">
+            Esta noche merece tu mejor versión.<br>
+            <span style="color:#FFD700;">Etiqueta formal · Tema dorado</span>
           </p>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── TICKER ── -->
-    <div class="ticker-wrap">
-      <div class="ticker-inner" id="ticker"></div>
-    </div>
-
-    <!-- ── BLOQUE 2: COUNTDOWN ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;text-align:center;padding:5rem 1.5rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%)">
-        <span class="eyebrow">Cuenta regresiva</span>
-        <span class="gold-title gold-shimmer">¡Falta poco!</span>
-        <!-- ornament -->
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLa)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRa)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLa" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRa" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div style="display:flex;justify-content:center;align-items:flex-start;gap:10px">
-          <div class="cd-box"><div class="cd-num-wrap"><span class="cd-num" id="cd-days">00</span></div><span class="cd-label">DÍAS</span></div>
-          <span class="cd-colon">:</span>
-          <div class="cd-box"><div class="cd-num-wrap"><span class="cd-num" id="cd-hours">00</span></div><span class="cd-label">HORAS</span></div>
-          <span class="cd-colon">:</span>
-          <div class="cd-box"><div class="cd-num-wrap"><span class="cd-num" id="cd-mins">00</span></div><span class="cd-label">MIN</span></div>
-          <span class="cd-colon">:</span>
-          <div class="cd-box"><div class="cd-num-wrap"><span class="cd-num" id="cd-secs">00</span></div><span class="cd-label">SEG</span></div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 3: FECHA ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 60%,#1a1200 100%);text-align:center">
-        <span class="eyebrow">La noche más especial</span>
-        <span class="gold-title gold-shimmer">La Fecha</span>
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLb)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRb)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLb" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRb" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div style="display:flex;gap:.75rem">
-          <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px)">
-            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent)"></div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem">DÍA</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,.5)">15</div>
-          </div>
-          <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px)">
-            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent)"></div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem">MES · AÑO</div>
-            <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-style:italic;color:rgba(255,215,0,.8);line-height:1.4">Nov<br>2026</div>
-          </div>
-          <div style="flex:1;border-radius:2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.75rem .5rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.3);box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(12px)">
-            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#FFD700,transparent)"></div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:.5rem;letter-spacing:.45em;color:rgba(255,215,0,.5);margin-bottom:.6rem">HORA</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,.5)">7</div>
-            <div style="font-family:'Bodoni Moda',serif;font-size:.9rem;font-style:italic;color:rgba(255,215,0,.8)">PM</div>
-          </div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 4: PROGRAMA ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;padding:3.5rem 1rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 50%,#1a1200 100%)">
-        <div style="text-align:center">
-          <span class="eyebrow">La noche de ensueño</span>
-          <span class="gold-title gold-shimmer">Programa</span>
-          <div class="ornament-row">
-            <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-              <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLc)" stroke-width="0.7"/>
-              <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-              <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-              <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-              <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRc)" stroke-width="0.7"/>
-              <defs>
-                <linearGradient id="oLc" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-                <linearGradient id="oRc" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        <div style="position:relative;max-width:700px;margin:0 auto;padding-bottom:1rem" id="timeline-container">
-          <div class="timeline-spine" id="timeline-spine"></div>
-          <!-- items injected by JS -->
-          <div id="itinerary-items"></div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 5: GALERÍA ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="padding:3.5rem 0 4rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 60%,#0f0a00 100%);position:relative;overflow:hidden">
-        <div style="text-align:center;margin-bottom:2rem;padding:0 1.5rem">
-          <span class="eyebrow">Momentos para recordar</span>
-          <span class="gold-title gold-shimmer">Galería</span>
-          <div class="ornament-row">
-            <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-              <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLd)" stroke-width="0.7"/>
-              <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-              <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-              <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-              <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRd)" stroke-width="0.7"/>
-              <defs>
-                <linearGradient id="oLd" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-                <linearGradient id="oRd" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        <div style="max-width:520px;margin:0 auto;padding:0 1.25rem">
-          <div id="gallery-main" onclick="openLightbox()" style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,215,0,.3),0 32px 80px rgba(0,0,0,.6);height:340px;cursor:pointer">
-            <img id="gallery-img" src="" alt="" class="gallery-img" />
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,3,0,.95) 0%,rgba(5,3,0,.3) 40%,transparent 65%);pointer-events:none"></div>
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:1.75rem 1.5rem 1.25rem;pointer-events:none">
-              <p id="gallery-caption" style="font-family:'Great Vibes',cursive;font-size:1.7rem;color:#FFD700;text-shadow:0 2px 16px rgba(0,0,0,.6);margin:0;filter:drop-shadow(0 0 8px rgba(255,215,0,.4))"></p>
-              <div style="margin-top:6px;height:2px;width:48px;background:linear-gradient(90deg,#FFD700,transparent);border-radius:2px"></div>
+          <div style="display:flex;flex-direction:column;gap:.875rem;">
+            <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.25);position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#C9A84C,#8B6914);"></div>
+              <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#C9A84C,#8B6914);box-shadow:0 6px 20px rgba(0,0,0,.3);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v1h6V7a3 3 0 0 0-3-3z"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px;">Damas</div>
+                <p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0;">Vestido largo o cocktail en tonos dorado, champagne, marfil o borgoña. Evitar blanco puro.</p>
+              </div>
             </div>
-            <div id="gallery-counter" style="position:absolute;top:14px;right:14px;z-index:10;background:rgba(5,3,0,.8);border:1px solid rgba(255,215,0,.4);border-radius:8px;padding:3px 10px;font-family:'Bebas Neue',sans-serif;font-size:.65rem;color:#FFD700;letter-spacing:.2em;backdrop-filter:blur(8px)"></div>
-            <button class="gallery-btn" onclick="event.stopPropagation();galleryPrev()" style="left:10px">‹</button>
-            <button class="gallery-btn" onclick="event.stopPropagation();galleryNext()" style="right:10px">›</button>
-          </div>
-          <div style="height:2px;background:rgba(255,215,0,.15);border-radius:2px;margin-top:12px;overflow:hidden">
-            <div id="gallery-progress" style="height:100%;background:linear-gradient(90deg,#8B6914,#FFD700,#C9A84C);border-radius:2px;transition:width .3s"></div>
-          </div>
-          <div id="gallery-thumbs" style="display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;justify-content:center"></div>
-          <div id="gallery-dots" style="display:flex;gap:6px;justify-content:center;margin-top:12px"></div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 6: LUGAR ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 60%,#1a1200 100%);text-align:center">
-        <span class="eyebrow">¿Dónde será la magia?</span>
-        <span class="gold-title gold-shimmer">El Lugar</span>
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLe)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRe)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLe" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRe" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div style="border-radius:2px;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(255,215,0,.3);background:rgba(10,7,0,.88);backdrop-filter:blur(12px);box-shadow:0 24px 60px rgba(0,0,0,.35)">
-          <div style="display:flex;align-items:center;gap:1rem;padding:1.5rem 1.5rem 1.25rem;border-bottom:1px solid rgba(255,215,0,.15)">
-            <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:linear-gradient(145deg,#FFD700,#8B6914);box-shadow:0 8px 28px rgba(255,215,0,.35)">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.25);position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#FFD700,#B8860B);"></div>
+              <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#FFD700,#B8860B);box-shadow:0 6px 20px rgba(0,0,0,.3);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM9 3h6v4H9zM12 13a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px;">Caballeros</div>
+                <p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0;">Traje formal o vestimenta elegante. Corbata o moño en tonos dorado u oscuros.</p>
+              </div>
             </div>
-            <div style="text-align:left">
-              <div style="font-family:'Bodoni Moda',serif;font-size:1.05rem;font-weight:700;color:#FFD700;margin-bottom:3px">Salón de Eventos</div>
-              <div style="font-size:.76rem;color:rgba(255,215,0,.5);line-height:1.5">Calle de los Sueños 123<br>Bogotá, Colombia</div>
+            <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.25);position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#FFF8DC,#C9A84C);"></div>
+              <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#FFF8DC,#C9A84C);box-shadow:0 6px 20px rgba(0,0,0,.3);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px;">Color de la noche</div>
+                <p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0;">Paleta oficial: dorado, champagne, crema y detalles metálicos.</p>
+              </div>
             </div>
           </div>
-          <div style="height:220px">
-            <iframe title="Mapa" src="https://maps.google.com/maps?q=Bogot%C3%A1,+Colombia&output=embed" style="width:100%;height:100%;display:block;border:none" loading="lazy"></iframe>
+          <div style="margin-top:1.75rem;border-radius:2px;padding:1.1rem 1.4rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.25);display:flex;align-items:center;gap:.875rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p style="font-size:.73rem;color:rgba(255,215,0,.6);line-height:1.6;margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;">Por favor <strong style="color:#FFD700;">evita usar blanco puro</strong> para respetar el color de la quinceañera y la paleta de la noche.</p>
           </div>
-          <div style="padding:1.25rem">
-            <button class="btn-gold" onclick="window.open('https://maps.google.com/maps?q=Bogotá,+Colombia','_blank')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-              Cómo llegar
-            </button>
-          </div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
 
-    <!-- ── BLOQUE 7: REGALOS ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%);text-align:center">
-        <span class="eyebrow">Si deseas obsequiar</span>
-        <span class="gold-title gold-shimmer">Regalo con Amor</span>
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLf)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRf)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLf" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRf" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:.875rem" id="gifts-container"></div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 8: CÓDIGO DE VESTIMENTA ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;padding:3.5rem 1.5rem 4rem;background:linear-gradient(160deg,#1a1200 0%,#2a1e00 50%,#1a1200 100%);text-align:center">
-        <span class="eyebrow">Viste para la ocasión</span>
-        <span class="gold-title gold-shimmer">Código de Vestimenta</span>
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLg)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRg)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLg" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRg" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;font-style:italic;color:rgba(255,215,0,.65);line-height:1.9;margin-bottom:2rem">
-          Esta noche merece tu mejor versión.<br>
-          <span style="color:#FFD700">Etiqueta formal · Tema dorado</span>
-        </p>
-        <div style="display:flex;flex-direction:column;gap:.875rem">
-          <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);position:relative;overflow:hidden;text-align:left">
-            <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#C9A84C,#8B6914)"></div>
-            <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#C9A84C,#8B6914);box-shadow:0 6px 20px rgba(0,0,0,.3)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v1h6V7a3 3 0 0 0-3-3z"/></svg>
-            </div>
-            <div><div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px">Damas</div><p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0">Vestido largo o cocktail en tonos dorado, champagne, marfil o borgoña. Evitar blanco puro.</p></div>
-          </div>
-          <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);position:relative;overflow:hidden;text-align:left">
-            <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#FFD700,#B8860B)"></div>
-            <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#FFD700,#B8860B);box-shadow:0 6px 20px rgba(0,0,0,.3)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM9 3h6v4H9zM12 13a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>
-            </div>
-            <div><div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px">Caballeros</div><p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0">Traje formal o vestimenta elegante. Corbata o moño en tonos dorado u oscuros.</p></div>
-          </div>
-          <div style="border-radius:2px;display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);position:relative;overflow:hidden;text-align:left">
-            <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(135deg,#FFF8DC,#C9A84C)"></div>
-            <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:linear-gradient(135deg,#FFF8DC,#C9A84C);box-shadow:0 6px 20px rgba(0,0,0,.3)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
-            </div>
-            <div><div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;margin-bottom:5px">Color de la noche</div><p style="font-size:.76rem;color:rgba(255,215,0,.55);line-height:1.65;margin:0">Paleta oficial: dorado, champagne, crema y detalles metálicos.</p></div>
-          </div>
-        </div>
-        <div style="margin-top:1.75rem;border-radius:2px;padding:1.1rem 1.4rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.25);display:flex;align-items:center;gap:.875rem;text-align:left">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <p style="font-size:.73rem;color:rgba(255,215,0,.6);line-height:1.6;margin:0;font-family:'Cormorant Garamond',serif;font-style:italic">Por favor <strong style="color:#FFD700">evita usar blanco puro</strong> para respetar el color de la quinceañera y la paleta de la noche.</p>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── BLOQUE 9: RSVP ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <section style="position:relative;overflow:hidden;padding:4rem 1.5rem 5rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%);text-align:center">
-        <span class="eyebrow">Confirma tu presencia</span>
-        <span class="gold-title gold-shimmer">¿Nos acompañas?</span>
-        <div class="ornament-row">
-          <svg width="180" height="14" viewBox="0 0 180 14" fill="none">
-            <line x1="0" y1="7" x2="66" y2="7" stroke="url(#oLh)" stroke-width="0.7"/>
-            <rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/>
-            <circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/>
-            <line x1="114" y1="7" x2="180" y2="7" stroke="url(#oRh)" stroke-width="0.7"/>
-            <defs>
-              <linearGradient id="oLh" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient>
-              <linearGradient id="oRh" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <p style="font-size:.88rem;font-style:italic;color:rgba(255,215,0,.65);line-height:1.8;font-family:'Cormorant Garamond',serif;margin-bottom:2rem">
-          Tu presencia hará esta noche aún más especial.<br>
-          Confirma antes del <strong style="color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,.4)">1 de Noviembre</strong>
-        </p>
-        <div class="glass-card" style="padding:2rem 1.75rem;max-width:420px;margin:0 auto">
-          <div id="rsvp-form">
-            <input class="gold-input" type="text" id="rsvp-name" placeholder="Tu nombre completo" />
-            <input class="gold-input" type="number" id="rsvp-guests" placeholder="¿Cuántos asistirán?" min="1" max="5" />
-            <div style="display:flex;gap:.75rem;margin-bottom:1rem">
-              <button class="rsvp-btn active" id="btn-yes" onclick="setAttendance('yes')">Sí asistiré ✓</button>
-              <button class="rsvp-btn" id="btn-no" onclick="setAttendance('no')">No podré ir</button>
-            </div>
-            <p id="rsvp-error" style="font-family:'Bebas Neue',sans-serif;font-size:.72rem;color:#FFD700;letter-spacing:.08em;margin-bottom:.5rem;display:none"></p>
-            <button class="btn-gold" onclick="submitRsvp()">Confirmar asistencia</button>
-            <p style="text-align:center;margin-top:.75rem;font-family:'Bebas Neue',sans-serif;font-size:.48rem;letter-spacing:.18em;color:rgba(255,215,0,.35)">Confirma antes del 1 de Noviembre · Cupos limitados</p>
-          </div>
-          <div id="rsvp-success" style="display:none;text-align:center;padding:2.5rem 0">
-            <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border-radius:2px;width:80px;height:80px;background:linear-gradient(145deg,#FFD700,#8B6914);box-shadow:0 14px 44px rgba(255,215,0,.4)">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3 style="font-family:'Great Vibes',cursive;font-size:4rem;color:#FFD700;line-height:1;filter:drop-shadow(0 2px 12px rgba(255,215,0,.4))">¡Gracias!</h3>
-            <p style="margin-top:.875rem;font-size:.9rem;font-style:italic;color:rgba(255,215,0,.7);line-height:1.8;font-family:'Cormorant Garamond',serif">Tu respuesta ha sido registrada.<br>¡Te esperamos con todo el amor!</p>
-          </div>
-        </div>
-      </section>
-      <div class="gold-line"></div>
-    </div>
-
-    <!-- ── FOOTER ── -->
-    <div class="block-wrap">
-      <div class="gold-line"></div>
-      <footer style="position:relative;overflow:hidden;text-align:center;padding:4rem 1.5rem 3rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 40%,#2a1e00 100%)">
-        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,241,176,.5),#FFD700,rgba(255,241,176,.5),transparent)"></div>
-        <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;border-radius:2px;width:90px;height:90px;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.35);box-shadow:0 10px 40px rgba(0,0,0,.3);backdrop-filter:blur(12px)">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,215,0,.85)" stroke-width="1.2" stroke-linecap="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-        </div>
-        <p style="font-style:italic;line-height:2;color:rgba(255,215,0,.7);font-size:.95rem;font-family:'Cormorant Garamond',serif;margin-bottom:1.5rem">
-          Hoy comienzas a escribir<br>el capítulo más hermoso<br>de tu historia.
-        </p>
-        <div style="display:inline-block;margin-bottom:2rem;border-radius:2px;padding:.95rem 2.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.4);backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,.3)">
-          <p style="font-family:'Great Vibes',cursive;font-size:2.4rem;color:#FFD700;filter:drop-shadow(0 1px 10px rgba(255,215,0,.4));margin:0">Con amor, Sofía</p>
-        </div>
-        <div style="padding-top:2rem;margin-top:2rem;border-top:1px solid rgba(255,215,0,.15)">
-          <p style="font-size:.7rem;color:rgba(255,215,0,.5);max-width:300px;margin:0 auto;line-height:1.7;letter-spacing:.02em">
-            Esta plantilla digital es propiedad exclusiva de <strong style="color:rgba(255,215,0,.75)">Gueka Ideas</strong>. Su uso está permitido únicamente para fines personales.
+      <!-- ── RSVP ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <section style="position:relative;overflow:hidden;padding:4rem 1.5rem 5rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 50%,#0a0700 100%);text-align:center;">
+          <span class="section-eyebrow">Confirma tu presencia</span>
+          <span class="gold-text">¿Nos acompañas?</span>
+          <div class="ornament-row"><svg width="180" height="14" viewBox="0 0 180 14" fill="none"><line x1="0" y1="7" x2="66" y2="7" stroke="url(#oL8)" stroke-width="0.7"/><rect x="85" y="4" width="10" height="6" fill="#FFD700" opacity=".9" transform="rotate(45 90 7)"/><circle cx="76" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><circle cx="104" cy="7" r="1.6" fill="rgba(255,255,255,.7)"/><line x1="114" y1="7" x2="180" y2="7" stroke="url(#oR8)" stroke-width="0.7"/><defs><linearGradient id="oL8" x1="0" y1="0" x2="66" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#FFD700" stop-opacity=".8"/></linearGradient><linearGradient id="oR8" x1="114" y1="0" x2="180" y2="0"><stop offset="0%" stop-color="#FFD700" stop-opacity=".8"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <p style="text-align:center;font-size:.88rem;font-style:italic;color:rgba(255,215,0,.65);line-height:1.8;font-family:'Cormorant Garamond',serif;margin-bottom:2rem;">
+            Tu presencia hará esta noche aún más especial.<br>
+            Confirma antes del <strong style="color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,.4);">1 de Noviembre</strong>
           </p>
-          <p style="margin-top:.875rem;font-size:.65rem;color:rgba(255,215,0,.35);letter-spacing:.1em;font-family:'Bebas Neue',sans-serif" id="footer-year"></p>
-        </div>
-      </footer>
-      <div class="gold-line"></div>
-    </div>
+          <div class="glass-card" style="padding:2rem 1.75rem;max-width:420px;margin:0 auto;" id="rsvp-form-wrap">
+            <div id="rsvp-form">
+              <input id="rsvp-name" class="rsvp-input" type="text" placeholder="Tu nombre completo" />
+              <input id="rsvp-guests" class="rsvp-input" type="number" placeholder="¿Cuántos asistirán?" min="1" max="5" />
+              <div style="display:flex;gap:.75rem;margin-bottom:1rem;">
+                <button id="btn-yes" onclick="setAttendance('yes')" class="attendance-btn" style="border:1px solid #FFD700;background:rgba(255,215,0,.15);color:#FFD700;box-shadow:0 4px 20px rgba(255,215,0,.25);">Sí asistiré ✓</button>
+                <button id="btn-no" onclick="setAttendance('no')" class="attendance-btn" style="border:1px solid rgba(255,215,0,.2);background:rgba(255,215,0,.04);color:rgba(255,215,0,.45);">No podré ir</button>
+              </div>
+              <p id="rsvp-error" style="font-family:'Bebas Neue',sans-serif;font-size:.72rem;color:#FFD700;letter-spacing:.08em;margin-bottom:.5rem;display:none;"></p>
+              <button class="btn-gold" onclick="submitRsvp()">Confirmar asistencia</button>
+              <p style="text-align:center;margin-top:.75rem;font-family:'Bebas Neue',sans-serif;font-size:.48rem;letter-spacing:.18em;color:rgba(255,215,0,.35);">Confirma antes del 1 de Noviembre · Cupos limitados</p>
+            </div>
+            <div id="rsvp-success" style="display:none;text-align:center;padding:2.5rem 0;">
+              <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border-radius:2px;width:80px;height:80px;background:linear-gradient(145deg,#FFD700,#8B6914);box-shadow:0 14px 44px rgba(255,215,0,.4);">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h3 style="font-family:'Great Vibes',cursive;font-size:4rem;color:#FFD700;line-height:1;filter:drop-shadow(0 2px 12px rgba(255,215,0,.4));text-align:center;">¡Gracias!</h3>
+              <p style="margin-top:.875rem;font-size:.9rem;font-style:italic;color:rgba(255,215,0,.7);line-height:1.8;font-family:'Cormorant Garamond',serif;text-align:center;">Tu respuesta ha sido registrada.<br>¡Te esperamos con todo el amor!</p>
+            </div>
+          </div>
+        </section>
+        <div class="gold-line"></div>
+      </div>
 
+      <!-- ── FOOTER ── -->
+      <div class="block-wrap">
+        <div class="gold-line"></div>
+        <footer style="position:relative;overflow:hidden;text-align:center;padding:4rem 1.5rem 3rem;background:linear-gradient(160deg,#0a0700 0%,#1a1200 40%,#2a1e00 100%);">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,241,176,.5),#FFD700,rgba(255,241,176,.5),transparent);"></div>
+          <div style="display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;border-radius:2px;width:90px;height:90px;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.35);box-shadow:0 10px 40px rgba(0,0,0,.3);backdrop-filter:blur(12px);">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,215,0,.85)" stroke-width="1.2" stroke-linecap="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          </div>
+          <p style="font-style:italic;line-height:2;color:rgba(255,215,0,.7);font-size:.95rem;font-family:'Cormorant Garamond',serif;margin-bottom:1.5rem;">
+            Hoy comienzas a escribir<br>
+            el capítulo más hermoso<br>
+            de tu historia.
+          </p>
+          <div style="display:inline-block;margin-bottom:2rem;border-radius:2px;padding:.95rem 2.5rem;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.4);backdrop-filter:blur(12px);box-shadow:0 8px 40px rgba(0,0,0,.3);">
+            <p style="font-family:'Great Vibes',cursive;font-size:2.4rem;color:#FFD700;filter:drop-shadow(0 1px 10px rgba(255,215,0,.4));margin:0;">Con amor, Sofía</p>
+          </div>
+          <div style="padding-top:2rem;margin-top:2rem;border-top:1px solid rgba(255,215,0,.15);">
+            <p style="font-size:.7rem;color:rgba(255,215,0,.5);max-width:300px;margin:0 auto;line-height:1.7;letter-spacing:.02em;">
+              Esta plantilla digital es propiedad exclusiva de <strong style="color:rgba(255,215,0,.75);">Gueka Ideas</strong>. Su uso está permitido únicamente para fines personales. Queda prohibida la reproducción, distribución, modificación o reventa total o parcial sin autorización escrita.
+            </p>
+            <p style="margin-top:.875rem;font-size:.65rem;color:rgba(255,215,0,.35);letter-spacing:.1em;font-family:'Bebas Neue',sans-serif;" id="copy-year"></p>
+          </div>
+        </footer>
+        <div class="gold-line"></div>
+      </div>
+
+    </div>
   </div>
 </div>
 
 <!-- ── LIGHTBOX ── -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <div style="max-width:700px;width:100%;position:relative" onclick="event.stopPropagation()">
-    <img id="lb-img" src="" alt="" style="width:100%;border-radius:16px;box-shadow:0 0 0 1px rgba(255,215,0,.3),0 40px 100px rgba(0,0,0,.7);display:block;max-height:70vh;object-fit:cover" />
-    <div style="text-align:center;margin-top:1rem">
-      <p id="lb-caption" style="font-family:'Great Vibes',cursive;font-size:1.8rem;color:#FFD700;margin:0;filter:drop-shadow(0 0 8px rgba(255,215,0,.4))"></p>
+<div id="lightbox" onclick="closeLightbox()">
+  <div style="max-width:700px;width:100%;position:relative;" onclick="event.stopPropagation()">
+    <img id="lb-img" src="" alt="" style="width:100%;border-radius:16px;box-shadow:0 0 0 1px rgba(255,215,0,.3),0 40px 100px rgba(0,0,0,.7);display:block;max-height:70vh;object-fit:cover;" />
+    <div style="text-align:center;margin-top:1rem;">
+      <p id="lb-caption" style="font-family:'Great Vibes',cursive;font-size:1.8rem;color:#FFD700;margin:0;filter:drop-shadow(0 0 8px rgba(255,215,0,.4));"></p>
     </div>
-    <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:rgba(60,40,0,.95);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
-    <button onclick="lbPrev()" style="position:absolute;left:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.9);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
-    <button onclick="lbNext()" style="position:absolute;right:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.9);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center">›</button>
+    <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:rgba(60,40,0,.95);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    <button onclick="lbPrev()" style="position:absolute;left:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.9);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+    <button onclick="lbNext()" style="position:absolute;right:-50px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(5,3,0,.9);border:1px solid rgba(255,215,0,.4);color:#FFD700;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     JAVASCRIPT
-═════════════════════════════════════════ -->
 <script>
-  // ── Data ──
-  const EVENT_DATE = new Date("2026-11-15T19:00:00");
+// ── Data ──────────────────────────────────────────────────────────────────────
+const EVENT_DATE = new Date("2026-11-15T19:00:00");
 
-  const GALLERY = [
-    { url: "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La quinceañera" },
-    { url: "https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Elegancia pura" },
-    { url: "https://images.unsplash.com/photo-1571924848943-25c2c95bbb4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Vestido de ensueño" },
-    { url: "https://images.unsplash.com/photo-1603122630570-7fd434d470d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La protagonista" },
-    { url: "https://images.unsplash.com/photo-1733322991133-2de13aa12c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Fashion moment" },
-    { url: "https://images.unsplash.com/photo-1779974797051-0c8b15b85c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Celebración especial" },
-    { url: "https://images.unsplash.com/photo-1748551204321-845c277c1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Luces y magia" },
-    { url: "https://images.unsplash.com/photo-1632459114930-2087067fb986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "El brindis" },
-  ];
+const GALLERY = [
+  { url: "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La quinceañera" },
+  { url: "https://images.unsplash.com/photo-1571924849183-a68a3879348d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Elegancia pura" },
+  { url: "https://images.unsplash.com/photo-1571924848943-25c2c95bbb4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Vestido de ensueño" },
+  { url: "https://images.unsplash.com/photo-1603122630570-7fd434d470d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "La protagonista" },
+  { url: "https://images.unsplash.com/photo-1733322991133-2de13aa12c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Fashion moment" },
+  { url: "https://images.unsplash.com/photo-1779974797051-0c8b15b85c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Celebración especial" },
+  { url: "https://images.unsplash.com/photo-1748551204321-845c277c1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "Luces y magia" },
+  { url: "https://images.unsplash.com/photo-1632459114930-2087067fb986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", caption: "El brindis" },
+];
 
-  const ITINERARY = [
-    { time: "7:00 PM", name: "Recepción de invitados", desc: "Bienvenida con cóctel y música en vivo" },
-    { time: "8:00 PM", name: "Entrada de la quinceañera", desc: "El gran momento de Sofía Valentina con su corte de honor" },
-    { time: "8:30 PM", name: "Vals y coreografía", desc: "El primer vals y la sorpresa coreográfica de la corte" },
-    { time: "9:30 PM", name: "Cena y brindis", desc: "Banquete especial y palabras desde el corazón" },
-    { time: "10:30 PM", name: "Pastel y sorpresas", desc: "Corte del pastel, lluvia de regalos y más sorpresas" },
-    { time: "11:00 PM", name: "Baile y fiesta", desc: "¡Pista de baile abierta hasta que el cuerpo aguante!" },
-  ];
+const ITINERARY = [
+  { time: "7:00 PM", name: "Recepción de invitados", desc: "Bienvenida con cóctel y música en vivo", icon: "M8 22V19M16 22V19M7 10L5 19H19L17 10M9 10V6a3 3 0 0 1 6 0v4M6 10h12" },
+  { time: "8:00 PM", name: "Entrada de la quinceañera", desc: "El gran momento de Sofía Valentina con su corte de honor", icon: "M2 19h20M4 19L2 7l5 4 5-8 5 8 5-4-2 12M9 19v-3a3 3 0 0 1 6 0v3" },
+  { time: "8:30 PM", name: "Vals y coreografía", desc: "El primer vals y la sorpresa coreográfica de la corte", icon: "M12 3C10.343 3 9 4.343 9 6c0 1.306.835 2.417 2 2.83V22h2V8.83C14.165 8.417 15 7.306 15 6c0-1.657-1.343-3-3-3z" },
+  { time: "9:30 PM", name: "Cena y brindis", desc: "Banquete especial y palabras desde el corazón", icon: "M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" },
+  { time: "10:30 PM", name: "Pastel y sorpresas", desc: "Corte del pastel, lluvia de regalos y más sorpresas", icon: "M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s1-1 2-1 2 1 3 1 2-1 3-1 2 1 3 1 2-1 3-1M2 21h20M7 8v2M12 8v2M17 8v2" },
+  { time: "11:00 PM", name: "Baile y fiesta", desc: "¡Pista de baile abierta hasta que el cuerpo aguante!", icon: "M9 18V5l12-2v13M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" },
+];
 
-  const GIFTS = [
-    { key: "nequi",    label: "Nequi",    sub: "Envío digital · Colombia",  grad: "linear-gradient(135deg,#B8860B,#FFD700)" },
-    { key: "daviplata",label: "Daviplata",sub: "Envío digital · Colombia",  grad: "linear-gradient(135deg,#8B6914,#D4A017)" },
-    { key: "pse",      label: "PSE",      sub: "Pago seguro en línea",       grad: "linear-gradient(135deg,#6B5A1E,#C9A84C)" },
-  ];
+const GIFTS = [
+  { key: "nequi", label: "Nequi", sub: "Envío digital · Colombia", grad: "linear-gradient(135deg,#B8860B,#FFD700)" },
+  { key: "daviplata", label: "Daviplata", sub: "Envío digital · Colombia", grad: "linear-gradient(135deg,#8B6914,#D4A017)" },
+  { key: "pse", label: "PSE", sub: "Pago seguro en línea", grad: "linear-gradient(135deg,#6B5A1E,#C9A84C)" },
+];
 
-  const TICKER_PHRASES = ["LUXURY · XV AÑOS","SOFÍA VALENTINA","15 NOVIEMBRE 2026","THE SHOW STARTS AT 7PM","YOU ARE INVITED","UNA NOCHE ÚNICA"];
+const TICKER_PHRASES = ["LUXURY · XV AÑOS","SOFÍA VALENTINA","15 NOVIEMBRE 2026","THE SHOW STARTS AT 7PM","YOU ARE INVITED","UNA NOCHE ÚNICA"];
 
-  // ── Splash → Invitation ──
-  function openInvitation() {
-    document.getElementById("splash-screen").style.display = "none";
-    document.getElementById("invitation-screen").style.display = "flex";
-    initAll();
+// ── Splash / Invitation toggle ────────────────────────────────────────────────
+function openInvitation() {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("invitation").style.display = "flex";
+  window.scrollTo(0,0);
+}
+
+// ── Footer year ───────────────────────────────────────────────────────────────
+document.getElementById("copy-year").textContent = "© " + new Date().getFullYear() + " Gueka Ideas · Todos los derechos reservados";
+
+// ── Ticker ────────────────────────────────────────────────────────────────────
+(function() {
+  const phrases = [...TICKER_PHRASES, ...TICKER_PHRASES];
+  const track = document.getElementById("ticker");
+  phrases.forEach(p => {
+    const span = document.createElement("span");
+    span.style.cssText = "display:inline-flex;align-items:center;gap:2rem;";
+    span.innerHTML = `<span class="ticker-item">${p}</span><span style="color:rgba(255,215,0,.5);">✦</span>`;
+    track.appendChild(span);
+  });
+})();
+
+// ── Countdown ─────────────────────────────────────────────────────────────────
+(function() {
+  function pad(n) { return String(n).padStart(2,"0"); }
+  function tick() {
+    const diff = Math.max(0, EVENT_DATE.getTime() - Date.now());
+    const s = Math.floor(diff / 1000);
+    document.getElementById("cd-days").textContent  = pad(Math.floor(s/86400));
+    document.getElementById("cd-hours").textContent = pad(Math.floor((s%86400)/3600));
+    document.getElementById("cd-mins").textContent  = pad(Math.floor((s%3600)/60));
+    document.getElementById("cd-secs").textContent  = pad(s%60);
   }
+  tick();
+  setInterval(tick, 1000);
+})();
 
-  // ── Ticker ──
-  function buildTicker() {
-    const phrases = [...TICKER_PHRASES, ...TICKER_PHRASES];
-    const el = document.getElementById("ticker");
-    el.innerHTML = phrases.map(p =>
-      `<span class="ticker-item"><span class="ticker-text">${p}</span><span class="ticker-sep">✦</span></span>`
-    ).join("");
-  }
-
-  // ── Countdown ──
-  function startCountdown() {
-    function tick() {
-      const diff = Math.max(0, EVENT_DATE.getTime() - Date.now());
-      const s = Math.floor(diff / 1000);
-      const pad = n => String(n).padStart(2,"0");
-      document.getElementById("cd-days").textContent  = pad(Math.floor(s / 86400));
-      document.getElementById("cd-hours").textContent = pad(Math.floor((s % 86400) / 3600));
-      document.getElementById("cd-mins").textContent  = pad(Math.floor((s % 3600) / 60));
-      document.getElementById("cd-secs").textContent  = pad(s % 60);
-    }
-    tick();
-    setInterval(tick, 1000);
-  }
-
-  // ── Itinerary ──
-  function buildItinerary() {
-    const container = document.getElementById("itinerary-items");
-    container.innerHTML = ITINERARY.map((item, i) => {
-      const isLeft = i % 2 === 0;
-      const card = `
-        <div style="border-radius:2px;padding:.875rem;max-width:260px;width:100%;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.3);${isLeft ? 'border-right:3px solid #FFD700' : 'border-left:3px solid rgba(255,241,176,.6)'}">
-          <div style="font-family:'Bodoni Moda',serif;font-size:.82rem;font-weight:700;color:#FFD700;margin-bottom:4px">${item.name}</div>
-          <p style="font-size:.72rem;color:rgba(255,215,0,.5);line-height:1.55;margin:0">${item.desc}</p>
-        </div>`;
-      const icon = `
-        <div style="display:flex;flex-direction:column;align-items:center;z-index:10;padding-top:4px">
-          <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;background:linear-gradient(145deg,#FFD700,#8B6914);box-shadow:0 0 18px rgba(255,215,0,.6);transform:rotate(45deg);border-radius:4px">
-            <span style="transform:rotate(-45deg);color:rgba(10,7,0,.9);font-size:1rem">✦</span>
-          </div>
-          <span style="margin-top:8px;white-space:nowrap;color:rgba(255,215,0,.7);font-family:'Bebas Neue',sans-serif;font-size:.55rem;letter-spacing:.2em">${item.time}</span>
-        </div>`;
-      return `
-        <div style="display:grid;grid-template-columns:1fr 52px 1fr;align-items:start;margin-bottom:2.25rem">
-          <div style="display:flex;justify-content:flex-end;padding-right:1rem">${isLeft ? card : '<div></div>'}</div>
-          ${icon}
-          <div style="display:flex;justify-content:flex-start;padding-left:1rem">${!isLeft ? card : '<div></div>'}</div>
-        </div>`;
-    }).join("");
-    // Animate spine on scroll
-    const spine = document.getElementById("timeline-spine");
-    const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { spine.classList.add("grown"); obs.disconnect(); }
-    }, { rootMargin: "-40px" });
-    obs.observe(spine);
-  }
-
-  // ── Gallery ──
-  let galleryIdx = 0;
-  let galleryTimer = null;
-
-  function updateGallery() {
-    const g = GALLERY[galleryIdx];
-    const img = document.getElementById("gallery-img");
-    img.style.opacity = "0";
-    setTimeout(() => { img.src = g.url; img.alt = g.caption; img.style.opacity = "1"; }, 200);
-    document.getElementById("gallery-caption").textContent = g.caption;
-    document.getElementById("gallery-counter").textContent = `${galleryIdx + 1} / ${GALLERY.length}`;
-    document.getElementById("gallery-progress").style.width = `${((galleryIdx + 1) / GALLERY.length * 100).toFixed(1)}%`;
-    document.querySelectorAll(".thumb-btn").forEach((b,i) => b.classList.toggle("active", i === galleryIdx));
-    document.querySelectorAll(".dot-btn").forEach((b,i) => b.classList.toggle("active", i === galleryIdx));
-  }
-
-  function galleryGoTo(i) {
-    galleryIdx = (i + GALLERY.length) % GALLERY.length;
-    updateGallery();
-    clearInterval(galleryTimer);
-    galleryTimer = setInterval(() => galleryGoTo(galleryIdx + 1), 4000);
-  }
-
-  function galleryPrev() { galleryGoTo(galleryIdx - 1); }
-  function galleryNext() { galleryGoTo(galleryIdx + 1); }
-
-  function buildGallery() {
-    const thumbs = document.getElementById("gallery-thumbs");
-    const dots   = document.getElementById("gallery-dots");
-    thumbs.innerHTML = GALLERY.map((g,i) =>
-      `<button class="thumb-btn${i===0?' active':''}" onclick="galleryGoTo(${i})">
-        <img src="${g.url}" alt="${g.caption}" style="width:100%;height:100%;object-fit:cover;display:block"/>
-      </button>`
-    ).join("");
-    dots.innerHTML = GALLERY.map((_,i) =>
-      `<button class="dot-btn${i===0?' active':''}" onclick="galleryGoTo(${i})"></button>`
-    ).join("");
-    updateGallery();
-    galleryTimer = setInterval(() => galleryGoTo(galleryIdx + 1), 4000);
-  }
-
-  // ── Lightbox ──
-  let lbIdx = 0;
-  function openLightbox() {
-    lbIdx = galleryIdx;
-    updateLightbox();
-    document.getElementById("lightbox").classList.add("open");
-  }
-  function closeLightbox() { document.getElementById("lightbox").classList.remove("open"); }
-  function lbPrev() { lbIdx = (lbIdx - 1 + GALLERY.length) % GALLERY.length; updateLightbox(); }
-  function lbNext() { lbIdx = (lbIdx + 1) % GALLERY.length; updateLightbox(); }
-  function updateLightbox() {
-    document.getElementById("lb-img").src = GALLERY[lbIdx].url;
-    document.getElementById("lb-caption").textContent = GALLERY[lbIdx].caption;
-  }
-  document.addEventListener("keydown", e => {
-    if (!document.getElementById("lightbox").classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") lbPrev();
-    if (e.key === "ArrowRight") lbNext();
+// ── Itinerary ─────────────────────────────────────────────────────────────────
+(function() {
+  const wrap = document.getElementById("itinerary-wrap");
+  ITINERARY.forEach((item, i) => {
+    const isLeft = i % 2 === 0;
+    const cardHtml = `<div style="border-radius:2px;padding:.875rem;max-width:260px;width:100%;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.25);backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.3);${isLeft?"border-right:3px solid #FFD700;":"border-left:3px solid rgba(255,241,176,.6);"}">
+      <div style="font-family:'Bodoni Moda',serif;font-size:.82rem;font-weight:700;color:#FFD700;margin-bottom:4px;">${item.name}</div>
+      <p style="font-size:.72rem;color:rgba(255,215,0,.5);line-height:1.55;margin:0;">${item.desc}</p>
+    </div>`;
+    const iconHtml = `<div style="display:flex;flex-direction:column;align-items:center;z-index:10;padding-top:4px;">
+      <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;background:linear-gradient(145deg,#FFD700,#8B6914);box-shadow:0 0 18px rgba(255,215,0,.6);transform:rotate(45deg);border-radius:4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-45deg);"><path d="${item.icon}"/></svg>
+      </div>
+      <span style="margin-top:8px;white-space:nowrap;color:rgba(255,215,0,.7);font-family:'Bebas Neue',sans-serif;font-size:.55rem;letter-spacing:.2em;">${item.time}</span>
+    </div>`;
+    const row = document.createElement("div");
+    row.style.cssText = "display:grid;grid-template-columns:1fr 52px 1fr;align-items:start;margin-bottom:2.25rem;";
+    row.innerHTML = `
+      <div style="display:flex;justify-content:flex-end;padding-right:1rem;">${isLeft ? cardHtml : '<div></div>'}</div>
+      ${iconHtml}
+      <div style="display:flex;justify-content:flex-start;padding-left:1rem;">${!isLeft ? cardHtml : '<div></div>'}</div>
+    `;
+    wrap.appendChild(row);
   });
 
-  // ── Gifts ──
-  function buildGifts() {
-    const c = document.getElementById("gifts-container");
-    c.innerHTML = GIFTS.map(g => `
-      <div style="border-radius:2px;overflow:hidden;background:rgba(10,7,0,.88);border:1px solid rgba(255,215,0,.2);backdrop-filter:blur(12px)">
-        <button onclick="toggleGift('${g.key}')" style="display:flex;align-items:center;gap:1rem;width:100%;text-align:left;background:transparent;border:none;padding:1.25rem 1.5rem;cursor:pointer">
-          <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:${g.grad};box-shadow:0 6px 20px rgba(0,0,0,.3)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-          </div>
-          <div style="flex:1">
-            <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700">${g.label}</div>
-            <div style="font-size:.7rem;color:rgba(255,215,0,.5);margin-top:2px">${g.sub}</div>
-          </div>
-          <svg id="chev-${g.key}" class="gift-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,215,0,.6)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="gift-body" id="body-${g.key}">
-          <div style="padding:0 1.5rem 1.5rem">
-            <div style="border-radius:2px;padding:1.5rem;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2)">
-              <p style="text-align:center;font-family:'Great Vibes',cursive;font-size:1.6rem;color:#FFD700;text-shadow:0 0 14px rgba(255,215,0,.4);margin:0 0 1.25rem">Regalar con ${g.label}</p>
-              <input class="gold-input" type="text" id="name-${g.key}" placeholder="Tu nombre" />
-              <input class="gold-input" type="number" id="amt-${g.key}" placeholder="Monto (COP)" />
-              <button class="btn-gold" onclick="genQr('${g.key}')" style="margin-bottom:.5rem">Generar QR</button>
-              <div id="qr-${g.key}" style="text-align:center;margin-top:1.5rem;display:none">
-                <div style="display:inline-block;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);border:2px solid rgba(255,215,0,.4)">
-                  <canvas id="canvas-${g.key}"></canvas>
-                </div>
+  // Animate spine on scroll
+  const spine = document.getElementById("spine");
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { spine.style.transform = "translateX(-50%) scaleY(1)"; obs.disconnect(); }
+  }, { rootMargin: "-40px" });
+  obs.observe(spine);
+})();
+
+// ── Gallery ───────────────────────────────────────────────────────────────────
+let galleryIdx = 0;
+let galleryAuto = null;
+
+function renderGallery() {
+  const img = document.getElementById("gallery-main");
+  img.src = GALLERY[galleryIdx].url;
+  img.alt = GALLERY[galleryIdx].caption;
+  document.getElementById("gallery-caption").textContent = GALLERY[galleryIdx].caption;
+  document.getElementById("gallery-counter").textContent = (galleryIdx+1) + " / " + GALLERY.length;
+  document.getElementById("gallery-progress").style.width = ((galleryIdx+1)/GALLERY.length*100).toFixed(1) + "%";
+
+  // Thumbs
+  const thumbs = document.getElementById("gallery-thumbs");
+  thumbs.innerHTML = "";
+  GALLERY.forEach((g,i) => {
+    const btn = document.createElement("button");
+    btn.className = "thumb-btn";
+    btn.style.border = i===galleryIdx ? "2.5px solid #FFD700" : "2px solid rgba(255,215,0,.15)";
+    btn.style.opacity = i===galleryIdx ? "1" : "0.5";
+    btn.style.boxShadow = i===galleryIdx ? "0 0 14px rgba(255,215,0,.5)" : "none";
+    btn.innerHTML = `<img src="${g.url}" alt="${g.caption}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+    btn.onclick = () => { stopGalleryAuto(); goGallery(i); };
+    thumbs.appendChild(btn);
+  });
+
+  // Dots
+  const dots = document.getElementById("gallery-dots");
+  dots.innerHTML = "";
+  GALLERY.forEach((_,i) => {
+    const btn = document.createElement("button");
+    btn.style.cssText = `height:4px;border-radius:3px;border:none;padding:0;cursor:pointer;background:${i===galleryIdx?"#FFD700":"rgba(255,215,0,.25)"};width:${i===galleryIdx?"28px":"6px"};box-shadow:${i===galleryIdx?"0 0 8px rgba(255,215,0,.6)":"none"};transition:all .25s;`;
+    btn.onclick = () => { stopGalleryAuto(); goGallery(i); };
+    dots.appendChild(btn);
+  });
+}
+
+function goGallery(i) {
+  galleryIdx = (i + GALLERY.length) % GALLERY.length;
+  renderGallery();
+  startGalleryAuto();
+}
+
+function nextGallery() { stopGalleryAuto(); goGallery(galleryIdx + 1); }
+function prevGallery() { stopGalleryAuto(); goGallery(galleryIdx - 1); }
+
+function startGalleryAuto() {
+  stopGalleryAuto();
+  galleryAuto = setInterval(() => goGallery(galleryIdx + 1), 4000);
+}
+function stopGalleryAuto() { if (galleryAuto) { clearInterval(galleryAuto); galleryAuto = null; } }
+
+renderGallery();
+startGalleryAuto();
+
+// Lightbox
+let lbIdx = 0;
+function openLightbox(i) { lbIdx = i; renderLightbox(); document.getElementById("lightbox").classList.add("active"); }
+function closeLightbox() { document.getElementById("lightbox").classList.remove("active"); }
+function lbPrev() { lbIdx = (lbIdx - 1 + GALLERY.length) % GALLERY.length; renderLightbox(); }
+function lbNext() { lbIdx = (lbIdx + 1) % GALLERY.length; renderLightbox(); }
+function renderLightbox() {
+  document.getElementById("lb-img").src = GALLERY[lbIdx].url;
+  document.getElementById("lb-caption").textContent = GALLERY[lbIdx].caption;
+}
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("lightbox").classList.contains("active")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") lbPrev();
+  if (e.key === "ArrowRight") lbNext();
+});
+
+// ── Gifts ─────────────────────────────────────────────────────────────────────
+(function() {
+  const container = document.getElementById("gifts-container");
+  GIFTS.forEach(gift => {
+    const panel = document.createElement("div");
+    panel.className = "gift-panel";
+    panel.innerHTML = `
+      <button class="gift-header" onclick="toggleGift(this)">
+        <div style="flex-shrink:0;border-radius:2px;display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:${gift.grad};box-shadow:0 6px 20px rgba(0,0,0,.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(10,7,0,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:'Bodoni Moda',serif;font-size:1rem;font-weight:700;color:#FFD700;">${gift.label}</div>
+          <div style="font-size:.7rem;color:rgba(255,215,0,.5);margin-top:2px;">${gift.sub}</div>
+        </div>
+        <svg class="chevron" style="transition:transform .35s cubic-bezier(.22,1,.36,1);" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,215,0,.6)" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="gift-body">
+        <div style="padding:0 1.5rem 1.5rem;">
+          <div style="border-radius:2px;padding:1.5rem;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);">
+            <p style="text-align:center;font-family:'Great Vibes',cursive;font-size:1.6rem;color:#FFD700;text-shadow:0 0 14px rgba(255,215,0,.4);margin:0 0 1.25rem;">Regalar con ${gift.label}</p>
+            <input type="text" placeholder="Tu nombre" class="rsvp-input" id="gift-name-${gift.key}" />
+            <input type="number" placeholder="Monto (COP)" class="rsvp-input" id="gift-amount-${gift.key}" />
+            <button class="btn-gold" onclick="generateGiftQr('${gift.key}','${gift.label}')" style="margin-bottom:.5rem;">Generar QR</button>
+            <div id="qr-wrap-${gift.key}" style="display:none;text-align:center;margin-top:1.5rem;">
+              <div style="display:inline-block;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);border:2px solid rgba(255,215,0,.4);">
+                <div id="qr-${gift.key}"></div>
               </div>
             </div>
           </div>
         </div>
-      </div>`).join("");
-  }
+      </div>
+    `;
+    container.appendChild(panel);
+  });
+})();
 
-  function toggleGift(key) {
-    const body = document.getElementById(`body-${key}`);
-    const chev = document.getElementById(`chev-${key}`);
-    body.classList.toggle("open");
-    chev.classList.toggle("open");
-  }
+function toggleGift(btn) {
+  const panel = btn.closest(".gift-panel");
+  const body = panel.querySelector(".gift-body");
+  const chevron = panel.querySelector(".chevron");
+  const isOpen = body.classList.contains("open");
+  body.classList.toggle("open");
+  panel.classList.toggle("open");
+  chevron.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+}
 
-  function genQr(key) {
-    const name = document.getElementById(`name-${key}`).value || "Invitado";
-    const amt  = document.getElementById(`amt-${key}`).value  || "0";
-    const wrap = document.getElementById(`qr-${key}`);
-    const canvas = document.getElementById(`canvas-${key}`);
-    canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
-    QRCode.toCanvas(canvas, `PAGO ${key.toUpperCase()} | ${name} | COP ${amt}`, {
-      width: 200,
-      color: { dark: "#1a1200", light: "#FFD700" }
-    }, () => { wrap.style.display = "block"; });
+function generateGiftQr(key, label) {
+  const name = document.getElementById("gift-name-" + key).value || "Invitado";
+  const amount = document.getElementById("gift-amount-" + key).value || "0";
+  const data = "PAGO " + label.toUpperCase() + " | " + name + " | COP " + amount;
+  const wrap = document.getElementById("qr-wrap-" + key);
+  const qrEl = document.getElementById("qr-" + key);
+  qrEl.innerHTML = "";
+  if (typeof QRCode !== "undefined") {
+    new QRCode(qrEl, { text: data, width: 200, height: 200, colorDark: "#1a1200", colorLight: "#FFD700" });
+  } else {
+    qrEl.textContent = data;
   }
+  wrap.style.display = "block";
+}
 
-  // ── RSVP ──
-  let rsvpAttendance = "yes";
-  function setAttendance(val) {
-    rsvpAttendance = val;
-    document.getElementById("btn-yes").classList.toggle("active", val === "yes");
-    document.getElementById("btn-no").classList.toggle("active",  val === "no");
+// ── RSVP ─────────────────────────────────────────────────────────────────────
+let attendance = "yes";
+function setAttendance(v) {
+  attendance = v;
+  const btnYes = document.getElementById("btn-yes");
+  const btnNo = document.getElementById("btn-no");
+  if (v === "yes") {
+    btnYes.style.border = "1px solid #FFD700"; btnYes.style.background = "rgba(255,215,0,.15)"; btnYes.style.color = "#FFD700"; btnYes.style.boxShadow = "0 4px 20px rgba(255,215,0,.25)";
+    btnNo.style.border = "1px solid rgba(255,215,0,.2)"; btnNo.style.background = "rgba(255,215,0,.04)"; btnNo.style.color = "rgba(255,215,0,.45)"; btnNo.style.boxShadow = "none";
+  } else {
+    btnNo.style.border = "1px solid #FFD700"; btnNo.style.background = "rgba(255,215,0,.15)"; btnNo.style.color = "#FFD700"; btnNo.style.boxShadow = "0 4px 20px rgba(255,215,0,.25)";
+    btnYes.style.border = "1px solid rgba(255,215,0,.2)"; btnYes.style.background = "rgba(255,215,0,.04)"; btnYes.style.color = "rgba(255,215,0,.45)"; btnYes.style.boxShadow = "none";
   }
-  function submitRsvp() {
-    const name = document.getElementById("rsvp-name").value.trim();
-    const err  = document.getElementById("rsvp-error");
-    if (!name) { err.textContent = "Por favor ingresa tu nombre"; err.style.display = "block"; return; }
-    err.style.display = "none";
-    setTimeout(() => {
-      document.getElementById("rsvp-form").style.display = "none";
-      document.getElementById("rsvp-success").style.display = "block";
-    }, 300);
-  }
+}
 
-  // ── Footer year ──
-  document.getElementById("footer-year").textContent = `© ${new Date().getFullYear()} Gueka Ideas · Todos los derechos reservados`;
-
-  // ── Init ──
-  function initAll() {
-    buildTicker();
-    startCountdown();
-    buildItinerary();
-    buildGallery();
-    buildGifts();
-  }
+function submitRsvp() {
+  const name = document.getElementById("rsvp-name").value.trim();
+  const errEl = document.getElementById("rsvp-error");
+  if (!name) { errEl.textContent = "Por favor ingresa tu nombre"; errEl.style.display = "block"; return; }
+  errEl.style.display = "none";
+  setTimeout(() => {
+    document.getElementById("rsvp-form").style.display = "none";
+    document.getElementById("rsvp-success").style.display = "block";
+  }, 300);
+}
 </script>
 </body>
 </html>
