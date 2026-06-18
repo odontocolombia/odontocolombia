@@ -1,1042 +1,959 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Villamil Finca Raíz — Bogotá, Colombia</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofía & Andrés — Invitación de Boda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #05030a !important; font-family: 'Montserrat', sans-serif; color: #f5ede0; }
+    input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    button { font-family: 'Montserrat', sans-serif; }
 
-  :root {
-    --bg:        #0d0a14;
-    --card:      #13101d;
-    --border:    rgba(120,90,200,0.18);
-    --primary:   #c9a84c;
-    --primary-fg:#0d0a14;
-    --accent:    #7c3aed;
-    --fg:        #f0ecfa;
-    --muted:     #8878a8;
-    --input-bg:  #1a1526;
-  }
+    /* Gold gradient text utility */
+    .gold-text {
+      background: linear-gradient(90deg,#c9a84c 0%,#e8d08a 38%,#fffbe8 52%,#e8d08a 66%,#c9a84c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-  html { scroll-behavior: smooth; }
+    /* Splash */
+    #splash {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.25rem;
+      background: radial-gradient(ellipse at 50% 45%,#12090e 0%,#05030a 100%);
+      cursor: pointer;
+      transition: opacity .7s, transform .7s;
+    }
+    #splash.hide { opacity: 0; transform: scale(.93); pointer-events: none; }
+    .splash-card {
+      position: relative;
+      width: min(370px,92vw);
+      background: linear-gradient(160deg,#1e1308 0%,#130d06 40%,#09060e 100%);
+      border-radius: 20px;
+      box-shadow: 0 0 0 1px rgba(201,168,76,.22),0 0 120px rgba(201,168,76,.18),0 40px 100px rgba(0,0,0,.9),inset 0 1px 0 rgba(201,168,76,.12);
+      cursor: default;
+    }
+    .splash-bar-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg,transparent 3%,#7a5c10 18%,#c9a84c 32%,#e8d08a 50%,#c9a84c 68%,#7a5c10 82%,transparent 97%);
+    }
+    .splash-bar-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(90deg,transparent 3%,#7a5c10 18%,#c9a84c 32%,#e8d08a 50%,#c9a84c 68%,#7a5c10 82%,transparent 97%);
+    }
+    .splash-inner { padding: 2.75rem 2rem 2.5rem; position: relative; overflow: hidden; border-radius: 20px; }
+    .corner { position: absolute; width: 22px; height: 22px; }
+    .corner-tl { top: 20px; left: 20px; border-top: 1.5px solid rgba(201,168,76,.6); border-left: 1.5px solid rgba(201,168,76,.6); }
+    .corner-tr { top: 20px; right: 20px; border-top: 1.5px solid rgba(201,168,76,.6); border-right: 1.5px solid rgba(201,168,76,.6); }
+    .corner-bl { bottom: 20px; left: 20px; border-bottom: 1.5px solid rgba(201,168,76,.6); border-left: 1.5px solid rgba(201,168,76,.6); }
+    .corner-br { bottom: 20px; right: 20px; border-bottom: 1.5px solid rgba(201,168,76,.6); border-right: 1.5px solid rgba(201,168,76,.6); }
+    .ring {
+      position: absolute; border-radius: 50%; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      border: 1px solid rgba(201,168,76,.1); pointer-events: none;
+    }
+    .open-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .9rem 2.75rem;
+      font-size: .55rem; letter-spacing: .25em; font-weight: 700;
+      background: linear-gradient(135deg,#7a5c10,#c9a84c,#e8d08a,#c9a84c,#7a5c10);
+      color: #05030a; border: none; border-radius: 50px; cursor: pointer;
+      box-shadow: 0 4px 30px rgba(201,168,76,.35),0 0 0 1px rgba(201,168,76,.2);
+      transition: transform .2s;
+    }
+    .open-btn:hover { transform: scale(1.05); }
 
-  body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    overflow-x: hidden;
-  }
+    /* Main content */
+    #main { display: none; max-width: 440px; margin: 0 auto; box-shadow: 0 0 300px rgba(0,0,0,.99); }
+    #main.show { display: block; animation: fadeIn .8s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+    /* Gold Line */
+    .gold-line { height: 1px; background: linear-gradient(90deg,transparent,#c9a84c,#e8d08a,#c9a84c,transparent); }
+    .gold-line-thick { height: 2px; background: linear-gradient(90deg,transparent,#c9a84c,#e8d08a,#c9a84c,transparent); }
 
-  /* ── UTILITY ── */
-  .serif { font-family: 'Playfair Display', serif; }
-  .italic { font-style: italic; }
-  .gold { color: var(--primary); }
-  .muted { color: var(--muted); }
-  .upper { text-transform: uppercase; letter-spacing: .15em; }
-  .pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(124,58,237,.18); border: 1px solid rgba(124,58,237,.4);
-    border-radius: 999px; padding: 6px 16px;
-  }
-  .pill span { color: var(--primary); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); animation: pulse 2s infinite; flex-shrink: 0; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    /* Section header pattern */
+    .sec-eyebrow { font-family: 'Montserrat',sans-serif; font-size: .42rem; letter-spacing: .7em; color: rgba(201,168,76,.35); font-weight: 600; margin-bottom: .7rem; }
+    .sec-ornament { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: .85rem; }
+    .sec-ornament-line-l { width: 36px; height: 1px; background: linear-gradient(90deg,transparent,rgba(201,168,76,.4)); }
+    .sec-ornament-line-r { width: 36px; height: 1px; background: linear-gradient(90deg,rgba(201,168,76,.4),transparent); }
+    .sec-ornament-star { font-family: 'Cormorant Garamond',serif; font-size: 1rem; color: rgba(201,168,76,.5); }
+    .sec-title { font-family: 'Cormorant Garamond',serif; font-size: clamp(2rem,7vw,2.8rem); font-weight: 300; letter-spacing: .18em; line-height: 1; margin: 0; }
+    .sec-subtitle { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: .88rem; color: rgba(201,168,76,.35); margin-top: .6rem; letter-spacing: .08em; }
 
-  img { display: block; max-width: 100%; }
-  a { text-decoration: none; color: inherit; }
-  button { font-family: inherit; cursor: pointer; background: none; border: none; }
+    /* Ticker */
+    #ticker-wrap {
+      background: #05030a;
+      border-top: 1px solid rgba(201,168,76,.1); border-bottom: 1px solid rgba(201,168,76,.1);
+      padding: .85rem 1.5rem; overflow: hidden; perspective: 600px;
+    }
+    #ticker {
+      font-size: .6rem; letter-spacing: .38em; color: rgba(201,168,76,.7);
+      font-weight: 700; white-space: nowrap; line-height: 1.6;
+    }
+    .ticker-char-3d { display: inline-block; position: relative; transform-style: preserve-3d; transform-origin: 50% 50% 1rem; }
+    .face { position: absolute; left: 0; font-style: normal; }
+    .face-top { bottom: 100%; transform-origin: 50% 100%; transform: rotateX(-90deg); }
+    .face-bottom { top: 100%; transform-origin: 50% 0%; transform: rotateX(90deg); }
+    .face-front { font-style: normal; }
 
-  /* ── NAVBAR ── */
-  nav.main-nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(13,10,20,.88);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    transition: background .4s, box-shadow .4s;
-  }
-  nav.main-nav.scrolled {
-    background: rgba(13,10,20,.97);
-    box-shadow: 0 8px 40px rgba(0,0,0,.35);
-  }
-  .nav-inner {
-    max-width: 1280px; margin: 0 auto;
-    padding: 0 32px;
-    height: 68px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  }
-  .nav-logo { height: 48px; object-fit: contain; cursor: pointer; flex-shrink: 0; }
-  .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-  .nav-links li button {
-    position: relative; color: var(--muted);
-    font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
-    padding: 8px 16px; transition: color .2s;
-  }
-  .nav-links li button:hover { color: var(--fg); }
-  .nav-links li button::after {
-    content:''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 0; height: 1px; background: var(--primary); transition: width .3s;
-  }
-  .nav-links li button:hover::after { width: 16px; }
-  .btn-nav {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--primary); color: var(--primary-fg);
-    padding: 10px 20px; font-size: 11px; font-weight: 800;
-    letter-spacing: .15em; text-transform: uppercase;
-    border-radius: 999px; transition: all .2s; flex-shrink: 0;
-  }
-  .btn-nav:hover { opacity: .88; box-shadow: 0 4px 20px rgba(201,168,76,.3); }
-  .hamburger { display: none; color: var(--fg); padding: 4px; }
+    /* Countdown */
+    .cd-box-inner {
+      width: 74px; height: 82px;
+      background: linear-gradient(170deg,#1e1608,#05030a);
+      border: 1px solid rgba(201,168,76,.55); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 1px rgba(201,168,76,.06),0 0 30px rgba(201,168,76,.13),inset 0 1px 0 rgba(201,168,76,.15);
+      position: relative; overflow: hidden;
+    }
+    .cd-num { font-family: 'Cormorant Garamond',serif; font-size: 2.5rem; color: #e8d08a; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+    .cd-label { font-size: .42rem; letter-spacing: .5em; color: rgba(201,168,76,.38); margin-top: 8px; }
+    .cd-sep { font-family: 'Cormorant Garamond',serif; font-size: 2.6rem; color: rgba(201,168,76,.4); padding-bottom: 1.9rem; line-height: 1.2; padding-top: 4px; }
 
-  /* Mobile menu */
-  .mobile-menu {
-    display: none; position: fixed; inset: 0; z-index: 99;
-    background: rgba(13,10,20,.98); backdrop-filter: blur(24px);
-    flex-direction: column; align-items: center; justify-content: center; gap: 24px;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu-glow {
-    position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
-    width: 280px; height: 280px; background: rgba(124,58,237,.2);
-    border-radius: 50%; filter: blur(80px); pointer-events: none;
-  }
-  .mobile-menu a, .mobile-menu button {
-    color: rgba(240,236,250,.8); font-size: 32px;
-    font-family: 'Playfair Display', serif; font-weight: 900;
-    transition: color .2s; position: relative; z-index: 1;
-  }
-  .mobile-menu a:hover, .mobile-menu button:hover { color: var(--primary); }
-  .mobile-btn-wa {
-    margin-top: 16px; background: var(--primary); color: var(--primary-fg) !important;
-    font-size: 13px !important; font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-weight: 800 !important; letter-spacing: .15em;
-    text-transform: uppercase; padding: 14px 40px; border-radius: 999px;
-    box-shadow: 0 8px 24px rgba(201,168,76,.3);
-  }
-  .close-btn { position: absolute; top: 20px; right: 20px; color: var(--fg); font-size: 28px; z-index: 110; }
+    /* Gallery */
+    #gallery-main {
+      position: relative; height: 370px; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(201,168,76,.4);
+      box-shadow: 0 0 0 6px rgba(201,168,76,.04),0 0 100px rgba(201,168,76,.12);
+      cursor: pointer;
+    }
+    #gallery-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .5s; }
+    .gal-vignette {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to top,rgba(5,3,10,.92) 0%,rgba(5,3,10,.12) 50%,transparent 100%);
+    }
+    .gal-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px;
+      background: rgba(5,3,10,.8); border: 1px solid rgba(201,168,76,.35);
+      border-radius: 8px; color: #c9a84c; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; z-index: 10;
+    }
+    #gal-prev { left: 14px; } #gal-next { right: 14px; }
+    #gal-counter {
+      position: absolute; top: 15px; right: 15px;
+      background: rgba(5,3,10,.88); border: 1px solid rgba(201,168,76,.4);
+      border-radius: 6px; padding: 5px 14px;
+      font-size: .55rem; color: #c9a84c; font-weight: 700;
+    }
+    #gal-progress-bar { height: 3px; background: rgba(201,168,76,.1); margin-top: 12px; overflow: hidden; border-radius: 2px; }
+    #gal-progress-fill { height: 100%; background: linear-gradient(90deg,#c9a84c,#e8d08a); border-radius: 2px; transition: width .4s; }
+    .gal-thumb-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 7px; margin-top: 10px; }
+    .gal-thumb { height: 48px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; opacity: .4; transition: opacity .2s; cursor: pointer; padding: 0; background: none; }
+    .gal-thumb.active { border-color: #c9a84c; opacity: 1; }
+    .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* ── HERO ── */
-  #inicio {
-    position: relative; min-height: 92vh;
-    display: flex; align-items: center; overflow: hidden;
-  }
-  .hero-bg { position: absolute; inset: 0; }
-  .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-bg::after {
-    content:''; position: absolute; inset: 0;
-    background: linear-gradient(to right, var(--bg) 0%, rgba(13,10,20,.85) 55%, rgba(13,10,20,.3) 100%),
-                linear-gradient(to top, rgba(13,10,20,.9) 0%, transparent 50%, rgba(13,10,20,.5) 100%),
-                rgba(124,58,237,.1);
-  }
-  .hero-orb1 {
-    position: absolute; top: 25%; left: 33%;
-    width: 380px; height: 380px;
-    background: rgba(124,58,237,.2); border-radius: 50%; filter: blur(100px); pointer-events: none;
-  }
-  .hero-orb2 {
-    position: absolute; bottom: 25%; left: 25%;
-    width: 260px; height: 260px;
-    background: rgba(201,168,76,.1); border-radius: 50%; filter: blur(80px); pointer-events: none;
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 1280px; margin: 0 auto; padding: 40px 20px 80px; width: 100%;
-  }
-  .hero-logo {
-    display: flex; justify-content: center;
-    margin-bottom: 28px;
-  }
-  .hero-logo img { height: 160px; width: auto; object-fit: contain; }
-  .hero-inner { max-width: 680px; }
-  .hero-badge { display: flex; justify-content: center; margin-bottom: 20px; }
-  .hero-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 6vw, 5.2rem);
-    font-weight: 900; line-height: 1.05;
-    margin-bottom: 20px; text-align: center;
-  }
-  .hero-h1 .underline-svg { position: relative; display: inline-block; }
-  .hero-h1 .underline-svg svg { position: absolute; bottom: -8px; left: 0; width: 100%; }
-  .hero-p {
-    color: var(--muted); font-size: 17px; line-height: 1.7;
-    margin-bottom: 36px; font-weight: 300; max-width: 540px;
-    text-align: center; margin-left: auto; margin-right: auto;
-  }
-  .hero-btns {
-    display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px;
-  }
-  .btn-primary {
-    background: var(--primary); color: var(--primary-fg);
-    padding: 16px 32px; font-size: 13px; font-weight: 800;
-    letter-spacing: .12em; text-transform: uppercase;
-    border-radius: 999px; transition: all .2s; text-align: center;
-    box-shadow: 0 8px 32px rgba(201,168,76,.3);
-  }
-  .btn-primary:hover { opacity: .9; box-shadow: 0 12px 40px rgba(201,168,76,.5); transform: translateY(-2px); }
-  .btn-ghost {
-    background: rgba(124,58,237,.2); color: var(--fg);
-    border: 1px solid rgba(124,58,237,.5);
-    padding: 16px 32px; font-size: 13px; font-weight: 800;
-    letter-spacing: .12em; text-transform: uppercase;
-    border-radius: 999px; transition: all .2s; text-align: center;
-  }
-  .btn-ghost:hover { background: rgba(124,58,237,.3); border-color: rgba(124,58,237,.8); }
-  .hero-stats {
-    display: flex; justify-content: space-between;
-    padding-top: 32px; border-top: 1px solid rgba(120,90,200,.2);
-  }
-  .stat-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem; color: var(--primary); font-weight: 900; line-height: 1;
-  }
-  .stat-lbl { color: var(--muted); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; margin-top: 4px; }
-  .stat-item { text-align: center; }
-  .scroll-cue {
-    display: none; position: absolute; bottom: 32px; left: 48px;
-    flex-direction: column; align-items: center; gap: 8px;
-  }
-  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,.5)); }
-  .scroll-txt { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; }
+    /* Lightbox */
+    #lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.97); display: none; align-items: center; justify-content: center; padding: 2rem; }
+    #lightbox.open { display: flex; animation: fadeIn .3s ease; }
+    #lightbox-img { width: 100%; border: 1px solid rgba(201,168,76,.4); border-radius: 10px; max-height: 72vh; object-fit: cover; display: block; }
 
-  /* ── SECTION SHARED ── */
-  .section { padding: 80px 20px; position: relative; overflow: hidden; }
-  .max-w { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-  .section-h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 900; line-height: 1.1;
-  }
-  .glow {
-    position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none;
-  }
+    /* Gift accordion */
+    .gift-card { border-radius: 14px; overflow: hidden; border: 1px solid rgba(201,168,76,.14); box-shadow: 0 4px 20px rgba(0,0,0,.3); transition: border-color .35s, box-shadow .35s; margin-bottom: .75rem; }
+    .gift-header { display: flex; align-items: center; gap: 1rem; width: 100%; text-align: left; background: linear-gradient(135deg,rgba(22,15,30,.98),rgba(5,3,10,.98)); border: none; padding: 1.15rem 1.25rem; cursor: pointer; transition: background .35s; }
+    .gift-body { overflow: hidden; max-height: 0; transition: max-height .35s ease; }
+    .gift-body.open { max-height: 400px; }
+    .gift-body-inner { padding: 0 1.25rem 1.25rem; background: linear-gradient(180deg,rgba(5,3,10,.98) 0%,rgba(14,11,21,.98) 100%); border-top: 1px solid rgba(201,168,76,.15); }
+    .gift-number-row { background: rgba(201,168,76,.04); border: 1px solid rgba(201,168,76,.2); border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: .65rem; }
+    .copy-btn { display: inline-flex; align-items: center; gap: .35rem; padding: .38rem .8rem; border-radius: 20px; border: 1px solid rgba(201,168,76,.35); background: transparent; color: rgba(201,168,76,.45); font-size: .38rem; letter-spacing: .15em; font-weight: 600; cursor: pointer; transition: all .25s; }
+    .copy-btn.copied { background: rgba(201,168,76,.22); color: #c9a84c; }
 
-  /* ── SERVICES ── */
-  #servicios .glow { top: 0; right: 0; width: 600px; height: 600px; background: rgba(124,58,237,.1); }
-  .services-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-  .services-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  .service-card {
-    position: relative; background: var(--card);
-    border: 1px solid var(--border); border-radius: 20px;
-    padding: 28px; overflow: hidden; transition: all .3s; cursor: default;
-  }
-  .service-card:hover { border-color: rgba(124,58,237,.6); background: rgba(124,58,237,.05); }
-  .card-num {
-    position: absolute; top: 16px; right: 20px;
-    font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 900;
-    color: rgba(124,58,237,.1); line-height: 1; user-select: none; transition: color .3s;
-  }
-  .service-card:hover .card-num { color: rgba(124,58,237,.18); }
-  .card-icon {
-    position: relative; z-index: 1;
-    width: 48px; height: 48px;
-    background: rgba(124,58,237,.2); border: 1px solid rgba(124,58,237,.3);
-    border-radius: 14px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px; transition: all .3s;
-  }
-  .service-card:hover .card-icon { background: rgba(124,58,237,.3); transform: scale(1.1); }
-  .card-icon svg { color: var(--primary); }
-  .card-title { position: relative; z-index: 1; font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-  .card-desc { position: relative; z-index: 1; color: var(--muted); font-size: 13.5px; line-height: 1.65; font-weight: 300; }
-  .card-line {
-    position: absolute; bottom: 0; left: 0;
-    height: 2px; width: 0;
-    background: linear-gradient(to right, var(--accent), var(--primary));
-    border-radius: 0 0 20px 20px; transition: width .5s;
-  }
-  .service-card:hover .card-line { width: 100%; }
+    /* RSVP Form */
+    .rsvp-input {
+      display: block; width: 100%; padding: 1rem 1.15rem;
+      background: #0e0b15; border: 1px solid rgba(201,168,76,.18);
+      color: #f5ede0; font-size: .76rem; border-radius: 8px; outline: none;
+      font-family: 'Montserrat',sans-serif;
+    }
+    .rsvp-input::placeholder { color: rgba(201,168,76,.25); }
+    .rsvp-label { display: block; font-size: .5rem; letter-spacing: .35em; color: rgba(201,168,76,.35); margin-bottom: 8px; font-weight: 600; }
+    .attend-btn { padding: 1.05rem; font-size: .55rem; letter-spacing: .14em; border-radius: 8px; cursor: pointer; border: 1px solid rgba(201,168,76,.16); background: transparent; color: rgba(201,168,76,.32); font-weight: 400; font-family: 'Montserrat',sans-serif; transition: all .2s; flex: 1; }
+    .attend-btn.active { border: 1.5px solid #c9a84c; background: linear-gradient(135deg,rgba(201,168,76,.14),rgba(201,168,76,.28)); color: #c9a84c; font-weight: 700; }
+    .submit-btn {
+      width: 100%; padding: 1.15rem; font-size: .6rem; letter-spacing: .22em;
+      background: linear-gradient(135deg,#7a5c10,#c9a84c,#e8d08a,#c9a84c,#7a5c10);
+      border: none; border-radius: 8px; color: #05030a; font-weight: 800;
+      box-shadow: 0 6px 40px rgba(201,168,76,.3); cursor: pointer;
+      font-family: 'Montserrat',sans-serif; transition: transform .2s, box-shadow .2s;
+    }
+    .submit-btn:hover { transform: scale(1.02); }
+    .submit-btn:disabled { background: rgba(201,168,76,.3); cursor: not-allowed; }
 
-  /* ── PROPERTIES ── */
-  #propiedades { background: var(--bg); }
-  #propiedades .glow { bottom: 0; left: 0; width: 500px; height: 500px; background: rgba(201,168,76,.08); }
-  .props-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
-  .props-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-  .prop-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; overflow: hidden; transition: all .4s;
-  }
-  .prop-card:hover { border-color: rgba(124,58,237,.5); box-shadow: 0 20px 60px rgba(124,58,237,.1); }
-  .prop-img { position: relative; height: 224px; overflow: hidden; }
-  .prop-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s; }
-  .prop-card:hover .prop-img img { transform: scale(1.08); }
-  .prop-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.1) 60%, transparent 100%); }
-  .prop-img-hover { position: absolute; inset: 0; background: rgba(124,58,237,0); transition: background .5s; }
-  .prop-card:hover .prop-img-hover { background: rgba(124,58,237,.1); }
-  .badge {
-    position: absolute; top: 16px; left: 16px;
-    font-size: 11px; font-weight: 700; letter-spacing: .08em;
-    padding: 6px 12px; border-radius: 999px;
-  }
-  .badge-venta { background: var(--primary); color: var(--primary-fg); box-shadow: 0 4px 12px rgba(201,168,76,.3); }
-  .badge-arriendo { background: rgba(124,58,237,.8); color: #fff; border: 1px solid rgba(124,58,237,.5); }
-  .prop-price {
-    position: absolute; bottom: 16px; left: 16px; right: 16px;
-    color: #fff; font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,.6);
-  }
-  .prop-body { padding: 20px; }
-  .prop-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .prop-loc { color: var(--muted); font-size: 12px; display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
-  .prop-loc svg { color: var(--primary); flex-shrink: 0; }
-  .prop-specs {
-    display: flex; gap: 16px; font-size: 12px; color: var(--muted);
-    border-top: 1px solid var(--border); padding-top: 14px; margin-bottom: 16px;
-  }
-  .spec { display: flex; align-items: center; gap: 6px; }
-  .spec svg { color: var(--accent); }
-  .btn-details {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%; padding: 10px; background: rgba(124,58,237,.15);
-    border: 1px solid rgba(124,58,237,.3); border-radius: 14px;
-    color: var(--fg); font-size: 12px; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; transition: all .2s;
-  }
-  .btn-details:hover { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
-  .btn-details svg { transition: transform .2s; }
-  .btn-details:hover svg { transform: translateX(4px); }
-  .props-more { text-align: center; margin-top: 48px; display: none; }
+    /* Dress code swatch */
+    .dc-swatch-box { width: 33px; height: 33px; border-radius: 7px; border: 1px solid rgba(201,168,76,.3); margin: 0 auto 5px; box-shadow: 0 3px 10px rgba(0,0,0,.5); }
 
-  /* ── ABOUT ── */
-  #nosotros .glow { top: 50%; right: 0; width: 400px; height: 400px; background: rgba(124,58,237,.15); transform: translateY(-50%); }
-  .about-grid { display: grid; grid-template-columns: 1fr; gap: 64px; align-items: center; }
-  .about-img { position: relative; }
-  .about-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
-  .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; }
-  .about-img-wrap::after { content:''; position:absolute; inset:0; background: rgba(124,58,237,.15); border-radius: 20px; }
-  .about-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,10,20,.4), transparent); border-radius: 20px; }
-  .stat-card {
-    position: absolute; bottom: -24px; right: 8px;
-    background: var(--card); border: 1px solid rgba(124,58,237,.4);
-    border-radius: 18px; padding: 20px 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.4); backdrop-filter: blur(16px);
-  }
-  .stat-card-val { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--primary); font-weight: 900; line-height: 1; }
-  .stat-card-lbl { color: var(--muted); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-top: 6px; }
-  .about-corner-tl { position: absolute; top: -12px; left: -12px; width: 96px; height: 96px; border-top: 2px solid rgba(124,58,237,.5); border-left: 2px solid rgba(124,58,237,.5); border-radius: 12px 0 0 0; pointer-events: none; }
-  .about-corner-br { position: absolute; bottom: -12px; right: -12px; width: 96px; height: 96px; border-bottom: 2px solid rgba(201,168,76,.5); border-right: 2px solid rgba(201,168,76,.5); border-radius: 0 0 12px 0; pointer-events: none; }
-  .about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
-  .about-p { color: var(--muted); font-size: 15px; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
-  .achievements { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
-  .achievements li { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-  .achievements li svg { color: var(--primary); flex-shrink: 0; }
-  .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
-  .value-card {
-    display: flex; gap: 12px; align-items: flex-start;
-    background: rgba(124,58,237,.1); border: 1px solid rgba(124,58,237,.2);
-    border-radius: 14px; padding: 14px; transition: background .2s;
-  }
-  .value-card:hover { background: rgba(124,58,237,.15); }
-  .value-icon { width: 32px; height: 32px; background: rgba(201,168,76,.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .value-icon svg { color: var(--primary); }
-  .value-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-  .value-desc { color: var(--muted); font-size: 11.5px; line-height: 1.5; }
-
-  /* ── CONTACT ── */
-  #contacto { background: var(--bg); }
-  #contacto .glow-top { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 400px; background: rgba(124,58,237,.08); border-radius: 50%; filter: blur(120px); pointer-events: none; }
-  .contact-header { text-align: center; margin-bottom: 64px; }
-  .contact-h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem,4vw,3.2rem); font-weight: 900; margin-top: 12px; }
-  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
-  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 24px; }
-  .info-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-  .info-card {
-    display: flex; gap: 16px; align-items: center;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px 16px; transition: border-color .2s;
-  }
-  .info-card:hover { border-color: rgba(124,58,237,.5); }
-  .info-icon { width: 40px; height: 40px; background: rgba(124,58,237,.2); border: 1px solid rgba(124,58,237,.3); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .info-icon svg { color: var(--primary); }
-  .info-lbl { font-size: 10px; color: var(--muted); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 2px; }
-  .info-val { font-size: 13px; font-weight: 600; }
-  .map-box { position: relative; height: 200px; border-radius: 18px; overflow: hidden; border: 1px solid var(--border); }
-  .map-box img { width: 100%; height: 100%; object-fit: cover; opacity: .4; }
-  .map-overlay { position: absolute; inset: 0; background: rgba(124,58,237,.3); }
-  .map-pin {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  }
-  .map-pin-inner {
-    background: rgba(13,10,20,.9); backdrop-filter: blur(12px);
-    border: 1px solid rgba(124,58,237,.4); border-radius: 14px; padding: 12px 20px; text-align: center;
-  }
-  .map-pin-inner svg { color: var(--primary); margin: 0 auto 4px; }
-  .map-pin-inner span { font-size: 13px; font-weight: 700; }
-  .form-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; padding: 32px; position: relative; overflow: hidden;
-  }
-  .form-glow { position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; background: rgba(124,58,237,.2); border-radius: 50%; filter: blur(40px); pointer-events: none; }
-  .form-h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; position: relative; z-index: 1; }
-  .form-sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; font-weight: 300; position: relative; z-index: 1; }
-  .form-fields { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  label { display: block; font-size: 10px; color: var(--muted); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 8px; }
-  input, textarea {
-    width: 100%; background: var(--input-bg); border: 1px solid var(--border);
-    border-radius: 14px; color: var(--fg); padding: 12px 16px; font-size: 13px;
-    font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
-  }
-  input::placeholder, textarea::placeholder { color: rgba(136,120,168,.5); }
-  input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(201,168,76,.15); }
-  textarea { resize: none; }
-  .form-error { color: #f87171; font-size: 12px; }
-  .btn-submit {
-    width: 100%; background: var(--primary); color: var(--primary-fg);
-    padding: 16px; font-size: 13px; font-weight: 800;
-    letter-spacing: .12em; text-transform: uppercase;
-    border-radius: 14px; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: all .2s; margin-top: 4px;
-  }
-  .btn-submit:hover { opacity: .9; box-shadow: 0 8px 30px rgba(201,168,76,.3); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--card); border-top: 1px solid var(--border);
-    position: relative; overflow: hidden;
-  }
-  .footer-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: rgba(124,58,237,.1); border-radius: 50%; filter: blur(100px); pointer-events: none; }
-  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 64px 24px 32px; position: relative; z-index: 2; }
-  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 48px; }
-  .footer-logo { height: 56px; object-fit: contain; margin-bottom: 20px; }
-  .footer-bio { color: var(--muted); font-size: 13.5px; line-height: 1.75; max-width: 300px; font-weight: 300; }
-  .footer-socials { display: flex; gap: 8px; margin-top: 20px; }
-  .social-btn {
-    width: 36px; height: 36px;
-    background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.3);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: var(--muted); transition: all .2s;
-  }
-  .social-btn:hover { color: var(--primary); border-color: var(--primary); background: rgba(201,168,76,.1); }
-  .footer-nav-title { color: var(--primary); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
-  .footer-nav-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-nav-list button {
-    color: var(--muted); font-size: 13px; font-weight: 300; transition: color .2s;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .footer-nav-list button .nav-line { width: 0; height: 1px; background: var(--primary); transition: width .3s; }
-  .footer-nav-list button:hover { color: var(--fg); }
-  .footer-nav-list button:hover .nav-line { width: 12px; }
-  .footer-contact-info { display: flex; flex-direction: column; gap: 12px; }
-  .footer-contact-info a, .footer-contact-info p { color: var(--muted); font-size: 13px; font-weight: 300; transition: color .2s; }
-  .footer-contact-info a:hover { color: var(--primary); }
-  .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .footer-copy { color: var(--muted); font-size: 12px; text-align: center; }
-
-  /* ── WHATSAPP FAB ── */
-  .wa-fab {
-    position: fixed; bottom: 24px; right: 24px; z-index: 200;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #25d366; box-shadow: 0 4px 20px rgba(37,211,102,.4);
-    display: flex; align-items: center; justify-content: center;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .wa-fab:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(37,211,102,.5); }
-  .wa-fab svg { color: #fff; }
-
-  /* ── ANIMATIONS ── */
-  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .6s ease, transform .6s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-left { opacity: 0; transform: translateX(-50px); transition: opacity .9s ease, transform .9s ease; }
-  .fade-left.visible { opacity: 1; transform: translateX(0); }
-  .fade-right { opacity: 0; transform: translateX(50px); transition: opacity .9s ease, transform .9s ease; }
-  .fade-right.visible { opacity: 1; transform: translateX(0); }
-
-  /* ── RESPONSIVE — tablet (≥640px) ── */
-  @media (min-width: 640px) {
-    .hero-btns { flex-direction: row; }
-    .hero-btns a, .hero-btns button { flex: 0 0 auto; }
-    .hero-stats { justify-content: flex-start; gap: 48px; }
-    .stat-item { text-align: left; }
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-grid .service-card:last-child { grid-column: span 2; }
-    .props-grid { grid-template-columns: repeat(2, 1fr); }
-    .field-row { grid-template-columns: 1fr 1fr; }
-    .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-bottom { flex-direction: row; justify-content: space-between; }
-  }
-
-  /* ── RESPONSIVE — desktop (≥768px) ── */
-  @media (min-width: 768px) {
-    .section { padding: 112px 40px; }
-    .hero-content { padding: 40px 40px 96px; }
-    .hero-logo img { height: 160px; }
-    .stat-val { font-size: 2.2rem; }
-    .stat-lbl { font-size: 10px; }
-    .scroll-cue { display: flex; }
-    .hamburger { display: none; }
-    .nav-links, .btn-nav { display: flex; }
-    .services-grid { grid-template-columns: repeat(3, 1fr); }
-    .services-grid .service-card:last-child { grid-column: span 1; }
-    .props-grid { grid-template-columns: repeat(3, 1fr); }
-    .about-grid { grid-template-columns: 1fr 1fr; }
-    .contact-grid { grid-template-columns: 1fr 1fr; }
-    .footer-grid { grid-template-columns: repeat(3, 1fr); }
-    .props-more { display: none !important; }
-    .hero-h1 { text-align: left; }
-    .hero-p { text-align: left; margin-left: 0; }
-    .hero-badge { justify-content: flex-start; }
-    .hero-inner { margin: 0; }
-  }
-
-  /* ── MOBILE HAMBURGER ── */
-  @media (max-width: 767px) {
-    .hamburger { display: block; }
-    .nav-links, .btn-nav { display: none; }
-    .props-more { display: block; }
-    .stat-card { right: 8px; }
-  }
-</style>
+    /* IntersectionObserver fade-ins */
+    .anim-hidden { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .anim-visible { opacity: 1; transform: translateY(0); }
+    .anim-scale-hidden { opacity: 0; transform: scale(.94); transition: opacity .7s ease, transform .7s ease; }
+    .anim-scale-visible { opacity: 1; transform: scale(1); }
+    .anim-left-hidden { opacity: 0; transform: translateX(-40px); transition: opacity .6s ease, transform .6s ease; }
+    .anim-left-visible { opacity: 1; transform: translateX(0); }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="main-nav" id="navbar">
-  <div class="nav-inner">
-    <img src="https://hercules-cdn.com/file_xtsxs7Dq97k25pZHKepwX1kp" alt="Villamil Finca Raíz" class="nav-logo" onclick="scrollTo('#inicio')" />
-    <ul class="nav-links">
-      <li><button onclick="scrollTo('#inicio')">Inicio</button></li>
-      <li><button onclick="scrollTo('#propiedades')">Propiedades</button></li>
-      <li><button onclick="scrollTo('#servicios')">Servicios</button></li>
-      <li><button onclick="scrollTo('#nosotros')">Nosotros</button></li>
-      <li><button onclick="scrollTo('#contacto')">Contacto</button></li>
-    </ul>
-    <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="btn-nav">Agendar cita</a>
-    <button class="hamburger" onclick="toggleMenu()">
-      <svg id="ham-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      <svg id="close-icon" style="display:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+<!-- ══════════════════════════════ SPLASH ══════════════════════════════ -->
+<div id="splash">
+  <div style="position:absolute;width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(201,168,76,.07) 0%,transparent 68%);pointer-events:none;"></div>
+  <div class="splash-card" onclick="event.stopPropagation()">
+    <div class="splash-bar-top"></div>
+    <div class="splash-bar-bottom"></div>
+    <div class="ring" style="width:295px;height:295px;"></div>
+    <div class="ring" style="width:220px;height:220px;"></div>
+    <div class="ring" style="width:152px;height:152px;"></div>
+    <div class="ring" style="width:90px;height:90px;"></div>
+    <div class="splash-inner">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div style="position:relative;z-index:10;text-align:center;">
+        <p style="font-size:.5rem;letter-spacing:.6em;color:rgba(201,168,76,.38);font-weight:600;">ALTA ELEGANCIA · BODA DE ENSUEÑO</p>
+        <div style="width:28px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:.5rem auto .75rem;"></div>
+        <p style="font-size:.48rem;letter-spacing:.5em;color:rgba(201,168,76,.32);margin-bottom:.4rem;">MONTOYA · RESTREPO</p>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,8vw,2.15rem);font-weight:700;letter-spacing:.05em;line-height:1.05;" class="gold-text">Sofía &amp; Andrés</h1>
+        <div style="display:flex;align-items:center;gap:.6rem;justify-content:center;margin:.75rem 0;">
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4));"></div>
+          <span id="infinity-sym" style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:#e8d08a;font-weight:300;line-height:1;">∞</span>
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent);"></div>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(245,237,224,.7);letter-spacing:.18em;margin-bottom:.35rem;">SE CASAN</p>
+        <p style="font-size:.45rem;letter-spacing:.32em;color:rgba(201,168,76,.38);margin-bottom:2rem;">SÁBADO · 20 JUNIO 2027 · 6:00 PM</p>
+        <button class="open-btn" onclick="openInvitation()">✦ ABRIR INVITACIÓN</button>
+        <p style="margin-top:.85rem;font-size:.4rem;letter-spacing:.28em;color:rgba(201,168,76,.25);">TOCA EN CUALQUIER LUGAR PARA VER</p>
+      </div>
+    </div>
   </div>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <div class="mobile-menu-glow"></div>
-  <button onclick="navTo('#inicio')">Inicio</button>
-  <button onclick="navTo('#propiedades')">Propiedades</button>
-  <button onclick="navTo('#servicios')">Servicios</button>
-  <button onclick="navTo('#nosotros')">Nosotros</button>
-  <button onclick="navTo('#contacto')">Contacto</button>
-  <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20agendar%20una%20cita" target="_blank" class="mobile-btn-wa" onclick="closeMenu()">Agendar cita</a>
 </div>
 
-<!-- HERO -->
-<section id="inicio">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1613013383640-6226419147d7?w=1920&q=80" alt="Propiedad de lujo" />
-  </div>
-  <div class="hero-orb1"></div>
-  <div class="hero-orb2"></div>
+<!-- ══════════════════════════════ MAIN ══════════════════════════════ -->
+<div id="main">
 
-  <div class="hero-content">
-    <div class="hero-logo">
-      <img src="https://hercules-cdn.com/file_xtsxs7Dq97k25pZHKepwX1kp" alt="Villamil Finca Raíz" />
+  <!-- ──── HERO ──── -->
+  <section style="background:#0e0b15;position:relative;overflow:hidden;">
+    <div class="gold-line-thick"></div>
+    <div style="background:#05030a;border-bottom:1px solid rgba(201,168,76,.1);padding:.9rem 1.5rem;display:flex;align-items:center;gap:.75rem;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4));"></div>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.38em;color:#c9a84c;font-weight:700;white-space:nowrap;">Invitación Oficial · Boda</span>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent);"></div>
     </div>
-
-    <div class="hero-inner">
-      <div class="hero-badge">
-        <div class="pill"><span class="dot"></span><span>Bogotá, Colombia — Expertos en Finca Raíz</span></div>
+    <div style="background:linear-gradient(175deg,#160f1e 0%,#0e0b15 100%);padding:3rem 1.75rem 2.75rem;text-align:center;position:relative;">
+      <div style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 62%);pointer-events:none;"></div>
+      <div class="corner corner-tl" style="position:absolute;top:22px;left:22px;border-color:rgba(201,168,76,.4);"></div>
+      <div class="corner corner-tr" style="position:absolute;top:22px;right:22px;border-color:rgba(201,168,76,.4);"></div>
+      <div class="corner corner-bl" style="position:absolute;bottom:22px;left:22px;border-color:rgba(201,168,76,.4);"></div>
+      <div class="corner corner-br" style="position:absolute;bottom:22px;right:22px;border-color:rgba(201,168,76,.4);"></div>
+      <p style="font-size:.5rem;letter-spacing:.65em;color:rgba(201,168,76,.35);font-weight:600;margin-bottom:1.5rem;">LOS NOVIOS</p>
+      <div style="width:250px;height:310px;margin:0 auto;position:relative;">
+        <div style="position:absolute;inset:-8px;border:1px solid rgba(201,168,76,.25);border-radius:10px;pointer-events:none;"></div>
+        <div style="position:relative;width:100%;height:100%;border:1px solid rgba(201,168,76,.5);border-radius:6px;overflow:hidden;box-shadow:0 0 0 5px #0e0b15,0 0 60px rgba(201,168,76,.2),0 20px 80px rgba(0,0,0,.7);">
+          <img src="https://images.unsplash.com/photo-1610759862400-de105ccacdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800" alt="Sofía y Andrés" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(5,3,10,.88);border:1px solid rgba(201,168,76,.45);border-radius:4px;padding:4px 14px;font-size:.4rem;letter-spacing:.38em;color:#c9a84c;white-space:nowrap;font-weight:600;">SOFÍA &amp; ANDRÉS · 2027</div>
+        </div>
       </div>
-
-      <h1 class="hero-h1">
-        Tu Próxima <span class="underline-svg gold italic">Propiedad
-          <svg viewBox="0 0 200 8" fill="none" style="position:absolute;bottom:-8px;left:0;width:100%">
-            <path d="M0 6 Q100 0 200 6" stroke="#c9a84c" stroke-width="2" opacity=".4"/>
+      <div style="margin-top:2.25rem;">
+        <!-- Animated SVG Title -->
+        <div id="animated-title-wrap">
+          <svg viewBox="0 0 420 160" style="width:100%;max-width:400px;height:auto;display:block;margin:0 auto;overflow:visible;">
+            <defs>
+              <linearGradient id="weddingGold" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#c9a84c"/>
+                <stop offset="40%" stop-color="#e8d08a"/>
+                <stop offset="52%" stop-color="#fffbe8"/>
+                <stop offset="65%" stop-color="#e8d08a"/>
+                <stop offset="100%" stop-color="#c9a84c"/>
+              </linearGradient>
+            </defs>
+            <text x="18"  y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">S</text>
+            <text x="49"  y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">o</text>
+            <text x="80"  y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">f</text>
+            <text x="111" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">í</text>
+            <text x="142" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">a</text>
+            <text x="210" y="72" font-family="'Cormorant Garamond',serif" font-size="44" font-weight="300" font-style="italic" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" text-anchor="middle" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">&amp;</text>
+            <text x="228" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">A</text>
+            <text x="259" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">n</text>
+            <text x="290" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">d</text>
+            <text x="321" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">r</text>
+            <text x="352" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">é</text>
+            <text x="383" y="72" font-family="'Cormorant Garamond',serif" font-size="52" font-weight="300" fill="url(#weddingGold)" stroke="url(#weddingGold)" stroke-width="1.2" stroke-linecap="round" class="wt-char" style="stroke-dasharray:800;stroke-dashoffset:800;">s</text>
+            <line x1="20" y1="88" x2="400" y2="88" stroke="url(#weddingGold)" stroke-width="0.5" opacity="0.25"/>
+            <text x="210" y="120" font-family="'Cormorant Garamond',serif" font-size="20" font-weight="300" font-style="italic" fill="#c9a84c" fill-opacity="0.55" text-anchor="middle" letter-spacing="6">se casan</text>
           </svg>
-        </span><br />Te Está Esperando
-      </h1>
-
-      <p class="hero-p">
-        Especialistas en compraventa, arriendo y construcción de propiedades
-        exclusivas en las zonas más premium de Bogotá.
-      </p>
-
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="scrollTo('#propiedades')">Explorar Propiedades</button>
-        <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20gratuita" target="_blank" class="btn-ghost">Asesoría Gratuita</a>
+        </div>
+        <p style="font-size:.45rem;letter-spacing:.6em;color:rgba(201,168,76,.35);margin-top:.65rem;font-weight:600;text-align:center;">MONTOYA · RESTREPO</p>
       </div>
-
-      <div class="hero-stats">
-        <div class="stat-item"><div class="stat-val">+500</div><div class="stat-lbl">Propiedades Vendidas</div></div>
-        <div class="stat-item"><div class="stat-val">15+</div><div class="stat-lbl">Años de Experiencia</div></div>
-        <div class="stat-item"><div class="stat-val">+1.200</div><div class="stat-lbl">Clientes Satisfechos</div></div>
+      <div style="display:flex;align-items:center;gap:.75rem;justify-content:center;margin:1.5rem 0;">
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3));"></div>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:.8rem;color:rgba(201,168,76,.4);letter-spacing:.4em;">✦ ✦ ✦</span>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.3),transparent);"></div>
       </div>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(201,168,76,.6);line-height:2.3;padding:0 .5rem;">
+        "Dos almas que se encontraron para escribir la historia más hermosa de su vida."
+      </blockquote>
     </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);background:#05030a;border-top:2px solid rgba(201,168,76,.3);">
+      <div style="padding:1.4rem .5rem;text-align:center;"><div style="margin-bottom:7px;font-size:1.1rem;">📅</div><div style="font-size:.37rem;letter-spacing:.5em;color:rgba(201,168,76,.35);margin-bottom:5px;">FECHA</div><div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#c9a84c;font-weight:500;">20 JUN 2027</div></div>
+      <div style="padding:1.4rem .5rem;text-align:center;border-left:1px solid rgba(201,168,76,.1);"><div style="margin-bottom:7px;font-size:1.1rem;">🕐</div><div style="font-size:.37rem;letter-spacing:.5em;color:rgba(201,168,76,.35);margin-bottom:5px;">HORA</div><div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#c9a84c;font-weight:500;">6:00 PM</div></div>
+      <div style="padding:1.4rem .5rem;text-align:center;border-left:1px solid rgba(201,168,76,.1);"><div style="margin-bottom:7px;font-size:1.1rem;">📍</div><div style="font-size:.37rem;letter-spacing:.5em;color:rgba(201,168,76,.35);margin-bottom:5px;">LUGAR</div><div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#c9a84c;font-weight:500;">BOG · COL</div></div>
+    </div>
+    <div class="gold-line"></div>
+  </section>
+
+  <!-- ──── TICKER ──── -->
+  <div id="ticker-wrap">
+    <div id="ticker"></div>
   </div>
+  <div class="gold-line"></div>
 
-  <div class="scroll-cue">
-    <div class="scroll-line"></div>
-    <span class="scroll-txt">Scroll</span>
-  </div>
-</section>
+  <!-- ──── COUNTDOWN ──── -->
+  <section style="background:linear-gradient(170deg,#160f1e 0%,#05030a 100%);padding:5rem 1.5rem 4.5rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(201,168,76,.07),transparent 60%);pointer-events:none;"></div>
+    <div style="margin-bottom:3rem;">
+      <p class="sec-eyebrow">CUENTA REGRESIVA</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">FALTA POCO</h2>
+    </div>
+    <div style="display:flex;align-items:flex-start;justify-content:center;gap:6px;">
+      <div style="display:flex;align-items:flex-start;gap:6px;">
+        <div class="anim-hidden" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div class="cd-box-inner"><div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);"></div><span class="cd-num" id="cd-d">--</span></div>
+          <span class="cd-label">DÍAS</span>
+        </div>
+        <div class="cd-sep anim-hidden">:</div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:6px;">
+        <div class="anim-hidden" style="display:flex;flex-direction:column;align-items:center;gap:8px;" style="transition-delay:.1s">
+          <div class="cd-box-inner"><div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);"></div><span class="cd-num" id="cd-h">--</span></div>
+          <span class="cd-label">HORAS</span>
+        </div>
+        <div class="cd-sep anim-hidden">:</div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:6px;">
+        <div class="anim-hidden" style="display:flex;flex-direction:column;align-items:center;gap:8px;" style="transition-delay:.2s">
+          <div class="cd-box-inner"><div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);"></div><span class="cd-num" id="cd-m">--</span></div>
+          <span class="cd-label">MIN</span>
+        </div>
+        <div class="cd-sep anim-hidden">:</div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:6px;">
+        <div class="anim-hidden" style="display:flex;flex-direction:column;align-items:center;gap:8px;" style="transition-delay:.3s">
+          <div class="cd-box-inner"><div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);"></div><span class="cd-num" id="cd-s">--</span></div>
+          <span class="cd-label">SEG</span>
+        </div>
+      </div>
+    </div>
+    <div class="anim-hidden" style="margin-top:2.5rem;">
+      <p style="font-size:.44rem;letter-spacing:.38em;color:rgba(201,168,76,.26);">20 · JUNIO · 2027 · BOGOTÁ, COLOMBIA</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:rgba(201,168,76,.5);margin-top:.5rem;line-height:1.9;">Cada segundo que pasa, nos acercamos más a este día tan especial</p>
+    </div>
+  </section>
+  <div class="gold-line"></div>
 
-<!-- SERVICES -->
-<section id="servicios" class="section">
-  <div class="glow"></div>
-  <div class="max-w">
-    <div class="services-head fade-up">
-      <div class="pill"><span>Lo que ofrecemos</span></div>
-      <h2 class="section-h2">Nuestros <span class="gold italic">Servicios</span></h2>
+  <!-- ──── DATE ──── -->
+  <section style="background:#0e0b15;padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <p class="sec-eyebrow">EL DÍA MÁS ESPECIAL</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">LA FECHA</h2>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <span class="card-num">01</span>
-        <div class="card-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 17h7M17.5 14v7"/></svg>
-        </div>
-        <div class="card-title">Venta de Propiedades</div>
-        <p class="card-desc">Apartamentos, casas y locales comerciales en las mejores zonas de Bogotá. Asesoría completa desde la búsqueda hasta la escritura.</p>
-        <div class="card-line"></div>
+    <div style="text-align:center;background:radial-gradient(ellipse at 50% 0%,#221708 0%,#130d06 45%,#07050a 100%);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:3rem 1.75rem 2.5rem;margin-bottom:1.1rem;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 80px rgba(201,168,76,.06);">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 3%,#7a5c10 18%,#c9a84c 32%,#e8d08a 50%,#c9a84c 68%,#7a5c10 82%,transparent 97%);"></div>
+      <p style="font-size:.5rem;letter-spacing:.6em;color:rgba(201,168,76,.35);font-weight:600;">SÁBADO</p>
+      <div class="anim-hidden gold-text" style="font-family:'Cormorant Garamond',serif;font-size:9rem;font-weight:300;line-height:.8;margin:.3rem 0;">20</div>
+      <div class="anim-hidden" style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:#f5ede0;font-weight:300;letter-spacing:.2em;">JUNIO</div>
+      <div class="anim-hidden" style="font-size:.5rem;color:rgba(201,168,76,.3);letter-spacing:.5em;margin-top:.5rem;">2027</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;">
+      <div class="anim-hidden" style="padding:1.6rem 1rem;background:#160f1e;border:1px solid rgba(201,168,76,.12);border-radius:10px;text-align:center;">
+        <div style="font-size:.37rem;letter-spacing:.45em;color:rgba(201,168,76,.32);margin-bottom:.4rem;">HORA DE INICIO</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:#c9a84c;font-weight:400;">6:00 PM</div>
+        <div style="font-size:.4rem;color:rgba(201,168,76,.28);margin-top:.3rem;">Puertas abren 5:30 PM</div>
       </div>
-      <div class="service-card fade-up">
-        <span class="card-num">02</span>
-        <div class="card-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <div class="card-title">Arriendo</div>
-        <p class="card-desc">Gestión integral de arriendos residenciales y comerciales. Contratos, administración y garantías para propietarios e inquilinos.</p>
-        <div class="card-line"></div>
-      </div>
-      <div class="service-card fade-up">
-        <span class="card-num">03</span>
-        <div class="card-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-7 8 7v10"/><path d="M9 20v-6h6v6"/></svg>
-        </div>
-        <div class="card-title">Construcción</div>
-        <p class="card-desc">Proyectos de construcción y remodelación con los más altos estándares de calidad. Diseño, obra y acabados de lujo.</p>
-        <div class="card-line"></div>
-      </div>
-      <div class="service-card fade-up">
-        <span class="card-num">04</span>
-        <div class="card-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <div class="card-title">Asesoría Jurídica</div>
-        <p class="card-desc">Acompañamiento legal en procesos de compraventa, promesas de contrato, escrituras y trámites inmobiliarios.</p>
-        <div class="card-line"></div>
-      </div>
-      <div class="service-card fade-up">
-        <span class="card-num">05</span>
-        <div class="card-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-        </div>
-        <div class="card-title">Administración Propiedad Horizontal</div>
-        <p class="card-desc">Gestión integral de conjuntos residenciales y edificios: cobro de cuotas, mantenimiento, asambleas y normativa vigente.</p>
-        <div class="card-line"></div>
+      <div class="anim-hidden" style="padding:1.6rem 1rem;background:#160f1e;border:1px solid rgba(201,168,76,.12);border-radius:10px;text-align:center;transition-delay:.1s">
+        <div style="font-size:.37rem;letter-spacing:.45em;color:rgba(201,168,76,.32);margin-bottom:.4rem;">CIUDAD</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:#c9a84c;font-weight:400;">BOGOTÁ</div>
+        <div style="font-size:.4rem;color:rgba(201,168,76,.28);margin-top:.3rem;">Colombia · GMT-5</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <div class="gold-line"></div>
 
-<!-- PROPERTIES -->
-<section id="propiedades" class="section">
-  <div class="glow"></div>
-  <div class="max-w">
-    <div class="props-head fade-up">
-      <div class="pill" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3)"><span>Portafolio exclusivo</span></div>
-      <h2 class="section-h2">Propiedades <span class="gold italic">Destacadas</span></h2>
+  <!-- ──── PROGRAMA ──── -->
+  <section style="background:linear-gradient(175deg,#0e0b15 0%,#160f1e 50%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:3.5rem;">
+      <p class="sec-eyebrow">EL PROGRAMA DE LA NOCHE</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">PROGRAMA</h2>
+      <p class="sec-subtitle">Sábado · 20 de Junio · 2027</p>
     </div>
-    <div class="props-grid">
-      <!-- Card 1 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1776362355123-ca966d36e29c?w=800&q=80" alt="Penthouse Chico Norte" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-venta">Venta</span>
-          <div class="prop-price">$1.850.000.000</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Penthouse en Chico Norte</div>
-          <div class="prop-loc">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Chico Norte, Bogotá
-          </div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M22 4v16"/><path d="M2 9h20"/><path d="M6 9v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>4 hab.</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>3 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>280 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20el%20Penthouse%20en%20Chico%20Norte" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
+    <div style="position:relative;max-width:400px;margin:0 auto;">
+      <div style="position:absolute;left:28px;top:0;bottom:0;width:1px;background:rgba(201,168,76,.1);"></div>
+      <div style="display:flex;flex-direction:column;gap:1.1rem;" id="program-list">
+        <!-- Items injected by JS -->
       </div>
-      <!-- Card 2 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1613013383640-6226419147d7?w=800&q=80" alt="Apartamento Rosales" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-arriendo">Arriendo</span>
-          <div class="prop-price">$8.500.000/mes</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Apartamento en Rosales</div>
-          <div class="prop-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>El Rosales, Bogotá</div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M22 4v16"/><path d="M2 9h20"/><path d="M6 9v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>3 hab.</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>2 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>150 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20el%20Apartamento%20en%20Rosales" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1613036814506-a79f847abdd4?w=800&q=80" alt="Casa La Cabrera" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-venta">Venta</span>
-          <div class="prop-price">$3.200.000.000</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Casa en La Cabrera</div>
-          <div class="prop-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>La Cabrera, Bogotá</div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M22 4v16"/><path d="M2 9h20"/><path d="M6 9v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>5 hab.</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>4 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>420 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20la%20Casa%20en%20La%20Cabrera" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1680209667207-cae0f6cd8fa9?w=800&q=80" alt="Apartamento Usaquén" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-venta">Venta</span>
-          <div class="prop-price">$980.000.000</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Apartamento en Usaquén</div>
-          <div class="prop-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Usaquén, Bogotá</div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M22 4v16"/><path d="M2 9h20"/><path d="M6 9v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>3 hab.</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>2 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>120 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20el%20Apartamento%20en%20Usaqu%C3%A9n" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-      </div>
-      <!-- Card 5 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1557733686-3f8641465d21?w=800&q=80" alt="Oficina Zona Rosa" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-arriendo">Arriendo</span>
-          <div class="prop-price">$12.000.000/mes</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Oficina en Zona Rosa</div>
-          <div class="prop-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Zona Rosa, Bogotá</div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>2 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>200 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20la%20Oficina%20en%20Zona%20Rosa" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-      </div>
-      <!-- Card 6 -->
-      <div class="prop-card fade-up">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="Apartamento Santa Bárbara" />
-          <div class="prop-img-overlay"></div>
-          <div class="prop-img-hover"></div>
-          <span class="badge badge-venta">Venta</span>
-          <div class="prop-price">$1.200.000.000</div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Apartamento en Santa Bárbara</div>
-          <div class="prop-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Santa Bárbara, Bogotá</div>
-          <div class="prop-specs">
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M22 4v16"/><path d="M2 9h20"/><path d="M6 9v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>3 hab.</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 C9 4.3 7.7 3 6 3S3 4.3 3 6v14h18v-6a4 4 0 0 0-4-4H9V6z"/><path d="M6 8h1"/></svg>3 baños</span>
-            <span class="spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>180 m²</span>
-          </div>
-          <a href="https://wa.me/573001234567?text=Me%20interesa%20el%20Apartamento%20en%20Santa%20B%C3%A1rbara" target="_blank" class="btn-details">Ver detalles <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
+      <div style="display:flex;align-items:center;gap:.6rem;margin-top:2rem;padding-left:20px;">
+        <div style="width:16px;height:16px;border-radius:50%;border:1px solid rgba(201,168,76,.5);display:flex;align-items:center;justify-content:center;"><div style="width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.6);"></div></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.8rem;color:rgba(201,168,76,.3);margin:0;letter-spacing:.1em;">Una noche para recordar siempre</p>
       </div>
     </div>
-    <div class="props-more">
-      <a href="https://wa.me/573001234567?text=Hola%2C%20quiero%20ver%20m%C3%A1s%20propiedades" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px">
-        Ver todas las propiedades
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
+  <div class="gold-line"></div>
 
-<!-- ABOUT -->
-<section id="nosotros" class="section">
-  <div class="glow"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(124,58,237,.05),transparent);pointer-events:none"></div>
-  <div class="max-w">
-    <div class="about-grid">
-      <div class="about-img fade-left">
-        <div class="about-img-wrap">
-          <img src="https://images.unsplash.com/photo-1761253467093-af291f940e95?w=800&q=80" alt="Villamil equipo" />
-          <div class="about-img-overlay"></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-val">15+</div>
-          <div class="stat-card-lbl">Años de trayectoria</div>
-        </div>
-        <div class="about-corner-tl"></div>
-        <div class="about-corner-br"></div>
+  <!-- ──── GALERÍA ──── -->
+  <section style="background:linear-gradient(170deg,#0e0b15 0%,#160f1e 55%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.75rem;">
+      <p class="sec-eyebrow">MOMENTOS PARA RECORDAR</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
       </div>
-      <div class="about-text fade-right">
-        <div class="pill" style="margin-bottom:20px"><span>Quiénes somos</span></div>
-        <h2>Villamil <span class="gold italic">Finca Raíz</span></h2>
-        <p class="about-p">Somos una empresa familiar bogotana con más de 15 años de trayectoria en el sector inmobiliario. Nos especializamos en la compraventa, arriendo y construcción de propiedades de alto valor en las zonas más exclusivas de Bogotá.</p>
-        <p class="about-p">Nuestro equipo de asesores certificados ofrece un servicio personalizado, acompañando a cada cliente en cada etapa del proceso para garantizar una inversión segura y rentable.</p>
-        <ul class="achievements">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Más de 500 propiedades vendidas exitosamente
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Presencia en las zonas más exclusivas de Bogotá
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Equipo de asesores certificados y especializados
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Garantía de confidencialidad en cada operación
-          </li>
-        </ul>
-        <div class="values-grid">
-          <div class="value-card">
-            <div class="value-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div>
-            <div><div class="value-title">Excelencia</div><div class="value-desc">Más altos estándares en cada transacción.</div></div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div><div class="value-title">Confianza</div><div class="value-desc">+1.200 familias nos han elegido.</div></div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-            <div><div class="value-title">Experiencia</div><div class="value-desc">15+ años en el mercado bogotano.</div></div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            <div><div class="value-title">Exclusividad</div><div class="value-desc">Acceso a propiedades premium.</div></div>
-          </div>
-        </div>
-        <a href="https://wa.me/573001234567" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px">Conocer más</a>
-      </div>
+      <h2 class="sec-title gold-text">GALERÍA</h2>
+      <p class="sec-subtitle">Cada imagen cuenta nuestra historia</p>
     </div>
-  </div>
-</section>
+    <div class="anim-hidden" id="gallery-wrap">
+      <div id="gallery-main" onclick="openLightbox(galleryIdx)">
+        <img id="gal-img" src="" alt="" />
+        <div class="gal-vignette"></div>
+        <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+          <div id="gal-caption" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:#f5ede0;text-shadow:0 2px 14px rgba(0,0,0,.95);"></div>
+          <div style="font-size:.5rem;letter-spacing:.32em;color:rgba(201,168,76,.8);margin-top:5px;">SOFÍA &amp; ANDRÉS · 2027</div>
+        </div>
+        <div id="gal-counter"></div>
+        <button class="gal-nav" id="gal-prev" onclick="event.stopPropagation();galNav(-1)">←</button>
+        <button class="gal-nav" id="gal-next" onclick="event.stopPropagation();galNav(1)">→</button>
+      </div>
+      <div id="gal-progress-bar"><div id="gal-progress-fill"></div></div>
+      <div class="gal-thumb-grid" id="gal-thumbs"></div>
+    </div>
+  </section>
+  <div class="gold-line"></div>
 
-<!-- CONTACT -->
-<section id="contacto" class="section">
-  <div class="glow-top"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(124,58,237,.05),transparent);pointer-events:none"></div>
-  <div class="max-w">
-    <div class="contact-header fade-up">
-      <div class="pill"><span>Estamos aquí para ti</span></div>
-      <h2 class="contact-h2">Hablemos de tu <span class="gold italic">Próxima Inversión</span></h2>
+  <!-- ──── EL LUGAR ──── -->
+  <section style="background:linear-gradient(170deg,#0e0b15 0%,#160f1e 55%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.05) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.75rem;">
+      <p class="sec-eyebrow">¿DÓNDE SERÁ LA MAGIA?</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">EL LUGAR</h2>
+      <p class="sec-subtitle">El escenario perfecto para nuestra historia</p>
     </div>
-    <div class="contact-grid">
-      <div class="contact-info fade-left">
-        <h3>Información de Contacto</h3>
-        <div class="info-cards">
-          <div class="info-card">
-            <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="info-lbl">Dirección</div><div class="info-val">Calle 100 # 19-54, Bogotá, Colombia</div></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.63 4.87 2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div><div class="info-lbl">Teléfono / WhatsApp</div><div class="info-val">+57 300 123 4567</div></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="info-lbl">Correo Electrónico</div><div class="info-val">info@villamil.com.co</div></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div><div class="info-lbl">Horario de Atención</div><div class="info-val">Lun - Sáb: 8:00 am – 6:00 pm</div></div>
-          </div>
-        </div>
-        <div class="map-box">
-          <img src="https://images.unsplash.com/photo-1761253468688-8ba66d58b328?w=800&q=80" alt="Bogotá" />
-          <div class="map-overlay"></div>
-          <div class="map-pin">
-            <div class="map-pin-inner">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Bogotá, Colombia</span>
+    <div class="anim-hidden" style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(201,168,76,.2),0 30px 80px rgba(0,0,0,.7),0 0 60px rgba(201,168,76,.06);margin-bottom:1.25rem;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 3%,#7a5c10 18%,#c9a84c 32%,#e8d08a 50%,#c9a84c 68%,#7a5c10 82%,transparent 97%);z-index:10;"></div>
+      <img src="https://images.unsplash.com/photo-1541602765605-c21290830624?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900" alt="Gran Salón Dorado" style="width:100%;height:260px;object-fit:cover;object-position:center 30%;display:block;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,3,10,.92) 0%,rgba(5,3,10,.45) 45%,transparent 70%);"></div>
+      <div style="position:absolute;bottom:1.25rem;left:1.25rem;right:1.25rem;">
+        <p style="font-family:'Montserrat',sans-serif;font-size:.38rem;letter-spacing:.5em;color:rgba(201,168,76,.55);font-weight:600;margin-bottom:.3rem;">BOGOTÁ · COLOMBIA</p>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#f5ede0;letter-spacing:.08em;line-height:1;">Gran Salón Dorado</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:rgba(201,168,76,.5);margin-top:.25rem;">Calle de la Elegancia 456</p>
+      </div>
+      <div id="venue-pin" style="position:absolute;top:1.1rem;right:1.1rem;width:46px;height:46px;border-radius:50%;background:rgba(5,3,10,.85);border:1.5px solid rgba(201,168,76,.6);box-shadow:0 0 20px rgba(201,168,76,.35);display:flex;align-items:center;justify-content:center;font-size:1.3rem;">📍</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.1rem;">
+      <div class="anim-hidden" style="background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,rgba(201,168,76,.03) 100%);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:1.1rem .9rem;text-align:center;position:relative;overflow:hidden;"><div style="font-size:1.3rem;margin-bottom:.5rem;">🏛️</div><div style="font-family:'Montserrat',sans-serif;font-size:.34rem;letter-spacing:.45em;color:rgba(201,168,76,.3);margin-bottom:.38rem;font-weight:600;">VENUE</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#c9a84c;font-weight:500;line-height:1.2;letter-spacing:.04em;">Gran Salón Dorado</div><div style="font-size:.36rem;color:rgba(201,168,76,.28);margin-top:.28rem;letter-spacing:.06em;">Salón principal</div></div>
+      <div class="anim-hidden" style="background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,rgba(201,168,76,.03) 100%);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:1.1rem .9rem;text-align:center;position:relative;overflow:hidden;"><div style="font-size:1.3rem;margin-bottom:.5rem;">📍</div><div style="font-family:'Montserrat',sans-serif;font-size:.34rem;letter-spacing:.45em;color:rgba(201,168,76,.3);margin-bottom:.38rem;font-weight:600;">DIRECCIÓN</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#c9a84c;font-weight:500;line-height:1.2;letter-spacing:.04em;">Calle de la Elegancia 456</div><div style="font-size:.36rem;color:rgba(201,168,76,.28);margin-top:.28rem;letter-spacing:.06em;">Bogotá, Colombia</div></div>
+      <div class="anim-hidden" style="background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,rgba(201,168,76,.03) 100%);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:1.1rem .9rem;text-align:center;position:relative;overflow:hidden;"><div style="font-size:1.3rem;margin-bottom:.5rem;">🕐</div><div style="font-family:'Montserrat',sans-serif;font-size:.34rem;letter-spacing:.45em;color:rgba(201,168,76,.3);margin-bottom:.38rem;font-weight:600;">HORA</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#c9a84c;font-weight:500;line-height:1.2;letter-spacing:.04em;">6:00 PM</div><div style="font-size:.36rem;color:rgba(201,168,76,.28);margin-top:.28rem;letter-spacing:.06em;">Puertas: 5:30 PM</div></div>
+      <div class="anim-hidden" style="background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,rgba(201,168,76,.03) 100%);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:1.1rem .9rem;text-align:center;position:relative;overflow:hidden;"><div style="font-size:1.3rem;margin-bottom:.5rem;">🚗</div><div style="font-family:'Montserrat',sans-serif;font-size:.34rem;letter-spacing:.45em;color:rgba(201,168,76,.3);margin-bottom:.38rem;font-weight:600;">PARKING</div><div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#c9a84c;font-weight:500;line-height:1.2;letter-spacing:.04em;">Gratuito</div><div style="font-size:.36rem;color:rgba(201,168,76,.28);margin-top:.28rem;letter-spacing:.06em;">Disponible en sitio</div></div>
+    </div>
+    <button onclick="window.open('https://maps.google.com/maps?q=Bogotá,+Colombia','_blank')" style="display:flex;align-items:center;justify-content:center;gap:.65rem;width:100%;padding:1.1rem;font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.22em;font-weight:700;background:linear-gradient(135deg,rgba(201,168,76,.07) 0%,rgba(201,168,76,.12) 100%);border:1px solid rgba(201,168,76,.45);border-radius:10px;color:#c9a84c;cursor:pointer;">
+      <span style="font-size:1rem;">📍</span> CÓMO LLEGAR <span style="font-size:.7rem;opacity:.6;">↗</span>
+    </button>
+    <div style="margin-top:2rem;text-align:center;padding:1.1rem 1.5rem;background:rgba(201,168,76,.03);border:1px solid rgba(201,168,76,.1);border-radius:10px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.82rem;color:rgba(201,168,76,.38);line-height:1.8;margin:0;">Te recomendamos llegar con 30 minutos de anticipación<br/>para disfrutar la bienvenida y encontrar tu lugar con calma.</p>
+    </div>
+  </section>
+  <div class="gold-line"></div>
+
+  <!-- ──── REGALO ──── -->
+  <section style="background:linear-gradient(170deg,#0e0b15 0%,#160f1e 55%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.75rem;">
+      <p class="sec-eyebrow">SI DESEAS OBSEQUIAR</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">REGALO</h2>
+      <p class="sec-subtitle">Con amor, lo que viene del corazón</p>
+    </div>
+    <!-- Intro card -->
+    <div class="anim-scale-hidden" style="text-align:center;padding:1.75rem 1.5rem;background:linear-gradient(135deg,rgba(201,168,76,.04) 0%,rgba(201,168,76,.08) 100%);border:1px solid rgba(201,168,76,.14);border-top:2px solid rgba(201,168,76,.5);border-radius:14px;margin-bottom:1.5rem;position:relative;overflow:hidden;">
+      <div style="font-size:1.6rem;margin-bottom:.65rem;">🎁</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(201,168,76,.7);line-height:1.9;margin:0;">Tu presencia es el mejor regalo que puedes darnos.</p>
+      <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);margin:.85rem auto;"></div>
+      <p style="font-family:'Montserrat',sans-serif;font-size:.38rem;letter-spacing:.3em;color:rgba(201,168,76,.3);margin:0;">SI DESEAS OBSEQUIARNOS ALGO · AQUÍ LAS OPCIONES</p>
+    </div>
+    <!-- Gift accordion -->
+    <div id="gifts-list"></div>
+    <!-- Footer note -->
+    <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(201,168,76,.03);border:1px solid rgba(201,168,76,.1);border-radius:10px;display:flex;gap:.75rem;align-items:flex-start;">
+      <span style="font-size:1rem;flex-shrink:0;margin-top:2px;">💌</span>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:rgba(201,168,76,.38);line-height:1.75;margin:0;">Con cada contribución, estás ayudando a construir los recuerdos y el hogar que Sofía y Andrés siempre soñaron.</p>
+    </div>
+  </section>
+  <div class="gold-line"></div>
+
+  <!-- ──── DRESS CODE ──── -->
+  <section style="background:linear-gradient(170deg,#160f1e 0%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.04) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.75rem;">
+      <p class="sec-eyebrow">VISTE PARA LA OCASIÓN</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">DRESS CODE</h2>
+      <p class="sec-subtitle">Esta noche merece tu mejor versión</p>
+    </div>
+    <div class="anim-scale-hidden" style="background:linear-gradient(135deg,#150e05,#160f1e);border:1px solid rgba(201,168,76,.15);border-top:2px solid rgba(201,168,76,.4);border-radius:14px;padding:2rem 1.5rem;margin-bottom:1.4rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.06),transparent 60%);pointer-events:none;"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:rgba(201,168,76,.65);line-height:2.1;">Una velada de alta elegancia merece un atuendo a la altura.</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:#c9a84c;margin-top:.5rem;letter-spacing:.08em;">Formal · Black Tie · Gold &amp; Ivory</div>
+      <div style="display:flex;justify-content:center;gap:13px;margin-top:1.75rem;">
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#07050a;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Negro</div></div>
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#2a1f08;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Café</div></div>
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#7a5c10;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Oro Viejo</div></div>
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#c9a84c;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Champán</div></div>
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#e8d08a;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Dorado</div></div>
+        <div class="dc-swatch anim-hidden" style="text-align:center;"><div class="dc-swatch-box" style="background:#f5ede0;"></div><div style="font-size:.3rem;color:rgba(201,168,76,.3);">Marfil</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      <div class="anim-left-hidden" style="display:flex;gap:1.1rem;align-items:flex-start;padding:1.25rem 1.35rem;background:linear-gradient(135deg,rgba(255,255,255,.015),rgba(201,168,76,.02));border-radius:12px;border:1px solid rgba(201,168,76,0.13);border-left:2.5px solid #c9a84c;box-shadow:0 4px 20px rgba(0,0,0,.25);"><div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.55);font-size:1.3rem;">👗</div><div><div style="font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.12em;color:#f5ede0;font-weight:700;margin-bottom:6px;">DAMAS</div><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:rgba(201,168,76,.5);line-height:1.8;">Vestido largo o cocktail en dorado, champán, marfil o tonos tierra. Accesorios brillantes y elegantes.</p></div></div>
+      <div class="anim-left-hidden" style="display:flex;gap:1.1rem;align-items:flex-start;padding:1.25rem 1.35rem;background:linear-gradient(135deg,rgba(255,255,255,.015),rgba(201,168,76,.02));border-radius:12px;border:1px solid rgba(184,148,58,0.13);border-left:2.5px solid #b8943a;box-shadow:0 4px 20px rgba(0,0,0,.25);"><div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(184,148,58,.18);border:1px solid rgba(184,148,58,.55);font-size:1.3rem;">🤵</div><div><div style="font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.12em;color:#f5ede0;font-weight:700;margin-bottom:6px;">CABALLEROS</div><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:rgba(201,168,76,.5);line-height:1.8;">Smoking o traje oscuro formal. Corbatín o corbata dorada. Esta noche es de alta elegancia.</p></div></div>
+      <div class="anim-left-hidden" style="display:flex;gap:1.1rem;align-items:flex-start;padding:1.25rem 1.35rem;background:linear-gradient(135deg,rgba(255,255,255,.015),rgba(201,168,76,.02));border-radius:12px;border:1px solid rgba(122,96,48,0.13);border-left:2.5px solid #7a6030;box-shadow:0 4px 20px rgba(0,0,0,.25);"><div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(122,96,48,.18);border:1px solid rgba(122,96,48,.55);font-size:1.3rem;">⚠️</div><div><div style="font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.12em;color:#f5ede0;font-weight:700;margin-bottom:6px;">NOTA IMPORTANTE</div><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:rgba(201,168,76,.5);line-height:1.8;">Por favor evita el blanco puro, para que la novia pueda brillar en su vestido.</p></div></div>
+    </div>
+  </section>
+  <div class="gold-line"></div>
+
+  <!-- ──── RSVP ──── -->
+  <section style="background:linear-gradient(170deg,#0e0b15 0%,#160f1e 55%,#0b0810 100%);padding:5rem 1.5rem 5.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:15%;left:10%;width:4px;height:4px;border-radius:50%;background:#c9a84c;opacity:.2;" id="p1"></div>
+    <div style="position:absolute;top:25%;right:8%;width:3px;height:3px;border-radius:50%;background:#c9a84c;opacity:.2;" id="p2"></div>
+    <div style="position:absolute;top:60%;left:5%;width:5px;height:5px;border-radius:50%;background:#c9a84c;opacity:.2;" id="p3"></div>
+    <div style="position:absolute;top:75%;right:12%;width:3px;height:3px;border-radius:50%;background:#c9a84c;opacity:.2;" id="p4"></div>
+    <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,168,76,.05) 0%,transparent 65%);pointer-events:none;"></div>
+    <div style="text-align:center;margin-bottom:2.75rem;">
+      <p class="sec-eyebrow">CONFIRMA TU PRESENCIA</p>
+      <div class="sec-ornament">
+        <div class="sec-ornament-line-l"></div>
+        <span class="sec-ornament-star">✦</span>
+        <div class="sec-ornament-line-r"></div>
+      </div>
+      <h2 class="sec-title gold-text">¿NOS ACOMPAÑAS?</h2>
+      <p class="sec-subtitle">Tu confirmación hace la diferencia</p>
+    </div>
+    <div class="anim-hidden" style="display:flex;align-items:center;gap:.9rem;padding:1.1rem 1.35rem;background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(201,168,76,.1));border:1px solid rgba(201,168,76,.22);border-left:3px solid #c9a84c;border-radius:10px;margin-bottom:2rem;position:relative;overflow:hidden;">
+      <span style="font-size:1.3rem;flex-shrink:0;">📅</span>
+      <div><div style="font-family:'Montserrat',sans-serif;font-size:.38rem;letter-spacing:.35em;color:rgba(201,168,76,.38);margin-bottom:3px;font-weight:600;">FECHA LÍMITE DE CONFIRMACIÓN</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#c9a84c;letter-spacing:.04em;">1 de Junio de 2027 · Cupos limitados</div></div>
+    </div>
+    <div class="anim-hidden" id="rsvp-wrap">
+      <div style="background:#160f1e;border:1px solid rgba(201,168,76,.16);border-radius:14px;padding:2.5rem 2rem;box-shadow:0 0 120px rgba(201,168,76,.06);" id="rsvp-form-card">
+        <div id="rsvp-form-inner">
+          <div style="margin-bottom:.9rem;"><label class="rsvp-label">NOMBRE COMPLETO</label><input class="rsvp-input" id="rsvp-name" type="text" placeholder="Ej: María González" /></div>
+          <div style="margin-bottom:1.25rem;"><label class="rsvp-label">NÚMERO DE ASISTENTES</label><input class="rsvp-input" id="rsvp-guests" type="number" min="1" max="10" placeholder="1 – 10 personas" value="1" /></div>
+          <div style="margin-bottom:1.9rem;">
+            <label class="rsvp-label">CONFIRMACIÓN</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;">
+              <button class="attend-btn active" id="btn-yes" onclick="setAttending(true)">✓ SÍ ASISTIRÉ</button>
+              <button class="attend-btn" id="btn-no" onclick="setAttending(false)">✗ NO PODRÉ</button>
             </div>
           </div>
+          <div id="rsvp-error" style="display:none;padding:.75rem 1rem;background:rgba(200,80,80,.08);border:1px solid rgba(200,80,80,.28);border-radius:7px;margin-bottom:1rem;font-size:.6rem;color:#e09090;"></div>
+          <button class="submit-btn" id="rsvp-submit" onclick="submitRsvp()">CONFIRMAR ASISTENCIA ✦</button>
+          <p style="font-size:.45rem;letter-spacing:.22em;color:rgba(201,168,76,.2);margin-top:.9rem;text-align:center;">ANTES DEL 1 DE JUN · CUPOS LIMITADOS · EVENTO EXCLUSIVO</p>
         </div>
-      </div>
-      <div class="form-card fade-right">
-        <div class="form-glow"></div>
-        <div class="form-h3">Solicitar Asesoría</div>
-        <p class="form-sub">Completa el formulario y nos contactaremos contigo por WhatsApp.</p>
-        <div class="form-fields">
-          <div>
-            <label>Nombre completo *</label>
-            <input type="text" id="f-name" placeholder="Juan García" />
+        <div id="rsvp-success" style="display:none;text-align:center;padding:1.75rem 0;">
+          <div style="width:76px;height:76px;background:rgba(201,168,76,.1);border:1.5px solid #c9a84c;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.75rem;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           </div>
-          <div class="field-row">
-            <div>
-              <label>Teléfono *</label>
-              <input type="tel" id="f-phone" placeholder="+57 300 000 0000" />
-            </div>
-            <div>
-              <label>Email</label>
-              <input type="email" id="f-email" placeholder="example@gmail.com" />
-            </div>
-          </div>
-          <div>
-            <label>Mensaje</label>
-            <textarea id="f-msg" rows="4" placeholder="Cuéntanos qué tipo de propiedad estás buscando..."></textarea>
-          </div>
-          <p class="form-error" id="f-error" style="display:none"></p>
-          <button class="btn-submit" onclick="submitForm()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Enviar por WhatsApp
-          </button>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:3rem;color:#f5ede0;font-weight:300;">¡Gracias!</h3>
+          <div style="display:flex;align-items:center;gap:.7rem;justify-content:center;margin:1.25rem 0;"><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.35));"></div><span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c9a84c;letter-spacing:.45em;">✦ ✦ ✦</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.35),transparent);"></div></div>
+          <p id="rsvp-thanks-msg" style="font-size:.6rem;color:rgba(201,168,76,.46);line-height:2.4;margin-top:.6rem;"></p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <div class="gold-line"></div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-glow"></div>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <img src="https://hercules-cdn.com/file_xtsxs7Dq97k25pZHKepwX1kp" alt="Villamil Finca Raíz" class="footer-logo" />
-        <p class="footer-bio">Expertos en finca raíz y construcción en Bogotá, Colombia. Más de 15 años acompañando a nuestros clientes en la inversión de sus sueños.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn">IG</a>
-          <a href="#" class="social-btn">FB</a>
-        </div>
+  <!-- ──── FOOTER ──── -->
+  <footer style="background:linear-gradient(180deg,#020108 0%,#040210 100%);padding:5rem 1.75rem 3.25rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:25%;left:50%;transform:translate(-50%,-50%);width:360px;height:360px;background:radial-gradient(circle,rgba(201,168,76,.05),transparent 68%);pointer-events:none;"></div>
+    <div style="display:flex;align-items:center;gap:.75rem;justify-content:center;margin-bottom:2.5rem;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3));"></div>
+      <div style="display:flex;gap:.4rem;align-items:center;">
+        <span class="ft-star anim-hidden" style="font-family:'Cormorant Garamond',serif;font-size:.8rem;color:#c9a84c;">✦</span>
+        <span class="ft-star anim-hidden" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#c9a84c;">✦</span>
+        <span class="ft-star anim-hidden" style="font-family:'Cormorant Garamond',serif;font-size:.8rem;color:#c9a84c;">✦</span>
       </div>
-      <div>
-        <div class="footer-nav-title">Navegación</div>
-        <ul class="footer-nav-list">
-          <li><button onclick="scrollTo('#inicio')"><span class="nav-line"></span>Inicio</button></li>
-          <li><button onclick="scrollTo('#propiedades')"><span class="nav-line"></span>Propiedades</button></li>
-          <li><button onclick="scrollTo('#servicios')"><span class="nav-line"></span>Servicios</button></li>
-          <li><button onclick="scrollTo('#nosotros')"><span class="nav-line"></span>Nosotros</button></li>
-          <li><button onclick="scrollTo('#contacto')"><span class="nav-line"></span>Contacto</button></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-nav-title">Contacto</div>
-        <div class="footer-contact-info">
-          <p>Calle 100 # 19-54, Bogotá</p>
-          <a href="https://wa.me/573001234567" target="_blank">+57 300 123 4567</a>
-          <a href="mailto:info@villamil.com.co">info@villamil.com.co</a>
-          <p>Lun - Sáb: 8:00 am – 6:00 pm</p>
-        </div>
-      </div>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.3),transparent);"></div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy" id="footer-year"></p>
-      <p class="footer-copy">Bogotá, Colombia — Matrícula Inmobiliaria Lic. 0001234</p>
+    <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;line-height:2.8;color:rgba(201,168,76,.5);font-size:1.15rem;margin:0 0 2.5rem;padding:0 .5rem;">
+      <span class="ft-line anim-hidden" style="display:block;">Hoy comenzamos a escribir</span>
+      <span class="ft-line anim-hidden" style="display:block;">el capítulo más hermoso</span>
+      <span class="ft-line anim-hidden" style="display:block;">de nuestra historia.</span>
+    </blockquote>
+    <div class="anim-scale-hidden" style="display:inline-block;margin-bottom:3.25rem;padding:1.25rem 3.5rem;border:1px solid rgba(201,168,76,.25);border-radius:8px;background:linear-gradient(135deg,rgba(201,168,76,.04),rgba(201,168,76,.1));">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,5vw,2.3rem);color:#f5ede0;font-style:italic;letter-spacing:.07em;">Con amor, Sofía &amp; Andrés</div>
     </div>
-  </div>
-</footer>
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.25),rgba(201,168,76,.5),rgba(201,168,76,.25),transparent);margin-bottom:2.75rem;"></div>
+    <!-- Copyright -->
+    <div style="text-align:center;">
+      <img src="https://hercules-cdn.com/file_GMr6NNn4tK0oI5vL3CVb9Svf" alt="Gueka Ideas" style="width:140px;margin:0 auto 1.5rem;display:block;opacity:.42;filter:brightness(0) invert(1);" onerror="this.style.display='none'" />
+      <p style="font-size:.48rem;color:rgba(255,255,255,.22);letter-spacing:.06em;line-height:2.2;max-width:340px;margin:0 auto;">Esta tarjeta digital es propiedad exclusiva de Gueka Ideas.</p>
+      <p style="font-size:.48rem;color:rgba(255,255,255,.22);letter-spacing:.06em;line-height:2.2;max-width:340px;margin:0 auto;">Uso permitido únicamente para fines personales.</p>
+      <p style="font-size:.42rem;color:rgba(201,168,76,.3);letter-spacing:.22em;line-height:2.2;max-width:340px;margin:0 auto;" id="copyright-year"></p>
+    </div>
+  </footer>
 
-<!-- WHATSAPP FAB -->
-<a href="https://wa.me/573001234567" target="_blank" class="wa-fab" title="Contactar por WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+</div>
+
+<!-- ══════════════════════════════ LIGHTBOX ══════════════════════════════ -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div style="max-width:700px;width:100%;position:relative;" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="" />
+    <div id="lightbox-caption" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:#f5ede0;text-align:center;margin-top:1.1rem;"></div>
+    <div id="lightbox-counter" style="font-size:.5rem;letter-spacing:.38em;color:rgba(201,168,76,.55);text-align:center;margin-top:5px;"></div>
+    <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;width:34px;height:34px;background:#160f1e;border:1px solid rgba(201,168,76,.45);border-radius:50%;color:#c9a84c;cursor:pointer;font-size:.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;">✕</button>
+    <button onclick="lbNav(-1)" style="position:absolute;top:42%;left:-54px;width:42px;height:42px;background:rgba(0,0,0,.9);border:1px solid rgba(201,168,76,.4);border-radius:8px;color:#c9a84c;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">←</button>
+    <button onclick="lbNav(1)"  style="position:absolute;top:42%;right:-54px;width:42px;height:42px;background:rgba(0,0,0,.9);border:1px solid rgba(201,168,76,.4);border-radius:8px;color:#c9a84c;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">→</button>
+  </div>
+</div>
 
 <script>
-  // Copyright year
-  document.getElementById('footer-year').textContent =
-    '© ' + new Date().getFullYear() + ' Villamil Finca Raíz. Todos los derechos reservados.';
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const EVENT_DATE = new Date("2027-06-20T18:00:00");
 
-  // Smooth scroll helper
-  function scrollTo(id) {
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
+const PROGRAM = [
+  { num:"I",   title:"Recepción",       time:"6:00 PM",  sub:"Puertas abren · 5:30 PM",  desc:"Bienvenida con champán, cócteles de bienvenida y música ambiente. El inicio de una noche que recordarás para siempre.",   accent:"#c9a84c", icon:"🥂" },
+  { num:"II",  title:"Ceremonia",        time:"7:00 PM",  sub:"Salón Principal",           desc:"La unión sagrada de Sofía y Andrés ante sus seres más queridos. Un momento eterno lleno de amor y emoción.",                accent:"#e0c878", icon:"💍" },
+  { num:"III", title:"Sesión de Fotos",  time:"7:45 PM",  sub:"Jardín & Salón",           desc:"Momentos mágicos para inmortalizar junto a los novios, la familia y los amigos más cercanos.",                              accent:"#b8943a", icon:"📷" },
+  { num:"IV",  title:"Cena de Gala",     time:"8:30 PM",  sub:"Salón Dorado",             desc:"Banquete de alta cocina con menú de cinco tiempos, maridaje de vinos y brindis desde el corazón.",                          accent:"#d4b86a", icon:"🍽️" },
+  { num:"V",   title:"Pastel & Brindis", time:"10:00 PM", sub:"Momento especial",          desc:"El corte del pastel nupcial, palabras especiales de los novios y un brindis que sellará este hermoso momento.",              accent:"#c9a84c", icon:"🎂" },
+  { num:"VI",  title:"Baile & Fiesta",   time:"10:30 PM", sub:"Hasta el amanecer",         desc:"La pista se abre para todos. Música, baile y celebración — ¡esta noche no tiene fin!",                                     accent:"#e8d08a", icon:"🎵" },
+];
 
-  // Mobile menu
-  let menuOpen = false;
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
-    document.getElementById('ham-icon').style.display = menuOpen ? 'none' : 'block';
-    document.getElementById('close-icon').style.display = menuOpen ? 'block' : 'none';
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-  }
-  function closeMenu() {
-    menuOpen = false;
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('ham-icon').style.display = 'block';
-    document.getElementById('close-icon').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  function navTo(id) {
-    closeMenu();
-    setTimeout(() => scrollTo(id), 100);
-  }
+const GALLERY = [
+  { url:"https://images.unsplash.com/photo-1610759862400-de105ccacdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"El gran día ✦" },
+  { url:"https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"Amor eterno" },
+  { url:"https://images.unsplash.com/photo-1649183424680-464747a8e43d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"Flores de primavera" },
+  { url:"https://images.unsplash.com/photo-1618566864264-fb013f791da4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"Tomados de la mano" },
+  { url:"https://images.unsplash.com/photo-1545989828-65a1092f6e2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"Salón de ensueño" },
+  { url:"https://images.unsplash.com/photo-1718463384055-738905bdd16e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800", cap:"Noche mágica ✦" },
+];
 
-  // Navbar scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+const GIFTS = [
+  { id:"nequi", title:"Nequi",        tag:"TRANSFERENCIA DIGITAL",   sub:"Colombia · Pago móvil",    accent:"#c9a84c", emoji:"📱", number:"310 000 0000",            name:"Sofía Montoya",  hint:"Abre Nequi y transfiere al número" },
+  { id:"davip", title:"Daviplata",    tag:"TRANSFERENCIA DIGITAL",   sub:"Colombia · Pago móvil",    accent:"#d4b86a", emoji:"💳", number:"311 000 0000",            name:"Andrés Restrepo",hint:"Abre Daviplata y transfiere al número" },
+  { id:"pse",   title:"PSE / Banco",  tag:"PAGO SEGURO EN LÍNEA",    sub:"Colombia · Banco Bogotá",  accent:"#b8943a", emoji:"🏦", number:"Cta. Ahorros · 0000000000",name:"Andrés Restrepo",hint:"Cuenta de ahorros Banco Bogotá" },
+];
+
+// ─── SPLASH ──────────────────────────────────────────────────────────────────
+document.getElementById('splash').addEventListener('click', openInvitation);
+
+function openInvitation() {
+  const splash = document.getElementById('splash');
+  const main   = document.getElementById('main');
+  splash.classList.add('hide');
+  setTimeout(() => {
+    splash.style.display = 'none';
+    main.classList.add('show');
+    initAll();
+  }, 700);
+}
+
+// ─── COPYRIGHT YEAR ──────────────────────────────────────────────────────────
+document.getElementById('copyright-year').textContent =
+  `© ${new Date().getFullYear()} GUEKA IDEAS · TODOS LOS DERECHOS RESERVADOS`;
+
+// ─── INFINITY PULSE ──────────────────────────────────────────────────────────
+anime({ targets: '#infinity-sym', opacity: [0.7, 1, 0.7], duration: 3000, loop: true, easing: 'easeInOutSine' });
+
+// ─── INIT ALL (called after splash) ─────────────────────────────────────────
+function initAll() {
+  buildProgram();
+  buildGifts();
+  initGallery();
+  initCountdown();
+  initTicker();
+  initAnimatedTitle();
+  initScrollObserver();
+  animateParticles();
+  animateVenuePin();
+}
+
+// ─── PROGRAM ─────────────────────────────────────────────────────────────────
+function buildProgram() {
+  const list = document.getElementById('program-list');
+  list.innerHTML = PROGRAM.map(p => `
+    <div class="prog-card anim-hidden" style="display:flex;gap:1rem;align-items:flex-start;">
+      <div style="flex-shrink:0;width:56px;display:flex;flex-direction:column;align-items:center;padding-top:6px;gap:6px;">
+        <div style="width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#fffbe8 20%,${p.accent} 70%);border:1.5px solid ${p.accent};box-shadow:0 0 8px ${p.accent}88;z-index:2;flex-shrink:0;" class="prog-dot"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:.65rem;font-style:italic;color:${p.accent};letter-spacing:.06em;line-height:1;">${p.num}</div>
+      </div>
+      <div style="flex:1;background:linear-gradient(135deg,rgba(255,255,255,.025) 0%,rgba(201,168,76,.03) 100%);border:1px solid ${p.accent}22;border-left:2px solid ${p.accent}88;border-radius:12px;padding:1.1rem 1.15rem 1rem;position:relative;overflow:hidden;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.45rem;">
+          <div style="display:flex;align-items:center;gap:.55rem;"><span style="font-size:1.15rem;line-height:1;">${p.icon}</span><div style="font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.1em;color:#f5ede0;font-weight:700;">${p.title}</div></div>
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div style="font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;color:${p.accent};letter-spacing:.06em;line-height:1;">${p.time}</div><div style="font-size:.35rem;color:rgba(201,168,76,.3);letter-spacing:.08em;white-space:nowrap;">${p.sub}</div></div>
+        </div>
+        <div style="height:1px;background:linear-gradient(90deg,${p.accent}44,transparent);margin-bottom:.55rem;"></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.82rem;color:rgba(245,237,224,.5);line-height:1.75;margin:0;">${p.desc}</p>
+      </div>
+    </div>`).join('');
+
+  // Animate dots
+  anime({ targets: '.prog-dot', boxShadow: ['0 0 4px rgba(201,168,76,0.4)','0 0 18px rgba(201,168,76,0.9)','0 0 4px rgba(201,168,76,0.4)'], scale: [1,1.25,1], duration: 2200, easing: 'easeInOutSine', loop: true, delay: anime.stagger(360) });
+}
+
+// ─── GIFTS ───────────────────────────────────────────────────────────────────
+let openGift = null;
+function buildGifts() {
+  const list = document.getElementById('gifts-list');
+  list.innerHTML = GIFTS.map(g => `
+    <div class="gift-card anim-hidden" id="gift-${g.id}">
+      <button class="gift-header" onclick="toggleGift('${g.id}')" style="border-bottom:none;">
+        <div style="flex-shrink:0;width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:${g.accent}18;border:1px solid ${g.accent}55;font-size:1.4rem;">${g.emoji}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-family:'Montserrat',sans-serif;font-size:.34rem;letter-spacing:.4em;color:rgba(201,168,76,.3);font-weight:600;margin-bottom:.3rem;">${g.tag}</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:#f5ede0;letter-spacing:.06em;line-height:1;">${g.title}</div>
+          <div style="font-size:.38rem;color:rgba(201,168,76,.3);margin-top:.28rem;letter-spacing:.1em;">${g.sub}</div>
+        </div>
+        <div id="chevron-${g.id}" style="flex-shrink:0;transition:transform .3s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${g.accent}" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </button>
+      <div class="gift-body" id="gift-body-${g.id}">
+        <div class="gift-body-inner">
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:rgba(201,168,76,.38);margin:1rem 0 .9rem;letter-spacing:.04em;">${g.hint}</p>
+          <div class="gift-number-row">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.65rem;">
+              <div><div style="font-size:.33rem;letter-spacing:.4em;color:rgba(201,168,76,.3);margin-bottom:.3rem;font-family:'Montserrat',sans-serif;font-weight:600;">NÚMERO</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#e8d08a;letter-spacing:.06em;">${g.number}</div></div>
+              <button class="copy-btn" onclick="copyText('${g.number}',this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPIAR</button>
+            </div>
+            <div style="height:1px;background:linear-gradient(90deg,${g.accent}33,transparent);margin-bottom:.65rem;"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+              <div><div style="font-size:.33rem;letter-spacing:.4em;color:rgba(201,168,76,.3);margin-bottom:.3rem;font-family:'Montserrat',sans-serif;font-weight:600;">A NOMBRE DE</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#e8d08a;letter-spacing:.06em;">${g.name}</div></div>
+              <button class="copy-btn" onclick="copyText('${g.name}',this)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPIAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function toggleGift(id) {
+  const body = document.getElementById('gift-body-' + id);
+  const chevron = document.getElementById('chevron-' + id);
+  const card = document.getElementById('gift-' + id);
+  const isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.gift-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('[id^="chevron-"]').forEach(c => c.style.transform = 'rotate(0deg)');
+  document.querySelectorAll('.gift-card').forEach(c => { c.style.borderColor = 'rgba(201,168,76,.14)'; c.style.boxShadow = '0 4px 20px rgba(0,0,0,.3)'; });
+  if (!isOpen) {
+    body.classList.add('open');
+    chevron.style.transform = 'rotate(180deg)';
+    card.style.borderColor = 'rgba(201,168,76,.5)';
+    card.style.boxShadow = '0 0 40px rgba(201,168,76,.1), 0 8px 30px rgba(0,0,0,.4)';
+  }
+}
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> COPIADO';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPIAR';
+    }, 2000);
   });
+}
 
-  // Scroll-reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        // stagger siblings
-        const siblings = e.target.parentElement.querySelectorAll('.fade-up');
-        siblings.forEach((s, i) => {
-          s.style.transitionDelay = (i * 0.1) + 's';
-        });
+// ─── GALLERY ─────────────────────────────────────────────────────────────────
+let galleryIdx = 0, galTimer = null;
+
+function initGallery() {
+  // Build thumbnails
+  const thumbs = document.getElementById('gal-thumbs');
+  thumbs.innerHTML = GALLERY.map((img, i) => `
+    <button class="gal-thumb ${i===0?'active':''}" id="thumb-${i}" onclick="galGoTo(${i})">
+      <img src="${img.url}" alt="" />
+    </button>`).join('');
+  galRender();
+  galTimer = setInterval(() => galGoTo((galleryIdx + 1) % GALLERY.length), 5000);
+}
+function galRender() {
+  document.getElementById('gal-img').src = GALLERY[galleryIdx].url;
+  document.getElementById('gal-img').alt = GALLERY[galleryIdx].cap;
+  document.getElementById('gal-caption').textContent = GALLERY[galleryIdx].cap;
+  document.getElementById('gal-counter').textContent = `${galleryIdx+1} / ${GALLERY.length}`;
+  document.getElementById('gal-progress-fill').style.width = `${((galleryIdx+1)/GALLERY.length)*100}%`;
+  document.querySelectorAll('.gal-thumb').forEach((t,i) => t.classList.toggle('active', i===galleryIdx));
+}
+function galGoTo(i) {
+  galleryIdx = (i + GALLERY.length) % GALLERY.length;
+  galRender();
+}
+function galNav(dir) {
+  clearInterval(galTimer);
+  galGoTo(galleryIdx + dir);
+  galTimer = setInterval(() => galGoTo((galleryIdx+1) % GALLERY.length), 5000);
+}
+
+// Lightbox
+let lbIdx = 0;
+function openLightbox(i) {
+  lbIdx = i;
+  lbRender();
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+function lbNav(dir) { lbIdx = (lbIdx + dir + GALLERY.length) % GALLERY.length; lbRender(); }
+function lbRender() {
+  document.getElementById('lightbox-img').src = GALLERY[lbIdx].url;
+  document.getElementById('lightbox-caption').textContent = GALLERY[lbIdx].cap;
+  document.getElementById('lightbox-counter').textContent = `${lbIdx+1} DE ${GALLERY.length}`;
+}
+
+// ─── COUNTDOWN ───────────────────────────────────────────────────────────────
+function initCountdown() {
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function update() {
+    const diff = EVENT_DATE - Date.now();
+    if (diff <= 0) { ['d','h','m','s'].forEach(k => document.getElementById('cd-'+k).textContent='00'); return; }
+    document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// ─── TICKER 3D ───────────────────────────────────────────────────────────────
+function initTicker() {
+  const ITEMS = ["✦ SOFÍA & ANDRÉS","✦ BODA","✦ 20 JUN 2027","✦ AMOR ETERNO","✦ BLACK TIE","✦ ESTÁS INVITADO","✦ CHAMPÁN & ORO","✦ BOGOTÁ 2027"];
+  const text  = ITEMS.join("   ");
+  const ticker = document.getElementById('ticker');
+  ticker.innerHTML = [...text].map((ch,i) => {
+    if (ch===' ') return `<span style="display:inline-block;"> </span>`;
+    return `<span class="ticker-char-3d" style=""><em class="face face-top" style="position:absolute;left:0;bottom:100%;transform-origin:50% 100%;transform:rotateX(-90deg);font-style:normal;">${ch}</em><em class="face-front" style="font-style:normal;">${ch}</em><em class="face face-bottom" style="position:absolute;left:0;top:100%;transform-origin:50% 0%;transform:rotateX(90deg);font-style:normal;">${ch}</em></span>`;
+  }).join('');
+
+  anime.timeline({ loop: true, easing: 'linear' })
+    .add({ targets: '.ticker-char-3d', rotateX: -90, duration: 750, delay: anime.stagger(100) })
+    .add({ targets: '.ticker-char-3d .face-top', opacity: [0.5, 0], duration: 750, delay: anime.stagger(100) }, 0)
+    .add({ targets: '.ticker-char-3d .face-front', opacity: [1, 0.5], duration: 750, delay: anime.stagger(100) }, 0)
+    .add({ targets: '.ticker-char-3d .face-bottom', opacity: [0.5, 1], duration: 750, delay: anime.stagger(100) }, 0);
+}
+
+// ─── ANIMATED TITLE ──────────────────────────────────────────────────────────
+function initAnimatedTitle() {
+  anime({
+    targets: '.wt-char',
+    strokeDashoffset: [800, 0, -800],
+    opacity: [1, 1, 0.2],
+    duration: 2800,
+    delay: anime.stagger(120),
+    easing: 'easeInOutQuad',
+    loop: true,
+  });
+}
+
+// ─── INTERSECTION OBSERVER SCROLL ANIMS ─────────────────────────────────────
+function initScrollObserver() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.classList.contains('anim-hidden')) {
+        el.classList.add('anim-visible');
+        el.classList.remove('anim-hidden');
+      } else if (el.classList.contains('anim-scale-hidden')) {
+        el.classList.add('anim-scale-visible');
+        el.classList.remove('anim-scale-hidden');
+      } else if (el.classList.contains('anim-left-hidden')) {
+        el.classList.add('anim-left-visible');
+        el.classList.remove('anim-left-hidden');
       }
+      io.unobserve(el);
     });
-  }, { threshold: 0.1, rootMargin: '-60px' });
+  }, { threshold: 0.12 });
 
-  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
-
-  // Contact form
-  function submitForm() {
-    const name  = document.getElementById('f-name').value.trim();
-    const phone = document.getElementById('f-phone').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const msg   = document.getElementById('f-msg').value.trim();
-    const err   = document.getElementById('f-error');
-
-    if (!name || !phone) {
-      err.textContent = 'Por favor completa nombre y teléfono.';
-      err.style.display = 'block';
-      return;
-    }
-    err.style.display = 'none';
-    const text = `Hola, soy ${name}. Teléfono: ${phone}.${email ? ' Email: ' + email + '.' : ''} ${msg || 'Me gustaría recibir más información.'}`;
-    window.open('https://wa.me/573001234567?text=' + encodeURIComponent(text), '_blank');
-  }
-
-  // Enter key in form
-  document.querySelectorAll('#f-name, #f-phone, #f-email').forEach(el => {
-    el.addEventListener('keydown', e => { if (e.key === 'Enter') submitForm(); });
+  // Observe with delays using CSS
+  document.querySelectorAll('.anim-hidden, .anim-scale-hidden, .anim-left-hidden').forEach((el, i) => {
+    el.style.transitionDelay = (i % 5) * 0.08 + 's';
+    io.observe(el);
   });
+}
+
+// ─── RSVP ────────────────────────────────────────────────────────────────────
+let attending = true;
+function setAttending(val) {
+  attending = val;
+  document.getElementById('btn-yes').classList.toggle('active', val);
+  document.getElementById('btn-no').classList.toggle('active', !val);
+}
+function submitRsvp() {
+  const name   = document.getElementById('rsvp-name').value.trim();
+  const guests = parseInt(document.getElementById('rsvp-guests').value, 10);
+  const err    = document.getElementById('rsvp-error');
+  if (!name) { err.style.display='block'; err.textContent='⚠ Por favor ingresa tu nombre completo'; return; }
+  if (!guests || guests < 1) { err.style.display='block'; err.textContent='⚠ Ingresa un número válido de asistentes'; return; }
+  err.style.display='none';
+  // Show success (in a real app you'd POST to a server here)
+  document.getElementById('rsvp-form-inner').style.display='none';
+  document.getElementById('rsvp-success').style.display='block';
+  document.getElementById('rsvp-thanks-msg').innerHTML =
+    `Tu respuesta ha sido registrada, <span style="color:#c9a84c;font-weight:600;">${name}</span>.<br/>¡Te esperamos con toda la elegancia!`;
+}
+
+// ─── PARTICLES (RSVP) ────────────────────────────────────────────────────────
+function animateParticles() {
+  ['p1','p2','p3','p4'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    anime({ targets: el, translateY: [0,-12,0], opacity: [0.2,0.6,0.2], duration: 2000+i*400, easing:'easeInOutSine', loop:true, delay:i*300 });
+  });
+}
+
+// ─── VENUE PIN BOUNCE ────────────────────────────────────────────────────────
+function animateVenuePin() {
+  anime({ targets: '#venue-pin', translateY:[0,-5,0], duration:1800, easing:'easeInOutSine', loop:true });
+}
+
+// ─── FOOTER STARS ROTATION ───────────────────────────────────────────────────
+// handled by scroll observer (anim-hidden)
 </script>
 </body>
 </html>
