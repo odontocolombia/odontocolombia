@@ -800,9 +800,7 @@ const CFG = {
     <div style="position:absolute;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(0,212,255,.9),rgba(255,229,0,.7),transparent);box-shadow:0 0 14px rgba(0,212,255,.8);animation:gueka-scan 3.5s ease-in-out infinite;top:0"></div>
     <!-- glow ring + logo -->
     <div style="position:relative;display:inline-block;margin-bottom:1.2rem">
-      <div style="position:absolute;inset:-20px;border-radius:50%;background:conic-gradient(from 0deg,#00D4FF,#9B59B6,#FFE500,#5DC645,#00D4FF);filter:blur(14px);opacity:.5;animation:gueka-spin 5s linear infinite"></div>
-      <div style="position:absolute;inset:-8px;border-radius:50%;border:1.5px solid rgba(0,212,255,.4);animation:gueka-pulse 2.5s ease-in-out infinite"></div>
-      <img src="https://hercules-cdn.com/file_rebAGZj75a2eQqJPRrsi9mRX" alt="Gueka Ideas" id="gueka-logo" style="width:165px;display:block;position:relative;filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(0,212,255,1)) drop-shadow(0 0 28px rgba(155,89,182,.8));opacity:0;animation:gueka-fadein 1s ease .3s forwards" />
+      <img src="https://hercules-cdn.com/file_rebAGZj75a2eQqJPRrsi9mRX" alt="Gueka Ideas" id="gueka-logo" style="width:165px;display:block;position:relative;filter:brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,.9)) drop-shadow(0 0 24px rgba(255,255,255,.5)) drop-shadow(0 0 42px rgba(0,212,255,.4));opacity:0;animation:gueka-fadein 1s ease .3s forwards, gueka-logo-breathe 3s ease-in-out 1.3s infinite" />
     </div>
     <!-- letter-by-letter brand -->
     <div id="gueka-brand" style="font-family:'Luckiest Guy',cursive;font-size:.78rem;letter-spacing:.4em;margin-bottom:.6rem;display:flex;justify-content:center;flex-wrap:wrap"></div>
@@ -1092,6 +1090,10 @@ init();
 @keyframes gueka-dot     { 0%,100%{transform:translateY(0) scale(1);opacity:.5} 50%{transform:translateY(-5px) scale(1.7);opacity:1} }
 @keyframes gueka-letter  { 0%{opacity:0;transform:translateY(14px) scale(.7) rotate(-8deg)} 100%{opacity:1;transform:translateY(0) scale(1) rotate(0deg)} }
 @keyframes gueka-glow    { 0%,100%{text-shadow:0 0 6px currentColor} 50%{text-shadow:0 0 20px currentColor,0 0 38px currentColor} }
+@keyframes gueka-logo-breathe {
+  0%,100% { filter:brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,.7)) drop-shadow(0 0 18px rgba(255,255,255,.3)) drop-shadow(0 0 32px rgba(0,212,255,.25)); }
+  50%     { filter:brightness(0) invert(1) drop-shadow(0 0 16px rgba(255,255,255,1)) drop-shadow(0 0 36px rgba(255,255,255,.6)) drop-shadow(0 0 60px rgba(0,212,255,.6)); }
+}
 
 /* ── CARD SCROLL REVEAL ── */
 .card, .hero-card {
