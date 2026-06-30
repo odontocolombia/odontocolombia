@@ -793,14 +793,31 @@ const CFG = {
   <p class="footer-date"  id="footer-date"></p>
   <p class="footer-tagline">"Al Infinito y Más Allá ★"</p>
 
-  <!-- Gueka Ideas watermark -->
-  <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,212,255,.15)">
-    <img src="https://hercules-cdn.com/file_rebAGZj75a2eQqJPRrsi9mRX" alt="Gueka Ideas" style="width:180px;margin:0 auto 1rem;display:block;filter:brightness(0) invert(1);opacity:.85" />
-    <p style="font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(196,181,253,.5);line-height:1.8;margin-top:.25rem">
-      Esta tarjeta digital es propiedad exclusiva de Gueka Ideas.<br/>
-      Uso permitido únicamente para fines personales.<br/>
-      © 2026 GUEKA IDEAS · TODOS LOS DERECHOS RESERVADOS
-    </p>
+  <!-- Gueka Ideas watermark animated -->
+  <div id="gueka-watermark" style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(0,212,255,.18);position:relative;overflow:hidden;text-align:center;padding-bottom:1.5rem">
+    <canvas id="gueka-particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.6"></canvas>
+    <!-- scan bar -->
+    <div style="position:absolute;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(0,212,255,.9),rgba(255,229,0,.7),transparent);box-shadow:0 0 14px rgba(0,212,255,.8);animation:gueka-scan 3.5s ease-in-out infinite;top:0"></div>
+    <!-- glow ring + logo -->
+    <div style="position:relative;display:inline-block;margin-bottom:1.2rem">
+      <div style="position:absolute;inset:-20px;border-radius:50%;background:conic-gradient(from 0deg,#00D4FF,#9B59B6,#FFE500,#5DC645,#00D4FF);filter:blur(14px);opacity:.5;animation:gueka-spin 5s linear infinite"></div>
+      <div style="position:absolute;inset:-8px;border-radius:50%;border:1.5px solid rgba(0,212,255,.4);animation:gueka-pulse 2.5s ease-in-out infinite"></div>
+      <img src="https://hercules-cdn.com/file_rebAGZj75a2eQqJPRrsi9mRX" alt="Gueka Ideas" id="gueka-logo" style="width:165px;display:block;position:relative;filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(0,212,255,1)) drop-shadow(0 0 28px rgba(155,89,182,.8));opacity:0;animation:gueka-fadein 1s ease .3s forwards" />
+    </div>
+    <!-- letter-by-letter brand -->
+    <div id="gueka-brand" style="font-family:'Luckiest Guy',cursive;font-size:.78rem;letter-spacing:.4em;margin-bottom:.6rem;display:flex;justify-content:center;flex-wrap:wrap"></div>
+    <!-- copyright lines -->
+    <p style="font-size:.35rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(196,181,253,0);line-height:2;animation:gueka-linefade 1s ease 1.9s forwards">Esta tarjeta digital es propiedad exclusiva de Gueka Ideas.</p>
+    <p style="font-size:.35rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(196,181,253,0);line-height:2;animation:gueka-linefade 1s ease 2.4s forwards">Uso permitido únicamente para fines personales.</p>
+    <p style="font-size:.35rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,229,0,0);line-height:2;animation:gueka-goldfade 1s ease 2.9s forwards">© 2026 GUEKA IDEAS · TODOS LOS DERECHOS RESERVADOS</p>
+    <!-- bouncing dots -->
+    <div style="display:flex;justify-content:center;gap:.45rem;margin-top:1rem">
+      <div style="width:5px;height:5px;border-radius:50%;background:#00D4FF;animation:gueka-dot 1.6s ease-in-out 0s infinite"></div>
+      <div style="width:5px;height:5px;border-radius:50%;background:#9B59B6;animation:gueka-dot 1.6s ease-in-out .2s infinite"></div>
+      <div style="width:5px;height:5px;border-radius:50%;background:#FFE500;animation:gueka-dot 1.6s ease-in-out .4s infinite"></div>
+      <div style="width:5px;height:5px;border-radius:50%;background:#5DC645;animation:gueka-dot 1.6s ease-in-out .6s infinite"></div>
+      <div style="width:5px;height:5px;border-radius:50%;background:#00D4FF;animation:gueka-dot 1.6s ease-in-out .8s infinite"></div>
+    </div>
   </div>
 </footer>
 </div><!-- /main -->
@@ -1062,6 +1079,285 @@ init();
     pupilL.style.transform = 'translate(-50%, -50%)';
     pupilR.style.transform = 'translate(-50%, -50%)';
   });
+})();
+</script>
+
+<style>
+@keyframes gueka-spin    { to { transform:rotate(360deg); } }
+@keyframes gueka-pulse   { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:.8;transform:scale(1.1)} }
+@keyframes gueka-scan    { 0%{top:0%;opacity:0} 8%{opacity:1} 92%{opacity:1} 100%{top:100%;opacity:0} }
+@keyframes gueka-fadein  { to { opacity:1; } }
+@keyframes gueka-linefade  { to { color:rgba(196,181,253,.7); } }
+@keyframes gueka-goldfade  { to { color:rgba(255,229,0,.65); } }
+@keyframes gueka-dot     { 0%,100%{transform:translateY(0) scale(1);opacity:.5} 50%{transform:translateY(-5px) scale(1.7);opacity:1} }
+@keyframes gueka-letter  { 0%{opacity:0;transform:translateY(14px) scale(.7) rotate(-8deg)} 100%{opacity:1;transform:translateY(0) scale(1) rotate(0deg)} }
+@keyframes gueka-glow    { 0%,100%{text-shadow:0 0 6px currentColor} 50%{text-shadow:0 0 20px currentColor,0 0 38px currentColor} }
+
+/* ── CARD SCROLL REVEAL ── */
+.card, .hero-card {
+  opacity: 0;
+  transform: translateY(36px) scale(.97);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.34,1.56,.64,1);
+}
+.card.in-view, .hero-card.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── PULSING BORDER ON CARDS ── */
+@keyframes borderPulse {
+  0%,100% { box-shadow: 0 6px 30px rgba(13,11,46,.7), 0 0 40px rgba(155,89,182,.15); }
+  50%     { box-shadow: 0 6px 30px rgba(13,11,46,.7), 0 0 55px rgba(155,89,182,.45), 0 0 0 1.5px rgba(0,212,255,.5); }
+}
+.card { animation: borderPulse 4s ease-in-out infinite; }
+
+/* ── GLOW TOP LINE ON CARDS ── */
+@keyframes topLineShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.card::before {
+  background: linear-gradient(to right, transparent, #9B59B6, #FFE135, #00D4FF, #9B59B6, transparent);
+  background-size: 200% auto;
+  animation: topLineShimmer 3s linear infinite;
+}
+
+/* ── PHOTO RING SPIN ── */
+@keyframes ringRotate {
+  to { transform: rotate(360deg); }
+}
+.photo-ring {
+  animation: ringRotate 8s linear infinite;
+  background: conic-gradient(#FFE135, #FFC107, #FF8F00, #9B59B6, #00D4FF, #5DC645, #FFE135);
+}
+.photo-inner img { transform: rotate(0deg); } /* counter-rotate via JS */
+
+/* ── COUNTDOWN BOX PULSE ── */
+@keyframes cdGlow {
+  0%,100% { box-shadow: 0 0 16px rgba(155,89,182,.35); border-color: rgba(0,212,255,.4); }
+  50%     { box-shadow: 0 0 30px rgba(0,212,255,.7), 0 0 0 1px rgba(0,212,255,.5); border-color: rgba(0,212,255,.9); }
+}
+.cd-box { animation: cdGlow 2.2s ease-in-out infinite; }
+.cd-box:nth-child(2) { animation-delay: .3s; }
+.cd-box:nth-child(3) { animation-delay: .6s; }
+.cd-box:nth-child(4) { animation-delay: .9s; }
+
+/* ── CD NUMBER FLIP ── */
+@keyframes numFlip {
+  0%   { transform: translateY(0);    opacity: 1; }
+  40%  { transform: translateY(-8px); opacity: 0; }
+  60%  { transform: translateY(8px);  opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+.cd-num.flip { animation: numFlip .35s ease; }
+
+/* ── TIMELINE DOT BOUNCE ── */
+@keyframes dotBounce {
+  0%,100% { transform: scale(1);   box-shadow: 0 0 10px rgba(93,198,69,.7); }
+  50%     { transform: scale(1.55); box-shadow: 0 0 22px rgba(93,198,69,1), 0 0 40px rgba(0,212,255,.5); }
+}
+.tl-dot { animation: dotBounce 2s ease-in-out infinite; }
+.tl-item:nth-child(2) .tl-dot { animation-delay: .2s; }
+.tl-item:nth-child(3) .tl-dot { animation-delay: .4s; }
+.tl-item:nth-child(4) .tl-dot { animation-delay: .6s; }
+.tl-item:nth-child(5) .tl-dot { animation-delay: .8s; }
+
+/* ── SECTION TITLE SHIMMER ── */
+@keyframes titleShimmer {
+  0%   { filter: drop-shadow(0 0 4px rgba(255,225,0,.4)); }
+  50%  { filter: drop-shadow(0 0 16px rgba(255,225,0,.9)) drop-shadow(0 0 32px rgba(255,225,0,.4)); }
+  100% { filter: drop-shadow(0 0 4px rgba(255,225,0,.4)); }
+}
+.section-title { animation: titleShimmer 3s ease-in-out infinite; }
+
+/* ── FLOATING SPARKLES ── */
+.sparkle {
+  position: fixed; pointer-events: none; z-index: 1;
+  border-radius: 50%;
+  animation: sparkleFly linear infinite;
+}
+@keyframes sparkleFly {
+  0%   { transform: translateY(0) scale(1) rotate(0deg);   opacity: .7; }
+  80%  { opacity: .5; }
+  100% { transform: translateY(-110vh) scale(.3) rotate(360deg); opacity: 0; }
+}
+
+/* ── HERO CARD BORDER GLOW ── */
+@keyframes heroBorderGlow {
+  0%,100% { box-shadow: 0 10px 50px rgba(26,10,75,.8), 0 0 60px rgba(155,89,182,.2); border-color: rgba(0,212,255,.45); }
+  50%     { box-shadow: 0 10px 60px rgba(26,10,75,.9), 0 0 90px rgba(0,212,255,.45), 0 0 0 2px rgba(0,212,255,.35); border-color: rgba(0,212,255,.9); }
+}
+.hero-card { animation: heroBorderGlow 3.5s ease-in-out infinite; }
+
+/* ── RSVP BANNER PULSE ── */
+@keyframes rsvpGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(155,89,182,.3); }
+  50%     { box-shadow: 0 0 36px rgba(155,89,182,.8), 0 0 0 1px rgba(155,89,182,.4); }
+}
+.rsvp-banner { animation: rsvpGlow 2.8s ease-in-out infinite; }
+
+/* ── FOOTER NAME WAVE ── */
+@keyframes nameWave {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%     { transform: translateY(-6px) rotate(1deg); }
+}
+.footer-name { animation: nameWave 3s ease-in-out infinite; }
+
+/* ── GAL HINT BLINK (already exists, keep) ── */
+
+</style>
+
+<script>
+(function() {
+  // Letter-by-letter animation for brand name
+  const brand = 'GUEKA IDEAS';
+  const container = document.getElementById('gueka-brand');
+  if (!container) return;
+  const colors = ['#00D4FF','#9B59B6','#FFE500','#5DC645','#FF6B6B','#00D4FF','#FFE500','#9B59B6','#5DC645','#FF6B6B','#00D4FF'];
+  brand.split('').forEach(function(ch, i) {
+    const span = document.createElement('span');
+    span.textContent = ch === ' ' ? '\u00A0' : ch;
+    const c = colors[i % colors.length];
+    span.style.cssText =
+      'display:inline-block;color:' + c + ';opacity:0;' +
+      'animation:gueka-letter .55s cubic-bezier(0.34,1.56,0.64,1) ' + (0.85 + i * 0.08) + 's forwards,' +
+      'gueka-glow 2.8s ease-in-out ' + (1.9 + i * 0.08) + 's infinite;' +
+      'text-shadow:0 0 10px ' + c + ';';
+    container.appendChild(span);
+  });
+
+  // Particle field
+  const canvas = document.getElementById('gueka-particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const wm = document.getElementById('gueka-watermark');
+  function resize() { canvas.width = wm.offsetWidth; canvas.height = wm.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const pColors = ['#00D4FF','#9B59B6','#FFE500','#5DC645','#FF6B6B'];
+  const pts = Array.from({length: 32}, function() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.9 + 0.4,
+      dx: (Math.random() - 0.5) * 0.55,
+      dy: (Math.random() - 0.5) * 0.55,
+      color: pColors[Math.floor(Math.random() * pColors.length)],
+      a: Math.random() * 0.55 + 0.2
+    };
+  });
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pts.forEach(function(p) {
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.a;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+<script>
+// ─── CARD SCROLL REVEAL ──────────────────────────────────────────────────────
+(function() {
+  const revealEls = document.querySelectorAll('.card, .hero-card');
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        const idx = Array.from(revealEls).indexOf(e.target);
+        e.target.style.transitionDelay = (idx * 0.07) + 's';
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(function(el) { io.observe(el); });
+})();
+
+// ─── COUNTDOWN NUMBER FLIP ───────────────────────────────────────────────────
+(function() {
+  const prevVals = {};
+  const ids = ['cd-d','cd-h','cd-m','cd-s'];
+  const origTick = window.tickCountdown;
+  window.tickCountdown = function() {
+    if (origTick) origTick();
+    ids.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.textContent !== prevVals[id]) {
+        el.classList.remove('flip');
+        void el.offsetWidth;
+        el.classList.add('flip');
+        prevVals[id] = el.textContent;
+      }
+    });
+  };
+})();
+
+// ─── PHOTO RING COUNTER-ROTATION ────────────────────────────────────────────
+(function() {
+  let angle = 0;
+  function tick() {
+    angle = (angle + 0.3) % 360;
+    document.querySelectorAll('.photo-inner img').forEach(function(img) {
+      img.style.transform = 'rotate(' + (-angle) + 'deg)';
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+// ─── FLOATING SPARKLES ──────────────────────────────────────────────────────
+(function() {
+  const colors = ['#FFE135','#00D4FF','#9B59B6','#5DC645','#FF6B6B','#FFC107'];
+  function makeSparkle() {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    const size = Math.random() * 5 + 2;
+    const dur  = Math.random() * 8 + 6;
+    const delay = Math.random() * 4;
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    s.style.cssText =
+      'left:' + (Math.random() * 100) + '%;bottom:-10px;' +
+      'width:' + size + 'px;height:' + size + 'px;' +
+      'background:' + c + ';' +
+      'animation-duration:' + dur + 's;animation-delay:' + delay + 's;' +
+      'box-shadow:0 0 ' + (size*2) + 'px ' + c + ';';
+    document.body.appendChild(s);
+    setTimeout(function() { s.remove(); }, (dur + delay) * 1000);
+  }
+  for (var i = 0; i < 20; i++) makeSparkle();
+  setInterval(makeSparkle, 600);
+})();
+
+// ─── TIMELINE ITEM SLIDE-IN ──────────────────────────────────────────────────
+(function() {
+  const items = document.querySelectorAll('.tl-item');
+  items.forEach(function(el, i) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-20px)';
+    el.style.transition = 'opacity .5s ease ' + (i * 0.12) + 's, transform .5s ease ' + (i * 0.12) + 's';
+  });
+  const io2 = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateX(0)';
+        io2.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  items.forEach(function(el) { io2.observe(el); });
 })();
 </script>
 </body>
