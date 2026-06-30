@@ -1,1070 +1,1054 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Invitación · Santiago cumple 1</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cumpleaños Emiliano 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Luckiest+Guy&display=swap" rel="stylesheet" />
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:linear-gradient(170deg,#0b2d6e 0%,#1a5abf 35%,#0d3580 65%,#0b2d6e 100%);min-height:100vh;font-family:'Lato',sans-serif;color:#fff;overflow-x:hidden}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ══ AURORA ══ */
-#aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-#aurora::before{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(100deg,rgba(13,53,128,.55) 0%,rgba(13,53,128,.55) 7%,transparent 10%,transparent 12%,rgba(13,53,128,.55) 16%),
-    repeating-linear-gradient(100deg,#0d3580 8%,#1565e0 13%,#0d3580 18%,#38b0ff 23%,#e8c84a 28%,#1a5abf 33%,#0d3580 38%);
-  background-size:300% 200%,300% 200%;
-  filter:blur(14px) opacity(70%) saturate(240%);
-  mask-image:radial-gradient(ellipse 75% 65% at 55% 0%,black 30%,transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse 75% 65% at 55% 0%,black 30%,transparent 75%);
-  animation:aurora 9s ease-in-out infinite}
-#aurora::after{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(80deg,#0d3580 0%,#38b0ff 15%,#e8c84a 30%,#1565e0 45%,transparent 60%);
-  background-size:200% 200%;
-  filter:blur(24px) opacity(30%) saturate(200%);
-  mask-image:radial-gradient(ellipse 50% 40% at 30% 100%,black 20%,transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 50% 40% at 30% 100%,black 20%,transparent 70%);
-  animation:aurora2 14s ease-in-out infinite}
-@keyframes aurora{0%{background-position:50% 50%,50% 50%}33%{background-position:350% 50%,350% 50%}66%{background-position:200% 100%,200% 100%}100%{background-position:50% 50%,50% 50%}}
-@keyframes aurora2{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  body {
+    background: linear-gradient(170deg,#0D0B2E 0%,#1A0A4B 40%,#0B1D4F 70%,#0D0B2E 100%);
+    min-height: 100vh;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    overflow-x: hidden;
+  }
 
-/* ══ STARS ══ */
-#stars{position:fixed;inset:0;z-index:1;pointer-events:none}
-.star{position:fixed;border-radius:50%;pointer-events:none}
-.star.twinkle{animation:twinkle var(--dur,2.5s) ease-in-out infinite var(--delay,0s)}
-.star.drift{animation:drift var(--dur,4s) ease-in-out infinite var(--delay,0s)}
-.star.pulse{animation:starPulse var(--dur,3s) ease-in-out infinite var(--delay,0s)}
-@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
-@keyframes drift{0%,100%{opacity:.2;transform:translate(0,0) scale(.8)}50%{opacity:.9;transform:translate(var(--dx,4px),var(--dy,-6px)) scale(1.2)}}
-@keyframes starPulse{0%,100%{opacity:.1;box-shadow:none}50%{opacity:1;box-shadow:0 0 6px 2px currentColor}}
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .star {
+    position: absolute; border-radius: 50%;
+    animation: twinkle var(--dur) var(--delay) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: .1; transform: scale(.8); }
+    50%      { opacity: .9; transform: scale(1.3); }
+  }
 
-/* ══ SHOOTING STARS ══ */
-.shooting{position:fixed;width:2px;height:2px;background:#fff;border-radius:50%;pointer-events:none;z-index:2}
-.shooting::after{content:'';position:absolute;top:50%;right:0;transform:translateY(-50%);height:1.5px;border-radius:1px;background:linear-gradient(to left,rgba(255,255,255,0.8),transparent);animation:inherit}
-@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(var(--angle,215deg))}5%{opacity:1}80%{opacity:.8}100%{opacity:0;transform:translate(var(--tx,400px),var(--ty,200px)) rotate(var(--angle,215deg))}}
+  /* ── SPLASH ── */
+  #splash {
+    position: fixed; inset: 0; z-index: 50;
+    background: linear-gradient(160deg,#0D0B2E 0%,#1A0A4B 40%,#0B1D4F 70%,#0D0B2E 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: pointer; overflow: hidden;
+    animation: splashIn .4s ease;
+  }
+  #splash.hide { animation: splashOut .5s ease forwards; }
+  @keyframes splashIn  { from { opacity:0 } to { opacity:1 } }
+  @keyframes splashOut { from { opacity:1 } to { opacity:0; pointer-events:none } }
 
-/* ══ CONFETTI PARTICLES ══ */
-.conf{position:fixed;pointer-events:none;z-index:2;border-radius:1px}
-@keyframes confFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+  .stripe-green {
+    position: absolute; left:0; right:0; height:12px;
+    background: repeating-linear-gradient(90deg,#5DC645 0,#5DC645 20px,white 20px,white 40px);
+  }
+  .stripe-purple { position: absolute; left:0; right:0; height:6px; background:#9B59B6; }
+  .stripe-top-green  { top:0; }
+  .stripe-top-purple { top:12px; }
+  .stripe-bot-purple { bottom:0; }
+  .stripe-bot-green  { bottom:6px; }
 
-/* ══ FLOATING BALLOONS BG ══ */
-.bg-balloon{position:fixed;bottom:-80px;pointer-events:none;z-index:2;animation:riseUp linear infinite}
-@keyframes riseUp{0%{transform:translateY(0) translateX(0) rotate(-3deg)}25%{transform:translateY(-25vh) translateX(12px) rotate(4deg)}50%{transform:translateY(-50vh) translateX(-8px) rotate(-2deg)}75%{transform:translateY(-75vh) translateX(10px) rotate(5deg)}100%{transform:translateY(-110vh) translateX(0) rotate(-3deg);opacity:0}}
+  /* ── TOY STORY TEXT ── */
+  .ts-name {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: clamp(3rem,16vw,5.5rem);
+    color: #FFE500;
+    -webkit-text-stroke: .12em #6B21A8;
+    paint-order: stroke fill;
+    letter-spacing: .04em;
+    line-height: 1;
+    filter: drop-shadow(0 4px 0 #4A0E75);
+    display: block;
+  }
+  .ts-age {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: clamp(5rem,22vw,8rem);
+    color: #FFE500;
+    -webkit-text-stroke: .1em #6B21A8;
+    paint-order: stroke fill;
+    letter-spacing: .02em;
+    line-height: 1;
+    filter: drop-shadow(0 5px 0 #4A0E75);
+    display: block;
+  }
+  .ts-cumple-wrap {
+    display: inline-block;
+    background: #9B59B6;
+    padding: .15em 1.4em;
+    clip-path: polygon(3% 0%,97% 0%,100% 100%,0% 100%);
+    margin: .1em 0;
+  }
+  .ts-cumple {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: clamp(1rem,5vw,1.5rem);
+    color: white;
+    -webkit-text-stroke: .05em rgba(0,0,0,.3);
+    paint-order: stroke fill;
+    letter-spacing: .1em;
+    line-height: 1;
+    display: block;
+  }
 
-/* ══ BASE KEYFRAMES ══ */
-@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-12px) rotate(1.5deg)}66%{transform:translateY(-5px) rotate(-1deg)}}
-@keyframes floatGlob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@keyframes blink{0%,100%{opacity:.3}50%{opacity:.9}}
-@keyframes nebula{0%,100%{opacity:.06}50%{opacity:.14}}
-@keyframes sway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInScale{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glow-pulse{0%,100%{text-shadow:0 0 20px rgba(232,200,74,.4),0 0 40px rgba(232,200,74,.2)}50%{text-shadow:0 0 40px rgba(232,200,74,.9),0 0 80px rgba(232,200,74,.5),0 0 120px rgba(232,200,74,.2)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.06);opacity:1}}
-@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.04)}28%{transform:scale(.98)}42%{transform:scale(1.03)}70%{transform:scale(1)}}
-@keyframes numBounce{0%{transform:scale(1)}15%{transform:scale(1.12) translateY(-4px)}30%{transform:scale(.96)}45%{transform:scale(1.05)}60%{transform:scale(.98)}100%{transform:scale(1)}}
-@keyframes waveTriangle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes badgePop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes glowSpin{to{--ga:360deg}}
-@keyframes cardReveal{from{opacity:0;transform:translateY(50px) scale(.97);filter:blur(4px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-@keyframes cdFlip{0%{transform:rotateX(0)}50%{transform:rotateX(-90deg)}51%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
-@property --ga{syntax:'<angle>';inherits:false;initial-value:0deg}
+  /* ── PHOTO CIRCLE ── */
+  .photo-ring {
+    width: 140px; height: 140px; border-radius: 50%;
+    background: linear-gradient(135deg,#FFE135,#FFC107,#FF8F00);
+    padding: 4px;
+    box-shadow: 0 0 30px rgba(255,209,0,.6);
+    margin: 0 auto .75rem;
+  }
+  .photo-inner {
+    width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+    border: 3px solid #0D0B2E;
+  }
+  .photo-inner img { width:100%; height:100%; object-fit:cover; object-position:top; }
 
-/* ══ LAYOUT ══ */
-#app{position:relative;z-index:10;max-width:448px;margin:0 auto;padding:1.5rem 1rem 4rem;display:flex;flex-direction:column;gap:1.25rem}
+  /* ── SPLASH ANIMATIONS ── */
+  .fade-up { animation: fadeUp .5s ease forwards; opacity:0; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(-12px) } to { opacity:1; transform:translateY(0) } }
+  .pop { animation: pop .5s cubic-bezier(.34,1.56,.64,1) forwards; opacity:0; transform:scale(0); }
+  @keyframes pop { to { opacity:1; transform:scale(1) } }
+  .blink { animation: blink 2s infinite ease-in-out; }
+  @keyframes blink { 0%,100% { opacity:.3 } 50% { opacity:1 } }
 
-/* ══ CARD REVEAL ══ */
-.reveal-card{opacity:0;transform:translateY(50px) scale(.97);filter:blur(4px);transition:opacity .7s cubic-bezier(.25,1,.5,1),transform .7s cubic-bezier(.25,1,.5,1),filter .7s ease}
-.reveal-card.visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  /* ── FLOAT (rockets, aliens) ── */
+  .float { animation: float 4s ease-in-out infinite; }
+  .float-slow { animation: float 3.5s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform:translateY(-8px) } 50% { transform:translateY(8px) } }
 
-/* ══ GLOW CARD ══ */
-.glow-card{position:relative;border-radius:16px;isolation:isolate}
-.glow-card::before{content:'';position:absolute;inset:-2px;border-radius:18px;z-index:-1;
-  background:conic-gradient(from var(--ga),#1565e0,#e8c84a,#38b0ff,#e8c84a,#1565e0,#87d2ff,#e8c84a,#1565e0);
-  animation:glowSpin var(--gd,5s) linear infinite}
-.glow-inner{border-radius:14px;overflow:hidden}
+  /* ── MAIN CONTENT ── */
+  #main { display:none; }
+  #main.show { display:block; }
 
-/* ══ TOPBAR ══ */
-.topbar{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:1.25rem}
-.topbar-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(135,210,255,.5),transparent)}
-.topbar-star{color:#e8c84a;font-size:.7rem;animation:starPulse 2s ease-in-out infinite}
-.triangle-row{display:flex;justify-content:center;gap:6px;margin-bottom:.5rem}
-.tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid;animation:waveTriangle 1.5s ease-in-out infinite}
+  .container {
+    position: relative; z-index: 10;
+    max-width: 430px; margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
 
-/* ══ CARD BASE ══ */
-.card{background:rgba(13,53,128,.88);backdrop-filter:blur(8px);box-shadow:0 6px 30px rgba(5,30,100,.6),0 0 40px rgba(56,150,255,.15);padding:2rem 1.75rem;position:relative;overflow:hidden}
-.card-label{font-family:'Lato',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#87d2ff;display:block;text-align:center;margin-bottom:.4rem}
-.card-title{font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.5rem);font-weight:700;color:#e8c84a;text-align:center;margin-bottom:.5rem;
-  background:linear-gradient(90deg,#c9a020,#e8c84a,#f5e27a,#e8c84a,#c9a020);background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 3s linear infinite}
-.divider{display:flex;align-items:center;justify-content:center;gap:8px;margin:.75rem 0}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(135,210,255,.4),transparent)}
-.divider span{color:#e8c84a;font-size:.6rem;animation:starPulse 2s ease-in-out infinite}
+  /* ── HERO CARD ── */
+  .hero-card {
+    background: linear-gradient(170deg,#0D0B2E 0%,#1A0A4B 45%,#0B1D4F 100%);
+    border: 2px solid rgba(0,212,255,.45);
+    border-radius: 24px; overflow: hidden;
+    box-shadow: 0 10px 50px rgba(26,10,75,.8),0 0 60px rgba(155,89,182,.2);
+    animation: fadeUp .7s ease forwards;
+  }
+  .hero-body {
+    padding: 1.25rem 1.5rem 0; text-align: center; position: relative; overflow:hidden;
+  }
+  .hero-deco-left  { position:absolute; left:8px;  top:20px; }
+  .hero-deco-right { position:absolute; right:8px; top:20px; }
+  .hero-info {
+    background: #1A0A4B;
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+  .info-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap:8px;
+    align-items: center; margin-bottom: 1.25rem;
+  }
+  .info-date  { text-align:center; border-right:1px dashed rgba(0,212,255,.4); padding-right:8px; }
+  .info-time  { text-align:center; padding:0 8px; }
+  .info-venue { text-align:center; border-left:1px dashed rgba(0,212,255,.4); padding-left:8px; }
 
-/* ══ HERO ══ */
-.hero-badge{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(232,200,74,.4);border-radius:20px;padding:.35rem 1rem;font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:#e8c84a;margin:0 auto .75rem;display:flex;justify-content:center;animation:badgePop 3s ease-in-out infinite}
-.hero-photo-wrap{position:relative;width:140px;height:140px;margin:0 auto 1rem;border-radius:50%;padding:3px;background:linear-gradient(135deg,#e8c84a,#1565e0,#38b0ff,#e8c84a);animation:heartbeat 3s ease-in-out infinite}
-.hero-photo-wrap::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from var(--ga),#e8c84a,#38b0ff,#e8c84a,#1565e0,#e8c84a);z-index:-1;animation:glowSpin 3s linear infinite,ringPulse 3s ease-in-out infinite;opacity:.6}
-.hero-photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-.hero-name{font-family:'Dancing Script',cursive;font-size:clamp(2.2rem,9vw,3rem);font-weight:700;text-align:center;margin:.25rem 0;
-  background:linear-gradient(90deg,#c9a020,#e8c84a,#f5e27a,#e8c84a,#c9a020);background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 2.5s linear infinite}
-.hero-cumple{font-family:'Lato',sans-serif;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:.5rem}
-.hero-age{font-family:'Dancing Script',cursive;font-size:clamp(4rem,18vw,5.5rem);font-weight:700;color:#e8c84a;text-align:center;line-height:1;animation:glow-pulse 2s ease-in-out infinite,numBounce 4s ease-in-out infinite;cursor:default}
-.hero-info-grid{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;gap:0;margin:1.25rem 0 1rem;padding-top:1rem;border-top:1px solid rgba(135,210,255,.2)}
-.hero-info-col{text-align:center;padding:.25rem .5rem}
-.hero-info-sep{background:rgba(135,210,255,.25)}
-.hero-info-label{font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;display:block;margin-bottom:.3rem}
-.hero-info-val{font-family:'Dancing Script',cursive;font-size:1rem;color:#b8e8ff;display:block;line-height:1.2}
-.hero-info-sub{font-family:'Lato',sans-serif;font-size:.38rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(135,210,255,.6);display:block;margin-top:.15rem}
-.hero-rsvp-btn{display:block;width:100%;padding:.9rem;background:rgba(56,150,255,.15);border:1px solid rgba(56,176,255,.35);border-radius:50px;text-align:center;color:#b8e8ff;font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .3s,transform .2s,box-shadow .3s;position:relative;overflow:hidden}
-.hero-rsvp-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);transform:translateX(-100%);transition:transform .5s}
-.hero-rsvp-btn:hover{background:rgba(56,150,255,.35);transform:translateY(-2px);box-shadow:0 8px 25px rgba(56,176,255,.3)}
-.hero-rsvp-btn:hover::after{transform:translateX(100%)}
-.hero-rsvp-phone{font-family:'Dancing Script',cursive;font-size:1.4rem;color:#e8c84a;display:block;margin-top:.2rem}
-.balloon{position:absolute;animation:float 3s ease-in-out infinite}
+  .lbl-sm {
+    font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:#00D4FF; font-weight:700;
+  }
+  .lbl-xs { font-size:.5rem; letter-spacing:.15em; text-transform:uppercase; color:#00D4FF; }
+  .date-big { font-family:'Dancing Script',cursive; font-size:3rem; font-weight:700; color:#FFE135; line-height:1; }
+  .time-big  { font-family:'Dancing Script',cursive; font-size:2rem; font-weight:700; color:#FFE135; line-height:1; }
+  .venue-name{ font-family:'Dancing Script',cursive; font-size:1rem; font-weight:700; color:#FFE135; line-height:1.2; }
+  .venue-addr{ font-size:.42rem; color:#C4B5FD; margin-top:4px; line-height:1.5; }
+  .italic-sm { font-family:'Dancing Script',cursive; font-style:italic; font-size:1rem; color:#C4B5FD; margin-bottom:4px; }
+  .year-sm   { font-size:.5rem; color:#C4B5FD; }
 
-/* ══ COUNTDOWN ══ */
-.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.25rem 0}
-.cd-box{background:rgba(5,20,80,.7);border:1px solid rgba(56,176,255,.25);border-radius:10px;padding:.75rem .5rem;text-align:center;position:relative;perspective:200px;overflow:hidden}
-.cd-box::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,transparent 100%);border-radius:10px}
-.cd-val{font-family:'Dancing Script',cursive;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:700;color:#e8c84a;line-height:1;display:block;transform-origin:center;transition:transform .15s ease-in,opacity .15s ease-in}
-.cd-val.flip{animation:cdFlip .5s ease forwards}
-.cd-lbl{font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;display:block;margin-top:.25rem}
-.cd-box.pulse-once{animation:cdBoxPulse .5s ease-out}
-@keyframes cdBoxPulse{0%{box-shadow:0 0 0 0 rgba(232,200,74,.5)}100%{box-shadow:0 0 0 12px rgba(232,200,74,0);border-color:rgba(232,200,74,.4)}}
+  .rsvp-banner {
+    background: linear-gradient(135deg,#5B21B6,#4A0E75);
+    border:1px solid rgba(0,212,255,.4); border-radius:8px;
+    padding:.7rem 1rem; text-align:center;
+    box-shadow:0 0 20px rgba(155,89,182,.3);
+  }
+  .rsvp-label { font-size:.52rem; letter-spacing:.3em; text-transform:uppercase; color:#C4B5FD; font-weight:700; }
+  .rsvp-phone { font-family:'Dancing Script',cursive; font-size:1.6rem; font-weight:700; color:#FFE135; margin-top:2px; }
 
-/* ══ PROGRAM ACCORDION ══ */
-.prog-container{display:flex;gap:8px;height:200px;width:100%}
-.prog-item{position:relative;overflow:hidden;border-radius:14px;cursor:pointer;background:rgba(8,25,80,.7);border:1px solid rgba(56,176,255,.18);transition:flex .6s cubic-bezier(.25,1,.5,1),border-color .3s,box-shadow .3s;flex:1}
-.prog-item.active{flex:4;background:linear-gradient(145deg,rgba(21,101,224,.6),rgba(8,30,90,.9));border-color:rgba(232,200,74,.45);box-shadow:0 0 18px rgba(232,200,74,.25),0 4px 20px rgba(5,30,100,.5)}
-.prog-inactive{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px 4px;transition:opacity .4s}
-.prog-item.active .prog-inactive{opacity:0;pointer-events:none}
-.prog-icon{font-size:1.25rem;transition:transform .3s}
-.prog-item:hover .prog-icon{transform:scale(1.2)}
-.prog-time-vert{font-family:'Lato',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:#87d2ff;writing-mode:vertical-rl;transform:rotate(180deg);opacity:.7}
-.prog-active{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 14px 14px;opacity:0;pointer-events:none;transition:opacity .35s .1s}
-.prog-item.active .prog-active{opacity:1;pointer-events:all}
-.prog-big-icon{font-size:2rem;text-align:center;margin-bottom:auto;padding-top:14px;filter:drop-shadow(0 0 8px rgba(232,200,74,.5));animation:floatGlob 3s ease-in-out infinite}
-.prog-time-label{font-family:'Lato',sans-serif;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#e8c84a;font-weight:700;display:block;margin-bottom:4px}
-.prog-title{font-family:'Dancing Script',cursive;font-size:1rem;font-weight:700;color:#b8e8ff;line-height:1.2;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prog-desc{font-family:'Lato',sans-serif;font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:#87d2ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prog-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
-.prog-dot{width:6px;height:6px;border-radius:3px;background:rgba(135,210,255,.3);border:none;cursor:pointer;padding:0;transition:width .4s cubic-bezier(.25,1,.5,1),background .3s,transform .2s}
-.prog-dot.active{width:18px;background:#e8c84a}
-.prog-dot:hover{transform:scale(1.3)}
+  /* ── CARD ── */
+  .card {
+    background: rgba(26,10,75,.9); backdrop-filter:blur(10px);
+    border: 1.5px solid rgba(0,212,255,.35); border-radius:24px; overflow:hidden;
+    box-shadow: 0 6px 30px rgba(13,11,46,.7),0 0 40px rgba(155,89,182,.15);
+    position: relative;
+    animation: fadeUp .6s ease forwards;
+  }
+  .card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(to right,transparent,#9B59B6,#FFE135,#9B59B6,transparent);
+  }
+  .card-body { padding:1.75rem; }
 
-/* ══ GALLERY CAROUSEL ══ */
-@keyframes kenBurns0{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.18) translate(-3%,-2%)}}
-@keyframes kenBurns1{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(2%,-3%)}}
-@keyframes kenBurns2{0%{transform:scale(1.1) translate(-2%,0)}100%{transform:scale(1) translate(2%,2%)}}
-@keyframes kenBurns3{0%{transform:scale(1) translate(2%,1%)}100%{transform:scale(1.2) translate(-1%,-3%)}}
-@keyframes kenBurns4{0%{transform:scale(1.08) translate(1%,-1%)}100%{transform:scale(1) translate(-2%,2%)}}
-@keyframes kenBurns5{0%{transform:scale(1) translate(-1%,2%)}100%{transform:scale(1.14) translate(2%,-2%)}}
-@keyframes slideInRight{from{opacity:0;transform:translateX(60px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
-@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
-@keyframes slideOutLeft{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(-60px) scale(.95)}}
-@keyframes slideOutRight{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(60px) scale(.95)}}
-@keyframes zoomIn{from{opacity:0;transform:scale(.7) rotate(-4deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
-@keyframes zoomOut{from{opacity:1;transform:scale(1) rotate(0deg)}to{opacity:0;transform:scale(1.1) rotate(2deg)}}
-@keyframes flipIn{from{opacity:0;transform:perspective(600px) rotateY(-90deg)}to{opacity:1;transform:perspective(600px) rotateY(0deg)}}
-@keyframes flipOut{from{opacity:1;transform:perspective(600px) rotateY(0deg)}to{opacity:0;transform:perspective(600px) rotateY(90deg)}}
-@keyframes dropIn{from{opacity:0;transform:translateY(-50px) rotate(-6deg)}to{opacity:1;transform:translateY(0) rotate(0deg)}}
-@keyframes dropOut{from{opacity:1;transform:translateY(0) rotate(0deg)}to{opacity:0;transform:translateY(40px) rotate(4deg)}}
-@keyframes glitchIn{0%{opacity:0;clip-path:inset(40% 0 40% 0);transform:skewX(-8deg)}40%{clip-path:inset(10% 0 10% 0);transform:skewX(4deg)}70%{clip-path:inset(0 0 0 0);transform:skewX(0)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
-@keyframes glitchOut{0%{opacity:1;clip-path:inset(0 0 0 0)}40%{clip-path:inset(20% 0 20% 0);transform:skewX(5deg)}100%{opacity:0;clip-path:inset(50% 0 50% 0)}}
-@keyframes shimmerSweep{0%{left:-100%}100%{left:200%}}
-@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-@keyframes progressFill2{from{width:0}to{width:100%}}
-@keyframes captionSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes starburstPop{0%{opacity:0;transform:scale(0) rotate(-30deg)}70%{transform:scale(1.2) rotate(5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes overlayFadeIn{from{opacity:0}to{opacity:1}}
+  /* ── SECTION TITLE ── */
+  .section-eyebrow {
+    font-size:.6rem; letter-spacing:.28em; text-transform:uppercase;
+    color:#00D4FF; display:block; margin-bottom:.4rem; font-weight:300;
+  }
+  .section-title {
+    font-family:'Dancing Script',cursive; font-size:clamp(1.9rem,6vw,2.5rem);
+    font-weight:700; color:#FFE135;
+  }
+  .section-divider {
+    display:flex; align-items:center; justify-content:center; gap:8px; margin-top:.5rem;
+  }
+  .divider-line { width:36px; height:1px; }
+  .divider-line-l { background:linear-gradient(to right,transparent,#00D4FF); }
+  .divider-line-r { background:linear-gradient(to left,transparent,#00D4FF); }
+  .title-block { text-align:center; margin-bottom:1.5rem; }
 
-.gallery-hint{font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:.75rem;animation:badgePop 4s ease-in-out infinite}
+  /* ── COUNTDOWN ── */
+  .countdown-grid {
+    display:flex; justify-content:center; gap:.625rem; flex-wrap:wrap;
+  }
+  .cd-box {
+    text-align:center; min-width:68px; padding:14px 10px;
+    background:linear-gradient(135deg,#3B0764,#5B21B6);
+    border:1.5px solid rgba(0,212,255,.4); border-radius:14px;
+    box-shadow:0 0 16px rgba(155,89,182,.35);
+  }
+  .cd-num {
+    font-family:'Dancing Script',cursive; font-weight:700;
+    font-size:2.4rem; line-height:1; color:#FFE135;
+  }
+  .cd-lbl {
+    font-size:.42rem; letter-spacing:.25em; text-transform:uppercase; color:#00D4FF; margin-top:6px;
+  }
+  .cd-footer {
+    display:flex; align-items:center; justify-content:center; gap:8px; margin-top:1rem;
+    font-size:.48rem; letter-spacing:.2em; text-transform:uppercase; color:#C4B5FD;
+  }
 
-/* ── Carousel wrapper ── */
-.carousel{position:relative;width:100%;user-select:none}
-.carousel-stage{position:relative;width:100%;height:300px;overflow:hidden;border-radius:12px;background:#020a18;cursor:grab}
-.carousel-stage:active{cursor:grabbing}
-.carousel-slide{position:absolute;inset:0;overflow:hidden;border-radius:12px}
-.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center;will-change:transform}
-/* enter/exit classes set by JS */
-.carousel-slide.enter-right{animation:slideInRight .55s cubic-bezier(.25,1,.5,1) forwards}
-.carousel-slide.enter-left{animation:slideInLeft .55s cubic-bezier(.25,1,.5,1) forwards}
-.carousel-slide.exit-left{animation:slideOutLeft .45s cubic-bezier(.5,0,.75,0) forwards}
-.carousel-slide.exit-right{animation:slideOutRight .45s cubic-bezier(.5,0,.75,0) forwards}
-.carousel-slide.enter-zoom{animation:zoomIn .6s cubic-bezier(.34,1.56,.64,1) forwards}
-.carousel-slide.exit-zoom{animation:zoomOut .4s ease-in forwards}
-.carousel-slide.enter-flip{animation:flipIn .6s cubic-bezier(.25,1,.5,1) forwards}
-.carousel-slide.exit-flip{animation:flipOut .4s ease-in forwards}
-.carousel-slide.enter-drop{animation:dropIn .55s cubic-bezier(.34,1.56,.64,1) forwards}
-.carousel-slide.exit-drop{animation:dropOut .4s ease-in forwards}
-.carousel-slide.enter-glitch{animation:glitchIn .55s steps(3,end) forwards}
-.carousel-slide.exit-glitch{animation:glitchOut .4s steps(3,end) forwards}
+  /* ── PROGRAM ── */
+  .timeline { position:relative; }
+  .timeline::before {
+    content:''; position:absolute; left:15px; top:0; bottom:0; width:1px;
+    background:linear-gradient(to bottom,#00D4FF,transparent);
+  }
+  .tl-item {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:12px 8px 12px 0; border-bottom:1px solid rgba(155,89,182,.25);
+  }
+  .tl-item:last-child { border-bottom:none; }
+  .tl-dot-wrap { flex-shrink:0; width:20px; display:flex; justify-content:center; margin-top:6px; }
+  .tl-dot {
+    width:10px; height:10px; border-radius:50%;
+    background:linear-gradient(135deg,#5DC645,#00D4FF);
+    box-shadow:0 0 10px rgba(93,198,69,.7);
+  }
+  .tl-time  { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:#FFE135; font-weight:600; }
+  .tl-title { font-family:'Dancing Script',cursive; font-size:1.1rem; color:#C4B5FD; margin-top:2px; }
+  .tl-desc  { font-size:.43rem; letter-spacing:.12em; text-transform:uppercase; color:#00D4FF; margin-top:2px; }
 
-/* ── Shimmer sweep overlay on enter ── */
-.carousel-slide::after{content:'';position:absolute;inset:0;top:0;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);pointer-events:none;animation:shimmerSweep .7s .2s ease forwards;opacity:0}
-/* ── Vignette ── */
-.carousel-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%);z-index:1;pointer-events:none}
+  /* ── GALLERY ── */
+  .gallery-wrap { position:relative; height:340px; display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:1.25rem; overflow:hidden; }
+  .gal-side {
+    position:absolute; width:42%; aspect-ratio:3/4;
+    border-radius:16px; overflow:hidden;
+    filter:brightness(.45); box-shadow:0 4px 24px rgba(0,0,0,.5);
+    cursor:pointer; transition:filter .2s, transform .2s;
+  }
+  .gal-side:hover { filter:brightness(.65); }
+  .gal-prev { left:0; transform:scale(.88) rotateY(12deg); transform-origin:right center; }
+  .gal-next { right:0; transform:scale(.88) rotateY(-12deg); transform-origin:left center; }
+  .gal-side img { width:100%; height:100%; object-fit:cover; }
+  .gal-main {
+    position:relative; width:58%; aspect-ratio:3/4;
+    border-radius:24px; overflow:hidden; z-index:10;
+    box-shadow:0 12px 48px rgba(0,0,0,.7),0 0 0 2px rgba(255,229,0,.45);
+  }
+  .gal-main img {
+    width:100%; height:100%; object-fit:cover;
+    position:absolute; inset:0;
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .gal-main img.leave { opacity:0; transform:translateX(-60px) scale(.92); }
+  .gal-main img.enter { opacity:0; transform:translateX(60px) scale(.92); }
+  .gal-main img.active { opacity:1; transform:none; }
+  .gal-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(3,10,50,.85) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .gal-caption { position:absolute; bottom:0; left:0; right:0; padding:1rem; }
+  .gal-cap-title { font-family:'Luckiest Guy',cursive; font-size:.95rem; color:#FFE500; letter-spacing:.05em; text-shadow:1px 1px 0 #6B21A8; margin-bottom:2px; }
+  .gal-cap-count { font-size:.42rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(0,212,255,.8); }
+  .gal-badge {
+    position:absolute; top:.75rem; right:.75rem;
+    background:rgba(0,0,0,.55); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,229,0,.35); border-radius:20px;
+    padding:4px 8px; display:flex; align-items:center; gap:4px;
+    font-size:.4rem; letter-spacing:.2em; color:#FFE500;
+  }
+  .gal-nav { display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1rem; }
+  .gal-btn {
+    width:40px; height:40px; border-radius:50%; border:none; cursor:pointer;
+    background:linear-gradient(135deg,#5B21B6,#4A0E75);
+    border:1.5px solid rgba(0,212,255,.4); color:#FFE500; font-size:1.3rem;
+    box-shadow:0 4px 16px rgba(155,89,182,.4);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .1s;
+  }
+  .gal-btn:active { transform:scale(.88); }
+  .gal-dots { display:flex; align-items:center; gap:6px; }
+  .gal-dot {
+    height:8px; min-width:8px; border-radius:4px; border:none; cursor:pointer;
+    background:rgba(0,212,255,.4); transition:width .3s, background .3s; padding:0;
+  }
+  .gal-dot.active { width:28px !important; background:#FFE500; }
 
-/* ── Caption overlay ── */
-.carousel-caption{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:.75rem 1rem;background:linear-gradient(to top,rgba(2,8,40,.85) 0%,transparent 100%);pointer-events:none}
-.carousel-caption-label{font-family:'Lato',sans-serif;font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;display:block;margin-bottom:.15rem;animation:captionSlide .5s .3s ease both}
-.carousel-caption-title{font-family:'Dancing Script',cursive;font-size:1.3rem;font-weight:700;color:#e8c84a;display:block;animation:captionSlide .5s .45s ease both;
-  background:linear-gradient(90deg,#c9a020,#e8c84a,#f5e27a,#e8c84a);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  /* ── RSVP ── */
+  .rsvp-form { max-width:320px; margin:0 auto; }
+  .rsvp-field {
+    border-bottom:1.5px solid rgba(0,212,255,.4); margin-bottom:1.5rem; padding-bottom:4px;
+  }
+  .rsvp-input, .rsvp-textarea {
+    width:100%; background:transparent; border:none; outline:none;
+    font-family:'Dancing Script',cursive; font-style:italic;
+    font-size:1.1rem; color:#FFE135; padding:4px 0;
+  }
+  .rsvp-input::placeholder, .rsvp-textarea::placeholder { color:rgba(255,229,53,.4); }
+  .rsvp-textarea { resize:none; }
+  .rsvp-submit {
+    width:100%; padding:.9rem; cursor:pointer;
+    font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem;
+    letter-spacing:.3em; text-transform:uppercase; color:#020a18;
+    background:linear-gradient(135deg,#FFE135,#FFC107); border:none; border-radius:50px;
+    box-shadow:0 4px 18px rgba(255,193,7,.5); transition:transform .1s;
+  }
+  .rsvp-submit:active { transform:scale(.97); }
+  .rsvp-thanks { text-align:center; padding:2rem 0; display:none; }
+  .rsvp-thanks.show { display:block; animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
+  .thanks-title { font-family:'Dancing Script',cursive; font-size:2.2rem; color:#FFE135; margin:.5rem 0; }
+  .thanks-sub { font-family:'Lato',sans-serif; font-style:italic; font-size:.95rem; color:#C4B5FD; margin-bottom:1.25rem; }
+  .wa-btn {
+    display:inline-block; padding:.75rem 2rem; border-radius:50px; text-decoration:none;
+    font-family:'Lato',sans-serif; font-weight:700; font-size:.55rem;
+    letter-spacing:.3em; text-transform:uppercase; color:#020a18;
+    background:linear-gradient(135deg,#25d366,#128c50);
+    box-shadow:0 4px 18px rgba(37,211,102,.4);
+  }
 
-/* ── Badge top-right ── */
-.carousel-badge{position:absolute;top:10px;right:10px;z-index:4;background:rgba(232,200,74,.18);border:1px solid rgba(232,200,74,.5);border-radius:20px;padding:.2rem .55rem;font-family:'Lato',sans-serif;font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:#e8c84a;backdrop-filter:blur(4px);animation:starburstPop .5s .15s ease both,badgeFloat 3s 1s ease-in-out infinite}
-
-/* ── Progress bar ── */
-.carousel-progress{height:2px;background:rgba(135,210,255,.15);border-radius:1px;margin-top:6px;overflow:hidden}
-.carousel-progress-bar{height:100%;background:linear-gradient(90deg,#1565e0,#e8c84a);border-radius:1px;width:0;transform-origin:left}
-
-/* ── Nav arrows ── */
-.carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:8px}
-.carousel-arrow{width:34px;height:34px;border-radius:50%;background:rgba(21,101,224,.25);border:1px solid rgba(56,176,255,.35);color:#b8e8ff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s,transform .2s,box-shadow .2s;flex-shrink:0}
-.carousel-arrow:hover{background:rgba(21,101,224,.55);transform:scale(1.12);box-shadow:0 0 14px rgba(56,176,255,.4)}
-.carousel-arrow:active{transform:scale(.95)}
-
-/* ── Dot indicators ── */
-.carousel-dots{display:flex;align-items:center;justify-content:center;gap:7px;flex:1}
-.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(135,210,255,.25);border:1px solid rgba(135,210,255,.3);cursor:pointer;transition:background .3s,transform .3s,width .4s;padding:0}
-.carousel-dot.active{background:#e8c84a;border-color:#e8c84a;transform:scale(1.2);width:20px;border-radius:4px;animation:dotPulse .4s ease}
-.carousel-dot:hover:not(.active){background:rgba(135,210,255,.5);transform:scale(1.15)}
-
-/* ── Thumb strip ── */
-.carousel-thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
-.carousel-thumbs::-webkit-scrollbar{display:none}
-.carousel-thumb{flex-shrink:0;width:48px;height:38px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .25s,transform .25s,box-shadow .25s;opacity:.6}
-.carousel-thumb.active{border-color:#e8c84a;opacity:1;transform:scale(1.08);box-shadow:0 0 10px rgba(232,200,74,.4)}
-.carousel-thumb:hover:not(.active){opacity:.9;transform:scale(1.05);border-color:rgba(135,210,255,.4)}
-.carousel-thumb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-
-/* ══ RSVP ══ */
-.rsvp-form{max-width:320px;margin:0 auto}
-.rsvp-field{border-bottom:1.5px solid rgba(135,210,255,.5);margin-bottom:1.5rem;padding-bottom:4px;transition:border-color .3s}
-.rsvp-field:focus-within{border-color:rgba(232,200,74,.7)}
-.rsvp-input{width:100%;background:transparent;border:none;outline:none;font-family:'Dancing Script',cursive;font-style:italic;font-size:1.1rem;color:#e8c84a;padding:4px 0}
-.rsvp-input::placeholder{color:rgba(135,210,255,.55)}
-.rsvp-btn{display:block;width:100%;padding:.85rem;background:linear-gradient(135deg,#e8c84a,#c9a020);border:none;border-radius:50px;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#020a18;cursor:pointer;transition:opacity .2s,transform .2s,box-shadow .3s;box-shadow:0 4px 20px rgba(232,200,74,.35)}
-.rsvp-btn:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,200,74,.5)}
-.creepy-btn{position:relative;width:100%;min-width:9em;border-radius:12px;background:#000;border:none;cursor:pointer;outline:none;user-select:none;-webkit-tap-highlight-color:transparent}
-.creepy-btn:focus-visible{box-shadow:0 0 0 3px #38b0ff}
-.creepy-eyes{position:absolute;display:flex;align-items:center;gap:.375em;right:1em;bottom:.5em;height:.75em;z-index:0;pointer-events:none}
-.creepy-eye{position:relative;width:.75em;background:#fff;border-radius:999px;overflow:hidden;animation:eyeblink 3s linear infinite}
-@keyframes eyeblink{0%,92%{height:.75em}96%{height:0em}100%{height:.75em}}
-.creepy-pupil{position:absolute;top:50%;left:50%;width:.375em;height:.375em;background:#000;border-radius:50%;transform:translate(-50%,-50%);transition:transform 75ms ease-out}
-.creepy-cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:.85rem 1rem;border-radius:12px;background:linear-gradient(135deg,#e8c84a,#c9a020);color:#020a18;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;box-shadow:inset 0 0 0 2px rgba(0,0,0,.3);transform-origin:1.25em 50%;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
-.creepy-btn:hover .creepy-cover,.creepy-btn:focus .creepy-cover{transform:rotate(-12deg)}
-.creepy-placeholder{display:block;opacity:0;padding:.85rem 1rem;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;min-width:9em}
-.rsvp-success{text-align:center;padding:2rem 0;animation:fadeIn .6s ease}
-.rsvp-success-emoji{font-size:3rem;margin-bottom:1rem;animation:numBounce .8s ease}
-.rsvp-success h3{font-family:'Dancing Script',cursive;font-size:2.2rem;color:#e8c84a;margin-bottom:.5rem}
-.rsvp-success p{font-family:'Lato',sans-serif;font-size:.9rem;font-style:italic;color:#b8e8ff;margin-bottom:1.25rem}
-.wa-btn{display:inline-block;padding:.75rem 2rem;background:linear-gradient(135deg,#25d366,#128c50);border-radius:50px;color:#020a18;font-family:'Lato',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:transform .2s,box-shadow .3s}
-.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.6)}
-
-/* ══ ELASTIC STACK ══ */
-.elastic-wrap{display:flex;align-items:center;justify-content:center;padding:2rem 0 1.5rem}
-.avatar{position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;border:2.5px solid rgba(232,200,74,.6);margin-left:-22px;transition:transform .5s,box-shadow .3s;cursor:pointer;flex-shrink:0;background:rgba(8,25,80,.8)}
-.avatar:first-child{margin-left:0}
-.avatar img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;border-radius:50%}
-
-/* ══ FOOTER ══ */
-footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(135,210,255,.35);position:relative;z-index:10;background:rgba(11,40,100,.5)}
-.footer-name{font-family:'Dancing Script',cursive;font-weight:700;font-size:2.4rem;margin-bottom:.25rem;
-  background:linear-gradient(90deg,#c9a020,#e8c84a,#f5e27a,#e8c84a,#c9a020);background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 3s linear infinite}
-.footer-sub{font-family:'Dancing Script',cursive;font-style:italic;font-size:1.2rem;color:#b8e8ff;margin-bottom:.5rem}
-.footer-date{font-family:'Lato',sans-serif;font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;margin-bottom:1rem}
-.footer-love{font-family:'Dancing Script',cursive;font-style:italic;font-size:1rem;color:#b8e8ff;animation:blink 3s infinite}
-.footer-legal-wrap{margin-top:2rem;border-top:1px solid rgba(135,210,255,.18);padding-top:1.75rem}
-.footer-logo{height:90px;opacity:.95;filter:drop-shadow(0 0 12px rgba(232,200,74,.5)) brightness(1.15);margin-bottom:1.25rem;animation:floatGlob 4s ease-in-out infinite}
-.footer-legal{font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.14em;line-height:2.2;text-transform:uppercase;color:rgba(135,210,255,.7);max-width:320px;margin:0 auto}
-.footer-copy{color:#e8c84a;font-weight:700;letter-spacing:.18em}
-
-/* ══ SPLASH ══ */
-#splash{position:fixed;inset:0;z-index:1000;background:rgba(2,8,40,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;overflow:hidden}
-#splash.hiding{animation:splashOut .8s ease forwards}
-@keyframes splashOut{0%{opacity:1}100%{opacity:0;pointer-events:none}}
-#splash.hidden{display:none}
-.splash-name{font-family:'Dancing Script',cursive;font-size:3.5rem;font-weight:700;color:#e8c84a;animation:splashName .8s cubic-bezier(.34,1.56,.64,1) forwards;opacity:0}
-.splash-sub{font-family:'Dancing Script',cursive;font-style:italic;font-size:1.6rem;color:#b8e8ff;animation:splashSub 1s cubic-bezier(.34,1.56,.64,1) .25s forwards;opacity:0}
-.splash-date{font-family:'Lato',sans-serif;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:#87d2ff;animation:fadeIn .8s ease .5s forwards;opacity:0}
-.shield-center{display:flex;justify-content:center;margin-bottom:.5rem}
-.splash-shield{animation:shieldSpin 1s cubic-bezier(.34,1.56,.64,1) forwards;opacity:0;transform:scale(0) rotate(-180deg)}
-.splash-progress{width:120px;height:2px;background:rgba(135,210,255,.2);border-radius:1px;margin-top:1rem;overflow:hidden;animation:fadeIn .5s ease .8s forwards;opacity:0}
-.splash-progress-bar{height:100%;background:linear-gradient(90deg,#1565e0,#e8c84a);border-radius:1px;animation:progressFill 2.2s ease .8s forwards;width:0}
-@keyframes splashName{0%{opacity:0;transform:scale(.5) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes splashSub{0%{opacity:0;transform:scale(.7) translateY(15px)}100%{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes shieldSpin{0%{opacity:0;transform:scale(0) rotate(-180deg)}70%{opacity:1;transform:scale(1.15) rotate(10deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
-@keyframes progressFill{0%{width:0}100%{width:100%}}
+  /* ── FOOTER ── */
+  footer {
+    text-align:center; position:relative; z-index:10;
+    padding:2.5rem 1.5rem; border-top:1px solid rgba(0,212,255,.3);
+    background:rgba(13,11,46,.6);
+  }
+  .footer-name { font-family:'Dancing Script',cursive; font-weight:700; font-size:2.4rem; color:#FFE135; margin-bottom:.25rem; }
+  .footer-turns { font-family:'Dancing Script',cursive; font-style:italic; font-size:1.2rem; color:#C4B5FD; margin-bottom:.5rem; }
+  .footer-date { font-size:.45rem; letter-spacing:.2em; text-transform:uppercase; color:#00D4FF; margin-bottom:1rem; }
+  .footer-tagline { font-family:'Dancing Script',cursive; font-style:italic; font-size:1rem; color:#C4B5FD; animation:blink 3s infinite; }
+  .footer-deco { display:flex; justify-content:center; gap:.75rem; margin-bottom:1rem; }
 </style>
 </head>
 <body>
 
-<div id="aurora"></div>
-<div id="stars"></div>
-<canvas id="confetti-canvas" style="position:fixed;inset:0;z-index:3;pointer-events:none;width:100%;height:100%"></canvas>
+<!-- ══════════════════════════════════════
+     ✏  PERSONALIZA AQUÍ TU INVITACIÓN
+══════════════════════════════════════ -->
+<script>
+const CFG = {
+  name:        "Emiliano",
+  age:         5,
+  eventDate:   "2026-10-03T15:00:00",
+  dateDisplay: "Viernes, 3 de Octubre 2026",
+  dateLine1:   "Viernes",
+  dateLine2:   "Octubre",
+  dateDay:     "3",
+  dateYear:    "2026",
+  time:        "3:00 PM",
+  venue:       "Salón de Clases",
+  address:     "Dirección del festejo aquí",
+  phone:       "1234567890",
+  rsvpTo:      "Mamá",
+  photo:       "https://hercules-cdn.com/file_C5H55EWpxK5exdvx4A1WqSiE",
+  gallery: [
+    { src:"https://images.unsplash.com/photo-1734943757796-366ab4eb02b7?w=800&q=80", cap:"El festejado" },
+    { src:"https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?w=800&q=80", cap:"La celebración" },
+    { src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80", cap:"El pastel" },
+    { src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80", cap:"Globos y decoración" },
+    { src:"https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=80", cap:"La celebración" },
+    { src:"https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80", cap:"Con amor" },
+  ],
+  program: [
+    { time:"2:30 pm", title:"Llegada de invitados",  desc:"¡Al infinito y más allá!" },
+    { time:"3:00 pm", title:"¡Hora de la fiesta!",   desc:"Juegos y misiones espaciales" },
+    { time:"4:00 pm", title:"El pastel y festejo",   desc:"¡Happy Birthday Cowboy! 🎂" },
+    { time:"5:00 pm", title:"Convivencia familiar",  desc:"Música y alegría galáctica" },
+    { time:"6:00 pm", title:"Despedida",             desc:"Gracias por venir, guardián ★" },
+  ],
+};
+</script>
 
-<!-- SPLASH -->
-<div id="splash">
-  <div id="splash-balloons" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
-  <div class="shield-center">
-    <svg class="splash-shield" width="80" height="80" viewBox="0 0 64 64" fill="none">
-      <defs><linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs>
-      <path d="M16 8 L48 8 L48 36 Q48 52 32 58 Q16 52 16 36 Z" fill="url(#sg1)" opacity="0.9"/>
-      <path d="M22 14 L42 14 L42 36 Q42 46 32 50 Q22 46 22 36 Z" fill="rgba(2,8,40,0.4)"/>
-      <polygon points="32,18 34.4,25.6 42.5,25.6 36.1,30.2 38.5,37.8 32,33.2 25.5,37.8 27.9,30.2 21.5,25.6 29.6,25.6" fill="#f5e27a" opacity="0.9"/>
+<!-- STARFIELD -->
+<div id="starfield"></div>
+
+<!-- ════════════════ SPLASH ════════════════ -->
+<div id="splash" onclick="closeSplash()">
+  <div class="stripe-green stripe-top-green"></div>
+  <div class="stripe-purple stripe-top-purple"></div>
+
+  <!-- Rockets deco -->
+  <div style="position:absolute;left:5%;top:20%" class="float">
+    <svg width="70" height="70" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+      <ellipse cx="40" cy="14" rx="10" ry="12" fill="#2196F3"/>
+      <circle cx="40" cy="28" r="7" fill="#7ECFFF" opacity=".9"/>
+      <circle cx="40" cy="28" r="4" fill="#1565C0"/>
+      <rect x="26" y="40" width="28" height="14" rx="2" fill="#EF5350"/>
+      <rect x="26" y="46" width="28" height="8" rx="2" fill="#E53935"/>
+      <path d="M26 42 Q18 48 22 56 L26 54 Z" fill="#EF5350"/>
+      <path d="M54 42 Q62 48 58 56 L54 54 Z" fill="#EF5350"/>
+      <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FF9800" opacity=".9"/>
+      <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFEB3B"/>
+      <rect x="29" y="40" width="6" height="2" rx="1" fill="#4CAF50"/>
+      <rect x="45" y="40" width="6" height="2" rx="1" fill="#4CAF50"/>
+      <circle cx="38" cy="32" r="1.5" fill="white" opacity=".8"/>
     </svg>
   </div>
-  <div class="splash-name">Santiago</div>
-  <div class="splash-sub">¡cumple 1!</div>
-  <div class="splash-date">Sábado, 15 de Agosto 2026</div>
-  <div class="splash-progress"><div class="splash-progress-bar"></div></div>
+  <div style="position:absolute;right:5%;top:15%;transform:scaleX(-1)" class="float">
+    <svg width="65" height="65" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+      <ellipse cx="40" cy="14" rx="10" ry="12" fill="#2196F3"/>
+      <circle cx="40" cy="28" r="7" fill="#7ECFFF" opacity=".9"/>
+      <circle cx="40" cy="28" r="4" fill="#1565C0"/>
+      <rect x="26" y="40" width="28" height="14" rx="2" fill="#EF5350"/>
+      <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FF9800" opacity=".9"/>
+      <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFEB3B"/>
+    </svg>
+  </div>
+
+  <!-- Aliens bottom -->
+  <div style="position:absolute;left:2%;bottom:5%" class="float-slow">
+    <svg width="110" height="130" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/>
+      <ellipse cx="45" cy="65" rx="14" ry="10" fill="#8BC34A"/>
+      <ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/>
+      <ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#4FC3F7"/>
+      <circle cx="45" cy="37" r="4" fill="#4FC3F7"/>
+      <circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+      <circle cx="37" cy="39" r="1.5" fill="white"/>
+      <circle cx="46" cy="36" r="1.5" fill="white"/>
+      <circle cx="55" cy="39" r="1.5" fill="white"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+      <path d="M25 75 Q14 80 18 88" stroke="#76C442" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M65 75 Q76 80 72 88" stroke="#76C442" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M38 54 Q45 60 52 54" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#76C442"/>
+      <circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+    </svg>
+  </div>
+  <div style="position:absolute;right:2%;bottom:5%" class="float-slow">
+    <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/>
+      <ellipse cx="45" cy="65" rx="14" ry="10" fill="#8BC34A"/>
+      <ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/>
+      <ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/>
+      <ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#4FC3F7"/>
+      <circle cx="45" cy="37" r="4" fill="#4FC3F7"/>
+      <circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+      <circle cx="37" cy="39" r="1.5" fill="white"/>
+      <circle cx="46" cy="36" r="1.5" fill="white"/>
+      <circle cx="55" cy="39" r="1.5" fill="white"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+      <path d="M38 54 Q45 60 52 54" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#76C442"/>
+      <circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div style="position:relative;z-index:10;text-align:center;padding:0 2rem">
+    <!-- Buzz icon -->
+    <div class="pop" style="animation-delay:.3s;margin-bottom:.5rem">
+      <svg width="72" height="72" viewBox="0 0 60 70" fill="none" style="margin:0 auto;display:block">
+        <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#76C442"/><stop offset="50%" stop-color="#43A047"/><stop offset="100%" stop-color="#2E7D32"/></linearGradient></defs>
+        <ellipse cx="30" cy="22" rx="18" ry="20" fill="white"/>
+        <ellipse cx="30" cy="22" rx="13" ry="14" fill="#7ECFFF" opacity=".9"/>
+        <ellipse cx="25" cy="18" rx="5" ry="6" fill="rgba(255,255,255,.4)"/>
+        <rect x="14" y="38" width="32" height="22" rx="4" fill="url(#bg)"/>
+        <rect x="18" y="41" width="24" height="16" rx="3" fill="white" opacity=".9"/>
+        <rect x="22" y="43" width="16" height="12" rx="2" fill="#1565C0"/>
+        <circle cx="24" cy="47" r="3" fill="#FF5722"/>
+        <circle cx="30" cy="47" r="3" fill="#FFEB3B"/>
+        <circle cx="36" cy="47" r="3" fill="#4CAF50"/>
+        <path d="M14 45 Q4 40 8 55 L14 52 Z" fill="white" opacity=".8"/>
+        <path d="M46 45 Q56 40 52 55 L46 52 Z" fill="white" opacity=".8"/>
+        <rect x="26" y="36" width="8" height="5" rx="2" fill="white"/>
+      </svg>
+    </div>
+
+    <p class="fade-up" style="animation-delay:.4s;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#00D4FF;margin-bottom:.25rem;font-weight:300">LLAMANDO A TODOS LOS</p>
+    <p class="fade-up" style="animation-delay:.5s;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#00D4FF;margin-bottom:.75rem;font-weight:700">GUARDIANES ESPACIALES</p>
+
+    <!-- Photo -->
+    <div class="pop" style="animation-delay:.5s">
+      <div class="photo-ring">
+        <div class="photo-inner">
+          <img id="splash-photo" src="" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="pop" style="animation-delay:.7s">
+      <span class="ts-name" id="splash-name"></span>
+    </div>
+
+    <!-- CUMPLE -->
+    <div class="pop" style="animation-delay:.9s;display:flex;justify-content:center">
+      <div class="ts-cumple-wrap"><span class="ts-cumple">CUMPLE</span></div>
+    </div>
+
+    <!-- Age -->
+    <div class="pop" style="animation-delay:1s">
+      <span class="ts-age" id="splash-age"></span>
+    </div>
+
+    <p class="blink" style="font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:#00D4FF;margin-top:1rem">★ Toca para abrir ★</p>
+  </div>
+
+  <div class="stripe-purple stripe-bot-purple"></div>
+  <div class="stripe-green stripe-bot-green"></div>
 </div>
 
-<!-- APP -->
-<div id="app">
+<!-- ════════════════ MAIN ════════════════ -->
+<div id="main">
+<div class="container">
 
-  <!-- HERO CARD -->
-  <div class="glow-card reveal-card" style="--gd:6s">
-    <div class="glow-inner card">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">★</span><div class="topbar-line"></div></div>
-      <div class="triangle-row" id="tri-top">
-        <div class="tri" style="border-bottom-color:#38b0ff;--delay:.0s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;--delay:.1s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;--delay:.2s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;--delay:.3s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;--delay:.4s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;--delay:.5s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;--delay:.6s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;--delay:.7s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;--delay:.8s"></div>
+  <!-- ── HERO CARD ── -->
+  <div class="hero-card">
+    <div style="height:10px;background:repeating-linear-gradient(90deg,#5DC645 0,#5DC645 18px,white 18px,white 36px)"></div>
+    <div style="height:5px;background:#9B59B6"></div>
+
+    <div class="hero-body">
+      <!-- deco rockets -->
+      <div class="hero-deco-left float">
+        <svg width="55" height="55" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+          <ellipse cx="40" cy="14" rx="10" ry="12" fill="#2196F3"/>
+          <circle cx="40" cy="28" r="7" fill="#7ECFFF" opacity=".9"/>
+          <circle cx="40" cy="28" r="4" fill="#1565C0"/>
+          <rect x="26" y="40" width="28" height="14" rx="2" fill="#EF5350"/>
+          <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FF9800" opacity=".9"/>
+          <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFEB3B"/>
+        </svg>
       </div>
-      <span class="card-label">Únete a la celebración de</span>
-      <div class="shield-center">
-        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" style="animation:floatGlob 4s ease-in-out infinite"><defs><linearGradient id="sg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs><path d="M16 8 L48 8 L48 36 Q48 52 32 58 Q16 52 16 36 Z" fill="url(#sg2)" opacity="0.9"/><path d="M22 14 L42 14 L42 36 Q42 46 32 50 Q22 46 22 36 Z" fill="rgba(2,8,40,0.4)"/><polygon points="32,18 34.4,25.6 42.5,25.6 36.1,30.2 38.5,37.8 32,33.2 25.5,37.8 27.9,30.2 21.5,25.6 29.6,25.6" fill="#f5e27a" opacity="0.9"/></svg>
+      <div class="hero-deco-right float" style="transform:scaleX(-1)">
+        <svg width="55" height="55" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="30" rx="14" ry="24" fill="white"/>
+          <ellipse cx="40" cy="14" rx="10" ry="12" fill="#2196F3"/>
+          <circle cx="40" cy="28" r="7" fill="#7ECFFF" opacity=".9"/>
+          <circle cx="40" cy="28" r="4" fill="#1565C0"/>
+          <rect x="26" y="40" width="28" height="14" rx="2" fill="#EF5350"/>
+          <path d="M34 54 Q36 64 38 60 Q40 68 42 60 Q44 64 46 54 Z" fill="#FF9800" opacity=".9"/>
+          <path d="M36 54 Q38 62 40 58 Q42 62 44 54 Z" fill="#FFEB3B"/>
+        </svg>
       </div>
-      <h1 class="card-title">Cumpleaños</h1>
-      <div class="hero-badge">★ Celebración ★</div>
-      <div class="hero-photo-wrap">
-        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&q=80" alt="Santiago"/>
-      </div>
-      <div style="font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:.25rem;animation:blink 4s ease-in-out infinite">★ Nuestro pequeño príncipe ★</div>
-      <div class="hero-name">Santiago</div>
-      <div class="hero-cumple">— Cumple —</div>
-      <div class="hero-age" id="hero-age">1</div>
-      <div class="divider"><span>✦</span></div>
-      <div class="hero-info-grid">
-        <div class="hero-info-col">
-          <span class="hero-info-label">Sábado</span>
-          <span class="hero-info-label">Agosto</span>
-          <span class="hero-info-val" style="font-size:1.8rem">15</span>
-          <span class="hero-info-sub">2026</span>
+
+      <p style="font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:#00D4FF;margin-bottom:.25rem;font-weight:300">LLAMANDO A TODOS LOS</p>
+      <p style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#00D4FF;margin-bottom:.75rem;font-weight:700">GUARDIANES ESPACIALES</p>
+
+      <!-- Photo + Buzz -->
+      <div style="display:flex;justify-content:center;margin-bottom:.75rem">
+        <div style="position:relative">
+          <div style="position:absolute;left:-30px;top:30px">
+            <svg width="42" height="42" viewBox="0 0 60 70" fill="none">
+              <defs><linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#76C442"/><stop offset="100%" stop-color="#2E7D32"/></linearGradient></defs>
+              <ellipse cx="30" cy="22" rx="18" ry="20" fill="white"/>
+              <ellipse cx="30" cy="22" rx="13" ry="14" fill="#7ECFFF" opacity=".9"/>
+              <rect x="14" y="38" width="32" height="22" rx="4" fill="url(#bg2)"/>
+              <rect x="18" y="41" width="24" height="16" rx="3" fill="white" opacity=".9"/>
+              <rect x="22" y="43" width="16" height="12" rx="2" fill="#1565C0"/>
+              <path d="M14 45 Q4 40 8 55 L14 52 Z" fill="white" opacity=".8"/>
+              <path d="M46 45 Q56 40 52 55 L46 52 Z" fill="white" opacity=".8"/>
+            </svg>
+          </div>
+          <div style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,#FFE135,#FFC107,#FF8F00);padding:4px;box-shadow:0 0 40px rgba(255,209,0,.6)">
+            <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;border:3px solid #0D0B2E">
+              <img id="hero-photo" src="" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top"/>
+            </div>
+          </div>
         </div>
-        <div class="hero-info-sep"></div>
-        <div class="hero-info-col" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <span class="hero-info-label">a las</span>
-          <span class="hero-info-val" style="font-size:1.5rem;color:#e8c84a">4:00 PM</span>
-          <span class="hero-info-sub">✦</span>
+      </div>
+
+      <span class="ts-name" id="hero-name" style="font-size:clamp(3rem,14vw,5rem)"></span>
+      <div style="display:flex;justify-content:center">
+        <div class="ts-cumple-wrap" style="margin:.1em 0"><span class="ts-cumple" style="font-size:clamp(1rem,5vw,1.4rem)">CUMPLE</span></div>
+      </div>
+      <span class="ts-age" id="hero-age" style="font-size:clamp(5rem,20vw,7rem)"></span>
+    </div>
+
+    <!-- Aliens -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:0 .5rem;margin-top:-20px">
+      <div class="float-slow">
+        <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+          <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/><ellipse cx="45" cy="65" rx="14" ry="10" fill="#8BC34A"/>
+          <ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+          <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+          <circle cx="36" cy="40" r="4" fill="#4FC3F7"/><circle cx="45" cy="37" r="4" fill="#4FC3F7"/><circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+          <circle cx="37" cy="39" r="1.5" fill="white"/><circle cx="46" cy="36" r="1.5" fill="white"/><circle cx="55" cy="39" r="1.5" fill="white"/>
+          <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+          <path d="M25 75 Q14 80 18 88" stroke="#76C442" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M65 75 Q76 80 72 88" stroke="#76C442" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M38 54 Q45 60 52 54" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+          <circle cx="45" cy="10" r="4" fill="#76C442"/><circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+        </svg>
+      </div>
+      <div class="float-slow" style="animation-delay:.5s">
+        <svg width="75" height="90" viewBox="0 0 90 110" fill="none">
+          <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/><ellipse cx="45" cy="65" rx="14" ry="10" fill="#8BC34A"/>
+          <ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+          <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+          <circle cx="36" cy="40" r="4" fill="#4FC3F7"/><circle cx="45" cy="37" r="4" fill="#4FC3F7"/><circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+          <circle cx="37" cy="39" r="1.5" fill="white"/><circle cx="46" cy="36" r="1.5" fill="white"/><circle cx="55" cy="39" r="1.5" fill="white"/>
+          <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+          <path d="M38 54 Q45 60 52 54" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+          <circle cx="45" cy="10" r="4" fill="#76C442"/><circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="hero-info">
+      <div class="info-grid">
+        <div class="info-date">
+          <div class="lbl-sm" id="info-line1"></div>
+          <div class="lbl-xs" id="info-line2"></div>
+          <div class="date-big" id="info-day"></div>
+          <div class="year-sm" id="info-year"></div>
         </div>
-        <div class="hero-info-sep"></div>
-        <div class="hero-info-col">
-          <span class="hero-info-label">Lugar</span>
-          <span class="hero-info-val" style="font-size:.85rem">The Party Palace</span>
-          <span class="hero-info-sub">123 Av. Celebración, Happyville</span>
+        <div class="info-time">
+          <p class="italic-sm">a las</p>
+          <div class="time-big" id="info-time"></div>
+          <svg width="16" height="16" viewBox="0 0 10 10" style="margin-top:4px"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".8"/></svg>
+        </div>
+        <div class="info-venue">
+          <div class="lbl-xs">Lugar</div>
+          <div class="venue-name" id="info-venue"></div>
+          <div class="venue-addr" id="info-addr"></div>
         </div>
       </div>
-      <a href="https://wa.me/1234567890" class="hero-rsvp-btn" target="_blank">
-        ★ RSVP a Mamá ★
-        <span class="hero-rsvp-phone">123-456-7890</span>
-      </a>
-      <div class="triangle-row" style="margin-top:1rem;margin-bottom:0">
-        <div class="tri" style="border-bottom-color:#38b0ff"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;animation-delay:.1s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;animation-delay:.2s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;animation-delay:.3s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;animation-delay:.4s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;animation-delay:.5s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;animation-delay:.6s"></div>
-        <div class="tri" style="border-bottom-color:#e8c84a;animation-delay:.7s"></div>
-        <div class="tri" style="border-bottom-color:#38b0ff;animation-delay:.8s"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COUNTDOWN CARD -->
-  <div class="glow-card reveal-card" style="--gd:5s">
-    <div class="glow-inner card">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">✦</span><div class="topbar-line"></div></div>
-      <span class="card-label">El Gran Día</span>
-      <h2 class="card-title">Cuenta Regresiva</h2>
-      <div class="divider"><span>✦</span></div>
-      <div class="cd-grid">
-        <div class="cd-box" id="cd-box-days"><span class="cd-val" id="cd-days">--</span><span class="cd-lbl">Días</span></div>
-        <div class="cd-box" id="cd-box-hours"><span class="cd-val" id="cd-hours">--</span><span class="cd-lbl">Horas</span></div>
-        <div class="cd-box" id="cd-box-mins"><span class="cd-val" id="cd-mins">--</span><span class="cd-lbl">Min</span></div>
-        <div class="cd-box" id="cd-box-secs"><span class="cd-val" id="cd-secs">--</span><span class="cd-lbl">Seg</span></div>
-      </div>
-      <div style="font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-top:.5rem;animation:blink 4s ease-in-out infinite">★ Sábado, 15 de Agosto 2026 ★</div>
-    </div>
-  </div>
-
-  <!-- PROGRAM CARD -->
-  <div class="glow-card reveal-card" style="--gd:7s">
-    <div class="glow-inner card">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">★</span><div class="topbar-line"></div></div>
-      <span class="card-label">El Evento</span>
-      <h2 class="card-title">Programa del Día</h2>
-      <div class="divider"><span>✦</span></div>
-      <div class="prog-container" id="prog-container">
-        <div class="prog-item active" data-idx="0"><div class="prog-inactive"><span class="prog-icon">🎈</span><span class="prog-time-vert">3:30 pm</span></div><div class="prog-active"><div class="prog-big-icon">🎈</div><span class="prog-time-label">3:30 pm</span><div class="prog-title">Llegada de invitados</div><div class="prog-desc">Bienvenida y recepción</div></div></div>
-        <div class="prog-item" data-idx="1"><div class="prog-inactive"><span class="prog-icon">🎉</span><span class="prog-time-vert">4:00 pm</span></div><div class="prog-active"><div class="prog-big-icon">🎉</div><span class="prog-time-label">4:00 pm</span><div class="prog-title">¡Hora de la fiesta!</div><div class="prog-desc">Juegos y actividades</div></div></div>
-        <div class="prog-item" data-idx="2"><div class="prog-inactive"><span class="prog-icon">🎂</span><span class="prog-time-vert">5:00 pm</span></div><div class="prog-active"><div class="prog-big-icon">🎂</div><span class="prog-time-label">5:00 pm</span><div class="prog-title">El pastel y festejo</div><div class="prog-desc">Happy Birthday 🎂</div></div></div>
-        <div class="prog-item" data-idx="3"><div class="prog-inactive"><span class="prog-icon">🎶</span><span class="prog-time-vert">6:00 pm</span></div><div class="prog-active"><div class="prog-big-icon">🎶</div><span class="prog-time-label">6:00 pm</span><div class="prog-title">Convivencia familiar</div><div class="prog-desc">Música y alegría</div></div></div>
-        <div class="prog-item" data-idx="4"><div class="prog-inactive"><span class="prog-icon">✨</span><span class="prog-time-vert">7:00 pm</span></div><div class="prog-active"><div class="prog-big-icon">✨</div><span class="prog-time-label">7:00 pm</span><div class="prog-title">Despedida</div><div class="prog-desc">Gracias por venir ★</div></div></div>
-      </div>
-      <div class="prog-dots" id="prog-dots">
-        <button class="prog-dot active" data-dot="0"></button>
-        <button class="prog-dot" data-dot="1"></button>
-        <button class="prog-dot" data-dot="2"></button>
-        <button class="prog-dot" data-dot="3"></button>
-        <button class="prog-dot" data-dot="4"></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- GALLERY CARD -->
-  <div class="glow-card reveal-card" style="--gd:4s">
-    <div class="glow-inner card">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">★</span><div class="topbar-line"></div></div>
-      <span class="card-label">Momentos</span>
-      <h2 class="card-title">Galería</h2>
-      <div class="divider"><span>✦</span></div>
-      <div class="gallery-hint">★ Desliza o usa las flechas ★</div>
-
-      <div class="carousel" id="carousel">
-        <!-- STAGE -->
-        <div class="carousel-stage" id="carousel-stage">
-          <!-- slides injected by JS -->
+      <div class="rsvp-banner">
+        <div class="rsvp-label">
+          <svg width="10" height="10" viewBox="0 0 10 10" style="vertical-align:middle;margin-right:6px"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
+          RSVP a <span id="rsvp-to"></span>
+          <svg width="10" height="10" viewBox="0 0 10 10" style="vertical-align:middle;margin-left:6px"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
         </div>
-        <!-- PROGRESS -->
-        <div class="carousel-progress"><div class="carousel-progress-bar" id="carousel-progress-bar"></div></div>
-        <!-- NAV -->
-        <div class="carousel-nav">
-          <button class="carousel-arrow" id="carousel-prev" aria-label="Anterior">&#8592;</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <button class="carousel-arrow" id="carousel-next" aria-label="Siguiente">&#8594;</button>
+        <div class="rsvp-phone" id="rsvp-phone"></div>
+      </div>
+    </div>
+
+    <div style="height:5px;background:#9B59B6"></div>
+    <div style="height:10px;background:repeating-linear-gradient(90deg,#5DC645 0,#5DC645 18px,white 18px,white 36px)"></div>
+  </div>
+
+  <!-- ── COUNTDOWN ── -->
+  <div class="card">
+    <div class="card-body">
+      <div class="title-block">
+        <span class="section-eyebrow">El Gran Día</span>
+        <h2 class="section-title">Cuenta Regresiva</h2>
+        <div class="section-divider">
+          <div class="divider-line divider-line-l"></div>
+          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
+          <div class="divider-line divider-line-r"></div>
         </div>
-        <!-- THUMBS -->
-        <div class="carousel-thumbs" id="carousel-thumbs"></div>
+      </div>
+      <div class="countdown-grid">
+        <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
+      </div>
+      <div class="cd-footer">
+        <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".8"/></svg>
+        <span id="cd-date-lbl"></span>
+        <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".8"/></svg>
       </div>
     </div>
   </div>
 
-  <!-- RSVP CARD -->
-  <div class="glow-card reveal-card" style="--gd:5s">
-    <div class="glow-inner card">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">★</span><div class="topbar-line"></div></div>
-      <span class="card-label">Confirmar</span>
-      <h2 class="card-title">Asistencia</h2>
-      <div style="font-family:'Lato',sans-serif;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:1.5rem">★ RSVP a Mamá · 123-456-7890 ★</div>
-      <div id="rsvp-form-wrap">
-        <form class="rsvp-form" id="rsvp-form">
-          <div class="rsvp-field"><input class="rsvp-input" type="text" id="rsvp-name" placeholder="Nombre completo" required/></div>
-          <div class="rsvp-field"><input class="rsvp-input" type="text" id="rsvp-guests" placeholder="Número de invitados"/></div>
-          <div class="rsvp-field"><textarea class="rsvp-input" id="rsvp-msg" placeholder="Mensaje para la familia…" rows="3" style="resize:none"></textarea></div>
-          <button type="submit" class="creepy-btn" id="creepy-submit">
-            <span class="creepy-eyes" id="creepy-eyes">
-              <span class="creepy-eye"><span class="creepy-pupil" id="pupil-l"></span></span>
-              <span class="creepy-eye"><span class="creepy-pupil" id="pupil-r"></span></span>
-            </span>
-            <span class="creepy-cover">★ Confirmar Asistencia ★</span>
-            <span class="creepy-placeholder">★ Confirmar Asistencia ★</span>
-          </button>
-        </form>
+  <!-- ── PROGRAM ── -->
+  <div class="card">
+    <div class="card-body">
+      <div class="title-block">
+        <span class="section-eyebrow">La Misión</span>
+        <h2 class="section-title">Programa del Día</h2>
+        <div class="section-divider">
+          <div class="divider-line divider-line-l"></div>
+          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
+          <div class="divider-line divider-line-r"></div>
+        </div>
+      </div>
+      <div class="timeline" id="program-list"></div>
+    </div>
+  </div>
+
+  <!-- ── GALLERY ── -->
+  <div class="card">
+    <div class="card-body">
+      <div class="title-block">
+        <span class="section-eyebrow">Momentos</span>
+        <h2 class="section-title">Galería</h2>
+        <div class="section-divider">
+          <div class="divider-line divider-line-l"></div>
+          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
+          <div class="divider-line divider-line-r"></div>
+        </div>
+      </div>
+
+      <div class="gallery-wrap" id="gallery-wrap">
+        <!-- prev -->
+        <div class="gal-side gal-prev" id="gal-prev" onclick="galGo(galIdx-1,-1)">
+          <img id="gal-prev-img" src="" alt=""/>
+        </div>
+        <!-- main -->
+        <div class="gal-main">
+          <img id="gal-img-a" src="" alt="" class="active"/>
+          <img id="gal-img-b" src="" alt="" class="enter"/>
+          <div class="gal-overlay"></div>
+          <div class="gal-caption">
+            <div class="gal-cap-title" id="gal-cap"></div>
+            <div class="gal-cap-count" id="gal-count"></div>
+          </div>
+          <div class="gal-badge">
+            <svg width="8" height="8" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE500"/></svg>
+            GALERÍA
+          </div>
+        </div>
+        <!-- next -->
+        <div class="gal-side gal-next" id="gal-next" onclick="galGo(galIdx+1,1)">
+          <img id="gal-next-img" src="" alt=""/>
+        </div>
+      </div>
+
+      <div class="gal-nav">
+        <button class="gal-btn" onclick="galGo(galIdx-1,-1)">&#8249;</button>
+        <div class="gal-dots" id="gal-dots"></div>
+        <button class="gal-btn" onclick="galGo(galIdx+1,1)">&#8250;</button>
       </div>
     </div>
   </div>
 
-  <!-- ELASTIC STACK CARD -->
-  <div class="glow-card reveal-card" style="--gd:8s">
-    <div class="glow-inner card" style="text-align:center">
-      <div class="topbar"><div class="topbar-line"></div><span class="topbar-star">★</span><div class="topbar-line"></div></div>
-      <span class="card-label">La Familia</span>
-      <h2 class="card-title" style="font-size:clamp(1.6rem,5vw,2.2rem)">¿Quién viene a celebrar?</h2>
-      <div style="font-family:'Lato',sans-serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:#87d2ff;margin-bottom:0">★ Pasa el cursor para descubrir ★</div>
-      <div class="elastic-wrap" id="elastic-wrap">
-        <div class="avatar" data-i="0"><img src="https://images.unsplash.com/photo-1734943842257-268c716c2701?w=200&q=80" alt="El festejado"/></div>
-        <div class="avatar" data-i="1"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&q=80" alt="El pastel"/></div>
-        <div class="avatar" data-i="2"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=200&q=80" alt="Globos"/></div>
-        <div class="avatar" data-i="3"><img src="https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=200&q=80" alt="Celebración"/></div>
-        <div class="avatar" data-i="4"><img src="https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=200&q=80" alt="Momentos"/></div>
-        <div class="avatar" data-i="5"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=200&q=80" alt="Con amor"/></div>
+  <!-- ── RSVP ── -->
+  <div class="card">
+    <div class="card-body">
+      <div class="title-block">
+        <span class="section-eyebrow">Confirmar</span>
+        <h2 class="section-title">Asistencia</h2>
+        <div class="section-divider">
+          <div class="divider-line divider-line-l"></div>
+          <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE135" opacity=".9"/></svg>
+          <div class="divider-line divider-line-r"></div>
+        </div>
       </div>
-      <div style="font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(135,210,255,.5);margin-top:-12px">Te esperamos a todos 🎈</div>
+      <p style="text-align:center;margin-bottom:1.5rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#00D4FF">
+        ★ RSVP a <span id="rsvp-to2"></span> · <span id="rsvp-phone2"></span> ★
+      </p>
+
+      <div id="rsvp-thanks" class="rsvp-thanks">
+        <div style="font-size:3rem;margin-bottom:.5rem">🎉</div>
+        <p class="thanks-title">¡Gracias!</p>
+        <p class="thanks-sub">Abriendo WhatsApp para confirmar…</p>
+        <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="wa-btn">Abrir WhatsApp</a>
+      </div>
+
+      <form id="rsvp-form" class="rsvp-form" onsubmit="rsvpSubmit(event)">
+        <div class="rsvp-field">
+          <input id="rsvp-name"   class="rsvp-input"    type="text"  placeholder="Nombre completo"     required />
+        </div>
+        <div class="rsvp-field">
+          <input id="rsvp-guests" class="rsvp-input"    type="text"  placeholder="Número de invitados" />
+        </div>
+        <div class="rsvp-field">
+          <textarea id="rsvp-msg" class="rsvp-textarea" rows="3"     placeholder="Mensaje para la familia…"></textarea>
+        </div>
+        <button type="submit" class="rsvp-submit">★ Confirmar Asistencia ★</button>
+      </form>
     </div>
   </div>
 
-</div>
+</div><!-- /container -->
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer>
-  <div class="shield-center" style="margin-bottom:1rem">
-    <svg width="36" height="36" viewBox="0 0 64 64" fill="none" style="animation:floatGlob 4s ease-in-out 1s infinite"><defs><linearGradient id="sg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f5e27a"/><stop offset="40%" stop-color="#e8c84a"/><stop offset="100%" stop-color="#c9a020"/></linearGradient></defs><path d="M16 8 L48 8 L48 36 Q48 52 32 58 Q16 52 16 36 Z" fill="url(#sg3)" opacity="0.9"/><path d="M22 14 L42 14 L42 36 Q42 46 32 50 Q22 46 22 36 Z" fill="rgba(2,8,40,0.4)"/><polygon points="32,18 34.4,25.6 42.5,25.6 36.1,30.2 38.5,37.8 32,33.2 25.5,37.8 27.9,30.2 21.5,25.6 29.6,25.6" fill="#f5e27a" opacity="0.9"/></svg>
+  <div class="footer-deco">
+    <svg width="50" height="60" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/><ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#4FC3F7"/><circle cx="45" cy="37" r="4" fill="#4FC3F7"/><circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#76C442"/><circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+    </svg>
+    <svg width="40" height="48" viewBox="0 0 60 70" fill="none">
+      <defs><linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#76C442"/><stop offset="100%" stop-color="#2E7D32"/></linearGradient></defs>
+      <ellipse cx="30" cy="22" rx="18" ry="20" fill="white"/>
+      <ellipse cx="30" cy="22" rx="13" ry="14" fill="#7ECFFF" opacity=".9"/>
+      <rect x="14" y="38" width="32" height="22" rx="4" fill="url(#bg3)"/>
+      <rect x="18" y="41" width="24" height="16" rx="3" fill="white" opacity=".9"/>
+      <rect x="22" y="43" width="16" height="12" rx="2" fill="#1565C0"/>
+      <circle cx="24" cy="47" r="3" fill="#FF5722"/><circle cx="30" cy="47" r="3" fill="#FFEB3B"/><circle cx="36" cy="47" r="3" fill="#4CAF50"/>
+      <path d="M14 45 Q4 40 8 55 L14 52 Z" fill="white" opacity=".8"/>
+      <path d="M46 45 Q56 40 52 55 L46 52 Z" fill="white" opacity=".8"/>
+    </svg>
+    <svg width="50" height="60" viewBox="0 0 90 110" fill="none">
+      <ellipse cx="45" cy="72" rx="20" ry="18" fill="#76C442"/><ellipse cx="45" cy="42" rx="26" ry="30" fill="#76C442"/><ellipse cx="45" cy="42" rx="22" ry="26" fill="#8BC34A"/>
+      <ellipse cx="36" cy="40" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="45" cy="37" rx="7" ry="9" fill="#1A1A2E"/><ellipse cx="54" cy="40" rx="7" ry="9" fill="#1A1A2E"/>
+      <circle cx="36" cy="40" r="4" fill="#4FC3F7"/><circle cx="45" cy="37" r="4" fill="#4FC3F7"/><circle cx="54" cy="40" r="4" fill="#4FC3F7"/>
+      <ellipse cx="45" cy="70" rx="18" ry="5" fill="#9C27B0"/>
+      <line x1="45" y1="12" x2="45" y2="24" stroke="#76C442" stroke-width="2.5"/>
+      <circle cx="45" cy="10" r="4" fill="#76C442"/><circle cx="45" cy="10" r="2.5" fill="#FFEB3B"/>
+    </svg>
   </div>
-  <div class="footer-name">Santiago</div>
-  <div class="footer-sub">¡cumple 1!</div>
-  <div class="footer-date">Sábado, 15 de Agosto 2026</div>
-  <div class="footer-love">"Hecho con amor ★"</div>
-  <div class="footer-legal-wrap">
-    <div style="display:flex;justify-content:center;margin-bottom:1.25rem">
-      <img src="https://hercules-cdn.com/file_vr5vHSi5Axfxp9garVzXpm1f" alt="Gueka Ideas" class="footer-logo"/>
-    </div>
-    <p class="footer-legal">
+  <p class="footer-name" id="footer-name"></p>
+  <p class="footer-turns" id="footer-turns"></p>
+  <p class="footer-date"  id="footer-date"></p>
+  <p class="footer-tagline">"Al Infinito y Más Allá ★"</p>
+
+  <!-- Gueka Ideas watermark -->
+  <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,212,255,.15)">
+    <img src="https://hercules-cdn.com/file_rebAGZj75a2eQqJPRrsi9mRX" alt="Gueka Ideas" style="width:140px;opacity:.55;margin:0 auto .75rem;display:block;filter:brightness(0) invert(1);opacity:.35" />
+    <p style="font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(196,181,253,.5);line-height:1.8;margin-top:.25rem">
       Esta tarjeta digital es propiedad exclusiva de Gueka Ideas.<br/>
       Uso permitido únicamente para fines personales.<br/>
-      <span class="footer-copy">© 2026 GUEKA IDEAS · TODOS LOS DERECHOS RESERVADOS</span>
+      © 2026 GUEKA IDEAS · TODOS LOS DERECHOS RESERVADOS
     </p>
   </div>
 </footer>
+</div><!-- /main -->
 
 <script>
-// ══════════════════════════════════════════
-//  STARS – three variants with random params
-// ══════════════════════════════════════════
-(function(){
-  const data=[
-    {x:7,y:12,r:1.5,c:'#e8c84a',t:'twinkle',dur:2.5,delay:0},
-    {x:20,y:5,r:1,c:'#38b0ff',t:'drift',dur:4,delay:.5,dx:6,dy:-8},
-    {x:38,y:8,r:1.5,c:'#e8c84a',t:'pulse',dur:3,delay:1},
-    {x:55,y:3,r:1,c:'#fff',t:'twinkle',dur:2,delay:.3},
-    {x:75,y:10,r:1.5,c:'#e8c84a',t:'drift',dur:5,delay:.8,dx:-5,dy:-7},
-    {x:90,y:6,r:1,c:'#38b0ff',t:'pulse',dur:3.5,delay:1.2},
-    {x:13,y:25,r:1,c:'#fff',t:'twinkle',dur:2.8,delay:.4},
-    {x:96,y:30,r:1.5,c:'#e8c84a',t:'drift',dur:4.5,delay:.7,dx:4,dy:-6},
-    {x:45,y:45,r:1,c:'#38b0ff',t:'pulse',dur:2.5,delay:1.5},
-    {x:80,y:50,r:1.5,c:'#e8c84a',t:'twinkle',dur:3,delay:.2},
-    {x:25,y:62,r:1,c:'#fff',t:'drift',dur:3.8,delay:.9,dx:-3,dy:-5},
-    {x:63,y:70,r:1.5,c:'#38b0ff',t:'pulse',dur:4,delay:1.1},
-    {x:4,y:40,r:1,c:'#e8c84a',t:'twinkle',dur:2.2,delay:.6},
-    {x:98,y:60,r:1,c:'#38b0ff',t:'drift',dur:5,delay:1.3,dx:5,dy:-9},
-    {x:52,y:18,r:1,c:'#fff',t:'twinkle',dur:3.2,delay:.15},
-    {x:33,y:85,r:1.5,c:'#e8c84a',t:'pulse',dur:2.8,delay:.85},
-    {x:70,y:88,r:1,c:'#38b0ff',t:'twinkle',dur:3.5,delay:1.0},
-    {x:15,y:75,r:1,c:'#fff',t:'drift',dur:4.2,delay:.55,dx:-6,dy:-4}
-  ];
-  const wrap=document.getElementById('stars');
-  data.forEach(s=>{
-    const d=document.createElement('div');
-    d.className=`star ${s.t}`;
-    let extra='';
-    if(s.dx)extra+=`--dx:${s.dx}px;--dy:${s.dy}px;`;
-    if(s.t==='pulse')extra+=`color:${s.c};`;
-    d.style.cssText=`left:${s.x}%;top:${s.y}%;width:${s.r*2}px;height:${s.r*2}px;background:${s.c};--dur:${s.dur}s;--delay:${s.delay}s;${extra}`;
-    wrap.appendChild(d);
-  });
-})();
-
-// ══════════════════════════════════════════
-//  SHOOTING STARS
-// ══════════════════════════════════════════
-(function(){
-  function shoot(){
-    const el=document.createElement('div');
-    el.className='shooting';
-    const x=Math.random()*60;
-    const y=Math.random()*40;
-    const len=80+Math.random()*180;
-    el.style.cssText=`left:${x}%;top:${y}%;`;
-    el.style.setProperty('--tx',`${len}px`);
-    el.style.setProperty('--ty',`${len*.55}px`);
-    el.style.setProperty('--angle','215deg');
-    el.style.animation=`shoot ${0.6+Math.random()*.6}s ease-out forwards`;
-    el.style.width=`${len}px`;
-    el.style.height='1.5px';
-    el.style.borderRadius='1px';
-    el.style.background='linear-gradient(to left,rgba(255,255,255,.9),transparent)';
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),1400);
-  }
-  function scheduleShoot(){
-    shoot();
-    setTimeout(scheduleShoot,(2000+Math.random()*5000));
-  }
-  setTimeout(scheduleShoot,2000);
-})();
-
-// ══════════════════════════════════════════
-//  BACKGROUND FLOATING BALLOONS
-// ══════════════════════════════════════════
-(function(){
-  const colors=['#38b0ff','#e8c84a','#1565e0','#87d2ff','#f5e27a','#3b82f6'];
-  function createBalloon(){
-    const b=document.createElement('div');
-    b.className='bg-balloon';
-    const c=colors[Math.floor(Math.random()*colors.length)];
-    const x=5+Math.random()*90;
-    const sz=16+Math.random()*20;
-    const dur=8+Math.random()*10;
-    const delay=Math.random()*2;
-    b.style.cssText=`left:${x}%;animation-duration:${dur}s;animation-delay:${delay}s;opacity:${0.12+Math.random()*.15}`;
-    b.innerHTML=`<svg width="${sz}" height="${sz*1.3}" viewBox="0 0 30 40"><ellipse cx="15" cy="14" rx="12" ry="13" fill="${c}"/><line x1="15" y1="27" x2="15" y2="40" stroke="${c}" stroke-width="1.5"/></svg>`;
-    document.body.appendChild(b);
-    setTimeout(()=>{b.remove();createBalloon();},( dur+delay+1)*1000);
-  }
-  for(let i=0;i<6;i++) setTimeout(createBalloon,i*1500);
-})();
-
-// ══════════════════════════════════════════
-//  CONFETTI CANVAS
-// ══════════════════════════════════════════
-const confettiCanvas=document.getElementById('confetti-canvas');
-const confettiCtx=confettiCanvas.getContext('2d');
-let confettiParticles=[];
-function resizeConfetti(){
-  confettiCanvas.width=window.innerWidth;
-  confettiCanvas.height=window.innerHeight;
-}
-resizeConfetti();
-window.addEventListener('resize',resizeConfetti);
-
-function launchConfetti(cx,cy,count=60){
-  const colors=['#e8c84a','#38b0ff','#f5e27a','#87d2ff','#1565e0','#fff','#ff6b9d'];
-  for(let i=0;i<count;i++){
-    const angle=Math.random()*Math.PI*2;
-    const speed=2+Math.random()*6;
-    confettiParticles.push({
-      x:cx??Math.random()*confettiCanvas.width,
-      y:cy??-10,
-      vx:Math.cos(angle)*speed,
-      vy:cy!=null?Math.sin(angle)*speed - 4:-2+Math.random()*-4,
-      w:4+Math.random()*6,
-      h:6+Math.random()*8,
-      color:colors[Math.floor(Math.random()*colors.length)],
-      rot:Math.random()*360,
-      rotV:(Math.random()-.5)*12,
-      alpha:1,
-      life:1
-    });
-  }
-}
-
-function animateConfetti(){
-  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  confettiParticles=confettiParticles.filter(p=>p.alpha>0.01);
-  confettiParticles.forEach(p=>{
-    p.x+=p.vx;
-    p.vy+=0.12;
-    p.y+=p.vy;
-    p.rot+=p.rotV;
-    p.alpha-=0.008;
-    confettiCtx.save();
-    confettiCtx.globalAlpha=Math.max(0,p.alpha);
-    confettiCtx.translate(p.x,p.y);
-    confettiCtx.rotate(p.rot*Math.PI/180);
-    confettiCtx.fillStyle=p.color;
-    confettiCtx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-    confettiCtx.restore();
-  });
-  requestAnimationFrame(animateConfetti);
-}
-animateConfetti();
-
-// ══════════════════════════════════════════
-//  SPLASH BALLOONS + DISMISS
-// ══════════════════════════════════════════
-(function(){
-  const wrap=document.getElementById('splash-balloons');
-  const colors=['#38b0ff','#e8c84a','#1565e0','#87d2ff'];
-  for(let i=0;i<10;i++){
-    const b=document.createElement('div');
-    const c=colors[i%colors.length];
-    const x=5+Math.random()*90;
-    const sz=24+Math.random()*18;
-    b.style.cssText=`position:absolute;left:${x}%;bottom:-60px;animation:riseUp ${3+Math.random()*2.5}s ease-in-out ${Math.random()*1.5}s infinite;opacity:0.7`;
-    b.innerHTML=`<svg width="${sz}" height="${sz*1.3}" viewBox="0 0 30 40"><ellipse cx="15" cy="14" rx="12" ry="13" fill="${c}" opacity="0.9"/><line x1="15" y1="27" x2="15" y2="40" stroke="${c}" stroke-width="1.5" opacity="0.7"/></svg>`;
-    wrap.appendChild(b);
-  }
-})();
-
-setTimeout(()=>{
-  const splash=document.getElementById('splash');
-  splash.classList.add('hiding');
-  // Launch splash confetti
-  setTimeout(()=>{
-    launchConfetti(window.innerWidth*.5,window.innerHeight*.3,80);
-  },400);
-  setTimeout(()=>{
-    splash.classList.add('hidden');
-    // Trigger first card reveal
-    document.querySelectorAll('.reveal-card')[0]?.classList.add('visible');
-  },800);
-},3500);
-
-// ══════════════════════════════════════════
-//  SCROLL REVEAL (Intersection Observer)
-// ══════════════════════════════════════════
-(function(){
-  const cards=document.querySelectorAll('.reveal-card');
-  const observer=new IntersectionObserver((entries)=>{
-    entries.forEach((entry,i)=>{
-      if(entry.isIntersecting){
-        setTimeout(()=>entry.target.classList.add('visible'),80);
-        observer.unobserve(entry.target);
-      }
-    });
-  },{threshold:.12});
-  cards.forEach(c=>observer.observe(c));
-})();
-
-// ══════════════════════════════════════════
-//  COUNTDOWN with flip animation
-// ══════════════════════════════════════════
-(function(){
-  const target=new Date('2026-08-15T16:00:00').getTime();
-  let prev={d:'--',h:'--',m:'--',s:'--'};
-  function flipEl(id,boxId){
-    const el=document.getElementById(id);
-    if(!el)return;
-    el.classList.remove('flip');
-    void el.offsetWidth;
-    el.classList.add('flip');
-    const box=document.getElementById(boxId);
-    if(box){
-      box.classList.remove('pulse-once');
-      void box.offsetWidth;
-      box.classList.add('pulse-once');
-    }
-  }
-  function tick(){
-    const now=Date.now();
-    const diff=Math.max(0,target-now);
-    const d=String(Math.floor(diff/86400000)).padStart(2,'0');
-    const h=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-    const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-    if(d!==prev.d){document.getElementById('cd-days').textContent=d;flipEl('cd-days','cd-box-days');}
-    if(h!==prev.h){document.getElementById('cd-hours').textContent=h;flipEl('cd-hours','cd-box-hours');}
-    if(m!==prev.m){document.getElementById('cd-mins').textContent=m;flipEl('cd-mins','cd-box-mins');}
-    if(s!==prev.s){document.getElementById('cd-secs').textContent=s;flipEl('cd-secs','cd-box-secs');}
-    prev={d,h,m,s};
-  }
-  tick();
-  setInterval(tick,1000);
-})();
-
-// ══════════════════════════════════════════
-//  PROGRAM ACCORDION
-// ══════════════════════════════════════════
-(function(){
-  const items=document.querySelectorAll('.prog-item');
-  const dots=document.querySelectorAll('.prog-dot');
-  function activate(idx){
-    items.forEach((el,i)=>el.classList.toggle('active',i===idx));
-    dots.forEach((el,i)=>el.classList.toggle('active',i===idx));
-  }
-  items.forEach((el,i)=>{
-    el.addEventListener('click',()=>activate(i));
-    el.addEventListener('mouseenter',()=>activate(i));
-  });
-  dots.forEach((el,i)=>el.addEventListener('click',()=>activate(i)));
-  // Auto-cycle
-  let cur=0;
-  setInterval(()=>{
-    cur=(cur+1)%items.length;
-    activate(cur);
-  },3500);
-})();
-
-// ══════════════════════════════════════════
-//  GALLERY CAROUSEL – cinematic per-photo
-// ══════════════════════════════════════════
-(function(){
-  const SLIDES=[
-    {src:'https://images.unsplash.com/photo-1734943842257-268c716c2701?w=800&q=85',label:'El protagonista',title:'El festejado',badge:'★ 1 Añito',transition:'zoom',kb:0},
-    {src:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=85',label:'Dulce momento',title:'El pastel',badge:'🎂 Delicioso',transition:'flip',kb:1},
-    {src:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=85',label:'Alegría pura',title:'Globos de colores',badge:'🎈 Fiesta',transition:'slide',kb:2},
-    {src:'https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=85',label:'Un gran día',title:'La celebración',badge:'🎉 Festejo',transition:'drop',kb:3},
-    {src:'https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=800&q=85',label:'Con la familia',title:'Momentos únicos',badge:'💛 Amor',transition:'glitch',kb:4},
-    {src:'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=85',label:'Para siempre',title:'Con todo el amor',badge:'★ Gracias',transition:'zoom',kb:5},
-  ];
-  const AUTO_INTERVAL=4200;
-
-  const stage=document.getElementById('carousel-stage');
-  const dotsWrap=document.getElementById('carousel-dots');
-  const thumbsWrap=document.getElementById('carousel-thumbs');
-  const progressBar=document.getElementById('carousel-progress-bar');
-  const btnPrev=document.getElementById('carousel-prev');
-  const btnNext=document.getElementById('carousel-next');
-
-  let current=0;
-  let transitioning=false;
-  let autoTimer=null;
-  let progressAnim=null;
-
-  // ── Build dots & thumbs ──
-  SLIDES.forEach((s,i)=>{
-    const dot=document.createElement('button');
-    dot.className='carousel-dot'+(i===0?' active':'');
-    dot.addEventListener('click',()=>goTo(i,i>current?'right':'left'));
-    dotsWrap.appendChild(dot);
-
-    const th=document.createElement('div');
-    th.className='carousel-thumb'+(i===0?' active':'');
-    th.innerHTML=`<img src="${s.src}" loading="lazy" alt="${s.title}"/>`;
-    th.addEventListener('click',()=>goTo(i,i>current?'right':'left'));
-    thumbsWrap.appendChild(th);
-  });
-
-  // ── Create slide DOM ──
-  function makeSlide(idx){
-    const s=SLIDES[idx];
-    const el=document.createElement('div');
-    el.className='carousel-slide';
-    el.innerHTML=`
-      <img src="${s.src}" alt="${s.title}" style="animation:kenBurns${s.kb} 6s ease-in-out forwards"/>
-      <div class="carousel-badge">${s.badge}</div>
-      <div class="carousel-caption">
-        <span class="carousel-caption-label">${s.label}</span>
-        <span class="carousel-caption-title">${s.title}</span>
+// ─── INIT DOM WITH CFG ────────────────────────────────────────────────────────
+function init() {
+  // Splash
+  document.getElementById('splash-photo').src = CFG.photo;
+  document.getElementById('splash-photo').alt = CFG.name;
+  document.getElementById('splash-name').textContent = CFG.name;
+  document.getElementById('splash-age').textContent  = CFG.age;
+  // Hero
+  document.getElementById('hero-photo').src = CFG.photo;
+  document.getElementById('hero-photo').alt = CFG.name;
+  document.getElementById('hero-name').textContent = CFG.name;
+  document.getElementById('hero-age').textContent  = CFG.age;
+  // Info
+  document.getElementById('info-line1').textContent = CFG.dateLine1;
+  document.getElementById('info-line2').textContent = CFG.dateLine2;
+  document.getElementById('info-day').textContent   = CFG.dateDay;
+  document.getElementById('info-year').textContent  = CFG.dateYear;
+  document.getElementById('info-time').textContent  = CFG.time;
+  document.getElementById('info-venue').textContent = CFG.venue;
+  document.getElementById('info-addr').textContent  = CFG.address;
+  document.getElementById('rsvp-to').textContent    = CFG.rsvpTo;
+  document.getElementById('rsvp-phone').textContent = CFG.phone;
+  document.getElementById('rsvp-to2').textContent   = CFG.rsvpTo;
+  document.getElementById('rsvp-phone2').textContent= CFG.phone;
+  // Footer
+  document.getElementById('footer-name').textContent  = CFG.name;
+  document.getElementById('footer-turns').textContent = 'turns ' + CFG.age + '!';
+  document.getElementById('footer-date').textContent  = CFG.dateDisplay;
+  // Countdown label
+  document.getElementById('cd-date-lbl').textContent = CFG.dateDisplay;
+  // Program
+  const pl = document.getElementById('program-list');
+  CFG.program.forEach((item, i) => {
+    pl.innerHTML += `
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div>
+          <div class="tl-time">${item.time}</div>
+          <div class="tl-title">${item.title}</div>
+          <div class="tl-desc">${item.desc}</div>
+        </div>
       </div>`;
-    return el;
-  }
-
-  // ── Transition pairs per slide ──
-  function getTransitionClasses(t,dir){
-    const enterClass=`enter-${t==='slide'?(dir==='right'?'right':'left'):t}`;
-    const exitClass=`exit-${t==='slide'?(dir==='right'?'left':'right'):t}`;
-    return{enterClass,exitClass};
-  }
-
-  // ── Progress bar animation ──
-  function startProgress(){
-    if(progressAnim)clearTimeout(progressAnim);
-    progressBar.style.transition='none';
-    progressBar.style.width='0%';
-    void progressBar.offsetWidth;
-    progressBar.style.transition=`width ${AUTO_INTERVAL}ms linear`;
-    progressBar.style.width='100%';
-  }
-
-  // ── Go to slide ──
-  function goTo(idx,dir='right',fromAuto=false){
-    if(transitioning||idx===current)return;
-    transitioning=true;
-
-    const s=SLIDES[idx];
-    const {enterClass,exitClass}=getTransitionClasses(s.transition,dir);
-
-    // outgoing
-    const outgoing=stage.querySelector('.carousel-slide');
-    if(outgoing){
-      outgoing.classList.add(exitClass);
-      setTimeout(()=>outgoing.remove(),450);
-    }
-
-    // incoming
-    const incoming=makeSlide(idx);
-    incoming.classList.add(enterClass);
-    stage.appendChild(incoming);
-
-    // sparkle confetti on flip / glitch
-    if(s.transition==='flip'||s.transition==='glitch'){
-      const r=stage.getBoundingClientRect();
-      launchConfetti(r.left+r.width/2,r.top+r.height/2,28);
-    }
-
-    // update indicators
-    dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
-    thumbsWrap.querySelectorAll('.carousel-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-    // scroll active thumb into view
-    const activeThumb=thumbsWrap.querySelectorAll('.carousel-thumb')[idx];
-    if(activeThumb)activeThumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-
-    current=idx;
-    setTimeout(()=>{transitioning=false;},600);
-
-    startProgress();
-    scheduleAuto();
-  }
-
-  // ── Auto-play ──
-  function scheduleAuto(){
-    if(autoTimer)clearTimeout(autoTimer);
-    autoTimer=setTimeout(()=>{
-      const next=(current+1)%SLIDES.length;
-      goTo(next,'right',true);
-    },AUTO_INTERVAL);
-  }
-
-  // ── Arrow buttons ──
-  btnPrev.addEventListener('click',()=>{
-    const prev=(current-1+SLIDES.length)%SLIDES.length;
-    goTo(prev,'left');
   });
-  btnNext.addEventListener('click',()=>{
-    const next=(current+1)%SLIDES.length;
-    goTo(next,'right');
-  });
+  // Starfield
+  buildStars();
+  // Gallery
+  galInit();
+}
 
-  // ── Touch / drag swipe ──
-  let touchStartX=0,touchStartY=0,isDragging=false;
-  stage.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;isDragging=true;},{passive:true});
-  stage.addEventListener('touchend',e=>{
-    if(!isDragging)return;isDragging=false;
-    const dx=e.changedTouches[0].clientX-touchStartX;
-    const dy=e.changedTouches[0].clientY-touchStartY;
-    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
-      if(dx<0)btnNext.click();else btnPrev.click();
-    }
-  },{passive:true});
-  // mouse drag
-  let mouseDown=false,mouseStartX=0;
-  stage.addEventListener('mousedown',e=>{mouseDown=true;mouseStartX=e.clientX;});
-  stage.addEventListener('mouseup',e=>{
-    if(!mouseDown)return;mouseDown=false;
-    const dx=e.clientX-mouseStartX;
-    if(Math.abs(dx)>40){if(dx<0)btnNext.click();else btnPrev.click();}
-  });
+// ─── SPLASH ───────────────────────────────────────────────────────────────────
+function closeSplash() {
+  const s = document.getElementById('splash');
+  s.classList.add('hide');
+  setTimeout(() => {
+    s.style.display = 'none';
+    const m = document.getElementById('main');
+    m.classList.add('show');
+  }, 500);
+}
+setTimeout(closeSplash, 3800);
 
-  // ── Keyboard ──
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowLeft')btnPrev.click();
-    else if(e.key==='ArrowRight')btnNext.click();
-  });
-
-  // ── Pause on hover ──
-  stage.addEventListener('mouseenter',()=>{if(autoTimer)clearTimeout(autoTimer);progressBar.style.animationPlayState='paused';progressBar.style.transition='none';});
-  stage.addEventListener('mouseleave',()=>{startProgress();scheduleAuto();});
-
-  // ── Init first slide ──
-  const first=makeSlide(0);
-  stage.appendChild(first);
-  startProgress();
-  scheduleAuto();
-})();
-
-// ══════════════════════════════════════════
-//  ELASTIC STACK – spring timing function
-// ══════════════════════════════════════════
-(function(){
-  const avatars=Array.from(document.querySelectorAll('#elastic-wrap .avatar'));
-  const total=avatars.length;
-  const overlap=22,push=18;
-  function reset(){
-    avatars.forEach(a=>{
-      a.style.transform='translateX(0) scale(1)';
-      a.style.zIndex='';
-      a.style.boxShadow='';
-      a.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .3s';
-    });
+// ─── STARFIELD ────────────────────────────────────────────────────────────────
+function buildStars() {
+  const sf = document.getElementById('starfield');
+  const colors = ['#FFE135','#00D4FF','#9B59B6','#5DC645'];
+  for (let i = 0; i < 60; i++) {
+    const d = document.createElement('div');
+    d.className = 'star';
+    const r = Math.random()*2+.5;
+    d.style.cssText = `
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${r*2}px;height:${r*2}px;
+      background:${colors[i%colors.length]};
+      --dur:${1.8+Math.random()*2}s;
+      --delay:${Math.random()*3}s;
+    `;
+    sf.appendChild(d);
   }
-  avatars.forEach((av,i)=>{
-    av.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .3s';
-    av.addEventListener('mouseenter',()=>{
-      avatars.forEach((a,j)=>{
-        let tx=0,sc=1,z=j;
-        if(j>i)tx=Math.min(push*(total-j-1),overlap);
-        else if(j<i)tx=-Math.min(push*j,overlap);
-        else{sc=1.28;z=100;}
-        a.style.transform=`translateX(${tx}px) scale(${sc})`;
-        a.style.zIndex=String(z);
-        a.style.boxShadow=j===i?'0 0 20px rgba(232,200,74,.7),0 0 40px rgba(232,200,74,.3)':'';
-      });
+}
+
+// ─── COUNTDOWN ────────────────────────────────────────────────────────────────
+function tickCountdown() {
+  const diff = Math.max(0, new Date(CFG.eventDate).getTime() - Date.now());
+  document.getElementById('cd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+// ─── GALLERY ──────────────────────────────────────────────────────────────────
+let galIdx = 0;
+let galBusy = false;
+let galActiveImg = 'a'; // 'a' or 'b'
+const galTouchData = { x: 0 };
+
+function galInit() {
+  const total = CFG.gallery.length;
+  // Dots
+  const dots = document.getElementById('gal-dots');
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'gal-dot' + (i===0 ? ' active' : '');
+    btn.style.width = i===0 ? '28px' : '8px';
+    btn.onclick = () => galGo(i, i > galIdx ? 1 : -1);
+    dots.appendChild(btn);
+  }
+  galRender(0, 0);
+  // Touch
+  const wrap = document.getElementById('gallery-wrap');
+  wrap.addEventListener('touchstart', e => { galTouchData.x = e.touches[0].clientX; });
+  wrap.addEventListener('touchend', e => {
+    const d = galTouchData.x - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 40) galGo(galIdx + (d > 0 ? 1 : -1), d > 0 ? 1 : -1);
+  });
+}
+
+function galMod(i) {
+  const t = CFG.gallery.length;
+  return ((i % t) + t) % t;
+}
+
+function galRender(idx, dir) {
+  const total = CFG.gallery.length;
+  const prev = galMod(idx - 1);
+  const next = galMod(idx + 1);
+  // Side cards
+  document.getElementById('gal-prev-img').src = CFG.gallery[prev].src;
+  document.getElementById('gal-next-img').src = CFG.gallery[next].src;
+  // Caption
+  document.getElementById('gal-cap').textContent   = CFG.gallery[idx].cap;
+  document.getElementById('gal-count').textContent = String(idx+1).padStart(2,'0') + ' — ' + String(total).padStart(2,'0');
+  // Dots
+  document.querySelectorAll('.gal-dot').forEach((d,i) => {
+    d.classList.toggle('active', i === idx);
+    d.style.width = i === idx ? '28px' : '8px';
+  });
+}
+
+function galGo(rawIdx, dir) {
+  if (galBusy) return;
+  galBusy = true;
+  const next = galMod(rawIdx);
+  const total = CFG.gallery.length;
+
+  const imgA = document.getElementById('gal-img-a');
+  const imgB = document.getElementById('gal-img-b');
+  const active = galActiveImg === 'a' ? imgA : imgB;
+  const incoming = galActiveImg === 'a' ? imgB : imgA;
+
+  // Set incoming image
+  incoming.src = CFG.gallery[next].src;
+  incoming.className = dir > 0 ? 'enter' : '';
+  incoming.style.transform = dir > 0 ? 'translateX(60px) scale(.92)' : 'translateX(-60px) scale(.92)';
+  incoming.style.opacity = '0';
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // Animate active out
+      active.style.transition = 'opacity .35s ease, transform .35s ease';
+      active.style.opacity = '0';
+      active.style.transform = dir > 0 ? 'translateX(-60px) scale(.92)' : 'translateX(60px) scale(.92)';
+      // Animate incoming in
+      incoming.style.transition = 'opacity .35s ease, transform .35s ease';
+      incoming.style.opacity = '1';
+      incoming.style.transform = 'none';
+
+      setTimeout(() => {
+        active.style.transition = '';
+        active.style.opacity = '';
+        active.style.transform = '';
+        active.className = 'enter';
+        incoming.className = 'active';
+        galActiveImg = galActiveImg === 'a' ? 'b' : 'a';
+        galIdx = next;
+        galRender(next, dir);
+        galBusy = false;
+      }, 370);
     });
   });
-  document.getElementById('elastic-wrap').addEventListener('mouseleave',reset);
-})();
+}
 
-// ══════════════════════════════════════════
-//  CREEPY BUTTON EYE TRACKING
-// ══════════════════════════════════════════
-(function(){
-  const btn=document.getElementById('creepy-submit');
-  const eyes=document.getElementById('creepy-eyes');
-  const pl=document.getElementById('pupil-l');
-  const pr=document.getElementById('pupil-r');
-  if(!btn||!eyes||!pl||!pr)return;
-  function movePupils(cx,cy){
-    const r=eyes.getBoundingClientRect();
-    const ex=r.left+r.width/2, ey=r.top+r.height/2;
-    const dx=cx-ex, dy=cy-ey;
-    const angle=Math.atan2(-dy,dx)+Math.PI/2;
-    const dist=Math.hypot(dx,dy);
-    const x=(Math.sin(angle)*Math.min(dist,180))/180;
-    const y=(Math.cos(angle)*Math.min(dist,75))/75;
-    const t=`translate(calc(-50% + ${x*50}%), calc(-50% + ${y*50}%))`;
-    pl.style.transform=t;
-    pr.style.transform=t;
-  }
-  btn.addEventListener('mousemove',e=>movePupils(e.clientX,e.clientY));
-  btn.addEventListener('touchmove',e=>{const t=e.touches[0];movePupils(t.clientX,t.clientY);},{passive:true});
-  btn.addEventListener('mouseleave',()=>{
-    pl.style.transform='translate(-50%,-50%)';
-    pr.style.transform='translate(-50%,-50%)';
-  });
-})();
+// ─── RSVP ─────────────────────────────────────────────────────────────────────
+function rsvpSubmit(e) {
+  e.preventDefault();
+  const name   = document.getElementById('rsvp-name').value.trim();
+  const guests = document.getElementById('rsvp-guests').value.trim();
+  const msg    = document.getElementById('rsvp-msg').value.trim();
+  if (!name) return;
 
-// ══════════════════════════════════════════
-//  HERO AGE – tap to bounce + confetti
-// ══════════════════════════════════════════
-(function(){
-  const age=document.getElementById('hero-age');
-  if(!age)return;
-  age.addEventListener('click',()=>{
-    const r=age.getBoundingClientRect();
-    launchConfetti(r.left+r.width/2,r.top+r.height/2,50);
-    age.style.animation='none';
-    void age.offsetWidth;
-    age.style.animation='glow-pulse 2s ease-in-out infinite,numBounce 4s ease-in-out infinite';
-  });
-})();
+  let text = `¡Hola! Confirmo mi asistencia a la fiesta de *${CFG.name}* 🎉\n\n`;
+  text += `👤 *Nombre:* ${name}\n`;
+  if (guests) text += `👥 *Invitados:* ${guests}\n`;
+  if (msg)    text += `💬 *Mensaje:* ${msg}\n`;
+  text += `\n📅 ${CFG.dateDisplay} a las ${CFG.time}\n📍 ${CFG.venue}`;
 
-// ══════════════════════════════════════════
-//  TRIANGLE WAVE – stagger delay
-// ══════════════════════════════════════════
-(function(){
-  document.querySelectorAll('.triangle-row').forEach(row=>{
-    row.querySelectorAll('.tri').forEach((t,i)=>{
-      t.style.animationDelay=`${i*0.1}s`;
-    });
-  });
-})();
+  const phone = CFG.phone.replace(/\D/g,'');
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
-// ══════════════════════════════════════════
-//  RSVP FORM → WHATSAPP
-// ══════════════════════════════════════════
-(function(){
-  document.getElementById('rsvp-form').addEventListener('submit',function(e){
-    e.preventDefault();
-    const name=document.getElementById('rsvp-name').value.trim();
-    const guests=document.getElementById('rsvp-guests').value.trim();
-    const msg=document.getElementById('rsvp-msg').value.trim();
-    if(!name)return;
-    let text=`¡Hola! Confirmo mi asistencia a la fiesta de *Santiago* 🎉\n\n`;
-    text+=`👤 *Nombre:* ${name}\n`;
-    if(guests)text+=`👥 *Invitados:* ${guests}\n`;
-    if(msg)text+=`💬 *Mensaje:* ${msg}\n`;
-    text+=`\n📅 Sábado, 15 de Agosto 2026 a las 4:00 PM\n📍 The Party Palace`;
-    const waUrl=`https://wa.me/1234567890?text=${encodeURIComponent(text)}`;
-    const wrap=document.getElementById('rsvp-form-wrap');
-    wrap.innerHTML=`<div class="rsvp-success"><div class="rsvp-success-emoji">🎉</div><h3>¡Gracias!</h3><p>Abriendo WhatsApp para enviar tu confirmación…</p><a href="${waUrl}" target="_blank" class="wa-btn">Abrir WhatsApp</a></div>`;
-    const r=wrap.getBoundingClientRect();
-    launchConfetti(r.left+r.width/2,r.top+r.height/2,70);
-    window.open(waUrl,'_blank');
-  });
-})();
+  document.getElementById('rsvp-form').style.display   = 'none';
+  document.getElementById('rsvp-thanks').classList.add('show');
+  document.getElementById('wa-link').href = waUrl;
+  window.open(waUrl, '_blank');
+}
+
+// ─── BOOT ─────────────────────────────────────────────────────────────────────
+init();
 </script>
 </body>
 </html>
