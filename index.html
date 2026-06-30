@@ -249,45 +249,16 @@
   .tl-title { font-family:'Dancing Script',cursive; font-size:1.1rem; color:#C4B5FD; margin-top:2px; }
   .tl-desc  { font-size:.43rem; letter-spacing:.12em; text-transform:uppercase; color:#00D4FF; margin-top:2px; }
 
-  /* ── GALLERY ── */
-  .gallery-wrap { position:relative; height:340px; display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:1.25rem; overflow:hidden; }
-  .gal-side {
-    position:absolute; width:42%; aspect-ratio:3/4;
-    border-radius:16px; overflow:hidden;
-    filter:brightness(.45); box-shadow:0 4px 24px rgba(0,0,0,.5);
-    cursor:pointer; transition:filter .2s, transform .2s;
+  /* ── GALLERY COLLAGE ── */
+  #collage-wrap {
+    transition: height 0.5s cubic-bezier(0.34,1.56,0.64,1);
   }
-  .gal-side:hover { filter:brightness(.65); }
-  .gal-prev { left:0; transform:scale(.88) rotateY(12deg); transform-origin:right center; }
-  .gal-next { right:0; transform:scale(.88) rotateY(-12deg); transform-origin:left center; }
-  .gal-side img { width:100%; height:100%; object-fit:cover; }
-  .gal-main {
-    position:relative; width:58%; aspect-ratio:3/4;
-    border-radius:24px; overflow:hidden; z-index:10;
-    box-shadow:0 12px 48px rgba(0,0,0,.7),0 0 0 2px rgba(255,229,0,.45);
+  .collage-item {
+    will-change: transform;
   }
-  .gal-main img {
-    width:100%; height:100%; object-fit:cover;
-    position:absolute; inset:0;
-    transition:opacity .35s ease, transform .35s ease;
-  }
-  .gal-main img.leave { opacity:0; transform:translateX(-60px) scale(.92); }
-  .gal-main img.enter { opacity:0; transform:translateX(60px) scale(.92); }
-  .gal-main img.active { opacity:1; transform:none; }
-  .gal-overlay {
-    position:absolute; inset:0;
-    background:linear-gradient(to top,rgba(3,10,50,.85) 0%,transparent 50%);
-    pointer-events:none;
-  }
-  .gal-caption { position:absolute; bottom:0; left:0; right:0; padding:1rem; }
-  .gal-cap-title { font-family:'Luckiest Guy',cursive; font-size:.95rem; color:#FFE500; letter-spacing:.05em; text-shadow:1px 1px 0 #6B21A8; margin-bottom:2px; }
-  .gal-cap-count { font-size:.42rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(0,212,255,.8); }
-  .gal-badge {
-    position:absolute; top:.75rem; right:.75rem;
-    background:rgba(0,0,0,.55); backdrop-filter:blur(6px);
-    border:1px solid rgba(255,229,0,.35); border-radius:20px;
-    padding:4px 8px; display:flex; align-items:center; gap:4px;
-    font-size:.4rem; letter-spacing:.2em; color:#FFE500;
+  .collage-item:hover {
+    z-index: 99 !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,.7), 0 0 0 2px rgba(255,229,0,.7) !important;
   }
   .gal-nav { display:flex; align-items:center; justify-content:center; gap:1rem; margin-bottom:1rem; }
   .gal-btn {
@@ -326,6 +297,16 @@
     box-shadow:0 4px 18px rgba(255,193,7,.5); transition:transform .1s;
   }
   .rsvp-submit:active { transform:scale(.97); }
+
+  /* ── CREEPY BUTTON ── */
+  .creepy-btn-wrap { position:relative; display:block; width:100%; border-radius:50px; background:#020a18; overflow:visible; }
+  .creepy-eyes { position:absolute; right:1.2em; bottom:0.45em; display:flex; align-items:center; gap:0.35em; z-index:0; pointer-events:none; }
+  .creepy-eye { position:relative; width:0.75em; height:0.75em; background:white; border-radius:50%; overflow:hidden; animation:creepyBlink 3s linear infinite; }
+  @keyframes creepyBlink { 0%,90% { transform:scaleY(1); } 95% { transform:scaleY(0); } 100% { transform:scaleY(1); } }
+  .creepy-pupil { position:absolute; top:50%; left:50%; width:0.375em; height:0.375em; background:black; border-radius:50%; transform:translate(-50%,-50%); transition:transform 75ms ease-out; }
+  .creepy-cover { position:relative; z-index:1; display:block; width:100%; transform-origin:1.25em 50%; transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1); border-radius:50px; }
+  .creepy-cover.hovered { transform:rotate(-12deg); }
+
   .rsvp-thanks { text-align:center; padding:2rem 0; display:none; }
   .rsvp-thanks.show { display:block; animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
   .thanks-title { font-family:'Dancing Script',cursive; font-size:2.2rem; color:#FFE135; margin:.5rem 0; }
@@ -719,35 +700,12 @@ const CFG = {
         </div>
       </div>
 
-      <div class="gallery-wrap" id="gallery-wrap">
-        <!-- prev -->
-        <div class="gal-side gal-prev" id="gal-prev" onclick="galGo(galIdx-1,-1)">
-          <img id="gal-prev-img" src="" alt=""/>
-        </div>
-        <!-- main -->
-        <div class="gal-main">
-          <img id="gal-img-a" src="" alt="" class="active"/>
-          <img id="gal-img-b" src="" alt="" class="enter"/>
-          <div class="gal-overlay"></div>
-          <div class="gal-caption">
-            <div class="gal-cap-title" id="gal-cap"></div>
-            <div class="gal-cap-count" id="gal-count"></div>
-          </div>
-          <div class="gal-badge">
-            <svg width="8" height="8" viewBox="0 0 10 10"><polygon points="5,0 5.8,3.5 9.5,5 5.8,6.5 5,10 4.2,6.5 0.5,5 4.2,3.5" fill="#FFE500"/></svg>
-            GALERÍA
-          </div>
-        </div>
-        <!-- next -->
-        <div class="gal-side gal-next" id="gal-next" onclick="galGo(galIdx+1,1)">
-          <img id="gal-next-img" src="" alt=""/>
-        </div>
-      </div>
+      <p id="collage-hint" style="text-align:center;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:#00D4FF;margin-bottom:1rem;animation:blink 2.5s infinite">★ Toca para organizar ★</p>
 
-      <div class="gal-nav">
-        <button class="gal-btn" onclick="galGo(galIdx-1,-1)">&#8249;</button>
+      <div id="collage-wrap" onclick="collageToggle()" style="position:relative;width:100%;height:260px;cursor:pointer;overflow:visible;margin-bottom:.75rem"></div>
+
+      <div class="gal-nav" style="margin-top:.5rem">
         <div class="gal-dots" id="gal-dots"></div>
-        <button class="gal-btn" onclick="galGo(galIdx+1,1)">&#8250;</button>
       </div>
     </div>
   </div>
@@ -785,7 +743,14 @@ const CFG = {
         <div class="rsvp-field">
           <textarea id="rsvp-msg" class="rsvp-textarea" rows="3"     placeholder="Mensaje para la familia…"></textarea>
         </div>
-        <button type="submit" class="rsvp-submit">★ Confirmar Asistencia ★</button>
+        <!-- Creepy button -->
+        <div class="creepy-btn-wrap" id="creepy-btn-wrap">
+          <span class="creepy-eyes" id="creepy-eyes">
+            <span class="creepy-eye creepy-eye-l"><span class="creepy-pupil" id="pupil-l"></span></span>
+            <span class="creepy-eye creepy-eye-r"><span class="creepy-pupil" id="pupil-r"></span></span>
+          </span>
+          <button type="submit" class="rsvp-submit creepy-cover" id="creepy-cover">★ Confirmar Asistencia ★</button>
+        </div>
       </form>
     </div>
   </div>
@@ -932,96 +897,108 @@ function tickCountdown() {
 tickCountdown();
 setInterval(tickCountdown, 1000);
 
-// ─── GALLERY ──────────────────────────────────────────────────────────────────
-let galIdx = 0;
-let galBusy = false;
-let galActiveImg = 'a'; // 'a' or 'b'
-const galTouchData = { x: 0 };
+// ─── GALLERY COLLAGE ──────────────────────────────────────────────────────────
+let collageOrganized = false;
+let collageItems = [];
+
+// Scatter positions for each image (relative to wrap center)
+const collageScatter = [
+  { x: -90, y: -20, r: -14 },
+  { x:  30, y: -35, r:  10 },
+  { x: -20, y:  30, r:  -6 },
+  { x:  80, y:  15, r:  16 },
+  { x: -60, y:  55, r:  -9 },
+  { x:  50, y:  55, r:  12 },
+];
 
 function galInit() {
+  const wrap = document.getElementById('collage-wrap');
   const total = CFG.gallery.length;
-  // Dots
+
+  // Build dot indicators
   const dots = document.getElementById('gal-dots');
   for (let i = 0; i < total; i++) {
     const btn = document.createElement('button');
     btn.className = 'gal-dot' + (i===0 ? ' active' : '');
     btn.style.width = i===0 ? '28px' : '8px';
-    btn.onclick = () => galGo(i, i > galIdx ? 1 : -1);
     dots.appendChild(btn);
   }
-  galRender(0, 0);
-  // Touch
-  const wrap = document.getElementById('gallery-wrap');
-  wrap.addEventListener('touchstart', e => { galTouchData.x = e.touches[0].clientX; });
-  wrap.addEventListener('touchend', e => {
-    const d = galTouchData.x - e.changedTouches[0].clientX;
-    if (Math.abs(d) > 40) galGo(galIdx + (d > 0 ? 1 : -1), d > 0 ? 1 : -1);
+
+  // Build image cards
+  CFG.gallery.forEach((img, i) => {
+    const sc = collageScatter[i % collageScatter.length];
+    const el = document.createElement('div');
+    el.className = 'collage-item';
+    el.style.cssText = `
+      position:absolute;
+      width:110px; height:138px;
+      left:50%; top:50%;
+      margin-left:-55px; margin-top:-69px;
+      border-radius:10px; overflow:hidden;
+      box-shadow:0 8px 24px rgba(0,0,0,.6), 0 0 0 2px rgba(255,229,0,.3);
+      transform: translate(${sc.x}px, ${sc.y}px) rotate(${sc.r}deg);
+      transition: transform 0.55s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
+      z-index:${i};
+      cursor:pointer;
+    `;
+    const image = document.createElement('img');
+    image.src = img.src;
+    image.alt = img.cap;
+    image.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;pointer-events:none';
+    // Caption overlay
+    const cap = document.createElement('div');
+    cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);font-family:"Luckiest Guy",cursive;font-size:.55rem;color:#FFE500;letter-spacing:.04em;text-shadow:1px 1px 0 #6B21A8';
+    cap.textContent = img.cap;
+    el.appendChild(image);
+    el.appendChild(cap);
+    wrap.appendChild(el);
+    collageItems.push({ el, sc });
   });
 }
 
-function galMod(i) {
-  const t = CFG.gallery.length;
-  return ((i % t) + t) % t;
-}
+function collageToggle() {
+  collageOrganized = !collageOrganized;
+  const hint = document.getElementById('collage-hint');
 
-function galRender(idx, dir) {
-  const total = CFG.gallery.length;
-  const prev = galMod(idx - 1);
-  const next = galMod(idx + 1);
-  // Side cards
-  document.getElementById('gal-prev-img').src = CFG.gallery[prev].src;
-  document.getElementById('gal-next-img').src = CFG.gallery[next].src;
-  // Caption
-  document.getElementById('gal-cap').textContent   = CFG.gallery[idx].cap;
-  document.getElementById('gal-count').textContent = String(idx+1).padStart(2,'0') + ' — ' + String(total).padStart(2,'0');
-  // Dots
-  document.querySelectorAll('.gal-dot').forEach((d,i) => {
-    d.classList.toggle('active', i === idx);
-    d.style.width = i === idx ? '28px' : '8px';
-  });
-}
+  if (collageOrganized) {
+    hint.textContent = '★ Toca para dispersar ★';
+    // Grid layout: 3 cols x 2 rows inside the wrap
+    const cols = 3;
+    const cardW = 90, cardH = 112, gapX = 8, gapY = 8;
+    const totalW = cols * cardW + (cols - 1) * gapX;
+    const rows = Math.ceil(collageItems.length / cols);
+    const totalH = rows * cardH + (rows - 1) * gapY;
+    const wrap = document.getElementById('collage-wrap');
+    // Expand wrap height for organized grid
+    wrap.style.height = (totalH + 20) + 'px';
 
-function galGo(rawIdx, dir) {
-  if (galBusy) return;
-  galBusy = true;
-  const next = galMod(rawIdx);
-  const total = CFG.gallery.length;
-
-  const imgA = document.getElementById('gal-img-a');
-  const imgB = document.getElementById('gal-img-b');
-  const active = galActiveImg === 'a' ? imgA : imgB;
-  const incoming = galActiveImg === 'a' ? imgB : imgA;
-
-  // Set incoming image
-  incoming.src = CFG.gallery[next].src;
-  incoming.className = dir > 0 ? 'enter' : '';
-  incoming.style.transform = dir > 0 ? 'translateX(60px) scale(.92)' : 'translateX(-60px) scale(.92)';
-  incoming.style.opacity = '0';
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      // Animate active out
-      active.style.transition = 'opacity .35s ease, transform .35s ease';
-      active.style.opacity = '0';
-      active.style.transform = dir > 0 ? 'translateX(-60px) scale(.92)' : 'translateX(60px) scale(.92)';
-      // Animate incoming in
-      incoming.style.transition = 'opacity .35s ease, transform .35s ease';
-      incoming.style.opacity = '1';
-      incoming.style.transform = 'none';
-
-      setTimeout(() => {
-        active.style.transition = '';
-        active.style.opacity = '';
-        active.style.transform = '';
-        active.className = 'enter';
-        incoming.className = 'active';
-        galActiveImg = galActiveImg === 'a' ? 'b' : 'a';
-        galIdx = next;
-        galRender(next, dir);
-        galBusy = false;
-      }, 370);
+    collageItems.forEach(({ el }, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const x = col * (cardW + gapX) - totalW / 2;
+      const y = row * (cardH + gapY) - totalH / 2;
+      el.style.width = cardW + 'px';
+      el.style.height = cardH + 'px';
+      el.style.marginLeft = (-cardW / 2) + 'px';
+      el.style.marginTop = (-cardH / 2) + 'px';
+      el.style.transform = `translate(${x}px, ${y}px) rotate(0deg)`;
+      el.style.zIndex = 1;
+      el.style.boxShadow = '0 4px 12px rgba(0,0,0,.4)';
     });
-  });
+  } else {
+    hint.textContent = '★ Toca para organizar ★';
+    const wrap = document.getElementById('collage-wrap');
+    wrap.style.height = '260px';
+    collageItems.forEach(({ el, sc }, i) => {
+      el.style.width = '110px';
+      el.style.height = '138px';
+      el.style.marginLeft = '-55px';
+      el.style.marginTop = '-69px';
+      el.style.transform = `translate(${sc.x}px, ${sc.y}px) rotate(${sc.r}deg)`;
+      el.style.zIndex = i;
+      el.style.boxShadow = '0 8px 24px rgba(0,0,0,.6), 0 0 0 2px rgba(255,229,0,.3)';
+    });
+  }
 }
 
 // ─── RSVP ─────────────────────────────────────────────────────────────────────
@@ -1049,6 +1026,43 @@ function rsvpSubmit(e) {
 
 // ─── BOOT ─────────────────────────────────────────────────────────────────────
 init();
+
+// ─── CREEPY BUTTON ────────────────────────────────────────────────────────────
+(function() {
+  const wrap = document.getElementById('creepy-btn-wrap');
+  const cover = document.getElementById('creepy-cover');
+  const eyesEl = document.getElementById('creepy-eyes');
+  const pupilL = document.getElementById('pupil-l');
+  const pupilR = document.getElementById('pupil-r');
+
+  function movePupils(ex, ey) {
+    const rect = eyesEl.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = ex - cx;
+    const dy = ey - cy;
+    const angle = Math.atan2(-dy, dx) + Math.PI / 2;
+    const dist = Math.hypot(dx, dy);
+    const x = (Math.sin(angle) * Math.min(dist, 180)) / 180;
+    const y = (Math.cos(angle) * Math.min(dist, 75)) / 75;
+    const style = `translate(calc(-50% + ${x * 50}%), calc(-50% + ${y * 50}%))`;
+    pupilL.style.transform = style;
+    pupilR.style.transform = style;
+  }
+
+  wrap.addEventListener('mousemove', function(e) {
+    cover.classList.add('hovered');
+    movePupils(e.clientX, e.clientY);
+  });
+  wrap.addEventListener('touchmove', function(e) {
+    movePupils(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  wrap.addEventListener('mouseleave', function() {
+    cover.classList.remove('hovered');
+    pupilL.style.transform = 'translate(-50%, -50%)';
+    pupilR.style.transform = 'translate(-50%, -50%)';
+  });
+})();
 </script>
 </body>
 </html>
