@@ -975,8 +975,8 @@ function collageToggle() {
     collageItems.forEach(({ el }, i) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
-      const x = col * (cardW + gapX) - totalW / 2;
-      const y = row * (cardH + gapY) - totalH / 2;
+      const x = col * (cardW + gapX) - totalW / 2 + cardW / 2;
+      const y = row * (cardH + gapY) - totalH / 2 + cardH / 2;
       el.style.width = cardW + 'px';
       el.style.height = cardH + 'px';
       el.style.marginLeft = (-cardW / 2) + 'px';
