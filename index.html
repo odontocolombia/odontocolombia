@@ -161,13 +161,92 @@ body{background:linear-gradient(170deg,#0b2d6e 0%,#1a5abf 35%,#0d3580 65%,#0b2d6
 .prog-dot.active{width:18px;background:#e8c84a}
 .prog-dot:hover{transform:scale(1.3)}
 
-/* ══ GALLERY ══ */
-.gallery-hint{font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:1rem;animation:badgePop 4s ease-in-out infinite}
-.gallery-wrap{display:flex;align-items:center;justify-content:center;min-height:260px;cursor:pointer;margin-bottom:.5rem;overflow:visible}
-.polaroid{flex-shrink:0;width:130px;background:#fff;padding:6px 6px 22px;box-shadow:0 4px 18px rgba(0,0,0,.55);will-change:transform,opacity;transition:box-shadow .3s}
-.polaroid:hover{box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 15px rgba(232,200,74,.3)}
-.polaroid img{width:100%;height:115px;object-fit:cover;display:block}
-.polaroid-cap{font-family:'Lato',sans-serif;font-size:.38rem;letter-spacing:.1em;text-transform:uppercase;color:#333;text-align:center;margin-top:3px}
+/* ══ GALLERY CAROUSEL ══ */
+@keyframes kenBurns0{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.18) translate(-3%,-2%)}}
+@keyframes kenBurns1{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(2%,-3%)}}
+@keyframes kenBurns2{0%{transform:scale(1.1) translate(-2%,0)}100%{transform:scale(1) translate(2%,2%)}}
+@keyframes kenBurns3{0%{transform:scale(1) translate(2%,1%)}100%{transform:scale(1.2) translate(-1%,-3%)}}
+@keyframes kenBurns4{0%{transform:scale(1.08) translate(1%,-1%)}100%{transform:scale(1) translate(-2%,2%)}}
+@keyframes kenBurns5{0%{transform:scale(1) translate(-1%,2%)}100%{transform:scale(1.14) translate(2%,-2%)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes slideOutLeft{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(-60px) scale(.95)}}
+@keyframes slideOutRight{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(60px) scale(.95)}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.7) rotate(-4deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
+@keyframes zoomOut{from{opacity:1;transform:scale(1) rotate(0deg)}to{opacity:0;transform:scale(1.1) rotate(2deg)}}
+@keyframes flipIn{from{opacity:0;transform:perspective(600px) rotateY(-90deg)}to{opacity:1;transform:perspective(600px) rotateY(0deg)}}
+@keyframes flipOut{from{opacity:1;transform:perspective(600px) rotateY(0deg)}to{opacity:0;transform:perspective(600px) rotateY(90deg)}}
+@keyframes dropIn{from{opacity:0;transform:translateY(-50px) rotate(-6deg)}to{opacity:1;transform:translateY(0) rotate(0deg)}}
+@keyframes dropOut{from{opacity:1;transform:translateY(0) rotate(0deg)}to{opacity:0;transform:translateY(40px) rotate(4deg)}}
+@keyframes glitchIn{0%{opacity:0;clip-path:inset(40% 0 40% 0);transform:skewX(-8deg)}40%{clip-path:inset(10% 0 10% 0);transform:skewX(4deg)}70%{clip-path:inset(0 0 0 0);transform:skewX(0)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes glitchOut{0%{opacity:1;clip-path:inset(0 0 0 0)}40%{clip-path:inset(20% 0 20% 0);transform:skewX(5deg)}100%{opacity:0;clip-path:inset(50% 0 50% 0)}}
+@keyframes shimmerSweep{0%{left:-100%}100%{left:200%}}
+@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes progressFill2{from{width:0}to{width:100%}}
+@keyframes captionSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes starburstPop{0%{opacity:0;transform:scale(0) rotate(-30deg)}70%{transform:scale(1.2) rotate(5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes overlayFadeIn{from{opacity:0}to{opacity:1}}
+
+.gallery-hint{font-family:'Lato',sans-serif;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;text-align:center;margin-bottom:.75rem;animation:badgePop 4s ease-in-out infinite}
+
+/* ── Carousel wrapper ── */
+.carousel{position:relative;width:100%;user-select:none}
+.carousel-stage{position:relative;width:100%;height:300px;overflow:hidden;border-radius:12px;background:#020a18;cursor:grab}
+.carousel-stage:active{cursor:grabbing}
+.carousel-slide{position:absolute;inset:0;overflow:hidden;border-radius:12px}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center;will-change:transform}
+/* enter/exit classes set by JS */
+.carousel-slide.enter-right{animation:slideInRight .55s cubic-bezier(.25,1,.5,1) forwards}
+.carousel-slide.enter-left{animation:slideInLeft .55s cubic-bezier(.25,1,.5,1) forwards}
+.carousel-slide.exit-left{animation:slideOutLeft .45s cubic-bezier(.5,0,.75,0) forwards}
+.carousel-slide.exit-right{animation:slideOutRight .45s cubic-bezier(.5,0,.75,0) forwards}
+.carousel-slide.enter-zoom{animation:zoomIn .6s cubic-bezier(.34,1.56,.64,1) forwards}
+.carousel-slide.exit-zoom{animation:zoomOut .4s ease-in forwards}
+.carousel-slide.enter-flip{animation:flipIn .6s cubic-bezier(.25,1,.5,1) forwards}
+.carousel-slide.exit-flip{animation:flipOut .4s ease-in forwards}
+.carousel-slide.enter-drop{animation:dropIn .55s cubic-bezier(.34,1.56,.64,1) forwards}
+.carousel-slide.exit-drop{animation:dropOut .4s ease-in forwards}
+.carousel-slide.enter-glitch{animation:glitchIn .55s steps(3,end) forwards}
+.carousel-slide.exit-glitch{animation:glitchOut .4s steps(3,end) forwards}
+
+/* ── Shimmer sweep overlay on enter ── */
+.carousel-slide::after{content:'';position:absolute;inset:0;top:0;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);pointer-events:none;animation:shimmerSweep .7s .2s ease forwards;opacity:0}
+/* ── Vignette ── */
+.carousel-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%);z-index:1;pointer-events:none}
+
+/* ── Caption overlay ── */
+.carousel-caption{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:.75rem 1rem;background:linear-gradient(to top,rgba(2,8,40,.85) 0%,transparent 100%);pointer-events:none}
+.carousel-caption-label{font-family:'Lato',sans-serif;font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:#87d2ff;display:block;margin-bottom:.15rem;animation:captionSlide .5s .3s ease both}
+.carousel-caption-title{font-family:'Dancing Script',cursive;font-size:1.3rem;font-weight:700;color:#e8c84a;display:block;animation:captionSlide .5s .45s ease both;
+  background:linear-gradient(90deg,#c9a020,#e8c84a,#f5e27a,#e8c84a);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── Badge top-right ── */
+.carousel-badge{position:absolute;top:10px;right:10px;z-index:4;background:rgba(232,200,74,.18);border:1px solid rgba(232,200,74,.5);border-radius:20px;padding:.2rem .55rem;font-family:'Lato',sans-serif;font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:#e8c84a;backdrop-filter:blur(4px);animation:starburstPop .5s .15s ease both,badgeFloat 3s 1s ease-in-out infinite}
+
+/* ── Progress bar ── */
+.carousel-progress{height:2px;background:rgba(135,210,255,.15);border-radius:1px;margin-top:6px;overflow:hidden}
+.carousel-progress-bar{height:100%;background:linear-gradient(90deg,#1565e0,#e8c84a);border-radius:1px;width:0;transform-origin:left}
+
+/* ── Nav arrows ── */
+.carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:8px}
+.carousel-arrow{width:34px;height:34px;border-radius:50%;background:rgba(21,101,224,.25);border:1px solid rgba(56,176,255,.35);color:#b8e8ff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s,transform .2s,box-shadow .2s;flex-shrink:0}
+.carousel-arrow:hover{background:rgba(21,101,224,.55);transform:scale(1.12);box-shadow:0 0 14px rgba(56,176,255,.4)}
+.carousel-arrow:active{transform:scale(.95)}
+
+/* ── Dot indicators ── */
+.carousel-dots{display:flex;align-items:center;justify-content:center;gap:7px;flex:1}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(135,210,255,.25);border:1px solid rgba(135,210,255,.3);cursor:pointer;transition:background .3s,transform .3s,width .4s;padding:0}
+.carousel-dot.active{background:#e8c84a;border-color:#e8c84a;transform:scale(1.2);width:20px;border-radius:4px;animation:dotPulse .4s ease}
+.carousel-dot:hover:not(.active){background:rgba(135,210,255,.5);transform:scale(1.15)}
+
+/* ── Thumb strip ── */
+.carousel-thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.carousel-thumbs::-webkit-scrollbar{display:none}
+.carousel-thumb{flex-shrink:0;width:48px;height:38px;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .25s,transform .25s,box-shadow .25s;opacity:.6}
+.carousel-thumb.active{border-color:#e8c84a;opacity:1;transform:scale(1.08);box-shadow:0 0 10px rgba(232,200,74,.4)}
+.carousel-thumb:hover:not(.active){opacity:.9;transform:scale(1.05);border-color:rgba(135,210,255,.4)}
+.carousel-thumb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 
 /* ══ RSVP ══ */
 .rsvp-form{max-width:320px;margin:0 auto}
@@ -372,14 +451,23 @@ footer{text-align:center;padding:2.5rem 1.5rem;border-top:1px solid rgba(135,210
       <span class="card-label">Momentos</span>
       <h2 class="card-title">Galería</h2>
       <div class="divider"><span>✦</span></div>
-      <div class="gallery-hint" id="gallery-hint">★ Toca para organizar ★</div>
-      <div class="gallery-wrap" id="gallery-wrap">
-        <div class="polaroid" data-x="-110" data-y="10" data-r="-4"><img src="https://images.unsplash.com/photo-1734943842257-268c716c2701?w=400&q=80" alt=""/><div class="polaroid-cap">El festejado</div></div>
-        <div class="polaroid" data-x="-55" data-y="30" data-r="3"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80" alt=""/><div class="polaroid-cap">El pastel</div></div>
-        <div class="polaroid" data-x="0" data-y="5" data-r="-2"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80" alt=""/><div class="polaroid-cap">Globos</div></div>
-        <div class="polaroid" data-x="55" data-y="20" data-r="5"><img src="https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=400&q=80" alt=""/><div class="polaroid-cap">La celebración</div></div>
-        <div class="polaroid" data-x="110" data-y="15" data-r="-3"><img src="https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=400&q=80" alt=""/><div class="polaroid-cap">Momentos</div></div>
-        <div class="polaroid" data-x="165" data-y="25" data-r="2"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&q=80" alt=""/><div class="polaroid-cap">Con amor</div></div>
+      <div class="gallery-hint">★ Desliza o usa las flechas ★</div>
+
+      <div class="carousel" id="carousel">
+        <!-- STAGE -->
+        <div class="carousel-stage" id="carousel-stage">
+          <!-- slides injected by JS -->
+        </div>
+        <!-- PROGRESS -->
+        <div class="carousel-progress"><div class="carousel-progress-bar" id="carousel-progress-bar"></div></div>
+        <!-- NAV -->
+        <div class="carousel-nav">
+          <button class="carousel-arrow" id="carousel-prev" aria-label="Anterior">&#8592;</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-arrow" id="carousel-next" aria-label="Siguiente">&#8594;</button>
+        </div>
+        <!-- THUMBS -->
+        <div class="carousel-thumbs" id="carousel-thumbs"></div>
       </div>
     </div>
   </div>
@@ -700,64 +788,171 @@ setTimeout(()=>{
 })();
 
 // ══════════════════════════════════════════
-//  GALLERY – spring physics
+//  GALLERY CAROUSEL – cinematic per-photo
 // ══════════════════════════════════════════
 (function(){
-  const wrap=document.getElementById('gallery-wrap');
-  const hint=document.getElementById('gallery-hint');
-  const cards=Array.from(wrap.querySelectorAll('.polaroid'));
-  const rafs=new Map();
+  const SLIDES=[
+    {src:'https://images.unsplash.com/photo-1734943842257-268c716c2701?w=800&q=85',label:'El protagonista',title:'El festejado',badge:'★ 1 Añito',transition:'zoom',kb:0},
+    {src:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=85',label:'Dulce momento',title:'El pastel',badge:'🎂 Delicioso',transition:'flip',kb:1},
+    {src:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=85',label:'Alegría pura',title:'Globos de colores',badge:'🎈 Fiesta',transition:'slide',kb:2},
+    {src:'https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?w=800&q=85',label:'Un gran día',title:'La celebración',badge:'🎉 Festejo',transition:'drop',kb:3},
+    {src:'https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=800&q=85',label:'Con la familia',title:'Momentos únicos',badge:'💛 Amor',transition:'glitch',kb:4},
+    {src:'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=85',label:'Para siempre',title:'Con todo el amor',badge:'★ Gracias',transition:'zoom',kb:5},
+  ];
+  const AUTO_INTERVAL=4200;
 
-  function springAnimate(el,from,to){
-    if(rafs.has(el))cancelAnimationFrame(rafs.get(el));
-    const k=200,b=20;
-    let {x:cx,y:cy,r:cr,s:cs}=from;
-    let vx=0,vy=0,vr=0,vs=0;
-    const tx=to.x,ty=to.y,tr=to.r,ts=to.s??1;
-    let last=null;
-    function step(t){
-      if(!last)last=t;
-      const dt=Math.min((t-last)/1000,0.033);last=t;
-      const ax=(-(k*(cx-tx))-(b*vx));
-      const ay=(-(k*(cy-ty))-(b*vy));
-      const ar=(-(k*(cr-tr))-(b*vr));
-      const as2=(-(k*(cs-ts))-(b*vs));
-      vx+=ax*dt;vy+=ay*dt;vr+=ar*dt;vs+=as2*dt;
-      cx+=vx*dt;cy+=vy*dt;cr+=vr*dt;cs+=vs*dt;
-      el.style.transform=`translate(${cx}px,${cy}px) rotate(${cr}deg) scale(${cs})`;
-      const done=Math.abs(cx-tx)<.2&&Math.abs(cy-ty)<.2&&Math.abs(cr-tr)<.05&&Math.abs(cs-ts)<.005&&Math.abs(vx)<.2&&Math.abs(vy)<.2;
-      if(!done)rafs.set(el,requestAnimationFrame(step));
-    }
-    rafs.set(el,requestAnimationFrame(step));
+  const stage=document.getElementById('carousel-stage');
+  const dotsWrap=document.getElementById('carousel-dots');
+  const thumbsWrap=document.getElementById('carousel-thumbs');
+  const progressBar=document.getElementById('carousel-progress-bar');
+  const btnPrev=document.getElementById('carousel-prev');
+  const btnNext=document.getElementById('carousel-next');
+
+  let current=0;
+  let transitioning=false;
+  let autoTimer=null;
+  let progressAnim=null;
+
+  // ── Build dots & thumbs ──
+  SLIDES.forEach((s,i)=>{
+    const dot=document.createElement('button');
+    dot.className='carousel-dot'+(i===0?' active':'');
+    dot.addEventListener('click',()=>goTo(i,i>current?'right':'left'));
+    dotsWrap.appendChild(dot);
+
+    const th=document.createElement('div');
+    th.className='carousel-thumb'+(i===0?' active':'');
+    th.innerHTML=`<img src="${s.src}" loading="lazy" alt="${s.title}"/>`;
+    th.addEventListener('click',()=>goTo(i,i>current?'right':'left'));
+    thumbsWrap.appendChild(th);
+  });
+
+  // ── Create slide DOM ──
+  function makeSlide(idx){
+    const s=SLIDES[idx];
+    const el=document.createElement('div');
+    el.className='carousel-slide';
+    el.innerHTML=`
+      <img src="${s.src}" alt="${s.title}" style="animation:kenBurns${s.kb} 6s ease-in-out forwards"/>
+      <div class="carousel-badge">${s.badge}</div>
+      <div class="carousel-caption">
+        <span class="carousel-caption-label">${s.label}</span>
+        <span class="carousel-caption-title">${s.title}</span>
+      </div>`;
+    return el;
   }
 
-  cards.forEach((c,i)=>{
-    const x=parseFloat(c.dataset.x||'0');
-    const y=parseFloat(c.dataset.y||'0');
-    const r=parseFloat(c.dataset.r||'0');
-    c.style.transform=`translate(${x}px,${y}px) rotate(${r}deg) scale(1)`;
-    c.style.zIndex=String(i);
+  // ── Transition pairs per slide ──
+  function getTransitionClasses(t,dir){
+    const enterClass=`enter-${t==='slide'?(dir==='right'?'right':'left'):t}`;
+    const exitClass=`exit-${t==='slide'?(dir==='right'?'left':'right'):t}`;
+    return{enterClass,exitClass};
+  }
+
+  // ── Progress bar animation ──
+  function startProgress(){
+    if(progressAnim)clearTimeout(progressAnim);
+    progressBar.style.transition='none';
+    progressBar.style.width='0%';
+    void progressBar.offsetWidth;
+    progressBar.style.transition=`width ${AUTO_INTERVAL}ms linear`;
+    progressBar.style.width='100%';
+  }
+
+  // ── Go to slide ──
+  function goTo(idx,dir='right',fromAuto=false){
+    if(transitioning||idx===current)return;
+    transitioning=true;
+
+    const s=SLIDES[idx];
+    const {enterClass,exitClass}=getTransitionClasses(s.transition,dir);
+
+    // outgoing
+    const outgoing=stage.querySelector('.carousel-slide');
+    if(outgoing){
+      outgoing.classList.add(exitClass);
+      setTimeout(()=>outgoing.remove(),450);
+    }
+
+    // incoming
+    const incoming=makeSlide(idx);
+    incoming.classList.add(enterClass);
+    stage.appendChild(incoming);
+
+    // sparkle confetti on flip / glitch
+    if(s.transition==='flip'||s.transition==='glitch'){
+      const r=stage.getBoundingClientRect();
+      launchConfetti(r.left+r.width/2,r.top+r.height/2,28);
+    }
+
+    // update indicators
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+    thumbsWrap.querySelectorAll('.carousel-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
+    // scroll active thumb into view
+    const activeThumb=thumbsWrap.querySelectorAll('.carousel-thumb')[idx];
+    if(activeThumb)activeThumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+
+    current=idx;
+    setTimeout(()=>{transitioning=false;},600);
+
+    startProgress();
+    scheduleAuto();
+  }
+
+  // ── Auto-play ──
+  function scheduleAuto(){
+    if(autoTimer)clearTimeout(autoTimer);
+    autoTimer=setTimeout(()=>{
+      const next=(current+1)%SLIDES.length;
+      goTo(next,'right',true);
+    },AUTO_INTERVAL);
+  }
+
+  // ── Arrow buttons ──
+  btnPrev.addEventListener('click',()=>{
+    const prev=(current-1+SLIDES.length)%SLIDES.length;
+    goTo(prev,'left');
+  });
+  btnNext.addEventListener('click',()=>{
+    const next=(current+1)%SLIDES.length;
+    goTo(next,'right');
   });
 
-  let organized=false;
-  wrap.addEventListener('click',()=>{
-    organized=!organized;
-    hint.textContent=organized?'★ Toca para dispersar ★':'★ Toca para organizar ★';
-    if(organized){
-      const rect=wrap.getBoundingClientRect();
-      launchConfetti(rect.left+rect.width/2,rect.top+rect.height/2,40);
+  // ── Touch / drag swipe ──
+  let touchStartX=0,touchStartY=0,isDragging=false;
+  stage.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;isDragging=true;},{passive:true});
+  stage.addEventListener('touchend',e=>{
+    if(!isDragging)return;isDragging=false;
+    const dx=e.changedTouches[0].clientX-touchStartX;
+    const dy=e.changedTouches[0].clientY-touchStartY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+      if(dx<0)btnNext.click();else btnPrev.click();
     }
-    cards.forEach((c,i)=>{
-      const mat=new DOMMatrix(getComputedStyle(c).transform);
-      const from={x:mat.m41,y:mat.m42,r:parseFloat((c.style.transform.match(/rotate\(([^)]+)deg\)/)||[,'0'])[1]),s:1};
-      const xTarget=parseFloat(c.dataset.x||'0');
-      const yTarget=parseFloat(c.dataset.y||'0');
-      const rTarget=parseFloat(c.dataset.r||'0');
-      const to=organized?{x:(i-2.5)*44,y:0,r:0,s:1}:{x:xTarget,y:yTarget,r:rTarget,s:1};
-      c.style.zIndex=organized?'1':String(i);
-      setTimeout(()=>springAnimate(c,from,to),i*40);
-    });
+  },{passive:true});
+  // mouse drag
+  let mouseDown=false,mouseStartX=0;
+  stage.addEventListener('mousedown',e=>{mouseDown=true;mouseStartX=e.clientX;});
+  stage.addEventListener('mouseup',e=>{
+    if(!mouseDown)return;mouseDown=false;
+    const dx=e.clientX-mouseStartX;
+    if(Math.abs(dx)>40){if(dx<0)btnNext.click();else btnPrev.click();}
   });
+
+  // ── Keyboard ──
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft')btnPrev.click();
+    else if(e.key==='ArrowRight')btnNext.click();
+  });
+
+  // ── Pause on hover ──
+  stage.addEventListener('mouseenter',()=>{if(autoTimer)clearTimeout(autoTimer);progressBar.style.animationPlayState='paused';progressBar.style.transition='none';});
+  stage.addEventListener('mouseleave',()=>{startProgress();scheduleAuto();});
+
+  // ── Init first slide ──
+  const first=makeSlide(0);
+  stage.appendChild(first);
+  startProgress();
+  scheduleAuto();
 })();
 
 // ══════════════════════════════════════════
