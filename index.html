@@ -140,7 +140,6 @@ header {
   background: var(--cream);
 }
 
-/* Plan + Panel grid */
 .plans-outer { max-width: 1200px; margin: 0 auto; }
 
 .plans-row {
@@ -160,7 +159,7 @@ header {
     align-items: start;
   }
   .plans-row {
-    display: contents; /* flat children into the outer grid */
+    display: contents;
   }
   .order-panel-wrap {
     margin-top: 0;
@@ -252,6 +251,23 @@ header {
 }
 .card-btn.outline:hover { background: var(--gold-light); }
 .card-btn.filled { background: var(--gold); color: var(--dark); border: none; }
+
+/* ── BOTÓN DEMO ─────────────────────────────── */
+.btn-demo {
+  width: 100%; margin-top: .55rem; padding: .68rem;
+  border-radius: 99px; font-size: .72rem; font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase; cursor: pointer;
+  background: transparent;
+  border: 1.5px solid rgba(201,169,110,.35);
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.btn-demo:hover {
+  background: rgba(201,169,110,.1);
+  border-color: var(--gold);
+  color: var(--dark);
+}
 
 /* ── Order Panel */
 .order-panel {
@@ -413,7 +429,6 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
 .pedido-hero { text-align: center; margin-bottom: clamp(2rem,5vw,3rem); }
 .pedido-hero .section-title { color: var(--dark); }
 
-/* Layout: card + right column */
 .pedido-layout {
   display: grid;
   grid-template-columns: 1fr 340px;
@@ -424,7 +439,6 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
   .pedido-layout { grid-template-columns: 1fr; }
 }
 
-/* Digital Card */
 .digital-card {
   border-radius: 1.5rem; overflow: hidden; background: var(--dark);
   box-shadow: 0 24px 64px rgba(26,18,8,.28);
@@ -484,7 +498,6 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
   border-top: 1px solid rgba(201,169,110,.1);
 }
 
-/* Right column */
 .right-col { display: flex; flex-direction: column; gap: 1rem; }
 
 .card-box {
@@ -538,6 +551,8 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
       </div>
       <nav>
         <ul class="nav-links">
+          <!-- ✅ INICIO añadido aquí -->
+          <li><a href="#">Inicio</a></li>
           <li><a href="#planes">Planes</a></li>
           <li><a href="#galería">Galería</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -547,6 +562,8 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
       <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
     </div>
     <nav class="mobile-menu" id="mobile-menu">
+      <!-- ✅ INICIO añadido aquí también -->
+      <a href="#" onclick="closeMobile()">Inicio</a>
       <a href="#planes"  onclick="closeMobile()">Planes</a>
       <a href="#galería" onclick="closeMobile()">Galería</a>
       <a href="#faq"     onclick="closeMobile()">FAQ</a>
@@ -749,7 +766,7 @@ footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; c
 
 <script>
 /* ═══════════════════════════════════════════ DATA */
-const WA_LINK = 'https://wa.me/message/57HQCKAMGELDG1'; // ← cambia por tu link
+const WA_LINK = 'https://wa.me/message/57HQCKAMGELDG1';
 
 const fmt = n => '$' + n.toLocaleString('es-CO');
 const $ = id => document.getElementById(id);
@@ -758,16 +775,19 @@ const PLANS = [
   {
     id: 'classic', label: 'CLASSIC', price: 80000, priceBefore: 160000, popular: false,
     image: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    demo: 'https://TU-DEMO-CLASSIC.com', // ← cambia por el link real
     features: ['Envío ilimitado','Portada cinematográfica','Cuenta regresiva animada','Galería de hasta 4 fotos','Agenda digital multiplataforma','Ubicación con mapa e indicaciones','RSVP online','Panel privado de invitados','Sección regalos y vestimenta'],
   },
   {
     id: 'premium', label: 'PREMIUM', price: 110000, priceBefore: 220000, popular: true,
     image: 'https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    demo: 'https://TU-DEMO-PREMIUM.com', // ← cambia por el link real
     features: ['Todo lo de CLASSIC','Música de fondo a elección','Galería de hasta 8 fotos','Historia de la pareja','Nombre del invitado y pases','RSVP Premium con panel avanzado','Sugerencia de canciones','Instagram Wall y hashtag','REGALO: Save The Date'],
   },
   {
     id: 'deluxe', label: 'DELUXE', price: 160000, priceBefore: 320000, popular: false,
     image: 'https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    demo: 'https://TU-DEMO-DELUXE.com', // ← cambia por el link real
     features: ['Todo lo de PREMIUM','Álbum de hasta 12 fotos','Mesa asignada al invitado','Hoteles y transporte','Itinerario completo del evento','Testigos y padrinos','Playlist de Spotify','Redes oficiales del evento','Sección adicional libre'],
   },
 ];
@@ -838,11 +858,23 @@ function renderPlans() {
         <ul class="card-features">
           ${p.features.map(f => `<li><span class="card-feat-dot">✦</span>${f}</li>`).join('')}
         </ul>
-        <button class="card-btn ${isSel ? 'filled' : 'outline'}">
+        <button class="card-btn ${isSel ? 'filled' : 'outline'}" data-action="select">
           ${isSel ? '✓ Seleccionado' : 'Seleccionar'}
         </button>
+        <a href="${p.demo}" target="_blank" rel="noopener noreferrer" class="btn-demo" data-action="demo">
+          👁 Ver Demo
+        </a>
       </div>`;
-    card.addEventListener('click', () => { selectedPlan = p.id; renderPlans(); renderPanel(); observeReveal(); });
+
+    /* Seleccionar al hacer click en la card, EXCEPTO si es el botón demo */
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('[data-action="demo"]')) return; // no selecciona al ver demo
+      selectedPlan = p.id;
+      renderPlans();
+      renderPanel();
+      observeReveal();
+    });
+
     row.appendChild(card);
   });
   observeReveal();
