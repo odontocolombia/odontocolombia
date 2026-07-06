@@ -149,79 +149,312 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:900px){.nav-links,.nav-cta.hide-mob{display:none!important}.hamburger{display:flex}}
 
 /* ══════════════════════════════════════════════════════
-   HERO
+   HERO — VIDEO BG + PHONE MOCKUP
 ══════════════════════════════════════════════════════ */
-#hero{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;background:var(--darker);padding:clamp(5rem,12vw,8rem) 1.5rem 3rem}
-.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=2000&q=80') center/cover no-repeat;opacity:.22;transform:scale(1.06);animation:bg-drift 20s ease-in-out infinite alternate}
-@keyframes bg-drift{to{transform:scale(1) translateX(1%)}}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(165deg,rgba(8,4,1,.92) 0%,rgba(26,18,8,.72) 45%,rgba(8,4,1,.95) 100%)}
-.hero-radial{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 35%,rgba(201,169,110,.18) 0%,transparent 70%);pointer-events:none}
-.hero-lines{position:absolute;inset:0;pointer-events:none;opacity:.04;background-image:repeating-linear-gradient(0deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px),repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px)}
-/* floating gold orbs */
-.orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.35) 0%,transparent 70%);pointer-events:none;animation:orb-float var(--d,8s) ease-in-out infinite alternate}
+#hero{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+  background:var(--darker);
+  padding:clamp(6rem,13vw,9rem) 1.5rem 4rem;
+}
+
+/* Video background */
+.hero-video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:.42;
+  transform:scale(1.04);
+  animation:vid-drift 18s ease-in-out infinite alternate;
+  pointer-events:none;
+  z-index:0;
+}
+@keyframes vid-drift{
+  from{transform:scale(1.04) translateX(0)}
+  to{transform:scale(1.08) translateX(1%)}
+}
+.hero-video-fallback{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=2000&q=80') center/cover no-repeat;
+  opacity:.3;pointer-events:none;z-index:0;
+}
+
+/* Overlays */
+.hero-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(165deg,rgba(6,3,1,.94) 0%,rgba(22,14,6,.76) 45%,rgba(6,3,1,.97) 100%);
+  pointer-events:none;z-index:1;
+}
+.hero-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 70% at 50% 40%,transparent 30%,rgba(0,0,0,.65) 100%);
+  pointer-events:none;z-index:2;
+}
+.hero-radial{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 55% at 50% 32%,rgba(201,169,110,.2) 0%,transparent 65%);
+  pointer-events:none;z-index:2;
+}
+.hero-lines{
+  position:absolute;inset:0;opacity:.032;
+  background-image:
+    repeating-linear-gradient(0deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px),
+    repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px);
+  pointer-events:none;z-index:2;
+}
+.orb{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.32) 0%,transparent 70%);
+  pointer-events:none;z-index:2;
+  animation:orb-float var(--d,8s) ease-in-out infinite alternate;
+}
 @keyframes orb-float{to{transform:translate(var(--tx,10px),var(--ty,-15px))}}
 
-.hero-body{position:relative;z-index:2;max-width:920px;text-align:center}
-.hero-logo-wrap{display:flex;justify-content:center;margin-bottom:2.5rem}
-.hero-logo-wrap img{width:clamp(240px,38vw,360px);filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%);animation:logo-shimmer 4s ease-in-out infinite}
-@keyframes logo-shimmer{0%,100%{filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%)}50%{filter:brightness(0) saturate(100%) invert(90%) sepia(40%) saturate(600%) hue-rotate(3deg) brightness(130%)}}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,9vw,6rem);font-weight:300;color:#fff;line-height:1.02;margin:.4rem 0 1.2rem;letter-spacing:-.01em}
-.hero-title em{font-style:italic;color:var(--gold);font-weight:600;position:relative}
-.hero-title em::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);animation:underline-in .8s .8s forwards cubic-bezier(.22,1,.36,1)}
-@keyframes underline-in{to{transform:scaleX(1)}}
-.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);font-weight:300;color:rgba(247,242,236,.62);max-width:560px;margin:0 auto 2.5rem;line-height:1.78}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:3rem}
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;border-top:1px solid rgba(201,169,110,.18);padding-top:2rem;max-width:720px;margin:0 auto}
-.stat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:300;color:var(--gold);line-height:1}
-.stat-l{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,236,.35);margin-top:.3rem}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.3);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;animation:scroll-bounce .9s ease-in-out infinite alternate}
-.scroll-arrow{width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),transparent)}
-@keyframes scroll-bounce{to{transform:translateX(-50%) translateY(6px)}}
-@media(max-width:768px){.hero-stats{grid-template-columns:repeat(2,1fr)}.hero-ctas{flex-direction:column;align-items:stretch}.hero-ctas a{justify-content:center}}
+/* Hero body — 2 cols */
+.hero-body{
+  position:relative;z-index:5;
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,6vw,6rem);
+  align-items:center;width:100%;
+}
 
-/* ══════════════════════════════════════════════════════
-   PHONE SHOWCASE (categoria cards con phone mockup)
-══════════════════════════════════════════════════════ */
-#showcase{padding:clamp(4rem,9vw,7rem) 1.5rem;background:var(--cream2);overflow:hidden}
-.showcase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+/* Left col */
+.hero-left{text-align:left}
+.hero-logo-wrap{display:flex;justify-content:flex-start;margin-bottom:2rem}
+.hero-logo-wrap img{
+  width:clamp(180px,26vw,280px);
+  filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%);
+  animation:logo-shimmer 4s ease-in-out infinite;
+}
+@keyframes logo-shimmer{
+  0%,100%{filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%)}
+  50%{filter:brightness(0) saturate(100%) invert(90%) sepia(40%) saturate(600%) hue-rotate(3deg) brightness(132%)}
+}
+.hero-eyebrow{margin-bottom:.5rem}
+.hero-orn{justify-content:flex-start}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:300;color:#fff;
+  line-height:1.04;margin:.5rem 0 1.2rem;
+  letter-spacing:-.01em;
+}
+.hero-title em{
+  font-style:italic;color:var(--gold);font-weight:600;
+  position:relative;display:inline-block;
+}
+.hero-title em::after{
+  content:'';position:absolute;
+  bottom:-3px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);
+  animation:ul-in .8s .9s forwards cubic-bezier(.22,1,.36,1);
+}
+@keyframes ul-in{to{transform:scaleX(1)}}
+.hero-sub{
+  font-size:clamp(.88rem,1.8vw,1rem);font-weight:300;
+  color:rgba(247,242,236,.62);max-width:480px;
+  margin:0 0 2rem;line-height:1.78;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.85rem;margin-bottom:2.5rem}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:.75rem 1.25rem;
+  border-top:1px solid rgba(201,169,110,.18);
+  padding-top:1.75rem;max-width:380px;
+}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,242,236,.32);margin-top:.25rem}
 
-/* Phone Card */
-.phone-card{position:relative;border-radius:var(--r2);overflow:hidden;background:var(--dark);border:1px solid rgba(201,169,110,.15);box-shadow:var(--sh-dark);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .35s;cursor:pointer;display:block;color:inherit;text-decoration:none}
-.phone-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 32px 80px rgba(0,0,0,.45);border-color:rgba(201,169,110,.4)}
-/* bg image */
-.pc-bg{position:relative;height:260px;overflow:hidden}
-.pc-bg img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.phone-card:hover .pc-bg img{transform:scale(1.08)}
-.pc-bg-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.05) 0%,rgba(26,18,8,.85) 100%)}
-/* inline phone frame */
-.pc-phone{position:absolute;bottom:-16px;right:14px;width:88px;height:165px;border-radius:14px;background:linear-gradient(150deg,#1c1108 0%,#0e0803 100%);border:1.5px solid rgba(201,169,110,.45);box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 0 10px rgba(201,169,110,.04);overflow:hidden;z-index:3;transform:rotate(2deg);transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.phone-card:hover .pc-phone{transform:rotate(0deg) translateY(-6px)}
-.pcph-notch{width:40px;height:8px;background:#0a0500;border-radius:0 0 5px 5px;margin:0 auto}
-.pcph-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.35rem .4rem;text-align:center;gap:.22rem}
-.pcph-logo{width:58px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
-.pcph-hr{height:1px;width:40px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.pcph-names{font-family:'Cormorant Garamond',serif;font-size:.75rem;font-weight:300;color:#fff;line-height:1.2}
-.pcph-date{font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,169,110,.55)}
-.pcph-btn{width:100%;background:var(--gold);color:var(--dark);border:none;border-radius:99px;padding:.28rem .4rem;font-size:.42rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif}
-.pcph-footer{background:rgba(201,169,110,.08);border-top:1px solid rgba(201,169,110,.15);padding:.2rem .4rem;text-align:center;font-size:.38rem;color:rgba(201,169,110,.45);font-family:'Jost',sans-serif}
-/* category badge */
-.pc-badge{position:absolute;top:.75rem;left:.75rem;z-index:4;background:rgba(14,9,3,.7);border:1px solid rgba(201,169,110,.4);border-radius:99px;padding:.25rem .75rem;font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);backdrop-filter:blur(6px)}
-.pc-new{position:absolute;top:.75rem;right:1rem;z-index:5;background:var(--gold);color:var(--dark);border-radius:99px;padding:.22rem .65rem;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 4px 12px rgba(201,169,110,.4)}
-/* card body */
-.pc-body{padding:1.25rem 1.25rem 1.4rem;position:relative;z-index:2}
-.pc-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#fff;margin-bottom:.2rem}
-.pc-sub{font-size:.72rem;color:rgba(247,242,236,.45);line-height:1.5;font-weight:300;margin-bottom:.9rem}
-.pc-footer-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.pc-models{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,169,110,.6);font-weight:500}
-.pc-arrow{width:28px;height:28px;border-radius:99px;background:var(--gold-dim);border:1px solid rgba(201,169,110,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.7rem;transition:background .25s,transform .25s}
-.phone-card:hover .pc-arrow{background:var(--gold);color:var(--dark);transform:translateX(3px)}
+/* Right col — phone */
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative}
+.phone-glow{
+  position:absolute;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.28) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+  animation:glow-pulse 3s ease-in-out infinite;
+}
+@keyframes glow-pulse{
+  0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}
+}
 
-/* hover glow */
-.phone-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.07) 0%,transparent 60%);opacity:0;transition:opacity .35s;pointer-events:none;border-radius:var(--r2)}
-.phone-card:hover::after{opacity:1}
+/* Main phone */
+.hero-phone{
+  width:220px;border-radius:32px;
+  background:linear-gradient(155deg,#1e1209 0%,#0c0703 100%);
+  border:2px solid rgba(201,169,110,.45);
+  box-shadow:0 40px 100px rgba(0,0,0,.65),inset 0 0 30px rgba(201,169,110,.04),0 0 0 1px rgba(201,169,110,.1);
+  overflow:hidden;position:relative;z-index:2;
+  animation:hero-phone-float 5s ease-in-out infinite;
+}
+@keyframes hero-phone-float{
+  0%,100%{transform:translateY(0) rotateX(4deg) rotateY(-6deg)}
+  33%{transform:translateY(-10px) rotateX(-2deg) rotateY(4deg)}
+  66%{transform:translateY(-5px) rotateX(3deg) rotateY(-3deg)}
+}
+.hp-notch{width:68px;height:16px;background:#060300;border-radius:0 0 10px 10px;margin:0 auto}
+.hp-screen{display:flex;flex-direction:column;align-items:center;padding:.8rem .75rem .6rem;text-align:center;gap:.5rem}
 
-@media(max-width:1100px){.showcase-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.showcase-grid{grid-template-columns:1fr 1fr;gap:.75rem}.pc-bg{height:200px}.pc-phone{width:68px;height:128px;bottom:-12px;right:8px}.pcph-logo{width:46px}.pcph-names{font-size:.62rem}.pc-title{font-size:1.15rem}}
+/* browser bar */
+.hp-bar{
+  width:100%;background:rgba(201,169,110,.08);
+  border:1px solid rgba(201,169,110,.15);border-radius:.5rem;
+  padding:.35rem .6rem;display:flex;align-items:center;gap:.4rem;
+}
+.hp-bar-dots{display:flex;gap:.25rem}
+.hp-dot{width:6px;height:6px;border-radius:50%}
+.hp-dot:nth-child(1){background:#e63946}
+.hp-dot:nth-child(2){background:var(--gold)}
+.hp-dot:nth-child(3){background:#2a9d8f}
+.hp-bar-url{font-size:.45rem;color:rgba(201,169,110,.45);letter-spacing:.05em;font-family:'Jost',sans-serif;flex:1;text-align:center}
+
+/* cover photo */
+.hp-cover{width:100%;height:100px;border-radius:.65rem;overflow:hidden;position:relative}
+.hp-cover img{width:100%;height:100%;object-fit:cover}
+.hp-cover-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.1),rgba(26,18,8,.7))}
+.hp-cover-text{position:absolute;bottom:.5rem;left:0;right:0;text-align:center}
+.hp-cover-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:300;color:#fff;line-height:1.15}
+.hp-cover-title em{font-style:italic;font-weight:600;color:var(--gold)}
+
+.hp-logo{width:95px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
+.hp-hr{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hp-date{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.55)}
+
+/* countdown en el teléfono */
+.hp-cd{
+  width:100%;background:rgba(201,169,110,.07);
+  border:1px solid rgba(201,169,110,.18);border-radius:.55rem;
+  padding:.45rem .5rem;
+}
+.hp-cd-label{font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.5);margin-bottom:.3rem}
+.hp-cd-row{display:flex;justify-content:center;gap:.35rem}
+.hp-cdu{text-align:center}
+.hp-cdn{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--gold);line-height:1}
+.hp-cdl{font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,169,110,.45)}
+
+.hp-btn{
+  width:100%;background:var(--gold);color:var(--dark);border:none;
+  border-radius:99px;padding:.5rem;font-size:.58rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif;
+  animation:btn-pulse 2.5s ease-in-out infinite;
+}
+@keyframes btn-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}
+  50%{box-shadow:0 0 0 6px rgba(201,169,110,0)}
+}
+.hp-chips{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center}
+.hp-chip{
+  background:rgba(201,169,110,.1);color:rgba(201,169,110,.8);
+  border-radius:.35rem;padding:.28rem .45rem;font-size:.5rem;
+  font-family:'Jost',sans-serif;border:1px solid rgba(201,169,110,.15);
+}
+.hp-footer{
+  background:rgba(201,169,110,.06);border-top:1px solid rgba(201,169,110,.12);
+  padding:.4rem;text-align:center;font-size:.46rem;
+  color:rgba(201,169,110,.42);font-family:'Jost',sans-serif;width:100%;
+}
+.hp-footer strong{color:var(--gold)}
+
+/* Notification badge */
+.hp-notif-card{
+  position:absolute;right:-55px;top:22%;
+  width:155px;background:rgba(14,9,3,.88);
+  border:1px solid rgba(201,169,110,.3);border-radius:.85rem;
+  padding:.65rem .75rem;backdrop-filter:blur(12px);
+  box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:3;
+  animation:notif-float 6s ease-in-out infinite;
+}
+@keyframes notif-float{
+  0%,100%{transform:translateY(0) translateX(0)}
+  50%{transform:translateY(-8px) translateX(3px)}
+}
+.notif-header{display:flex;align-items:center;gap:.45rem;margin-bottom:.45rem}
+.notif-ico{width:18px;height:18px;border-radius:99px;background:var(--wa);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-app{font-size:.5rem;font-weight:600;color:rgba(247,242,236,.4);text-transform:uppercase;letter-spacing:.1em}
+.notif-time{font-size:.45rem;color:rgba(247,242,236,.22);margin-left:auto}
+.notif-title{font-size:.62rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.notif-msg{font-size:.58rem;color:rgba(247,242,236,.5);line-height:1.4}
+.notif-badge{display:inline-flex;align-items:center;gap:.25rem;background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.25);border-radius:99px;padding:.18rem .5rem;margin-top:.4rem;font-size:.5rem;color:var(--gold);font-weight:600}
+
+/* RSVP badge */
+.hp-rsvp-badge{
+  position:absolute;left:-50px;bottom:28%;
+  width:130px;background:rgba(14,9,3,.88);
+  border:1px solid rgba(37,211,102,.35);border-radius:.85rem;
+  padding:.6rem .7rem;backdrop-filter:blur(12px);
+  box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:3;
+  animation:rsvp-float 7s ease-in-out infinite;animation-delay:.5s;
+}
+@keyframes rsvp-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(8px)}
+}
+.rsvp-row{display:flex;align-items:center;gap:.4rem;margin-bottom:.35rem}
+.rsvp-dot{width:7px;height:7px;border-radius:50%;background:var(--wa);flex-shrink:0;animation:rsvp-blink .9s ease-in-out infinite}
+@keyframes rsvp-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.rsvp-label{font-size:.52rem;font-weight:600;color:#fff}
+.rsvp-sub{font-size:.5rem;color:rgba(247,242,236,.4);line-height:1.35}
+.rsvp-count{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--wa);margin-top:.25rem}
+.rsvp-of{font-size:.48rem;color:rgba(247,242,236,.3)}
+
+/* LIVE badge */
+.hero-live-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:rgba(14,9,3,.75);border:1px solid rgba(201,169,110,.3);
+  border-radius:99px;padding:.32rem .85rem;
+  font-size:.6rem;font-weight:600;color:rgba(247,242,236,.7);
+  letter-spacing:.1em;text-transform:uppercase;
+  backdrop-filter:blur(8px);margin-bottom:1.25rem;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#e63946;animation:live-blink .8s ease-in-out infinite}
+@keyframes live-blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* Countdown strip */
+.cd-live{display:inline-flex;gap:.35rem;align-items:center;justify-content:flex-start;margin-bottom:2rem}
+.cdl-unit{display:flex;flex-direction:column;align-items:center;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.18);border-radius:.5rem;padding:.35rem .55rem;min-width:46px}
+.cdl-n{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--gold);line-height:1}
+.cdl-l{font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.5);margin-top:.15rem}
+.cdl-sep{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:rgba(201,169,110,.4);margin-bottom:.8rem}
+
+/* Scroll indicator */
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:rgba(255,255,255,.28);font-size:.58rem;
+  letter-spacing:.22em;text-transform:uppercase;
+  z-index:5;animation:scroll-bounce .95s ease-in-out infinite alternate;
+}
+.scroll-arr{width:1px;height:30px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes scroll-bounce{to{transform:translateX(-50%) translateY(7px)}}
+
+/* Responsive hero */
+@media(max-width:900px){
+  .hero-body{grid-template-columns:1fr;text-align:center;gap:3rem}
+  .hero-left{display:flex;flex-direction:column;align-items:center}
+  .hero-logo-wrap{justify-content:center}
+  .hero-orn{justify-content:center}
+  .hero-sub{text-align:center}
+  .hero-stats{max-width:100%;grid-template-columns:repeat(4,1fr)}
+  .hero-ctas{justify-content:center}
+  .hp-notif-card{right:-30px;width:130px}
+  .hp-rsvp-badge{left:-30px;width:115px}
+  .cd-live{justify-content:center}
+}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hp-notif-card,.hp-rsvp-badge{display:none}
+  .hero-phone{width:185px}
+}
+@media(max-width:400px){
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .hero-ctas a{justify-content:center}
+}
 
 /* ══════════════════════════════════════════════════════
    MARQUEE STRIP
@@ -233,17 +466,81 @@ button{font-family:inherit;cursor:pointer}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ══════════════════════════════════════════════════════
-   PHONE DEMO HERO (interactive section)
+   SHOWCASE — PHONE CARDS
+══════════════════════════════════════════════════════ */
+#showcase{padding:clamp(4rem,9vw,7rem) 1.5rem;background:var(--cream2);overflow:hidden}
+.showcase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+
+.phone-card{
+  position:relative;border-radius:var(--r2);overflow:hidden;
+  background:var(--dark);border:1px solid rgba(201,169,110,.15);
+  box-shadow:var(--sh-dark);
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,border-color .35s;
+  cursor:pointer;display:block;color:inherit;text-decoration:none;
+}
+.phone-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 32px 80px rgba(0,0,0,.45);border-color:rgba(201,169,110,.4)}
+.pc-bg{position:relative;height:260px;overflow:hidden}
+.pc-bg img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.phone-card:hover .pc-bg img{transform:scale(1.08)}
+.pc-bg-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.05) 0%,rgba(26,18,8,.85) 100%)}
+
+/* inline phone frame */
+.pc-phone{
+  position:absolute;bottom:-16px;right:14px;
+  width:88px;height:165px;border-radius:14px;
+  background:linear-gradient(150deg,#1c1108 0%,#0e0803 100%);
+  border:1.5px solid rgba(201,169,110,.45);
+  box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 0 10px rgba(201,169,110,.04);
+  overflow:hidden;z-index:3;
+  transform:rotate(2deg);
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+  display:flex;flex-direction:column;
+}
+.phone-card:hover .pc-phone{transform:rotate(0deg) translateY(-6px)}
+.pcph-notch{width:40px;height:8px;background:#0a0500;border-radius:0 0 5px 5px;margin:0 auto;flex-shrink:0}
+.pcph-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.35rem .4rem;text-align:center;gap:.22rem}
+.pcph-logo{width:58px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
+.pcph-hr{height:1px;width:40px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.pcph-names{font-family:'Cormorant Garamond',serif;font-size:.75rem;font-weight:300;color:#fff;line-height:1.2}
+.pcph-date{font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,169,110,.55)}
+.pcph-btn{width:100%;background:var(--gold);color:var(--dark);border:none;border-radius:99px;padding:.28rem .4rem;font-size:.42rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif}
+.pcph-footer{background:rgba(201,169,110,.08);border-top:1px solid rgba(201,169,110,.15);padding:.2rem .4rem;text-align:center;font-size:.38rem;color:rgba(201,169,110,.45);font-family:'Jost',sans-serif;flex-shrink:0}
+
+.pc-badge{position:absolute;top:.75rem;left:.75rem;z-index:4;background:rgba(14,9,3,.7);border:1px solid rgba(201,169,110,.4);border-radius:99px;padding:.25rem .75rem;font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);backdrop-filter:blur(6px)}
+.pc-new{position:absolute;top:.75rem;right:1rem;z-index:5;background:var(--gold);color:var(--dark);border-radius:99px;padding:.22rem .65rem;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 4px 12px rgba(201,169,110,.4)}
+.pc-body{padding:1.25rem 1.25rem 1.4rem;position:relative;z-index:2}
+.pc-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.pc-sub{font-size:.72rem;color:rgba(247,242,236,.45);line-height:1.5;font-weight:300;margin-bottom:.9rem}
+.pc-footer-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.pc-models{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,169,110,.6);font-weight:500}
+.pc-arrow{width:28px;height:28px;border-radius:99px;background:var(--gold-dim);border:1px solid rgba(201,169,110,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.7rem;transition:background .25s,transform .25s}
+.phone-card:hover .pc-arrow{background:var(--gold);color:var(--dark);transform:translateX(3px)}
+.phone-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.07) 0%,transparent 60%);opacity:0;transition:opacity .35s;pointer-events:none;border-radius:var(--r2)}
+.phone-card:hover::after{opacity:1}
+
+@media(max-width:1100px){.showcase-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){
+  .showcase-grid{grid-template-columns:1fr 1fr;gap:.75rem}
+  .pc-bg{height:200px}
+  .pc-phone{width:68px;height:128px;bottom:-12px;right:8px}
+  .pcph-logo{width:46px}
+  .pcph-names{font-size:.62rem}
+  .pc-title{font-size:1.15rem}
+}
+
+/* ══════════════════════════════════════════════════════
+   DEMO SECTION (phone hero)
 ══════════════════════════════════════════════════════ */
 #demo-section{padding:clamp(4rem,9vw,7rem) 1.5rem;background:linear-gradient(155deg,var(--dark) 0%,var(--dark2) 100%);position:relative;overflow:hidden}
 .demo-grid-bg{position:absolute;inset:0;pointer-events:none;opacity:.04;background-image:repeating-linear-gradient(0deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 72px),repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 72px)}
 .demo-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
 .demo-phones{display:flex;align-items:flex-end;justify-content:center;gap:1.25rem;perspective:800px}
+
 /* big phone */
-.big-phone{width:200px;height:400px;border-radius:28px;background:linear-gradient(155deg,#221408 0%,#120c04 100%);border:1.5px solid rgba(201,169,110,.4);box-shadow:var(--sh-dark);overflow:hidden;flex-shrink:0;position:relative;z-index:2;animation:phone-float 5s ease-in-out infinite}
+.big-phone{width:200px;height:400px;border-radius:28px;background:linear-gradient(155deg,#221408 0%,#120c04 100%);border:1.5px solid rgba(201,169,110,.4);box-shadow:var(--sh-dark);overflow:hidden;flex-shrink:0;position:relative;z-index:2;animation:phone-float 5s ease-in-out infinite;display:flex;flex-direction:column}
 @keyframes phone-float{0%,100%{transform:translateY(0) rotateY(-3deg) rotateX(2deg)}50%{transform:translateY(-12px) rotateY(3deg) rotateX(-2deg)}}
-.big-notch{width:60px;height:14px;background:#0a0500;border-radius:0 0 8px 8px;margin:0 auto}
-.big-screen{display:flex;flex-direction:column;align-items:center;padding:1rem .75rem .75rem;text-align:center;gap:.55rem}
+.big-notch{width:60px;height:14px;background:#0a0500;border-radius:0 0 8px 8px;margin:0 auto;flex-shrink:0}
+.big-screen{display:flex;flex-direction:column;align-items:center;padding:1rem .75rem .75rem;text-align:center;gap:.55rem;flex:1}
 .big-logo{width:120px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
 .big-hr{height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .big-names{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:#fff;line-height:1.25}
@@ -257,13 +554,14 @@ button{font-family:inherit;cursor:pointer}
 .big-btn{width:100%;background:var(--gold);color:var(--dark);border:none;border-radius:99px;padding:.55rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif}
 .big-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
 .big-chip{background:rgba(201,169,110,.1);color:rgba(201,169,110,.8);border-radius:.4rem;padding:.28rem .5rem;font-size:.55rem;font-family:'Jost',sans-serif;border:1px solid rgba(201,169,110,.15)}
-.big-footer{background:rgba(201,169,110,.06);border-top:1px solid rgba(201,169,110,.12);padding:.45rem;text-align:center;font-size:.52rem;color:rgba(201,169,110,.4);font-family:'Jost',sans-serif}
+.big-footer{background:rgba(201,169,110,.06);border-top:1px solid rgba(201,169,110,.12);padding:.45rem;text-align:center;font-size:.52rem;color:rgba(201,169,110,.4);font-family:'Jost',sans-serif;flex-shrink:0}
 .big-footer strong{color:var(--gold)}
-/* small phone behind */
-.sm-phone{width:140px;height:280px;border-radius:20px;background:linear-gradient(155deg,#1c1008 0%,#100a03 100%);border:1.5px solid rgba(201,169,110,.2);box-shadow:var(--sh-dark);overflow:hidden;flex-shrink:0;transform:translateX(-20px) rotate(5deg);opacity:.65;animation:phone-float2 5s ease-in-out infinite;animation-delay:.8s}
+
+/* small phone */
+.sm-phone{width:140px;height:280px;border-radius:20px;background:linear-gradient(155deg,#1c1008 0%,#100a03 100%);border:1.5px solid rgba(201,169,110,.2);box-shadow:var(--sh-dark);overflow:hidden;flex-shrink:0;transform:translateX(-20px) rotate(5deg);opacity:.65;animation:phone-float2 5s ease-in-out infinite;animation-delay:.8s;display:flex;flex-direction:column}
 @keyframes phone-float2{0%,100%{transform:translateX(-20px) rotate(5deg)}50%{transform:translateX(-20px) rotate(5deg) translateY(-8px)}}
-.sm-notch{width:40px;height:10px;background:#0a0500;border-radius:0 0 6px 6px;margin:0 auto}
-.sm-screen{display:flex;flex-direction:column;align-items:center;padding:.75rem .5rem;text-align:center;gap:.4rem}
+.sm-notch{width:40px;height:10px;background:#0a0500;border-radius:0 0 6px 6px;margin:0 auto;flex-shrink:0}
+.sm-screen{display:flex;flex-direction:column;align-items:center;padding:.75rem .5rem;text-align:center;gap:.4rem;flex:1;justify-content:center}
 .sm-logo{width:75px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(400%) hue-rotate(3deg) brightness(115%)}
 .sm-hr{height:1px;width:50px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sm-title{font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#fff}
@@ -284,7 +582,7 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:900px){.demo-inner{grid-template-columns:1fr}.demo-phones{display:none}}
 
 /* ══════════════════════════════════════════════════════
-   FEATURES GRID
+   FEATURES
 ══════════════════════════════════════════════════════ */
 #features{padding:clamp(4rem,9vw,7rem) 1.5rem;background:var(--cream)}
 .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
@@ -299,7 +597,7 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:480px){.feat-grid{grid-template-columns:1fr 1fr;gap:.75rem}.feat-card{padding:1.1rem 1rem}}
 
 /* ══════════════════════════════════════════════════════
-   PROCESS (3 steps)
+   PROCESS
 ══════════════════════════════════════════════════════ */
 #process{padding:clamp(4rem,9vw,7rem) 1.5rem;background:var(--cream2)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;position:relative}
@@ -337,9 +635,9 @@ button{font-family:inherit;cursor:pointer}
 .faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.15rem 1.5rem;background:none;border:none;text-align:left;font-size:.9rem;font-weight:500;color:var(--dark);gap:1rem;font-family:'Jost',sans-serif}
 .faq-ic{width:24px;height:24px;border-radius:99px;background:var(--gold-dim);border:1px solid rgba(201,169,110,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.85rem;flex-shrink:0;transition:transform .3s,background .25s}
 .faq-item.open .faq-ic{transform:rotate(45deg);background:var(--gold);color:var(--dark)}
-.faq-body{max-height:0;overflow:hidden;transition:max-height .38s ease,opacity .3s}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .38s ease}
 .faq-item.open .faq-body{max-height:300px}
-.faq-ans{padding:0 1.5rem 1.2rem;font-size:.85rem;color:var(--muted);line-height:1.78;border-top:1px solid rgba(201,169,110,.1);padding-top:.8rem}
+.faq-ans{padding:.8rem 1.5rem 1.2rem;font-size:.85rem;color:var(--muted);line-height:1.78;border-top:1px solid rgba(201,169,110,.1)}
 
 /* ══════════════════════════════════════════════════════
    NOSOTROS
@@ -377,15 +675,6 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 .float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:900;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,.5);text-decoration:none;transition:transform .25s;animation:wa-pulse 2.5s ease-out infinite}
 .float-wa:hover{transform:scale(1.12)}
 @keyframes wa-pulse{0%{box-shadow:0 4px 20px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 4px 20px rgba(0,0,0,.3),0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 4px 20px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,0)}}
-
-/* ══════════════════════════════════════════════════════
-   COUNTDOWN (hero live)
-══════════════════════════════════════════════════════ */
-.cd-live{display:inline-flex;gap:.35rem;align-items:center;justify-content:center;margin-bottom:2rem}
-.cdl-unit{display:flex;flex-direction:column;align-items:center;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.2);border-radius:.5rem;padding:.35rem .5rem;min-width:44px}
-.cdl-n{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--gold);line-height:1}
-.cdl-l{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.5);margin-top:.15rem}
-.cdl-sep{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:rgba(201,169,110,.4);margin-bottom:.8rem}
 </style>
 </head>
 <body>
@@ -421,46 +710,155 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
   </nav>
 </header>
 
-<!-- ══════ HERO ══════ -->
 <main>
-<section id="hero" aria-label="Gueka Ideas – Invitaciones Digitales de Lujo">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-ov" aria-hidden="true"></div>
-  <div class="hero-radial" aria-hidden="true"></div>
-  <div class="hero-lines" aria-hidden="true"></div>
-  <!-- decorative orbs -->
-  <div class="orb" style="width:200px;height:200px;top:10%;left:5%;--d:9s;--tx:20px;--ty:-25px;opacity:.5" aria-hidden="true"></div>
-  <div class="orb" style="width:140px;height:140px;top:60%;right:8%;--d:7s;--tx:-15px;--ty:20px;opacity:.4" aria-hidden="true"></div>
-  <div class="orb" style="width:80px;height:80px;bottom:20%;left:15%;--d:11s;--tx:10px;--ty:-10px;opacity:.3" aria-hidden="true"></div>
 
-  <div class="hero-body reveal">
-    <div class="hero-logo-wrap">
-      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" width="360" height="120"/>
+<!-- ══════════════════════════════════════════════════════
+     HERO — VIDEO BG + 2 COLS + PHONE MOCKUP
+══════════════════════════════════════════════════════ -->
+<section id="hero" aria-label="Gueka Ideas – Invitaciones Digitales de Lujo">
+
+  <!-- Video background (persona abriendo invitación en smartphone) -->
+  <video
+    class="hero-video"
+    autoplay muted loop playsinline
+    preload="none"
+    poster="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=2000&q=80"
+    aria-hidden="true">
+    <source src="https://videos.pexels.com/video-files/7706476/7706476-hd_1920_1080_30fps.mp4" type="video/mp4"/>
+    <source src="https://videos.pexels.com/video-files/6621461/6621461-hd_1920_1080_25fps.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-video-fallback" aria-hidden="true"></div>
+
+  <!-- Overlays -->
+  <div class="hero-ov"       aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-radial"   aria-hidden="true"></div>
+  <div class="hero-lines"    aria-hidden="true"></div>
+  <div class="orb" style="width:220px;height:220px;top:8%;left:3%;--d:9s;--tx:18px;--ty:-20px;opacity:.45" aria-hidden="true"></div>
+  <div class="orb" style="width:130px;height:130px;top:65%;right:6%;--d:7s;--tx:-12px;--ty:18px;opacity:.35" aria-hidden="true"></div>
+
+  <!-- Body -->
+  <div class="hero-body">
+
+    <!-- LEFT: copy -->
+    <div class="hero-left reveal">
+
+      <div class="hero-logo-wrap">
+        <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="280" height="110"/>
+      </div>
+
+      <div class="hero-live-badge reveal d1">
+        <span class="live-dot"></span>
+        Demo interactivo en vivo
+      </div>
+
+      <p class="eyebrow hero-eyebrow reveal d1">Invitaciones Digitales · Colombia</p>
+      <div class="orn hero-orn reveal d1">
+        <div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div>
+      </div>
+
+      <h1 class="hero-title reveal d2">
+        Invitar nunca<br>fue tan <em>especial</em>
+      </h1>
+
+      <p class="hero-sub reveal d3">
+        Invitaciones digitales interactivas para tu gran celebración. Diseño exclusivo, RSVP online, cuenta regresiva animada y link para compartir sin límites — todo desde un smartphone.
+      </p>
+
+      <div class="cd-live reveal d3" id="cd-hero" aria-label="Ejemplo de cuenta regresiva"></div>
+
+      <div class="hero-ctas reveal d4">
+        <a href="#showcase" class="btn-g">🗂 Ver Categorías</a>
+        <a href="demo.html"  class="btn-o">👁 Ver Demo →</a>
+      </div>
+
+      <div class="hero-stats reveal d5" aria-label="Estadísticas de Gueka Ideas">
+        <div><div class="stat-n">+15</div><div class="stat-l">Años de experiencia</div></div>
+        <div><div class="stat-n">+500</div><div class="stat-l">Familias felices</div></div>
+        <div><div class="stat-n">4.9 ★</div><div class="stat-l">Calificación promedio</div></div>
+        <div><div class="stat-n">24hs</div><div class="stat-l">Tiempo de entrega</div></div>
+      </div>
     </div>
-    <p class="eyebrow d1 reveal" style="margin-bottom:.5rem">Invitaciones Digitales · Colombia</p>
-    <div class="orn d1 reveal" style="justify-content:center">
-      <div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div>
-    </div>
-    <h1 class="hero-title d2 reveal">
-      Invitar nunca<br>fue tan <em>especial</em>
-    </h1>
-    <p class="hero-sub d3 reveal">
-      Invitaciones digitales interactivas para tu gran celebración. Diseño exclusivo, RSVP online, cuenta regresiva animada y enlace para compartir sin límites.
-    </p>
-    <!-- live countdown demo -->
-    <div class="cd-live d4 reveal" id="cd-hero" aria-label="Próximo evento de ejemplo"></div>
-    <div class="hero-ctas d4 reveal">
-      <a href="#showcase" class="btn-g">🗂 Ver Categorías</a>
-      <a href="demo.html" class="btn-o">👁 Ver Demo en vivo →</a>
-    </div>
-    <div class="hero-stats d5 reveal" aria-label="Estadísticas de Gueka Ideas">
-      <div><div class="stat-n">+15</div><div class="stat-l">Años de experiencia</div></div>
-      <div><div class="stat-n">+500</div><div class="stat-l">Familias felices</div></div>
-      <div><div class="stat-n">4.9 ★</div><div class="stat-l">Calificación promedio</div></div>
-      <div><div class="stat-n">24hs</div><div class="stat-l">Tiempo de entrega</div></div>
+
+    <!-- RIGHT: big phone mockup -->
+    <div class="hero-right reveal-r d2">
+      <div class="phone-glow" aria-hidden="true"></div>
+
+      <!-- Notificación flotante WA -->
+      <div class="hp-notif-card" aria-hidden="true">
+        <div class="notif-header">
+          <div class="notif-ico">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a7 7 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
+          </div>
+          <span class="notif-app">WhatsApp</span>
+          <span class="notif-time">ahora</span>
+        </div>
+        <div class="notif-title">🎉 ¡Tu invitación está lista!</div>
+        <div class="notif-msg">Hola Valentina, tu invitación digital ya está publicada.</div>
+        <div class="notif-badge">✦ Ver invitación →</div>
+      </div>
+
+      <!-- Teléfono principal -->
+      <div class="hero-phone" role="img" aria-label="Vista previa de invitación digital en smartphone">
+        <div class="hp-notch"></div>
+        <div class="hp-screen">
+
+          <!-- Browser bar -->
+          <div class="hp-bar">
+            <div class="hp-bar-dots">
+              <div class="hp-dot"></div>
+              <div class="hp-dot"></div>
+              <div class="hp-dot"></div>
+            </div>
+            <span class="hp-bar-url">guekaideas.com/val-diego</span>
+          </div>
+
+          <!-- Cover photo -->
+          <div class="hp-cover">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy" width="220" height="100"/>
+            <div class="hp-cover-ov"></div>
+            <div class="hp-cover-text">
+              <div class="hp-cover-title">Valentina<br>&amp; <em>Diego</em></div>
+            </div>
+          </div>
+
+          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="hp-logo"/>
+          <div class="hp-hr"></div>
+          <div class="hp-date">15 · Marzo · 2025 · Cali</div>
+
+          <div class="hp-cd">
+            <div class="hp-cd-label">Cuenta regresiva</div>
+            <div class="hp-cd-row" id="cd-phone"></div>
+          </div>
+
+          <button class="hp-btn" tabindex="-1" aria-hidden="true">✓ Confirmar Asistencia</button>
+
+          <div class="hp-chips">
+            <div class="hp-chip">📍 Maps</div>
+            <div class="hp-chip">📅 Agenda</div>
+            <div class="hp-chip">🎵 Música</div>
+            <div class="hp-chip">📸 Fotos</div>
+          </div>
+        </div>
+        <div class="hp-footer">guekaideas.com/<strong>valentina-diego</strong></div>
+      </div>
+
+      <!-- RSVP badge flotante -->
+      <div class="hp-rsvp-badge" aria-hidden="true">
+        <div class="rsvp-row">
+          <div class="rsvp-dot"></div>
+          <span class="rsvp-label">RSVP en vivo</span>
+        </div>
+        <div class="rsvp-sub">Confirmaciones recibidas</div>
+        <div class="rsvp-count" id="rsvp-count">120 <span class="rsvp-of">/ 200</span></div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll" aria-hidden="true"><div class="scroll-arrow"></div>Explorar</div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-arr"></div>
+    Explorar
+  </div>
 </section>
 
 <!-- ══════ MARQUEE ══════ -->
@@ -468,9 +866,8 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
   <div class="marquee-track" id="mq"></div>
 </div>
 
-<!-- ══════ SHOWCASE (phone cards) ══════ -->
+<!-- ══════ SHOWCASE ══════ -->
 <section id="showcase" aria-labelledby="showcase-title">
-  <div style="padding:clamp(4rem,9vw,7rem) 1.5rem;background:var(--cream2)">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow reveal">Catálogo de Invitaciones</p>
@@ -480,14 +877,12 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
     </div>
     <div class="showcase-grid" id="showcase-grid" role="list" aria-label="Categorías de invitaciones"></div>
   </div>
-  </div>
 </section>
 
 <!-- ══════ DEMO SECTION ══════ -->
 <section id="demo-section" aria-labelledby="demo-title">
   <div class="demo-grid-bg" aria-hidden="true"></div>
   <div class="wrap demo-inner">
-    <!-- phones -->
     <div class="demo-phones" aria-hidden="true">
       <div class="sm-phone">
         <div class="sm-notch"></div>
@@ -507,9 +902,9 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
           <div class="big-date">15 · Marzo · 2025</div>
           <div class="big-cd">
             <div class="big-cd-label">Cuenta regresiva</div>
-            <div class="big-cd-nums" id="cd-phone"></div>
+            <div class="big-cd-nums" id="cd-phone2"></div>
           </div>
-          <button class="big-btn">Confirmar Asistencia</button>
+          <button class="big-btn" tabindex="-1">Confirmar Asistencia</button>
           <div class="big-chips">
             <div class="big-chip">📍 Maps</div>
             <div class="big-chip">📅 Agenda</div>
@@ -519,7 +914,6 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
         <div class="big-footer">guekaideas.com/<strong>valentina-diego</strong></div>
       </div>
     </div>
-    <!-- copy -->
     <div class="demo-copy">
       <p class="eyebrow reveal" style="margin-bottom:.5rem">Digital e Interactivo</p>
       <h2 id="demo-title" class="demo-title reveal d1">Una invitación que tus invitados <em>van a adorar</em></h2>
@@ -558,7 +952,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 
 <!-- ══════ PROCESS ══════ -->
 <section id="process" aria-labelledby="proc-title">
-  <div class="wrap" style="padding:clamp(4rem,9vw,7rem) 1.5rem">
+  <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow reveal">Proceso</p>
       <h2 id="proc-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Tu invitación en <em>3 pasos</em></h2>
@@ -569,12 +963,12 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
       <div class="step reveal d1" role="listitem">
         <div class="step-ico"><div class="step-n">1</div></div>
         <h3 class="step-t">Elige tu categoría</h3>
-        <p class="step-d">Explora nuestro catálogo de categorías — boda, quinces, bautizo, empresarial y más — y elige el diseño que te enamore.</p>
+        <p class="step-d">Explora nuestro catálogo — boda, quinces, bautizo, empresarial y más — y elige el diseño que te enamore.</p>
       </div>
       <div class="step reveal d2" role="listitem">
         <div class="step-ico"><div class="step-n">2</div></div>
         <h3 class="step-t">Escoge tu plan</h3>
-        <p class="step-d">Selecciona entre Classic, Premium o Deluxe según las funciones que necesitas. Contáctanos por WhatsApp con tu pedido.</p>
+        <p class="step-d">Selecciona entre Classic, Premium o Deluxe según las funciones que necesitas y contáctanos por WhatsApp.</p>
       </div>
       <div class="step reveal d3" role="listitem">
         <div class="step-ico"><div class="step-n">3</div></div>
@@ -594,7 +988,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 
 <!-- ══════ TESTIMONIALS ══════ -->
 <section id="testimonios" aria-labelledby="test-title">
-  <div class="wrap" style="padding:clamp(4rem,9vw,7rem) 1.5rem">
+  <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow reveal">Testimonios</p>
       <h2 id="test-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem);color:#fff">Lo que dicen nuestros <em>clientes</em></h2>
@@ -607,7 +1001,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 
 <!-- ══════ FAQ ══════ -->
 <section id="faq" aria-labelledby="faq-title">
-  <div class="wrap" style="padding:clamp(4rem,9vw,7rem) 1.5rem">
+  <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow reveal">Preguntas frecuentes</p>
       <h2 id="faq-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Todo lo que <em>necesitas saber</em></h2>
@@ -619,7 +1013,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 
 <!-- ══════ NOSOTROS ══════ -->
 <section id="nosotros" aria-labelledby="nos-title">
-  <div class="wrap" style="padding:clamp(4rem,9vw,6rem) 1.5rem;text-align:center">
+  <div class="wrap" style="text-align:center">
     <div class="sec-head">
       <p class="eyebrow reveal">Quiénes Somos</p>
       <h2 id="nos-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Gueka <em>Ideas</em></h2>
@@ -637,7 +1031,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
   <div class="cta-inner">
     <p class="eyebrow reveal" style="margin-bottom:.5rem">¿Lista para brillar?</p>
     <h2 class="cta-t reveal d1">Cuéntanos tu <em>historia</em></h2>
-    <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+    <div class="orn reveal d1" style="justify-content:center"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
     <p class="cta-sub reveal d2">Escríbenos por WhatsApp y te asesoramos sin compromiso. Respuesta inmediata.</p>
     <div class="cta-btns reveal d3">
       <a href="#showcase" class="btn-g">🗂 Ver Categorías</a>
@@ -648,6 +1042,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
     </div>
   </div>
 </section>
+
 </main>
 
 <!-- ══════ FOOTER ══════ -->
@@ -671,46 +1066,45 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
    DATA
 ══════════════════════════════════════════════════════ */
 const LOGO = 'https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44';
-const WA   = 'https://wa.me/573242712162';
 
 const CATS = [
-  { slug:'boda',         label:'Matrimonio',  sub:'La celebración más especial de tu vida',    img:'https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:12, names:'Valentina & Diego', date:'15 · Mar · 2025', badge:'Más popular', isNew:false },
-  { slug:'quince',       label:'15 Años',     sub:'Un momento único e irrepetible para ella',   img:'https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:10, names:'Sofía López', date:'8 · Jun · 2025', badge:'Quinceañera', isNew:false },
-  { slug:'bautizo',      label:'Bautizo',     sub:'Bienvenida al mundo espiritual con amor',    img:'https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:8,  names:'Santiago', date:'20 · Abr · 2025', badge:'Sagrado', isNew:false },
-  { slug:'comunion',     label:'Comunión',    sub:'Un paso de fe que recordarás siempre',       img:'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:7,  names:'Isabella', date:'5 · May · 2025', badge:'Fe', isNew:false },
-  { slug:'empresariales',label:'Empresarial', sub:'Eventos corporativos con elegancia y clase', img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:9,  names:'Corp Event 2025', date:'10 · Oct · 2025', badge:'Corporativo', isNew:false },
-  { slug:'cumpleanos',   label:'Cumpleaños',  sub:'Celebra cada año con estilo y personalidad', img:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:11, names:'María Fernanda', date:'3 · Ago · 2025', badge:'Fiesta', isNew:false },
-  { slug:'graduacion',   label:'Graduación',  sub:'El comienzo de un brillante nuevo camino',   img:'https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:8,  names:'Juan Camilo', date:'1 · Nov · 2025', badge:'Logro', isNew:true  },
-  { slug:'infantil',     label:'Infantiles',  sub:'Magia, colores y alegría para los pequeños', img:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80', models:12, names:'Emilio 4 años', date:'15 · Jul · 2025', badge:'Magia', isNew:true  },
+  { slug:'boda',          label:'Matrimonio',   sub:'La celebración más especial de tu vida',     img:'https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:12, names:'Valentina & Diego', date:'15 · Mar · 2025', badge:'Más popular', isNew:false },
+  { slug:'quince',        label:'15 Años',      sub:'Un momento único e irrepetible para ella',    img:'https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:10, names:'Sofía López',       date:'8 · Jun · 2025',  badge:'Quinceañera', isNew:false },
+  { slug:'bautizo',       label:'Bautizo',      sub:'Bienvenida al mundo espiritual con amor',     img:'https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:8,  names:'Santiago',          date:'20 · Abr · 2025', badge:'Sagrado',     isNew:false },
+  { slug:'comunion',      label:'Comunión',     sub:'Un paso de fe que recordarás siempre',        img:'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:7,  names:'Isabella',          date:'5 · May · 2025',  badge:'Fe',          isNew:false },
+  { slug:'empresariales', label:'Empresarial',  sub:'Eventos corporativos con elegancia y clase',  img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:9,  names:'Corp Event 2025',   date:'10 · Oct · 2025', badge:'Corporativo', isNew:false },
+  { slug:'cumpleanos',    label:'Cumpleaños',   sub:'Celebra cada año con estilo y personalidad',  img:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:11, names:'María Fernanda',    date:'3 · Ago · 2025',  badge:'Fiesta',      isNew:false },
+  { slug:'graduacion',    label:'Graduación',   sub:'El comienzo de un brillante nuevo camino',    img:'https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:8,  names:'Juan Camilo',       date:'1 · Nov · 2025',  badge:'Logro',       isNew:true  },
+  { slug:'infantil',      label:'Infantiles',   sub:'Magia, colores y alegría para los pequeños',  img:'https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:12, names:'Emilio 4 años',     date:'15 · Jul · 2025', badge:'Magia',       isNew:true  },
 ];
 
 const FEATS = [
-  { ico:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',                                   t:'RSVP Online',          d:'Confirmación de asistencia al instante desde cualquier dispositivo.' },
-  { ico:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',t:'Maps Integrado',       d:'Indicaciones paso a paso con Google Maps incluido en la invitación.' },
-  { ico:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',t:'Agenda Digital',d:'Añadir al calendario con un toque — Google Calendar y Apple Calendar.' },
-  { ico:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',                    t:'Cuenta Regresiva',     d:'Contador animado que muestra los días, horas y minutos para el evento.' },
-  { ico:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>', t:'Música de Fondo',      d:'Reproduce automáticamente la canción favorita de los protagonistas.' },
-  { ico:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',t:'Panel Invitados',d:'Gestiona las confirmaciones en tiempo real con panel privado online.' },
-  { ico:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',t:'Galería Fotos',d:'Álbum digital con hasta 12 fotos personales del evento y la pareja.' },
-  { ico:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',               t:'Personalizado',        d:'Cada invitado recibe un mensaje con su nombre y número de pases.' },
+  { ico:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',                                                                                                                                                               t:'RSVP Online',      d:'Confirmación de asistencia al instante desde cualquier dispositivo.' },
+  { ico:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',                                                                                                                          t:'Maps Integrado',   d:'Indicaciones paso a paso con Google Maps incluido en la invitación.' },
+  { ico:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',                                                   t:'Agenda Digital',   d:'Añadir al calendario con un toque — Google Calendar y Apple Calendar.' },
+  { ico:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',                                                                                                                                               t:'Cuenta Regresiva', d:'Contador animado que muestra días, horas y minutos para el evento.' },
+  { ico:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',                                                                                                                            t:'Música de Fondo',  d:'Reproduce automáticamente la canción favorita de los protagonistas.' },
+  { ico:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',                                                     t:'Panel Invitados',  d:'Gestiona las confirmaciones en tiempo real con panel privado online.' },
+  { ico:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',                                                                                           t:'Galería Fotos',    d:'Álbum digital con hasta 12 fotos personales del evento y la pareja.' },
+  { ico:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',                                                                                                                                         t:'Personalizado',    d:'Cada invitado recibe un mensaje con su nombre y número de pases.' },
 ];
 
 const TESTS = [
-  { init:'L', name:'Liliana A.',   loc:'Argentina', stars:5, q:'"Excelente, novedosa, nos encantó! La tarjeta divina, súper original y completa. La atención excelente, muy atentos. Super recomendables."' },
-  { init:'D', name:'Daniela Y.',   loc:'Argentina', stars:5, q:'"Quiero agradecer por acompañarnos de manera incondicional, estuvieron pendientes de cada detalle. Sin dudas, para recomendar."' },
-  { init:'D', name:'Diego',        loc:'Uruguay',   stars:5, q:'"La invitación quedó pronta en el día! Todo excelente! Casi todos los invitados hicieron comentarios de lo buena que quedó."' },
-  { init:'Y', name:'Yanina B.',    loc:'Argentina', stars:5, q:'"Súper rápido, en menos de 24hs ya las teníamos! Hermosas! Súper recomendable para cualquier tipo de evento."' },
-  { init:'Y', name:'Ysabel C.',    loc:'Argentina', stars:5, q:'"Un trabajo muy bien hecho, responden rápido. La atención al cliente 10/10. Todos mis invitados están encantados con el resultado."' },
-  { init:'L', name:'Liseth G.',    loc:'España',    stars:5, q:'"Con tan buen gusto y sin perder detalles llevó a cabo mi sueño de la tarjeta más linda, con el fondo musical que elegí. Estoy super contenta."' },
+  { init:'L', name:'Liliana A.',  loc:'Argentina', stars:5, q:'"Excelente, novedosa, nos encantó! La tarjeta divina, súper original y completa. La atención excelente, muy atentos. Super recomendables."' },
+  { init:'D', name:'Daniela Y.',  loc:'Argentina', stars:5, q:'"Quiero agradecer por acompañarnos de manera incondicional, estuvieron pendientes de cada detalle. Sin dudas, para recomendar."' },
+  { init:'D', name:'Diego',       loc:'Uruguay',   stars:5, q:'"La invitación quedó pronta en el día! Todo excelente! Casi todos los invitados hicieron comentarios de lo buena que quedó."' },
+  { init:'Y', name:'Yanina B.',   loc:'Argentina', stars:5, q:'"Súper rápido, en menos de 24hs ya las teníamos! Hermosas! Súper recomendable para cualquier tipo de evento."' },
+  { init:'Y', name:'Ysabel C.',   loc:'Argentina', stars:5, q:'"Un trabajo muy bien hecho, responden rápido. La atención al cliente 10/10. Todos mis invitados están encantados con el resultado."' },
+  { init:'L', name:'Liseth G.',   loc:'España',    stars:5, q:'"Con tan buen gusto y sin perder detalles llevó a cabo mi sueño de la tarjeta más linda, con el fondo musical que elegí. Estoy super contenta."' },
 ];
 
 const FAQS = [
-  { q:'¿Cómo contrato mi invitación?',              a:'Muy fácil: 1) Elige la categoría de tu evento. 2) Explora los 12 diseños disponibles. 3) Escoge el plan (Classic / Premium / Deluxe). 4) Contáctanos por WhatsApp y en 24hs tienes tu invitación lista.' },
-  { q:'¿Los precios son por cantidad de invitados?', a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, ¡sin límites ni costos adicionales!' },
-  { q:'¿En cuánto tiempo está lista?',              a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños completamente a medida pueden tardar de 7 a 10 días laborales.' },
-  { q:'¿Cuánto tiempo estará activo el link?',      a:'El link estará activo desde que esté lista la invitación y durante al menos 3 meses después de la fecha del evento.' },
-  { q:'¿Se pueden personalizar más?',               a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También diseñamos modelos completamente a medida.' },
-  { q:'¿Qué diferencia hay entre los planes?',      a:'Classic incluye las funciones esenciales (RSVP, Maps, galería básica). Premium añade música, historia, Save The Date gratis y más. Deluxe incluye todo con álbum completo, mesa asignada, Spotify y más.' },
+  { q:'¿Cómo contrato mi invitación?',               a:'Muy fácil: 1) Elige la categoría de tu evento. 2) Explora los diseños disponibles. 3) Escoge el plan (Classic / Premium / Deluxe). 4) Contáctanos por WhatsApp y en 24hs tienes tu invitación lista.' },
+  { q:'¿Los precios son por cantidad de invitados?',  a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, ¡sin límites ni costos adicionales!' },
+  { q:'¿En cuánto tiempo está lista?',               a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños completamente a medida pueden tardar de 7 a 10 días laborales.' },
+  { q:'¿Cuánto tiempo estará activo el link?',       a:'El link estará activo desde que esté lista la invitación y durante al menos 3 meses después de la fecha del evento.' },
+  { q:'¿Se pueden personalizar más?',                a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También diseñamos modelos completamente a medida.' },
+  { q:'¿Qué diferencia hay entre los planes?',       a:'Classic incluye las funciones esenciales (RSVP, Maps, galería). Premium añade música, historia, Save The Date gratis y más. Deluxe incluye todo con álbum completo, mesa asignada, Spotify y sección adicional libre.' },
 ];
 
 const MARQUEE_ITEMS = ['Invitaciones Digitales','Boda','Quinceañero','Bautizo','Comunión','Graduación','Cumpleaños','Infantil','Empresarial','RSVP Online','Colombia','Diseño Exclusivo'];
@@ -722,11 +1116,11 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* Navbar scroll */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, {passive:true});
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive:true });
 
 /* Hamburger */
-const burger = document.getElementById('hamburger');
-const mobMenu = document.getElementById('mob-menu');
+const burger   = document.getElementById('hamburger');
+const mobMenu  = document.getElementById('mob-menu');
 burger.addEventListener('click', () => {
   const open = mobMenu.classList.toggle('open');
   burger.textContent = open ? '✕' : '☰';
@@ -737,7 +1131,7 @@ function closeMob() { mobMenu.classList.remove('open'); burger.textContent = '�
 /* Scroll reveal */
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
-}, { threshold: 0.1 });
+}, { threshold:0.1 });
 function watchAll() { document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-s').forEach(el => ro.observe(el)); }
 watchAll();
 
@@ -746,16 +1140,16 @@ watchAll();
 ══════════════════════════════════════════════════════ */
 const mq = document.getElementById('mq');
 const mqHtml = MARQUEE_ITEMS.map(i => `<span class="marquee-item">${i}<span class="marquee-sep">✦</span></span>`).join('');
-mq.innerHTML = mqHtml + mqHtml; // duplicate for seamless loop
+mq.innerHTML = mqHtml + mqHtml;
 
 /* ══════════════════════════════════════════════════════
-   SHOWCASE GRID (phone cards)
+   SHOWCASE GRID
 ══════════════════════════════════════════════════════ */
 const grid = document.getElementById('showcase-grid');
 CATS.forEach((c, i) => {
   const card = document.createElement('a');
   card.href = `${c.slug}.html`;
-  card.className = `phone-card reveal d${(i % 4)+1}`;
+  card.className = `phone-card reveal d${(i % 4) + 1}`;
   card.setAttribute('role','listitem');
   card.setAttribute('aria-label', `Categoría: ${c.label} — ${c.models} diseños`);
   card.innerHTML = `
@@ -765,7 +1159,6 @@ CATS.forEach((c, i) => {
     </div>
     <div class="pc-badge" aria-hidden="true">${c.badge}</div>
     ${c.isNew ? '<div class="pc-new" aria-hidden="true">Nuevo</div>' : ''}
-    <!-- inline phone mockup -->
     <div class="pc-phone" aria-hidden="true">
       <div class="pcph-notch"></div>
       <div class="pcph-screen">
@@ -793,12 +1186,10 @@ watchAll();
    FEATURES
 ══════════════════════════════════════════════════════ */
 const fg = document.getElementById('feat-grid');
-FEATS.forEach((f,i) => {
+FEATS.forEach((f, i) => {
   fg.innerHTML += `
-    <div class="feat-card reveal d${(i%4)+1}" role="listitem">
-      <div class="feat-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24">${f.ico}</svg>
-      </div>
+    <div class="feat-card reveal d${(i % 4) + 1}" role="listitem">
+      <div class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24">${f.ico}</svg></div>
       <div class="feat-t">${f.t}</div>
       <p class="feat-d">${f.d}</p>
     </div>`;
@@ -809,9 +1200,9 @@ watchAll();
    TESTIMONIALS
 ══════════════════════════════════════════════════════ */
 const tg = document.getElementById('test-grid');
-TESTS.forEach((t,i) => {
+TESTS.forEach((t, i) => {
   tg.innerHTML += `
-    <article class="tcard reveal d${(i%3)+1}" role="listitem" aria-label="Testimonio de ${t.name}">
+    <article class="tcard reveal d${(i % 3) + 1}" role="listitem" aria-label="Testimonio de ${t.name}">
       <div class="t-stars" aria-label="${t.stars} estrellas">${'★'.repeat(t.stars)}</div>
       <blockquote class="t-quote">${t.q}</blockquote>
       <div class="t-foot">
@@ -826,9 +1217,9 @@ watchAll();
    FAQ
 ══════════════════════════════════════════════════════ */
 const fl = document.getElementById('faq-list');
-FAQS.forEach((f,i) => {
+FAQS.forEach((f, i) => {
   fl.innerHTML += `
-    <div class="faq-item reveal d${Math.min(i+1,4)}" id="fi-${i}">
+    <div class="faq-item reveal d${Math.min(i + 1, 4)}" id="fi-${i}">
       <button class="faq-btn" data-i="${i}" aria-expanded="false" aria-controls="fa-${i}">
         <span>${f.q}</span>
         <div class="faq-ic" aria-hidden="true">+</div>
@@ -849,11 +1240,10 @@ fl.addEventListener('click', e => {
 watchAll();
 
 /* ══════════════════════════════════════════════════════
-   COUNTDOWN HELPERS
+   COUNTDOWN
 ══════════════════════════════════════════════════════ */
 function getCD(targetDate) {
-  const now  = Date.now();
-  const diff = Math.max(0, new Date(targetDate) - now);
+  const diff = Math.max(0, new Date(targetDate) - Date.now());
   return {
     d: Math.floor(diff / 86400000),
     h: Math.floor((diff % 86400000) / 3600000),
@@ -863,11 +1253,11 @@ function getCD(targetDate) {
 }
 function pad(n) { return String(n).padStart(2,'0'); }
 
-/* hero countdown */
+/* Hero countdown */
 function renderHeroCD() {
-  const cd = getCD('2025-12-20T20:00:00');
   const el = document.getElementById('cd-hero');
   if (!el) return;
+  const cd = getCD('2025-12-20T20:00:00');
   el.innerHTML = `
     <div class="cdl-unit"><span class="cdl-n">${pad(cd.d)}</span><span class="cdl-l">Días</span></div>
     <span class="cdl-sep">:</span>
@@ -878,18 +1268,41 @@ function renderHeroCD() {
     <div class="cdl-unit"><span class="cdl-n">${pad(cd.s)}</span><span class="cdl-l">Seg</span></div>`;
 }
 
-/* phone countdown */
+/* Phone countdown (hero) */
 function renderPhoneCD() {
-  const cd = getCD('2025-03-15T20:00:00');
   const el = document.getElementById('cd-phone');
   if (!el) return;
+  const cd = getCD('2025-03-15T20:00:00');
+  const u = (n,l) => `<div class="hp-cdu"><div class="hp-cdn">${pad(n)}</div><div class="hp-cdl">${l}</div></div>`;
+  el.innerHTML = u(cd.d,'d') + u(cd.h,'h') + u(cd.m,'m') + u(cd.s,'s');
+}
+
+/* Phone countdown (demo section) */
+function renderPhoneCD2() {
+  const el = document.getElementById('cd-phone2');
+  if (!el) return;
+  const cd = getCD('2025-03-15T20:00:00');
   const u = (n,l) => `<div class="cd-unit"><div class="cd-n">${pad(n)}</div><div class="cd-l">${l}</div></div>`;
   el.innerHTML = u(cd.d,'d') + u(cd.h,'h') + u(cd.m,'m') + u(cd.s,'s');
 }
 
 renderHeroCD();
 renderPhoneCD();
-setInterval(() => { renderHeroCD(); renderPhoneCD(); }, 1000);
+renderPhoneCD2();
+setInterval(() => { renderHeroCD(); renderPhoneCD(); renderPhoneCD2(); }, 1000);
+
+/* ══════════════════════════════════════════════════════
+   RSVP COUNTER ANIMATION (120 → 148)
+══════════════════════════════════════════════════════ */
+let rsvpCount = 120;
+const rsvpEl = document.getElementById('rsvp-count');
+if (rsvpEl) {
+  const rsvpInterval = setInterval(() => {
+    if (rsvpCount >= 148) { clearInterval(rsvpInterval); return; }
+    rsvpCount++;
+    rsvpEl.innerHTML = `${rsvpCount} <span class="rsvp-of">/ 200</span>`;
+  }, 80);
+}
 </script>
 </body>
 </html>
