@@ -1339,11 +1339,15 @@ function renderHeroCD() {
     <div class="cdl-unit"><span class="cdl-n">${pad(cd.s)}</span><span class="cdl-l">Seg</span></div>`;
 }
 
-/* Phone countdown (hero — sección 2) */
+/* Phone countdown (hero — sección 2) — ciclo de 3 días siempre activo */
 function renderPhoneCD() {
   const el = document.getElementById('cd-phone');
   if (!el) return;
-  const cd = getCD('2025-12-20T20:00:00');
+  // Calcula el próximo múltiplo de 3 días desde epoch — siempre hay entre 0 y 3 días
+  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+  const now  = Date.now();
+  const next = Math.ceil(now / THREE_DAYS_MS) * THREE_DAYS_MS;
+  const cd   = getCD(new Date(next));
   const u = (n,l) => `<div class="hps-cdu"><div class="hps-cdn">${pad(n)}</div><div class="hps-cdl">${l}</div></div>`;
   const sep = '<span class="hps-cd-sep">:</span>';
   el.innerHTML = u(cd.d,'días') + sep + u(cd.h,'hrs') + sep + u(cd.m,'min') + sep + u(cd.s,'seg');
