@@ -8,469 +8,656 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Jost', sans-serif; background: #f7f2ec; color: #1a1208; overflow-x: hidden; }
+/* ═══════════════════════════════════════════ RESET & BASE */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: #f7f2ec; color: #1a1208;
+  overflow-x: hidden; min-height: 100dvh;
+}
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+a { text-decoration: none; }
 
-  /* ── HEADER ── */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(247,242,236,0.97);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(201,169,110,0.2);
-    padding: 0 2rem;
-  }
-  .nav-inner {
-    max-width: 1200px; margin: 0 auto;
-    height: clamp(64px,9vw,80px);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo img { height: clamp(48px,7vw,72px); }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a {
-    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
-    font-weight: 500; text-decoration: none; color: #7a6a58; transition: color .2s;
-  }
-  .nav-links a:hover { color: #c9a96e; }
-  .btn-gold {
-    display: inline-flex; align-items: center; gap: .4rem;
-    background: #c9a96e; color: #1a1208; border: none;
-    border-radius: 99px; padding: .55rem 1.3rem;
-    font-size: .7rem; font-weight: 600; letter-spacing: .06em;
-    text-transform: uppercase; text-decoration: none; cursor: pointer;
-    transition: opacity .2s;
-  }
-  .btn-gold:hover { opacity: .82; }
-  .hamburger {
-    display: none; background: none; border: none;
-    cursor: pointer; font-size: 1.4rem; color: #1a1208;
-  }
-  .mobile-menu {
-    display: none; flex-direction: column; gap: 1rem;
-    padding: .75rem 2rem 1.25rem;
-    background: #f7f2ec;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-    font-weight: 500; text-decoration: none; color: #1a1208;
-  }
-  @media (max-width: 768px) { .nav-links, .nav-cta { display: none !important; } .hamburger { display: block; } }
+/* ═══════════════════════════════════════════ TOKENS */
+:root {
+  --gold: #c9a96e;
+  --gold-light: rgba(201,169,110,.15);
+  --dark: #1a1208;
+  --darker: #0e0903;
+  --cream: #f7f2ec;
+  --muted: #7a6a58;
+  --white: #fff;
+  --radius: 1.1rem;
+  --shadow-sm: 0 4px 24px rgba(0,0,0,.08);
+  --shadow-md: 0 12px 40px rgba(0,0,0,.14);
+  --shadow-gold: 0 16px 48px rgba(201,169,110,.22);
+}
 
-  /* ── DIVIDER ── */
-  .divider { display: flex; align-items: center; justify-content: center; gap: .75rem; margin: .85rem 0; }
-  .divider-line { height: 1px; width: 48px; background: rgba(201,169,110,.45); }
-  .divider-star { color: #c9a96e; font-size: .52rem; }
+/* ═══════════════════════════════════════════ UTILITIES */
+.eyebrow {
+  font-size: .62rem; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(201,169,110,.72);
+}
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: .75rem; margin: .85rem 0;
+}
+.divider-line { height: 1px; width: 44px; background: rgba(201,169,110,.4); }
+.divider-star { color: var(--gold); font-size: .52rem; }
 
-  /* ── PLANS SECTION ── */
-  #planes { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
-  .section-header { text-align: center; margin-bottom: 3.5rem; }
-  .eyebrow { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.6rem); font-weight: 300; color: #1a1208; }
-  .section-title em { font-style: italic; }
-  .section-sub { font-size: .92rem; color: #7a6a58; max-width: 480px; margin: .5rem auto 0; line-height: 1.7; }
+/* ═══════════════════════════════════════════ BUTTONS */
+.btn-gold {
+  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+  background: var(--gold); color: var(--dark); border: none;
+  border-radius: 99px; padding: .62rem 1.4rem;
+  font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  white-space: nowrap;
+}
+.btn-gold:hover { opacity: .84; transform: translateY(-1px); }
+.btn-gold:active { transform: translateY(0); }
 
-  .plans-grid {
-    max-width: 1200px; margin: 0 auto;
+.btn-wa {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  background: #25D366; color: #fff; border: none; border-radius: 99px;
+  padding: 1rem 2rem; font-size: .86rem; font-weight: 600;
+  letter-spacing: .05em; text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37,211,102,.28);
+  transition: transform .2s, opacity .2s; width: 100%;
+}
+.btn-wa:hover { transform: translateY(-2px); opacity: .92; }
+
+/* ═══════════════════════════════════════════ HEADER */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(247,242,236,.97);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,169,110,.18);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.nav-logo img { height: clamp(44px,6vw,64px); }
+.nav-links {
+  display: flex; gap: 1.75rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 500; color: var(--muted); transition: color .2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.hamburger {
+  display: none; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 99px;
+  background: none; border: 1px solid rgba(201,169,110,.25);
+  cursor: pointer; color: var(--dark); font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.mobile-menu {
+  display: none; flex-direction: column;
+  padding: 1rem 1.5rem 1.25rem;
+  background: rgba(247,242,236,.99);
+  border-top: 1px solid rgba(201,169,110,.1);
+  gap: .1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: .75rem 0;
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: var(--dark);
+  border-bottom: 1px solid rgba(201,169,110,.1);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none !important; }
+  .hamburger { display: flex; }
+}
+
+/* ═══════════════════════════════════════════ SECTION WRAPPER */
+.section-header { text-align: center; margin-bottom: clamp(2rem,5vw,3.5rem); }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem,5vw,3.4rem);
+  font-weight: 300; color: var(--dark); line-height: 1.1;
+}
+.section-title em { font-style: italic; }
+.section-sub {
+  font-size: .92rem; color: var(--muted);
+  max-width: 460px; margin: .5rem auto 0; line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════ PLANES */
+#planes {
+  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
+  background: var(--cream);
+}
+
+/* Plan + Panel grid */
+.plans-outer { max-width: 1200px; margin: 0 auto; }
+
+.plans-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.order-panel-wrap {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 1080px) {
+  .plans-outer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 300px;
-    gap: 1.25rem;
+    grid-template-columns: 1fr 1fr 1fr 296px;
+    gap: 1.1rem;
     align-items: start;
   }
-  @media (max-width: 1100px) { .plans-grid { grid-template-columns: 1fr 1fr; } .order-panel { grid-column: 1 / -1; } }
-  @media (max-width: 600px)  { .plans-grid { grid-template-columns: 1fr; } }
+  .plans-row {
+    display: contents; /* flat children into the outer grid */
+  }
+  .order-panel-wrap {
+    margin-top: 0;
+  }
+}
 
-  /* ── PLAN CARD ── */
-  .plan-card {
-    border-radius: 1.1rem; overflow: hidden; background: #fff;
-    border: 2px solid rgba(201,169,110,.15);
-    box-shadow: 0 4px 24px rgba(0,0,0,.08);
-    cursor: pointer;
-    transition: transform .3s, box-shadow .3s, border-color .3s;
-    position: relative;
+@media (max-width: 680px) {
+  .plans-row {
+    grid-template-columns: 1fr;
+    gap: .9rem;
   }
-  .plan-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.14); }
-  .plan-card.selected { border-color: #c9a96e; box-shadow: 0 16px 48px rgba(201,169,110,.25); }
+}
 
-  @keyframes pulse-badge {
-    0%,100% { opacity:1; transform:scale(1); }
-    50%      { opacity:.6; transform:scale(1.08); }
-  }
-  .oferta-badge {
-    position: absolute; top: .75rem; left: .75rem; z-index: 5;
-    background: #e63946; color: #fff;
-    border-radius: 99px; padding: .28rem .75rem;
-    font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-    animation: pulse-badge 1.2s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(230,57,70,.55);
-  }
-  .popular-badge {
-    position: absolute; top: .75rem; right: .75rem; z-index: 5;
-    background: #c9a96e; color: #1a1208;
-    border-radius: 99px; padding: .28rem .75rem;
-    font-size: .58rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  }
-  .card-img { position: relative; height: 192px; overflow: hidden; }
-  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
-  .plan-card:hover .card-img img { transform: scale(1.06); }
-  .card-img-overlay {
-    position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(to bottom, rgba(26,18,8,.08) 0%, rgba(201,169,110,.38) 100%);
-  }
-  .card-label {
-    position: absolute; bottom: .75rem; left: 1rem;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
-    font-weight: 600; color: #fff;
-    text-shadow: 0 2px 8px rgba(0,0,0,.5);
-  }
-  .card-body { padding: 1.1rem 1.25rem 1.25rem; }
-  .card-price { font-family: 'Jost', sans-serif; font-size: 1.75rem; font-weight: 600; color: #1a1208; letter-spacing: -.01em; }
-  .card-before-wrap { display: flex; align-items: center; gap: .5rem; margin: .25rem 0 .75rem; }
-  .card-before { font-family: 'Jost', sans-serif; font-size: .74rem; color: #b0a090; text-decoration: line-through; }
-  .card-off { font-size: .62rem; font-weight: 600; background: rgba(201,169,110,.15); color: #c9a96e; border-radius: 99px; padding: .18rem .5rem; }
-  .card-features { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
-  .card-features li { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: #7a6a58; }
-  .card-features li::before { content: '✦'; color: #c9a96e; font-size: .5rem; flex-shrink: 0; }
-  .card-btn {
-    width: 100%; margin-top: 1.1rem;
-    padding: .75rem; border-radius: 99px;
-    font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    cursor: pointer; transition: all .2s;
-  }
-  .card-btn.outline { background: transparent; color: #1a1208; border: 1px solid #c9a96e; }
-  .card-btn.outline:hover { background: rgba(201,169,110,.08); }
-  .card-btn.filled { background: #c9a96e; color: #1a1208; border: none; }
+/* ── Plan Card */
+.plan-card {
+  border-radius: var(--radius); overflow: hidden;
+  background: #fff;
+  border: 2px solid rgba(201,169,110,.14);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform .28s, box-shadow .28s, border-color .28s;
+  position: relative;
+}
+.plan-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.plan-card.selected {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold);
+}
 
-  /* ── ORDER PANEL ── */
-  .order-panel {
-    border-radius: 1.1rem; padding: 1.5rem;
-    background: #1a1208; border: 1px solid rgba(201,169,110,.2);
-    position: sticky; top: 88px;
-  }
-  .panel-label { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; }
-  .panel-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: #fff; }
-  .addons-list { margin-top: 1rem; display: flex; flex-direction: column; gap: .65rem; }
-  .addon-btn {
-    width: 100%; display: flex; align-items: center; justify-content: space-between;
-    border-radius: .75rem; padding: .75rem 1rem;
-    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-    cursor: pointer; transition: all .2s; text-align: left;
-  }
-  .addon-btn.active { background: rgba(201,169,110,.15); border-color: #c9a96e; }
-  .addon-name { font-size: .78rem; color: #fff; }
-  .addon-price { font-size: .72rem; font-weight: 600; color: #c9a96e; white-space: nowrap; margin-left: .5rem; }
-  .summary { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,.15); }
-  .summary-row { display: flex; justify-content: space-between; font-size: .78rem; color: rgba(247,242,236,.5); margin-bottom: .5rem; }
-  .summary-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: .75rem; }
-  .summary-total span:first-child { font-size: .85rem; font-weight: 500; color: #fff; }
-  .summary-total-price { font-family: 'Jost', sans-serif; font-size: 1.5rem; font-weight: 600; color: #c9a96e; letter-spacing: -.01em; }
-  .panel-cta {
-    width: 100%; margin-top: 1.25rem;
-    padding: .9rem; border-radius: 99px;
-    background: #c9a96e; color: #1a1208; border: none;
-    font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    cursor: pointer; transition: opacity .2s;
-    display: flex; align-items: center; justify-content: center; gap: .5rem;
-  }
-  .panel-cta:hover { opacity: .88; }
-  .panel-cta:disabled { opacity: .38; cursor: not-allowed; }
-  .panel-note { text-align: center; font-size: .68rem; color: rgba(247,242,236,.3); margin-top: .6rem; }
+@keyframes pulse-badge {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.65; transform:scale(1.07); }
+}
+.oferta-badge {
+  position: absolute; top: .7rem; left: .7rem; z-index: 5;
+  background: #e63946; color: #fff; border-radius: 99px;
+  padding: .24rem .7rem; font-size: .58rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  animation: pulse-badge 1.25s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(230,57,70,.5);
+}
+.popular-badge {
+  position: absolute; top: .7rem; right: .7rem; z-index: 5;
+  background: var(--gold); color: var(--dark); border-radius: 99px;
+  padding: .24rem .7rem; font-size: .58rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.card-img-wrap { position: relative; height: 180px; overflow: hidden; }
+.card-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s;
+}
+.plan-card:hover .card-img-wrap img { transform: scale(1.06); }
+.card-img-gradient {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(26,18,8,.06) 0%, rgba(201,169,110,.38) 100%);
+}
+.card-plan-label {
+  position: absolute; bottom: .75rem; left: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600; color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+.card-body { padding: 1.1rem 1.2rem 1.25rem; }
+.card-price { font-family: 'Jost', sans-serif; font-size: 1.65rem; font-weight: 600; color: var(--dark); }
+.card-before-row { display: flex; align-items: center; gap: .5rem; margin: .2rem 0 .75rem; flex-wrap: wrap; }
+.card-before { font-family: 'Jost', sans-serif; font-size: .72rem; color: #b0a090; text-decoration: line-through; }
+.card-off-badge {
+  font-size: .6rem; font-weight: 600; border-radius: 99px;
+  padding: .18rem .5rem; background: var(--gold-light); color: var(--gold);
+}
+.card-features { list-style: none; display: flex; flex-direction: column; gap: .42rem; }
+.card-features li {
+  display: flex; align-items: flex-start; gap: .55rem;
+  font-size: .77rem; color: var(--muted); line-height: 1.45;
+}
+.card-feat-dot {
+  color: var(--gold); font-size: .5rem; margin-top: .22rem; flex-shrink: 0;
+}
+.card-btn {
+  width: 100%; margin-top: 1.1rem; padding: .75rem;
+  border-radius: 99px; font-size: .77rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.card-btn.outline {
+  background: transparent; color: var(--dark);
+  border: 1.5px solid var(--gold);
+}
+.card-btn.outline:hover { background: var(--gold-light); }
+.card-btn.filled { background: var(--gold); color: var(--dark); border: none; }
 
-  /* ── GALLERY ── */
-  #galería {
-    padding: clamp(3rem,8vw,6rem) 1.5rem;
-    background: linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%);
-  }
-  .gallery-grid {
-    max-width: 960px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
-  }
-  @media (max-width: 640px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } }
-  .gallery-card {
-    position: relative; border-radius: 1rem; overflow: hidden;
-    aspect-ratio: 3/4; cursor: pointer;
-    transition: transform .3s;
-  }
-  .gallery-card:hover { transform: scale(1.04); }
-  .gallery-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gallery-plan-badge {
-    position: absolute; top: .65rem; left: .65rem;
-    background: rgba(26,18,8,.65); color: #c9a96e;
-    border: 1px solid rgba(201,169,110,.38);
-    border-radius: 99px; padding: .22rem .7rem;
-    font-size: .58rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  }
-  .gallery-hover {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem;
-    background: rgba(26,18,8,.7);
-    opacity: 0; transition: opacity .28s;
-  }
-  .gallery-card:hover .gallery-hover { opacity: 1; }
-  .gallery-hover span {
-    font-size: .68rem; font-weight: 600; letter-spacing: .1em;
-    text-transform: uppercase; color: #fff;
-  }
+/* ── Order Panel */
+.order-panel {
+  border-radius: var(--radius); padding: 1.4rem;
+  background: var(--dark);
+  border: 1px solid rgba(201,169,110,.22);
+  position: sticky; top: 80px;
+}
+.panel-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 300; color: #fff; margin-top: .3rem; }
+.addons-title { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin: 1.1rem 0 .6rem; }
+.addons-list { display: flex; flex-direction: column; gap: .6rem; }
+.addon-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  border-radius: .75rem; padding: .7rem .95rem;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  cursor: pointer; transition: all .2s; text-align: left; gap: .5rem;
+}
+.addon-btn.active { background: rgba(201,169,110,.15); border-color: var(--gold); }
+.addon-name { font-size: .78rem; color: #fff; flex: 1; line-height: 1.35; }
+.addon-price { font-size: .72rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
+.summary-box { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,.14); }
+.summary-row { display: flex; justify-content: space-between; gap: .5rem; font-size: .78rem; color: rgba(247,242,236,.5); margin-bottom: .45rem; }
+.summary-row span:last-child { white-space: nowrap; }
+.summary-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: .7rem; gap: .5rem; }
+.summary-total-label { font-size: .85rem; font-weight: 500; color: #fff; }
+.summary-total-price { font-family: 'Jost', sans-serif; font-size: 1.55rem; font-weight: 600; color: var(--gold); }
+.panel-cta {
+  width: 100%; margin-top: 1.2rem; padding: .88rem;
+  border-radius: 99px; background: var(--gold); color: var(--dark); border: none;
+  font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  cursor: pointer; transition: opacity .2s;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+}
+.panel-cta:hover { opacity: .88; }
+.panel-cta:disabled { opacity: .36; cursor: not-allowed; }
+.panel-note { text-align: center; font-size: .67rem; color: rgba(247,242,236,.3); margin-top: .55rem; }
 
-  /* ── FAQ ── */
-  #faq { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
-  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: .65rem; }
-  .faq-item {
-    border-radius: .75rem; overflow: hidden;
-    border: 1px solid rgba(201,169,110,.2);
-    background: rgba(255,255,255,.6);
-  }
-  .faq-item.open { background: #fff; }
-  .faq-btn {
-    width: 100%; display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 1.5rem; text-align: left; cursor: pointer;
-    background: none; border: none;
-  }
-  .faq-question { font-size: .88rem; font-weight: 500; color: #1a1208; }
-  .faq-icon { color: #c9a96e; font-size: 1rem; flex-shrink: 0; margin-left: 1rem; transition: transform .3s; }
-  .faq-answer {
-    max-height: 0; overflow: hidden;
-    transition: max-height .35s ease, padding .35s ease;
-    padding: 0 1.5rem; font-size: .86rem; line-height: 1.7; color: #7a6a58;
-  }
-  .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.5rem 1.1rem; }
-  .faq-item.open .faq-icon { transform: rotate(45deg); }
+/* ═══════════════════════════════════════════ GALLERY */
+#galería {
+  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
+  background: linear-gradient(150deg, var(--dark) 0%, #2e1d0a 100%);
+}
+.gallery-grid {
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: .9rem;
+}
+@media (max-width: 640px) { .gallery-grid { grid-template-columns: repeat(2,1fr); gap: .7rem; } }
+.gallery-card {
+  position: relative; border-radius: 1rem; overflow: hidden;
+  aspect-ratio: 3/4; cursor: pointer;
+  transition: transform .28s;
+}
+.gallery-card:hover { transform: scale(1.04); }
+.gallery-card img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-badge {
+  position: absolute; top: .6rem; left: .6rem;
+  background: rgba(26,18,8,.68); color: var(--gold);
+  border: 1px solid rgba(201,169,110,.35);
+  border-radius: 99px; padding: .2rem .65rem;
+  font-size: .56rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+}
+.gallery-hover {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
+  background: rgba(26,18,8,.7);
+  opacity: 0; transition: opacity .28s;
+}
+.gallery-card:hover .gallery-hover { opacity: 1; }
+.gallery-hover-label {
+  font-size: .66rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: #fff;
+}
 
-  /* ── CTA ── */
-  #cta {
-    padding: clamp(3rem,8vw,6rem) 1.5rem;
-    background: linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%);
-    text-align: center; position: relative; overflow: hidden;
-  }
-  #cta::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,169,110,.15) 0%, transparent 70%);
-  }
-  .cta-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
-  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 300; color: #fff; margin-bottom: .3rem; }
-  .cta-title em { font-style: italic; color: #c9a96e; }
-  .cta-sub { font-size: .92rem; font-weight: 300; color: rgba(247,242,236,.52); margin-bottom: 2rem; }
-  .btn-wa {
-    display: inline-flex; align-items: center; gap: .6rem;
-    background: #25D366; color: #fff; border-radius: 99px;
-    padding: 1rem 2.5rem; font-size: .86rem; font-weight: 600;
-    letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
-    box-shadow: 0 8px 24px rgba(37,211,102,.28);
-    transition: transform .2s;
-  }
-  .btn-wa:hover { transform: scale(1.05); }
+/* ═══════════════════════════════════════════ FAQ */
+#faq {
+  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
+  background: var(--cream);
+}
+.faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: .6rem; }
+.faq-item {
+  border-radius: .85rem; overflow: hidden;
+  border: 1px solid rgba(201,169,110,.2);
+  background: rgba(255,255,255,.6);
+  transition: background .2s;
+}
+.faq-item.open { background: #fff; }
+.faq-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.35rem; text-align: left; cursor: pointer;
+  background: none; border: none; gap: 1rem;
+}
+.faq-question { font-size: .87rem; font-weight: 500; color: var(--dark); line-height: 1.4; text-align: left; }
+.faq-icon {
+  width: 24px; height: 24px; border-radius: 99px;
+  background: var(--gold-light); border: 1px solid rgba(201,169,110,.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: .85rem; flex-shrink: 0;
+  transition: transform .3s, background .2s;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); color: var(--dark); }
+.faq-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease, padding .3s ease;
+  padding: 0 1.35rem;
+}
+.faq-item.open .faq-body { max-height: 400px; padding-bottom: 1.1rem; }
+.faq-body p { font-size: .85rem; line-height: 1.75; color: var(--muted); }
 
-  /* ── FOOTER ── */
-  footer { background: #0e0903; border-top: 1px solid rgba(201,169,110,.1); padding: 2rem 1.5rem; text-align: center; }
-  footer img { height: 72px; margin-bottom: .75rem; }
-  footer p { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,242,236,.22); }
+/* ═══════════════════════════════════════════ CTA */
+#cta {
+  padding: clamp(3rem,8vw,6rem) clamp(1rem,4vw,1.5rem);
+  background: linear-gradient(150deg, var(--dark) 0%, #2e1d0a 100%);
+  text-align: center; position: relative; overflow: hidden;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 65% 75% at 50% 110%, rgba(201,169,110,.15) 0%, transparent 65%);
+}
+.cta-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,5vw,3.4rem); font-weight: 300; color: #fff; }
+.cta-title em { font-style: italic; color: var(--gold); }
+.cta-sub { font-size: .9rem; color: rgba(247,242,236,.5); margin: .75rem 0 2rem; line-height: 1.65; }
+.cta-btn-wrap { display: flex; justify-content: center; }
+.cta-btn-wrap .btn-wa { width: auto; padding: 1rem 2.5rem; }
 
-  /* ── PEDIDO PAGE (hidden by default) ── */
-  #pedido-page { display: none; }
-  #pedido-page.active { display: block; }
-  #planes-page.hidden { display: none; }
+/* ═══════════════════════════════════════════ FOOTER */
+footer {
+  background: var(--darker);
+  border-top: 1px solid rgba(201,169,110,.1);
+  padding: 2rem 1.5rem; text-align: center;
+}
+footer img { height: 64px; margin: 0 auto .75rem; }
+footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,242,236,.2); }
 
-  /* Pedido styles */
-  .pedido-header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(247,242,236,0.97); backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(201,169,110,.2);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: .65rem 2rem;
-  }
-  .pedido-header img { height: 48px; }
-  .btn-back {
-    display: inline-flex; align-items: center; gap: .4rem;
-    background: none; border: none; cursor: pointer;
-    font-size: .72rem; font-weight: 500; letter-spacing: .1em;
-    text-transform: uppercase; color: #7a6a58; transition: opacity .2s;
-  }
-  .btn-back:hover { opacity: .6; }
-  .pedido-main { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
-  .pedido-hero { text-align: center; margin-bottom: 3rem; }
-  .pedido-layout { display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
-  @media (max-width: 860px) { .pedido-layout { grid-template-columns: 1fr; } }
+/* ═══════════════════════════════════════════ PEDIDO PAGE */
+#pedido-page { display: none; }
+#pedido-page.active { display: block; }
+#planes-page.hidden { display: none; }
 
-  .digital-card {
-    border-radius: 1.5rem; overflow: hidden; background: #1a1208;
-    box-shadow: 0 24px 64px rgba(26,18,8,.28);
-    border: 1px solid rgba(201,169,110,.25);
-  }
-  .dc-img { position: relative; height: 260px; overflow: hidden; }
-  .dc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .dc-img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,18,8,.08) 0%, rgba(26,18,8,.82) 100%); pointer-events: none; }
-  .dc-film-top {
-    position: absolute; top: 0; left: 0; right: 0; height: 28px;
-    background: rgba(0,0,0,.6); display: flex; align-items: center; padding: 0 .75rem; gap: .4rem;
-  }
-  .dc-film-hole { width: 18px; height: 12px; background: rgba(255,255,255,.14); border-radius: 2px; flex-shrink: 0; }
-  .dc-plan-badge {
-    position: absolute; top: 2.2rem; right: 1rem;
-    background: #c9a96e; color: #1a1208;
-    border-radius: 99px; padding: .3rem .9rem;
-    font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  }
-  .dc-title-wrap { position: absolute; bottom: 1.2rem; left: 1.5rem; }
-  .dc-eyebrow { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .2rem; }
-  .dc-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: #fff; }
-  .dc-title em { font-style: italic; font-weight: 600; color: #c9a96e; }
-  .dc-body { padding: 1.75rem; }
-  .dc-price-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; }
-  .dc-price { font-family: 'Jost', sans-serif; font-size: 2.2rem; font-weight: 600; color: #c9a96e; letter-spacing: -.01em; }
-  .dc-price-note { font-size: .72rem; color: rgba(247,242,236,.38); text-align: right; line-height: 1.5; }
-  .dc-sep { height: 1px; background: rgba(201,169,110,.15); margin-bottom: 1.25rem; }
-  .dc-features-label { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,169,110,.6); margin-bottom: .75rem; }
-  .dc-features { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem 1.5rem; margin-bottom: 1.25rem; }
-  @media (max-width: 500px) { .dc-features { grid-template-columns: 1fr; } }
-  .dc-feat { display: flex; align-items: center; gap: .5rem; }
-  .dc-feat-dot { width: 20px; height: 20px; border-radius: 99px; background: rgba(201,169,110,.14); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #c9a96e; font-size: .7rem; }
-  .dc-feat-text { font-size: .76rem; color: rgba(247,242,236,.68); }
-  .dc-addons-label { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,169,110,.6); margin-bottom: .6rem; }
-  .dc-addon-item {
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.2);
-    border-radius: .75rem; padding: .6rem 1rem; margin-bottom: .4rem;
-  }
-  .dc-addon-name { font-size: .78rem; color: #fff; display: flex; align-items: center; gap: .45rem; }
-  .dc-addon-price { font-size: .72rem; font-weight: 600; color: #c9a96e; }
-  .dc-film-bottom { display: flex; gap: .4rem; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,.1); }
+.pedido-header {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(247,242,236,.97);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,169,110,.18);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .75rem 1.5rem;
+}
+.pedido-header img { height: 48px; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: none; border: none; cursor: pointer;
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); transition: color .2s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-back:hover { color: var(--dark); }
 
-  .right-col { display: flex; flex-direction: column; gap: 1.1rem; }
-  .breakdown-card { background: #fff; border: 1px solid rgba(201,169,110,.2); border-radius: 1.1rem; padding: 1.4rem; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-  .breakdown-label { font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: 1rem; }
-  .breakdown-row { display: flex; justify-content: space-between; font-size: .83rem; color: #7a6a58; margin-bottom: .55rem; }
-  .breakdown-row strong { color: #1a1208; font-weight: 500; }
-  .breakdown-sep { height: 1px; background: rgba(201,169,110,.2); margin: .75rem 0; }
-  .breakdown-total { display: flex; justify-content: space-between; align-items: baseline; }
-  .breakdown-total span:first-child { font-size: .88rem; font-weight: 600; color: #1a1208; }
-  .breakdown-total-price { font-family: 'Jost', sans-serif; font-size: 1.8rem; font-weight: 600; color: #c9a96e; letter-spacing: -.01em; }
+.pedido-main { max-width: 1000px; margin: 0 auto; padding: clamp(2rem,5vw,3rem) clamp(1rem,4vw,1.5rem) 4rem; }
+.pedido-hero { text-align: center; margin-bottom: clamp(2rem,5vw,3rem); }
+.pedido-hero .section-title { color: var(--dark); }
 
-  .wa-card { background: linear-gradient(135deg,#1a1208 0%,#2e1d0a 100%); border: 1px solid rgba(201,169,110,.2); border-radius: 1.1rem; padding: 1.4rem; text-align: center; }
-  .wa-card .panel-label { margin-bottom: .25rem; }
-  .wa-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: #fff; margin-bottom: .3rem; }
-  .wa-card-sub { font-size: .8rem; color: rgba(247,242,236,.48); margin-bottom: 1.1rem; }
-  .trust-card { background: #fff; border: 1px solid rgba(201,169,110,.15); border-radius: 1.1rem; padding: 1.2rem 1.4rem; }
-  .trust-item { display: flex; align-items: center; gap: .75rem; margin-bottom: .7rem; }
-  .trust-item:last-child { margin-bottom: 0; }
-  .trust-icon { width: 28px; height: 28px; border-radius: 99px; background: rgba(201,169,110,.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #c9a96e; font-size: .85rem; }
-  .trust-text { font-size: .8rem; color: #7a6a58; }
+/* Layout: card + right column */
+.pedido-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .pedido-layout { grid-template-columns: 1fr; }
+}
+
+/* Digital Card */
+.digital-card {
+  border-radius: 1.5rem; overflow: hidden; background: var(--dark);
+  box-shadow: 0 24px 64px rgba(26,18,8,.28);
+  border: 1px solid rgba(201,169,110,.22);
+}
+.dc-img-wrap { position: relative; height: clamp(200px,30vw,280px); overflow: hidden; }
+.dc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.dc-img-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(26,18,8,.06) 0%, rgba(26,18,8,.8) 100%);
+}
+.dc-film-strip {
+  position: absolute; top: 0; left: 0; right: 0; height: 26px;
+  background: rgba(0,0,0,.55);
+  display: flex; align-items: center; padding: 0 .65rem; gap: .35rem; overflow: hidden;
+}
+.dc-hole { width: 18px; height: 11px; background: rgba(255,255,255,.13); border-radius: 2px; flex-shrink: 0; }
+.dc-plan-badge {
+  position: absolute; top: 2rem; right: 1rem;
+  background: var(--gold); color: var(--dark); border-radius: 99px;
+  padding: .28rem .9rem; font-size: .6rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.dc-title-wrap { position: absolute; bottom: 1.1rem; left: 1.4rem; }
+.dc-title-eyebrow { font-size: .56rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .2rem; }
+.dc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #fff; }
+.dc-title em { font-style: italic; font-weight: 600; color: var(--gold); }
+
+.dc-body { padding: 1.5rem 1.5rem 1.75rem; }
+.dc-price-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+.dc-price { font-family: 'Jost', sans-serif; font-size: 2.1rem; font-weight: 600; color: var(--gold); }
+.dc-price-note { font-size: .7rem; color: rgba(247,242,236,.36); line-height: 1.55; text-align: right; }
+.dc-sep { height: 1px; background: rgba(201,169,110,.14); margin: 0 0 1.2rem; }
+.dc-section-label { font-size: .56rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,169,110,.6); margin-bottom: .7rem; }
+.dc-features {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 420px) { .dc-features { grid-template-columns: 1fr; } }
+.dc-feat { display: flex; align-items: flex-start; gap: .45rem; }
+.dc-feat-icon {
+  width: 18px; height: 18px; border-radius: 99px; flex-shrink: 0; margin-top: .12rem;
+  background: rgba(201,169,110,.13); display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: .6rem;
+}
+.dc-feat-text { font-size: .75rem; color: rgba(247,242,236,.65); line-height: 1.45; }
+.dc-addon-item {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.2);
+  border-radius: .7rem; padding: .55rem .95rem; margin-bottom: .4rem;
+}
+.dc-addon-name { font-size: .77rem; color: #fff; }
+.dc-addon-price { font-size: .72rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
+.dc-film-bottom {
+  display: flex; gap: .35rem; flex-wrap: nowrap; overflow: hidden;
+  margin-top: 1.25rem; padding-top: 1rem;
+  border-top: 1px solid rgba(201,169,110,.1);
+}
+
+/* Right column */
+.right-col { display: flex; flex-direction: column; gap: 1rem; }
+
+.card-box {
+  background: #fff; border: 1px solid rgba(201,169,110,.18);
+  border-radius: var(--radius); padding: 1.35rem;
+  box-shadow: var(--shadow-sm);
+}
+.card-box-dark {
+  background: linear-gradient(135deg, var(--dark) 0%, #2e1d0a 100%);
+  border: 1px solid rgba(201,169,110,.2);
+  border-radius: var(--radius); padding: 1.35rem; text-align: center;
+}
+.box-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .85rem; }
+.box-label-dark { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .25rem; }
+.breakdown-row { display: flex; justify-content: space-between; gap: .5rem; font-size: .82rem; color: var(--muted); margin-bottom: .48rem; }
+.breakdown-row strong { color: var(--dark); font-weight: 500; white-space: nowrap; }
+.breakdown-sep { height: 1px; background: rgba(201,169,110,.18); margin: .75rem 0; }
+.breakdown-total { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+.breakdown-total-label { font-size: .88rem; font-weight: 600; color: var(--dark); }
+.breakdown-total-price { font-family: 'Jost', sans-serif; font-size: 1.75rem; font-weight: 600; color: var(--gold); }
+.box-dark-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; color: #fff; margin-bottom: .25rem; }
+.box-dark-sub { font-size: .78rem; color: rgba(247,242,236,.45); margin-bottom: 1.1rem; }
+.box-note { font-size: .65rem; color: rgba(247,242,236,.26); margin-top: .5rem; }
+
+.trust-list { display: flex; flex-direction: column; gap: .65rem; }
+.trust-item { display: flex; align-items: center; gap: .75rem; }
+.trust-icon {
+  width: 30px; height: 30px; border-radius: 99px; flex-shrink: 0;
+  background: rgba(201,169,110,.12); display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+}
+.trust-text { font-size: .8rem; color: var(--muted); line-height: 1.35; }
+
+/* ═══════════════════════════════════════════ SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════ PLANES PAGE -->
+<!-- ═══════════════════════════════════════════════════ PLANES PAGE -->
 <div id="planes-page">
 
-  <!-- HEADER -->
   <header>
     <div class="nav-inner">
-      <div class="nav-logo"><img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" /></div>
-      <nav class="nav-links">
-        <a href="#planes">Planes</a>
-        <a href="#galería">Galería</a>
-        <a href="#faq">FAQ</a>
+      <div class="nav-logo">
+        <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#planes">Planes</a></li>
+          <li><a href="#galería">Galería</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
       </nav>
       <a href="#planes" class="btn-gold nav-cta">🛒 Contratar</a>
-      <button class="hamburger" id="hamburger">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
     </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#planes">Planes</a>
-      <a href="#galería">Galería</a>
-      <a href="#faq">FAQ</a>
-    </div>
+    <nav class="mobile-menu" id="mobile-menu">
+      <a href="#planes"  onclick="closeMobile()">Planes</a>
+      <a href="#galería" onclick="closeMobile()">Galería</a>
+      <a href="#faq"     onclick="closeMobile()">FAQ</a>
+      <a href="#planes" class="btn-gold" style="margin-top:.5rem;text-align:center" onclick="closeMobile()">🛒 Contratar ahora</a>
+    </nav>
   </header>
 
-  <!-- ── PLANES ── -->
+  <!-- ─── PLANES ─────────────────────────────────── -->
   <section id="planes">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="eyebrow">Elige tu plan</p>
       <h2 class="section-title">Invitación Cinema <em>Boda</em></h2>
       <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
       <p class="section-sub">Tres niveles para que encuentres la experiencia perfecta para tu gran día.</p>
     </div>
-    <div class="plans-grid" id="plans-grid">
-      <!-- cards injected by JS -->
-      <div class="order-panel" id="order-panel">
-        <p class="panel-label">Tu Invitación</p>
-        <h3 class="panel-title" id="panel-title">Elige un plan</h3>
-        <div class="divider"><div class="divider-line" style="background:rgba(201,169,110,.3)"></div><span class="divider-star">✦</span><div class="divider-line" style="background:rgba(201,169,110,.3)"></div></div>
-        <p class="eyebrow" style="margin-top:.75rem">Complementos</p>
-        <div class="addons-list" id="addons-list"></div>
-        <div class="summary" id="summary"></div>
-        <button class="panel-cta" id="panel-cta" disabled>🛒 Elige un plan</button>
-        <p class="panel-note">Pago 100% seguro · Sin límite de envíos</p>
+
+    <div class="plans-outer" id="plans-outer">
+      <div class="plans-row" id="plans-row">
+        <!-- cards injected by JS -->
+      </div>
+      <div class="order-panel-wrap">
+        <div class="order-panel" id="order-panel">
+          <p class="eyebrow">Tu Invitación</p>
+          <p class="panel-subtitle" id="panel-subtitle">Elige un plan</p>
+          <div class="divider" style="justify-content:flex-start">
+            <div class="divider-line" style="background:rgba(201,169,110,.28)"></div>
+            <span class="divider-star">✦</span>
+            <div class="divider-line" style="background:rgba(201,169,110,.28)"></div>
+          </div>
+          <p class="addons-title">Complementos</p>
+          <div class="addons-list" id="addons-list"></div>
+          <div class="summary-box" id="summary-box"></div>
+          <button class="panel-cta" id="panel-cta" disabled>🛒 Elige un plan</button>
+          <p class="panel-note">Pago 100% seguro · Sin límite de envíos</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── GALLERY ── -->
+  <!-- ─── GALLERY ─────────────────────────────────── -->
   <section id="galería">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="eyebrow">Vista Previa</p>
-      <h2 class="section-title" style="color:#fff">Momentos que <em style="color:#c9a96e">perduran</em></h2>
+      <h2 class="section-title" style="color:#fff">Momentos que <em style="color:var(--gold)">perduran</em></h2>
       <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-      <p class="section-sub" style="color:rgba(247,242,236,.52)">Cada invitación es un cortometraje único de tu historia de amor.</p>
+      <p class="section-sub" style="color:rgba(247,242,236,.5)">Cada invitación es un cortometraje único de tu historia de amor.</p>
     </div>
-    <div class="gallery-grid">
+    <div class="gallery-grid reveal">
       <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="" loading="lazy" />
-        <span class="gallery-plan-badge">CLASSIC</span>
-        <div class="gallery-hover"><span>👁 Ver más modelos</span></div>
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Classic" loading="lazy" />
+        <span class="gallery-badge">CLASSIC</span>
+        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
       </div>
       <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="" loading="lazy" />
-        <span class="gallery-plan-badge">PREMIUM</span>
-        <div class="gallery-hover"><span>👁 Ver más modelos</span></div>
+        <img src="https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Premium" loading="lazy" />
+        <span class="gallery-badge">PREMIUM</span>
+        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
       </div>
       <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1607357910286-1ff94ac13c24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="" loading="lazy" />
-        <span class="gallery-plan-badge">DELUXE</span>
-        <div class="gallery-hover"><span>👁 Ver más modelos</span></div>
+        <img src="https://images.unsplash.com/photo-1607357910286-1ff94ac13c24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Deluxe" loading="lazy" />
+        <span class="gallery-badge">DELUXE</span>
+        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
       </div>
       <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="" loading="lazy" />
-        <span class="gallery-plan-badge">PREMIUM</span>
-        <div class="gallery-hover"><span>👁 Ver más modelos</span></div>
+        <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Premium" loading="lazy" />
+        <span class="gallery-badge">PREMIUM</span>
+        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ── FAQ ── -->
+  <!-- ─── FAQ ─────────────────────────────────── -->
   <section id="faq">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="eyebrow">Preguntas frecuentes</p>
       <h2 class="section-title">Todo lo que <em>necesitas saber</em></h2>
       <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
     </div>
-    <div class="faq-list" id="faq-list"></div>
+    <div class="faq-list reveal" id="faq-list"></div>
   </section>
 
-  <!-- ── CTA ── -->
+  <!-- ─── CTA ─────────────────────────────────── -->
   <section id="cta">
-    <div class="cta-inner">
+    <div class="cta-inner reveal">
       <p class="eyebrow">¿Lista para brillar?</p>
       <h2 class="cta-title">Cuéntanos tu <em>historia</em></h2>
       <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
       <p class="cta-sub">Escríbenos por WhatsApp y te asesoramos sin compromiso.</p>
-      <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" class="btn-wa">💬 Contactar por WhatsApp</a>
+      <div class="cta-btn-wrap">
+        <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noopener noreferrer" class="btn-wa" style="width:auto;padding:1rem 2.5rem">
+          💬 Contactar por WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
   <footer>
     <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
     <p>Invitaciones Digitales · <span id="year"></span></p>
   </footer>
 
-</div><!-- end #planes-page -->
+</div><!-- /planes-page -->
 
 
-<!-- ═══════════════════════════════════════════ PEDIDO PAGE -->
+<!-- ═══════════════════════════════════════════════════ PEDIDO PAGE -->
 <div id="pedido-page">
+
   <div class="pedido-header">
     <button class="btn-back" id="btn-back">← Volver</button>
     <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-    <div style="width:80px"></div>
+    <div style="width:72px"></div>
   </div>
 
   <div class="pedido-main">
@@ -482,290 +669,295 @@
     </div>
 
     <div class="pedido-layout">
+
       <!-- Digital Card -->
       <div class="digital-card">
-        <div class="dc-img">
+        <div class="dc-img-wrap">
           <img id="dc-img" src="" alt="" />
           <div class="dc-img-overlay"></div>
-          <div class="dc-film-top" id="dc-film-top"></div>
+          <div class="dc-film-strip" id="dc-film-strip"></div>
           <div class="dc-plan-badge" id="dc-plan-badge"></div>
           <div class="dc-title-wrap">
-            <p class="dc-eyebrow">Invitación Digital</p>
+            <p class="dc-title-eyebrow">Invitación Digital</p>
             <p class="dc-title">Cinema <em>Boda</em></p>
           </div>
         </div>
         <div class="dc-body">
           <div class="dc-price-row">
             <div>
-              <p style="font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,169,110,.6);margin-bottom:.2rem">Plan seleccionado</p>
-              <p class="dc-price" id="dc-total-price"></p>
+              <p class="dc-section-label" style="margin-bottom:.2rem">Plan seleccionado</p>
+              <p class="dc-price" id="dc-price"></p>
             </div>
             <div class="dc-price-note">Precio único<br>Sin límite de invitados</div>
           </div>
           <div class="dc-sep"></div>
-          <p class="dc-features-label">Incluye</p>
+          <p class="dc-section-label">Incluye</p>
           <div class="dc-features" id="dc-features"></div>
-          <div id="dc-addons-section" style="display:none">
+          <div id="dc-addons-wrap" style="display:none">
             <div class="dc-sep"></div>
-            <p class="dc-addons-label">Complementos añadidos</p>
+            <p class="dc-section-label">Complementos añadidos</p>
             <div id="dc-addons-list"></div>
           </div>
           <div class="dc-film-bottom" id="dc-film-bottom"></div>
         </div>
       </div>
 
-      <!-- Right col -->
+      <!-- Right column -->
       <div class="right-col">
-        <div class="breakdown-card">
-          <p class="breakdown-label">Desglose del pedido</p>
+
+        <div class="card-box">
+          <p class="box-label">Desglose del pedido</p>
           <div id="breakdown-rows"></div>
           <div class="breakdown-sep"></div>
           <div class="breakdown-total">
-            <span>Total</span>
+            <span class="breakdown-total-label">Total</span>
             <span class="breakdown-total-price" id="breakdown-total"></span>
           </div>
         </div>
-        <div class="wa-card">
-          <p class="panel-label">Siguiente paso</p>
-          <p class="wa-card-title">¿Todo listo?</p>
-          <p class="wa-card-sub">Escríbenos por WhatsApp con tu selección y te asesoramos al instante.</p>
-          <a id="wa-btn" href="#" target="_blank" class="btn-wa" style="display:flex;justify-content:center;width:100%;padding:.9rem">
+
+        <div class="card-box-dark">
+          <p class="box-label-dark">Siguiente paso</p>
+          <p class="box-dark-title">¿Todo listo?</p>
+          <p class="box-dark-sub">Escríbenos por WhatsApp y te asesoramos al instante.</p>
+          <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-wa">
             💬 Pedir por WhatsApp
           </a>
-          <p style="font-size:.68rem;color:rgba(247,242,236,.28);margin-top:.5rem">Tu selección se envía automáticamente</p>
+          <p class="box-note">Tu selección se envía automáticamente</p>
         </div>
-        <div class="trust-card">
-          <div class="trust-item"><div class="trust-icon">🛡</div><span class="trust-text">Pago 100% seguro</span></div>
-          <div class="trust-item"><div class="trust-icon">∞</div><span class="trust-text">Envío ilimitado a todos tus invitados</span></div>
-          <div class="trust-item"><div class="trust-icon">📅</div><span class="trust-text">Lista en 1–2 días laborales</span></div>
+
+        <div class="card-box">
+          <p class="box-label">Por qué elegirnos</p>
+          <div class="trust-list">
+            <div class="trust-item"><div class="trust-icon">🛡</div><span class="trust-text">Pago 100% seguro</span></div>
+            <div class="trust-item"><div class="trust-icon">∞</div><span class="trust-text">Envío ilimitado a todos tus invitados</span></div>
+            <div class="trust-item"><div class="trust-icon">📅</div><span class="trust-text">Lista en 1–2 días laborales</span></div>
+            <div class="trust-item"><div class="trust-icon">💬</div><span class="trust-text">Soporte personalizado por WhatsApp</span></div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
 
   <footer style="margin-top:2rem">
     <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-    <p>Invitaciones Digitales · <span class="year2"></span></p>
+    <p>Invitaciones Digitales · <span id="year2"></span></p>
   </footer>
-</div>
+
+</div><!-- /pedido-page -->
+
 
 <script>
-  // ── DATA ──────────────────────────────────────────────────────
-  const WA_NUMBER = '57HQCKAMGELDG1'; // ← cambia por tu número
+/* ═══════════════════════════════════════════ DATA */
+const WA_LINK = 'https://wa.me/message/57HQCKAMGELDG1'; // ← cambia por tu link
 
-  const fmt = n => '$' + n.toLocaleString('es-CO');
+const fmt = n => '$' + n.toLocaleString('es-CO');
+const $ = id => document.getElementById(id);
 
-  const PLANS = [
-    {
-      id: 'classic', label: 'CLASSIC', price: 80000, priceBefore: 160000,
-      image: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-      popular: false,
-      features: ['Envío ilimitado','Portada cinematográfica','Cuenta regresiva animada','Galería de hasta 4 fotos','Agenda digital multiplataforma','Ubicación con mapa e indicaciones','RSVP online','Panel privado de invitados','Sección regalos y vestimenta'],
-    },
-    {
-      id: 'premium', label: 'PREMIUM', price: 110000, priceBefore: 220000,
-      image: 'https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-      popular: true,
-      features: ['Todo lo de CLASSIC','Música de fondo a elección','Galería de hasta 8 fotos','Historia de la pareja','Nombre del invitado y pases','RSVP Premium con panel avanzado','Sugerencia de canciones','Instagram Wall y hashtag','REGALO: Save The Date'],
-    },
-    {
-      id: 'deluxe', label: 'DELUXE', price: 160000, priceBefore: 320000,
-      image: 'https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-      popular: false,
-      features: ['Todo lo de PREMIUM','Álbum de hasta 12 fotos','Mesa asignada al invitado','Hoteles y transporte','Itinerario completo del evento','Testigos y padrinos','Playlist de Spotify','Redes oficiales del evento','Sección adicional libre'],
-    },
-  ];
+const PLANS = [
+  {
+    id: 'classic', label: 'CLASSIC', price: 80000, priceBefore: 160000, popular: false,
+    image: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    features: ['Envío ilimitado','Portada cinematográfica','Cuenta regresiva animada','Galería de hasta 4 fotos','Agenda digital multiplataforma','Ubicación con mapa e indicaciones','RSVP online','Panel privado de invitados','Sección regalos y vestimenta'],
+  },
+  {
+    id: 'premium', label: 'PREMIUM', price: 110000, priceBefore: 220000, popular: true,
+    image: 'https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    features: ['Todo lo de CLASSIC','Música de fondo a elección','Galería de hasta 8 fotos','Historia de la pareja','Nombre del invitado y pases','RSVP Premium con panel avanzado','Sugerencia de canciones','Instagram Wall y hashtag','REGALO: Save The Date'],
+  },
+  {
+    id: 'deluxe', label: 'DELUXE', price: 160000, priceBefore: 320000, popular: false,
+    image: 'https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+    features: ['Todo lo de PREMIUM','Álbum de hasta 12 fotos','Mesa asignada al invitado','Hoteles y transporte','Itinerario completo del evento','Testigos y padrinos','Playlist de Spotify','Redes oficiales del evento','Sección adicional libre'],
+  },
+];
 
-  const ADDONS = [
-    { id: 'color',     label: 'Cambiar paleta de colores', price: 30000 },
-    { id: 'font',      label: 'Cambiar tipografía',         price: 20000 },
-    { id: 'multilang', label: 'Versión multilenguaje',      price: 25000 },
-  ];
+const ADDONS = [
+  { id: 'color',     label: 'Cambiar paleta de colores', price: 30000 },
+  { id: 'font',      label: 'Cambiar tipografía',        price: 20000 },
+  { id: 'multilang', label: 'Versión multilenguaje',     price: 25000 },
+];
 
-  const FAQS = [
-    { q:'¿Cómo contrato la invitación?', a:'Muy fácil: 1) Elige el modelo y realiza la compra online. 2) Envíanos los datos y fotos desde nuestro panel. 3) Comparte el link con todos tus invitados con un clic.' },
-    { q:'¿Los precios son por cantidad de invitados?', a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, sin límites.' },
-    { q:'¿Se pueden personalizar aún más?', a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También podemos diseñar un modelo a medida.' },
-    { q:'¿En cuánto tiempo está lista la invitación?', a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños a medida pueden tardar de 7 a 10 días laborales.' },
-    { q:'¿Cuánto tiempo estará online?', a:'El link estará activo desde que esté lista la invitación y durante al menos 3 meses después de la fecha del evento.' },
-    { q:'¿Hay un límite de invitados?', a:'No. Puedes enviar la invitación a todos los invitados que desees sin ningún límite.' },
-  ];
+const FAQS = [
+  { q:'¿Cómo contrato la invitación?',             a:'Muy fácil: 1) Elige el modelo y realiza la compra. 2) Envíanos los datos y fotos desde nuestro panel. 3) Comparte el link con todos tus invitados con un clic.' },
+  { q:'¿Los precios son por cantidad de invitados?', a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, sin límites.' },
+  { q:'¿Se pueden personalizar aún más?',           a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También podemos diseñar un modelo completamente a medida.' },
+  { q:'¿En cuánto tiempo está lista?',              a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños a medida pueden tardar de 7 a 10 días laborales.' },
+  { q:'¿Cuánto tiempo estará online?',              a:'El link estará activo desde que esté lista y durante al menos 3 meses después de la fecha del evento.' },
+  { q:'¿Hay un límite de invitados?',               a:'No. Puedes enviar la invitación a todos los invitados que desees sin ningún límite.' },
+];
 
-  // ── STATE ─────────────────────────────────────────────────────
-  let selectedPlan = 'premium';
-  let selectedAddons = [];
+/* ═══════════════════════════════════════════ STATE */
+let selectedPlan = 'premium';
+let selectedAddons = [];
 
-  // ── HELPERS ───────────────────────────────────────────────────
-  const $ = id => document.getElementById(id);
-  const year = new Date().getFullYear();
-  document.querySelectorAll('#year, .year2').forEach(el => el.textContent = year);
+/* ═══════════════════════════════════════════ YEAR */
+const yr = new Date().getFullYear();
+$('year').textContent = yr; $('year2').textContent = yr;
 
-  function getTotal() {
-    const plan = PLANS.find(p => p.id === selectedPlan);
-    const addonsTotal = ADDONS.filter(a => selectedAddons.includes(a.id)).reduce((s, a) => s + a.price, 0);
-    return (plan?.price ?? 0) + addonsTotal;
-  }
+/* ═══════════════════════════════════════════ MOBILE MENU */
+const hamburger = $('hamburger'), mobileMenu = $('mobile-menu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+function closeMobile() { mobileMenu.classList.remove('open'); }
 
-  // ── RENDER PLAN CARDS ─────────────────────────────────────────
-  function renderPlans() {
-    const grid = $('plans-grid');
-    // remove old cards (keep order panel)
-    const panel = $('order-panel');
-    grid.innerHTML = '';
-    grid.appendChild(panel);
+/* ═══════════════════════════════════════════ SCROLL REVEAL */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+function observeReveal() { document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el)); }
 
-    PLANS.forEach(p => {
-      const off = Math.round((1 - p.price / p.priceBefore) * 100);
-      const isSel = selectedPlan === p.id;
-      const card = document.createElement('div');
-      card.className = 'plan-card' + (isSel ? ' selected' : '');
-      card.dataset.id = p.id;
-      card.innerHTML = `
-        <div class="oferta-badge">🔥 OFERTA</div>
-        ${p.popular ? '<div class="popular-badge">Más popular</div>' : ''}
-        <div class="card-img">
-          <img src="${p.image}" alt="${p.label}" loading="lazy" />
-          <div class="card-img-overlay"></div>
-          <span class="card-label">${p.label}</span>
+/* ═══════════════════════════════════════════ HELPERS */
+function getTotal() {
+  const plan = PLANS.find(p => p.id === selectedPlan);
+  return (plan?.price ?? 0) + ADDONS.filter(a => selectedAddons.includes(a.id)).reduce((s,a) => s + a.price, 0);
+}
+
+/* ═══════════════════════════════════════════ RENDER PLAN CARDS */
+function renderPlans() {
+  const row = $('plans-row');
+  row.innerHTML = '';
+  PLANS.forEach(p => {
+    const off  = Math.round((1 - p.price / p.priceBefore) * 100);
+    const isSel = selectedPlan === p.id;
+    const card = document.createElement('div');
+    card.className = 'plan-card reveal' + (isSel ? ' selected' : '');
+    card.innerHTML = `
+      <div class="oferta-badge">🔥 OFERTA</div>
+      ${p.popular ? '<div class="popular-badge">Más popular</div>' : ''}
+      <div class="card-img-wrap">
+        <img src="${p.image}" alt="${p.label}" loading="lazy" />
+        <div class="card-img-gradient"></div>
+        <span class="card-plan-label">${p.label}</span>
+      </div>
+      <div class="card-body">
+        <p class="card-price">${fmt(p.price)}</p>
+        <div class="card-before-row">
+          <span class="card-before">${fmt(p.priceBefore)}</span>
+          <span class="card-off-badge">-${off}% OFF</span>
         </div>
-        <div class="card-body">
-          <p class="card-price">${fmt(p.price)}</p>
-          <div class="card-before-wrap">
-            <span class="card-before">${fmt(p.priceBefore)}</span>
-            <span class="card-off">-${off}% OFF</span>
-          </div>
-          <ul class="card-features">
-            ${p.features.map(f => `<li>${f}</li>`).join('')}
-          </ul>
-          <button class="card-btn ${isSel ? 'filled' : 'outline'}">
-            ${isSel ? '✓ Seleccionado' : 'Seleccionar'}
-          </button>
-        </div>`;
-      card.addEventListener('click', () => { selectedPlan = p.id; renderPlans(); renderPanel(); });
-      grid.insertBefore(card, panel);
-    });
-  }
-
-  // ── RENDER ORDER PANEL ────────────────────────────────────────
-  function renderPanel() {
-    const plan = PLANS.find(p => p.id === selectedPlan);
-    $('panel-title').textContent = plan ? `Cinema ${plan.label}` : 'Elige un plan';
-
-    // addons
-    $('addons-list').innerHTML = ADDONS.map(a => {
-      const active = selectedAddons.includes(a.id);
-      return `<button class="addon-btn${active?' active':''}" data-addon="${a.id}">
-        <span class="addon-name">${a.label}</span>
-        <span class="addon-price">+${fmt(a.price)}</span>
-      </button>`;
-    }).join('');
-    $('addons-list').querySelectorAll('.addon-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.addon;
-        selectedAddons = selectedAddons.includes(id) ? selectedAddons.filter(x => x !== id) : [...selectedAddons, id];
-        renderPanel();
-      });
-    });
-
-    // summary
-    const total = getTotal();
-    let rows = '';
-    if (plan) rows += `<div class="summary-row"><span>Plan ${plan.label}</span><span>${fmt(plan.price)}</span></div>`;
-    selectedAddons.forEach(id => {
-      const a = ADDONS.find(x => x.id === id);
-      if (a) rows += `<div class="summary-row"><span>${a.label}</span><span>+${fmt(a.price)}</span></div>`;
-    });
-    $('summary').innerHTML = rows + `<div class="summary-total"><span>Total</span><span class="summary-total-price">${fmt(total)}</span></div>`;
-
-    // CTA
-    const cta = $('panel-cta');
-    cta.disabled = !plan;
-    cta.textContent = plan ? '🛒 Contratar ahora' : '🛒 Elige un plan';
-    cta.onclick = plan ? showPedido : null;
-  }
-
-  // ── SHOW PEDIDO ───────────────────────────────────────────────
-  function showPedido() {
-    const plan = PLANS.find(p => p.id === selectedPlan);
-    if (!plan) return;
-    const activeAddons = ADDONS.filter(a => selectedAddons.includes(a.id));
-    const total = getTotal();
-
-    // fill digital card
-    $('dc-img').src = plan.image;
-    $('dc-plan-badge').textContent = plan.label;
-    $('dc-total-price').textContent = fmt(total);
-
-    // film holes
-    const holes = Array.from({length:14}).map(()=>'<div class="dc-film-hole"></div>').join('');
-    $('dc-film-top').innerHTML = holes;
-    $('dc-film-bottom').innerHTML = Array.from({length:10}).map(()=>'<div class="dc-film-hole"></div>').join('');
-
-    // features
-    $('dc-features').innerHTML = plan.features.map(f => `
-      <div class="dc-feat"><div class="dc-feat-dot">✦</div><span class="dc-feat-text">${f}</span></div>`).join('');
-
-    // addons
-    if (activeAddons.length) {
-      $('dc-addons-section').style.display = 'block';
-      $('dc-addons-list').innerHTML = activeAddons.map(a => `
-        <div class="dc-addon-item">
-          <span class="dc-addon-name">✓ ${a.label}</span>
-          <span class="dc-addon-price">+${fmt(a.price)}</span>
-        </div>`).join('');
-    } else {
-      $('dc-addons-section').style.display = 'none';
-    }
-
-    // breakdown
-    let bRows = `<div class="breakdown-row"><span>Invitación Cinema ${plan.label}</span><strong>${fmt(plan.price)}</strong></div>`;
-    activeAddons.forEach(a => { bRows += `<div class="breakdown-row"><span>${a.label}</span><strong>+${fmt(a.price)}</strong></div>`; });
-    $('breakdown-rows').innerHTML = bRows;
-    $('breakdown-total').textContent = fmt(total);
-
-    // WA link
-    const addonLine = activeAddons.length ? `\nComplementos: ${activeAddons.map(a=>a.label).join(', ')}` : '';
-    const msg = encodeURIComponent(`¡Hola! Quiero contratar la Invitación Digital Cinema Boda — Plan ${plan.label} (${fmt(plan.price)})${addonLine}\nTotal: ${fmt(total)}`);
-    $('wa-btn').href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
-
-    document.querySelectorAll('.year2').forEach(el => el.textContent = year);
-
-    $('planes-page').classList.add('hidden');
-    $('pedido-page').classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  // ── BACK BUTTON ───────────────────────────────────────────────
-  $('btn-back').addEventListener('click', () => {
-    $('pedido-page').classList.remove('active');
-    $('planes-page').classList.remove('hidden');
-    window.scrollTo(0, 0);
+        <ul class="card-features">
+          ${p.features.map(f => `<li><span class="card-feat-dot">✦</span>${f}</li>`).join('')}
+        </ul>
+        <button class="card-btn ${isSel ? 'filled' : 'outline'}">
+          ${isSel ? '✓ Seleccionado' : 'Seleccionar'}
+        </button>
+      </div>`;
+    card.addEventListener('click', () => { selectedPlan = p.id; renderPlans(); renderPanel(); observeReveal(); });
+    row.appendChild(card);
   });
+  observeReveal();
+}
 
-  // ── FAQ ───────────────────────────────────────────────────────
-  $('faq-list').innerHTML = FAQS.map((f,i) => `
-    <div class="faq-item" id="faq-${i}">
-      <button class="faq-btn" data-i="${i}">
-        <span class="faq-question">${f.q}</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">${f.a}</div>
-    </div>`).join('');
-  $('faq-list').querySelectorAll('.faq-btn').forEach(btn => {
+/* ═══════════════════════════════════════════ RENDER ORDER PANEL */
+function renderPanel() {
+  const plan = PLANS.find(p => p.id === selectedPlan);
+  $('panel-subtitle').textContent = plan ? `Cinema ${plan.label}` : 'Elige un plan';
+
+  $('addons-list').innerHTML = ADDONS.map(a => {
+    const active = selectedAddons.includes(a.id);
+    return `<button class="addon-btn${active?' active':''}" data-id="${a.id}">
+      <span class="addon-name">${a.label}</span>
+      <span class="addon-price">+${fmt(a.price)}</span>
+    </button>`;
+  }).join('');
+  $('addons-list').querySelectorAll('.addon-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const item = $('faq-' + btn.dataset.i);
-      item.classList.toggle('open');
+      const id = btn.dataset.id;
+      selectedAddons = selectedAddons.includes(id) ? selectedAddons.filter(x=>x!==id) : [...selectedAddons, id];
+      renderPanel();
     });
   });
 
-  // ── MOBILE MENU ───────────────────────────────────────────────
-  $('hamburger').addEventListener('click', () => {
-    $('mobile-menu').classList.toggle('open');
+  const total = getTotal();
+  let rows = '';
+  if (plan) rows += `<div class="summary-row"><span>Plan ${plan.label}</span><span>${fmt(plan.price)}</span></div>`;
+  selectedAddons.forEach(id => {
+    const a = ADDONS.find(x=>x.id===id);
+    if (a) rows += `<div class="summary-row"><span>${a.label}</span><span>+${fmt(a.price)}</span></div>`;
   });
+  $('summary-box').innerHTML = rows +
+    `<div class="summary-total"><span class="summary-total-label">Total</span><span class="summary-total-price">${fmt(total)}</span></div>`;
 
-  // ── INIT ──────────────────────────────────────────────────────
-  renderPlans();
-  renderPanel();
+  const cta = $('panel-cta');
+  cta.disabled = !plan;
+  cta.innerHTML = plan ? '🛒 Contratar ahora' : '🛒 Elige un plan';
+  cta.onclick = plan ? showPedido : null;
+}
+
+/* ═══════════════════════════════════════════ SHOW PEDIDO */
+function showPedido() {
+  const plan = PLANS.find(p => p.id === selectedPlan);
+  if (!plan) return;
+  const activeAddons = ADDONS.filter(a => selectedAddons.includes(a.id));
+  const total = getTotal();
+
+  $('dc-img').src = plan.image;
+  $('dc-plan-badge').textContent = plan.label;
+  $('dc-price').textContent = fmt(total);
+
+  const holes = (n) => Array.from({length:n}).map(()=>'<div class="dc-hole"></div>').join('');
+  $('dc-film-strip').innerHTML = holes(16);
+  $('dc-film-bottom').innerHTML = holes(12);
+
+  $('dc-features').innerHTML = plan.features.map(f =>
+    `<div class="dc-feat"><div class="dc-feat-icon">✦</div><span class="dc-feat-text">${f}</span></div>`
+  ).join('');
+
+  if (activeAddons.length) {
+    $('dc-addons-wrap').style.display = 'block';
+    $('dc-addons-list').innerHTML = activeAddons.map(a =>
+      `<div class="dc-addon-item"><span class="dc-addon-name">✓ ${a.label}</span><span class="dc-addon-price">+${fmt(a.price)}</span></div>`
+    ).join('');
+  } else {
+    $('dc-addons-wrap').style.display = 'none';
+  }
+
+  let bRows = `<div class="breakdown-row"><span>Invitación Cinema ${plan.label}</span><strong>${fmt(plan.price)}</strong></div>`;
+  activeAddons.forEach(a => {
+    bRows += `<div class="breakdown-row"><span>${a.label}</span><strong>+${fmt(a.price)}</strong></div>`;
+  });
+  $('breakdown-rows').innerHTML = bRows;
+  $('breakdown-total').textContent = fmt(total);
+
+  const addonLine = activeAddons.length ? `\nComplementos: ${activeAddons.map(a=>a.label).join(', ')}` : '';
+  const msg = encodeURIComponent(`¡Hola! Quiero contratar:\n✨ Invitación Digital Cinema Boda — Plan ${plan.label}\n💰 Precio: ${fmt(plan.price)}${addonLine}\n💳 Total: ${fmt(total)}`);
+  $('wa-btn').href = `https://wa.me/message/57HQCKAMGELDG1?text=${msg}`;
+
+  $('planes-page').classList.add('hidden');
+  $('pedido-page').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ═══════════════════════════════════════════ BACK */
+$('btn-back').addEventListener('click', () => {
+  $('pedido-page').classList.remove('active');
+  $('planes-page').classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+/* ═══════════════════════════════════════════ FAQ */
+$('faq-list').innerHTML = FAQS.map((f,i) => `
+  <div class="faq-item reveal" id="faq-${i}">
+    <button class="faq-trigger" data-i="${i}" aria-expanded="false">
+      <span class="faq-question">${f.q}</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-body"><p>${f.a}</p></div>
+  </div>`).join('');
+
+$('faq-list').addEventListener('click', e => {
+  const btn = e.target.closest('.faq-trigger');
+  if (!btn) return;
+  const item = $('faq-' + btn.dataset.i);
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+});
+
+/* ═══════════════════════════════════════════ INIT */
+renderPlans();
+renderPanel();
+observeReveal();
 </script>
 </body>
 </html>
