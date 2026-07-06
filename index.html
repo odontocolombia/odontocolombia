@@ -318,10 +318,34 @@ button{font-family:inherit;cursor:pointer}
 .hp-bar-url{font-size:.45rem;color:rgba(201,169,110,.45);letter-spacing:.05em;font-family:'Jost',sans-serif;flex:1;text-align:center}
 
 /* cover photo */
-.hp-cover{width:100%;height:100px;border-radius:.65rem;overflow:hidden;position:relative}
-.hp-cover img{width:100%;height:100%;object-fit:cover}
-.hp-cover-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.1),rgba(26,18,8,.7))}
-.hp-cover-text{position:absolute;bottom:.5rem;left:0;right:0;text-align:center}
+.hp-cover{width:100%;height:110px;border-radius:.65rem;overflow:hidden;position:relative}
+/* Strip que se desliza horizontalmente */
+.hp-cover-strip{
+  display:flex;
+  width:500%; /* 5 imágenes */
+  height:100%;
+  animation:hp-slide 10s ease-in-out infinite;
+}
+.hp-cover-strip img{
+  width:20%; /* 1/5 del strip */
+  height:100%;
+  object-fit:cover;
+  flex-shrink:0;
+}
+@keyframes hp-slide{
+  0%,15%   { transform:translateX(0) }
+  20%,35%  { transform:translateX(-20%) }
+  40%,55%  { transform:translateX(-40%) }
+  60%,75%  { transform:translateX(-60%) }
+  80%,95%  { transform:translateX(-80%) }
+  100%     { transform:translateX(0) }
+}
+.hp-cover-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.05),rgba(26,18,8,.72));pointer-events:none}
+/* dots indicator */
+.hp-dots{position:absolute;bottom:.35rem;left:0;right:0;display:flex;justify-content:center;gap:.28rem;z-index:2}
+.hp-dot-i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .3s}
+.hp-dot-i.active{background:var(--gold);width:10px;border-radius:99px}
+.hp-cover-text{position:absolute;bottom:.55rem;left:0;right:0;text-align:center;z-index:3}
 .hp-cover-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:300;color:#fff;line-height:1.15}
 .hp-cover-title em{font-style:italic;font-weight:600;color:var(--gold)}
 
@@ -816,10 +840,23 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
             <span class="hp-bar-url">guekaideas.com/val-diego</span>
           </div>
 
-          <!-- Cover photo -->
+          <!-- Cover — image slider -->
           <div class="hp-cover">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy" width="220" height="100"/>
+            <div class="hp-cover-strip" id="hp-strip">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
+              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
+            </div>
             <div class="hp-cover-ov"></div>
+            <div class="hp-dots" id="hp-dots">
+              <div class="hp-dot-i active"></div>
+              <div class="hp-dot-i"></div>
+              <div class="hp-dot-i"></div>
+              <div class="hp-dot-i"></div>
+              <div class="hp-dot-i"></div>
+            </div>
             <div class="hp-cover-text">
               <div class="hp-cover-title">Valentina<br>&amp; <em>Diego</em></div>
             </div>
@@ -1295,8 +1332,24 @@ renderPhoneCD2();
 setInterval(() => { renderHeroCD(); renderPhoneCD(); renderPhoneCD2(); }, 1000);
 
 /* ══════════════════════════════════════════════════════
-   RSVP COUNTER ANIMATION (120 → 148)
+   HERO PHONE — DOTS SYNC con animación CSS
+   Cada slide dura 2s visible dentro del ciclo de 10s
 ══════════════════════════════════════════════════════ */
+(function() {
+  const dots = document.querySelectorAll('#hp-dots .hp-dot-i');
+  if (!dots.length) return;
+  const total     = dots.length;   // 5
+  const cycleSecs = 10;            // debe coincidir con animation-duration
+  let current = 0;
+
+  function tick() {
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    current = (current + 1) % total;
+  }
+
+  tick();
+  setInterval(tick, (cycleSecs / total) * 1000); // cada 2 s
+})();
 let rsvpCount = 120;
 const rsvpEl = document.getElementById('rsvp-count');
 if (rsvpEl) {
