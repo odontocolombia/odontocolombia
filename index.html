@@ -1,345 +1,287 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gueka Ideas – Invitaciones Digitales</title>
-<meta name="description" content="Invitaciones digitales, sustentables e interactivas. RSVP online, Maps integrado, agenda digital y mucho más." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: 'Jost', sans-serif; background: #f7f2ec; color: #1a1208; }
-a { text-decoration: none; }
-ul { list-style: none; }
-img { display: block; max-width: 100%; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitaciones Infantiles – Gueka Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: #f7f2ec; color: #1a1208; overflow-x: hidden; }
 
-.fade-in { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-.fade-in-delay-1 { transition-delay: .1s; }
-.fade-in-delay-2 { transition-delay: .2s; }
-.fade-in-delay-3 { transition-delay: .3s; }
-.fade-in-delay-4 { transition-delay: .4s; }
-.fade-in-delay-5 { transition-delay: .5s; }
-.fade-from-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
-.fade-from-left.visible { opacity: 1; transform: translateX(0); }
-.fade-from-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
-.fade-from-right.visible { opacity: 1; transform: translateX(0); }
+    /* NAVBAR */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: all .35s ease; padding: 0 2rem;
+    }
+    header.scrolled {
+      background: rgba(247,242,236,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,169,110,0.2);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      height: clamp(70px,10vw,90px);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img {
+      height: clamp(56px,8vw,96px);
+      filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%);
+      transition: filter .3s;
+    }
+    header.scrolled .nav-logo img { filter: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+      font-weight: 500; text-decoration: none; color: rgba(255,255,255,.75);
+      transition: color .2s; font-family: 'Jost', sans-serif;
+    }
+    header.scrolled .nav-links a { color: #7a6a58; }
+    .nav-links a:hover { color: #c9a96e !important; }
+    .nav-btn {
+      background: #c9a96e; color: #1a1208; border-radius: 99px;
+      padding: .6rem 1.4rem; font-size: .7rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+      display: flex; align-items: center; gap: .4rem; transition: opacity .2s;
+    }
+    .nav-btn:hover { opacity: .85; }
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; color: white; font-size: 1.5rem;
+    }
+    header.scrolled .hamburger { color: #1a1208; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 1.2rem;
+      background: #f7f2ec; padding: 1rem 2rem 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: .8rem; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; text-decoration: none; color: #1a1208;
+    }
+    .mobile-menu .nav-btn { width: fit-content; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .hamburger { display: block; }
+    }
 
-.divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0; }
-.divider-line { height: 1px; width: 60px; }
-.divider-line-gold { background: rgba(201,169,110,.5); }
-.divider-line-gold-dim { background: rgba(201,169,110,.35); }
-.divider-star { color: #c9a96e; }
-.section-label { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; font-family: 'Jost', sans-serif; }
-.section-title-light { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: #1a1208; }
-.section-title-dark { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: white; }
-.section-sub { color: #7a6a58; font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; font-family: 'Jost', sans-serif; }
-.section-sub-dark { color: rgba(247,242,236,.5); font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; font-family: 'Jost', sans-serif; }
-.section-head { text-align: center; margin-bottom: 4rem; }
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0; }
+    .divider-line { height: 1px; width: 60px; background: rgba(201,169,110,.5); }
+    .divider-line.dim { background: rgba(201,169,110,.35); }
+    .divider span { color: #c9a96e; }
 
-/* NAVBAR */
-#navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 0 2rem; transition: all .35s ease;
-}
-#navbar.scrolled {
-  background: rgba(247,242,236,0.97);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(201,169,110,0.2);
-}
-.navbar-inner {
-  max-width: 1200px; margin: 0 auto;
-  height: clamp(70px,10vw,90px);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.navbar-logo img {
-  height: clamp(56px,8vw,96px);
-  filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%);
-  transition: filter .3s;
-}
-#navbar.scrolled .navbar-logo img { filter: none; }
-.navbar-links { display: flex; gap: 2rem; }
-.navbar-links a {
-  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
-  font-weight: 500; color: rgba(255,255,255,.75); font-family: 'Jost', sans-serif;
-  transition: color .2s;
-}
-#navbar.scrolled .navbar-links a { color: #7a6a58; }
-.navbar-links a:hover, #navbar.scrolled .navbar-links a:hover { color: #c9a96e; }
-.navbar-cta {
-  background: #c9a96e; color: #1a1208; border-radius: 99px;
-  padding: .6rem 1.4rem; font-size: .7rem; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase;
-  display: flex; align-items: center; gap: .4rem;
-  transition: opacity .2s; font-family: 'Jost', sans-serif;
-}
-.navbar-cta:hover { opacity: .85; }
-.hamburger {
-  display: none; background: none; border: none; cursor: pointer;
-  color: white; font-size: 1.5rem;
-}
-#navbar.scrolled .hamburger { color: #1a1208; }
-.mobile-menu {
-  display: none; flex-direction: column; gap: 1.2rem;
-  background: #f7f2ec; padding: 1rem 2rem 1.5rem;
-}
-.mobile-menu a {
-  font-size: .8rem; font-weight: 500; letter-spacing: .1em;
-  text-transform: uppercase; color: #1a1208; font-family: 'Jost', sans-serif;
-}
-.mobile-menu .navbar-cta { width: fit-content; }
-@media (max-width: 768px) {
-  .navbar-links, .navbar-cta.desktop-only { display: none !important; }
-  .hamburger { display: block; }
-}
-@media (min-width: 769px) { .mobile-menu { display: none !important; } }
+    /* HERO */
+    #hero {
+      min-height: 100svh; display: flex; align-items: center; justify-content: center;
+      background: #1a1208; position: relative; overflow: hidden;
+      text-align: center; padding: clamp(4rem,10vw,6rem) 1.5rem 3rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');
+      background-size: cover; background-position: center;
+      opacity: .35; transform: scale(1.05);
+    }
+    .hero-overlay1 {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(160deg, rgba(10,5,2,0.88) 0%, rgba(26,18,8,0.72) 50%, rgba(10,5,2,0.92) 100%);
+    }
+    .hero-overlay2 {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,169,110,.18) 0%, transparent 70%);
+    }
+    .hero-content {
+      max-width: 860px; margin: 0 auto; position: relative; z-index: 1;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp .9s ease forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .hero-logo { margin-top: 4rem; margin-bottom: 2.5rem; display: flex; justify-content: center; }
+    .hero-logo img {
+      width: 300px; max-width: 80vw;
+      filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(110%);
+    }
+    .hero-eyebrow {
+      font-size: .65rem; letter-spacing: .35em; text-transform: uppercase;
+      color: rgba(201,169,110,.7); margin-bottom: .5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem,9vw,5.5rem); font-weight: 300;
+      color: white; line-height: 1.05; margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: normal; font-weight: 600; color: #c9a96e; }
+    .hero-sub {
+      font-size: 1rem; font-weight: 300; color: rgba(247,242,236,.65);
+      max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7;
+    }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 3rem; }
+    .btn-gold {
+      background: #c9a96e; color: #1a1208; border-radius: 99px;
+      padding: 1rem 2rem; font-size: .85rem; font-weight: 600;
+      letter-spacing: .06em; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      transition: transform .2s, opacity .2s;
+    }
+    .btn-gold:hover { transform: scale(1.04); }
+    .btn-outline {
+      background: transparent; color: rgba(247,242,236,.8);
+      border: 1px solid rgba(201,169,110,.4); border-radius: 99px;
+      padding: 1rem 2rem; font-size: .85rem; font-weight: 400;
+      letter-spacing: .06em; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      transition: transform .2s;
+    }
+    .btn-outline:hover { transform: scale(1.04); }
+    .hero-arrow {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,.35); font-size: 1.2rem;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
-/* HERO */
-#hero {
-  min-height: 100svh; display: flex; align-items: center; justify-content: center;
-  background: #1a1208; position: relative; overflow: hidden;
-  text-align: center; padding: clamp(4rem,10vw,6rem) 1.5rem 3rem;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1551564874-2c247864797e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');
-  background-size: cover; background-position: center;
-  opacity: .38; transform: scale(1.05);
-}
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg, rgba(10,5,2,.85) 0%, rgba(26,18,8,.7) 50%, rgba(10,5,2,.9) 100%);
-  pointer-events: none;
-}
-.hero-glow {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,169,110,.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-content { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
-.hero-logo { margin-top: 4rem; margin-bottom: 2.5rem; display: flex; justify-content: center; }
-.hero-logo img {
-  width: 340px; max-width: 85vw;
-  filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(110%);
-}
-.hero-sup { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; font-family: 'Jost', sans-serif; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,9vw,5.5rem); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 1.5rem; }
-.hero-title em { font-style: normal; font-weight: 600; color: #c9a96e; }
-.hero-sub { font-size: 1rem; font-weight: 300; color: rgba(247,242,236,.65); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; font-family: 'Jost', sans-serif; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 3rem; }
-.btn-gold {
-  background: #c9a96e; color: #1a1208; border-radius: 99px;
-  padding: 1rem 2rem; font-size: .85rem; font-weight: 600;
-  letter-spacing: .06em; display: inline-flex; align-items: center;
-  gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s;
-}
-.btn-gold:hover { transform: scale(1.04); }
-.btn-outline {
-  background: transparent; color: rgba(247,242,236,.8);
-  border: 1px solid rgba(201,169,110,.4); border-radius: 99px;
-  padding: 1rem 2rem; font-size: .85rem; font-weight: 400;
-  letter-spacing: .06em; display: inline-flex; align-items: center;
-  gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s;
-}
-.btn-outline:hover { transform: scale(1.04); }
-.hero-stats {
-  border-top: 1px solid rgba(201,169,110,.2);
-  padding-top: 1.5rem; padding-bottom: 2rem;
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem;
-}
-.stat-val { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: #c9a96e; margin-bottom: .25rem; }
-.stat-lbl { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,242,236,.4); font-family: 'Jost', sans-serif; }
-.hero-arrow { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.35); font-size: 1.2rem; animation: bounce .6s ease-in-out infinite alternate; }
-@keyframes bounce { to { transform: translateX(-50%) translateY(6px); } }
-.particle { position: absolute; border-radius: 50%; background: rgba(201,169,110,.4); animation: float-p 4s ease-in-out infinite; pointer-events: none; }
-@keyframes float-p { 0%,100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(-20px); opacity: .7; } }
-@media (max-width: 768px) { .hero-stats { grid-template-columns: repeat(2,1fr); gap: 1rem; } }
-@media (max-width: 480px) { .hero-ctas { flex-direction: column; align-items: stretch; } .hero-ctas a { text-align: center; justify-content: center; } }
+    /* PARTICLES */
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: rgba(201,169,110,0.4);
+      animation: floatP linear infinite;
+    }
+    @keyframes floatP {
+      0%,100%{opacity:.2;transform:translateY(0)}
+      50%{opacity:.7;transform:translateY(-20px)}
+    }
 
-/* CATALOGO */
-#catalogo { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
-.cat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
-.cat-card {
-  border-radius: 1rem; overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,.08);
-  background: #fff; border: 1px solid rgba(201,169,110,.15);
-  transition: box-shadow .3s, border-color .3s, transform .3s;
-  cursor: pointer; display: block; color: inherit;
-}
-.cat-card:hover {
-  box-shadow: 0 16px 48px rgba(0,0,0,.16);
-  border-color: rgba(201,169,110,.5);
-  transform: translateY(-6px);
-}
-.cat-img-wrap { position: relative; height: 200px; overflow: hidden; }
-.cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-.cat-card:hover .cat-img-wrap img { transform: scale(1.07); }
-.cat-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,18,8,.1) 0%, rgba(201,169,110,.35) 100%); }
-.cat-name { position: absolute; bottom: 1rem; left: 1rem; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.5); letter-spacing: .02em; }
-.cat-body { padding: 1rem 1.25rem 1.25rem; }
-.cat-divider { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
-.cat-divider-line { height: 1px; flex: 1; background: linear-gradient(90deg,#c9a96e,transparent); }
-.cat-divider-star { color: #c9a96e; font-size: .6rem; }
-.cat-desc { font-size: .78rem; color: #7a6a58; line-height: 1.5; font-family: 'Jost', sans-serif; }
-@media (max-width: 1024px) { .cat-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 480px) { .cat-grid { grid-template-columns: 1fr 1fr; gap: .75rem; } }
+    /* ESTILOS SECTION */
+    #estilos { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-eyebrow {
+      font-size: .65rem; letter-spacing: .35em; text-transform: uppercase;
+      color: rgba(201,169,110,.7); margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: #1a1208;
+    }
+    .section-title em { font-style: italic; }
+    .section-sub { color: #7a6a58; font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+    .cards-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    }
+    @media (max-width: 1100px) { .cards-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr; } }
+    .card {
+      border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      background: #fff; border: 1px solid rgba(201,169,110,.15);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      opacity: 0; transform: translateY(40px);
+    }
+    .card.visible { animation: cardIn .6s ease forwards; }
+    @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.16); border-color: rgba(201,169,110,.5); }
+    .card-img-wrap { position: relative; height: 200px; overflow: hidden; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+    .card:hover .card-img-wrap img { transform: scale(1.07); }
+    .card-img-overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(26,18,8,0.1) 0%, rgba(201,169,110,0.35) 100%);
+    }
+    .card-name {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+      font-weight: 600; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.5);
+      letter-spacing: .02em;
+    }
+    .card-body { padding: 1rem 1.25rem 1.25rem; }
+    .card-sep { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+    .card-sep-line { height: 1px; flex: 1; background: linear-gradient(90deg, #c9a96e, transparent); }
+    .card-sep span { color: #c9a96e; font-size: .6rem; }
+    .card-desc { font-size: .78rem; color: #7a6a58; line-height: 1.5; margin: 0; }
 
-/* INTERACTIVE */
-#interactive {
-  padding: clamp(3rem,8vw,6rem) 1.5rem;
-  background: linear-gradient(150deg,#1a1208 0%,#2a1c0e 100%);
-  position: relative; overflow: hidden;
-}
-.grid-overlay {
-  position: absolute; inset: 0; pointer-events: none; opacity: .05;
-  background-image:
-    repeating-linear-gradient(0deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 60px),
-    repeating-linear-gradient(90deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 60px);
-}
-.interactive-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.interactive-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,4vw,3.2rem); font-weight: 300; color: white; line-height: 1.15; margin-bottom: .5rem; }
-.interactive-title em { font-style: italic; color: #c9a96e; }
-.interactive-sub { font-size: .95rem; font-weight: 300; color: rgba(247,242,236,.65); line-height: 1.7; margin-bottom: 2rem; font-family: 'Jost', sans-serif; }
-.checks { display: flex; flex-direction: column; gap: .9rem; margin-bottom: 2rem; }
-.check-item { display: flex; align-items: center; gap: .75rem; font-size: .88rem; font-weight: 300; color: rgba(247,242,236,.8); font-family: 'Jost', sans-serif; }
-.delivery-badge { display: flex; align-items: center; gap: .75rem; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(201,169,110,.6); font-family: 'Jost', sans-serif; }
-.delivery-badge-line { height: 1px; width: 32px; background: #c9a96e; }
-.delivery-badge span { font-weight: 700; color: #c9a96e; }
-.phone { width: 260px; height: 520px; border-radius: 3rem; overflow: hidden; background: linear-gradient(170deg,#251508 0%,#1a0f05 100%); border: 1px solid rgba(201,169,110,.3); box-shadow: 0 32px 80px rgba(0,0,0,.5),inset 0 0 40px rgba(201,169,110,.03); display: flex; flex-direction: column; align-items: center; animation: float 4s ease-in-out infinite; }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.phone-notch { width: 96px; height: 24px; border-radius: 0 0 1rem 1rem; background: #0e0804; flex-shrink: 0; }
-.phone-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center; gap: .75rem; width: 100%; }
-.phone-logo { width: 160px; filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%); }
-.phone-divider { height: 1px; width: 96px; background: linear-gradient(90deg,transparent,#c9a96e,transparent); }
-.phone-names { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: white; line-height: 1.2; }
-.phone-date { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(201,169,110,.55); font-family: 'Jost', sans-serif; }
-.phone-btn { width: 100%; background: #c9a96e; color: #1a1208; border: none; border-radius: 99px; padding: .75rem; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'Jost', sans-serif; }
-.phone-chips { display: flex; gap: .75rem; }
-.phone-chip { background: rgba(201,169,110,.12); color: #c9a96e; border-radius: .6rem; padding: .4rem .6rem; font-size: .65rem; font-family: 'Jost', sans-serif; }
-.phone-footer { width: 100%; padding: .75rem 1.5rem; background: rgba(201,169,110,.08); border-top: 1px solid rgba(201,169,110,.1); text-align: center; font-size: .65rem; color: rgba(201,169,110,.5); font-family: 'Jost', sans-serif; }
-.phone-footer strong { color: #c9a96e; }
-.phone-wrap { display: flex; justify-content: center; }
-@media (max-width: 768px) { .interactive-inner { grid-template-columns: 1fr; gap: 2.5rem; } .phone-wrap { display: none !important; } }
+    /* CTA */
+    #nosotros {
+      padding: clamp(3rem,8vw,6rem) 1.5rem;
+      background: linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,169,110,.15) 0%, transparent 70%);
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-label { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: white; margin-bottom: .5rem; }
+    .cta-title em { font-style: italic; color: #c9a96e; }
+    .cta-sub { color: rgba(247,242,236,.55); font-size: .95rem; margin-bottom: 2.5rem; font-weight: 300; }
+    .btn-wa {
+      background: #25D366; color: white; border-radius: 99px;
+      padding: 1.1rem 2.5rem; font-size: .88rem; font-weight: 600;
+      letter-spacing: .06em; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .65rem;
+      box-shadow: 0 8px 24px rgba(37,211,102,.3); transition: transform .2s;
+    }
+    .btn-wa:hover { transform: scale(1.05); }
 
-/* FEATURES */
-#funciones { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
-.feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .75rem; }
-.feat-card { background: white; border: 1px solid rgba(201,169,110,.18); border-radius: .75rem; padding: 1.25rem; transition: border-color .25s, transform .25s, box-shadow .25s; }
-.feat-card:hover { border-color: rgba(201,169,110,.4); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
-.feat-icon { width: 36px; height: 36px; border-radius: .6rem; background: rgba(201,169,110,.1); display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
-.feat-icon svg { width: 16px; height: 16px; stroke: #c9a96e; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.feat-title { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; margin-bottom: .4rem; color: #1a1208; }
-.feat-desc { font-size: .72rem; color: #7a6a58; line-height: 1.55; font-family: 'Jost', sans-serif; }
-@media (max-width: 1024px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+    /* FOOTER */
+    footer { background: #0e0903; border-top: 1px solid rgba(201,169,110,.1); padding: 2rem 1.5rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1.5rem;
+    }
+    .footer-inner img { height: 56px; opacity: .75; filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-links a { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,242,236,.25); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: rgba(247,242,236,.5); }
+    .footer-copy { font-size: .7rem; color: rgba(247,242,236,.18); }
 
-/* PROCESO */
-#proceso { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f0e9df; }
-.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-bottom: 4rem; }
-.step-num { width: 64px; height: 64px; border-radius: 50%; background: white; border: 1px solid rgba(201,169,110,.3); color: #c9a96e; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; transition: border-color .3s, transform .3s; }
-.step:hover .step-num { border-color: #c9a96e; transform: scale(1.05); }
-.step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .75rem; color: #1a1208; }
-.step-desc { font-size: .85rem; color: #7a6a58; line-height: 1.7; font-family: 'Jost', sans-serif; }
-.proceso-cta { text-align: center; }
-.proceso-sub { color: #7a6a58; font-size: .85rem; margin-bottom: 1.5rem; font-family: 'Jost', sans-serif; }
-.btn-dark { background: #1a1208; color: #c9a96e; border-radius: 99px; padding: 1rem 2rem; font-size: .82rem; font-weight: 600; letter-spacing: .06em; display: inline-flex; align-items: center; gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s; }
-.btn-dark:hover { transform: scale(1.04); opacity: .9; }
-@media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-
-/* TESTIMONIOS */
-#testimonios { padding: clamp(3rem,8vw,6rem) 1.5rem; background: linear-gradient(160deg,#1a1208 0%,#2a1c0e 100%); }
-.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
-.test-card { background: rgba(255,255,255,.04); border: 1px solid rgba(201,169,110,.15); border-radius: 1.25rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: border-color .3s, transform .3s, box-shadow .3s; }
-.test-card:hover { border-color: rgba(201,169,110,.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.3); }
-.test-stars { color: #c9a96e; font-size: .85rem; margin-bottom: 1rem; }
-.test-quote { font-size: .82rem; font-weight: 300; color: rgba(247,242,236,.7); line-height: 1.7; font-style: italic; margin-bottom: 1.25rem; flex: 1; font-family: 'Cormorant Garamond', serif; }
-.test-footer { display: flex; align-items: center; gap: .75rem; border-top: 1px solid rgba(201,169,110,.12); padding-top: 1rem; }
-.test-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(201,169,110,.15); color: #c9a96e; font-family: 'Cormorant Garamond', serif; font-size: .9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.test-name { font-size: .82rem; font-weight: 500; color: white; font-family: 'Jost', sans-serif; }
-.test-country { font-size: .7rem; color: rgba(201,169,110,.5); font-family: 'Jost', sans-serif; }
-@media (max-width: 1024px) { .test-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 640px) { .test-grid { grid-template-columns: 1fr; } }
-
-/* FAQ */
-#faq { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
-.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .5rem; }
-.faq-item { background: white; border: 1px solid rgba(201,169,110,.15); border-radius: .75rem; overflow: hidden; transition: border-color .2s; }
-.faq-item.open { border-color: rgba(201,169,110,.4); }
-.faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.5rem; background: none; border: none; text-align: left; font-size: .88rem; font-weight: 500; color: #1a1208; cursor: pointer; font-family: 'Jost', sans-serif; gap: 1rem; }
-.faq-arrow { color: #c9a96e; font-size: .8rem; flex-shrink: 0; transition: transform .25s; }
-.faq-item.open .faq-arrow { transform: rotate(180deg); }
-.faq-body { max-height: 0; overflow: hidden; transition: max-height .35s ease, opacity .3s; opacity: 0; }
-.faq-item.open .faq-body { max-height: 300px; opacity: 1; }
-.faq-answer { padding: 1rem 1.5rem 1.25rem; font-size: .82rem; color: #7a6a58; line-height: 1.7; border-top: 1px solid rgba(201,169,110,.12); font-family: 'Jost', sans-serif; }
-.faq-foot { text-align: center; margin-top: 2rem; font-size: .85rem; color: #7a6a58; font-family: 'Jost', sans-serif; }
-.faq-foot a { color: #c9a96e; font-weight: 500; }
-
-/* NOSOTROS */
-#nosotros { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f0e9df; text-align: center; }
-.nosotros-logo { width: 280px; filter: brightness(0) saturate(100%) sepia(60%) saturate(300%) hue-rotate(5deg) brightness(90%); opacity: .7; margin: 0 auto 2rem; }
-.nosotros-p1 { font-size: .95rem; color: #7a6a58; line-height: 1.8; max-width: 600px; margin: 0 auto; font-family: 'Jost', sans-serif; }
-.nosotros-p2 { font-size: .88rem; color: #7a6a58; line-height: 1.8; max-width: 600px; margin: 1rem auto 0; font-family: 'Jost', sans-serif; }
-
-/* CTA */
-#cta { padding: clamp(3rem,8vw,6rem) 1.5rem; background: linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%); text-align: center; position: relative; overflow: hidden; }
-.cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 80% at 50% 100%,rgba(201,169,110,.15) 0%,transparent 70%); }
-.cta-inner { position: relative; z-index: 1; }
-.btn-wa { background: #25D366; color: white; border-radius: 99px; padding: 1.1rem 2.5rem; font-size: .88rem; font-weight: 600; letter-spacing: .06em; display: inline-flex; align-items: center; gap: .65rem; box-shadow: 0 8px 24px rgba(37,211,102,.3); font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s; }
-.btn-wa:hover { transform: scale(1.05); opacity: .92; }
-
-/* FOOTER */
-footer { background: #0e0903; border-top: 1px solid rgba(201,169,110,.1); padding: 2rem 1.5rem; }
-.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
-.footer-logo { height: 56px; opacity: .75; filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg); }
-.footer-nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-.footer-nav a { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,242,236,.25); font-family: 'Jost', sans-serif; transition: color .2s; }
-.footer-nav a:hover { color: rgba(247,242,236,.5); }
-.footer-copy { font-size: .7rem; color: rgba(247,242,236,.18); font-family: 'Jost', sans-serif; }
-@media (max-width: 768px) { .footer-inner { flex-direction: column; align-items: center; text-align: center; } .footer-nav { justify-content: center; } }
-
-/* FLOAT WA */
-.float-wa { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; width: 56px; height: 56px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,.25); text-decoration: none; cursor: pointer; transition: transform .2s; }
-.float-wa:hover { transform: scale(1.1); }
-.ping { position: absolute; inset: 0; border-radius: 50%; background: #25D366; animation: ping 1.5s cubic-bezier(0,0,.2,1) infinite; opacity: .4; }
-@keyframes ping { 75%,100% { transform: scale(1.8); opacity: 0; } }
-</style>
+    /* FLOAT WA */
+    .float-wa {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4); text-decoration: none; transition: transform .2s;
+    }
+    .float-wa:hover { transform: scale(1.1); }
+    .float-wa svg { width: 28px; height: 28px; fill: white; }
+    .ping {
+      position: absolute; top: -2px; right: -2px; width: 14px; height: 14px;
+      border-radius: 50%; background: #c9a96e;
+      animation: ping 1.5s ease-in-out infinite;
+    }
+    @keyframes ping { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:0} }
+  </style>
 </head>
 <body>
 
-<!-- FLOAT WA -->
-<a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" aria-label="WhatsApp" class="float-wa">
-  <span class="ping"></span>
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
 <!-- NAVBAR -->
-<header id="navbar">
-  <div class="navbar-inner">
-    <a href="index.html" class="navbar-logo">
+<header id="header">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
       <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" />
     </a>
-    <nav class="navbar-links">
-      <a href="#catalogo">Catálogo</a>
-      <a href="#funciones">Funciones</a>
-      <a href="#proceso">Proceso</a>
-      <a href="planes.html">Planes</a>
-      <a href="demo.html">Demo</a>
-      <a href="#faq">FAQ</a>
+    <nav class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="#estilos">Estilos</a>
+      <a href="#nosotros">Comprar</a>
     </nav>
-    <a href="planes.html" class="navbar-cta desktop-only">🛒 Ver Planes</a>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="nav-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar
+    </a>
     <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#catalogo" onclick="closeMobile()">Catálogo</a>
-    <a href="#funciones" onclick="closeMobile()">Funciones</a>
-    <a href="#proceso" onclick="closeMobile()">Proceso</a>
-    <a href="planes.html" onclick="closeMobile()">Planes</a>
-    <a href="demo.html" onclick="closeMobile()">Demo</a>
-    <a href="#faq" onclick="closeMobile()">FAQ</a>
-    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="navbar-cta" onclick="closeMobile()">
+    <a href="/" onclick="closeMobile()">Inicio</a>
+    <a href="#estilos" onclick="closeMobile()">Estilos</a>
+    <a href="#nosotros" onclick="closeMobile()">Comprar</a>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="nav-btn" onclick="closeMobile()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Solicitar
     </a>
@@ -349,367 +291,169 @@ footer { background: #0e0903; border-top: 1px solid rgba(201,169,110,.1); paddin
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-glow"></div>
-  <div class="particle" style="width:3px;height:3px;left:5%;top:15%;animation-duration:3s;animation-delay:0s"></div>
-  <div class="particle" style="width:2px;height:2px;left:10.5%;top:24%;animation-duration:4s;animation-delay:.3s"></div>
-  <div class="particle" style="width:2px;height:2px;left:16%;top:33%;animation-duration:5s;animation-delay:.6s"></div>
-  <div class="particle" style="width:3px;height:3px;left:21.5%;top:42%;animation-duration:6s;animation-delay:.9s"></div>
-  <div class="particle" style="width:2px;height:2px;left:27%;top:51%;animation-duration:3s;animation-delay:1.2s"></div>
-  <div class="particle" style="width:2px;height:2px;left:32.5%;top:60%;animation-duration:4s;animation-delay:1.5s"></div>
-  <div class="particle" style="width:3px;height:3px;left:38%;top:69%;animation-duration:5s;animation-delay:1.8s"></div>
-  <div class="particle" style="width:2px;height:2px;left:43.5%;top:78%;animation-duration:6s;animation-delay:2.1s"></div>
-  <div class="particle" style="width:2px;height:2px;left:49%;top:21%;animation-duration:3s;animation-delay:2.4s"></div>
-  <div class="particle" style="width:3px;height:3px;left:54.5%;top:30%;animation-duration:4s;animation-delay:2.7s"></div>
-  <div class="particle" style="width:2px;height:2px;left:60%;top:39%;animation-duration:5s;animation-delay:3s"></div>
-  <div class="particle" style="width:2px;height:2px;left:65.5%;top:48%;animation-duration:6s;animation-delay:3.3s"></div>
-  <div class="particle" style="width:3px;height:3px;left:71%;top:57%;animation-duration:3s;animation-delay:3.6s"></div>
-  <div class="particle" style="width:2px;height:2px;left:76.5%;top:66%;animation-duration:4s;animation-delay:3.9s"></div>
-  <div class="particle" style="width:2px;height:2px;left:82%;top:75%;animation-duration:5s;animation-delay:4.2s"></div>
-  <div class="particle" style="width:3px;height:3px;left:87.5%;top:19%;animation-duration:6s;animation-delay:4.5s"></div>
-  <div class="particle" style="width:2px;height:2px;left:93%;top:28%;animation-duration:3s;animation-delay:4.8s"></div>
-  <div class="particle" style="width:2px;height:2px;left:97%;top:37%;animation-duration:4s;animation-delay:5.1s"></div>
-
+  <div class="hero-overlay1"></div>
+  <div class="hero-overlay2"></div>
+  <div id="particles"></div>
   <div class="hero-content">
-    <div class="hero-logo fade-in">
+    <div class="hero-logo">
       <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" />
     </div>
-    <p class="hero-sup fade-in fade-in-delay-1">Invitaciones Digitales · Colombia</p>
-    <div class="divider fade-in fade-in-delay-1">
-      <div class="divider-line divider-line-gold-dim"></div>
-      <span class="divider-star">✦</span>
-      <div class="divider-line divider-line-gold-dim"></div>
-    </div>
-    <h1 class="hero-title fade-in fade-in-delay-2">Invitar nunca<br><em>fue tan fácil</em></h1>
-    <p class="hero-sub fade-in fade-in-delay-3">Invitaciones digitales, sustentables e interactivas. Sitio web personalizado con RSVP online, Maps integrado, agenda digital y mucho más.</p>
-    <div class="hero-ctas fade-in fade-in-delay-4">
-      <a href="planes.html" class="btn-gold">🛒 Ver Planes y Precios</a>
-      <a href="demo.html" class="btn-outline">👁 Ver Demo →</a>
-    </div>
-    <div class="hero-stats fade-in fade-in-delay-5">
-      <div><div class="stat-val">+15 años</div><div class="stat-lbl">de experiencia</div></div>
-      <div><div class="stat-val">+500</div><div class="stat-lbl">familias felices</div></div>
-      <div><div class="stat-val">4.9 ★</div><div class="stat-lbl">calificación promedio</div></div>
-      <div><div class="stat-val">24hs</div><div class="stat-lbl">tiempo de entrega</div></div>
+    <p class="hero-eyebrow">· Infantiles</p>
+    <div class="divider"><div class="divider-line dim"></div><span>✦</span><div class="divider-line dim"></div></div>
+    <h1 class="hero-title">
+      Invitaciones<br />
+      <em>Infantiles</em>
+    </h1>
+    <p class="hero-sub">
+      Magia y alegría para los pequeños. Invitaciones coloridas e interactivas que harán que tus invitados pequeños y grandes se emocionen.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicita tu invitación
+      </a>
+      <a href="#estilos" class="btn-outline">Ver estilos infantiles →</a>
     </div>
   </div>
   <div class="hero-arrow">↓</div>
 </section>
 
-<!-- CATALOGO -->
-<section id="catalogo">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Catálogo</p>
-      <h2 class="section-title-light">¿Qué <em style="font-style:italic">Celebramos?</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
-      <p class="section-sub">Tenemos estilos para todos los eventos. Cada celebración merece una invitación especial.</p>
-    </div>
-    <div class="cat-grid">
-      <a href="boda.html" class="cat-card fade-in fade-in-delay-1">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1781479544100-85dc5d475228?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Matrimonio" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Matrimonio</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">La celebración más especial</p></div>
-      </a>
-      <a href="quince.html" class="cat-card fade-in fade-in-delay-2">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1755207296882-995b6b3f709a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="15 Años" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">15 Años</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Un momento único e irrepetible</p></div>
-      </a>
-      <a href="bautizo.html" class="cat-card fade-in fade-in-delay-3">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Bautizo" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Bautizo</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Bienvenida al mundo espiritual</p></div>
-      </a>
-      <a href="comunion.html" class="cat-card fade-in fade-in-delay-4">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1746559676407-370f34bec476?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Comunión" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Comunión</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Un paso de fe importante</p></div>
-      </a>
-      <a href="empresariales.html" class="cat-card fade-in fade-in-delay-1">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1768508950719-4d76978fdf44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Empresarial" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Empresarial</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Eventos corporativos con clase</p></div>
-      </a>
-      <a href="cumpleanos.html" class="cat-card fade-in fade-in-delay-2">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1545696563-af8f6ec2295a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Cumpleaños" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Cumpleaños</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Celebra cada año con estilo</p></div>
-      </a>
-      <a href="graduacion.html" class="cat-card fade-in fade-in-delay-3">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Graduación" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Graduación</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">El comienzo de un nuevo camino</p></div>
-      </a>
-      <a href="infantil.html" class="cat-card fade-in fade-in-delay-4">
-        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Infantiles" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Infantiles</div></div>
-        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Magia y alegría para los pequeños</p></div>
-      </a>
-    </div>
+<!-- ESTILOS -->
+<section id="estilos">
+  <div class="section-header">
+    <p class="section-eyebrow">Estilos</p>
+    <h2 class="section-title">Estilos <em>Infantiles</em></h2>
+    <div class="divider"><div class="divider-line"></div><span>✦</span><div class="divider-line"></div></div>
+    <p class="section-sub">Diseños mágicos y coloridos para fiestas temáticas de bebés y niños.</p>
   </div>
-</section>
-
-<!-- INTERACTIVE -->
-<section id="interactive">
-  <div class="grid-overlay"></div>
-  <div class="interactive-inner">
-    <div class="fade-from-left">
-      <p class="section-label">Digital e Interactivo</p>
-      <h2 class="interactive-title">Una invitación que tus invitados van a <em>adorar</em></h2>
-      <div class="divider" style="justify-content:flex-start">
-        <div class="divider-line divider-line-gold-dim"></div>
-        <span class="divider-star">✦</span>
-        <div class="divider-line divider-line-gold-dim"></div>
-      </div>
-      <p class="interactive-sub">Olvida el papel. Con nuestras invitaciones digitales, tus invitados pueden confirmar asistencia, agendar la fecha, ver el lugar en Maps y mucho más — todo desde su celular.</p>
-      <ul class="checks">
-        <li class="check-item"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Confirmar asistencia con un clic</li>
-        <li class="check-item"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Agendar en su calendario digital</li>
-        <li class="check-item"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Ver indicaciones en Google Maps</li>
-        <li class="check-item"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Enviar sugerencias de canciones</li>
-        <li class="check-item"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Subir fotos del evento en tiempo real</li>
-      </ul>
-      <div class="delivery-badge">
-        <div class="delivery-badge-line"></div>
-        Entrega en <span>24 horas</span>
-      </div>
-    </div>
-    <div class="phone-wrap fade-from-right">
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-content">
-          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="logo" class="phone-logo" />
-          <div class="phone-divider"></div>
-          <div class="phone-names">Valentina<br>&amp; Diego</div>
-          <div class="phone-date">15 · Marzo · 2025</div>
-          <button class="phone-btn">Confirmar Asistencia</button>
-          <div class="phone-chips">
-            <div class="phone-chip">📍 Maps</div>
-            <div class="phone-chip">📅 Agenda</div>
-            <div class="phone-chip">🎵 Música</div>
-          </div>
-        </div>
-        <div class="phone-footer">guekaideas.com/<strong>valentina-diego</strong></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="funciones">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Características</p>
-      <h2 class="section-title-light"><em style="font-style:italic">Funciones</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
-      <p class="section-sub">Prácticas y modernas. Las principales funciones de nuestras invitaciones digitales.</p>
-    </div>
-    <div class="feat-grid" id="feat-grid"></div>
-  </div>
-</section>
-
-<!-- PROCESO -->
-<section id="proceso">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Proceso</p>
-      <h2 class="section-title-light">Tu invitación en <em style="font-style:italic">3 pasos</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
-      <p class="section-sub">Fácil y rápido. Nosotros nos encargamos de todo.</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step fade-in fade-in-delay-1">
-        <div class="step-num">1</div>
-        <h3 class="step-title">Elección</h3>
-        <p class="step-desc">Seleccionas el modelo de invitación que más te guste de nuestro catálogo.</p>
-      </div>
-      <div class="step fade-in fade-in-delay-2">
-        <div class="step-num">2</div>
-        <h3 class="step-title">Personalización</h3>
-        <p class="step-desc">Nos envías los datos y fotos a través del panel de administración exclusivo.</p>
-      </div>
-      <div class="step fade-in fade-in-delay-3">
-        <div class="step-num">3</div>
-        <h3 class="step-title">Envío</h3>
-        <p class="step-desc">Compartes la invitación con todas las personas que desees por donde prefieras.</p>
-      </div>
-    </div>
-    <div class="proceso-cta fade-in fade-in-delay-4">
-      <p class="proceso-sub">Contáctanos y te explicamos los pasos a seguir.</p>
-      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-dark">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Contáctanos por WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section id="testimonios">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Testimonios</p>
-      <h2 class="section-title-dark">Lo que dicen nuestros <em style="font-style:italic;color:#c9a96e">clientes</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold-dim"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold-dim"></div></div>
-      <p class="section-sub-dark">Miles de personas ya confiaron en nosotros para sus invitaciones más especiales.</p>
-    </div>
-    <div class="test-grid">
-      <div class="test-card fade-in fade-in-delay-1">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"Excelente, novedosa, nos encantó!!! La tarjeta divina, súper original y completa. La atención excelente, muy atentos, evacuaron todas nuestras dudas. Super recomendables."</p>
-        <div class="test-footer"><div class="test-avatar">L</div><div><div class="test-name">Liliana A.</div><div class="test-country">Argentina</div></div></div>
-      </div>
-      <div class="test-card fade-in fade-in-delay-2">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"Quiero agradecer por acompañarnos de una manera incondicional, estuvieron pendientes de cada detalle. Sin dudas, para recomendar."</p>
-        <div class="test-footer"><div class="test-avatar">D</div><div><div class="test-name">Daniela Y.</div><div class="test-country">Argentina</div></div></div>
-      </div>
-      <div class="test-card fade-in fade-in-delay-3">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"La invitación quedó pronta en el día! Todo excelente! Casi todos los invitados hicieron comentarios de lo buena que quedó!"</p>
-        <div class="test-footer"><div class="test-avatar">D</div><div><div class="test-name">Diego</div><div class="test-country">Uruguay</div></div></div>
-      </div>
-      <div class="test-card fade-in fade-in-delay-1">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"Súper rápido, en menos de 24hs ya las teníamos! Hermosas!!! Súper recomendable!"</p>
-        <div class="test-footer"><div class="test-avatar">Y</div><div><div class="test-name">Yanina B.</div><div class="test-country">Argentina</div></div></div>
-      </div>
-      <div class="test-card fade-in fade-in-delay-2">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"Un trabajo muy bien hecho, responden rápido y no tardaron ni un día. La atención al cliente 10/10, te responden cualquier duda, todos mis invitados están encantados."</p>
-        <div class="test-footer"><div class="test-avatar">Y</div><div><div class="test-name">Ysabel C.</div><div class="test-country">Argentina</div></div></div>
-      </div>
-      <div class="test-card fade-in fade-in-delay-3">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">"Con tan buen gusto y sin perder detalles llevó a cabo mi sueño de la tarjeta más linda, con el fondo musical que elegí. Estoy super contenta y la atención super especial."</p>
-        <div class="test-footer"><div class="test-avatar">L</div><div><div class="test-name">Liseth G.</div><div class="test-country">España</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Preguntas frecuentes</p>
-      <h2 class="section-title-light">Todo lo que <em style="font-style:italic">necesitas saber</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
-    </div>
-    <div class="faq-list" id="faq-list"></div>
-  </div>
-</section>
-
-<!-- NOSOTROS -->
-<section id="nosotros">
-  <div style="max-width:700px;margin:0 auto">
-    <div class="section-head fade-in">
-      <p class="section-label">Quiénes Somos</p>
-      <h2 class="section-title-light">Gueka <em style="font-style:italic">Ideas</em></h2>
-      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
-    </div>
-    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="nosotros-logo fade-in" />
-    <p class="nosotros-p1 fade-in">Somos una empresa colombiana especializada en invitaciones digitales de alta calidad. Combinamos diseño, tecnología y creatividad para crear experiencias digitales únicas e interactivas para cada celebración.</p>
-    <p class="nosotros-p2 fade-in">Más de 15 años de experiencia y 500 familias felices nos respaldan. Cada invitación es única, personalizada y diseñada con amor para reflejar la esencia de tu evento especial.</p>
-  </div>
+  <div class="cards-grid" id="cards-grid"></div>
 </section>
 
 <!-- CTA -->
-<section id="cta">
+<section id="nosotros">
   <div class="cta-glow"></div>
   <div class="cta-inner">
-    <p class="section-label">¿Lista para brillar?</p>
-    <h2 class="section-title-dark" style="margin-bottom:.5rem">Cuéntanos tu <em style="font-style:italic;color:#c9a96e">historia</em></h2>
-    <div class="divider"><div class="divider-line divider-line-gold-dim"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold-dim"></div></div>
-    <p class="section-sub-dark" style="margin-bottom:2rem">Escríbenos por WhatsApp y te asesoramos sin compromiso.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="planes.html" class="btn-gold">🛒 Ver Planes</a>
-      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Contactar por WhatsApp
-      </a>
-    </div>
+    <p class="cta-label">Proveedor Certificado</p>
+    <h2 class="cta-title">¿Lista para la invitación<br /><em>de la fiesta perfecta?</em></h2>
+    <div class="divider"><div class="divider-line dim"></div><span>✦</span><div class="divider-line dim"></div></div>
+    <p class="cta-sub">Contáctanos hoy y te mostramos todos los estilos disponibles para la fiesta infantil de tus sueños.</p>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar por WhatsApp
+    </a>
   </div>
 </section>
 
+<!-- FLOAT WA -->
+<a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="float-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="ping"></span>
+</a>
+
 <footer>
   <div class="footer-inner">
-    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="footer-logo" />
-    <nav class="footer-nav">
-      <a href="index.html">Inicio</a>
-      <a href="#catalogo">Catálogo</a>
-      <a href="planes.html">Planes</a>
-      <a href="demo.html">Demo</a>
-      <a href="#faq">FAQ</a>
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" />
+    <nav class="footer-links">
+      <a href="/">Inicio</a>
+      <a href="#estilos">Estilos</a>
+      <a href="#nosotros">Comprar</a>
     </nav>
-    <p class="footer-copy">© <span id="year"></span> Gueka Ideas · Invitaciones Digitales</p>
+    <div class="footer-copy">© <span id="year"></span> Gueka Ideas</div>
   </div>
 </footer>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// Navbar scroll
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+  // Navbar scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
 
-// Hamburger
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.style.display === 'flex';
-  mobileMenu.style.display = isOpen ? 'none' : 'flex';
-  hamburger.textContent = isOpen ? '☰' : '✕';
-});
-function closeMobile() { mobileMenu.style.display = 'none'; hamburger.textContent = '☰'; }
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.textContent = isOpen ? '✕' : '☰';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.textContent = '☰';
+  }
 
-// Fade-in on scroll
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in, .fade-from-left, .fade-from-right').forEach(el => observer.observe(el));
+  // Particles
+  const particlesEl = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = i % 3 === 0 ? 3 : 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${5 + (i * 5.5) % 92}%;
+      top:${10 + (i * 7.3) % 80}%;
+      animation-duration:${3 + (i % 4)}s;
+      animation-delay:${i * 0.3}s;
+    `;
+    particlesEl.appendChild(p);
+  }
 
-// Features
-const FEATURES = [
-  { icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>', title: 'RSVP Online', desc: 'Confirmación de asistencia instantánea desde cualquier dispositivo.' },
-  { icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', title: 'Maps Integrado', desc: 'Ubicación del evento con indicaciones paso a paso en Google Maps.' },
-  { icon: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>', title: 'Agenda Digital', desc: 'Los invitados pueden añadir el evento a su calendario con un clic.' },
-  { icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>', title: 'Cuenta Regresiva', desc: 'Contador animado que muestra el tiempo restante para el gran día.' },
-  { icon: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>', title: 'Música de Fondo', desc: 'Reproduce automáticamente la canción favorita de los novios.' },
-  { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', title: 'Panel de Invitados', desc: 'Administra las confirmaciones en tiempo real desde tu panel privado.' },
-  { icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>', title: 'Galería de Fotos', desc: 'Comparte los mejores momentos antes, durante y después del evento.' },
-  { icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>', title: 'Mensajes Personalizados', desc: 'Cada invitado recibe un mensaje personalizado con su nombre.' },
-];
-const featGrid = document.getElementById('feat-grid');
-FEATURES.forEach(f => {
-  featGrid.innerHTML += `
-    <div class="feat-card fade-in">
-      <div class="feat-icon"><svg viewBox="0 0 24 24">${f.icon}</svg></div>
-      <div class="feat-title">${f.title}</div>
-      <p class="feat-desc">${f.desc}</p>
-    </div>`;
-});
-document.querySelectorAll('.feat-card').forEach(el => observer.observe(el));
+  // Cards
+  const estilos = [
+    {
+      name: "Mundo Mágico",
+      desc: "Un universo lleno de colores, fantasía y sorpresas para que los pequeños vivan una aventura única.",
+      img: "https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80"
+    },
+    {
+      name: "Superhéroes",
+      desc: "Poderes, capas y colores intensos para el pequeño héroe que quiere salvar el mundo.",
+      img: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80"
+    },
+    {
+      name: "Princesas & Hadas",
+      desc: "Castillos, coronas y hadas: una invitación de cuento de hadas para la princesa de la casa.",
+      img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80"
+    },
+    {
+      name: "Primer Añito",
+      desc: "El primer año es el más especial. Una invitación tan tierna y única como ese momento irrepetible.",
+      img: "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80"
+    },
+  ];
 
-// FAQ
-const FAQS = [
-  { q:'¿Cómo contrato la invitación?', a:'Muy fácil: 1) Elige el modelo y realiza la compra. 2) Envíanos los datos y fotos desde nuestro panel. 3) Comparte el link con todos tus invitados con un clic.' },
-  { q:'¿Los precios son por cantidad de invitados?', a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, sin límites.' },
-  { q:'¿En cuánto tiempo está lista?', a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños a medida pueden tardar de 7 a 10 días laborales.' },
-  { q:'¿Cuánto tiempo estará online?', a:'El link estará activo desde que esté lista y durante al menos 3 meses después de la fecha del evento.' },
-  { q:'¿Hay un límite de invitados?', a:'No. Puedes enviar la invitación a todos los invitados que desees sin ningún límite.' },
-  { q:'¿Se pueden personalizar aún más?', a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También podemos diseñar un modelo completamente a medida.' },
-];
-const faqList = document.getElementById('faq-list');
-faqList.innerHTML = FAQS.map((f,i) => `
-  <div class="faq-item reveal" id="faq-${i}">
-    <button class="faq-btn" data-i="${i}" aria-expanded="false">
-      <span>${f.q}</span>
-      <span class="faq-arrow">▾</span>
-    </button>
-    <div class="faq-body"><p class="faq-answer">${f.a}</p></div>
-  </div>`).join('');
-faqList.addEventListener('click', e => {
-  const btn = e.target.closest('.faq-btn');
-  if (!btn) return;
-  const item = document.getElementById('faq-' + btn.dataset.i);
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-});
+  const grid = document.getElementById('cards-grid');
+  estilos.forEach(e => {
+    grid.innerHTML += `
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="${e.img}" alt="${e.name}" loading="lazy" />
+          <div class="card-img-overlay"></div>
+          <div class="card-name">${e.name}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-sep">
+            <div class="card-sep-line"></div>
+            <span>✦</span>
+          </div>
+          <p class="card-desc">${e.desc}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  // Scroll reveal cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '-60px' });
+  document.querySelectorAll('.card').forEach(c => observer.observe(c));
 </script>
 </body>
 </html>
