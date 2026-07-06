@@ -3,993 +3,851 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Invitación Cinema Boda · Gueka Ideas</title>
+<title>Gueka Ideas – Invitaciones Digitales</title>
+<meta name="description" content="Invitaciones digitales, sustentables e interactivas. RSVP online, Maps integrado, agenda digital y mucho más." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
 <style>
-/* ═══════════════════════════════════════════ RESET & BASE */
+/* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body {
-  font-family: 'Jost', sans-serif;
-  background: #f7f2ec; color: #1a1208;
-  overflow-x: hidden; min-height: 100dvh;
-}
-img { display: block; max-width: 100%; }
-button { font-family: inherit; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Jost', sans-serif; background: #f7f2ec; color: #1a1208; }
 a { text-decoration: none; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
 
-/* ═══════════════════════════════════════════ TOKENS */
-:root {
-  --gold: #c9a96e;
-  --gold-light: rgba(201,169,110,.15);
-  --dark: #1a1208;
-  --darker: #0e0903;
-  --cream: #f7f2ec;
-  --muted: #7a6a58;
-  --white: #fff;
-  --radius: 1.1rem;
-  --shadow-sm: 0 4px 24px rgba(0,0,0,.08);
-  --shadow-md: 0 12px 40px rgba(0,0,0,.14);
-  --shadow-gold: 0 16px 48px rgba(201,169,110,.22);
-}
+/* ===== FADE-IN ANIMATION ===== */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-delay-1 { transition-delay: .1s; }
+.fade-in-delay-2 { transition-delay: .2s; }
+.fade-in-delay-3 { transition-delay: .3s; }
+.fade-in-delay-4 { transition-delay: .4s; }
+.fade-in-delay-5 { transition-delay: .5s; }
+.fade-in-delay-6 { transition-delay: .6s; }
+.fade-from-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s ease, transform .7s ease; }
+.fade-from-left.visible { opacity: 1; transform: translateX(0); }
+.fade-from-right { opacity: 0; transform: translateX(40px); transition: opacity .7s ease, transform .7s ease; }
+.fade-from-right.visible { opacity: 1; transform: translateX(0); }
 
-/* ═══════════════════════════════════════════ UTILITIES */
-.eyebrow {
-  font-size: .62rem; letter-spacing: .32em;
-  text-transform: uppercase; color: rgba(201,169,110,.72);
-}
-.divider {
-  display: flex; align-items: center; justify-content: center;
-  gap: .75rem; margin: .85rem 0;
-}
-.divider-line { height: 1px; width: 44px; background: rgba(201,169,110,.4); }
-.divider-star { color: var(--gold); font-size: .52rem; }
+/* ===== DIVIDER ===== */
+.divider { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0; }
+.divider-line { height: 1px; width: 60px; }
+.divider-line-gold { background: rgba(201,169,110,.5); }
+.divider-line-gold-dim { background: rgba(201,169,110,.35); }
+.divider-star { color: #c9a96e; }
+.section-label { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; font-family: 'Jost', sans-serif; }
+.section-title-light { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: #1a1208; }
+.section-title-dark { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,3.8rem); font-weight: 300; color: white; }
+.section-sub { color: #7a6a58; font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; font-family: 'Jost', sans-serif; }
+.section-sub-dark { color: rgba(247,242,236,.5); font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; font-family: 'Jost', sans-serif; }
+.section-head { text-align: center; margin-bottom: 4rem; }
 
-/* ═══════════════════════════════════════════ BUTTONS */
-.btn-gold {
-  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
-  background: var(--gold); color: var(--dark); border: none;
-  border-radius: 99px; padding: .62rem 1.4rem;
-  font-size: .72rem; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; cursor: pointer;
-  transition: opacity .2s, transform .15s;
-  white-space: nowrap;
-}
-.btn-gold:hover { opacity: .84; transform: translateY(-1px); }
-.btn-gold:active { transform: translateY(0); }
+/* ===== WA SVG PATH ===== */
+.wa-path { d: path("M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"); }
 
-.btn-wa {
-  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
-  background: #25D366; color: #fff; border: none; border-radius: 99px;
-  padding: 1rem 2rem; font-size: .86rem; font-weight: 600;
-  letter-spacing: .05em; text-transform: uppercase; cursor: pointer;
-  box-shadow: 0 8px 24px rgba(37,211,102,.28);
-  transition: transform .2s, opacity .2s; width: 100%;
+/* ===== NAVBAR ===== */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 2rem; transition: all .35s ease;
 }
-.btn-wa:hover { transform: translateY(-2px); opacity: .92; }
-
-/* ═══════════════════════════════════════════ HEADER */
-header {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(247,242,236,.97);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(201,169,110,.18);
+#navbar.scrolled {
+  background: rgba(247,242,236,0.97);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,169,110,0.2);
 }
-.nav-inner {
+.navbar-inner {
   max-width: 1200px; margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 68px;
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  height: clamp(70px,10vw,90px);
+  display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo img { height: clamp(44px,6vw,64px); }
-.nav-links {
-  display: flex; gap: 1.75rem;
-  list-style: none;
+.navbar-logo img {
+  height: clamp(56px,8vw,96px);
+  filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%);
+  transition: filter .3s;
 }
-.nav-links a {
-  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
-  font-weight: 500; color: var(--muted); transition: color .2s;
+#navbar.scrolled .navbar-logo img { filter: none; }
+.navbar-links { display: flex; gap: 2rem; }
+.navbar-links a {
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: rgba(255,255,255,.75); font-family: 'Jost', sans-serif;
+  transition: color .2s;
 }
-.nav-links a:hover { color: var(--gold); }
+#navbar.scrolled .navbar-links a { color: #7a6a58; }
+.navbar-links a:hover, #navbar.scrolled .navbar-links a:hover { color: #c9a96e; }
+.navbar-cta {
+  background: #c9a96e; color: #1a1208; border-radius: 99px;
+  padding: .6rem 1.4rem; font-size: .7rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  display: flex; align-items: center; gap: .4rem;
+  transition: opacity .2s; font-family: 'Jost', sans-serif;
+}
+.navbar-cta:hover { opacity: .85; }
 .hamburger {
-  display: none; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 99px;
-  background: none; border: 1px solid rgba(201,169,110,.25);
-  cursor: pointer; color: var(--dark); font-size: 1.1rem;
-  flex-shrink: 0;
+  display: none; background: none; border: none; cursor: pointer;
+  color: white; font-size: 1.5rem;
 }
+#navbar.scrolled .hamburger { color: #1a1208; }
 .mobile-menu {
-  display: none; flex-direction: column;
-  padding: 1rem 1.5rem 1.25rem;
-  background: rgba(247,242,236,.99);
-  border-top: 1px solid rgba(201,169,110,.1);
-  gap: .1rem;
+  display: none; flex-direction: column; gap: 1.2rem;
+  background: #f7f2ec; padding: 1rem 2rem 1.5rem;
 }
-.mobile-menu.open { display: flex; }
 .mobile-menu a {
-  padding: .75rem 0;
-  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
-  font-weight: 500; color: var(--dark);
-  border-bottom: 1px solid rgba(201,169,110,.1);
+  font-size: .8rem; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: #1a1208; font-family: 'Jost', sans-serif;
 }
-.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu .navbar-cta { width: fit-content; }
+@media (max-width: 768px) {
+  .navbar-links, .navbar-cta.desktop-only { display: none !important; }
+  .hamburger { display: block; }
+}
+@media (min-width: 769px) { .mobile-menu { display: none !important; } }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100svh; display: flex; align-items: center; justify-content: center;
+  background: #1a1208; position: relative; overflow: hidden;
+  text-align: center; padding: clamp(4rem,10vw,6rem) 1.5rem 3rem;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1551564874-2c247864797e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');
+  background-size: cover; background-position: center;
+  opacity: .38; transform: scale(1.05);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(10,5,2,.85) 0%, rgba(26,18,8,.7) 50%, rgba(10,5,2,.9) 100%);
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,169,110,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-logo { margin-top: 4rem; margin-bottom: 2.5rem; display: flex; justify-content: center; }
+.hero-logo img {
+  width: 340px; max-width: 85vw;
+  filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(110%);
+}
+.hero-sup { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: rgba(201,169,110,.7); margin-bottom: .5rem; font-family: 'Jost', sans-serif; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,9vw,5.5rem); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 1.5rem; }
+.hero-title em { font-style: normal; font-weight: 600; color: #c9a96e; }
+.hero-sub { font-size: 1rem; font-weight: 300; color: rgba(247,242,236,.65); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; font-family: 'Jost', sans-serif; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 3rem; }
+.btn-gold {
+  background: #c9a96e; color: #1a1208; border-radius: 99px;
+  padding: 1rem 2rem; font-size: .85rem; font-weight: 600;
+  letter-spacing: .06em; display: inline-flex; align-items: center;
+  gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s;
+}
+.btn-gold:hover { transform: scale(1.04); }
+.btn-outline {
+  background: transparent; color: rgba(247,242,236,.8);
+  border: 1px solid rgba(201,169,110,.4); border-radius: 99px;
+  padding: 1rem 2rem; font-size: .85rem; font-weight: 400;
+  letter-spacing: .06em; display: inline-flex; align-items: center;
+  gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s;
+}
+.btn-outline:hover { transform: scale(1.04); }
+.hero-stats {
+  border-top: 1px solid rgba(201,169,110,.2);
+  padding-top: 1.5rem; padding-bottom: 2rem;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem;
+}
+.stat-val { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: #c9a96e; margin-bottom: .25rem; }
+.stat-lbl { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,242,236,.4); font-family: 'Jost', sans-serif; }
+.hero-arrow { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.35); font-size: 1.2rem; animation: bounce .6s ease-in-out infinite alternate; }
+@keyframes bounce { to { transform: translateX(-50%) translateY(6px); } }
+
+/* Particles */
+.particle {
+  position: absolute; border-radius: 50%; background: rgba(201,169,110,.4);
+  animation: float-p 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes float-p {
+  0%,100% { transform: translateY(0); opacity: .2; }
+  50% { transform: translateY(-20px); opacity: .7; }
+}
 
 @media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none !important; }
-  .hamburger { display: flex; }
+  .hero-stats { grid-template-columns: repeat(2,1fr); gap: 1rem; }
+  .stat-val { font-size: 1.6rem !important; }
+}
+@media (max-width: 480px) {
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas a { text-align: center; justify-content: center; }
 }
 
-/* ═══════════════════════════════════════════ SECTION WRAPPER */
-.section-header { text-align: center; margin-bottom: clamp(2rem,5vw,3.5rem); }
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem,5vw,3.4rem);
-  font-weight: 300; color: var(--dark); line-height: 1.1;
+/* ===== CATALOGO ===== */
+#catalogo { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
+.cat-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
 }
-.section-title em { font-style: italic; }
-.section-sub {
-  font-size: .92rem; color: var(--muted);
-  max-width: 460px; margin: .5rem auto 0; line-height: 1.75;
+.cat-card {
+  border-radius: 1rem; overflow: hidden; cursor: default;
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  background: #fff; border: 1px solid rgba(201,169,110,.15);
+  transition: box-shadow .3s, border-color .3s, transform .3s;
 }
-
-/* ═══════════════════════════════════════════ PLANES */
-#planes {
-  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
-  background: var(--cream);
+.cat-card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,.16);
+  border-color: rgba(201,169,110,.5);
+  transform: translateY(-6px);
 }
-
-.plans-outer { max-width: 1200px; margin: 0 auto; }
-
-.plans-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.1rem;
-}
-.order-panel-wrap {
-  margin-top: 1.5rem;
-}
-
-@media (min-width: 1080px) {
-  .plans-outer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 296px;
-    gap: 1.1rem;
-    align-items: start;
-  }
-  .plans-row {
-    display: contents;
-  }
-  .order-panel-wrap {
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 680px) {
-  .plans-row {
-    grid-template-columns: 1fr;
-    gap: .9rem;
-  }
-}
-
-/* ── Plan Card */
-.plan-card {
-  border-radius: var(--radius); overflow: hidden;
-  background: #fff;
-  border: 2px solid rgba(201,169,110,.14);
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: transform .28s, box-shadow .28s, border-color .28s;
-  position: relative;
-}
-.plan-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-.plan-card.selected {
-  border-color: var(--gold);
-  box-shadow: var(--shadow-gold);
-}
-
-@keyframes pulse-badge {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%      { opacity:.65; transform:scale(1.07); }
-}
-.oferta-badge {
-  position: absolute; top: .7rem; left: .7rem; z-index: 5;
-  background: #e63946; color: #fff; border-radius: 99px;
-  padding: .24rem .7rem; font-size: .58rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  animation: pulse-badge 1.25s ease-in-out infinite;
-  box-shadow: 0 0 12px rgba(230,57,70,.5);
-}
-.popular-badge {
-  position: absolute; top: .7rem; right: .7rem; z-index: 5;
-  background: var(--gold); color: var(--dark); border-radius: 99px;
-  padding: .24rem .7rem; font-size: .58rem; font-weight: 600;
-  letter-spacing: .1em; text-transform: uppercase;
-}
-.card-img-wrap { position: relative; height: 180px; overflow: hidden; }
-.card-img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .5s;
-}
-.plan-card:hover .card-img-wrap img { transform: scale(1.06); }
-.card-img-gradient {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(26,18,8,.06) 0%, rgba(201,169,110,.38) 100%);
-}
-.card-plan-label {
-  position: absolute; bottom: .75rem; left: 1rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 600; color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,.5);
-}
-.card-body { padding: 1.1rem 1.2rem 1.25rem; }
-.card-price { font-family: 'Jost', sans-serif; font-size: 1.65rem; font-weight: 600; color: var(--dark); }
-.card-before-row { display: flex; align-items: center; gap: .5rem; margin: .2rem 0 .75rem; flex-wrap: wrap; }
-.card-before { font-family: 'Jost', sans-serif; font-size: .72rem; color: #b0a090; text-decoration: line-through; }
-.card-off-badge {
-  font-size: .6rem; font-weight: 600; border-radius: 99px;
-  padding: .18rem .5rem; background: var(--gold-light); color: var(--gold);
-}
-.card-features { list-style: none; display: flex; flex-direction: column; gap: .42rem; }
-.card-features li {
-  display: flex; align-items: flex-start; gap: .55rem;
-  font-size: .77rem; color: var(--muted); line-height: 1.45;
-}
-.card-feat-dot {
-  color: var(--gold); font-size: .5rem; margin-top: .22rem; flex-shrink: 0;
-}
-.card-btn {
-  width: 100%; margin-top: 1.1rem; padding: .75rem;
-  border-radius: 99px; font-size: .77rem; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
-  transition: background .2s, color .2s, border-color .2s;
-}
-.card-btn.outline {
-  background: transparent; color: var(--dark);
-  border: 1.5px solid var(--gold);
-}
-.card-btn.outline:hover { background: var(--gold-light); }
-.card-btn.filled { background: var(--gold); color: var(--dark); border: none; }
-
-/* ── BOTÓN DEMO ─────────────────────────────── */
-.btn-demo {
-  width: 100%; margin-top: .55rem; padding: .68rem;
-  border-radius: 99px; font-size: .72rem; font-weight: 600;
-  letter-spacing: .07em; text-transform: uppercase; cursor: pointer;
-  background: transparent;
-  border: 1.5px solid rgba(201,169,110,.35);
-  color: var(--muted);
-  display: flex; align-items: center; justify-content: center; gap: .4rem;
-  transition: background .2s, color .2s, border-color .2s;
-}
-.btn-demo:hover {
-  background: rgba(201,169,110,.1);
-  border-color: var(--gold);
-  color: var(--dark);
-}
-
-/* ── Order Panel */
-.order-panel {
-  border-radius: var(--radius); padding: 1.4rem;
-  background: var(--dark);
-  border: 1px solid rgba(201,169,110,.22);
-  position: sticky; top: 80px;
-}
-.panel-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 300; color: #fff; margin-top: .3rem; }
-.addons-title { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin: 1.1rem 0 .6rem; }
-.addons-list { display: flex; flex-direction: column; gap: .6rem; }
-.addon-btn {
-  width: 100%; display: flex; align-items: center; justify-content: space-between;
-  border-radius: .75rem; padding: .7rem .95rem;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-  cursor: pointer; transition: all .2s; text-align: left; gap: .5rem;
-}
-.addon-btn.active { background: rgba(201,169,110,.15); border-color: var(--gold); }
-.addon-name { font-size: .78rem; color: #fff; flex: 1; line-height: 1.35; }
-.addon-price { font-size: .72rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
-.summary-box { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,.14); }
-.summary-row { display: flex; justify-content: space-between; gap: .5rem; font-size: .78rem; color: rgba(247,242,236,.5); margin-bottom: .45rem; }
-.summary-row span:last-child { white-space: nowrap; }
-.summary-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: .7rem; gap: .5rem; }
-.summary-total-label { font-size: .85rem; font-weight: 500; color: #fff; }
-.summary-total-price { font-family: 'Jost', sans-serif; font-size: 1.55rem; font-weight: 600; color: var(--gold); }
-.panel-cta {
-  width: 100%; margin-top: 1.2rem; padding: .88rem;
-  border-radius: 99px; background: var(--gold); color: var(--dark); border: none;
-  font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-  cursor: pointer; transition: opacity .2s;
-  display: flex; align-items: center; justify-content: center; gap: .5rem;
-}
-.panel-cta:hover { opacity: .88; }
-.panel-cta:disabled { opacity: .36; cursor: not-allowed; }
-.panel-note { text-align: center; font-size: .67rem; color: rgba(247,242,236,.3); margin-top: .55rem; }
-
-/* ═══════════════════════════════════════════ GALLERY */
-#galería {
-  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
-  background: linear-gradient(150deg, var(--dark) 0%, #2e1d0a 100%);
-}
-.gallery-grid {
-  max-width: 960px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(4,1fr); gap: .9rem;
-}
-@media (max-width: 640px) { .gallery-grid { grid-template-columns: repeat(2,1fr); gap: .7rem; } }
-.gallery-card {
-  position: relative; border-radius: 1rem; overflow: hidden;
-  aspect-ratio: 3/4; cursor: pointer;
-  transition: transform .28s;
-}
-.gallery-card:hover { transform: scale(1.04); }
-.gallery-card img { width: 100%; height: 100%; object-fit: cover; }
-.gallery-badge {
-  position: absolute; top: .6rem; left: .6rem;
-  background: rgba(26,18,8,.68); color: var(--gold);
-  border: 1px solid rgba(201,169,110,.35);
-  border-radius: 99px; padding: .2rem .65rem;
-  font-size: .56rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-}
-.gallery-hover {
+.cat-img-wrap { position: relative; height: 200px; overflow: hidden; }
+.cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.cat-card:hover .cat-img-wrap img { transform: scale(1.07); }
+.cat-overlay {
   position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
-  background: rgba(26,18,8,.7);
-  opacity: 0; transition: opacity .28s;
+  background: linear-gradient(to bottom, rgba(26,18,8,.1) 0%, rgba(201,169,110,.35) 100%);
 }
-.gallery-card:hover .gallery-hover { opacity: 1; }
-.gallery-hover-label {
-  font-size: .66rem; font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; color: #fff;
+.cat-name {
+  position: absolute; bottom: 1rem; left: 1rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+  font-weight: 600; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.5);
+  letter-spacing: .02em;
+}
+.cat-body { padding: 1rem 1.25rem 1.25rem; }
+.cat-divider { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+.cat-divider-line { height: 1px; flex: 1; background: linear-gradient(90deg,#c9a96e,transparent); }
+.cat-divider-star { color: #c9a96e; font-size: .6rem; }
+.cat-desc { font-size: .78rem; color: #7a6a58; line-height: 1.5; font-family: 'Jost', sans-serif; }
+@media (max-width: 1024px) { .cat-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .cat-grid { grid-template-columns: 1fr 1fr; gap: .75rem; } }
+
+/* ===== INTERACTIVE ===== */
+#interactive {
+  padding: clamp(3rem,8vw,6rem) 1.5rem;
+  background: linear-gradient(150deg,#1a1208 0%,#2a1c0e 100%);
+  position: relative; overflow: hidden;
+}
+.grid-overlay {
+  position: absolute; inset: 0; pointer-events: none; opacity: .05;
+  background-image:
+    repeating-linear-gradient(0deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 60px),
+    repeating-linear-gradient(90deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 60px);
+}
+.interactive-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.interactive-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,4vw,3.2rem); font-weight: 300; color: white; line-height: 1.15; margin-bottom: .5rem; }
+.interactive-title em { font-style: italic; color: #c9a96e; }
+.interactive-sub { font-size: .95rem; font-weight: 300; color: rgba(247,242,236,.65); line-height: 1.7; margin-bottom: 2rem; font-family: 'Jost', sans-serif; }
+.checks { display: flex; flex-direction: column; gap: .9rem; margin-bottom: 2rem; }
+.check-item { display: flex; align-items: center; gap: .75rem; font-size: .88rem; font-weight: 300; color: rgba(247,242,236,.8); font-family: 'Jost', sans-serif; }
+.delivery-badge { display: flex; align-items: center; gap: .75rem; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(201,169,110,.6); font-family: 'Jost', sans-serif; }
+.delivery-badge-line { height: 1px; width: 32px; background: #c9a96e; }
+.delivery-badge span { font-weight: 700; color: #c9a96e; }
+/* Phone mockup */
+.phone {
+  width: 260px; height: 520px; border-radius: 3rem; overflow: hidden;
+  background: linear-gradient(170deg,#251508 0%,#1a0f05 100%);
+  border: 1px solid rgba(201,169,110,.3);
+  box-shadow: 0 32px 80px rgba(0,0,0,.5), inset 0 0 40px rgba(201,169,110,.03);
+  display: flex; flex-direction: column; align-items: center;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.phone-notch { width: 96px; height: 24px; border-radius: 0 0 1rem 1rem; background: #0e0804; flex-shrink: 0; }
+.phone-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center; gap: .75rem; width: 100%; }
+.phone-logo { width: 160px; filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%); }
+.phone-divider { height: 1px; width: 96px; background: linear-gradient(90deg,transparent,#c9a96e,transparent); }
+.phone-names { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: white; line-height: 1.2; }
+.phone-date { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(201,169,110,.55); font-family: 'Jost', sans-serif; }
+.phone-btn { width: 100%; background: #c9a96e; color: #1a1208; border: none; border-radius: 99px; padding: .75rem; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'Jost', sans-serif; }
+.phone-chips { display: flex; gap: .75rem; }
+.phone-chip { background: rgba(201,169,110,.12); color: #c9a96e; border-radius: .6rem; padding: .4rem .6rem; font-size: .65rem; font-family: 'Jost', sans-serif; }
+.phone-footer { width: 100%; padding: .75rem 1.5rem; background: rgba(201,169,110,.08); border-top: 1px solid rgba(201,169,110,.1); text-align: center; font-size: .65rem; color: rgba(201,169,110,.5); font-family: 'Jost', sans-serif; }
+.phone-footer strong { color: #c9a96e; }
+.phone-wrap { display: flex; justify-content: center; }
+@media (max-width: 768px) {
+  .interactive-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .phone-wrap { display: none !important; }
 }
 
-/* ═══════════════════════════════════════════ FAQ */
-#faq {
-  padding: clamp(2.5rem,7vw,5.5rem) clamp(1rem,4vw,1.5rem);
-  background: var(--cream);
+/* ===== FEATURES ===== */
+#funciones { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
+.feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: .75rem; }
+.feat-card {
+  background: white; border: 1px solid rgba(201,169,110,.18); border-radius: .75rem;
+  padding: 1.25rem; transition: border-color .25s, transform .25s, box-shadow .25s;
 }
-.faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: .6rem; }
-.faq-item {
-  border-radius: .85rem; overflow: hidden;
-  border: 1px solid rgba(201,169,110,.2);
-  background: rgba(255,255,255,.6);
-  transition: background .2s;
-}
-.faq-item.open { background: #fff; }
-.faq-trigger {
-  width: 100%; display: flex; align-items: center; justify-content: space-between;
-  padding: 1rem 1.35rem; text-align: left; cursor: pointer;
-  background: none; border: none; gap: 1rem;
-}
-.faq-question { font-size: .87rem; font-weight: 500; color: var(--dark); line-height: 1.4; text-align: left; }
-.faq-icon {
-  width: 24px; height: 24px; border-radius: 99px;
-  background: var(--gold-light); border: 1px solid rgba(201,169,110,.3);
+.feat-card:hover { border-color: rgba(201,169,110,.4); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.07); }
+.feat-icon { width: 36px; height: 36px; border-radius: .6rem; background: rgba(201,169,110,.1); display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
+.feat-icon svg { width: 16px; height: 16px; stroke: #c9a96e; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.feat-title { font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; margin-bottom: .4rem; color: #1a1208; }
+.feat-desc { font-size: .72rem; color: #7a6a58; line-height: 1.55; font-family: 'Jost', sans-serif; }
+@media (max-width: 1024px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ===== PROCESO ===== */
+#proceso { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f0e9df; }
+.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-bottom: 4rem; }
+.step-num {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: white; border: 1px solid rgba(201,169,110,.3);
+  color: #c9a96e; font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 300;
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: .85rem; flex-shrink: 0;
-  transition: transform .3s, background .2s;
+  margin-bottom: 1.25rem; transition: border-color .3s, transform .3s;
 }
-.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); color: var(--dark); }
-.faq-body {
-  max-height: 0; overflow: hidden;
-  transition: max-height .35s ease, padding .3s ease;
-  padding: 0 1.35rem;
+.step:hover .step-num { border-color: #c9a96e; transform: scale(1.05); }
+.step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: .75rem; color: #1a1208; }
+.step-desc { font-size: .85rem; color: #7a6a58; line-height: 1.7; font-family: 'Jost', sans-serif; }
+.proceso-cta { text-align: center; }
+.proceso-sub { color: #7a6a58; font-size: .85rem; margin-bottom: 1.5rem; font-family: 'Jost', sans-serif; }
+.btn-dark {
+  background: #1a1208; color: #c9a96e; border-radius: 99px;
+  padding: 1rem 2rem; font-size: .82rem; font-weight: 600;
+  letter-spacing: .06em; display: inline-flex; align-items: center;
+  gap: .5rem; font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s;
 }
-.faq-item.open .faq-body { max-height: 400px; padding-bottom: 1.1rem; }
-.faq-body p { font-size: .85rem; line-height: 1.75; color: var(--muted); }
+.btn-dark:hover { transform: scale(1.04); opacity: .9; }
+@media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
-/* ═══════════════════════════════════════════ CTA */
+/* ===== TESTIMONIOS ===== */
+#testimonios {
+  padding: clamp(3rem,8vw,6rem) 1.5rem;
+  background: linear-gradient(160deg,#1a1208 0%,#2a1c0e 100%);
+}
+.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.test-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(201,169,110,.15);
+  border-radius: 1.25rem; padding: 1.5rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+}
+.test-card:hover { border-color: rgba(201,169,110,.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+.test-stars { color: #c9a96e; font-size: .85rem; margin-bottom: 1rem; font-family: Arial, sans-serif; }
+.test-quote { font-size: .82rem; font-weight: 300; color: rgba(247,242,236,.7); line-height: 1.7; font-style: italic; margin-bottom: 1.25rem; flex: 1; font-family: 'Cormorant Garamond', serif; }
+.test-footer { display: flex; align-items: center; gap: .75rem; border-top: 1px solid rgba(201,169,110,.12); padding-top: 1rem; }
+.test-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(201,169,110,.15); color: #c9a96e; font-family: 'Cormorant Garamond', serif; font-size: .9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.test-name { font-size: .82rem; font-weight: 500; color: white; font-family: 'Jost', sans-serif; }
+.test-country { font-size: .7rem; color: rgba(201,169,110,.5); font-family: 'Jost', sans-serif; }
+@media (max-width: 1024px) { .test-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px) { .test-grid { grid-template-columns: 1fr; } }
+
+/* ===== FAQ ===== */
+#faq { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f7f2ec; }
+.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .5rem; }
+.faq-item { background: white; border: 1px solid rgba(201,169,110,.15); border-radius: .75rem; overflow: hidden; transition: border-color .2s; }
+.faq-item.open { border-color: rgba(201,169,110,.4); }
+.faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.5rem; background: none; border: none; text-align: left; font-size: .88rem; font-weight: 500; color: #1a1208; cursor: pointer; font-family: 'Jost', sans-serif; gap: 1rem; }
+.faq-arrow { color: #c9a96e; font-size: .8rem; flex-shrink: 0; transition: transform .25s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height .35s ease, opacity .3s; opacity: 0; }
+.faq-item.open .faq-body { max-height: 300px; opacity: 1; }
+.faq-answer { padding: 1rem 1.5rem 1.25rem; font-size: .82rem; color: #7a6a58; line-height: 1.7; border-top: 1px solid rgba(201,169,110,.12); font-family: 'Jost', sans-serif; }
+.faq-foot { text-align: center; margin-top: 2rem; font-size: .85rem; color: #7a6a58; font-family: 'Jost', sans-serif; }
+.faq-foot a { color: #c9a96e; font-weight: 500; }
+
+/* ===== NOSOTROS ===== */
+#nosotros { padding: clamp(3rem,8vw,6rem) 1.5rem; background: #f0e9df; text-align: center; }
+.nosotros-logo { width: 280px; filter: brightness(0) saturate(100%) sepia(60%) saturate(300%) hue-rotate(5deg) brightness(90%); opacity: .7; margin: 0 auto 2rem; }
+.nosotros-p1 { font-size: .95rem; color: #7a6a58; line-height: 1.8; max-width: 600px; margin: 0 auto; font-family: 'Jost', sans-serif; }
+.nosotros-p2 { font-size: .88rem; color: #7a6a58; line-height: 1.8; max-width: 600px; margin: 1rem auto 0; font-family: 'Jost', sans-serif; }
+
+/* ===== CTA ===== */
 #cta {
-  padding: clamp(3rem,8vw,6rem) clamp(1rem,4vw,1.5rem);
-  background: linear-gradient(150deg, var(--dark) 0%, #2e1d0a 100%);
+  padding: clamp(3rem,8vw,6rem) 1.5rem;
+  background: linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%);
   text-align: center; position: relative; overflow: hidden;
 }
-#cta::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 65% 75% at 50% 110%, rgba(201,169,110,.15) 0%, transparent 65%);
+.cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 80% at 50% 100%,rgba(201,169,110,.15) 0%,transparent 70%); }
+.cta-inner { position: relative; z-index: 1; }
+.btn-wa {
+  background: #25D366; color: white; border-radius: 99px;
+  padding: 1.1rem 2.5rem; font-size: .88rem; font-weight: 600;
+  letter-spacing: .06em; display: inline-flex; align-items: center;
+  gap: .65rem; box-shadow: 0 8px 24px rgba(37,211,102,.3);
+  font-family: 'Jost', sans-serif; transition: transform .2s, opacity .2s;
 }
-.cta-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
-.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,5vw,3.4rem); font-weight: 300; color: #fff; }
-.cta-title em { font-style: italic; color: var(--gold); }
-.cta-sub { font-size: .9rem; color: rgba(247,242,236,.5); margin: .75rem 0 2rem; line-height: 1.65; }
-.cta-btn-wrap { display: flex; justify-content: center; }
-.cta-btn-wrap .btn-wa { width: auto; padding: 1rem 2.5rem; }
+.btn-wa:hover { transform: scale(1.05); opacity: .92; }
 
-/* ═══════════════════════════════════════════ FOOTER */
-footer {
-  background: var(--darker);
-  border-top: 1px solid rgba(201,169,110,.1);
-  padding: 2rem 1.5rem; text-align: center;
-}
-footer img { height: 64px; margin: 0 auto .75rem; }
-footer p { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247,242,236,.2); }
-
-/* ═══════════════════════════════════════════ PEDIDO PAGE */
-#pedido-page { display: none; }
-#pedido-page.active { display: block; }
-#planes-page.hidden { display: none; }
-
-.pedido-header {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(247,242,236,.97);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(201,169,110,.18);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .75rem 1.5rem;
-}
-.pedido-header img { height: 48px; }
-.btn-back {
-  display: inline-flex; align-items: center; gap: .4rem;
-  background: none; border: none; cursor: pointer;
-  font-size: .7rem; font-weight: 600; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--muted); transition: color .2s;
-  font-family: 'Jost', sans-serif;
-}
-.btn-back:hover { color: var(--dark); }
-
-.pedido-main { max-width: 1000px; margin: 0 auto; padding: clamp(2rem,5vw,3rem) clamp(1rem,4vw,1.5rem) 4rem; }
-.pedido-hero { text-align: center; margin-bottom: clamp(2rem,5vw,3rem); }
-.pedido-hero .section-title { color: var(--dark); }
-
-.pedido-layout {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 1.5rem;
-  align-items: start;
-}
-@media (max-width: 820px) {
-  .pedido-layout { grid-template-columns: 1fr; }
+/* ===== FOOTER ===== */
+footer { background: #0e0903; border-top: 1px solid rgba(201,169,110,.1); padding: 2rem 1.5rem; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.footer-logo { height: 56px; opacity: .75; filter: brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg); }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.footer-nav a { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,242,236,.25); font-family: 'Jost', sans-serif; transition: color .2s; }
+.footer-nav a:hover { color: rgba(247,242,236,.5); }
+.footer-copy { font-size: .7rem; color: rgba(247,242,236,.18); font-family: 'Jost', sans-serif; }
+@media (max-width: 768px) {
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+  .footer-nav { justify-content: center; }
 }
 
-.digital-card {
-  border-radius: 1.5rem; overflow: hidden; background: var(--dark);
-  box-shadow: 0 24px 64px rgba(26,18,8,.28);
-  border: 1px solid rgba(201,169,110,.22);
+/* ===== FLOAT WA ===== */
+.float-wa {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,.25); text-decoration: none; cursor: pointer;
+  transition: transform .2s;
 }
-.dc-img-wrap { position: relative; height: clamp(200px,30vw,280px); overflow: hidden; }
-.dc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-.dc-img-overlay {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(26,18,8,.06) 0%, rgba(26,18,8,.8) 100%);
+.float-wa:hover { transform: scale(1.1); }
+.ping {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: #25D366; animation: ping 1.5s cubic-bezier(0,0,.2,1) infinite; opacity: .4;
 }
-.dc-film-strip {
-  position: absolute; top: 0; left: 0; right: 0; height: 26px;
-  background: rgba(0,0,0,.55);
-  display: flex; align-items: center; padding: 0 .65rem; gap: .35rem; overflow: hidden;
-}
-.dc-hole { width: 18px; height: 11px; background: rgba(255,255,255,.13); border-radius: 2px; flex-shrink: 0; }
-.dc-plan-badge {
-  position: absolute; top: 2rem; right: 1rem;
-  background: var(--gold); color: var(--dark); border-radius: 99px;
-  padding: .28rem .9rem; font-size: .6rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-}
-.dc-title-wrap { position: absolute; bottom: 1.1rem; left: 1.4rem; }
-.dc-title-eyebrow { font-size: .56rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .2rem; }
-.dc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #fff; }
-.dc-title em { font-style: italic; font-weight: 600; color: var(--gold); }
-
-.dc-body { padding: 1.5rem 1.5rem 1.75rem; }
-.dc-price-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
-.dc-price { font-family: 'Jost', sans-serif; font-size: 2.1rem; font-weight: 600; color: var(--gold); }
-.dc-price-note { font-size: .7rem; color: rgba(247,242,236,.36); line-height: 1.55; text-align: right; }
-.dc-sep { height: 1px; background: rgba(201,169,110,.14); margin: 0 0 1.2rem; }
-.dc-section-label { font-size: .56rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,169,110,.6); margin-bottom: .7rem; }
-.dc-features {
-  display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.25rem;
-  margin-bottom: 1.25rem;
-}
-@media (max-width: 420px) { .dc-features { grid-template-columns: 1fr; } }
-.dc-feat { display: flex; align-items: flex-start; gap: .45rem; }
-.dc-feat-icon {
-  width: 18px; height: 18px; border-radius: 99px; flex-shrink: 0; margin-top: .12rem;
-  background: rgba(201,169,110,.13); display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: .6rem;
-}
-.dc-feat-text { font-size: .75rem; color: rgba(247,242,236,.65); line-height: 1.45; }
-.dc-addon-item {
-  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
-  background: rgba(201,169,110,.1); border: 1px solid rgba(201,169,110,.2);
-  border-radius: .7rem; padding: .55rem .95rem; margin-bottom: .4rem;
-}
-.dc-addon-name { font-size: .77rem; color: #fff; }
-.dc-addon-price { font-size: .72rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
-.dc-film-bottom {
-  display: flex; gap: .35rem; flex-wrap: nowrap; overflow: hidden;
-  margin-top: 1.25rem; padding-top: 1rem;
-  border-top: 1px solid rgba(201,169,110,.1);
-}
-
-.right-col { display: flex; flex-direction: column; gap: 1rem; }
-
-.card-box {
-  background: #fff; border: 1px solid rgba(201,169,110,.18);
-  border-radius: var(--radius); padding: 1.35rem;
-  box-shadow: var(--shadow-sm);
-}
-.card-box-dark {
-  background: linear-gradient(135deg, var(--dark) 0%, #2e1d0a 100%);
-  border: 1px solid rgba(201,169,110,.2);
-  border-radius: var(--radius); padding: 1.35rem; text-align: center;
-}
-.box-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .85rem; }
-.box-label-dark { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(201,169,110,.65); margin-bottom: .25rem; }
-.breakdown-row { display: flex; justify-content: space-between; gap: .5rem; font-size: .82rem; color: var(--muted); margin-bottom: .48rem; }
-.breakdown-row strong { color: var(--dark); font-weight: 500; white-space: nowrap; }
-.breakdown-sep { height: 1px; background: rgba(201,169,110,.18); margin: .75rem 0; }
-.breakdown-total { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
-.breakdown-total-label { font-size: .88rem; font-weight: 600; color: var(--dark); }
-.breakdown-total-price { font-family: 'Jost', sans-serif; font-size: 1.75rem; font-weight: 600; color: var(--gold); }
-.box-dark-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; color: #fff; margin-bottom: .25rem; }
-.box-dark-sub { font-size: .78rem; color: rgba(247,242,236,.45); margin-bottom: 1.1rem; }
-.box-note { font-size: .65rem; color: rgba(247,242,236,.26); margin-top: .5rem; }
-
-.trust-list { display: flex; flex-direction: column; gap: .65rem; }
-.trust-item { display: flex; align-items: center; gap: .75rem; }
-.trust-icon {
-  width: 30px; height: 30px; border-radius: 99px; flex-shrink: 0;
-  background: rgba(201,169,110,.12); display: flex; align-items: center; justify-content: center;
-  font-size: .85rem;
-}
-.trust-text { font-size: .8rem; color: var(--muted); line-height: 1.35; }
-
-/* ═══════════════════════════════════════════ SCROLL REVEAL */
-.reveal {
-  opacity: 0; transform: translateY(22px);
-  transition: opacity .55s ease, transform .55s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes ping { 75%,100% { transform: scale(1.8); opacity: 0; } }
 </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════════════ PLANES PAGE -->
-<div id="planes-page">
+<!-- ===== FLOAT WA ===== -->
+<a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" aria-label="WhatsApp" class="float-wa">
+  <span class="ping"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
-  <header>
-    <div class="nav-inner">
-      <div class="nav-logo">
-        <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <!-- ✅ INICIO añadido aquí -->
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#planes">Planes</a></li>
-          <li><a href="#galería">Galería</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </nav>
-      <a href="#planes" class="btn-gold nav-cta">🛒 Contratar</a>
-      <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
-    </div>
-    <nav class="mobile-menu" id="mobile-menu">
-      <!-- ✅ INICIO añadido aquí también -->
-      <a href="#" onclick="closeMobile()">Inicio</a>
-      <a href="#planes"  onclick="closeMobile()">Planes</a>
-      <a href="#galería" onclick="closeMobile()">Galería</a>
-      <a href="#faq"     onclick="closeMobile()">FAQ</a>
-      <a href="#planes" class="btn-gold" style="margin-top:.5rem;text-align:center" onclick="closeMobile()">🛒 Contratar ahora</a>
+<!-- ===== NAVBAR ===== -->
+<header id="navbar">
+  <div class="navbar-inner">
+    <a href="#hero" class="navbar-logo">
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" />
+    </a>
+    <nav class="navbar-links">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#faq">FAQ</a>
     </nav>
-  </header>
-
-  <!-- ─── PLANES ─────────────────────────────────── -->
-  <section id="planes">
-    <div class="section-header reveal">
-      <p class="eyebrow">Elige tu plan</p>
-      <h2 class="section-title">Invitación Cinema <em>Boda</em></h2>
-      <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-      <p class="section-sub">Tres niveles para que encuentres la experiencia perfecta para tu gran día.</p>
-    </div>
-
-    <div class="plans-outer" id="plans-outer">
-      <div class="plans-row" id="plans-row">
-        <!-- cards injected by JS -->
-      </div>
-      <div class="order-panel-wrap">
-        <div class="order-panel" id="order-panel">
-          <p class="eyebrow">Tu Invitación</p>
-          <p class="panel-subtitle" id="panel-subtitle">Elige un plan</p>
-          <div class="divider" style="justify-content:flex-start">
-            <div class="divider-line" style="background:rgba(201,169,110,.28)"></div>
-            <span class="divider-star">✦</span>
-            <div class="divider-line" style="background:rgba(201,169,110,.28)"></div>
-          </div>
-          <p class="addons-title">Complementos</p>
-          <div class="addons-list" id="addons-list"></div>
-          <div class="summary-box" id="summary-box"></div>
-          <button class="panel-cta" id="panel-cta" disabled>🛒 Elige un plan</button>
-          <p class="panel-note">Pago 100% seguro · Sin límite de envíos</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── GALLERY ─────────────────────────────────── -->
-  <section id="galería">
-    <div class="section-header reveal">
-      <p class="eyebrow">Vista Previa</p>
-      <h2 class="section-title" style="color:#fff">Momentos que <em style="color:var(--gold)">perduran</em></h2>
-      <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-      <p class="section-sub" style="color:rgba(247,242,236,.5)">Cada invitación es un cortometraje único de tu historia de amor.</p>
-    </div>
-    <div class="gallery-grid reveal">
-      <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Classic" loading="lazy" />
-        <span class="gallery-badge">CLASSIC</span>
-        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
-      </div>
-      <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Premium" loading="lazy" />
-        <span class="gallery-badge">PREMIUM</span>
-        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
-      </div>
-      <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1607357910286-1ff94ac13c24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Deluxe" loading="lazy" />
-        <span class="gallery-badge">DELUXE</span>
-        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
-      </div>
-      <div class="gallery-card" onclick="window.location.href='modelos.html'">
-        <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Premium" loading="lazy" />
-        <span class="gallery-badge">PREMIUM</span>
-        <div class="gallery-hover"><span class="gallery-hover-label">👁 Ver más modelos</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FAQ ─────────────────────────────────── -->
-  <section id="faq">
-    <div class="section-header reveal">
-      <p class="eyebrow">Preguntas frecuentes</p>
-      <h2 class="section-title">Todo lo que <em>necesitas saber</em></h2>
-      <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-    </div>
-    <div class="faq-list reveal" id="faq-list"></div>
-  </section>
-
-  <!-- ─── CTA ─────────────────────────────────── -->
-  <section id="cta">
-    <div class="cta-inner reveal">
-      <p class="eyebrow">¿Lista para brillar?</p>
-      <h2 class="cta-title">Cuéntanos tu <em>historia</em></h2>
-      <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-      <p class="cta-sub">Escríbenos por WhatsApp y te asesoramos sin compromiso.</p>
-      <div class="cta-btn-wrap">
-        <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noopener noreferrer" class="btn-wa" style="width:auto;padding:1rem 2.5rem">
-          💬 Contactar por WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-    <p>Invitaciones Digitales · <span id="year"></span></p>
-  </footer>
-
-</div><!-- /planes-page -->
-
-
-<!-- ═══════════════════════════════════════════════════ PEDIDO PAGE -->
-<div id="pedido-page">
-
-  <div class="pedido-header">
-    <button class="btn-back" id="btn-back">← Volver</button>
-    <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-    <div style="width:72px"></div>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="navbar-cta desktop-only">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
   </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#catalogo" class="mobile-link">Catálogo</a>
+    <a href="#funciones" class="mobile-link">Funciones</a>
+    <a href="#proceso" class="mobile-link">Proceso</a>
+    <a href="#testimonios" class="mobile-link">Testimonios</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="navbar-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar
+    </a>
+  </div>
+</header>
 
-  <div class="pedido-main">
-    <div class="pedido-hero">
-      <p class="eyebrow">Tu selección</p>
-      <h1 class="section-title">Resumen de <em>tu pedido</em></h1>
-      <div class="divider"><div class="divider-line"></div><span class="divider-star">✦</span><div class="divider-line"></div></div>
-      <p class="section-sub">Revisa los detalles y contáctanos por WhatsApp para completar tu contratación.</p>
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+
+  <!-- Particles -->
+  <div class="particle" style="width:3px;height:3px;left:5%;top:15%;animation-duration:3s;animation-delay:0s"></div>
+  <div class="particle" style="width:2px;height:2px;left:10.5%;top:24%;animation-duration:4s;animation-delay:.3s"></div>
+  <div class="particle" style="width:2px;height:2px;left:16%;top:33%;animation-duration:5s;animation-delay:.6s"></div>
+  <div class="particle" style="width:3px;height:3px;left:21.5%;top:42%;animation-duration:6s;animation-delay:.9s"></div>
+  <div class="particle" style="width:2px;height:2px;left:27%;top:51%;animation-duration:3s;animation-delay:1.2s"></div>
+  <div class="particle" style="width:2px;height:2px;left:32.5%;top:60%;animation-duration:4s;animation-delay:1.5s"></div>
+  <div class="particle" style="width:3px;height:3px;left:38%;top:69%;animation-duration:5s;animation-delay:1.8s"></div>
+  <div class="particle" style="width:2px;height:2px;left:43.5%;top:78%;animation-duration:6s;animation-delay:2.1s"></div>
+  <div class="particle" style="width:2px;height:2px;left:49%;top:21%;animation-duration:3s;animation-delay:2.4s"></div>
+  <div class="particle" style="width:3px;height:3px;left:54.5%;top:30%;animation-duration:4s;animation-delay:2.7s"></div>
+  <div class="particle" style="width:2px;height:2px;left:60%;top:39%;animation-duration:5s;animation-delay:3s"></div>
+  <div class="particle" style="width:2px;height:2px;left:65.5%;top:48%;animation-duration:6s;animation-delay:3.3s"></div>
+  <div class="particle" style="width:3px;height:3px;left:71%;top:57%;animation-duration:3s;animation-delay:3.6s"></div>
+  <div class="particle" style="width:2px;height:2px;left:76.5%;top:66%;animation-duration:4s;animation-delay:3.9s"></div>
+  <div class="particle" style="width:2px;height:2px;left:82%;top:75%;animation-duration:5s;animation-delay:4.2s"></div>
+  <div class="particle" style="width:3px;height:3px;left:87.5%;top:19%;animation-duration:6s;animation-delay:4.5s"></div>
+  <div class="particle" style="width:2px;height:2px;left:93%;top:28%;animation-duration:3s;animation-delay:4.8s"></div>
+  <div class="particle" style="width:2px;height:2px;left:97%;top:37%;animation-duration:4s;animation-delay:5.1s"></div>
+
+  <div class="hero-content">
+    <div class="hero-logo fade-in">
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" />
     </div>
+    <p class="hero-sup fade-in fade-in-delay-1">Invitaciones Digitales · Colombia</p>
+    <div class="divider fade-in fade-in-delay-1">
+      <div class="divider-line divider-line-gold-dim"></div>
+      <span class="divider-star">✦</span>
+      <div class="divider-line divider-line-gold-dim"></div>
+    </div>
+    <h1 class="hero-title fade-in fade-in-delay-2">
+      Invitar nunca<br>
+      <em>fue tan fácil</em>
+    </h1>
+    <p class="hero-sub fade-in fade-in-delay-3">
+      Invitaciones digitales, sustentables e interactivas. Sitio web personalizado con RSVP online, Maps integrado, agenda digital y mucho más.
+    </p>
+    <div class="hero-ctas fade-in fade-in-delay-4">
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicita tu invitación
+      </a>
+      <a href="#funciones" class="btn-outline">Ver cómo funciona →</a>
+    </div>
+    <div class="hero-stats fade-in fade-in-delay-5">
+      <div><div class="stat-val">+15 años</div><div class="stat-lbl">de experiencia</div></div>
+      <div><div class="stat-val">+500</div><div class="stat-lbl">familias felices</div></div>
+      <div><div class="stat-val">4.9 ★</div><div class="stat-lbl">calificación promedio</div></div>
+      <div><div class="stat-val">24hs</div><div class="stat-lbl">tiempo de entrega</div></div>
+    </div>
+  </div>
+  <div class="hero-arrow">↓</div>
+</section>
 
-    <div class="pedido-layout">
-
-      <!-- Digital Card -->
-      <div class="digital-card">
-        <div class="dc-img-wrap">
-          <img id="dc-img" src="" alt="" />
-          <div class="dc-img-overlay"></div>
-          <div class="dc-film-strip" id="dc-film-strip"></div>
-          <div class="dc-plan-badge" id="dc-plan-badge"></div>
-          <div class="dc-title-wrap">
-            <p class="dc-title-eyebrow">Invitación Digital</p>
-            <p class="dc-title">Cinema <em>Boda</em></p>
-          </div>
-        </div>
-        <div class="dc-body">
-          <div class="dc-price-row">
-            <div>
-              <p class="dc-section-label" style="margin-bottom:.2rem">Plan seleccionado</p>
-              <p class="dc-price" id="dc-price"></p>
-            </div>
-            <div class="dc-price-note">Precio único<br>Sin límite de invitados</div>
-          </div>
-          <div class="dc-sep"></div>
-          <p class="dc-section-label">Incluye</p>
-          <div class="dc-features" id="dc-features"></div>
-          <div id="dc-addons-wrap" style="display:none">
-            <div class="dc-sep"></div>
-            <p class="dc-section-label">Complementos añadidos</p>
-            <div id="dc-addons-list"></div>
-          </div>
-          <div class="dc-film-bottom" id="dc-film-bottom"></div>
-        </div>
+<!-- ===== CATALOGO ===== -->
+<section id="catalogo">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-in">
+      <p class="section-label">Catálogo</p>
+      <h2 class="section-title-light">¿Qué <em style="font-style:italic">Celebramos?</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
+      <p class="section-sub">Tenemos estilos para todos los eventos. Cada celebración merece una invitación especial.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card fade-in fade-in-delay-1">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1781479544100-85dc5d475228?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Matrimonio" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Matrimonio</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">La celebración más especial</p></div>
       </div>
-
-      <!-- Right column -->
-      <div class="right-col">
-
-        <div class="card-box">
-          <p class="box-label">Desglose del pedido</p>
-          <div id="breakdown-rows"></div>
-          <div class="breakdown-sep"></div>
-          <div class="breakdown-total">
-            <span class="breakdown-total-label">Total</span>
-            <span class="breakdown-total-price" id="breakdown-total"></span>
-          </div>
-        </div>
-
-        <div class="card-box-dark">
-          <p class="box-label-dark">Siguiente paso</p>
-          <p class="box-dark-title">¿Todo listo?</p>
-          <p class="box-dark-sub">Escríbenos por WhatsApp y te asesoramos al instante.</p>
-          <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-wa">
-            💬 Pedir por WhatsApp
-          </a>
-          <p class="box-note">Tu selección se envía automáticamente</p>
-        </div>
-
-        <div class="card-box">
-          <p class="box-label">Por qué elegirnos</p>
-          <div class="trust-list">
-            <div class="trust-item"><div class="trust-icon">🛡</div><span class="trust-text">Pago 100% seguro</span></div>
-            <div class="trust-item"><div class="trust-icon">∞</div><span class="trust-text">Envío ilimitado a todos tus invitados</span></div>
-            <div class="trust-item"><div class="trust-icon">📅</div><span class="trust-text">Lista en 1–2 días laborales</span></div>
-            <div class="trust-item"><div class="trust-icon">💬</div><span class="trust-text">Soporte personalizado por WhatsApp</span></div>
-          </div>
-        </div>
-
+      <div class="cat-card fade-in fade-in-delay-2">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1755207296882-995b6b3f709a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="15 Años" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">15 Años</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Un momento único e irrepetible</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-3">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Bautizo" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Bautizo</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Bienvenida al mundo espiritual</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-4">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1746559676407-370f34bec476?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Comunión" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Comunión</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Un paso de fe importante</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-1">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1768508950719-4d76978fdf44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Empresarial" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Empresarial</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Eventos corporativos con clase</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-2">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1545696563-af8f6ec2295a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Cumpleaños" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Cumpleaños</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Celebra cada año con estilo</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-3">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Graduación" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Graduación</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">El comienzo de un nuevo camino</p></div>
+      </div>
+      <div class="cat-card fade-in fade-in-delay-4">
+        <div class="cat-img-wrap"><img src="https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Infantiles" loading="lazy"/><div class="cat-overlay"></div><div class="cat-name">Infantiles</div></div>
+        <div class="cat-body"><div class="cat-divider"><div class="cat-divider-line"></div><span class="cat-divider-star">✦</span></div><p class="cat-desc">Magia y alegría para los pequeños</p></div>
       </div>
     </div>
   </div>
+</section>
 
-  <footer style="margin-top:2rem">
-    <img src="https://hercules-cdn.com/file_hC93kYqv7h5rfBHqXQGJ6bTw" alt="Gueka Ideas" />
-    <p>Invitaciones Digitales · <span id="year2"></span></p>
-  </footer>
+<!-- ===== INTERACTIVE ===== -->
+<section id="interactive">
+  <div class="grid-overlay"></div>
+  <div class="interactive-inner">
+    <div class="fade-from-left">
+      <p class="section-label">Digital e Interactivo</p>
+      <h2 class="interactive-title">Una invitación que tus invitados van a <em>adorar</em></h2>
+      <div class="divider" style="justify-content:flex-start">
+        <div class="divider-line divider-line-gold-dim"></div>
+        <span class="divider-star">✦</span>
+        <div class="divider-line divider-line-gold-dim"></div>
+      </div>
+      <p class="interactive-sub">Olvida el papel. Con nuestras invitaciones digitales, tus invitados pueden confirmar asistencia, agendar la fecha, ver el lugar en Maps y mucho más — todo desde su celular.</p>
+      <ul class="checks">
+        <li class="check-item">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Confirmar asistencia con un clic
+        </li>
+        <li class="check-item">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Agendar en su calendario digital
+        </li>
+        <li class="check-item">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Ver indicaciones en Google Maps
+        </li>
+        <li class="check-item">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Enviar sugerencias de canciones
+        </li>
+        <li class="check-item">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#c9a96e;fill:none;stroke-width:2;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Subir fotos del evento en tiempo real
+        </li>
+      </ul>
+      <div class="delivery-badge">
+        <div class="delivery-badge-line"></div>
+        Entrega en <span>24 horas</span>
+      </div>
+    </div>
+    <div class="phone-wrap fade-from-right">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-content">
+          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="logo" class="phone-logo" />
+          <div class="phone-divider"></div>
+          <div class="phone-names">Valentina<br>&amp; Diego</div>
+          <div class="phone-date">15 · Marzo · 2025</div>
+          <button class="phone-btn">Confirmar Asistencia</button>
+          <div class="phone-chips">
+            <div class="phone-chip">📍 Maps</div>
+            <div class="phone-chip">📅 Agenda</div>
+            <div class="phone-chip">🎵 Música</div>
+          </div>
+        </div>
+        <div class="phone-footer">guekaideas.com/<strong>valentina-diego</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-</div><!-- /pedido-page -->
+<!-- ===== FEATURES ===== -->
+<section id="funciones">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-in">
+      <p class="section-label">Características</p>
+      <h2 class="section-title-light"><em style="font-style:italic">Funciones</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
+      <p class="section-sub">Prácticas y modernas. Las principales funciones de nuestras invitaciones digitales.</p>
+    </div>
+    <div class="feat-grid" id="feat-grid"></div>
+  </div>
+</section>
 
+<!-- ===== PROCESO ===== -->
+<section id="proceso">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-in">
+      <p class="section-label">Proceso</p>
+      <h2 class="section-title-light">Tu invitación en <em style="font-style:italic">3 pasos</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
+      <p class="section-sub">Fácil y rápido. Nosotros nos encargamos de todo.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-in fade-in-delay-1">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Elección</h3>
+        <p class="step-desc">Seleccionas el modelo de invitación que más te guste de nuestro catálogo.</p>
+      </div>
+      <div class="step fade-in fade-in-delay-2">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Personalización</h3>
+        <p class="step-desc">Nos envías los datos y fotos a través del panel de administración exclusivo.</p>
+      </div>
+      <div class="step fade-in fade-in-delay-3">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Envío</h3>
+        <p class="step-desc">Compartes la invitación con todas las personas que desees por donde prefieras.</p>
+      </div>
+    </div>
+    <div class="proceso-cta fade-in fade-in-delay-4">
+      <p class="proceso-sub">Contáctanos y te explicamos los pasos a seguir.</p>
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-dark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Contáctanos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIOS ===== -->
+<section id="testimonios">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-in">
+      <p class="section-label">Testimonios</p>
+      <h2 class="section-title-dark">Lo que dicen nuestros <em style="font-style:italic;color:#c9a96e">clientes</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold-dim"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold-dim"></div></div>
+      <p class="section-sub-dark">Miles de personas ya confiaron en nosotros para sus invitaciones más especiales.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card fade-in fade-in-delay-1">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Excelente, novedosa, nos encantó!!! La tarjeta divina, súper original y completa. La atención excelente, muy atentos, evacuaron todas nuestras dudas. Super recomendables."</p>
+        <div class="test-footer"><div class="test-avatar">L</div><div><div class="test-name">Liliana A.</div><div class="test-country">Argentina</div></div></div>
+      </div>
+      <div class="test-card fade-in fade-in-delay-2">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Quiero agradecer por acompañarnos de una manera incondicional, estuvieron pendientes de cada detalle. Sin dudas, para recomendar."</p>
+        <div class="test-footer"><div class="test-avatar">D</div><div><div class="test-name">Daniela Y.</div><div class="test-country">Argentina</div></div></div>
+      </div>
+      <div class="test-card fade-in fade-in-delay-3">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"La invitación quedó pronta en el día! Todo excelente! Casi todos los invitados hicieron comentarios de lo buena que quedó!"</p>
+        <div class="test-footer"><div class="test-avatar">D</div><div><div class="test-name">Diego</div><div class="test-country">Uruguay</div></div></div>
+      </div>
+      <div class="test-card fade-in fade-in-delay-1">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Súper rápido, en menos de 24hs ya las teníamos! Hermosas!!! Súper recomendable!"</p>
+        <div class="test-footer"><div class="test-avatar">Y</div><div><div class="test-name">Yanina B.</div><div class="test-country">Argentina</div></div></div>
+      </div>
+      <div class="test-card fade-in fade-in-delay-2">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Un trabajo muy bien hecho, responden rápido y no tardaron ni un día. La atención al cliente 10/10, te responden cualquier duda, todos mis invitados están encantados."</p>
+        <div class="test-footer"><div class="test-avatar">Y</div><div><div class="test-name">Ysabel C.</div><div class="test-country">Argentina</div></div></div>
+      </div>
+      <div class="test-card fade-in fade-in-delay-3">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Con tan buen gusto y sin perder detalles llevó a cabo mi sueño de la tarjeta más linda, con el fondo musical que elegí. Estoy super contenta y la atención super especial."</p>
+        <div class="test-footer"><div class="test-avatar">L</div><div><div class="test-name">Liseth G.</div><div class="test-country">España</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-in">
+      <p class="section-label">Preguntas Frecuentes</p>
+      <h2 class="section-title-light"><em style="font-style:italic">FAQ</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
+      <p class="section-sub">Todo lo que necesitas saber antes de solicitar tu invitación.</p>
+    </div>
+    <div class="faq-list" id="faq-list"></div>
+    <p class="faq-foot">¿Tienes otra duda? <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer">Contáctanos con gusto.</a></p>
+  </div>
+</section>
+
+<!-- ===== NOSOTROS ===== -->
+<section id="nosotros">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="fade-in">
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="nosotros-logo" />
+      <p class="section-label">Nosotros</p>
+      <h2 class="section-title-light" style="margin-bottom:.5rem">Create · Invite · <em style="font-style:italic">Celebrate</em></h2>
+      <div class="divider"><div class="divider-line divider-line-gold"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold"></div></div>
+      <p class="nosotros-p1">Somos Gueka Ideas y contamos con una amplia experiencia brindando servicios de invitaciones digitales para bodas y eventos desde 2010.</p>
+      <p class="nosotros-p2">Nos impulsan los sueños, nos mueve lo hermoso de las pequeñas cosas, nos estremece el amor. Es un privilegio para nosotros acompañar cada historia y hacerla especial a través de nuestras invitaciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner fade-in">
+    <p class="section-label">Proveedor Certificado</p>
+    <h2 class="section-title-dark" style="margin-bottom:.5rem">¿Listo para crear tu<br><em style="font-style:italic;color:#c9a96e">invitación perfecta?</em></h2>
+    <div class="divider"><div class="divider-line divider-line-gold-dim"></div><span class="divider-star">✦</span><div class="divider-line divider-line-gold-dim"></div></div>
+    <p style="color:rgba(247,242,236,.55);font-size:.95rem;margin-bottom:2.5rem;font-weight:300;font-family:'Jost',sans-serif">Contáctanos hoy y te explicamos todo lo que necesitas saber para tener tu invitación lista.</p>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div><img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="footer-logo" /></div>
+    <nav class="footer-nav">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="footer-copy">© <span id="year"></span> Gueka Ideas</div>
+  </div>
+</footer>
 
 <script>
-/* ═══════════════════════════════════════════ DATA */
-const WA_LINK = 'https://wa.me/message/57HQCKAMGELDG1';
+// ===== YEAR =====
+document.getElementById('year').textContent = new Date().getFullYear();
 
-const fmt = n => '$' + n.toLocaleString('es-CO');
-const $ = id => document.getElementById(id);
+// ===== NAVBAR SCROLL =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
 
-const PLANS = [
-  {
-    id: 'classic', label: 'CLASSIC', price: 80000, priceBefore: 160000, popular: false,
-    image: 'https://images.unsplash.com/photo-1596457221755-b96bc3a6df18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-    demo: 'https://TU-DEMO-CLASSIC.com', // ← cambia por el link real
-    features: ['Envío ilimitado','Portada cinematográfica','Cuenta regresiva animada','Galería de hasta 4 fotos','Agenda digital multiplataforma','Ubicación con mapa e indicaciones','RSVP online','Panel privado de invitados','Sección regalos y vestimenta'],
-  },
-  {
-    id: 'premium', label: 'PREMIUM', price: 110000, priceBefore: 220000, popular: true,
-    image: 'https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-    demo: 'https://TU-DEMO-PREMIUM.com', // ← cambia por el link real
-    features: ['Todo lo de CLASSIC','Música de fondo a elección','Galería de hasta 8 fotos','Historia de la pareja','Nombre del invitado y pases','RSVP Premium con panel avanzado','Sugerencia de canciones','Instagram Wall y hashtag','REGALO: Save The Date'],
-  },
-  {
-    id: 'deluxe', label: 'DELUXE', price: 160000, priceBefore: 320000, popular: false,
-    image: 'https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-    demo: 'https://TU-DEMO-DELUXE.com', // ← cambia por el link real
-    features: ['Todo lo de PREMIUM','Álbum de hasta 12 fotos','Mesa asignada al invitado','Hoteles y transporte','Itinerario completo del evento','Testigos y padrinos','Playlist de Spotify','Redes oficiales del evento','Sección adicional libre'],
-  },
-];
+// ===== HAMBURGER =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.style.display === 'flex';
+  mobileMenu.style.display = open ? 'none' : 'flex';
+  hamburger.textContent = open ? '☰' : '✕';
+});
+document.querySelectorAll('.mobile-link').forEach(l => {
+  l.addEventListener('click', () => {
+    mobileMenu.style.display = 'none';
+    hamburger.textContent = '☰';
+  });
+});
 
-const ADDONS = [
-  { id: 'color',     label: 'Cambiar paleta de colores', price: 30000 },
-  { id: 'font',      label: 'Cambiar tipografía',        price: 20000 },
-  { id: 'multilang', label: 'Versión multilenguaje',     price: 25000 },
-];
-
-const FAQS = [
-  { q:'¿Cómo contrato la invitación?',             a:'Muy fácil: 1) Elige el modelo y realiza la compra. 2) Envíanos los datos y fotos desde nuestro panel. 3) Comparte el link con todos tus invitados con un clic.' },
-  { q:'¿Los precios son por cantidad de invitados?', a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, sin límites.' },
-  { q:'¿Se pueden personalizar aún más?',           a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También podemos diseñar un modelo completamente a medida.' },
-  { q:'¿En cuánto tiempo está lista?',              a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños a medida pueden tardar de 7 a 10 días laborales.' },
-  { q:'¿Cuánto tiempo estará online?',              a:'El link estará activo desde que esté lista y durante al menos 3 meses después de la fecha del evento.' },
-  { q:'¿Hay un límite de invitados?',               a:'No. Puedes enviar la invitación a todos los invitados que desees sin ningún límite.' },
-];
-
-/* ═══════════════════════════════════════════ STATE */
-let selectedPlan = 'premium';
-let selectedAddons = [];
-
-/* ═══════════════════════════════════════════ YEAR */
-const yr = new Date().getFullYear();
-$('year').textContent = yr; $('year2').textContent = yr;
-
-/* ═══════════════════════════════════════════ MOBILE MENU */
-const hamburger = $('hamburger'), mobileMenu = $('mobile-menu');
-hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-function closeMobile() { mobileMenu.classList.remove('open'); }
-
-/* ═══════════════════════════════════════════ SCROLL REVEAL */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+// ===== INTERSECTION OBSERVER for fade-in =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.1 });
-function observeReveal() { document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el)); }
+document.querySelectorAll('.fade-in, .fade-from-left, .fade-from-right').forEach(el => observer.observe(el));
 
-/* ═══════════════════════════════════════════ HELPERS */
-function getTotal() {
-  const plan = PLANS.find(p => p.id === selectedPlan);
-  return (plan?.price ?? 0) + ADDONS.filter(a => selectedAddons.includes(a.id)).reduce((s,a) => s + a.price, 0);
-}
-
-/* ═══════════════════════════════════════════ RENDER PLAN CARDS */
-function renderPlans() {
-  const row = $('plans-row');
-  row.innerHTML = '';
-  PLANS.forEach(p => {
-    const off  = Math.round((1 - p.price / p.priceBefore) * 100);
-    const isSel = selectedPlan === p.id;
-    const card = document.createElement('div');
-    card.className = 'plan-card reveal' + (isSel ? ' selected' : '');
-    card.innerHTML = `
-      <div class="oferta-badge">🔥 OFERTA</div>
-      ${p.popular ? '<div class="popular-badge">Más popular</div>' : ''}
-      <div class="card-img-wrap">
-        <img src="${p.image}" alt="${p.label}" loading="lazy" />
-        <div class="card-img-gradient"></div>
-        <span class="card-plan-label">${p.label}</span>
-      </div>
-      <div class="card-body">
-        <p class="card-price">${fmt(p.price)}</p>
-        <div class="card-before-row">
-          <span class="card-before">${fmt(p.priceBefore)}</span>
-          <span class="card-off-badge">-${off}% OFF</span>
-        </div>
-        <ul class="card-features">
-          ${p.features.map(f => `<li><span class="card-feat-dot">✦</span>${f}</li>`).join('')}
-        </ul>
-        <button class="card-btn ${isSel ? 'filled' : 'outline'}" data-action="select">
-          ${isSel ? '✓ Seleccionado' : 'Seleccionar'}
-        </button>
-        <a href="${p.demo}" target="_blank" rel="noopener noreferrer" class="btn-demo" data-action="demo">
-          👁 Ver Demo
-        </a>
-      </div>`;
-
-    /* Seleccionar al hacer click en la card, EXCEPTO si es el botón demo */
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('[data-action="demo"]')) return; // no selecciona al ver demo
-      selectedPlan = p.id;
-      renderPlans();
-      renderPanel();
-      observeReveal();
-    });
-
-    row.appendChild(card);
-  });
-  observeReveal();
-}
-
-/* ═══════════════════════════════════════════ RENDER ORDER PANEL */
-function renderPanel() {
-  const plan = PLANS.find(p => p.id === selectedPlan);
-  $('panel-subtitle').textContent = plan ? `Cinema ${plan.label}` : 'Elige un plan';
-
-  $('addons-list').innerHTML = ADDONS.map(a => {
-    const active = selectedAddons.includes(a.id);
-    return `<button class="addon-btn${active?' active':''}" data-id="${a.id}">
-      <span class="addon-name">${a.label}</span>
-      <span class="addon-price">+${fmt(a.price)}</span>
-    </button>`;
-  }).join('');
-  $('addons-list').querySelectorAll('.addon-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      selectedAddons = selectedAddons.includes(id) ? selectedAddons.filter(x=>x!==id) : [...selectedAddons, id];
-      renderPanel();
-    });
-  });
-
-  const total = getTotal();
-  let rows = '';
-  if (plan) rows += `<div class="summary-row"><span>Plan ${plan.label}</span><span>${fmt(plan.price)}</span></div>`;
-  selectedAddons.forEach(id => {
-    const a = ADDONS.find(x=>x.id===id);
-    if (a) rows += `<div class="summary-row"><span>${a.label}</span><span>+${fmt(a.price)}</span></div>`;
-  });
-  $('summary-box').innerHTML = rows +
-    `<div class="summary-total"><span class="summary-total-label">Total</span><span class="summary-total-price">${fmt(total)}</span></div>`;
-
-  const cta = $('panel-cta');
-  cta.disabled = !plan;
-  cta.innerHTML = plan ? '🛒 Contratar ahora' : '🛒 Elige un plan';
-  cta.onclick = plan ? showPedido : null;
-}
-
-/* ═══════════════════════════════════════════ SHOW PEDIDO */
-function showPedido() {
-  const plan = PLANS.find(p => p.id === selectedPlan);
-  if (!plan) return;
-  const activeAddons = ADDONS.filter(a => selectedAddons.includes(a.id));
-  const total = getTotal();
-
-  $('dc-img').src = plan.image;
-  $('dc-plan-badge').textContent = plan.label;
-  $('dc-price').textContent = fmt(total);
-
-  const holes = (n) => Array.from({length:n}).map(()=>'<div class="dc-hole"></div>').join('');
-  $('dc-film-strip').innerHTML = holes(16);
-  $('dc-film-bottom').innerHTML = holes(12);
-
-  $('dc-features').innerHTML = plan.features.map(f =>
-    `<div class="dc-feat"><div class="dc-feat-icon">✦</div><span class="dc-feat-text">${f}</span></div>`
-  ).join('');
-
-  if (activeAddons.length) {
-    $('dc-addons-wrap').style.display = 'block';
-    $('dc-addons-list').innerHTML = activeAddons.map(a =>
-      `<div class="dc-addon-item"><span class="dc-addon-name">✓ ${a.label}</span><span class="dc-addon-price">+${fmt(a.price)}</span></div>`
-    ).join('');
-  } else {
-    $('dc-addons-wrap').style.display = 'none';
-  }
-
-  let bRows = `<div class="breakdown-row"><span>Invitación Cinema ${plan.label}</span><strong>${fmt(plan.price)}</strong></div>`;
-  activeAddons.forEach(a => {
-    bRows += `<div class="breakdown-row"><span>${a.label}</span><strong>+${fmt(a.price)}</strong></div>`;
-  });
-  $('breakdown-rows').innerHTML = bRows;
-  $('breakdown-total').textContent = fmt(total);
-
-  const addonLine = activeAddons.length ? `\nComplementos: ${activeAddons.map(a=>a.label).join(', ')}` : '';
-  const msg = encodeURIComponent(`¡Hola! Quiero contratar:\n✨ Invitación Digital Cinema Boda — Plan ${plan.label}\n💰 Precio: ${fmt(plan.price)}${addonLine}\n💳 Total: ${fmt(total)}`);
-  $('wa-btn').href = `https://wa.me/message/57HQCKAMGELDG1?text=${msg}`;
-
-  $('planes-page').classList.add('hidden');
-  $('pedido-page').classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-/* ═══════════════════════════════════════════ BACK */
-$('btn-back').addEventListener('click', () => {
-  $('pedido-page').classList.remove('active');
-  $('planes-page').classList.remove('hidden');
-  window.scrollTo({top:0, behavior:'smooth'});
+// ===== FEATURES =====
+const features = [
+  { title: "RSVP Digital", desc: "Los invitados confirman asistencia online con un click desde su celular.", icon: '<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>' },
+  { title: "Lista de Invitados", desc: "Invitaciones personalizadas con nombre, pases adicionales y número de mesa.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+  { title: "Agenda", desc: "Los invitados agendan el evento en su calendario digital con un solo clic.", icon: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/>' },
+  { title: "Ubicación", desc: "Google Maps integrado con indicaciones para que nadie se pierda.", icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>' },
+  { title: "Envío Ilimitado", desc: "Paga una vez y envía a todos los invitados por WhatsApp, email, redes sociales.", icon: '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>' },
+  { title: "Itinerario", desc: "Cada momento importante del evento en una línea de tiempo paso a paso.", icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' },
+  { title: "Cuenta Regresiva", desc: "Días, horas y minutos para el evento generando expectativa y emoción.", icon: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>' },
+  { title: "Regalos", desc: "Recibe regalos en cuenta bancaria o billetera virtual y lista de regalos.", icon: '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>' },
+  { title: "Álbum de Fotos", desc: "Comparte las fotos favoritas o sesión previa para personalizar la invitación.", icon: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>' },
+  { title: "Sugerencias de Canciones", desc: "Los invitados participan enviando canciones para la fiesta.", icon: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>' },
+  { title: "Instagram Wall", desc: "Con hashtag personalizado, visualiza todas las fotos del evento en un lugar.", icon: '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>' },
+  { title: "Compartir Fotos", desc: "Los invitados suben fotos y videos del evento a la nube en tiempo real.", icon: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
+  { title: "Dress Code", desc: "Indica el código de vestimenta elegido de forma elegante a los invitados.", icon: '<path d="M3 3h6l2 2-8 8-3-3V3z"/><path d="M21 21h-6l-2-2 8-8 3 3v7z"/>' },
+  { title: "Testigos / Padrinos", desc: "Destaca a testigos y padrinos con sus nombres y fotos en la invitación.", icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>' },
+  { title: "Multilenguaje", desc: "Invitación en dos o más idiomas para invitados internacionales.", icon: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
+  { title: "Música de Fondo", desc: "Selecciona el tema musical que desees para que suene en la invitación.", icon: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>' },
+  { title: "Menú", desc: "Los invitados seleccionan opciones de menú o declaran restricciones alimentarias.", icon: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>' },
+  { title: "Transporte", desc: "Los invitados se anotan para el bus o indican que asistirán por su cuenta.", icon: '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>' },
+  { title: "Alojamiento", desc: "Recomendaciones de alojamientos cercanos para invitados de otras ciudades.", icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
+  { title: "Panel Propietario", desc: "Personalización, envío con un clic, gestión de invitados y descarga en Excel.", icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>' },
+];
+const featGrid = document.getElementById('feat-grid');
+features.forEach((f, i) => {
+  const delay = (i % 4) * 0.06;
+  featGrid.innerHTML += `
+    <div class="feat-card fade-in" style="transition-delay:${delay}s">
+      <div class="feat-icon"><svg viewBox="0 0 24 24">${f.icon}</svg></div>
+      <div class="feat-title">${f.title}</div>
+      <p class="feat-desc">${f.desc}</p>
+    </div>`;
 });
+// re-observe new elements
+document.querySelectorAll('.feat-card').forEach(el => observer.observe(el));
 
-/* ═══════════════════════════════════════════ FAQ */
-$('faq-list').innerHTML = FAQS.map((f,i) => `
-  <div class="faq-item reveal" id="faq-${i}">
-    <button class="faq-trigger" data-i="${i}" aria-expanded="false">
-      <span class="faq-question">${f.q}</span>
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-body"><p>${f.a}</p></div>
-  </div>`).join('');
-
-$('faq-list').addEventListener('click', e => {
-  const btn = e.target.closest('.faq-trigger');
-  if (!btn) return;
-  const item = $('faq-' + btn.dataset.i);
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
+// ===== FAQ =====
+const faqs = [
+  { q: "¿Cómo contrato la invitación?", a: "Contáctanos por WhatsApp o formulario, te explicamos los pasos y modelos disponibles. Una vez elegido el modelo, te enviamos el acceso al panel de administración." },
+  { q: "¿Los precios son por invitado?", a: "No, los precios son por invitación (evento). Puedes enviarla a todos tus invitados sin costo adicional." },
+  { q: "¿Cuál es la diferencia entre la Invitación Web y el Save the Date?", a: "La Invitación Web es la invitación completa con todos los detalles del evento, RSVP y funciones interactivas. El Save the Date es un adelanto anticipado con la fecha y lugar del evento." },
+  { q: "¿Cuánto tiempo tardan en entregar la invitación?", a: "El tiempo de entrega estándar es de 24 horas una vez recibidos todos los datos y fotos a través del panel de administración." },
+  { q: "¿Puedo hacer cambios después de recibir la invitación?", a: "Sí, incluimos hasta 2 rondas de correcciones sin costo adicional. Cambios adicionales tienen un pequeño costo dependiendo de su alcance." },
+  { q: "¿La invitación tiene fecha de vencimiento?", a: "No, la invitación estará disponible de forma indefinida. Generalmente se mantiene activa hasta 30 días después del evento." },
+  { q: "¿En qué idiomas están disponibles las invitaciones?", a: "Nuestras invitaciones están disponibles en español e inglés por defecto. Si necesitas otro idioma, podemos coordinarlo sin problema." },
+];
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f, i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item fade-in';
+  item.style.transitionDelay = (i * 0.06) + 's';
+  item.innerHTML = `
+    <button class="faq-btn">${f.q}<span class="faq-arrow">▾</span></button>
+    <div class="faq-body"><div class="faq-answer">${f.a}</div></div>`;
+  item.querySelector('.faq-btn').addEventListener('click', () => {
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+  faqList.appendChild(item);
+  observer.observe(item);
 });
-
-/* ═══════════════════════════════════════════ INIT */
-renderPlans();
-renderPanel();
-observeReveal();
 </script>
 </body>
 </html>
