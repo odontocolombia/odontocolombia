@@ -290,6 +290,52 @@ img{display:block;max-width:100%}
   font-family:'Jost',sans-serif;
 }
 
+/* ── Promo badge animada ── */
+.promo-badge{
+  position:absolute;top:-10px;left:8%;z-index:5;
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:linear-gradient(90deg,#e63946,#c1121f);
+  color:#fff;
+  font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.28rem .72rem;border-radius:99px;
+  box-shadow:0 4px 14px rgba(230,57,70,.45);
+  font-family:'Jost',sans-serif;
+  animation:promo-pulse 1.6s ease-in-out infinite;
+  white-space:nowrap;
+}
+.promo-badge::before{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:#fff;
+  animation:promo-dot .9s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes promo-pulse{
+  0%,100%{box-shadow:0 4px 14px rgba(230,57,70,.45),0 0 0 0 rgba(230,57,70,.5)}
+  50%{box-shadow:0 4px 20px rgba(230,57,70,.65),0 0 0 6px rgba(230,57,70,0)}
+}
+@keyframes promo-dot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.7)}
+}
+
+/* ── Precios en card body ── */
+.gcard-prices{
+  display:flex;gap:.4rem;margin-bottom:.7rem;justify-content:center;flex-wrap:wrap;
+}
+.price-chip{
+  display:flex;flex-direction:column;align-items:center;
+  background:rgba(197,160,89,.07);
+  border:1px solid rgba(197,160,89,.2);
+  border-radius:.65rem;padding:.35rem .55rem;
+  min-width:58px;
+}
+.price-plan{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Jost',sans-serif;font-weight:600}
+.price-old{font-size:.48rem;color:rgba(74,107,93,.5);font-family:'Jost',sans-serif;text-decoration:line-through;line-height:1.2}
+.price-new{font-size:.72rem;font-weight:700;color:var(--gold);font-family:'Cormorant Garamond',serif;line-height:1.1}
+.price-discount{font-size:.42rem;font-weight:700;color:#e63946;font-family:'Jost',sans-serif;letter-spacing:.05em}
+
 /* Phone footer bar */
 .phone-mock-footer{
   flex-shrink:0;
@@ -528,104 +574,56 @@ const mqHtml = MARQUEE.map(i => `<span class="marquee-item">${i}<span class="mar
 mq.innerHTML = mqHtml + mqHtml;
 
 /* ── Gallery Data — 12 diseños de boda ── */
-const CARDS = [
-  {
-    name:'Cinema Boda',
-    img:'https://images.unsplash.com/photo-1571753217087-980e556e16ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Valentina & Diego',date:'15 · Mar · 2025',
-    tags:['Classic','Premium','Deluxe'],badge:'Más Popular',
-  },
-  {
-    name:'Jardín Romántico',
-    img:'https://images.unsplash.com/photo-1727425383452-2be55354f06e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Sofía & Andrés',date:'22 · Jun · 2025',
-    tags:['Classic','Premium'],badge:'Nuevo',
-  },
-  {
-    name:'Atardecer Dorado',
-    img:'https://images.unsplash.com/photo-1773693062137-7d2220b09155?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Camila & Sebastián',date:'8 · Ago · 2025',
-    tags:['Premium','Deluxe'],badge:null,
-  },
-  {
-    name:'Hacienda Clásica',
-    img:'https://images.unsplash.com/photo-1780337092331-6580fd9ccb47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Laura & Felipe',date:'14 · Sep · 2025',
-    tags:['Deluxe'],badge:'Exclusivo',
-  },
-  {
-    name:'Novios al Amanecer',
-    img:'https://images.unsplash.com/photo-1774545272426-264af5db8d01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Isabela & Mateo',date:'30 · May · 2025',
-    tags:['Classic','Premium'],badge:null,
-  },
-  {
-    name:'Salón de Cristal',
-    img:'https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Ana & Rodrigo',date:'12 · Oct · 2025',
-    tags:['Premium','Deluxe'],badge:null,
-  },
-  {
-    name:'Playa Dorada',
-    img:'https://images.unsplash.com/photo-1768611260522-4e6b5c6c3448?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'María & José',date:'3 · Nov · 2025',
-    tags:['Classic','Premium','Deluxe'],badge:'Nuevo',
-  },
-  {
-    name:'Arco Floral',
-    img:'https://images.unsplash.com/photo-1766149481900-328c59e7f17a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Valentina & Tomás',date:'18 · Abr · 2025',
-    tags:['Premium','Deluxe'],badge:null,
-  },
-  {
-    name:'Ramo de Novia',
-    img:'https://images.unsplash.com/photo-1521543832500-49e69fb2bea2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Daniela & Camilo',date:'6 · Jul · 2025',
-    tags:['Classic'],badge:null,
-  },
-  {
-    name:'Orquídeas & Luz',
-    img:'https://images.unsplash.com/photo-1779308936221-89739e035a53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Carolina & Luis',date:'25 · Oct · 2025',
-    tags:['Premium','Deluxe'],badge:'Exclusivo',
-  },
-  {
-    name:'Beso al Atardecer',
-    img:'https://images.unsplash.com/photo-1653614711373-94a99432ab4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Alejandra & David',date:'1 · Dic · 2025',
-    tags:['Classic','Premium'],badge:null,
-  },
-  {
-    name:'Lago & Serenidad',
-    img:'https://images.unsplash.com/photo-1758727654358-a90614d694eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80',
-    couple:'Natalia & Esteban',date:'15 · Feb · 2026',
-    tags:['Deluxe'],badge:'Nuevo',
-  },
+/* Todos tienen los 3 planes con 50 % de descuento aplicado */
+const PLANS = [
+  { name:'Classic', old:'$160.000', new:'$80.000' },
+  { name:'Premium', old:'$220.000', new:'$110.000' },
+  { name:'Deluxe',  old:'$320.000', new:'$160.000' },
 ];
+
+const CARDS = [
+  { name:'Cinema Boda',        img:'https://images.unsplash.com/photo-1571753217087-980e556e16ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Valentina & Diego',    date:'15 · Mar · 2025', badge:'Más Popular' },
+  { name:'Jardín Romántico',   img:'https://images.unsplash.com/photo-1727425383452-2be55354f06e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Sofía & Andrés',      date:'22 · Jun · 2025', badge:'Nuevo' },
+  { name:'Atardecer Dorado',   img:'https://images.unsplash.com/photo-1773693062137-7d2220b09155?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Camila & Sebastián',  date:'8 · Ago · 2025',  badge:'Exclusivo' },
+  { name:'Hacienda Clásica',   img:'https://images.unsplash.com/photo-1780337092331-6580fd9ccb47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Laura & Felipe',      date:'14 · Sep · 2025', badge:'Nuevo' },
+  { name:'Novios al Amanecer', img:'https://images.unsplash.com/photo-1774545272426-264af5db8d01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Isabela & Mateo',     date:'30 · May · 2025', badge:'Exclusivo' },
+  { name:'Salón de Cristal',   img:'https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Ana & Rodrigo',       date:'12 · Oct · 2025', badge:'Nuevo' },
+  { name:'Playa Dorada',       img:'https://images.unsplash.com/photo-1768611260522-4e6b5c6c3448?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'María & José',        date:'3 · Nov · 2025',  badge:'Más Popular' },
+  { name:'Arco Floral',        img:'https://images.unsplash.com/photo-1766149481900-328c59e7f17a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Valentina & Tomás',   date:'18 · Abr · 2025', badge:'Nuevo' },
+  { name:'Ramo de Novia',      img:'https://images.unsplash.com/photo-1521543832500-49e69fb2bea2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Daniela & Camilo',    date:'6 · Jul · 2025',  badge:'Exclusivo' },
+  { name:'Orquídeas & Luz',    img:'https://images.unsplash.com/photo-1779308936221-89739e035a53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Carolina & Luis',     date:'25 · Oct · 2025', badge:'Nuevo' },
+  { name:'Beso al Atardecer',  img:'https://images.unsplash.com/photo-1653614711373-94a99432ab4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Alejandra & David',   date:'1 · Dic · 2025',  badge:'Más Popular' },
+  { name:'Lago & Serenidad',   img:'https://images.unsplash.com/photo-1758727654358-a90614d694eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', couple:'Natalia & Esteban',   date:'15 · Feb · 2026', badge:'Nuevo' },
+];
+
+/* ── Helpers ── */
+function buildPriceChips() {
+  return PLANS.map(p => `
+    <div class="price-chip">
+      <span class="price-plan">${p.name}</span>
+      <span class="price-old">${p.old}</span>
+      <span class="price-new">${p.new}</span>
+      <span class="price-discount">−50%</span>
+    </div>`).join('');
+}
 
 /* ── Build cards ── */
 const grid = document.getElementById('gallery-grid');
 CARDS.forEach((c, i) => {
   const delay = `d${(i % 4) + 1}`;
-  const badgeHtml = c.badge
-    ? `<div class="phone-badge">${c.badge}</div>`
-    : '';
 
   const el = document.createElement('div');
   el.className = `gcard fade-in ${delay}`;
   el.innerHTML = `
     <div class="phone-mock-wrap">
-      ${badgeHtml}
+      <!-- Etiqueta promo animada (izquierda) -->
+      <div class="promo-badge">50% OFF</div>
+      <!-- Badge de estilo (derecha) -->
+      <div class="phone-badge">${c.badge}</div>
       <div class="phone-mock">
         <div class="phone-mock-notch"></div>
         <div class="phone-mock-screen">
-          <img
-            src="${c.img}"
-            alt="${c.name}"
-            class="phone-mock-img"
-            loading="lazy"
-            width="600"
-          />
+          <img src="${c.img}" alt="${c.name}" class="phone-mock-img" loading="lazy" width="600"/>
           <div class="phone-mock-ov"></div>
           <div class="phone-mock-content">
             <img src="${LOGO}" alt="" class="pmc-logo"/>
@@ -640,17 +638,15 @@ CARDS.forEach((c, i) => {
     </div>
     <div class="gcard-body-outer">
       <div class="gcard-name">${c.name}</div>
-      <div class="gcard-tags">${c.tags.map(t => `<span class="gcard-tag">${t}</span>`).join('')}</div>
+      <div class="gcard-prices">${buildPriceChips()}</div>
       <div class="gcard-footer-row">
-        <span class="gcard-plans">${c.tags.length} plan${c.tags.length > 1 ? 'es' : ''}</span>
+        <span class="gcard-plans">3 planes disponibles</span>
         <div class="pc-arrow" aria-hidden="true">→</div>
       </div>
     </div>`;
 
-  /* click to WhatsApp */
-  el.addEventListener('click', () => {
-    window.open(`https://wa.me/573242712162?text=${encodeURIComponent('Hola! Me interesa el diseño "' + c.name + '" para mi matrimonio. ¿Me pueden dar más información?')}`, '_blank');
-  });
+  /* click → página de planes */
+  el.addEventListener('click', () => { window.location.href = 'planes.html'; });
   el.style.cursor = 'pointer';
   grid.appendChild(el);
 });
