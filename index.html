@@ -133,8 +133,8 @@ button{font-family:inherit;cursor:pointer}
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:background .35s,border-color .35s,backdrop-filter .35s}
 #nav.scrolled{background:rgba(247,242,236,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,169,110,.2)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;height:clamp(80px,11vw,108px);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.nav-logo img{height:clamp(66px,9vw,96px);transition:filter .3s,height .3s;filter:brightness(0) saturate(100%) invert(95%) sepia(20%) saturate(500%) hue-rotate(5deg) brightness(130%)}
-#nav.scrolled .nav-logo img{filter:none;height:clamp(60px,8vw,86px)}
+.nav-logo img{height:clamp(52px,7vw,80px);width:auto;object-fit:contain;transition:filter .3s,height .3s;filter:brightness(0) saturate(100%) invert(95%) sepia(20%) saturate(500%) hue-rotate(5deg) brightness(130%)}
+#nav.scrolled .nav-logo img{filter:none;height:clamp(48px,6vw,70px);width:auto}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.75);transition:color .2s}
 #nav.scrolled .nav-links a{color:var(--muted)}
@@ -227,6 +227,9 @@ button{font-family:inherit;cursor:pointer}
 .hero-logo-wrap{display:flex;justify-content:flex-start;margin-bottom:2rem}
 .hero-logo-wrap img{
   width:clamp(180px,26vw,280px);
+  height:auto;
+  object-fit:contain;
+  display:block;
   filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%);
   animation:logo-shimmer 4s ease-in-out infinite;
 }
@@ -643,7 +646,7 @@ button{font-family:inherit;cursor:pointer}
    NOSOTROS
 ══════════════════════════════════════════════════════ */
 #nosotros{padding:clamp(4rem,9vw,6rem) 1.5rem;background:var(--cream2);text-align:center}
-.nos-logo{width:260px;opacity:.6;filter:brightness(0) saturate(100%) sepia(50%) saturate(300%) hue-rotate(5deg) brightness(88%);margin:0 auto 2rem}
+.nos-logo{width:260px;height:auto;object-fit:contain;opacity:.6;filter:brightness(0) saturate(100%) sepia(50%) saturate(300%) hue-rotate(5deg) brightness(88%);margin:0 auto 2rem;display:block}
 .nos-p{font-size:.93rem;color:var(--muted);line-height:1.82;max-width:600px;margin:0 auto 1rem}
 
 /* ══════════════════════════════════════════════════════
@@ -662,7 +665,7 @@ button{font-family:inherit;cursor:pointer}
 ══════════════════════════════════════════════════════ */
 footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);padding:2.5rem 1.5rem}
 .foot-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
-.foot-logo{height:52px;opacity:.65;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg)}
+.foot-logo{height:52px;width:auto;object-fit:contain;opacity:.65;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg)}
 .foot-nav{display:flex;flex-wrap:wrap;gap:1.5rem}
 .foot-nav a{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,236,.22);transition:color .2s}
 .foot-nav a:hover{color:rgba(247,242,236,.5)}
@@ -688,7 +691,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 <header id="nav" role="banner">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo" aria-label="Gueka Ideas — Inicio">
-      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="200" height="96"/>
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="200"/>
     </a>
     <nav class="nav-links" aria-label="Navegación principal">
       <a href="#showcase">Categorías</a>
@@ -744,7 +747,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
     <div class="hero-left reveal">
 
       <div class="hero-logo-wrap">
-        <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="280" height="110"/>
+        <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="280"/>
       </div>
 
       <div class="hero-live-badge reveal d1">
@@ -1048,7 +1051,7 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
 <!-- ══════ FOOTER ══════ -->
 <footer role="contentinfo">
   <div class="foot-inner">
-    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo" width="140" height="52"/>
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo" width="140"/>
     <nav class="foot-nav" aria-label="Navegación del pie de página">
       <a href="index.html">Inicio</a>
       <a href="#showcase">Categorías</a>
