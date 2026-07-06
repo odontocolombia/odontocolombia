@@ -294,6 +294,8 @@ button{font-family:inherit;cursor:pointer}
   border:2px solid rgba(201,169,110,.45);
   box-shadow:0 40px 100px rgba(0,0,0,.65),inset 0 0 30px rgba(201,169,110,.04),0 0 0 1px rgba(201,169,110,.1);
   overflow:hidden;position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  height:440px;
   animation:hero-phone-float 5s ease-in-out infinite;
 }
 @keyframes hero-phone-float{
@@ -301,14 +303,14 @@ button{font-family:inherit;cursor:pointer}
   33%{transform:translateY(-10px) rotateX(-2deg) rotateY(4deg)}
   66%{transform:translateY(-5px) rotateX(3deg) rotateY(-3deg)}
 }
-.hp-notch{width:68px;height:16px;background:#060300;border-radius:0 0 10px 10px;margin:0 auto}
-.hp-screen{display:flex;flex-direction:column;align-items:center;padding:.8rem .75rem .6rem;text-align:center;gap:.5rem}
+.hp-notch{width:68px;height:16px;background:#060300;border-radius:0 0 10px 10px;margin:0 auto;flex-shrink:0}
 
 /* browser bar */
 .hp-bar{
-  width:100%;background:rgba(201,169,110,.08);
-  border:1px solid rgba(201,169,110,.15);border-radius:.5rem;
-  padding:.35rem .6rem;display:flex;align-items:center;gap:.4rem;
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.15);
+  border-radius:.5rem;padding:.35rem .6rem;
+  margin:.4rem .6rem .2rem;flex-shrink:0;
 }
 .hp-bar-dots{display:flex;gap:.25rem}
 .hp-dot{width:6px;height:6px;border-radius:50%}
@@ -317,74 +319,73 @@ button{font-family:inherit;cursor:pointer}
 .hp-dot:nth-child(3){background:#2a9d8f}
 .hp-bar-url{font-size:.45rem;color:rgba(201,169,110,.45);letter-spacing:.05em;font-family:'Jost',sans-serif;flex:1;text-align:center}
 
-/* cover photo */
-.hp-cover{width:100%;height:110px;border-radius:.65rem;overflow:hidden;position:relative}
-/* Strip que se desliza horizontalmente */
-.hp-cover-strip{
-  display:flex;
-  width:500%; /* 5 imágenes */
-  height:100%;
-  animation:hp-slide 10s ease-in-out infinite;
-}
-.hp-cover-strip img{
-  width:20%; /* 1/5 del strip */
-  height:100%;
-  object-fit:cover;
-  flex-shrink:0;
-}
-@keyframes hp-slide{
-  0%,15%   { transform:translateX(0) }
-  20%,35%  { transform:translateX(-20%) }
-  40%,55%  { transform:translateX(-40%) }
-  60%,75%  { transform:translateX(-60%) }
-  80%,95%  { transform:translateX(-80%) }
-  100%     { transform:translateX(0) }
-}
-.hp-cover-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,8,.05),rgba(26,18,8,.72));pointer-events:none}
-/* dots indicator */
-.hp-dots{position:absolute;bottom:.35rem;left:0;right:0;display:flex;justify-content:center;gap:.28rem;z-index:2}
-.hp-dot-i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .3s}
-.hp-dot-i.active{background:var(--gold);width:10px;border-radius:99px}
-.hp-cover-text{position:absolute;bottom:.55rem;left:0;right:0;text-align:center;z-index:3}
-.hp-cover-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:300;color:#fff;line-height:1.15}
-.hp-cover-title em{font-style:italic;font-weight:600;color:var(--gold)}
+/* ── viewport: recorta el scroll strip ── */
+.hp-viewport{flex:1;overflow:hidden;position:relative}
 
-.hp-logo{width:95px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
-.hp-hr{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.hp-date{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.55)}
+/* tira vertical — secciones apiladas, JS mueve con translateY */
+.hp-scroll-strip{
+  display:flex;flex-direction:column;
+  width:100%;
+  transition:transform .95s cubic-bezier(.77,0,.18,1);
+}
 
-/* countdown en el teléfono */
-.hp-cd{
-  width:100%;background:rgba(201,169,110,.07);
-  border:1px solid rgba(201,169,110,.18);border-radius:.55rem;
-  padding:.45rem .5rem;
+/* cada sección = alto del viewport */
+.hps-section{
+  flex-shrink:0;width:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:.55rem .65rem;text-align:center;gap:.3rem;
+  background:linear-gradient(155deg,#1c1008 0%,#100803 100%);
 }
-.hp-cd-label{font-size:.45rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.5);margin-bottom:.3rem}
-.hp-cd-row{display:flex;justify-content:center;gap:.35rem}
-.hp-cdu{text-align:center}
-.hp-cdn{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--gold);line-height:1}
-.hp-cdl{font-size:.38rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,169,110,.45)}
 
-.hp-btn{
-  width:100%;background:var(--gold);color:var(--dark);border:none;
-  border-radius:99px;padding:.5rem;font-size:.58rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif;
-  animation:btn-pulse 2.5s ease-in-out infinite;
-}
-@keyframes btn-pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}
-  50%{box-shadow:0 0 0 6px rgba(201,169,110,0)}
-}
-.hp-chips{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:center}
-.hp-chip{
-  background:rgba(201,169,110,.1);color:rgba(201,169,110,.8);
-  border-radius:.35rem;padding:.28rem .45rem;font-size:.5rem;
-  font-family:'Jost',sans-serif;border:1px solid rgba(201,169,110,.15);
-}
+/* ── S1: Portada ── */
+.hps-cover{position:relative;padding:0!important;overflow:hidden}
+.hps-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.hps-cover-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,8,3,.4),rgba(14,8,3,.85))}
+.hps-cover-body{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:.32rem;padding:.7rem .65rem}
+.hps-logo{width:84px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(120%)}
+.hps-hr{height:1px;width:56px;background:linear-gradient(90deg,transparent,var(--gold),transparent);flex-shrink:0}
+.hps-names{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:#fff;line-height:1.2}
+.hps-names em{font-style:italic;font-weight:600;color:var(--gold)}
+.hps-date{font-size:.46rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.65)}
+.hps-location{font-size:.48rem;color:rgba(247,242,236,.4)}
+
+/* ── S2: Countdown ── */
+.hps-sec-label{font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,169,110,.6);font-family:'Jost',sans-serif}
+.hps-cd-grid{display:flex;gap:.28rem;justify-content:center;align-items:center}
+.hps-cdu{display:flex;flex-direction:column;align-items:center;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.2);border-radius:.4rem;padding:.28rem .32rem;min-width:30px}
+.hps-cdn{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:600;color:var(--gold);line-height:1}
+.hps-cdl{font-size:.34rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,169,110,.45)}
+.hps-cd-sep{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:rgba(201,169,110,.35);margin-bottom:.3rem}
+.hps-cd-sub{font-size:.48rem;color:rgba(247,242,236,.3);font-style:italic;font-family:'Cormorant Garamond',serif}
+
+/* ── S3: RSVP ── */
+.hps-rsvp-name{font-size:.58rem;color:rgba(247,242,236,.55);font-family:'Jost',sans-serif}
+.hps-rsvp-name strong{color:#fff}
+.hps-rsvp-q{font-family:'Cormorant Garamond',serif;font-size:.82rem;font-weight:300;color:#fff;line-height:1.3}
+.hps-rsvp-btns{display:flex;gap:.3rem;width:100%}
+.hps-btn-yes{flex:1;background:var(--gold);color:var(--dark);border:none;border-radius:99px;padding:.36rem .2rem;font-size:.46rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-family:'Jost',sans-serif}
+.hps-btn-no{flex:1;background:transparent;color:rgba(247,242,236,.35);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:.36rem .2rem;font-size:.46rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;font-family:'Jost',sans-serif}
+.hps-rsvp-pases{display:flex;gap:.25rem}
+.hps-pase{background:rgba(201,169,110,.07);border:1px solid rgba(201,169,110,.14);border-radius:99px;padding:.2rem .42rem;font-size:.44rem;color:rgba(201,169,110,.45);font-family:'Jost',sans-serif}
+.hps-pase.active{background:rgba(201,169,110,.18);border-color:var(--gold);color:var(--gold);font-weight:600}
+
+/* ── S4: Mapa ── */
+.hps-map-img{position:relative;width:100%;border-radius:.5rem;overflow:hidden;height:62px}
+.hps-map-img img{width:100%;height:100%;object-fit:cover;opacity:.65}
+.hps-map-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:.85rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.hps-map-name{font-family:'Cormorant Garamond',serif;font-size:.8rem;font-weight:600;color:#fff}
+.hps-map-addr{font-size:.46rem;color:rgba(247,242,236,.38);font-family:'Jost',sans-serif}
+.hps-map-btn{background:transparent;border:1px solid rgba(201,169,110,.3);border-radius:99px;padding:.28rem .65rem;font-size:.46rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);font-family:'Jost',sans-serif}
+
+/* ── S5: Galería ── */
+.hps-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:.28rem;width:100%}
+.hps-gallery-grid img{width:100%;height:50px;object-fit:cover;border-radius:.4rem}
+
+/* footer */
 .hp-footer{
   background:rgba(201,169,110,.06);border-top:1px solid rgba(201,169,110,.12);
-  padding:.4rem;text-align:center;font-size:.46rem;
-  color:rgba(201,169,110,.42);font-family:'Jost',sans-serif;width:100%;
+  padding:.35rem;text-align:center;font-size:.44rem;
+  color:rgba(201,169,110,.38);font-family:'Jost',sans-serif;flex-shrink:0;
 }
 .hp-footer strong{color:var(--gold)}
 
@@ -825,61 +826,91 @@ footer{background:var(--darker);border-top:1px solid rgba(201,169,110,.1);paddin
         <div class="notif-badge">✦ Ver invitación →</div>
       </div>
 
-      <!-- Teléfono principal -->
+      <!-- Teléfono principal — scroll vertical de secciones -->
       <div class="hero-phone" role="img" aria-label="Vista previa de invitación digital en smartphone">
         <div class="hp-notch"></div>
-        <div class="hp-screen">
 
-          <!-- Browser bar -->
-          <div class="hp-bar">
-            <div class="hp-bar-dots">
-              <div class="hp-dot"></div>
-              <div class="hp-dot"></div>
-              <div class="hp-dot"></div>
-            </div>
-            <span class="hp-bar-url">guekaideas.com/val-diego</span>
+        <!-- browser bar fija -->
+        <div class="hp-bar" style="margin:.0 .75rem 0;flex-shrink:0">
+          <div class="hp-bar-dots">
+            <div class="hp-dot"></div><div class="hp-dot"></div><div class="hp-dot"></div>
           </div>
-
-          <!-- Cover — image slider -->
-          <div class="hp-cover">
-            <div class="hp-cover-strip" id="hp-strip">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
-              <img src="https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
-              <img src="https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
-              <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
-              <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" loading="lazy"/>
-            </div>
-            <div class="hp-cover-ov"></div>
-            <div class="hp-dots" id="hp-dots">
-              <div class="hp-dot-i active"></div>
-              <div class="hp-dot-i"></div>
-              <div class="hp-dot-i"></div>
-              <div class="hp-dot-i"></div>
-              <div class="hp-dot-i"></div>
-            </div>
-            <div class="hp-cover-text">
-              <div class="hp-cover-title">Valentina<br>&amp; <em>Diego</em></div>
-            </div>
-          </div>
-
-          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="hp-logo"/>
-          <div class="hp-hr"></div>
-          <div class="hp-date">15 · Marzo · 2025 · Cali</div>
-
-          <div class="hp-cd">
-            <div class="hp-cd-label">Cuenta regresiva</div>
-            <div class="hp-cd-row" id="cd-phone"></div>
-          </div>
-
-          <button class="hp-btn" tabindex="-1" aria-hidden="true">✓ Confirmar Asistencia</button>
-
-          <div class="hp-chips">
-            <div class="hp-chip">📍 Maps</div>
-            <div class="hp-chip">📅 Agenda</div>
-            <div class="hp-chip">🎵 Música</div>
-            <div class="hp-chip">📸 Fotos</div>
-          </div>
+          <span class="hp-bar-url">guekaideas.com/val-diego</span>
         </div>
+
+        <!-- viewport recortado -->
+        <div class="hp-viewport">
+          <!-- tira vertical que hace scroll -->
+          <div class="hp-scroll-strip" id="hp-scroll-strip">
+
+            <!-- ── SECCIÓN 1: Portada ── -->
+            <div class="hps-section hps-cover">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" class="hps-cover-img"/>
+              <div class="hps-cover-ov"></div>
+              <div class="hps-cover-body">
+                <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="hps-logo"/>
+                <div class="hps-hr"></div>
+                <div class="hps-names">Valentina<br><em>& Diego</em></div>
+                <div class="hps-date">15 · Marzo · 2025</div>
+                <div class="hps-location">📍 Cali, Colombia</div>
+              </div>
+            </div>
+
+            <!-- ── SECCIÓN 2: Cuenta regresiva ── -->
+            <div class="hps-section hps-countdown">
+              <div class="hps-sec-label">Cuenta Regresiva</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
+              <div class="hps-cd-grid" id="cd-phone">
+                <!-- llenado por JS -->
+              </div>
+              <div class="hps-cd-sub">¡Nos faltan pocos días!</div>
+            </div>
+
+            <!-- ── SECCIÓN 3: RSVP ── -->
+            <div class="hps-section hps-rsvp">
+              <div class="hps-sec-label">Confirmar Asistencia</div>
+              <div class="hps-hr" style="margin:.3rem auto .7rem"></div>
+              <div class="hps-rsvp-name">👋 Hola, <strong>María</strong></div>
+              <div class="hps-rsvp-q">¿Asistirás a nuestra boda?</div>
+              <div class="hps-rsvp-btns">
+                <button class="hps-btn-yes" tabindex="-1">✓ Sí, asistiré</button>
+                <button class="hps-btn-no"  tabindex="-1">✗ No podré</button>
+              </div>
+              <div class="hps-rsvp-pases">
+                <span class="hps-pase">1 pase</span>
+                <span class="hps-pase">2 pases</span>
+                <span class="hps-pase active">3 pases</span>
+              </div>
+            </div>
+
+            <!-- ── SECCIÓN 4: Ubicación ── -->
+            <div class="hps-section hps-map">
+              <div class="hps-sec-label">Ubicación</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
+              <div class="hps-map-img">
+                <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt=""/>
+                <div class="hps-map-pin">📍</div>
+              </div>
+              <div class="hps-map-name">Hacienda Las Palmas</div>
+              <div class="hps-map-addr">Cali, Valle del Cauca</div>
+              <button class="hps-map-btn" tabindex="-1">Abrir en Maps →</button>
+            </div>
+
+            <!-- ── SECCIÓN 5: Galería ── -->
+            <div class="hps-section hps-gallery">
+              <div class="hps-sec-label">Nuestra Historia</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
+              <div class="hps-gallery-grid">
+                <img src="https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+              </div>
+            </div>
+
+          </div><!-- /scroll-strip -->
+        </div><!-- /viewport -->
+
         <div class="hp-footer">guekaideas.com/<strong>valentina-diego</strong></div>
       </div>
 
@@ -1308,13 +1339,14 @@ function renderHeroCD() {
     <div class="cdl-unit"><span class="cdl-n">${pad(cd.s)}</span><span class="cdl-l">Seg</span></div>`;
 }
 
-/* Phone countdown (hero) */
+/* Phone countdown (hero — sección 2) */
 function renderPhoneCD() {
   const el = document.getElementById('cd-phone');
   if (!el) return;
-  const cd = getCD('2025-03-15T20:00:00');
-  const u = (n,l) => `<div class="hp-cdu"><div class="hp-cdn">${pad(n)}</div><div class="hp-cdl">${l}</div></div>`;
-  el.innerHTML = u(cd.d,'d') + u(cd.h,'h') + u(cd.m,'m') + u(cd.s,'s');
+  const cd = getCD('2025-12-20T20:00:00');
+  const u = (n,l) => `<div class="hps-cdu"><div class="hps-cdn">${pad(n)}</div><div class="hps-cdl">${l}</div></div>`;
+  const sep = '<span class="hps-cd-sep">:</span>';
+  el.innerHTML = u(cd.d,'días') + sep + u(cd.h,'hrs') + sep + u(cd.m,'min') + sep + u(cd.s,'seg');
 }
 
 /* Phone countdown (demo section) */
@@ -1332,23 +1364,38 @@ renderPhoneCD2();
 setInterval(() => { renderHeroCD(); renderPhoneCD(); renderPhoneCD2(); }, 1000);
 
 /* ══════════════════════════════════════════════════════
-   HERO PHONE — DOTS SYNC con animación CSS
-   Cada slide dura 2s visible dentro del ciclo de 10s
+   HERO PHONE — scroll vertical automático entre secciones
 ══════════════════════════════════════════════════════ */
-(function() {
-  const dots = document.querySelectorAll('#hp-dots .hp-dot-i');
-  if (!dots.length) return;
-  const total     = dots.length;   // 5
-  const cycleSecs = 10;            // debe coincidir con animation-duration
-  let current = 0;
+(function () {
+  const strip    = document.getElementById('hp-scroll-strip');
+  const viewport = strip && strip.parentElement;
+  if (!strip || !viewport) return;
 
-  function tick() {
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-    current = (current + 1) % total;
+  const SECTIONS  = strip.querySelectorAll('.hps-section');
+  const PAUSE_MS  = 2800;   // tiempo visible por sección
+  const TOTAL     = SECTIONS.length;
+  let   current   = 0;
+
+  function setHeights() {
+    const h = viewport.clientHeight;
+    SECTIONS.forEach(s => { s.style.height = h + 'px'; });
   }
 
-  tick();
-  setInterval(tick, (cycleSecs / total) * 1000); // cada 2 s
+  function scrollTo(idx) {
+    const h = viewport.clientHeight;
+    strip.style.transform = `translateY(-${idx * h}px)`;
+  }
+
+  function next() {
+    current = (current + 1) % TOTAL;
+    scrollTo(current);
+  }
+
+  // Init: igualar alturas y arrancar
+  setHeights();
+  scrollTo(0);
+  setInterval(next, PAUSE_MS);
+  window.addEventListener('resize', () => { setHeights(); scrollTo(current); }, { passive: true });
 })();
 let rsvpCount = 120;
 const rsvpEl = document.getElementById('rsvp-count');
