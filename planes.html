@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Planes Cinema Boda – Gueka Ideas</title>
+<meta name="description" content="Elige el plan perfecto para tu invitación digital de matrimonio. Classic, Premium o Deluxe."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:#0e0903;color:#f7f2ec}
+a{text-decoration:none}
+img{display:block;max-width:100%}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.fade-from-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.fade-from-left.visible{opacity:1;transform:translateX(0)}
+.fade-from-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-from-right.visible{opacity:1;transform:translateX(0)}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2rem;transition:all .35s ease}
+#navbar.scrolled{background:rgba(14,9,3,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.15)}
+.nav-inner{max-width:1200px;margin:0 auto;height:80px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo img{height:72px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%);transition:filter .3s}
+.nav-links{display:flex;gap:1.75rem}
+.nav-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:rgba(247,242,236,.5);font-family:'Jost',sans-serif;transition:color .2s}
+.nav-links a:hover{color:#c9a96e}
+.nav-cta{background:#c9a96e;color:#1a1208;border-radius:99px;padding:.55rem 1.3rem;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif;transition:opacity .2s;white-space:nowrap}
+.nav-cta:hover{opacity:.85}
+.hamburger{display:none;background:none;border:none;cursor:pointer;color:rgba(247,242,236,.7);font-size:1.5rem}
+.mobile-menu{display:none;flex-direction:column;gap:1.1rem;background:#0e0903;padding:1rem 2rem 1.5rem;border-bottom:1px solid rgba(201,169,110,.1)}
+.mobile-menu a{font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,242,236,.65);font-family:'Jost',sans-serif;transition:color .2s}
+.mobile-menu a:hover{color:#c9a96e}
+@media(max-width:768px){.nav-links,.nav-cta.desk{display:none!important}.hamburger{display:block}}
+@media(min-width:769px){.mobile-menu{display:none!important}}
+
+/* HEADER */
+#page-header{min-height:52vh;display:flex;align-items:center;justify-content:center;background:#0e0903;position:relative;overflow:hidden;text-align:center;padding:8rem 1.5rem 4rem}
+.header-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1606216794079-73c37814af18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');background-size:cover;background-position:center;opacity:.22}
+.header-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,9,3,.8) 0%,rgba(14,9,3,.5) 50%,rgba(14,9,3,1) 100%);pointer-events:none}
+.header-glow{position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 35%,rgba(201,169,110,.18) 0%,transparent 70%);pointer-events:none}
+.header-content{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.back-btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(247,242,236,.35);font-family:'Jost',sans-serif;margin-bottom:2rem;transition:color .2s}
+.back-btn:hover{color:#c9a96e}
+.header-label{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,169,110,.65);margin-bottom:.5rem;font-family:'Jost',sans-serif}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,4.8rem);font-weight:300;color:white;line-height:1.05;margin-bottom:.5rem}
+.header-title em{font-style:italic;color:#c9a96e;font-weight:600}
+.header-sub{font-size:.95rem;font-weight:300;color:rgba(247,242,236,.55);max-width:440px;margin:0 auto;line-height:1.7;font-family:'Jost',sans-serif}
+.divider{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:.75rem 0}
+.dvl{height:1px;width:52px;background:rgba(201,169,110,.35)}
+.dvs{color:#c9a96e;font-size:.7rem}
+
+/* PROMO BANNER */
+#promo-banner{background:linear-gradient(90deg,rgba(201,169,110,.12),rgba(201,169,110,.06),rgba(201,169,110,.12));border-top:1px solid rgba(201,169,110,.15);border-bottom:1px solid rgba(201,169,110,.15);padding:.85rem 1.5rem;text-align:center}
+.promo-inner{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,236,.55);font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.promo-badge{background:#c9a96e;color:#1a1208;padding:.3rem .9rem;border-radius:99px;font-size:.62rem;font-weight:700;letter-spacing:.1em}
+.promo-text{color:rgba(247,242,236,.65)}
+.promo-discount{color:#c9a96e;font-weight:600}
+
+/* PLANS SECTION */
+#plans{padding:clamp(3rem,6vw,5rem) 1.5rem;background:#0e0903}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1200px;margin:0 auto}
+
+/* PLAN CARD */
+.plan-card{border-radius:1.5rem;overflow:hidden;border:1px solid rgba(201,169,110,.15);background:linear-gradient(170deg,rgba(255,255,255,.03) 0%,rgba(201,169,110,.02) 100%);transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
+.plan-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.plan-card.featured{border-color:rgba(201,169,110,.45);background:linear-gradient(170deg,rgba(201,169,110,.07) 0%,rgba(201,169,110,.03) 100%);box-shadow:0 8px 32px rgba(201,169,110,.1)}
+.plan-card.featured:hover{border-color:#c9a96e;box-shadow:0 28px 72px rgba(201,169,110,.2)}
+
+/* CARD HEADER */
+.plan-header{padding:2rem 2rem 1.5rem;border-bottom:1px solid rgba(201,169,110,.1);position:relative}
+.plan-badge{position:absolute;top:1.25rem;right:1.25rem;background:#c9a96e;color:#1a1208;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border-radius:99px;font-family:'Jost',sans-serif}
+.plan-name{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,169,110,.6);font-family:'Jost',sans-serif;margin-bottom:.5rem}
+.plan-title{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:white;line-height:1.1;margin-bottom:1.25rem}
+.plan-title em{font-style:italic;color:#c9a96e}
+.price-row{display:flex;align-items:flex-end;gap:.65rem;flex-wrap:wrap}
+.price-before{font-size:.82rem;color:rgba(247,242,236,.25);text-decoration:line-through;font-family:'Jost',sans-serif}
+.price-now{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:#c9a96e;line-height:1}
+.price-now small{font-size:.75rem;font-family:'Jost',sans-serif;color:rgba(247,242,236,.4);font-weight:300}
+.price-save{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,169,110,.55);font-family:'Jost',sans-serif}
+
+/* CARD SCREENS */
+.plan-screens{padding:1.25rem 2rem;border-bottom:1px solid rgba(201,169,110,.08)}
+.screens-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(247,242,236,.3);font-family:'Jost',sans-serif;margin-bottom:.85rem}
+.screens-row{display:flex;flex-wrap:wrap;gap:.45rem}
+.screen-chip{font-size:.62rem;padding:.3rem .7rem;border-radius:.5rem;font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.04em;border:1px solid rgba(201,169,110,.2);color:rgba(201,169,110,.7);background:rgba(201,169,110,.06);transition:border-color .2s,color .2s}
+.screen-chip.active{border-color:rgba(201,169,110,.5);color:#c9a96e;background:rgba(201,169,110,.1)}
+
+/* CARD FEATURES */
+.plan-features{padding:1.25rem 2rem;flex:1}
+.features-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(247,242,236,.3);font-family:'Jost',sans-serif;margin-bottom:.85rem}
+.feature-list{display:flex;flex-direction:column;gap:.6rem}
+.feature-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.78rem;font-family:'Jost',sans-serif;line-height:1.4}
+.feature-item.included{color:rgba(247,242,236,.75)}
+.feature-item.excluded{color:rgba(247,242,236,.22)}
+.feat-icon{flex-shrink:0;width:16px;height:16px;margin-top:.05rem}
+.feat-icon.ok{color:#c9a96e}
+.feat-icon.no{color:rgba(247,242,236,.15)}
+
+/* CARD FOOTER */
+.plan-footer{padding:1.5rem 2rem 2rem;display:flex;flex-direction:column;gap:.75rem}
+.btn-select{width:100%;border-radius:99px;padding:.95rem;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Jost',sans-serif;cursor:pointer;border:none;transition:transform .2s,opacity .2s}
+.btn-select:hover{transform:scale(1.03)}
+.btn-select-gold{background:#c9a96e;color:#1a1208}
+.btn-select-outline{background:transparent;border:1px solid rgba(201,169,110,.35);color:#c9a96e}
+.btn-select-outline:hover{border-color:#c9a96e}
+.btn-demo{width:100%;background:transparent;border:1px solid rgba(247,242,236,.1);border-radius:99px;padding:.75rem;font-size:.72rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,242,236,.4);font-family:'Jost',sans-serif;cursor:pointer;transition:border-color .2s,color .2s;display:flex;align-items:center;justify-content:center;gap:.45rem}
+.btn-demo:hover{border-color:rgba(247,242,236,.25);color:rgba(247,242,236,.65)}
+.wa-link{text-align:center;font-size:.68rem;color:rgba(247,242,236,.25);font-family:'Jost',sans-serif;transition:color .2s}
+.wa-link:hover{color:#c9a96e}
+
+@media(max-width:1024px){.plans-grid{grid-template-columns:1fr 1fr;gap:1rem}}
+@media(max-width:640px){.plans-grid{grid-template-columns:1fr}}
+
+/* COMPARISON TABLE */
+#comparison{padding:clamp(3rem,6vw,5rem) 1.5rem;background:linear-gradient(180deg,#0e0903 0%,#130a03 100%)}
+.comp-inner{max-width:900px;margin:0 auto}
+.section-head{text-align:center;margin-bottom:3rem}
+.section-label{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,169,110,.6);margin-bottom:.4rem;font-family:'Jost',sans-serif}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:white}
+.section-title em{font-style:italic;color:#c9a96e}
+.comp-table{width:100%;border-collapse:collapse;border-radius:1rem;overflow:hidden}
+.comp-table thead tr th{padding:1rem 1.25rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:600;text-align:center}
+.comp-table thead tr th:first-child{text-align:left;color:rgba(247,242,236,.3)}
+.comp-table thead tr th.classic{color:rgba(201,169,110,.6);background:rgba(201,169,110,.04)}
+.comp-table thead tr th.premium{color:#c9a96e;background:rgba(201,169,110,.08)}
+.comp-table thead tr th.deluxe{color:rgba(201,169,110,.8);background:rgba(201,169,110,.12)}
+.comp-table tbody tr{border-bottom:1px solid rgba(255,255,255,.04)}
+.comp-table tbody tr:last-child{border-bottom:none}
+.comp-table tbody tr td{padding:.9rem 1.25rem;font-size:.8rem;font-family:'Jost',sans-serif;text-align:center;color:rgba(247,242,236,.55)}
+.comp-table tbody tr td:first-child{text-align:left;color:rgba(247,242,236,.5)}
+.comp-table tbody tr td.yes{color:#c9a96e;font-size:1rem}
+.comp-table tbody tr td.no{color:rgba(255,255,255,.15);font-size:.9rem}
+.comp-table tbody tr:hover td{background:rgba(255,255,255,.02)}
+@media(max-width:600px){
+  .comp-table{font-size:.72rem}
+  .comp-table thead tr th,.comp-table tbody tr td{padding:.7rem .75rem}
+}
+
+/* FAQ */
+#faq{padding:clamp(3rem,6vw,5rem) 1.5rem;background:#0e0903}
+.faq-inner{max-width:700px;margin:0 auto}
+.faq-list{display:flex;flex-direction:column;gap:.5rem}
+.faq-item{background:rgba(255,255,255,.025);border:1px solid rgba(201,169,110,.1);border-radius:.85rem;overflow:hidden;transition:border-color .2s}
+.faq-item.open{border-color:rgba(201,169,110,.3)}
+.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.15rem 1.5rem;background:none;border:none;text-align:left;font-size:.84rem;font-weight:400;color:rgba(247,242,236,.75);cursor:pointer;font-family:'Jost',sans-serif;gap:1rem}
+.faq-arrow{color:#c9a96e;font-size:.75rem;flex-shrink:0;transition:transform .25s}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0}
+.faq-item.open .faq-body{max-height:300px;opacity:1}
+.faq-answer{padding:.9rem 1.5rem 1.15rem;font-size:.8rem;color:rgba(247,242,236,.45);line-height:1.7;border-top:1px solid rgba(201,169,110,.08);font-family:'Jost',sans-serif}
+
+/* CTA */
+#cta-bottom{padding:clamp(3rem,6vw,5rem) 1.5rem;background:linear-gradient(150deg,#130a03 0%,#1e1005 100%);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 70% at 50% 100%,rgba(201,169,110,.12),transparent 70%)}
+.cta-inner-wrap{position:relative;z-index:1}
+.btn-wa-big{background:#25D366;color:white;border-radius:99px;padding:1.1rem 2.4rem;font-size:.88rem;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.65rem;box-shadow:0 8px 24px rgba(37,211,102,.25);font-family:'Jost',sans-serif;transition:transform .2s,opacity .2s}
+.btn-wa-big:hover{transform:scale(1.05);opacity:.92}
+
+/* FOOTER */
+footer{background:#080501;border-top:1px solid rgba(201,169,110,.08);padding:2rem 1.5rem}
+.foot-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
+.foot-logo{height:52px;opacity:.6;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:1.5rem}
+.foot-nav a{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(247,242,236,.2);font-family:'Jost',sans-serif;transition:color .2s}
+.foot-nav a:hover{color:rgba(247,242,236,.45)}
+.foot-copy{font-size:.68rem;color:rgba(247,242,236,.15);font-family:'Jost',sans-serif}
+@media(max-width:768px){.foot-inner{flex-direction:column;align-items:center;text-align:center}.foot-nav{justify-content:center}}
+
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:transform .2s}
+.float-wa:hover{transform:scale(1.1)}
+.ping{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
+@keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
+
+/* GRID BG */
+.grid-bg{position:absolute;inset:0;pointer-events:none;opacity:.035;background-image:repeating-linear-gradient(0deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 64px),repeating-linear-gradient(90deg,#c9a96e 0,#c9a96e 1px,transparent 1px,transparent 64px)}
+</style>
+</head>
+<body>
+
+<!-- FLOAT WA -->
+<a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" aria-label="WhatsApp" class="float-wa">
+  <span class="ping"></span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAVBAR -->
+<header id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#catalogo">Catálogo</a>
+      <a href="boda.html">Cinema Boda</a>
+      <a href="demo.html">Demo</a>
+    </nav>
+    <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" class="nav-cta desk">Solicitar →</a>
+    <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" onclick="closeMobile()">Inicio</a>
+    <a href="index.html#catalogo" onclick="closeMobile()">Catálogo</a>
+    <a href="boda.html" onclick="closeMobile()">Cinema Boda</a>
+    <a href="demo.html" onclick="closeMobile()">Demo</a>
+    <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" onclick="closeMobile()" class="nav-cta" style="width:fit-content">Solicitar →</a>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section id="page-header">
+  <div class="header-bg"></div>
+  <div class="header-ov"></div>
+  <div class="header-glow"></div>
+  <div class="grid-bg"></div>
+  <div class="header-content">
+    <a href="index.html" class="back-btn fade-in">← Volver al inicio</a>
+    <p class="header-label fade-in d1">Cinema Boda · Invitaciones Digitales</p>
+    <div class="divider fade-in d1"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+    <h1 class="header-title fade-in d2">Elige tu <em>Plan</em></h1>
+    <p class="header-sub fade-in d3">Planes accesibles con descuento especial. Cada uno incluye tu invitación personalizada lista en 24 horas.</p>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div id="promo-banner">
+  <div class="promo-inner">
+    <span class="promo-badge">OFERTA</span>
+    <span class="promo-text">Todos los planes con</span>
+    <span class="promo-discount">50% de descuento</span>
+    <span class="promo-text">· Tiempo limitado</span>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section id="plans">
+  <div class="plans-grid" id="plans-grid">
+    <!-- Cards generadas por JS -->
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="comparison">
+  <div class="comp-inner">
+    <div class="section-head fade-in">
+      <p class="section-label">Detalle</p>
+      <h2 class="section-title">Comparativa de <em>Planes</em></h2>
+      <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="comp-table fade-in">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="classic">Classic</th>
+            <th class="premium">Premium</th>
+            <th class="deluxe">Deluxe</th>
+          </tr>
+        </thead>
+        <tbody id="comp-body">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="section-head fade-in">
+      <p class="section-label">Preguntas frecuentes</p>
+      <h2 class="section-title">Todo lo que necesitas <em>saber</em></h2>
+      <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+    </div>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section id="cta-bottom">
+  <div class="cta-glow"></div>
+  <div class="cta-inner-wrap">
+    <p class="section-label fade-in">¿Tienes dudas?</p>
+    <h2 class="section-title fade-in d1" style="margin-bottom:.5rem">Hablemos por <em>WhatsApp</em></h2>
+    <div class="divider fade-in d1"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+    <p style="font-size:.88rem;color:rgba(247,242,236,.4);max-width:400px;margin:.5rem auto 2rem;line-height:1.7;font-family:'Jost',sans-serif" class="fade-in d2">Te asesoramos sin compromiso y respondemos en minutos.</p>
+    <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" class="btn-wa-big fade-in d3">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Contactar por WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo"/>
+    <nav class="foot-nav">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#catalogo">Catálogo</a>
+      <a href="boda.html">Cinema Boda</a>
+      <a href="demo.html">Demo</a>
+    </nav>
+    <p class="foot-copy">© <span id="yr"></span> Gueka Ideas · Invitaciones Digitales</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ── PLANS DATA ── */
+const PLANS = [
+  {
+    id: 'classic',
+    name: 'Classic',
+    label: 'Para comenzar',
+    price: 80000,
+    before: 160000,
+    featured: false,
+    badge: null,
+    demo: 'demo.html',
+    wa: 'https://wa.me/message/57HQCKAMGELDG1',
+    screens: ['Portada', 'Galería', 'RSVP'],
+    features: [
+      { text: 'Portada cinematográfica', ok: true },
+      { text: 'Cuenta regresiva animada', ok: true },
+      { text: 'Galería de fotos', ok: true },
+      { text: 'RSVP + Maps + Agenda', ok: true },
+      { text: 'Link personalizado', ok: true },
+      { text: 'Música de fondo', ok: false },
+      { text: 'RSVP avanzado con datos', ok: false },
+      { text: 'Itinerario del evento', ok: false },
+      { text: 'Mesa asignada por invitado', ok: false },
+      { text: 'Playlist Spotify', ok: false },
+    ]
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
+    label: 'El más elegido',
+    price: 110000,
+    before: 220000,
+    featured: true,
+    badge: '⭐ Más Popular',
+    demo: 'demo.html',
+    wa: 'https://wa.me/message/57HQCKAMGELDG1',
+    screens: ['Portada', 'Música', 'Galería', 'RSVP', 'Itinerario'],
+    features: [
+      { text: 'Portada cinematográfica', ok: true },
+      { text: 'Cuenta regresiva animada', ok: true },
+      { text: 'Galería de fotos', ok: true },
+      { text: 'RSVP + Maps + Agenda', ok: true },
+      { text: 'Link personalizado', ok: true },
+      { text: 'Música de fondo', ok: true },
+      { text: 'RSVP avanzado con datos', ok: true },
+      { text: 'Itinerario del evento', ok: true },
+      { text: 'Mesa asignada por invitado', ok: false },
+      { text: 'Playlist Spotify', ok: false },
+    ]
+  },
+  {
+    id: 'deluxe',
+    name: 'Deluxe',
+    label: 'Experiencia completa',
+    price: 160000,
+    before: 320000,
+    featured: false,
+    badge: '✦ Todo incluido',
+    demo: 'demo.html',
+    wa: 'https://wa.me/message/57HQCKAMGELDG1',
+    screens: ['Portada', 'Música', 'Galería', 'Mesa', 'RSVP', 'Itinerario', 'Playlist'],
+    features: [
+      { text: 'Portada cinematográfica', ok: true },
+      { text: 'Cuenta regresiva animada', ok: true },
+      { text: 'Galería de fotos', ok: true },
+      { text: 'RSVP + Maps + Agenda', ok: true },
+      { text: 'Link personalizado', ok: true },
+      { text: 'Música de fondo', ok: true },
+      { text: 'RSVP avanzado con datos', ok: true },
+      { text: 'Itinerario del evento', ok: true },
+      { text: 'Mesa asignada por invitado', ok: true },
+      { text: 'Playlist Spotify', ok: true },
+    ]
+  }
+];
+
+/* ── FORMAT PRICE ── */
+function fmt(n) {
+  return '$' + n.toLocaleString('es-CO');
+}
+
+/* ── RENDER PLAN CARDS ── */
+function renderPlans() {
+  const grid = document.getElementById('plans-grid');
+  grid.innerHTML = '';
+  PLANS.forEach((p, i) => {
+    const save = Math.round((1 - p.price / p.before) * 100);
+    const delay = ['d1','d2','d3'][i];
+    const card = document.createElement('div');
+    card.className = 'plan-card fade-in ' + delay + (p.featured ? ' featured' : '');
+    card.innerHTML = `
+      <div class="plan-header">
+        ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
+        <div class="plan-name">${p.label}</div>
+        <div class="plan-title">${p.name === 'Classic' ? '<em>Classic</em>' : p.name === 'Premium' ? '<em>Premium</em>' : '<em>Deluxe</em>'}</div>
+        <div class="price-row">
+          <span class="price-before">${fmt(p.before)}</span>
+          <span class="price-now">${fmt(p.price)} <small>COP</small></span>
+        </div>
+        <div class="price-save">Ahorras ${save}% · Pago único</div>
+      </div>
+      <div class="plan-screens">
+        <div class="screens-label">Pantallas incluidas</div>
+        <div class="screens-row">
+          ${p.screens.map(s => `<span class="screen-chip active">${s}</span>`).join('')}
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="features-label">Funciones</div>
+        <div class="feature-list">
+          ${p.features.map(f => `
+            <div class="feature-item ${f.ok ? 'included' : 'excluded'}">
+              <svg class="feat-icon ${f.ok ? 'ok' : 'no'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                ${f.ok
+                  ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'
+                  : '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'}
+              </svg>
+              <span>${f.text}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="plan-footer">
+        <a href="${p.wa}" target="_blank" rel="noreferrer" class="btn-select ${p.featured ? 'btn-select-gold' : 'btn-select-outline'}">
+          Seleccionar ${p.name}
+        </a>
+        <a href="${p.demo}?plan=${p.id}" class="btn-demo">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Ver Demo ${p.name}
+        </a>
+        <a href="${p.wa}" target="_blank" rel="noreferrer" class="wa-link">¿Tienes dudas? Escríbenos →</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ── RENDER COMPARISON TABLE ── */
+const COMP_ROWS = [
+  { label: 'Precio', classic: fmt(80000), premium: fmt(110000), deluxe: fmt(160000), type: 'text' },
+  { label: 'Pantallas', classic: '3', premium: '5', deluxe: '7', type: 'text' },
+  { label: 'Portada cinematográfica', classic: true, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Cuenta regresiva', classic: true, premium: true, deluxe: true, type: 'bool' },
+  { label: 'RSVP + Maps + Agenda', classic: true, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Galería de fotos', classic: true, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Música de fondo', classic: false, premium: true, deluxe: true, type: 'bool' },
+  { label: 'RSVP avanzado', classic: false, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Itinerario del evento', classic: false, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Mesa asignada', classic: false, premium: false, deluxe: true, type: 'bool' },
+  { label: 'Playlist Spotify', classic: false, premium: false, deluxe: true, type: 'bool' },
+  { label: 'Link personalizado', classic: true, premium: true, deluxe: true, type: 'bool' },
+  { label: 'Entrega', classic: '24hs', premium: '24hs', deluxe: '24hs', type: 'text' },
+];
+
+function renderComparison() {
+  const tbody = document.getElementById('comp-body');
+  COMP_ROWS.forEach(r => {
+    const tr = document.createElement('tr');
+    function cell(val, type) {
+      if (type === 'bool') {
+        return val
+          ? `<td class="yes">✓</td>`
+          : `<td class="no">–</td>`;
+      }
+      return `<td>${val}</td>`;
+    }
+    tr.innerHTML = `<td>${r.label}</td>${cell(r.classic, r.type)}${cell(r.premium, r.type)}${cell(r.deluxe, r.type)}`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ── RENDER FAQ ── */
+const FAQS = [
+  { q: '¿Cómo recibo la invitación?', a: 'Después de elegir tu plan y enviarnos los datos, te entregamos el link personalizado en un máximo de 24 horas. Puedes compartirlo por WhatsApp, Instagram, email o cualquier otra plataforma.' },
+  { q: '¿Puedo pedir cambios después de recibirla?', a: 'Sí. Incluimos hasta 2 revisiones sin costo adicional para ajustar textos, fotos o colores después de la entrega.' },
+  { q: '¿Cuánto tiempo estará activa la invitación?', a: 'La invitación permanece activa desde que la entregas y por al menos 3 meses después de la fecha del evento.' },
+  { q: '¿Hay límite de invitados?', a: 'No. Puedes compartir el link con todos los invitados que necesites, sin ningún costo adicional.' },
+  { q: '¿Qué información necesitan para personalizarla?', a: 'Nombres de los novios, fecha y lugar del evento, fotos, colores preferidos y cualquier detalle especial. Te enviamos un formulario guía para completar todo fácilmente.' },
+  { q: '¿Cuáles son los métodos de pago?', a: 'Aceptamos transferencia bancaria, Nequi, Daviplata y efectivo. El pago se realiza antes de iniciar el diseño.' },
+];
+
+function renderFAQ() {
+  const list = document.getElementById('faq-list');
+  list.innerHTML = FAQS.map((f, i) => `
+    <div class="faq-item" id="fi-${i}">
+      <button class="faq-btn" data-i="${i}" aria-expanded="false">
+        <span>${f.q}</span>
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-body"><p class="faq-answer">${f.a}</p></div>
+    </div>`).join('');
+
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.faq-btn');
+    if (!btn) return;
+    const item = document.getElementById('fi-' + btn.dataset.i);
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+}
+
+/* ── NAVBAR SCROLL ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.style.display === 'flex';
+  mobileMenu.style.display = open ? 'none' : 'flex';
+  hamburger.textContent = open ? '☰' : '✕';
+});
+function closeMobile() {
+  mobileMenu.style.display = 'none';
+  hamburger.textContent = '☰';
+}
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }),
+  { threshold: 0.08 }
+);
+
+/* ── INIT ── */
+renderPlans();
+renderComparison();
+renderFAQ();
+document.querySelectorAll('.fade-in, .fade-from-left, .fade-from-right').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
