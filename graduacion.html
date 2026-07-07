@@ -4,121 +4,185 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Invitaciones de Graduación – Gueka Ideas</title>
-<meta name="description" content="Invitaciones digitales para graduaciones. Elegantes, interactivas y con RSVP online."/>
+<meta name="description" content="Invitaciones digitales para graduaciones. Elegantes, interactivas y con RSVP online. 12 diseños exclusivos."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;background:#f7f2ec;color:#1a1208}
+body{font-family:'Jost',sans-serif;background:#FDFBF7;color:#1D2A44;overflow-x:hidden}
 a{text-decoration:none}
 img{display:block;max-width:100%}
+
+:root{
+  --gold:#C5A059;
+  --gold2:#D4AF37;
+  --gold-dim:rgba(197,160,89,.15);
+  --dark:#1D2A44;
+  --darker:#141c2e;
+  --dark2:#253352;
+  --cream:#FDFBF7;
+  --cream2:#F5F0EB;
+  --muted:#4A6B5D;
+  --wa:#25D366;
+  --sh-gold:0 16px 48px rgba(197,160,89,.28);
+  --sh-dark:0 24px 64px rgba(20,28,46,.4);
+}
+
 .fade-in{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+.d5{transition-delay:.40s}.d6{transition-delay:.48s}
 
 /* NAVBAR */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2rem;transition:all .35s ease}
-#navbar.scrolled{background:rgba(247,242,236,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,169,110,.2)}
-.nav-inner{max-width:1200px;margin:0 auto;height:80px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo img{height:72px;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%);transition:filter .3s}
-#navbar.scrolled .nav-logo img{filter:none}
+#navbar.scrolled{background:rgba(253,251,247,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(197,160,89,.2)}
+.nav-inner{max-width:1280px;margin:0 auto;height:clamp(80px,11vw,108px);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.nav-logo img{height:clamp(52px,7vw,80px);width:auto;object-fit:contain;filter:brightness(0) saturate(100%) invert(95%) sepia(20%) saturate(500%) hue-rotate(5deg) brightness(130%);transition:filter .3s,height .3s}
+#navbar.scrolled .nav-logo img{filter:none;height:clamp(48px,6vw,70px)}
 .nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.75);font-family:'Jost',sans-serif;transition:color .2s}
-#navbar.scrolled .nav-links a{color:#7a6a58}
-.nav-links a:hover,#navbar.scrolled .nav-links a:hover{color:#c9a96e}
-.nav-cta{background:#c9a96e;color:#1a1208;border-radius:99px;padding:.55rem 1.3rem;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif;transition:opacity .2s}
-.nav-cta:hover{opacity:.85}
-.hamburger{display:none;background:none;border:none;cursor:pointer;color:white;font-size:1.5rem}
-#navbar.scrolled .hamburger{color:#1a1208}
-.mobile-menu{display:none;flex-direction:column;gap:1.1rem;background:#f7f2ec;padding:1rem 2rem 1.5rem}
-.mobile-menu a{font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#1a1208;font-family:'Jost',sans-serif}
-@media(max-width:768px){.nav-links,.nav-cta.desk{display:none!important}.hamburger{display:block}}
+.nav-links a{font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.75);font-family:'Jost',sans-serif;transition:color .2s}
+#navbar.scrolled .nav-links a{color:var(--muted)}
+.nav-links a:hover,#navbar.scrolled .nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff;border-radius:99px;padding:.55rem 1.3rem;font-size:.67rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif;transition:opacity .2s,transform .2s;white-space:nowrap}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+.hamburger{display:none;background:none;border:1px solid rgba(255,255,255,.2);border-radius:99px;width:42px;height:42px;cursor:pointer;color:rgba(255,255,255,.8);font-size:1.2rem;align-items:center;justify-content:center;transition:border-color .2s}
+#navbar.scrolled .hamburger{border-color:rgba(197,160,89,.3);color:var(--dark)}
+.mobile-menu{display:none;flex-direction:column;gap:.5rem;background:rgba(253,251,247,.99);padding:1rem 2rem 1.5rem;border-bottom:1px solid rgba(197,160,89,.12)}
+.mobile-menu a{font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);font-family:'Jost',sans-serif;padding:.6rem 0;border-bottom:1px solid rgba(197,160,89,.1)}
+.mobile-menu a:last-child{border:none}
+.mobile-menu a:hover{color:var(--gold)}
+@media(max-width:768px){.nav-links,.nav-cta.desk{display:none!important}.hamburger{display:flex}}
 @media(min-width:769px){.mobile-menu{display:none!important}}
 
 /* HERO */
-#hero{min-height:100svh;display:flex;align-items:center;justify-content:center;background:#1a1208;position:relative;overflow:hidden;text-align:center;padding:6rem 1.5rem 3rem}
-.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');background-size:cover;background-position:center;opacity:.38}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,5,2,.88),rgba(26,18,8,.65),rgba(10,5,2,.92));pointer-events:none}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(201,169,110,.2) 0%,transparent 70%);pointer-events:none}
-.hero-content{max-width:760px;margin:0 auto;position:relative;z-index:1}
+#hero{min-height:100svh;display:flex;align-items:center;justify-content:center;background:var(--darker);position:relative;overflow:hidden;text-align:center;padding:clamp(6rem,12vw,9rem) 1.5rem 3rem}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1800&q=80');background-size:cover;background-position:center 30%;opacity:.42;animation:hero-zoom 18s ease-in-out infinite alternate}
+@keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.06) translateX(1%)}}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(20,28,46,.92),rgba(29,42,68,.7),rgba(20,28,46,.95));pointer-events:none;z-index:1}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(197,160,89,.18) 0%,transparent 70%);pointer-events:none;z-index:2}
+.hero-lines{position:absolute;inset:0;opacity:.025;z-index:2;pointer-events:none;background-image:repeating-linear-gradient(0deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px),repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 80px)}
+.hero-content{max-width:760px;margin:0 auto;position:relative;z-index:3}
 .hero-logo{margin-bottom:2rem;display:flex;justify-content:center}
-.hero-logo img{width:280px;max-width:80vw;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(115%)}
-.hero-sup{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,169,110,.7);margin-bottom:.4rem;font-family:'Jost',sans-serif}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,5rem);font-weight:300;color:white;line-height:1.05;margin-bottom:1.2rem}
-.hero-title em{font-style:italic;color:#c9a96e;font-weight:600}
-.hero-sub{font-size:.95rem;font-weight:300;color:rgba(247,242,236,.65);max-width:460px;margin:0 auto 2.2rem;line-height:1.7;font-family:'Jost',sans-serif}
+.hero-logo img{width:clamp(180px,28vw,300px);max-width:80vw;filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%);animation:logo-shimmer 4s ease-in-out infinite}
+@keyframes logo-shimmer{0%,100%{filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(115%)}50%{filter:brightness(0) saturate(100%) invert(90%) sepia(40%) saturate(600%) hue-rotate(3deg) brightness(132%)}}
+.hero-sup{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(197,160,89,.75);margin-bottom:.4rem;font-family:'Jost',sans-serif}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,5.2rem);font-weight:300;color:white;line-height:1.04;margin-bottom:1.2rem;letter-spacing:-.01em}
+.hero-title em{font-style:italic;color:var(--gold);font-weight:600;position:relative;display:inline-block}
+.hero-title em::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);animation:ul-in .8s .9s forwards cubic-bezier(.22,1,.36,1)}
+@keyframes ul-in{to{transform:scaleX(1)}}
+.hero-sub{font-size:.95rem;font-weight:300;color:rgba(253,251,247,.62);max-width:460px;margin:0 auto 2.2rem;line-height:1.78;font-family:'Jost',sans-serif}
 .divider{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:.75rem 0}
-.dvl{height:1px;width:52px;background:rgba(201,169,110,.4)}
-.dvs{color:#c9a96e;font-size:.7rem}
+.dvl{height:1px;width:52px;background:rgba(197,160,89,.4)}
+.dvs{color:var(--gold);font-size:.7rem}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
-.btn-gold{background:#c9a96e;color:#1a1208;border-radius:99px;padding:.9rem 1.9rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.45rem;font-family:'Jost',sans-serif;transition:transform .2s}
-.btn-gold:hover{transform:scale(1.04)}
-.btn-outline{background:transparent;color:rgba(247,242,236,.8);border:1px solid rgba(201,169,110,.4);border-radius:99px;padding:.9rem 1.9rem;font-size:.82rem;font-weight:400;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.45rem;font-family:'Jost',sans-serif;transition:transform .2s}
-.btn-outline:hover{transform:scale(1.04)}
-.hero-back{position:absolute;top:6rem;left:2rem;z-index:2;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:'Jost',sans-serif;display:flex;align-items:center;gap:.4rem;transition:color .2s}
-.hero-back:hover{color:#c9a96e}
+.btn-gold{background:var(--gold);color:#fff;border-radius:99px;padding:.9rem 1.9rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.45rem;font-family:'Jost',sans-serif;transition:transform .2s,box-shadow .2s;border:none}
+.btn-gold:hover{transform:scale(1.04);box-shadow:var(--sh-gold)}
+.btn-outline{background:transparent;color:rgba(253,251,247,.8);border:1px solid rgba(197,160,89,.4);border-radius:99px;padding:.9rem 1.9rem;font-size:.82rem;font-weight:400;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.45rem;font-family:'Jost',sans-serif;transition:transform .2s,border-color .2s}
+.btn-outline:hover{transform:scale(1.04);border-color:rgba(197,160,89,.8)}
+.hero-back{position:absolute;top:clamp(5.5rem,9vw,7rem);left:2rem;z-index:4;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(253,251,247,.4);font-family:'Jost',sans-serif;display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
+.hero-back:hover{color:var(--gold)}
+.hero-stats{display:flex;gap:2.5rem;justify-content:center;border-top:1px solid rgba(197,160,89,.18);padding-top:1.75rem;margin-top:2.2rem;flex-wrap:wrap}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,251,247,.32);margin-top:.2rem}
 @media(max-width:480px){.hero-ctas{flex-direction:column;align-items:stretch}.hero-ctas a{justify-content:center}}
 
-/* SECTION COMMONS */
-.section-label{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(201,169,110,.7);margin-bottom:.4rem;font-family:'Jost',sans-serif}
-.section-head{text-align:center;margin-bottom:3.5rem}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:300;color:#1a1208}
-.section-title em{font-style:italic}
-.section-title-dark{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:300;color:white}
-.section-sub{color:#7a6a58;font-size:.9rem;max-width:460px;margin:.5rem auto 0;line-height:1.7;font-family:'Jost',sans-serif}
-.section-sub-dark{color:rgba(247,242,236,.5);font-size:.9rem;max-width:460px;margin:.5rem auto 0;line-height:1.7;font-family:'Jost',sans-serif}
+/* MARQUEE */
+.marquee-strip{background:var(--gold);padding:.6rem 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:marquee 24s linear infinite}
+.marquee-item{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#fff;padding:0 2rem}
+.marquee-sep{color:rgba(255,255,255,.4);margin-right:2rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* GALLERY */
-#gallery{padding:clamp(3rem,7vw,5.5rem) 1.5rem;background:#f7f2ec}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.gcard{border-radius:1.1rem;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.09);border:1px solid rgba(201,169,110,.15);transition:transform .3s,box-shadow .3s,border-color .3s;background:#fff}
-.gcard:hover{transform:translateY(-6px);box-shadow:0 16px 44px rgba(0,0,0,.16);border-color:rgba(201,169,110,.4)}
-.gcard-img{height:220px;position:relative;overflow:hidden}
-.gcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.gcard:hover .gcard-img img{transform:scale(1.07)}
-.gcard-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(26,18,8,.7) 100%)}
-.gcard-badge{position:absolute;top:.75rem;right:.75rem;background:rgba(201,169,110,.9);color:#1a1208;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .65rem;border-radius:99px;font-family:'Jost',sans-serif}
-.gcard-body{padding:1rem 1.1rem 1.2rem}
-.gcard-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#1a1208;margin-bottom:.3rem}
-.gcard-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.75rem}
-.gcard-tag{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(201,169,110,.1);color:#c9a96e;padding:.25rem .6rem;border-radius:99px;font-family:'Jost',sans-serif}
-.gcard-link{font-size:.72rem;font-weight:500;color:#c9a96e;letter-spacing:.06em;text-transform:uppercase;font-family:'Jost',sans-serif;display:inline-flex;align-items:center;gap:.3rem}
-@media(max-width:1024px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.gallery-grid{grid-template-columns:1fr 1fr;gap:.75rem}.gcard-img{height:170px}}
+/* SECTION COMMONS */
+.section-label{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(197,160,89,.75);margin-bottom:.4rem;font-family:'Jost',sans-serif}
+.section-head{text-align:center;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:300;color:var(--dark)}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-title-dark{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:300;color:white}
+.section-sub{color:var(--muted);font-size:.9rem;max-width:480px;margin:.5rem auto 0;line-height:1.75;font-family:'Jost',sans-serif}
+.section-sub-dark{color:rgba(253,251,247,.5);font-size:.9rem;max-width:480px;margin:.5rem auto 0;line-height:1.75;font-family:'Jost',sans-serif}
+.wrap{max-width:1200px;margin:0 auto}
+.orn{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:.6rem 0}
+.orn-line{height:1px;width:52px;background:linear-gradient(90deg,transparent,rgba(197,160,89,.55),transparent)}
+.orn-star{color:var(--gold);font-size:.55rem}
+
+/* GALLERY — PHONE MOCKUP */
+#gallery{padding:clamp(3.5rem,8vw,6rem) 1.5rem;background:var(--cream2);overflow:hidden}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem}
+.gcard{display:flex;flex-direction:column;cursor:pointer}
+.gcard:hover .phone-mock{transform:translateY(-10px);box-shadow:0 32px 72px rgba(20,28,46,.45),0 0 0 1.5px rgba(197,160,89,.5)}
+.gcard:hover .phone-mock-img{transform:scale(1.06)}
+.gcard:hover .pc-arrow{background:var(--gold);color:#fff;transform:translateX(3px)}
+.phone-mock-wrap{position:relative;padding:0 12%;margin-bottom:1rem}
+.phone-mock{position:relative;border-radius:28px;background:linear-gradient(160deg,#1e2a40 0%,#101c2e 100%);border:2px solid rgba(197,160,89,.4);box-shadow:0 20px 56px rgba(20,28,46,.42),0 0 0 1px rgba(197,160,89,.1),inset 0 0 20px rgba(197,160,89,.04);overflow:hidden;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;aspect-ratio:9/18;display:flex;flex-direction:column}
+.phone-mock-notch{flex-shrink:0;height:20px;display:flex;justify-content:center;background:linear-gradient(160deg,#1e2a40,#101c2e);position:relative;z-index:3}
+.phone-mock-notch::after{content:'';display:block;width:60px;height:14px;background:#060e1a;border-radius:0 0 10px 10px}
+.phone-mock-screen{flex:1;position:relative;overflow:hidden}
+.phone-mock-img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.22,1,.36,1);opacity:.88}
+.phone-mock-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(20,28,46,.6) 70%,rgba(20,28,46,.92) 100%);z-index:1}
+.phone-mock-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:.65rem .75rem .8rem;display:flex;flex-direction:column;align-items:center;gap:.28rem}
+.pmc-logo{width:52px;filter:brightness(0) saturate(100%) invert(87%) sepia(30%) saturate(400%) hue-rotate(3deg) brightness(118%)}
+.pmc-hr{height:1px;width:40px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.pmc-name{font-family:'Cormorant Garamond',serif;font-size:.72rem;font-weight:300;color:#fff;text-align:center;line-height:1.2}
+.pmc-date{font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(197,160,89,.6);font-family:'Jost',sans-serif}
+.pmc-btn{width:80%;background:var(--gold);color:#fff;border:none;border-radius:99px;padding:.28rem;font-size:.42rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif;margin-top:.1rem;cursor:default}
+.phone-badge{position:absolute;top:-8px;right:8%;z-index:4;background:var(--gold);color:#fff;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .62rem;border-radius:99px;box-shadow:0 4px 12px rgba(197,160,89,.4);font-family:'Jost',sans-serif}
+.promo-badge{position:absolute;top:-10px;left:8%;z-index:5;display:inline-flex;align-items:center;gap:.3rem;background:linear-gradient(90deg,#e63946,#c1121f);color:#fff;font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .72rem;border-radius:99px;box-shadow:0 4px 14px rgba(230,57,70,.45);font-family:'Jost',sans-serif;animation:promo-pulse 1.6s ease-in-out infinite;white-space:nowrap}
+.promo-badge::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;animation:promo-dot .9s ease-in-out infinite;flex-shrink:0}
+@keyframes promo-pulse{0%,100%{box-shadow:0 4px 14px rgba(230,57,70,.45),0 0 0 0 rgba(230,57,70,.5)}50%{box-shadow:0 4px 20px rgba(230,57,70,.65),0 0 0 6px rgba(230,57,70,0)}}
+@keyframes promo-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.gcard-prices{display:flex;gap:.4rem;margin-bottom:.7rem;justify-content:center;flex-wrap:wrap}
+.price-chip{display:flex;flex-direction:column;align-items:center;background:rgba(197,160,89,.07);border:1px solid rgba(197,160,89,.2);border-radius:.65rem;padding:.35rem .55rem;min-width:58px}
+.price-plan{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Jost',sans-serif;font-weight:600}
+.price-old{font-size:.48rem;color:rgba(74,107,93,.5);font-family:'Jost',sans-serif;text-decoration:line-through;line-height:1.2}
+.price-new{font-size:.72rem;font-weight:700;color:var(--gold);font-family:'Cormorant Garamond',serif;line-height:1.1}
+.price-discount{font-size:.42rem;font-weight:700;color:#e63946;font-family:'Jost',sans-serif;letter-spacing:.05em}
+.phone-mock-footer{flex-shrink:0;background:rgba(197,160,89,.07);border-top:1px solid rgba(197,160,89,.15);padding:.28rem;text-align:center;font-size:.38rem;color:rgba(197,160,89,.5);font-family:'Jost',sans-serif}
+.phone-mock-footer strong{color:var(--gold)}
+.gcard-body-outer{padding:.85rem .5rem .2rem}
+.gcard-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:.3rem;text-align:center}
+.gcard-footer-row{display:flex;align-items:center;justify-content:space-between;padding-top:.5rem;border-top:1px solid rgba(197,160,89,.12)}
+.gcard-plans{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(197,160,89,.65);font-weight:500;font-family:'Jost',sans-serif}
+.pc-arrow{width:26px;height:26px;border-radius:99px;background:var(--gold-dim);border:1px solid rgba(197,160,89,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.65rem;transition:background .25s,transform .25s;flex-shrink:0}
+@media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+@media(max-width:420px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:.85rem}.phone-mock{border-radius:18px}.phone-mock-notch::after{width:42px;height:10px}}
 
 /* FEATURES STRIP */
-#features-strip{padding:clamp(2.5rem,6vw,4.5rem) 1.5rem;background:#f0e9df}
+#features-strip{padding:clamp(2.5rem,6vw,4.5rem) 1.5rem;background:var(--cream)}
 .strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
 .strip-item{text-align:center}
-.strip-icon{width:48px;height:48px;border-radius:50%;background:rgba(201,169,110,.12);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem}
-.strip-icon svg{width:20px;height:20px;stroke:#c9a96e;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.strip-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#1a1208;margin-bottom:.3rem}
-.strip-desc{font-size:.75rem;color:#7a6a58;line-height:1.55;font-family:'Jost',sans-serif}
+.strip-icon{width:48px;height:48px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;border:1px solid rgba(197,160,89,.2);transition:background .25s,transform .3s}
+.strip-item:hover .strip-icon{background:rgba(197,160,89,.25);transform:scale(1.08)}
+.strip-icon svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.strip-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.strip-desc{font-size:.75rem;color:var(--muted);line-height:1.55;font-family:'Jost',sans-serif}
 @media(max-width:768px){.strip-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* CTA */
-#cta-section{padding:clamp(3rem,7vw,5.5rem) 1.5rem;background:linear-gradient(150deg,#1a1208 0%,#2e1d0a 100%);text-align:center;position:relative;overflow:hidden}
-.cta-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(201,169,110,.15),transparent 70%)}
-.cta-inner{position:relative;z-index:1}
-.btn-wa{background:#25D366;color:white;border-radius:99px;padding:1rem 2.2rem;font-size:.85rem;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.6rem;box-shadow:0 8px 24px rgba(37,211,102,.3);font-family:'Jost',sans-serif;transition:transform .2s,opacity .2s}
+#cta-section{padding:clamp(3rem,7vw,5.5rem) 1.5rem;background:linear-gradient(155deg,var(--dark) 0%,var(--dark2) 100%);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(197,160,89,.16),transparent 70%)}
+.cta-inner{position:relative;z-index:1;max-width:580px;margin:0 auto}
+.btn-wa{background:var(--wa);color:white;border-radius:99px;padding:1rem 2.2rem;font-size:.85rem;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:.6rem;box-shadow:0 8px 24px rgba(37,211,102,.3);font-family:'Jost',sans-serif;transition:transform .2s}
 .btn-wa:hover{transform:scale(1.05)}
 
 /* FOOTER */
-footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem 1.5rem}
-.foot-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
-.foot-logo{height:52px;opacity:.7;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg)}
+footer{background:var(--darker);border-top:1px solid rgba(197,160,89,.1);padding:2rem 1.5rem}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
+.foot-logo{height:52px;opacity:.65;filter:brightness(0) saturate(100%) invert(85%) sepia(40%) saturate(500%) hue-rotate(5deg)}
 .foot-nav{display:flex;flex-wrap:wrap;gap:1.5rem}
-.foot-nav a{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(247,242,236,.25);font-family:'Jost',sans-serif;transition:color .2s}
-.foot-nav a:hover{color:rgba(247,242,236,.5)}
-.foot-copy{font-size:.68rem;color:rgba(247,242,236,.18);font-family:'Jost',sans-serif}
+.foot-nav a{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(253,251,247,.22);font-family:'Jost',sans-serif;transition:color .2s}
+.foot-nav a:hover{color:rgba(253,251,247,.5)}
+.foot-copy{font-size:.68rem;color:rgba(253,251,247,.15);font-family:'Jost',sans-serif}
 @media(max-width:768px){.foot-inner{flex-direction:column;align-items:center;text-align:center}.foot-nav{justify-content:center}}
 
 /* FLOAT WA */
-.float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:transform .2s}
+.float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:54px;height:54px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,.5);transition:transform .2s;animation:wa-pulse 2.5s ease-out infinite}
 .float-wa:hover{transform:scale(1.1)}
-.ping{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
+@keyframes wa-pulse{0%{box-shadow:0 4px 20px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 4px 20px rgba(0,0,0,.28),0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 4px 20px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,0)}}
+.ping{position:absolute;inset:0;border-radius:50%;background:var(--wa);animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
 @keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
 </style>
 </head>
@@ -134,7 +198,7 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
 <header id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" width="200"/>
     </a>
     <nav class="nav-links">
       <a href="index.html">Inicio</a>
@@ -142,7 +206,7 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
       <a href="planes.html">Planes</a>
       <a href="demo.html">Demo</a>
     </nav>
-    <a href="planes.html" class="nav-cta desk">🛒 Ver Planes</a>
+    <a href="index.html#catalogo" class="nav-cta desk">🗂 Ver Catálogo</a>
     <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
@@ -150,7 +214,7 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
     <a href="index.html#catalogo" onclick="closeMobile()">Catálogo</a>
     <a href="planes.html" onclick="closeMobile()">Planes</a>
     <a href="demo.html" onclick="closeMobile()">Demo</a>
-    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" onclick="closeMobile()" class="nav-cta" style="width:fit-content">Solicitar</a>
+    <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" onclick="closeMobile()" class="nav-cta" style="width:fit-content;margin-top:.5rem">Solicitar</a>
   </div>
 </header>
 
@@ -159,145 +223,76 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
   <div class="hero-bg"></div>
   <div class="hero-ov"></div>
   <div class="hero-glow"></div>
+  <div class="hero-lines"></div>
   <a href="index.html" class="hero-back">← Volver al inicio</a>
   <div class="hero-content">
     <div class="hero-logo fade-in">
-      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
+      <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" width="300"/>
     </div>
     <p class="hero-sup fade-in d1">Invitaciones Digitales · Graduación</p>
     <div class="divider fade-in d1"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
     <h1 class="hero-title fade-in d2">Invitaciones de<br><em>Graduación</em></h1>
-    <p class="hero-sub fade-in d3">El comienzo de un nuevo camino. Comparte tu logro con una invitación digital que refleja tu esfuerzo y éxito.</p>
+    <p class="hero-sub fade-in d3">El comienzo de un nuevo camino. Comparte tu logro con una invitación digital que refleja tu esfuerzo y éxito. 12 diseños exclusivos.</p>
     <div class="hero-ctas fade-in d4">
-      <a href="planes.html" class="btn-gold">🛒 Ver Planes y Precios</a>
+      <a href="index.html#catalogo" class="btn-gold">🗂 Ver Catálogo</a>
       <a href="demo.html" class="btn-outline">👁 Ver Demo</a>
+    </div>
+    <div class="hero-stats fade-in d5">
+      <div><div class="stat-n">12</div><div class="stat-l">Diseños</div></div>
+      <div><div class="stat-n">+350</div><div class="stat-l">Graduados felices</div></div>
+      <div><div class="stat-n">4.9 ★</div><div class="stat-l">Calificación</div></div>
+      <div><div class="stat-n">24hs</div><div class="stat-l">Entrega</div></div>
     </div>
   </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track" id="mq"></div>
+</div>
+
 <!-- GALLERY -->
 <section id="gallery">
-  <div style="max-width:1200px;margin:0 auto">
+  <div class="wrap">
     <div class="section-head fade-in">
-      <p class="section-label">Modelos Disponibles</p>
+      <p class="section-label">12 Diseños Exclusivos</p>
       <h2 class="section-title">Estilos para <em>Graduación</em></h2>
-      <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
-      <p class="section-sub">Diseños modernos y elegantes para celebrar este gran logro académico.</p>
+      <div class="orn"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="section-sub">Diseños modernos y elegantes para celebrar este gran logro académico. Totalmente personalizables con tus datos y fotos.</p>
     </div>
-    <div class="gallery-grid">
-
-      <!-- Tarjeta 1 -->
-      <div class="gcard fade-in d1">
-        <div class="gcard-img">
-          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Toga y Birrete" loading="lazy"/>
-          <div class="gcard-ov"></div>
-          <span class="gcard-badge">Más Popular</span>
-        </div>
-        <div class="gcard-body">
-          <div class="gcard-name">Toga &amp; Birrete</div>
-          <div class="gcard-tags">
-            <span class="gcard-tag">Classic</span>
-            <span class="gcard-tag">Premium</span>
-            <span class="gcard-tag">Deluxe</span>
-          </div>
-          <a href="planes.html" class="gcard-link">Ver planes →</a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 2 -->
-      <div class="gcard fade-in d2">
-        <div class="gcard-img">
-          <img src="https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Éxito Dorado" loading="lazy"/>
-          <div class="gcard-ov"></div>
-          <span class="gcard-badge">Nuevo</span>
-        </div>
-        <div class="gcard-body">
-          <div class="gcard-name">Éxito Dorado</div>
-          <div class="gcard-tags">
-            <span class="gcard-tag">Premium</span>
-            <span class="gcard-tag">Deluxe</span>
-          </div>
-          <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" class="gcard-link">Consultar →</a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 3 -->
-      <div class="gcard fade-in d3">
-        <div class="gcard-img">
-          <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Futuro Brillante" loading="lazy"/>
-          <div class="gcard-ov"></div>
-        </div>
-        <div class="gcard-body">
-          <div class="gcard-name">Futuro Brillante</div>
-          <div class="gcard-tags">
-            <span class="gcard-tag">Classic</span>
-            <span class="gcard-tag">Premium</span>
-          </div>
-          <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" class="gcard-link">Consultar →</a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 4 -->
-      <div class="gcard fade-in d4">
-        <div class="gcard-img">
-          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80" alt="Clásico Universitario" loading="lazy"/>
-          <div class="gcard-ov"></div>
-        </div>
-        <div class="gcard-body">
-          <div class="gcard-name">Clásico Universitario</div>
-          <div class="gcard-tags">
-            <span class="gcard-tag">Deluxe</span>
-          </div>
-          <a href="https://wa.me/message/57HQCKAMGELDG1" target="_blank" rel="noreferrer" class="gcard-link">Consultar →</a>
-        </div>
-      </div>
-
-    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
   </div>
 </section>
 
 <!-- FEATURES STRIP -->
 <section id="features-strip">
-  <div style="max-width:1200px;margin:0 auto">
+  <div class="wrap">
     <div class="section-head fade-in">
       <p class="section-label">¿Por qué Digital?</p>
       <h2 class="section-title">Todo lo que <em>incluye</em></h2>
-      <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+      <div class="orn"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
     </div>
     <div class="strip-grid">
-
       <div class="strip-item fade-in d1">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
+        <div class="strip-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="strip-title">RSVP Online</div>
         <p class="strip-desc">Confirmación de asistencia en un clic desde cualquier celular.</p>
       </div>
-
       <div class="strip-item fade-in d2">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+        <div class="strip-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="strip-title">Cuenta Regresiva</div>
         <p class="strip-desc">Un contador animado que genera emoción hasta la ceremonia.</p>
       </div>
-
       <div class="strip-item fade-in d3">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
+        <div class="strip-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="strip-title">Maps Integrado</div>
         <p class="strip-desc">Ubicación del auditorio con indicaciones paso a paso en Maps.</p>
       </div>
-
       <div class="strip-item fade-in d4">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
+        <div class="strip-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
         <div class="strip-title">Galería de Fotos</div>
         <p class="strip-desc">Comparte fotos del proceso y del gran día con todos tus invitados.</p>
       </div>
-
     </div>
   </div>
 </section>
@@ -306,12 +301,12 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
 <section id="cta-section">
   <div class="cta-glow"></div>
   <div class="cta-inner">
-    <p class="section-label" style="color:rgba(201,169,110,.7)">¿Listo para celebrar tu logro?</p>
-    <h2 class="section-title-dark" style="margin-bottom:.4rem">Cuéntanos tu <em style="font-style:italic;color:#c9a96e">historia</em></h2>
-    <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
-    <p class="section-sub-dark" style="margin-bottom:2rem">Escríbenos por WhatsApp y te asesoramos sin compromiso.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="planes.html" class="btn-gold">🛒 Ver Planes</a>
+    <p class="section-label" style="color:rgba(197,160,89,.75);margin-bottom:.4rem">¿Listo para celebrar tu logro?</p>
+    <h2 class="section-title-dark fade-in" style="margin-bottom:.4rem">Cuéntanos tu <em style="font-style:italic;color:var(--gold)">historia</em></h2>
+    <div class="orn fade-in d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+    <p class="section-sub-dark fade-in d2" style="margin-bottom:2rem">Escríbenos por WhatsApp y te asesoramos sin compromiso. Respuesta inmediata.</p>
+    <div class="fade-in d3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="index.html#catalogo" class="btn-gold">🗂 Ver Catálogo</a>
       <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Contactar por WhatsApp
@@ -320,15 +315,15 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="foot-inner">
-    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo"/>
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo" width="140"/>
     <nav class="foot-nav">
       <a href="index.html">Inicio</a>
       <a href="index.html#catalogo">Catálogo</a>
       <a href="planes.html">Planes</a>
       <a href="demo.html">Demo</a>
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer">WhatsApp</a>
     </nav>
     <p class="foot-copy">© <span id="yr"></span> Gueka Ideas · Invitaciones Digitales</p>
   </div>
@@ -337,29 +332,104 @@ footer{background:#0e0903;border-top:1px solid rgba(201,169,110,.1);padding:2rem
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Navbar scroll
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+/* ── Marquee ── */
+const LOGO = 'https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44';
+const MARQUEE = ['Invitaciones de Graduación','Toga & Birrete','Éxito Dorado','RSVP Online','Cuenta Regresiva','Entrega en 24hs','Colombia','Galería de Fotos','Maps Integrado','Diseño Exclusivo'];
+const mq = document.getElementById('mq');
+const mqHtml = MARQUEE.map(i => `<span class="marquee-item">${i}<span class="marquee-sep">✦</span></span>`).join('');
+mq.innerHTML = mqHtml + mqHtml;
 
-// Hamburger
-const hamburger = document.getElementById('hamburger');
+/* ── Planes ── */
+const PLANS = [
+  { name:'Classic', old:'$160.000', new:'$80.000' },
+  { name:'Premium', old:'$220.000', new:'$110.000' },
+  { name:'Deluxe',  old:'$320.000', new:'$160.000' },
+];
+
+/* ── 12 tarjetas de graduación ── */
+const CARDS = [
+  { name:'Toga & Birrete',          img:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Valentina García',   date:'15 · Mar · 2025', badge:'Más Popular' },
+  { name:'Éxito Dorado',            img:'https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Santiago López',     date:'22 · Abr · 2025', badge:'Nuevo' },
+  { name:'Futuro Brillante',        img:'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Isabella Torres',    date:'8 · May · 2025',  badge:'Exclusivo' },
+  { name:'Clásico Universitario',   img:'https://images.unsplash.com/photo-1580582932707-520aed937b7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Mateo Ramírez',      date:'14 · Jun · 2025', badge:'Nuevo' },
+  { name:'Honor & Mérito',          img:'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Sofía Hernández',    date:'5 · Jul · 2025',  badge:'Más Popular' },
+  { name:'Diploma de Oro',          img:'https://images.unsplash.com/photo-1507679799987-c73779587ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Nicolás Vargas',     date:'20 · Jul · 2025', badge:'Exclusivo' },
+  { name:'Cum Laude',               img:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Camila Morales',     date:'2 · Ago · 2025',  badge:'Nuevo' },
+  { name:'Nuevo Horizonte',         img:'https://images.unsplash.com/photo-1501290836284-3b8b5e32e41d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Andrés Castro',      date:'18 · Ago · 2025', badge:'Más Popular' },
+  { name:'Summa Cum Laude',         img:'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Lucía Jiménez',      date:'30 · Sep · 2025', badge:'Exclusivo' },
+  { name:'Generación de Éxito',     img:'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Daniel Sánchez',     date:'15 · Oct · 2025', badge:'Nuevo' },
+  { name:'Promesa del Futuro',      img:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Valeria Rodríguez',  date:'8 · Nov · 2025',  badge:'Más Popular' },
+  { name:'Inicio & Logro',          img:'https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=80', grad:'Sebastián Núñez',    date:'20 · Dic · 2025', badge:'Nuevo' },
+];
+
+function buildPriceChips() {
+  return PLANS.map(p => `
+    <div class="price-chip">
+      <span class="price-plan">${p.name}</span>
+      <span class="price-old">${p.old}</span>
+      <span class="price-new">${p.new}</span>
+      <span class="price-discount">−50%</span>
+    </div>`).join('');
+}
+
+const grid = document.getElementById('gallery-grid');
+CARDS.forEach((c, i) => {
+  const delay = `d${(i % 4) + 1}`;
+  const el = document.createElement('div');
+  el.className = `gcard fade-in ${delay}`;
+  el.innerHTML = `
+    <div class="phone-mock-wrap">
+      <div class="promo-badge">50% OFF</div>
+      <div class="phone-badge">${c.badge}</div>
+      <div class="phone-mock">
+        <div class="phone-mock-notch"></div>
+        <div class="phone-mock-screen">
+          <img src="${c.img}" alt="${c.name}" class="phone-mock-img" loading="lazy" width="600"/>
+          <div class="phone-mock-ov"></div>
+          <div class="phone-mock-content">
+            <img src="${LOGO}" alt="" class="pmc-logo"/>
+            <div class="pmc-hr"></div>
+            <div class="pmc-name">${c.grad}</div>
+            <div class="pmc-date">${c.date}</div>
+            <button class="pmc-btn" tabindex="-1">Confirmar asistencia →</button>
+          </div>
+        </div>
+        <div class="phone-mock-footer">guekaideas.com/<strong>graduación</strong></div>
+      </div>
+    </div>
+    <div class="gcard-body-outer">
+      <div class="gcard-name">${c.name}</div>
+      <div class="gcard-prices">${buildPriceChips()}</div>
+      <div class="gcard-footer-row">
+        <span class="gcard-plans">3 planes disponibles</span>
+        <div class="pc-arrow" aria-hidden="true">→</div>
+      </div>
+    </div>`;
+
+  el.addEventListener('click', () => { window.location.href = 'index.html#catalogo'; });
+  el.style.cursor = 'pointer';
+  grid.appendChild(el);
+});
+
+/* ── Navbar ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+
+const hamburger  = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 hamburger.addEventListener('click', () => {
   const open = mobileMenu.style.display === 'flex';
   mobileMenu.style.display = open ? 'none' : 'flex';
   hamburger.textContent = open ? '☰' : '✕';
 });
-function closeMobile() {
-  mobileMenu.style.display = 'none';
-  hamburger.textContent = '☰';
-}
+function closeMobile() { mobileMenu.style.display = 'none'; hamburger.textContent = '☰'; }
 
-// Scroll reveal
+/* ── Scroll reveal ── */
 const obs = new IntersectionObserver(
   entries => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
   }),
-  { threshold: 0.1 }
+  { threshold: 0.08 }
 );
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
