@@ -769,16 +769,22 @@ footer{background:var(--darker);border-top:1px solid rgba(197,160,89,.1);padding
 
 <main>
 
-<!-- ══════ HERO ══════ -->
+<!-- ══════════════════════════════════════════════════════
+     HERO — VIDEO BG + 2 COLS + PHONE MOCKUP
+══════════════════════════════════════════════════════ -->
 <section id="hero" aria-label="Gueka Ideas – Invitaciones Digitales de Lujo">
 
-  <video class="hero-video" autoplay muted loop playsinline preload="none"
+  <video
+    class="hero-video"
+    autoplay muted loop playsinline
+    preload="none"
     poster="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=2000&q=80"
     aria-hidden="true">
     <source src="https://videos.pexels.com/video-files/7706476/7706476-hd_1920_1080_30fps.mp4" type="video/mp4"/>
     <source src="https://videos.pexels.com/video-files/6621461/6621461-hd_1920_1080_25fps.mp4" type="video/mp4"/>
   </video>
   <div class="hero-video-fallback" aria-hidden="true"></div>
+
   <div class="hero-ov"       aria-hidden="true"></div>
   <div class="hero-vignette" aria-hidden="true"></div>
   <div class="hero-radial"   aria-hidden="true"></div>
@@ -788,627 +794,285 @@ footer{background:var(--darker);border-top:1px solid rgba(197,160,89,.1);padding
 
   <div class="hero-body">
 
-    <!-- LEFT -->
+    <!-- LEFT: copy -->
     <div class="hero-left reveal">
+
       <div class="hero-logo-wrap">
-        <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales"/>
+        <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas – Invitaciones Digitales" width="280"/>
       </div>
-      <p class="eyebrow hero-eyebrow">Invitaciones Digitales · Colombia</p>
-      <div class="orn hero-orn">
-        <span class="orn-line"></span>
-        <span class="orn-star">✦</span>
-        <span class="orn-line"></span>
-      </div>
-      <div class="hero-live-badge">
+
+      <div class="hero-live-badge reveal d1">
         <span class="live-dot"></span>
-        Más de 500 familias felices
+        Demo interactivo en vivo
       </div>
-      <h1 class="hero-title">
-        Invitaciones<br/>
-        <em>Digitales</em><br/>
-        de Lujo
+
+      <p class="eyebrow hero-eyebrow reveal d1">Invitaciones Digitales · Colombia</p>
+      <div class="orn hero-orn reveal d1">
+        <div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div>
+      </div>
+
+      <h1 class="hero-title reveal d2">
+        Invitar nunca<br>fue tan <em>especial</em>
       </h1>
-      <p class="hero-sub">
-        Diseños exclusivos para bodas, quinceañeros, bautizos y más. Con RSVP online, Google Maps integrado y cuenta regresiva animada. Entrega en 24 horas.
+
+      <p class="hero-sub reveal d3">
+        Invitaciones digitales interactivas para tu gran celebración. Diseño exclusivo, RSVP online, cuenta regresiva animada y link para compartir sin límites — todo desde un smartphone.
       </p>
 
-      <div class="cd-live" id="hero-cd" aria-label="Cuenta regresiva">
-        <div class="cdl-unit"><span class="cdl-n" id="h-dias">00</span><span class="cdl-l">Días</span></div>
-        <span class="cdl-sep">:</span>
-        <div class="cdl-unit"><span class="cdl-n" id="h-hrs">00</span><span class="cdl-l">Horas</span></div>
-        <span class="cdl-sep">:</span>
-        <div class="cdl-unit"><span class="cdl-n" id="h-min">00</span><span class="cdl-l">Min</span></div>
-        <span class="cdl-sep">:</span>
-        <div class="cdl-unit"><span class="cdl-n" id="h-seg">00</span><span class="cdl-l">Seg</span></div>
-      </div>
+      <div class="cd-live reveal d3" id="cd-hero" aria-label="Ejemplo de cuenta regresiva"></div>
 
-      <div class="hero-ctas">
+      <div class="hero-ctas reveal d4">
         <a href="#showcase" class="btn-g">🗂 Ver Categorías</a>
-        <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
-          Pedir mi invitación
-        </a>
+        <a href="demo.html"  class="btn-o">👁 Ver Demo →</a>
       </div>
 
-      <div class="hero-stats">
+      <div class="hero-stats reveal d5" aria-label="Estadísticas de Gueka Ideas">
+        <div><div class="stat-n">+15</div><div class="stat-l">Años de experiencia</div></div>
         <div><div class="stat-n">+500</div><div class="stat-l">Familias felices</div></div>
-        <div><div class="stat-n">24h</div><div class="stat-l">Tiempo de entrega</div></div>
-        <div><div class="stat-n">4.9★</div><div class="stat-l">Calificación</div></div>
-        <div><div class="stat-n">8+</div><div class="stat-l">Categorías</div></div>
+        <div><div class="stat-n">4.9 ★</div><div class="stat-l">Calificación promedio</div></div>
+        <div><div class="stat-n">24hs</div><div class="stat-l">Tiempo de entrega</div></div>
       </div>
     </div>
 
-    <!-- RIGHT: phone mockup -->
+    <!-- RIGHT: big phone mockup -->
     <div class="hero-right reveal-r d2">
-      <div class="phone-glow"></div>
+      <div class="phone-glow" aria-hidden="true"></div>
 
-      <!-- Notification badge -->
+      <!-- Notificación flotante WA -->
       <div class="hp-notif-card" aria-hidden="true">
         <div class="notif-header">
           <div class="notif-ico">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a7 7 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
           </div>
           <span class="notif-app">WhatsApp</span>
           <span class="notif-time">ahora</span>
         </div>
-        <div class="notif-title">¡Tu invitación está lista!</div>
-        <div class="notif-msg">Hola! Tu invitación digital ya fue enviada. 🎉</div>
-        <div class="notif-badge">✦ Ver invitación</div>
+        <div class="notif-title">🎉 ¡Tu invitación está lista!</div>
+        <div class="notif-msg">Hola Valentina, tu invitación digital ya está publicada.</div>
+        <div class="notif-badge">✦ Ver invitación →</div>
       </div>
 
-      <!-- Phone -->
-      <div class="hero-phone" aria-label="Vista previa de invitación digital">
+      <!-- Teléfono principal -->
+      <div class="hero-phone" role="img" aria-label="Vista previa de invitación digital en smartphone">
         <div class="hp-notch"></div>
-        <div class="hp-bar">
-          <div class="hp-bar-dots">
-            <div class="hp-dot"></div>
-            <div class="hp-dot"></div>
-            <div class="hp-dot"></div>
-          </div>
-          <span class="hp-bar-url">guekaideas.com/boda</span>
-        </div>
-        <div class="hp-viewport">
-          <div class="hp-scroll-strip" id="hp-strip">
 
-            <!-- S1: Portada -->
+        <div class="hp-bar" style="margin:.0 .75rem 0;flex-shrink:0">
+          <div class="hp-bar-dots">
+            <div class="hp-dot"></div><div class="hp-dot"></div><div class="hp-dot"></div>
+          </div>
+          <span class="hp-bar-url">guekaideas.com/val-diego</span>
+        </div>
+
+        <div class="hp-viewport">
+          <div class="hp-scroll-strip" id="hp-scroll-strip">
+
+            <!-- ── SECCIÓN 1: Portada ── -->
             <div class="hps-section hps-cover">
-              <img class="hps-cover-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=60" alt=""/>
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt="" class="hps-cover-img"/>
               <div class="hps-cover-ov"></div>
               <div class="hps-cover-body">
-                <img class="hps-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
+                <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="hps-logo"/>
                 <div class="hps-hr"></div>
-                <div class="hps-names"><em>Sofía</em> &amp; <em>Andrés</em></div>
-                <div class="hps-date">15 · Febrero · 2025</div>
-                <div class="hps-location">📍 Jardín Botánico, Bogotá</div>
+                <div class="hps-names">Valentina<br><em>&amp; Diego</em></div>
+                <div class="hps-date">15 · Marzo · 2025</div>
+                <div class="hps-location">📍 Cali, Colombia</div>
               </div>
             </div>
 
-            <!-- S2: Countdown -->
-            <div class="hps-section">
-              <p class="hps-sec-label">Cuenta regresiva</p>
-              <div class="hps-cd-grid">
-                <div class="hps-cdu"><span class="hps-cdn">42</span><span class="hps-cdl">Días</span></div>
-                <span class="hps-cd-sep">:</span>
-                <div class="hps-cdu"><span class="hps-cdn">08</span><span class="hps-cdl">Hrs</span></div>
-                <span class="hps-cd-sep">:</span>
-                <div class="hps-cdu"><span class="hps-cdn">33</span><span class="hps-cdl">Min</span></div>
-              </div>
-              <p class="hps-cd-sub">Para el gran día</p>
+            <!-- ── SECCIÓN 2: Cuenta regresiva ── -->
+            <div class="hps-section hps-countdown">
+              <div class="hps-sec-label">Cuenta Regresiva</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
+              <div class="hps-cd-grid" id="cd-phone"></div>
+              <div class="hps-cd-sub">¡Nos faltan pocos días!</div>
             </div>
 
-            <!-- S3: RSVP -->
-            <div class="hps-section">
-              <p class="hps-rsvp-name">Hola, <strong>María García</strong></p>
-              <p class="hps-rsvp-q">¿Confirmas tu asistencia a nuestra boda?</p>
+            <!-- ── SECCIÓN 3: RSVP ── -->
+            <div class="hps-section hps-rsvp">
+              <div class="hps-sec-label">Confirmar Asistencia</div>
+              <div class="hps-hr" style="margin:.3rem auto .7rem"></div>
+              <div class="hps-rsvp-name">👋 Hola, <strong>María</strong></div>
+              <div class="hps-rsvp-q">¿Asistirás a nuestra boda?</div>
               <div class="hps-rsvp-btns">
-                <button class="hps-btn-yes">✓ Sí, confirmo</button>
-                <button class="hps-btn-no">✗ No puedo</button>
+                <button class="hps-btn-yes" tabindex="-1">✓ Sí, asistiré</button>
+                <button class="hps-btn-no"  tabindex="-1">✗ No podré</button>
               </div>
               <div class="hps-rsvp-pases">
-                <span class="hps-pase active">1 pase</span>
+                <span class="hps-pase">1 pase</span>
                 <span class="hps-pase">2 pases</span>
-                <span class="hps-pase">3 pases</span>
+                <span class="hps-pase active">3 pases</span>
               </div>
             </div>
 
-            <!-- S4: Mapa -->
-            <div class="hps-section">
-              <p class="hps-sec-label">Lugar del evento</p>
+            <!-- ── SECCIÓN 4: Ubicación ── -->
+            <div class="hps-section hps-map">
+              <div class="hps-sec-label">Ubicación</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
               <div class="hps-map-img">
-                <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=300&q=60" alt="Mapa"/>
-                <span class="hps-map-pin">📍</span>
+                <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=80" alt=""/>
+                <div class="hps-map-pin">📍</div>
               </div>
-              <p class="hps-map-name">Jardín Botánico</p>
-              <p class="hps-map-addr">Av. Calle 63 #68-95, Bogotá</p>
-              <button class="hps-map-btn">Cómo llegar →</button>
+              <div class="hps-map-name">Hacienda Las Palmas</div>
+              <div class="hps-map-addr">Cali, Valle del Cauca</div>
+              <button class="hps-map-btn" tabindex="-1">Abrir en Maps →</button>
             </div>
 
-            <!-- S5: Galería -->
-            <div class="hps-section">
-              <p class="hps-sec-label">Nuestra historia</p>
+            <!-- ── SECCIÓN 5: Galería ── -->
+            <div class="hps-section hps-gallery">
+              <div class="hps-sec-label">Nuestra Historia</div>
+              <div class="hps-hr" style="margin:.3rem auto .6rem"></div>
               <div class="hps-gallery-grid">
-                <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=60" alt=""/>
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=60" alt=""/>
-                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=60" alt=""/>
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=60" alt=""/>
+                <img src="https://images.unsplash.com/photo-1606216794079-73f85bbd57d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1537633468298-d86f0c2d4173?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1591604442449-ecc9943efabf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=200&q=80" alt=""/>
               </div>
             </div>
 
-          </div>
-        </div>
-        <div class="hp-footer"><strong>Gueka Ideas</strong> · Invitaciones Digitales</div>
+          </div><!-- /scroll-strip -->
+        </div><!-- /viewport -->
+
+        <div class="hp-footer">guekaideas.com/<strong>valentina-diego</strong></div>
       </div>
 
-      <!-- RSVP badge -->
+      <!-- RSVP badge flotante -->
       <div class="hp-rsvp-badge" aria-hidden="true">
         <div class="rsvp-row">
-          <span class="rsvp-dot"></span>
+          <div class="rsvp-dot"></div>
           <span class="rsvp-label">RSVP en vivo</span>
         </div>
-        <p class="rsvp-sub">Confirmaciones recibidas</p>
-        <div class="rsvp-count">127</div>
-        <div class="rsvp-of">de 150 invitados</div>
+        <div class="rsvp-sub">Confirmaciones recibidas</div>
+        <div class="rsvp-count" id="rsvp-count">120 <span class="rsvp-of">/ 200</span></div>
       </div>
-
-    </div><!-- /hero-right -->
-  </div><!-- /hero-body -->
-
-  <div class="hero-scroll" aria-hidden="true">
-    <span class="scroll-arr"></span>
-    <span>Scroll</span>
+    </div>
   </div>
 
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-arr"></div>
+    Explorar
+  </div>
 </section>
 
 <!-- ══════ MARQUEE ══════ -->
 <div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Bodas</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Quinceañeros</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Bautizos</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Comuniones</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Graduaciones</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Cumpleaños</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Empresariales</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Infantiles</span><span class="marquee-sep">✦</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Bodas</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Quinceañeros</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Bautizos</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Comuniones</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Graduaciones</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Cumpleaños</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Empresariales</span><span class="marquee-sep">✦</span>
-    <span class="marquee-item">Infantiles</span><span class="marquee-sep">✦</span>
-  </div>
+  <div class="marquee-track" id="mq"></div>
 </div>
 
 <!-- ══════ SHOWCASE ══════ -->
 <section id="showcase" aria-labelledby="showcase-title">
-  <div class="wrap" style="padding:0 1.5rem">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Nuestras categorías</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="showcase-title" class="h-serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--dark)">Para cada <em>celebración</em></h2>
-      <p class="sec-sub">Cada categoría con diseños exclusivos, animaciones únicas y funciones interactivas.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow reveal">Catálogo de Invitaciones</p>
+      <h2 id="showcase-title" class="h-serif reveal d1" style="font-size:clamp(2.5rem,5vw,3.8rem)">¿Qué <em>Celebramos?</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="sec-sub reveal d2">Elige tu categoría y descubre diseños exclusivos con teléfonos de muestra para cada evento.</p>
     </div>
+    <div class="showcase-grid" id="showcase-grid" role="list" aria-label="Categorías de invitaciones"></div>
   </div>
-
-  <div class="wrap showcase-grid" style="padding:0 1.5rem">
-
-    <!-- Boda -->
-    <a href="boda.html" class="phone-card reveal d1">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones de Boda"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">Sofía &amp; Andrés</div>
-            <div class="pcph-date">15 · Feb · 2025</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Boda</span>
-      <div class="pc-body">
-        <div class="pc-title">Invitaciones de Boda</div>
-        <div class="pc-sub">Elegancia y romanticismo en cada detalle. Diseños personalizados para el gran día.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+12 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- 15 Años -->
-    <a href="quince.html" class="phone-card reveal d2">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones 15 Años"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">Isabella</div>
-            <div class="pcph-date">Mis 15 Años</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">15 Años</span>
-      <span class="pc-new">Popular</span>
-      <div class="pc-body">
-        <div class="pc-title">Quinceañeros</div>
-        <div class="pc-sub">Princesas reales merecen invitaciones únicas. Glitter digital, animaciones y más.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+15 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Bautizo -->
-    <a href="bautizo.html" class="phone-card reveal d3">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Bautizo"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">Samuel</div>
-            <div class="pcph-date">Bautizo</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Bautizo</span>
-      <div class="pc-body">
-        <div class="pc-title">Bautizos</div>
-        <div class="pc-sub">Dulces y tiernas invitaciones para celebrar el primer sacramento.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+8 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Comunión -->
-    <a href="comunion.html" class="phone-card reveal d4">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Comunión"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">Valentina</div>
-            <div class="pcph-date">Primera Comunión</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Comunión</span>
-      <div class="pc-body">
-        <div class="pc-title">Comuniones</div>
-        <div class="pc-sub">Elegancia celestial para este momento tan especial y sagrado.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+7 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Empresarial -->
-    <a href="empresariales.html" class="phone-card reveal d1">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Empresariales"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">Evento Corp.</div>
-            <div class="pcph-date">Gala Empresarial</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Empresarial</span>
-      <div class="pc-body">
-        <div class="pc-title">Empresariales</div>
-        <div class="pc-sub">Imagen corporativa premium para galas, lanzamientos y eventos de empresa.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+6 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Cumpleaños -->
-    <a href="cumpleanos.html" class="phone-card reveal d2">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Cumpleaños"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">¡Fiesta!</div>
-            <div class="pcph-date">Cumpleaños</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Cumpleaños</span>
-      <div class="pc-body">
-        <div class="pc-title">Cumpleaños</div>
-        <div class="pc-sub">Vibra y color para la fiesta del año. Diseños divertidos y modernos.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+10 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Graduación -->
-    <a href="graduacion.html" class="phone-card reveal d3">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Graduación"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">¡Me gradué!</div>
-            <div class="pcph-date">Graduación 2025</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Graduación</span>
-      <div class="pc-body">
-        <div class="pc-title">Graduaciones</div>
-        <div class="pc-sub">Celebra el logro más importante con una invitación tan especial como tú.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+9 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Infantil -->
-    <a href="infantil.html" class="phone-card reveal d4">
-      <div class="pc-bg">
-        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Invitaciones Infantiles"/>
-        <div class="pc-bg-ov"></div>
-        <div class="pc-phone">
-          <div class="pcph-notch"></div>
-          <div class="pcph-screen">
-            <img class="pcph-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
-            <div class="pcph-hr"></div>
-            <div class="pcph-names">¡A jugar!</div>
-            <div class="pcph-date">Fiesta Infantil</div>
-            <button class="pcph-btn">RSVP</button>
-          </div>
-          <div class="pcph-footer"><strong>Gueka Ideas</strong></div>
-        </div>
-      </div>
-      <span class="pc-badge">Infantil</span>
-      <span class="pc-new">Nuevo</span>
-      <div class="pc-body">
-        <div class="pc-title">Infantiles</div>
-        <div class="pc-sub">Magia y color para los más pequeños. Personajes, confeti y mucha diversión.</div>
-        <div class="pc-footer-row">
-          <span class="pc-models">+11 modelos</span>
-          <span class="pc-arrow">→</span>
-        </div>
-      </div>
-    </a>
-
-  </div><!-- /showcase-grid -->
 </section>
 
 <!-- ══════ DEMO SECTION ══════ -->
 <section id="demo-section" aria-labelledby="demo-title">
   <div class="demo-grid-bg" aria-hidden="true"></div>
-  <div class="demo-inner wrap" style="padding:0 1.5rem">
-
-    <!-- Phones -->
+  <div class="wrap demo-inner">
     <div class="demo-phones" aria-hidden="true">
       <div class="sm-phone">
         <div class="sm-notch"></div>
         <div class="sm-screen">
-          <img class="sm-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt=""/>
+          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="sm-logo"/>
           <div class="sm-hr"></div>
-          <div class="sm-title">Isabella &amp; Mateo</div>
-          <div class="sm-date">20 · Abril · 2025</div>
+          <div class="sm-title">Sofía &amp; Mateo</div>
+          <div class="sm-date">12 · Julio · 2025</div>
         </div>
       </div>
       <div class="big-phone">
         <div class="big-notch"></div>
         <div class="big-screen">
-          <img class="big-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
+          <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="" class="big-logo"/>
           <div class="big-hr"></div>
-          <div class="big-names">Sofía &amp; Andrés</div>
-          <div class="big-date">15 · Febrero · 2025</div>
+          <div class="big-names">Valentina<br>&amp; Diego</div>
+          <div class="big-date">15 · Marzo · 2025</div>
           <div class="big-cd">
-            <div class="big-cd-label">Faltan</div>
-            <div class="big-cd-nums">
-              <div class="cd-unit"><div class="cd-n">42</div><div class="cd-l">Días</div></div>
-              <div class="cd-unit" style="margin:0 .2rem;padding-bottom:.3rem;display:flex;align-items:flex-start;padding-top:.05rem"><span style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.1rem">:</span></div>
-              <div class="cd-unit"><div class="cd-n">08</div><div class="cd-l">Hrs</div></div>
-            </div>
+            <div class="big-cd-label">Cuenta regresiva</div>
+            <div class="big-cd-nums" id="cd-phone2"></div>
           </div>
-          <button class="big-btn">Confirmar Asistencia</button>
+          <button class="big-btn" tabindex="-1">Confirmar Asistencia</button>
           <div class="big-chips">
-            <span class="big-chip">📍 Maps</span>
-            <span class="big-chip">🎵 Canción</span>
-            <span class="big-chip">📸 Galería</span>
+            <div class="big-chip">📍 Maps</div>
+            <div class="big-chip">📅 Agenda</div>
+            <div class="big-chip">🎵 Música</div>
           </div>
         </div>
-        <div class="big-footer">Hecho con ❤ por <strong>Gueka Ideas</strong></div>
+        <div class="big-footer">guekaideas.com/<strong>valentina-diego</strong></div>
       </div>
     </div>
-
-    <!-- Copy -->
-    <div class="demo-copy reveal-r">
-      <p class="eyebrow">Así funciona</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="demo-title" class="demo-title">Una invitación <em>interactiva</em> y completa</h2>
-      <p class="demo-sub">Cada invitación incluye todas las funciones que necesitas para que tus invitados tengan la mejor experiencia.</p>
-      <div class="checks">
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> RSVP online en tiempo real</div>
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> Google Maps integrado</div>
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> Cuenta regresiva animada</div>
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> Galería de fotos</div>
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> Canción de fondo personalizada</div>
-        <div class="check"><span class="check-ico"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5"/></svg></span> Agenda del evento paso a paso</div>
+    <div class="demo-copy">
+      <p class="eyebrow reveal" style="margin-bottom:.5rem">Digital e Interactivo</p>
+      <h2 id="demo-title" class="demo-title reveal d1">Una invitación que tus invitados <em>van a adorar</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="demo-sub reveal d2">Olvida el papel. Con nuestras invitaciones digitales tus invitados pueden confirmar asistencia, agendar la fecha, ver el lugar en Maps y mucho más — todo desde su celular.</p>
+      <ul class="checks reveal d3" aria-label="Características incluidas">
+        <li class="check"><div class="check-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Confirmar asistencia con un clic</li>
+        <li class="check"><div class="check-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Agendar en calendario digital (Google/Apple)</li>
+        <li class="check"><div class="check-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Ver indicaciones en Google Maps integrado</li>
+        <li class="check"><div class="check-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Sugerir canciones para la playlist del evento</li>
+        <li class="check"><div class="check-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Compartir a todos los invitados sin límites</li>
+      </ul>
+      <div class="delivery-tag reveal d4">
+        <div class="delivery-tag-line"></div>
+        Entrega en <strong>24 horas</strong>
       </div>
-      <div class="delivery-tag">
-        <span class="delivery-tag-line"></span>
-        <strong>Entrega en 24hs</strong> · Comparte por WhatsApp
+      <div style="margin-top:1.75rem" class="reveal d5">
+        <a href="demo.html" class="btn-g">👁 Ver Demo Interactivo</a>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- ══════ FEATURES ══════ -->
 <section id="features" aria-labelledby="feat-title">
-  <div class="wrap" style="padding:0 1.5rem">
-    <div class="sec-head reveal">
-      <p class="eyebrow">¿Por qué elegirnos?</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="feat-title" class="h-serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--dark)">Todo lo que tu invitación <em>necesita</em></h2>
-      <p class="sec-sub">Funciones premium incluidas en cada diseño, sin costos adicionales.</p>
+  <div class="wrap">
+    <div class="sec-head" style="padding-top:clamp(4rem,9vw,7rem)">
+      <p class="eyebrow reveal">Características</p>
+      <h2 id="feat-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Funciones que <em>enamoran</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="sec-sub reveal d2">Cada detalle pensado para que tu invitación sea una experiencia única e inolvidable.</p>
     </div>
-    <div class="feat-grid">
-
-      <div class="feat-card reveal d1">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.19 2 2 0 012.1 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <div class="feat-t">RSVP Online</div>
-        <div class="feat-d">Tus invitados confirman asistencia y número de pases directamente desde la invitación.</div>
-      </div>
-
-      <div class="feat-card reveal d2">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="feat-t">Google Maps</div>
-        <div class="feat-d">Ubicación del evento integrada con un clic para abrir la ruta en Maps.</div>
-      </div>
-
-      <div class="feat-card reveal d3">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="feat-t">Cuenta Regresiva</div>
-        <div class="feat-d">Animación en tiempo real con días, horas, minutos y segundos hasta el gran día.</div>
-      </div>
-
-      <div class="feat-card reveal d4">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <div class="feat-t">Galería de Fotos</div>
-        <div class="feat-d">Muestra tu historia o los mejores momentos con una galería elegante.</div>
-      </div>
-
-      <div class="feat-card reveal d1">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-        </div>
-        <div class="feat-t">Música de Fondo</div>
-        <div class="feat-d">Añade vuestra canción favorita para una experiencia aún más emotiva.</div>
-      </div>
-
-      <div class="feat-card reveal d2">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="feat-t">Agenda del Evento</div>
-        <div class="feat-d">Detalla hora por hora el programa completo para que nadie se pierda nada.</div>
-      </div>
-
-      <div class="feat-card reveal d3">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        </div>
-        <div class="feat-t">Comparte fácil</div>
-        <div class="feat-d">Enlace único para compartir por WhatsApp, Instagram, email o cualquier red social.</div>
-      </div>
-
-      <div class="feat-card reveal d4">
-        <div class="feat-ico">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="feat-t">Estadísticas</div>
-        <div class="feat-d">Mira en tiempo real cuántos invitados confirmaron, cuántos vieron y cuántos faltan.</div>
-      </div>
-
-    </div>
+    <div class="feat-grid" id="feat-grid" style="margin-bottom:clamp(4rem,9vw,7rem)" role="list"></div>
   </div>
 </section>
 
 <!-- ══════ PROCESS ══════ -->
 <section id="process" aria-labelledby="proc-title">
-  <div class="wrap" style="padding:0 1.5rem">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Así de fácil</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="proc-title" class="h-serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--dark)">Tu invitación en <em>3 pasos</em></h2>
-      <p class="sec-sub">Un proceso simple y rápido. En menos de 24 horas tienes tu invitación lista para compartir.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow reveal">Proceso</p>
+      <h2 id="proc-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Tu invitación en <em>3 pasos</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="sec-sub reveal d2">Fácil, rápido y sin complicaciones. Nosotros nos encargamos de todo el diseño.</p>
     </div>
-    <div class="steps">
-
-      <div class="step reveal d1" style="text-align:center">
-        <div class="step-ico" style="margin:0 auto 1.5rem">
-          <span class="step-n">1</span>
-        </div>
-        <div class="step-t">Elige tu diseño</div>
-        <div class="step-d">Navega por nuestras categorías y elige el diseño que más se adapte a tu evento y personalidad.</div>
+    <div class="steps" role="list">
+      <div class="step reveal d1" role="listitem">
+        <div class="step-ico"><div class="step-n">1</div></div>
+        <h3 class="step-t">Elige tu categoría</h3>
+        <p class="step-d">Explora nuestro catálogo — boda, quinces, bautizo, empresarial y más — y elige el diseño que te enamore.</p>
       </div>
-
-      <div class="step reveal d2" style="text-align:center">
-        <div class="step-ico" style="margin:0 auto 1.5rem">
-          <span class="step-n">2</span>
-        </div>
-        <div class="step-t">Envíanos los datos</div>
-        <div class="step-d">Compártenos los detalles de tu evento por WhatsApp: nombres, fecha, lugar, foto y canción.</div>
+      <div class="step reveal d2" role="listitem">
+        <div class="step-ico"><div class="step-n">2</div></div>
+        <h3 class="step-t">Escoge tu plan</h3>
+        <p class="step-d">Selecciona entre Classic, Premium o Deluxe según las funciones que necesitas y contáctanos por WhatsApp.</p>
       </div>
-
-      <div class="step reveal d3" style="text-align:center">
-        <div class="step-ico" style="margin:0 auto 1.5rem">
-          <span class="step-n">3</span>
-        </div>
-        <div class="step-t">Recibe y comparte</div>
-        <div class="step-d">En máximo 24 horas recibes tu enlace listo para compartir. ¡Así de sencillo y rápido!</div>
+      <div class="step reveal d3" role="listitem">
+        <div class="step-ico"><div class="step-n">3</div></div>
+        <h3 class="step-t">Comparte y celebra</h3>
+        <p class="step-d">Recibe tu invitación en 24hs. Un link único para compartir con todos tus invitados sin límite de envíos.</p>
       </div>
-
     </div>
-    <div style="text-align:center;margin-top:3rem" class="reveal">
-      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
-        Pedir mi invitación ahora
+    <div style="text-align:center;margin-top:3.5rem" class="reveal d4">
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem">¿Tienes dudas? Contáctanos sin compromiso.</p>
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-dark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablar con nosotros
       </a>
     </div>
   </div>
@@ -1416,193 +1080,56 @@ footer{background:var(--darker);border-top:1px solid rgba(197,160,89,.1);padding
 
 <!-- ══════ TESTIMONIALS ══════ -->
 <section id="testimonios" aria-labelledby="test-title">
-  <div class="wrap" style="padding:0 1.5rem">
-    <div class="sec-head reveal">
-      <p class="eyebrow" style="color:rgba(197,160,89,.75)">Lo que dicen nuestros clientes</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="test-title" class="h-serif" style="font-size:clamp(2rem,4vw,3rem);color:#fff">Más de 500 familias <em>felices</em></h2>
-      <p class="sec-sub-d">Cada invitación es una historia única. Aquí algunas de las nuestras.</p>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow reveal">Testimonios</p>
+      <h2 id="test-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem);color:#fff">Lo que dicen nuestros <em>clientes</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+      <p class="sec-sub-d reveal d2">Más de 500 familias ya confiaron en Gueka Ideas para su gran celebración.</p>
     </div>
-    <div class="test-grid">
-
-      <div class="tcard reveal d1">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Quedamos absolutamente encantados con nuestra invitación de boda. Todos nuestros invitados nos preguntaron dónde la habíamos hecho. El RSVP funcionó perfecto y el Maps fue muy útil para quienes venían de otras ciudades."</p>
-        <div class="t-foot">
-          <div class="t-av">S</div>
-          <div>
-            <div class="t-name">Sofía Ramírez</div>
-            <div class="t-loc">Bogotá · Boda 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tcard reveal d2">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Para los 15 de mi hija buscaba algo diferente y Gueka Ideas superó todas mis expectativas. La cuenta regresiva animada fue un detallazo. La entrega en 24 horas fue real, incluso antes de lo prometido."</p>
-        <div class="t-foot">
-          <div class="t-av">M</div>
-          <div>
-            <div class="t-name">Martha López</div>
-            <div class="t-loc">Medellín · Quinceañero 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tcard reveal d3">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Usé su servicio para el bautizo de mi bebé y fue la mejor decisión. Diseño hermoso, muy fácil de compartir por WhatsApp y todos mis familiares pudieron confirmar asistencia sin ningún problema."</p>
-        <div class="t-foot">
-          <div class="t-av">C</div>
-          <div>
-            <div class="t-name">Carolina Vega</div>
-            <div class="t-loc">Cali · Bautizo 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tcard reveal d1">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"El evento corporativo de nuestra empresa quedó con una imagen super profesional gracias a la invitación digital. Los asistentes quedaron impresionados. Sin duda volveremos a usar Gueka Ideas."</p>
-        <div class="t-foot">
-          <div class="t-av">A</div>
-          <div>
-            <div class="t-name">Andrés Moreno</div>
-            <div class="t-loc">Bogotá · Evento Corporativo 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tcard reveal d2">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Para mi graduación quería algo especial y diferente. La invitación con la galería de fotos de mi carrera fue perfecta. Mis compañeros y profesores la amaron. Totalmente recomendado."</p>
-        <div class="t-foot">
-          <div class="t-av">V</div>
-          <div>
-            <div class="t-name">Valentina Cruz</div>
-            <div class="t-loc">Barranquilla · Graduación 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tcard reveal d3">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"La fiesta infantil de mi hijo fue un éxito total. La invitación animada emocionó a los niños desde el primer momento. El servicio es rápido, profesional y el precio es muy justo."</p>
-        <div class="t-foot">
-          <div class="t-av">P</div>
-          <div>
-            <div class="t-name">Patricia Herrera</div>
-            <div class="t-loc">Pereira · Fiesta Infantil 2024</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="test-grid" id="test-grid" role="list"></div>
   </div>
 </section>
 
 <!-- ══════ FAQ ══════ -->
 <section id="faq" aria-labelledby="faq-title">
-  <div class="wrap" style="padding:0 1.5rem">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Preguntas frecuentes</p>
-      <div class="orn"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-      <h2 id="faq-title" class="h-serif" style="font-size:clamp(2rem,4vw,3rem);color:var(--dark)">Todo lo que <em>necesitas</em> saber</h2>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow reveal">Preguntas frecuentes</p>
+      <h2 id="faq-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Todo lo que <em>necesitas saber</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
     </div>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿En cuánto tiempo entrego mi invitación?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">El tiempo de entrega estándar es de 24 horas hábiles desde que nos envías todos los datos del evento. En muchos casos la entregamos antes. Para eventos urgentes contáctanos y buscamos una solución.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿Cómo funciona el RSVP?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">Cada invitado puede confirmar su asistencia directamente desde la invitación con un clic. Puede indicar cuántos pases necesita y recibes todas las confirmaciones en tiempo real desde tu panel.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿Puedo solicitar cambios después de recibirla?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">Sí. Incluimos una ronda de cambios sin costo adicional. Si necesitas más modificaciones, las realizamos a un costo muy accesible según el alcance del cambio.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿Cómo comparto la invitación con mis invitados?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">Recibes un enlace único que puedes compartir por WhatsApp, Instagram, correo electrónico o cualquier red social. No requiere descargar ninguna app.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿Qué necesito para pedir mi invitación?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">Solo necesitas escribirnos por WhatsApp con: el modelo que elegiste, nombres de los protagonistas, fecha y hora del evento, lugar con dirección, una foto principal y (opcional) la canción que deseas.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false">
-          ¿Por cuánto tiempo está disponible la invitación?
-          <span class="faq-ic">+</span>
-        </button>
-        <div class="faq-body">
-          <div class="faq-ans">La invitación permanece activa por 6 meses a partir de la fecha de entrega, más que suficiente para antes, durante y después de tu evento.</div>
-        </div>
-      </div>
-
-    </div>
+    <div class="faq-list" id="faq-list"></div>
   </div>
 </section>
 
 <!-- ══════ NOSOTROS ══════ -->
 <section id="nosotros" aria-labelledby="nos-title">
-  <div class="wrap reveal" style="padding:0 1.5rem">
-    <img class="nos-logo" src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
-    <p class="eyebrow" style="text-align:center;margin-bottom:.5rem">Sobre nosotros</p>
-    <div class="orn" style="justify-content:center"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-    <h2 id="nos-title" class="h-serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--dark);text-align:center;margin-bottom:1.5rem">Creamos <em>momentos</em> que perduran</h2>
-    <p class="nos-p">Somos un equipo apasionado por los detalles y las celebraciones. Nacimos con la misión de llevar la elegancia de las invitaciones de lujo a todos los colombianos, de manera digital, accesible y sin complicaciones.</p>
-    <p class="nos-p">Cada invitación que creamos es única, diseñada con amor y pensada para que el primer contacto con tu evento sea una experiencia inolvidable para tus invitados.</p>
-    <div style="text-align:center;margin-top:2rem">
-      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-dark">📱 +57 324 271 2162</a>
+  <div class="wrap" style="text-align:center">
+    <div class="sec-head">
+      <p class="eyebrow reveal">Quiénes Somos</p>
+      <h2 id="nos-title" class="h-serif reveal d1" style="font-size:clamp(2.2rem,5vw,3.4rem)">Gueka <em>Ideas</em></h2>
+      <div class="orn reveal d1"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
     </div>
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas logo" class="nos-logo reveal" width="260"/>
+    <p class="nos-p reveal d1">Somos una empresa colombiana especializada en invitaciones digitales de alta calidad. Combinamos diseño, tecnología y creatividad para crear experiencias únicas para cada celebración.</p>
+    <p class="nos-p reveal d2">Más de 15 años de experiencia y 500 familias felices nos respaldan. Cada invitación es única y diseñada con amor para reflejar la esencia de tu evento especial.</p>
   </div>
 </section>
 
 <!-- ══════ CTA FINAL ══════ -->
-<section id="cta-final" aria-labelledby="cta-title">
+<section id="cta-final" aria-label="Llamada a acción final">
   <div class="cta-radial" aria-hidden="true"></div>
-  <div class="cta-inner reveal">
-    <p class="eyebrow">¿Listo para comenzar?</p>
-    <div class="orn" style="justify-content:center"><span class="orn-line"></span><span class="orn-star">✦</span><span class="orn-line"></span></div>
-    <h2 id="cta-title" class="cta-t">Haz tu evento <em>inolvidable</em></h2>
-    <p class="cta-sub">Únete a más de 500 familias que ya confiaron en Gueka Ideas para su invitación digital. Diseño premium, entrega en 24 horas.</p>
-    <div class="cta-btns">
+  <div class="cta-inner">
+    <p class="eyebrow reveal" style="margin-bottom:.5rem">¿Lista para brillar?</p>
+    <h2 class="cta-t reveal d1">Cuéntanos tu <em>historia</em></h2>
+    <div class="orn reveal d1" style="justify-content:center"><div class="orn-line"></div><span class="orn-star">✦</span><div class="orn-line"></div></div>
+    <p class="cta-sub reveal d2">Escríbenos por WhatsApp y te asesoramos sin compromiso. Respuesta inmediata.</p>
+    <div class="cta-btns reveal d3">
       <a href="#showcase" class="btn-g">🗂 Ver Categorías</a>
       <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="btn-wa">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
-        Pedir ahora por WhatsApp
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir por WhatsApp
       </a>
     </div>
   </div>
@@ -1611,156 +1138,325 @@ footer{background:var(--darker);border-top:1px solid rgba(197,160,89,.1);padding
 </main>
 
 <!-- ══════ FOOTER ══════ -->
-<footer>
+<footer role="contentinfo">
   <div class="foot-inner">
-
-    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo"/>
-
-    <nav class="foot-nav" aria-label="Footer">
+    <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo" width="140"/>
+    <nav class="foot-nav" aria-label="Navegación del pie de página">
+      <a href="index.html">Inicio</a>
       <a href="#showcase">Categorías</a>
+      <a href="demo.html">Demo</a>
       <a href="#features">Funciones</a>
-      <a href="#process">Proceso</a>
-      <a href="#testimonios">Testimonios</a>
       <a href="#faq">FAQ</a>
+      <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer">WhatsApp</a>
     </nav>
 
     <!-- Redes Sociales -->
     <div class="foot-social" aria-label="Redes sociales">
-
       <!-- Instagram -->
       <a href="#" target="_blank" rel="noreferrer" aria-label="Instagram">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608C4.516 2.497 5.783 2.225 7.15 2.163 8.416 2.105 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
       </a>
-
       <!-- Facebook -->
       <a href="#" target="_blank" rel="noreferrer" aria-label="Facebook">
         <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
       </a>
-
       <!-- TikTok -->
       <a href="#" target="_blank" rel="noreferrer" aria-label="TikTok">
         <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
       </a>
-
       <!-- YouTube -->
       <a href="#" target="_blank" rel="noreferrer" aria-label="YouTube">
         <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       </a>
-
     </div>
 
-    <span class="foot-copy">© <span id="yr"></span> Gueka Ideas. Todos los derechos reservados.</span>
+    <p class="foot-copy">© <span id="yr"></span> Gueka Ideas · Invitaciones Digitales Colombia</p>
 
     <!-- Links Legales -->
     <nav class="foot-legal" aria-label="Legal">
       <a href="terminos.html">Términos y Condiciones</a>
       <a href="privacidad.html">Política de Privacidad</a>
     </nav>
-
   </div>
 </footer>
 
 <script>
-/* ══════ Año dinámico ══════ */
+/* ══════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════ */
+const LOGO = 'https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44';
+
+const CATS = [
+  { slug:'boda',          label:'Matrimonio',   sub:'La celebración más especial de tu vida',     img:'https://images.unsplash.com/photo-1519741497674-611481863552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:12, names:'Valentina & Diego', date:'15 · Mar · 2025', badge:'Más popular', isNew:false },
+  { slug:'quince',        label:'15 Años',      sub:'Un momento único e irrepetible para ella',    img:'https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:10, names:'Sofía López',       date:'8 · Jun · 2025',  badge:'Quinceañera', isNew:false },
+  { slug:'bautizo',       label:'Bautizo',      sub:'Bienvenida al mundo espiritual con amor',     img:'https://images.unsplash.com/photo-1566516171511-1c411a59c8ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:8,  names:'Santiago',          date:'20 · Abr · 2025', badge:'Sagrado',     isNew:false },
+  { slug:'comunion',      label:'Comunión',     sub:'Un paso de fe que recordarás siempre',        img:'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:7,  names:'Isabella',          date:'5 · May · 2025',  badge:'Fe',          isNew:false },
+  { slug:'empresariales', label:'Empresarial',  sub:'Eventos corporativos con elegancia y clase',  img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:9,  names:'Corp Event 2025',   date:'10 · Oct · 2025', badge:'Corporativo', isNew:false },
+  { slug:'cumpleanos',    label:'Cumpleaños',   sub:'Celebra cada año con estilo y personalidad',  img:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:11, names:'María Fernanda',    date:'3 · Ago · 2025',  badge:'Fiesta',      isNew:false },
+  { slug:'graduacion',    label:'Graduación',   sub:'El comienzo de un brillante nuevo camino',    img:'https://images.unsplash.com/photo-1623461487986-9400110de28e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:8,  names:'Juan Camilo',       date:'1 · Nov · 2025',  badge:'Logro',       isNew:true  },
+  { slug:'infantil',      label:'Infantiles',   sub:'Magia, colores y alegría para los pequeños',  img:'https://images.unsplash.com/photo-1529347599731-ec02b259c9f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=700&q=80',  models:12, names:'Emilio 4 años',     date:'15 · Jul · 2025', badge:'Magia',       isNew:true  },
+];
+
+const FEATS = [
+  { ico:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',                                                                                                                                                               t:'RSVP Online',      d:'Confirmación de asistencia al instante desde cualquier dispositivo.' },
+  { ico:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',                                                                                                                          t:'Maps Integrado',   d:'Indicaciones paso a paso con Google Maps incluido en la invitación.' },
+  { ico:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',                                                   t:'Agenda Digital',   d:'Añadir al calendario con un toque — Google Calendar y Apple Calendar.' },
+  { ico:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',                                                                                                                                               t:'Cuenta Regresiva', d:'Contador animado que muestra días, horas y minutos para el evento.' },
+  { ico:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',                                                                                                                            t:'Música de Fondo',  d:'Reproduce automáticamente la canción favorita de los protagonistas.' },
+  { ico:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',                                                     t:'Panel Invitados',  d:'Gestiona las confirmaciones en tiempo real con panel privado online.' },
+  { ico:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',                                                                                           t:'Galería Fotos',    d:'Álbum digital con hasta 12 fotos personales del evento y la pareja.' },
+  { ico:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',                                                                                                                                         t:'Personalizado',    d:'Cada invitado recibe un mensaje con su nombre y número de pases.' },
+];
+
+const TESTS = [
+  { init:'L', name:'Liliana A.',  loc:'Argentina', stars:5, q:'"Excelente, novedosa, nos encantó! La tarjeta divina, súper original y completa. La atención excelente, muy atentos. Super recomendables."' },
+  { init:'D', name:'Daniela Y.',  loc:'Argentina', stars:5, q:'"Quiero agradecer por acompañarnos de manera incondicional, estuvieron pendientes de cada detalle. Sin dudas, para recomendar."' },
+  { init:'D', name:'Diego',       loc:'Uruguay',   stars:5, q:'"La invitación quedó pronta en el día! Todo excelente! Casi todos los invitados hicieron comentarios de lo buena que quedó."' },
+  { init:'Y', name:'Yanina B.',   loc:'Argentina', stars:5, q:'"Súper rápido, en menos de 24hs ya las teníamos! Hermosas! Súper recomendable para cualquier tipo de evento."' },
+  { init:'Y', name:'Ysabel C.',   loc:'Argentina', stars:5, q:'"Un trabajo muy bien hecho, responden rápido. La atención al cliente 10/10. Todos mis invitados están encantados con el resultado."' },
+  { init:'L', name:'Liseth G.',   loc:'España',    stars:5, q:'"Con tan buen gusto y sin perder detalles llevó a cabo mi sueño de la tarjeta más linda, con el fondo musical que elegí. Estoy super contenta."' },
+];
+
+const FAQS = [
+  { q:'¿Cómo contrato mi invitación?',               a:'Muy fácil: 1) Elige la categoría de tu evento. 2) Explora los diseños disponibles. 3) Escoge el plan (Classic / Premium / Deluxe). 4) Contáctanos por WhatsApp y en 24hs tienes tu invitación lista.' },
+  { q:'¿Los precios son por cantidad de invitados?',  a:'No. Los precios son por invitación. Pagas una sola vez y puedes enviarla a todos los invitados que necesites, ¡sin límites ni costos adicionales!' },
+  { q:'¿En cuánto tiempo está lista?',               a:'Las invitaciones de catálogo tardan de 1 a 2 días laborales. Los diseños completamente a medida pueden tardar de 7 a 10 días laborales.' },
+  { q:'¿Cuánto tiempo estará activo el link?',       a:'El link estará activo desde que esté lista la invitación y durante al menos 3 meses después de la fecha del evento.' },
+  { q:'¿Se pueden personalizar más?',                a:'Sí. Puedes quitar secciones sin costo adicional o agregar secciones de otros modelos. También diseñamos modelos completamente a medida.' },
+  { q:'¿Qué diferencia hay entre los planes?',       a:'Classic incluye las funciones esenciales (RSVP, Maps, galería). Premium añade música, historia, Save The Date gratis y más. Deluxe incluye todo con álbum completo, mesa asignada, Spotify y sección adicional libre.' },
+];
+
+const MARQUEE_ITEMS = ['Invitaciones Digitales','Boda','Quinceañero','Bautizo','Comunión','Graduación','Cumpleaños','Infantil','Empresarial','RSVP Online','Colombia','Diseño Exclusivo'];
+
+/* ══════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════ */
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* ══════ Navbar scroll ══════ */
+/* Navbar scroll */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive:true });
 
-/* ══════ Hamburger / Mobile menu ══════ */
-const hamburger = document.getElementById('hamburger');
-const mobMenu   = document.getElementById('mob-menu');
-hamburger.addEventListener('click', () => {
+/* Hamburger */
+const burger  = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mob-menu');
+burger.addEventListener('click', () => {
   const open = mobMenu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', open);
-  hamburger.textContent = open ? '✕' : '☰';
+  burger.textContent = open ? '✕' : '☰';
+  burger.setAttribute('aria-expanded', open);
 });
-function closeMob() {
-  mobMenu.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', false);
-  hamburger.textContent = '☰';
+function closeMob() { mobMenu.classList.remove('open'); burger.textContent = '☰'; burger.setAttribute('aria-expanded','false'); }
+
+/* Scroll reveal */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold:0.1 });
+function watchAll() { document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-s').forEach(el => ro.observe(el)); }
+watchAll();
+
+/* ══════════════════════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════════════════════ */
+const mq = document.getElementById('mq');
+const mqHtml = MARQUEE_ITEMS.map(i => `<span class="marquee-item">${i}<span class="marquee-sep">✦</span></span>`).join('');
+mq.innerHTML = mqHtml + mqHtml;
+
+/* ══════════════════════════════════════════════════════
+   SHOWCASE GRID
+══════════════════════════════════════════════════════ */
+const grid = document.getElementById('showcase-grid');
+CATS.forEach((c, i) => {
+  const card = document.createElement('a');
+  card.href = `${c.slug}.html`;
+  card.className = `phone-card reveal d${(i % 4) + 1}`;
+  card.setAttribute('role','listitem');
+  card.setAttribute('aria-label', `Categoría: ${c.label} — ${c.models} diseños`);
+  card.innerHTML = `
+    <div class="pc-bg">
+      <img src="${c.img}" alt="Invitaciones digitales de ${c.label}" loading="lazy" width="700" height="260"/>
+      <div class="pc-bg-ov" aria-hidden="true"></div>
+    </div>
+    <div class="pc-badge" aria-hidden="true">${c.badge}</div>
+    ${c.isNew ? '<div class="pc-new" aria-hidden="true">Nuevo</div>' : ''}
+    <div class="pc-phone" aria-hidden="true">
+      <div class="pcph-notch"></div>
+      <div class="pcph-screen">
+        <img src="${LOGO}" alt="" class="pcph-logo"/>
+        <div class="pcph-hr"></div>
+        <div class="pcph-names">${c.names}</div>
+        <div class="pcph-date">${c.date}</div>
+        <button class="pcph-btn" tabindex="-1">Asistir</button>
+      </div>
+      <div class="pcph-footer">guekaideas.com</div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-title">${c.label}</div>
+      <div class="pc-sub">${c.sub}</div>
+      <div class="pc-footer-row">
+        <span class="pc-models">${c.models} diseños</span>
+        <div class="pc-arrow" aria-hidden="true">→</div>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+watchAll();
+
+/* ══════════════════════════════════════════════════════
+   FEATURES
+══════════════════════════════════════════════════════ */
+const fg = document.getElementById('feat-grid');
+FEATS.forEach((f, i) => {
+  fg.innerHTML += `
+    <div class="feat-card reveal d${(i % 4) + 1}" role="listitem">
+      <div class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24">${f.ico}</svg></div>
+      <div class="feat-t">${f.t}</div>
+      <p class="feat-d">${f.d}</p>
+    </div>`;
+});
+watchAll();
+
+/* ══════════════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════════════ */
+const tg = document.getElementById('test-grid');
+TESTS.forEach((t, i) => {
+  tg.innerHTML += `
+    <article class="tcard reveal d${(i % 3) + 1}" role="listitem" aria-label="Testimonio de ${t.name}">
+      <div class="t-stars" aria-label="${t.stars} estrellas">${'★'.repeat(t.stars)}</div>
+      <blockquote class="t-quote">${t.q}</blockquote>
+      <div class="t-foot">
+        <div class="t-av" aria-hidden="true">${t.init}</div>
+        <div><div class="t-name">${t.name}</div><div class="t-loc">${t.loc}</div></div>
+      </div>
+    </article>`;
+});
+watchAll();
+
+/* ══════════════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════════════ */
+const fl = document.getElementById('faq-list');
+FAQS.forEach((f, i) => {
+  fl.innerHTML += `
+    <div class="faq-item reveal d${Math.min(i + 1, 4)}" id="fi-${i}">
+      <button class="faq-btn" data-i="${i}" aria-expanded="false" aria-controls="fa-${i}">
+        <span>${f.q}</span>
+        <div class="faq-ic" aria-hidden="true">+</div>
+      </button>
+      <div class="faq-body" id="fa-${i}" role="region">
+        <p class="faq-ans">${f.a}</p>
+      </div>
+    </div>`;
+});
+fl.addEventListener('click', e => {
+  const btn = e.target.closest('.faq-btn');
+  if (!btn) return;
+  const item = document.getElementById('fi-' + btn.dataset.i);
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => { el.classList.remove('open'); el.querySelector('.faq-btn').setAttribute('aria-expanded','false'); });
+  if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+});
+watchAll();
+
+/* ══════════════════════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════════════════════ */
+function getCD(targetDate) {
+  const diff = Math.max(0, new Date(targetDate) - Date.now());
+  return {
+    d: Math.floor(diff / 86400000),
+    h: Math.floor((diff % 86400000) / 3600000),
+    m: Math.floor((diff % 3600000)  / 60000),
+    s: Math.floor((diff % 60000)    / 1000),
+  };
+}
+function pad(n) { return String(n).padStart(2,'0'); }
+
+/* Hero countdown */
+function renderHeroCD() {
+  const el = document.getElementById('cd-hero');
+  if (!el) return;
+  const cd = getCD('2025-12-20T20:00:00');
+  el.innerHTML = `
+    <div class="cdl-unit"><span class="cdl-n">${pad(cd.d)}</span><span class="cdl-l">Días</span></div>
+    <span class="cdl-sep">:</span>
+    <div class="cdl-unit"><span class="cdl-n">${pad(cd.h)}</span><span class="cdl-l">Horas</span></div>
+    <span class="cdl-sep">:</span>
+    <div class="cdl-unit"><span class="cdl-n">${pad(cd.m)}</span><span class="cdl-l">Min</span></div>
+    <span class="cdl-sep">:</span>
+    <div class="cdl-unit"><span class="cdl-n">${pad(cd.s)}</span><span class="cdl-l">Seg</span></div>`;
 }
 
-/* ══════ Scroll reveal (IntersectionObserver) ══════ */
-const revealEls = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-s');
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      revealObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-revealEls.forEach(el => revealObs.observe(el));
+/* Phone countdown (hero) */
+function renderPhoneCD() {
+  const el = document.getElementById('cd-phone');
+  if (!el) return;
+  const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+  const now  = Date.now();
+  const next = Math.ceil(now / THREE_DAYS_MS) * THREE_DAYS_MS;
+  const cd   = getCD(new Date(next));
+  const u = (n,l) => `<div class="hps-cdu"><div class="hps-cdn">${pad(n)}</div><div class="hps-cdl">${l}</div></div>`;
+  const sep = '<span class="hps-cd-sep">:</span>';
+  el.innerHTML = u(cd.d,'días') + sep + u(cd.h,'hrs') + sep + u(cd.m,'min') + sep + u(cd.s,'seg');
+}
 
-/* ══════ Hero phone auto-scroll ══════ */
-(function() {
-  const strip    = document.getElementById('hp-strip');
-  if (!strip) return;
-  const viewport = strip.parentElement;
-  const sections = strip.querySelectorAll('.hps-section');
-  let current = 0;
+/* Phone countdown (demo section) */
+function renderPhoneCD2() {
+  const el = document.getElementById('cd-phone2');
+  if (!el) return;
+  const cd = getCD('2025-03-15T20:00:00');
+  const u = (n,l) => `<div class="cd-unit"><div class="cd-n">${pad(n)}</div><div class="cd-l">${l}</div></div>`;
+  el.innerHTML = u(cd.d,'d') + u(cd.h,'h') + u(cd.m,'m') + u(cd.s,'s');
+}
 
-  function scrollTo(i) {
-    const h = viewport.offsetHeight;
-    strip.style.transform = 'translateY(-' + (i * h) + 'px)';
-    current = i;
+renderHeroCD();
+renderPhoneCD();
+renderPhoneCD2();
+setInterval(() => { renderHeroCD(); renderPhoneCD(); renderPhoneCD2(); }, 1000);
+
+/* ══════════════════════════════════════════════════════
+   HERO PHONE — scroll vertical automático entre secciones
+══════════════════════════════════════════════════════ */
+(function () {
+  const strip    = document.getElementById('hp-scroll-strip');
+  const viewport = strip && strip.parentElement;
+  if (!strip || !viewport) return;
+
+  const SECTIONS  = strip.querySelectorAll('.hps-section');
+  const PAUSE_MS  = 2800;
+  const TOTAL     = SECTIONS.length;
+  let   current   = 0;
+
+  function setHeights() {
+    const h = viewport.clientHeight;
+    SECTIONS.forEach(s => { s.style.height = h + 'px'; });
   }
 
-  setInterval(() => {
-    const next = (current + 1) % sections.length;
-    scrollTo(next);
-  }, 2800);
-})();
-
-/* ══════ Hero countdown (demo — hacia una fecha futura) ══════ */
-(function() {
-  const target = new Date();
-  target.setDate(target.getDate() + 42);
-  target.setHours(8, 33, 0, 0);
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function tick() {
-    const diff = target - Date.now();
-    if (diff <= 0) return;
-    const d  = Math.floor(diff / 86400000);
-    const h  = Math.floor((diff % 86400000) / 3600000);
-    const m  = Math.floor((diff % 3600000)  / 60000);
-    const s  = Math.floor((diff % 60000)    / 1000);
-    const eD = document.getElementById('h-dias');
-    const eH = document.getElementById('h-hrs');
-    const eM = document.getElementById('h-min');
-    const eS = document.getElementById('h-seg');
-    if (eD) eD.textContent = pad(d);
-    if (eH) eH.textContent = pad(h);
-    if (eM) eM.textContent = pad(m);
-    if (eS) eS.textContent = pad(s);
+  function scrollTo(idx) {
+    const h = viewport.clientHeight;
+    strip.style.transform = `translateY(-${idx * h}px)`;
   }
-  tick();
-  setInterval(tick, 1000);
+
+  function next() {
+    current = (current + 1) % TOTAL;
+    scrollTo(current);
+  }
+
+  setHeights();
+  scrollTo(0);
+  setInterval(next, PAUSE_MS);
+  window.addEventListener('resize', () => { setHeights(); scrollTo(current); }, { passive: true });
 })();
 
-/* ══════ FAQ accordion ══════ */
-document.querySelectorAll('.faq-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    // close all
-    document.querySelectorAll('.faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-btn').setAttribute('aria-expanded', false);
-    });
-    // open clicked if was closed
-    if (!isOpen) {
-      item.classList.add('open');
-      btn.setAttribute('aria-expanded', true);
-    }
-  });
-});
+let rsvpCount = 120;
+const rsvpEl = document.getElementById('rsvp-count');
+if (rsvpEl) {
+  const rsvpInterval = setInterval(() => {
+    if (rsvpCount >= 148) { clearInterval(rsvpInterval); return; }
+    rsvpCount++;
+    rsvpEl.innerHTML = `${rsvpCount} <span class="rsvp-of">/ 200</span>`;
+  }, 80);
+}
 </script>
 </body>
 </html>
