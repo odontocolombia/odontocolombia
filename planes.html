@@ -508,7 +508,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 
 <!-- CHECKOUT DRAWER -->
 <div id="checkout-drawer" role="dialog" aria-modal="true" aria-label="Formulario de pedido">
-  <!-- Head -->
   <div class="drawer-head">
     <button class="drawer-close" onclick="closeDrawer()" aria-label="Cerrar">✕</button>
     <div class="dh-label">Completar pedido</div>
@@ -520,27 +519,17 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
     </div>
     <div class="dh-save" id="dh-save">50% de descuento — tiempo limitado</div>
   </div>
-  <!-- Progress -->
   <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-  <!-- Tabs -->
   <div class="drawer-tabs">
-    <button class="dtab active" data-tab="0">
-      <span class="dtab-num">1</span><span class="dtab-text">Evento</span>
-    </button>
-    <button class="dtab" data-tab="1">
-      <span class="dtab-num">2</span><span class="dtab-text">Diseño</span>
-    </button>
-    <button class="dtab" data-tab="2">
-      <span class="dtab-num">3</span><span class="dtab-text">Contacto</span>
-    </button>
+    <button class="dtab active" data-tab="0"><span class="dtab-num">1</span><span class="dtab-text">Evento</span></button>
+    <button class="dtab" data-tab="1"><span class="dtab-num">2</span><span class="dtab-text">Diseño</span></button>
+    <button class="dtab" data-tab="2"><span class="dtab-num">3</span><span class="dtab-text">Contacto</span></button>
   </div>
-  <!-- Body -->
   <div class="drawer-body">
 
-    <!-- TAB 1: EVENTO -->
+    <!-- TAB 1 -->
     <div class="tab-panel active" data-panel="0">
       <h3 class="step-title">Datos del <em>Evento</em></h3>
-
       <div class="field-row">
         <div class="field">
           <label>Nombres de los protagonistas<span class="req">*</span></label>
@@ -564,7 +553,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
           <span class="field-err" id="err-categoria">Selecciona la categoría</span>
         </div>
       </div>
-
       <div class="field-row">
         <div class="field">
           <label>Fecha del evento<span class="req">*</span></label>
@@ -576,7 +564,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
           <input type="text" id="f-lugar" placeholder="Ej: Club Campestre"/>
         </div>
       </div>
-
       <div class="field">
         <label>Modelo de invitación<span class="req">*</span></label>
         <div class="select-wrap">
@@ -598,9 +585,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
         </div>
         <span class="field-err" id="err-modelo">Selecciona un modelo</span>
       </div>
-
       <div class="field-section-divider"></div>
-
       <div class="field">
         <label>Cantidad de fotos para la galería<span class="req">*</span></label>
         <div class="photo-counter">
@@ -615,40 +600,34 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       </div>
     </div>
 
-    <!-- TAB 2: DISEÑO -->
+    <!-- TAB 2 -->
     <div class="tab-panel" data-panel="1">
       <h3 class="step-title">Personaliza tu <em>Diseño</em></h3>
-
       <div class="field">
         <label>Paleta de colores preferida</label>
         <p style="font-size:.75rem;color:rgba(29,42,68,.42);margin-bottom:.5rem">Elige el tono dominante de tu invitación</p>
         <div class="swatch-grid" id="swatch-grid"></div>
         <span class="field-hint" id="swatch-hint">Sin selección — se usan los colores del modelo</span>
       </div>
-
       <div class="field-section-divider"></div>
-
       <div class="field" id="extras-field" style="display:none">
         <label>Funciones incluidas en tu plan</label>
         <div class="extras-grid" id="extras-grid"></div>
       </div>
-
       <div class="field" id="musica-field">
         <label>Música de fondo</label>
         <input type="text" id="f-musica" placeholder="Nombre de la canción y artista"/>
         <span class="field-hint" id="musica-hint">Solo disponible en planes Premium y Deluxe</span>
       </div>
-
       <div class="field">
         <label>Notas adicionales</label>
         <textarea id="f-notas" placeholder="Detalles especiales, frases, referencias de estilo…"></textarea>
       </div>
     </div>
 
-    <!-- TAB 3: CONTACTO + RESUMEN -->
+    <!-- TAB 3 -->
     <div class="tab-panel" data-panel="2">
       <h3 class="step-title">Tus <em>Datos</em> de Contacto</h3>
-
       <div class="field-row">
         <div class="field">
           <label>Tu nombre completo<span class="req">*</span></label>
@@ -661,15 +640,13 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
           <span class="field-err" id="err-tel">Ingresa tu número</span>
         </div>
       </div>
-
       <div class="field">
         <label>Ciudad del evento</label>
         <input type="text" id="f-ciudad" placeholder="Ciudad donde se celebra el evento"/>
       </div>
-
       <div class="field-section-divider"></div>
 
-      <!-- Mini resumen dinámico -->
+      <!-- Mini resumen -->
       <div class="mini-summary" id="mini-summary">
         <div class="ms-row">
           <span class="ms-label">Plan seleccionado</span>
@@ -724,9 +701,9 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
           </div>
           <span class="terms-check-text">
             He leído y acepto los
-            <a href="terminos.html" target="_blank"><strong>Términos y Condiciones del Servicio</strong></a>
+            <a href="/terminos" target="_blank"><strong>Términos y Condiciones del Servicio</strong></a>
             y autorizo el tratamiento de mis datos personales según la
-            <a href="terminos.html" target="_blank"><strong>Política de Privacidad</strong></a>
+            <a href="/privacidad" target="_blank"><strong>Política de Privacidad</strong></a>
             de Gueka Ideas.
           </span>
         </label>
@@ -735,7 +712,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
           Debes aceptar los términos y condiciones para enviar el pedido
         </p>
       </div>
-
     </div>
 
   </div><!-- /drawer-body -->
@@ -765,23 +741,25 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 <!-- NAVBAR -->
 <header id="navbar">
   <div class="nav-inner">
-    <a href="gueka.html" class="nav-logo">
+    <a href="/index" class="nav-logo">
       <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas"/>
     </a>
     <nav class="nav-links">
-      <a href="gueka.html">Inicio</a>
-      <a href="gueka.html#showcase">Catálogo</a>
-      <a href="boda.html">Matrimonios</a>
-      <a href="demo.html">Demo</a>
+      <a href="/index">Inicio</a>
+      <a href="/catalogo">Catálogo</a>
+      <a href="/matrimonios">Matrimonios</a>
+      <a href="/demo">Demo</a>
+      <a href="/privacidad">Privacidad</a>
     </nav>
     <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" class="nav-cta desk">Solicitar →</a>
     <button class="hamburger" id="hamburger" aria-label="Menú">☰</button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="gueka.html" onclick="closeMobile()">Inicio</a>
-    <a href="gueka.html#showcase" onclick="closeMobile()">Catálogo</a>
-    <a href="boda.html" onclick="closeMobile()">Matrimonios</a>
-    <a href="demo.html" onclick="closeMobile()">Demo</a>
+    <a href="/index" onclick="closeMobile()">Inicio</a>
+    <a href="/catalogo" onclick="closeMobile()">Catálogo</a>
+    <a href="/matrimonios" onclick="closeMobile()">Matrimonios</a>
+    <a href="/demo" onclick="closeMobile()">Demo</a>
+    <a href="/privacidad" onclick="closeMobile()">Privacidad</a>
     <a href="https://wa.me/573242712162" target="_blank" rel="noreferrer" onclick="closeMobile()" class="nav-cta" style="width:fit-content">Solicitar →</a>
   </div>
 </header>
@@ -793,7 +771,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
   <div class="header-glow"></div>
   <div class="grid-bg"></div>
   <div class="header-content">
-    <a href="gueka.html#showcase" class="back-btn fade-in">← Ver Catálogo</a>
+    <a href="/catalogo" class="back-btn fade-in">← Ver Catálogo</a>
     <p class="header-label fade-in d1" id="header-categoria-label">Invitaciones Digitales</p>
     <div class="divider fade-in d1"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
     <div class="fade-in d2">
@@ -877,10 +855,12 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
   <div class="foot-inner">
     <img src="https://hercules-cdn.com/file_GksORuRQPAzOYyo4c4ClTi44" alt="Gueka Ideas" class="foot-logo"/>
     <nav class="foot-nav">
-      <a href="gueka.html">Inicio</a>
-      <a href="gueka.html#showcase">Catálogo</a>
-      <a href="boda.html">Matrimonios</a>
-      <a href="demo.html">Demo</a>
+      <a href="/index">Inicio</a>
+      <a href="/catalogo">Catálogo</a>
+      <a href="/matrimonios">Matrimonios</a>
+      <a href="/demo">Demo</a>
+      <a href="/terminos">Términos</a>
+      <a href="/privacidad">Política de Privacidad</a>
     </nav>
     <p class="foot-copy">© <span id="yr"></span> Gueka Ideas · Invitaciones Digitales</p>
   </div>
@@ -892,18 +872,15 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* ── URL PARAMS ── */
 var params    = new URLSearchParams(window.location.search);
 var CATEGORIA = params.get('categoria') || 'Matrimonio';
 var MODELO    = params.get('modelo')    || 'Cinema Boda';
 
-/* Header chip */
 var chip = document.getElementById('modelo-chip');
 document.getElementById('modelo-chip-text').textContent = MODELO + ' · ' + CATEGORIA;
 chip.style.display = 'inline-flex';
 document.getElementById('header-categoria-label').textContent = CATEGORIA + ' · Invitaciones Digitales';
 
-/* ── PLANS DATA ── */
 var PLANS_DATA = {
   classic: {
     id:'classic', name:'Classic', label:'Para comenzar',
@@ -969,43 +946,32 @@ var PLANS_DATA = {
 
 function fmt(n){ return '$' + n.toLocaleString('es-CO'); }
 
-/* ════════════════════════════════
-   DRAWER STATE
-════════════════════════════════ */
 var activePlan = null;
 var photoCount = 5;
 var selectedSwatch = null;
 var currentTab = 0;
 
-/* ── OPEN DRAWER ── */
 function openDrawer(planId) {
   activePlan = PLANS_DATA[planId];
   currentTab = 0;
   photoCount = activePlan.photosDefault;
   selectedSwatch = null;
 
-  /* highlight selected card */
   document.querySelectorAll('.plan-card').forEach(function(c){ c.classList.remove('selected-plan'); });
   var selCard = document.querySelector('.plan-card[data-plan="' + planId + '"]');
   if(selCard) selCard.classList.add('selected-plan');
 
-  /* fill drawer header */
   document.getElementById('dh-plan').innerHTML = '<em>' + activePlan.name + '</em>';
   document.getElementById('dh-meta').textContent = CATEGORIA + ' · ' + MODELO;
   document.getElementById('dh-before').textContent = fmt(activePlan.before);
   document.getElementById('dh-now').innerHTML = fmt(activePlan.price) + ' <small>COP</small>';
 
-  /* prefill categoria & modelo selects */
   setSelectValue('f-categoria', CATEGORIA);
   setSelectValue('f-modelo', MODELO);
 
-  /* photo counter */
   initPhotoCounter();
-
-  /* extras */
   initExtras();
 
-  /* music hint */
   var mHint = document.getElementById('musica-hint');
   if(activePlan.id === 'classic'){
     document.getElementById('f-musica').disabled = true;
@@ -1017,10 +983,8 @@ function openDrawer(planId) {
     mHint.textContent = 'Incluido en tu plan ' + activePlan.name;
   }
 
-  /* swatches */
   initSwatches();
 
-  /* reset terms checkbox */
   var termsInput = document.getElementById('f-terms');
   var termsWrap  = document.getElementById('terms-wrap');
   var termsErr   = document.getElementById('err-terms');
@@ -1028,13 +992,9 @@ function openDrawer(planId) {
   termsWrap.classList.remove('terms-checked','terms-error');
   termsErr.classList.remove('show');
 
-  /* clear errors */
   clearErrors();
-
-  /* render tab */
   goToTab(0);
 
-  /* open */
   document.getElementById('drawer-overlay').classList.add('open');
   document.getElementById('checkout-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1046,10 +1006,8 @@ function closeDrawer() {
   document.body.style.overflow = '';
 }
 
-/* ESC key */
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeDrawer(); });
 
-/* Terms checkbox interaction */
 document.getElementById('f-terms').addEventListener('change', function(){
   var wrap = document.getElementById('terms-wrap');
   var err  = document.getElementById('err-terms');
@@ -1062,19 +1020,18 @@ document.getElementById('f-terms').addEventListener('change', function(){
   }
 });
 
-/* ── HELPERS ── */
 function setSelectValue(id, val) {
   var el = document.getElementById(id);
   for(var i=0;i<el.options.length;i++){
     if(el.options[i].value === val){ el.selectedIndex = i; break; }
   }
 }
+
 function clearErrors() {
   document.querySelectorAll('.field input,.field select,.field textarea').forEach(function(el){ el.classList.remove('err'); });
   document.querySelectorAll('.field-err').forEach(function(el){ el.classList.remove('show'); });
 }
 
-/* ── PHOTO COUNTER ── */
 function initPhotoCounter() {
   var pcVal    = document.getElementById('pc-value');
   var pcLimits = document.getElementById('pc-limits');
@@ -1097,7 +1054,6 @@ function initPhotoCounter() {
   render();
 }
 
-/* ── SWATCHES ── */
 var SWATCHES = [
   {color:'#F5F0E8',label:'Marfil'},{color:'#1D2A44',label:'Medianoche'},
   {color:'#4A6B5D',label:'Eucalipto'},{color:'#C5A059',label:'Champagne'},
@@ -1133,7 +1089,6 @@ function initSwatches() {
   });
 }
 
-/* ── EXTRAS ── */
 function initExtras() {
   var field = document.getElementById('extras-field');
   var grid  = document.getElementById('extras-grid');
@@ -1153,7 +1108,6 @@ function initExtras() {
   });
 }
 
-/* ── MINI SUMMARY ── */
 function updateMiniSummary() {
   if(!activePlan) return;
   document.getElementById('ms-plan').textContent      = activePlan.name;
@@ -1165,14 +1119,13 @@ function updateMiniSummary() {
   var msList = document.getElementById('ms-features-list');
   msList.innerHTML = '';
   activePlan.features.forEach(function(f){
-    var chip = document.createElement('span');
-    chip.className = 'ms-feat-chip' + (f.ok ? '' : ' off');
-    chip.textContent = f.text;
-    msList.appendChild(chip);
+    var ch = document.createElement('span');
+    ch.className = 'ms-feat-chip' + (f.ok ? '' : ' off');
+    ch.textContent = f.text;
+    msList.appendChild(ch);
   });
 }
 
-/* ── TABS ── */
 function goToTab(n) {
   currentTab = Math.max(0, Math.min(2, n));
 
@@ -1187,14 +1140,12 @@ function goToTab(n) {
   });
 
   document.getElementById('progress-fill').style.width = ((currentTab+1)/3*100) + '%';
-
   document.getElementById('btn-prev').style.display      = currentTab > 0 ? 'block' : 'none';
   document.getElementById('btn-next').style.display      = currentTab < 2 ? 'flex'  : 'none';
   document.getElementById('btn-buy-final').style.display = currentTab === 2 ? 'flex' : 'none';
   document.getElementById('btn-buy-sub').style.display   = currentTab === 2 ? 'flex' : 'none';
 
   if(currentTab === 2) updateMiniSummary();
-
   document.querySelector('.drawer-body').scrollTop = 0;
 }
 
@@ -1203,7 +1154,6 @@ function goTab(dir) {
   goToTab(currentTab + dir);
 }
 
-/* ── VALIDATION ── */
 function validateTab(tab) {
   var ok = true;
   if(tab === 0){
@@ -1216,7 +1166,6 @@ function validateTab(tab) {
     ok = requireField('f-contacto','err-contacto', function(v){ return v.trim().length > 1; }) && ok;
     ok = requireField('f-tel','err-tel', function(v){ return v.trim().replace(/\D/g,'').length >= 7; }) && ok;
 
-    /* terms checkbox validation */
     var termsInput = document.getElementById('f-terms');
     var termsErr   = document.getElementById('err-terms');
     var termsWrap  = document.getElementById('terms-wrap');
@@ -1248,7 +1197,6 @@ function requireField(id, errId, test) {
   return true;
 }
 
-/* Clear err on input */
 document.querySelectorAll('.field input, .field select, .field textarea').forEach(function(el){
   ['input','change'].forEach(function(ev){
     el.addEventListener(ev, function(){
@@ -1260,7 +1208,6 @@ document.querySelectorAll('.field input, .field select, .field textarea').forEac
   });
 });
 
-/* ── BUILD WA MESSAGE ── */
 function buildWALink() {
   var nombres   = document.getElementById('f-nombres').value.trim();
   var categoria = document.getElementById('f-categoria').value;
@@ -1311,7 +1258,6 @@ function buildWALink() {
   return 'https://wa.me/573242712162?text=' + encodeURIComponent(msg);
 }
 
-/* ── BUY HANDLER ── */
 function handleBuy() {
   if(!validateTab(2)) return;
   var toast = document.getElementById('toast');
@@ -1320,7 +1266,6 @@ function handleBuy() {
   setTimeout(function(){ window.open(buildWALink(), '_blank'); }, 400);
 }
 
-/* ── RENDER PLAN CARDS ── */
 function renderPlans() {
   var grid = document.getElementById('plans-grid');
   grid.innerHTML = '';
@@ -1367,7 +1312,7 @@ function renderPlans() {
           '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
           'Seleccionar Plan ' + p.name +
         '</button>' +
-        '<a href="demo.html?plan=' + p.id + '" class="btn-demo">' +
+        '<a href="/demo?plan=' + p.id + '" class="btn-demo">' +
           '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>' +
           'Ver Demo ' + p.name +
         '</a>' +
@@ -1377,7 +1322,6 @@ function renderPlans() {
   });
 }
 
-/* ── COMPARISON TABLE ── */
 var COMP_ROWS = [
   {label:'Precio',          classic:fmt(80000),  premium:fmt(110000), deluxe:fmt(160000), type:'text'},
   {label:'Pantallas',       classic:'3',         premium:'5',         deluxe:'7',         type:'text'},
@@ -1408,7 +1352,6 @@ function renderComparison(){
   });
 }
 
-/* ── FAQ ── */
 var FAQS = [
   {q:'¿Cómo recibo la invitación?',a:'Después de elegir tu plan y enviarnos los datos, te entregamos el link personalizado en un máximo de 24 horas. Puedes compartirlo por WhatsApp, Instagram, email o cualquier otra plataforma.'},
   {q:'¿Puedo pedir cambios después de recibirla?',a:'Sí. Incluimos hasta 2 revisiones sin costo adicional para ajustar textos, fotos o colores después de la entrega.'},
@@ -1436,11 +1379,9 @@ function renderFAQ(){
   });
 }
 
-/* ── NAVBAR SCROLL ── */
 var navbar = document.getElementById('navbar');
 window.addEventListener('scroll', function(){ navbar.classList.toggle('scrolled', window.scrollY > 40); });
 
-/* ── HAMBURGER ── */
 var hamburger  = document.getElementById('hamburger');
 var mobileMenu = document.getElementById('mobile-menu');
 hamburger.addEventListener('click', function(){
@@ -1450,7 +1391,6 @@ hamburger.addEventListener('click', function(){
 });
 function closeMobile(){ mobileMenu.style.display='none'; hamburger.textContent='☰'; }
 
-/* ── SCROLL REVEAL ── */
 var obs = new IntersectionObserver(
   function(entries){
     entries.forEach(function(e){
@@ -1460,7 +1400,6 @@ var obs = new IntersectionObserver(
   {threshold:0.08}
 );
 
-/* ── INIT ── */
 renderPlans();
 renderComparison();
 renderFAQ();
