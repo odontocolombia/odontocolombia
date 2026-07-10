@@ -324,7 +324,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
             <label>Nombres de los protagonistas<span class="req">*</span></label>
             <input type="text" id="nombre_protagonistas" placeholder="Ej: Valentina &amp; Diego" autocomplete="off" required/>
           </div>
-          <div class="f-field">
+          <div class="f-field" id="bloque-categoria-formulario">
             <label>Categoría del evento<span class="req">*</span></label>
             <div class="f-select-wrap">
               <select id="categoria_evento" required>
@@ -379,7 +379,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
               </select>
             </div>
           </div>
-          <div class="f-field">
+          <div class="f-field" id="bloque-modelo-formulario">
             <label>Modelo de diseño<span class="req">*</span></label>
             <div class="f-select-wrap">
               <select id="modelo_invitacion" required>
@@ -1008,8 +1008,8 @@ function initScrollAnimations() {
    URL PARAMS — pre-selección desde catálogo
    ═══════════════════════════════════════════════════════════════ */
 function readUrlParams() {
-  const params   = new URLSearchParams(window.location.search);
-  const modelo   = params.get('modelo');
+  const params    = new URLSearchParams(window.location.search);
+  const modelo    = params.get('modelo');
   const categoria = params.get('categoria');
 
   if (modelo) {
@@ -1024,13 +1024,20 @@ function readUrlParams() {
         if (opt.value === modelo) { sel.value = modelo; break; }
       }
     }
+    // Ocultar el bloque visualmente — el valor ya quedó asignado y viaja en el submit
+    const bloque = document.getElementById('bloque-modelo-formulario');
+    if (bloque) bloque.style.display = 'none';
   }
+
   if (categoria) {
     const label = document.getElementById('header-categoria-label');
     if (label) label.textContent = categoria;
     // Pre-seleccionar categoría en el formulario
     const selCat = document.getElementById('categoria_evento');
     if (selCat) selCat.value = categoria;
+    // Ocultar el bloque visualmente — el valor ya quedó asignado y viaja en el submit
+    const bloqueCat = document.getElementById('bloque-categoria-formulario');
+    if (bloqueCat) bloqueCat.style.display = 'none';
   }
 }
 </script>
