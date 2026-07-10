@@ -361,19 +361,19 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
   </div>
   <div class="drawer-body">
 
-    <!-- TAB 1 -->
+    <!-- TAB 1: EVENTO -->
     <div class="tab-panel active" data-panel="0">
       <h3 class="step-title">Datos del <em>Evento</em></h3>
       <div class="field-row">
         <div class="field">
           <label>Nombres de los protagonistas<span class="req">*</span></label>
-          <input type="text" id="f-nombres" placeholder="Ej: Valentina &amp; Diego" autocomplete="off"/>
+          <input type="text" id="nombre_protagonistas" placeholder="Ej: Valentina &amp; Diego" autocomplete="off"/>
           <span class="field-err" id="err-nombres">Por favor ingresa los nombres</span>
         </div>
         <div class="field">
           <label>Categoría<span class="req">*</span></label>
           <div class="select-wrap">
-            <select id="f-categoria">
+            <select id="categoria_evento">
               <option value="">Seleccionar…</option>
               <option value="Matrimonio">Matrimonio</option>
               <option value="15 Años">15 Años</option>
@@ -389,19 +389,31 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       </div>
       <div class="field-row">
         <div class="field">
-          <label>Fecha del evento<span class="req">*</span></label>
-          <input type="date" id="f-fecha"/>
-          <span class="field-err" id="err-fecha">Ingresa la fecha</span>
+          <label>Fecha y hora del evento<span class="req">*</span></label>
+          <input type="datetime-local" id="fecha_evento"/>
+          <span class="field-err" id="err-fecha">Ingresa la fecha y hora</span>
         </div>
         <div class="field">
           <label>Lugar / Salón</label>
-          <input type="text" id="f-lugar" placeholder="Ej: Club Campestre"/>
+          <input type="text" id="lugar_evento" placeholder="Ej: Club Campestre"/>
         </div>
+      </div>
+      <div class="field">
+        <label>Plan seleccionado<span class="req">*</span></label>
+        <div class="select-wrap">
+          <select id="plan_seleccionado" onchange="onPlanChange()">
+            <option value="">Seleccionar plan…</option>
+            <option value="CLASSIC">CLASSIC</option>
+            <option value="PREMIUM">PREMIUM</option>
+            <option value="DELUXE">DELUXE</option>
+          </select>
+        </div>
+        <span class="field-err" id="err-plan">Selecciona un plan</span>
       </div>
       <div class="field">
         <label>Modelo de invitación<span class="req">*</span></label>
         <div class="select-wrap">
-          <select id="f-modelo">
+          <select id="modelo_invitacion">
             <option value="">Seleccionar diseño…</option>
             <option value="Cinema Boda">Cinema Boda</option>
             <option value="Jardín Romántico">Jardín Romántico</option>
@@ -423,18 +435,20 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       <div class="field">
         <label>Cantidad de fotos para la galería<span class="req">*</span></label>
         <div class="photo-counter">
-          <button class="pc-btn" id="pc-minus" type="button">−</button>
-          <span class="pc-val" id="pc-value">5</span>
-          <button class="pc-btn" id="pc-plus" type="button">+</button>
+          <button class="pc-btn" id="pc-minus" type="button" onclick="changePhoto(-1)">−</button>
+          <span class="pc-val" id="pc-value">4</span>
+          <button class="pc-btn" id="pc-plus" type="button" onclick="changePhoto(1)">+</button>
+          <input type="hidden" id="cantidad_fotos" value="4"/>
           <div class="pc-info">
             <span>fotos seleccionadas</span>
-            <span class="pc-limits" id="pc-limits">Mín. 3 · Máx. 8 para plan Classic</span>
+            <span class="pc-limits" id="pc-limits">Selecciona un plan primero</span>
           </div>
         </div>
+        <span class="field-hint" id="foto-hint"></span>
       </div>
     </div>
 
-    <!-- TAB 2 -->
+    <!-- TAB 2: DISEÑO -->
     <div class="tab-panel" data-panel="1">
       <h3 class="step-title">Personaliza tu <em>Diseño</em></h3>
       <div class="field">
@@ -459,18 +473,18 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       </div>
     </div>
 
-    <!-- TAB 3 -->
+    <!-- TAB 3: CONTACTO -->
     <div class="tab-panel" data-panel="2">
       <h3 class="step-title">Tus <em>Datos</em> de Contacto</h3>
       <div class="field-row">
         <div class="field">
           <label>Tu nombre completo<span class="req">*</span></label>
-          <input type="text" id="f-contacto" placeholder="Tu nombre"/>
+          <input type="text" id="nombre_cliente" placeholder="Tu nombre"/>
           <span class="field-err" id="err-contacto">Ingresa tu nombre</span>
         </div>
         <div class="field">
           <label>Número de WhatsApp<span class="req">*</span></label>
-          <input type="tel" id="f-tel" placeholder="+57 300 000 0000"/>
+          <input type="tel" id="whatsapp_cliente" placeholder="+57 300 000 0000"/>
           <span class="field-err" id="err-tel">Ingresa tu número</span>
         </div>
       </div>
@@ -481,12 +495,12 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       <div class="field-section-divider"></div>
 
       <div class="mini-summary">
-        <div class="ms-row"><span class="ms-label">Plan seleccionado</span><span class="ms-val" id="ms-plan">Classic</span></div>
+        <div class="ms-row"><span class="ms-label">Plan seleccionado</span><span class="ms-val" id="ms-plan">—</span></div>
         <div class="ms-row"><span class="ms-label">Modelo</span><span class="ms-val" id="ms-modelo">—</span></div>
         <div class="ms-row"><span class="ms-label">Categoría</span><span class="ms-val" id="ms-categoria">—</span></div>
-        <div class="ms-row"><span class="ms-label">Fotos en galería</span><span class="ms-val" id="ms-fotos">5 fotos</span></div>
+        <div class="ms-row"><span class="ms-label">Fotos en galería</span><span class="ms-val" id="ms-fotos">—</span></div>
         <div class="ms-divider"></div>
-        <div class="ms-row"><span class="ms-label">Total</span><span class="ms-price" id="ms-precio-val">$80.000 COP</span></div>
+        <div class="ms-row"><span class="ms-label">Total</span><span class="ms-price" id="ms-precio-val">—</span></div>
         <div style="margin-top:.75rem">
           <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(29,42,68,.3);margin-bottom:.5rem">Funciones incluidas</div>
           <div class="ms-features-list" id="ms-features-list"></div>
@@ -666,411 +680,629 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       <a href="index.html#showcase">Inicio</a>
       <a href="index.html#showcase">Catálogo</a>
       <a href="demo.html">Demo</a>
-      <a href="terminos.html">Términos & Privacidad</a>
+      <a href="terminos.html">Términos &amp; Privacidad</a>
     </nav>
-    <p class="foot-copy">© <span id="yr"></span> Gueka Ideas · Invitaciones Digitales</p>
+    <p class="foot-copy">© 2025 Gueka Ideas · Todos los derechos reservados</p>
   </div>
 </footer>
 
-<!-- JAVASCRIPT -->
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN GLOBAL
+   ► Reemplaza la URL con la de tu Google Apps Script desplegado
+   ═══════════════════════════════════════════════════════════════ */
+const URL_WEB_API_GOOGLE = 'https://script.google.com/macros/s/AKfycbxdbML-0c5dg4F2BpXVKTqWCRfHacF_SdoCPxOP-YNSLlWRVKnVSUHnE4LlMYVseEr5AA/exec';
 
-var params    = new URLSearchParams(window.location.search);
-var CATEGORIA = params.get('categoria') || 'Matrimonio';
-var MODELO    = params.get('modelo')    || 'Cinema Boda';
+/* Número comercial WhatsApp (formato internacional sin +) */
+const WA_NUMERO = '573242712162';
 
-var chip = document.getElementById('modelo-chip');
-document.getElementById('modelo-chip-text').textContent = MODELO + ' · ' + CATEGORIA;
-chip.style.display = 'inline-flex';
-document.getElementById('header-categoria-label').textContent = CATEGORIA + ' · Invitaciones Digitales';
-
-var PLANS_DATA = {
-  classic:{
-    id:'classic',name:'Classic',label:'Para comenzar',
-    price:80000,before:160000,featured:false,badge:null,
-    photosMin:3,photosMax:8,photosDefault:5,
-    screens:['Portada','Galería','RSVP'],
-    features:[
-      {text:'Portada cinematográfica',ok:true},
-      {text:'Cuenta regresiva animada',ok:true},
-      {text:'Galería de fotos (hasta 8)',ok:true},
-      {text:'RSVP + Maps + Agenda',ok:true},
-      {text:'Link personalizado',ok:true},
-      {text:'Música de fondo',ok:false},
-      {text:'RSVP avanzado con datos',ok:false},
-      {text:'Itinerario del evento',ok:false},
-      {text:'Mesa asignada',ok:false},
-      {text:'Playlist Spotify',ok:false}
+/* ═══════════════════════════════════════════════════════════════
+   DATOS DE PLANES
+   ═══════════════════════════════════════════════════════════════ */
+const PLANES = {
+  CLASSIC: {
+    nombre: 'Classic',
+    precioAntes: '$160.000',
+    precioAhora: '$80.000',
+    maxFotos: 4,
+    minFotos: 1,
+    screens: ['Portada','Galería','Detalles','Cuenta Regresiva'],
+    features: [
+      { label:'Portada animada', ok:true },
+      { label:'Galería de fotos (máx. 4)', ok:true },
+      { label:'Cuenta regresiva', ok:true },
+      { label:'Detalles del evento', ok:true },
+      { label:'Música de fondo', ok:false },
+      { label:'Confirmación de asistencia (RSVP)', ok:false },
+      { label:'Mesa de regalos', ok:false },
     ],
-    extras:[]
+    badge: null,
+    featured: false,
+    precio: '$80.000 COP',
   },
-  premium:{
-    id:'premium',name:'Premium',label:'El más elegido',
-    price:110000,before:220000,featured:true,badge:'⭐ Más Popular',
-    photosMin:5,photosMax:15,photosDefault:10,
-    screens:['Portada','Música','Galería','RSVP','Itinerario'],
-    features:[
-      {text:'Portada cinematográfica',ok:true},
-      {text:'Cuenta regresiva animada',ok:true},
-      {text:'Galería de fotos (hasta 15)',ok:true},
-      {text:'RSVP + Maps + Agenda',ok:true},
-      {text:'Link personalizado',ok:true},
-      {text:'Música de fondo',ok:true},
-      {text:'RSVP avanzado con datos',ok:true},
-      {text:'Itinerario del evento',ok:true},
-      {text:'Mesa asignada',ok:false},
-      {text:'Playlist Spotify',ok:false}
+  PREMIUM: {
+    nombre: 'Premium',
+    precioAntes: '$280.000',
+    precioAhora: '$140.000',
+    maxFotos: 8,
+    minFotos: 1,
+    screens: ['Portada','Galería','RSVP','Música','Detalles','Cuenta Regresiva'],
+    features: [
+      { label:'Portada animada', ok:true },
+      { label:'Galería de fotos (máx. 8)', ok:true },
+      { label:'Cuenta regresiva', ok:true },
+      { label:'Detalles del evento', ok:true },
+      { label:'Música de fondo', ok:true },
+      { label:'Confirmación de asistencia (RSVP)', ok:true },
+      { label:'Mesa de regalos', ok:false },
     ],
-    extras:['Música de fondo','RSVP avanzado','Itinerario del evento']
+    badge: 'Más popular',
+    featured: true,
+    precio: '$140.000 COP',
   },
-  deluxe:{
-    id:'deluxe',name:'Deluxe',label:'Experiencia completa',
-    price:160000,before:320000,featured:false,badge:'✦ Todo incluido',
-    photosMin:8,photosMax:25,photosDefault:15,
-    screens:['Portada','Música','Galería','Mesa','RSVP','Itinerario','Playlist'],
-    features:[
-      {text:'Portada cinematográfica',ok:true},
-      {text:'Cuenta regresiva animada',ok:true},
-      {text:'Galería de fotos (hasta 25)',ok:true},
-      {text:'RSVP + Maps + Agenda',ok:true},
-      {text:'Link personalizado',ok:true},
-      {text:'Música de fondo',ok:true},
-      {text:'RSVP avanzado con datos',ok:true},
-      {text:'Itinerario del evento',ok:true},
-      {text:'Mesa asignada',ok:true},
-      {text:'Playlist Spotify',ok:true}
+  DELUXE: {
+    nombre: 'Deluxe',
+    precioAntes: '$400.000',
+    precioAhora: '$200.000',
+    maxFotos: 12,
+    minFotos: 1,
+    screens: ['Portada','Galería','RSVP','Música','Mesa de Regalos','Video','Detalles','Mapa'],
+    features: [
+      { label:'Portada animada', ok:true },
+      { label:'Galería de fotos (máx. 12)', ok:true },
+      { label:'Cuenta regresiva', ok:true },
+      { label:'Detalles del evento', ok:true },
+      { label:'Música de fondo', ok:true },
+      { label:'Confirmación de asistencia (RSVP)', ok:true },
+      { label:'Mesa de regalos', ok:true },
     ],
-    extras:['Música de fondo','RSVP avanzado','Itinerario del evento','Mesa asignada','Playlist Spotify']
+    badge: 'Todo incluido',
+    featured: false,
+    precio: '$200.000 COP',
   }
 };
 
-function fmt(n){ return '$' + n.toLocaleString('es-CO'); }
+const COMP_ROWS = [
+  { label:'Portada animada',       c:true,  p:true,  d:true  },
+  { label:'Galería de fotos',      c:'4',   p:'8',   d:'12'  },
+  { label:'Cuenta regresiva',      c:true,  p:true,  d:true  },
+  { label:'Detalles del evento',   c:true,  p:true,  d:true  },
+  { label:'Música de fondo',       c:false, p:true,  d:true  },
+  { label:'RSVP / Confirmación',   c:false, p:true,  d:true  },
+  { label:'Mesa de regalos',       c:false, p:false, d:true  },
+  { label:'Video de bienvenida',   c:false, p:false, d:true  },
+];
 
-var activePlan=null, photoCount=5, selectedSwatch=null, currentTab=0;
+const FAQS = [
+  { q:'¿Cuánto demora la entrega?', a:'Tu invitación digital estará lista en máximo 24 horas hábiles después de recibir toda la información y los materiales.' },
+  { q:'¿Cómo hago el pago?', a:'El pago se realiza una vez revises y apruebes la primera versión de tu invitación. Aceptamos transferencias bancarias y pagos por PSE, Nequi o Daviplata.' },
+  { q:'¿Puedo solicitar cambios?', a:'¡Claro! Todos los planes incluyen 2 rondas de revisión. Cambios adicionales tienen un costo extra.' },
+  { q:'¿Cómo comparto la invitación?', a:'Te entregamos un enlace único que puedes compartir por WhatsApp, redes sociales o correo electrónico.' },
+  { q:'¿Qué pasa si necesito más fotos?', a:'Puedes agregar fotos adicionales por un valor extra. Consúltanos por WhatsApp para conocer la tarifa.' },
+];
 
-function openDrawer(planId){
-  activePlan=PLANS_DATA[planId]; currentTab=0; photoCount=activePlan.photosDefault; selectedSwatch=null;
-  document.querySelectorAll('.plan-card').forEach(function(c){ c.classList.remove('selected-plan'); });
-  var sc=document.querySelector('.plan-card[data-plan="'+planId+'"]');
-  if(sc) sc.classList.add('selected-plan');
-  document.getElementById('dh-plan').innerHTML='<em>'+activePlan.name+'</em>';
-  document.getElementById('dh-meta').textContent=CATEGORIA+' · '+MODELO;
-  document.getElementById('dh-before').textContent=fmt(activePlan.before);
-  document.getElementById('dh-now').innerHTML=fmt(activePlan.price)+' <small>COP</small>';
-  setSelectValue('f-categoria',CATEGORIA); setSelectValue('f-modelo',MODELO);
-  initPhotoCounter(); initExtras();
-  var mHint=document.getElementById('musica-hint');
-  if(activePlan.id==='classic'){
-    document.getElementById('f-musica').disabled=true;
-    document.getElementById('f-musica').placeholder='No disponible en plan Classic';
-    mHint.textContent='Solo disponible en planes Premium y Deluxe';
-  } else {
-    document.getElementById('f-musica').disabled=false;
-    document.getElementById('f-musica').placeholder='Ej: Perfect – Ed Sheeran';
-    mHint.textContent='Incluido en tu plan '+activePlan.name;
-  }
-  initSwatches();
-  var ti=document.getElementById('f-terms'),tw=document.getElementById('terms-wrap'),te=document.getElementById('err-terms');
-  ti.checked=false; tw.classList.remove('terms-checked','terms-error'); te.classList.remove('show');
-  clearErrors(); goToTab(0);
-  document.getElementById('drawer-overlay').classList.add('open');
-  document.getElementById('checkout-drawer').classList.add('open');
-  document.body.style.overflow='hidden';
-}
+const SWATCHES = [
+  { color:'#C5A059', label:'Dorado' },
+  { color:'#4A6B5D', label:'Eucalipto' },
+  { color:'#1D2A44', label:'Medianoche' },
+  { color:'#E8D5B7', label:'Crema' },
+  { color:'#C4736A', label:'Terracota' },
+  { color:'#8B6FAE', label:'Lavanda' },
+  { color:'#5B8DB8', label:'Azul Sereno' },
+  { color:'#D4756B', label:'Rosa Polvos' },
+  { color:'#6B8C6B', label:'Sage' },
+  { color:'#2C2C2C', label:'Negro' },
+];
 
-function closeDrawer(){
-  document.getElementById('drawer-overlay').classList.remove('open');
-  document.getElementById('checkout-drawer').classList.remove('open');
-  document.body.style.overflow='';
-}
+/* ═══════════════════════════════════════════════════════════════
+   ESTADO
+   ═══════════════════════════════════════════════════════════════ */
+let currentTab = 0;
+let selectedPlan = null;
+let photoCount = 4;
+let selectedSwatch = null;
 
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeDrawer(); });
-
-document.getElementById('f-terms').addEventListener('change',function(){
-  var w=document.getElementById('terms-wrap'),e=document.getElementById('err-terms');
-  if(this.checked){ w.classList.add('terms-checked'); w.classList.remove('terms-error'); e.classList.remove('show'); }
-  else { w.classList.remove('terms-checked'); }
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  buildPlans();
+  buildCompTable();
+  buildFaq();
+  buildSwatches();
+  initScrollAnimations();
+  initNavbar();
+  initTermsToggle();
+  updatePhotoUI();
 });
 
-function setSelectValue(id,val){
-  var el=document.getElementById(id);
-  for(var i=0;i<el.options.length;i++){ if(el.options[i].value===val){ el.selectedIndex=i; break; } }
-}
-function clearErrors(){
-  document.querySelectorAll('.field input,.field select,.field textarea').forEach(function(el){ el.classList.remove('err'); });
-  document.querySelectorAll('.field-err').forEach(function(el){ el.classList.remove('show'); });
-}
-
-function initPhotoCounter(){
-  var pcVal=document.getElementById('pc-value'),pcLimits=document.getElementById('pc-limits');
-  var minus=document.getElementById('pc-minus'),plus=document.getElementById('pc-plus');
-  function render(){
-    pcVal.textContent=photoCount;
-    pcLimits.textContent='Mín. '+activePlan.photosMin+' · Máx. '+activePlan.photosMax+' para plan '+activePlan.name;
-    minus.disabled=photoCount<=activePlan.photosMin; plus.disabled=photoCount>=activePlan.photosMax;
-  }
-  var nm=minus.cloneNode(true),np=plus.cloneNode(true);
-  minus.parentNode.replaceChild(nm,minus); plus.parentNode.replaceChild(np,plus);
-  nm.addEventListener('click',function(){ if(photoCount>activePlan.photosMin){ photoCount--; render(); updateMiniSummary(); }});
-  np.addEventListener('click',function(){ if(photoCount<activePlan.photosMax){ photoCount++; render(); updateMiniSummary(); }});
-  render();
-}
-
-var SWATCHES=[
-  {color:'#F5F0E8',label:'Marfil'},{color:'#1D2A44',label:'Medianoche'},
-  {color:'#4A6B5D',label:'Eucalipto'},{color:'#C5A059',label:'Champagne'},
-  {color:'#D4AF37',label:'Oro'},{color:'#8B1A4A',label:'Vino'},
-  {color:'#2C5F8A',label:'Zafiro'},{color:'#3D2B1F',label:'Espresso'},
-  {color:'#E8D5C4',label:'Durazno'},{color:'#4A4A4A',label:'Carbón'}
-];
-function initSwatches(){
-  selectedSwatch=null;
-  var grid=document.getElementById('swatch-grid'); grid.innerHTML='';
-  document.getElementById('swatch-hint').textContent='Sin selección — se usan los colores del modelo';
-  SWATCHES.forEach(function(s){
-    var el=document.createElement('div');
-    el.className='swatch'; el.style.background=s.color; el.title=s.label;
-    if(['#F5F0E8','#E8D5C4','#D4AF37'].includes(s.color)) el.style.border='2px solid rgba(29,42,68,.15)';
-    el.addEventListener('click',function(){
-      document.querySelectorAll('.swatch').forEach(function(sw){ sw.classList.remove('selected'); });
-      if(selectedSwatch===s.label){ selectedSwatch=null; document.getElementById('swatch-hint').textContent='Sin selección — se usan los colores del modelo'; }
-      else { el.classList.add('selected'); selectedSwatch=s.label; document.getElementById('swatch-hint').textContent='Color: '+s.label; }
-    });
-    grid.appendChild(el);
-  });
+/* ═══════════════════════════════════════════════════════════════
+   BUILD PLAN CARDS
+   ═══════════════════════════════════════════════════════════════ */
+function buildPlans() {
+  const grid = document.getElementById('plans-grid');
+  grid.innerHTML = Object.entries(PLANES).map(([key, p]) => `
+    <div class="plan-card${p.featured?' featured':''} fade-in" id="card-${key}">
+      <div class="plan-header">
+        ${p.badge ? `<span class="plan-badge">${p.badge}</span>` : ''}
+        <div class="plan-name">Plan</div>
+        <div class="plan-title">${p.nombre}</div>
+        <div class="price-row">
+          <span class="price-before">${p.precioAntes}</span>
+          <span class="price-now">${p.precioAhora} <small>COP</small></span>
+        </div>
+        <div class="price-save">Ahorra 50% hoy</div>
+      </div>
+      <div class="plan-screens">
+        <div class="screens-label">Pantallas incluidas</div>
+        <div class="screens-row">${p.screens.map(s=>`<span class="screen-chip active">${s}</span>`).join('')}</div>
+      </div>
+      <div class="plan-features">
+        <div class="features-label">Características</div>
+        <div class="feature-list">${p.features.map(f=>`
+          <div class="feature-item ${f.ok?'included':'excluded'}">
+            <svg class="feat-icon ${f.ok?'ok':'no'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              ${f.ok ? '<polyline points="20 6 9 17 4 12"/>' : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'}
+            </svg>${f.label}
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="plan-footer">
+        <button class="btn-select btn-select-${p.featured?'gold':'outline'}" onclick="openDrawer('${key}')">
+          Elegir ${p.nombre}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>`).join('');
 }
 
-function initExtras(){
-  var field=document.getElementById('extras-field'),grid=document.getElementById('extras-grid');
-  if(!activePlan.extras.length){ field.style.display='none'; return; }
-  field.style.display='block'; grid.innerHTML='';
-  activePlan.extras.forEach(function(ex){
-    var el=document.createElement('div'); el.className='extra-item included';
-    el.innerHTML='<div class="extra-cb-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="extra-label">'+ex+'</span><span class="extra-tag">Incluido</span>';
-    grid.appendChild(el);
-  });
-}
-
-function updateMiniSummary(){
-  if(!activePlan) return;
-  document.getElementById('ms-plan').textContent=activePlan.name;
-  document.getElementById('ms-precio-val').textContent=fmt(activePlan.price)+' COP';
-  document.getElementById('ms-modelo').textContent=document.getElementById('f-modelo').value||MODELO;
-  document.getElementById('ms-categoria').textContent=document.getElementById('f-categoria').value||CATEGORIA;
-  document.getElementById('ms-fotos').textContent=photoCount+' fotos (máx. '+activePlan.photosMax+')';
-  var ml=document.getElementById('ms-features-list'); ml.innerHTML='';
-  activePlan.features.forEach(function(f){
-    var ch=document.createElement('span');
-    ch.className='ms-feat-chip'+(f.ok?'':' off'); ch.textContent=f.text; ml.appendChild(ch);
-  });
-}
-
-function goToTab(n){
-  currentTab=Math.max(0,Math.min(2,n));
-  document.querySelectorAll('.tab-panel').forEach(function(p,i){ p.classList.toggle('active',i===currentTab); });
-  document.querySelectorAll('.dtab').forEach(function(t,i){
-    t.classList.remove('active','done');
-    if(i===currentTab) t.classList.add('active');
-    else if(i<currentTab) t.classList.add('done');
-  });
-  document.getElementById('progress-fill').style.width=((currentTab+1)/3*100)+'%';
-  document.getElementById('btn-prev').style.display=currentTab>0?'block':'none';
-  document.getElementById('btn-next').style.display=currentTab<2?'flex':'none';
-  document.getElementById('btn-buy-final').style.display=currentTab===2?'flex':'none';
-  document.getElementById('btn-buy-sub').style.display=currentTab===2?'flex':'none';
-  if(currentTab===2) updateMiniSummary();
-  document.querySelector('.drawer-body').scrollTop=0;
-}
-
-function goTab(dir){
-  if(dir>0 && !validateTab(currentTab)) return;
-  goToTab(currentTab+dir);
-}
-
-function validateTab(tab){
-  var ok=true;
-  if(tab===0){
-    ok=requireField('f-nombres','err-nombres',function(v){ return v.trim().length>1; })&&ok;
-    ok=requireField('f-categoria','err-categoria',function(v){ return v!==''; })&&ok;
-    ok=requireField('f-fecha','err-fecha',function(v){ return v!==''; })&&ok;
-    ok=requireField('f-modelo','err-modelo',function(v){ return v!==''; })&&ok;
-  }
-  if(tab===2){
-    ok=requireField('f-contacto','err-contacto',function(v){ return v.trim().length>1; })&&ok;
-    ok=requireField('f-tel','err-tel',function(v){ return v.trim().replace(/\D/g,'').length>=7; })&&ok;
-    var ti=document.getElementById('f-terms'),te=document.getElementById('err-terms'),tw=document.getElementById('terms-wrap');
-    if(!ti.checked){ tw.classList.add('terms-error'); te.classList.add('show'); if(ok) tw.scrollIntoView({behavior:'smooth',block:'center'}); ok=false; }
-    else { tw.classList.remove('terms-error'); te.classList.remove('show'); }
-  }
-  return ok;
-}
-
-function requireField(id,errId,test){
-  var el=document.getElementById(id),err=document.getElementById(errId),val=el.value;
-  if(!test(val)){ el.classList.add('err'); err.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'center'}); return false; }
-  el.classList.remove('err'); err.classList.remove('show'); return true;
-}
-
-document.querySelectorAll('.field input,.field select,.field textarea').forEach(function(el){
-  ['input','change'].forEach(function(ev){
-    el.addEventListener(ev,function(){
-      el.classList.remove('err');
-      var errEl=document.getElementById('err-'+el.id.replace('f-',''));
-      if(errEl) errEl.classList.remove('show');
-    });
-  });
-});
-
-function buildWALink(){
-  var nombres=document.getElementById('f-nombres').value.trim();
-  var categoria=document.getElementById('f-categoria').value;
-  var fecha=document.getElementById('f-fecha').value;
-  var lugar=document.getElementById('f-lugar').value.trim();
-  var modelo=document.getElementById('f-modelo').value;
-  var musica=document.getElementById('f-musica').value.trim();
-  var notas=document.getElementById('f-notas').value.trim();
-  var contacto=document.getElementById('f-contacto').value.trim();
-  var tel=document.getElementById('f-tel').value.trim();
-  var ciudad=document.getElementById('f-ciudad').value.trim();
-  var fechaFmt=fecha;
-  if(fecha){ var d=new Date(fecha+'T00:00:00'); fechaFmt=d.toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'}); }
-  var msg=
-    '¡Hola! Quiero realizar mi pedido de invitación digital 🎉\n\n'+
-    '━━━━━━━━━━━━━━━━━━━━━━\n📋 DETALLES DEL PEDIDO\n━━━━━━━━━━━━━━━━━━━━━━\n'+
-    '• Plan seleccionado: '+activePlan.name+' ('+fmt(activePlan.price)+' COP)\n'+
-    '• Categoría: '+categoria+'\n• Modelo: '+modelo+'\n\n'+
-    '🎊 DATOS DEL EVENTO\n━━━━━━━━━━━━━━━━━━━━━━\n'+
-    '• Nombre(s): '+nombres+'\n• Fecha: '+fechaFmt+'\n'+
-    (lugar?'• Lugar / Salón: '+lugar+'\n':'')+(ciudad?'• Ciudad: '+ciudad+'\n':'')+'\n'+
-    '📸 GALERÍA\n━━━━━━━━━━━━━━━━━━━━━━\n'+
-    '• Cantidad de fotos: '+photoCount+' (máx. '+activePlan.photosMax+' en plan '+activePlan.name+')\n\n'+
-    '🎨 PERSONALIZACIÓN\n━━━━━━━━━━━━━━━━━━━━━━\n'+
-    '• Color preferido: '+(selectedSwatch||'Sin preferencia')+'\n'+
-    (musica?'• Música de fondo: '+musica+'\n':'')+(notas?'• Notas: '+notas+'\n':'')+'\n'+
-    '👤 DATOS DE CONTACTO\n━━━━━━━━━━━━━━━━━━━━━━\n'+
-    '• Nombre: '+contacto+'\n• WhatsApp: '+tel+'\n\n'+
-    '✅ Términos y condiciones aceptados\n\n'+
-    '¿Cuáles son los siguientes pasos para confirmar mi pedido?';
-  return 'https://wa.me/573242712162?text='+encodeURIComponent(msg);
-}
-
-function handleBuy(){
-  if(!validateTab(2)) return;
-  var toast=document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(function(){ toast.classList.remove('show'); },3500);
-  setTimeout(function(){ window.open(buildWALink(),'_blank'); },400);
-}
-
-function renderPlans(){
-  var grid=document.getElementById('plans-grid'); grid.innerHTML='';
-  Object.values(PLANS_DATA).forEach(function(p,i){
-    var save=Math.round((1-p.price/p.before)*100),delay=['d1','d2','d3'][i];
-    var card=document.createElement('div');
-    card.className='plan-card fade-in '+delay+(p.featured?' featured':'');
-    card.dataset.plan=p.id;
-    card.innerHTML=
-      '<div class="plan-header">'+
-        (p.badge?'<span class="plan-badge">'+p.badge+'</span>':'')+
-        '<div class="plan-name">'+p.label+'</div>'+
-        '<div class="plan-title"><em>'+p.name+'</em></div>'+
-        '<div class="price-row"><span class="price-before">'+fmt(p.before)+'</span><span class="price-now">'+fmt(p.price)+' <small>COP</small></span></div>'+
-        '<div class="price-save">Ahorras '+save+'% · Pago único</div>'+
-      '</div>'+
-      '<div class="plan-screens"><div class="screens-label">Pantallas incluidas</div><div class="screens-row">'+
-        p.screens.map(function(s){ return '<span class="screen-chip active">'+s+'</span>'; }).join('')+
-      '</div></div>'+
-      '<div class="plan-features"><div class="features-label">Funciones</div><div class="feature-list">'+
-        p.features.map(function(f){
-          return '<div class="feature-item '+(f.ok?'included':'excluded')+'">'+
-            '<svg class="feat-icon '+(f.ok?'ok':'no')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
-              (f.ok?'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>':'<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>')+
-            '</svg><span>'+f.text+'</span></div>';
-        }).join('')+
-      '</div></div>'+
-      '<div class="plan-footer">'+
-        '<button onclick="openDrawer(\''+p.id+'\')" class="btn-select '+(p.featured?'btn-select-gold':'btn-select-outline')+'">'+
-          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'+
-          'Seleccionar Plan '+p.name+
-        '</button>'+
-        '<a href="demo.html?plan='+p.id+'" class="btn-demo">'+
-          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>'+
-          'Ver Demo '+p.name+
-        '</a>'+
-        '<a href="https://wa.me/573242712162?text='+encodeURIComponent('¡Hola! Tengo dudas sobre el plan '+p.name+'. ¿Me pueden ayudar?')+'" target="_blank" rel="noreferrer" class="wa-link">¿Tienes dudas? Escríbenos →</a>'+
-      '</div>';
-    grid.appendChild(card);
-  });
-}
-
-var COMP_ROWS=[
-  {label:'Precio',classic:fmt(80000),premium:fmt(110000),deluxe:fmt(160000),type:'text'},
-  {label:'Pantallas',classic:'3',premium:'5',deluxe:'7',type:'text'},
-  {label:'Portada cinematográfica',classic:true,premium:true,deluxe:true,type:'bool'},
-  {label:'Cuenta regresiva',classic:true,premium:true,deluxe:true,type:'bool'},
-  {label:'RSVP + Maps + Agenda',classic:true,premium:true,deluxe:true,type:'bool'},
-  {label:'Galería de fotos',classic:true,premium:true,deluxe:true,type:'bool'},
-  {label:'Música de fondo',classic:false,premium:true,deluxe:true,type:'bool'},
-  {label:'RSVP avanzado',classic:false,premium:true,deluxe:true,type:'bool'},
-  {label:'Itinerario del evento',classic:false,premium:true,deluxe:true,type:'bool'},
-  {label:'Mesa asignada',classic:false,premium:false,deluxe:true,type:'bool'},
-  {label:'Playlist Spotify',classic:false,premium:false,deluxe:true,type:'bool'},
-  {label:'Link personalizado',classic:true,premium:true,deluxe:true,type:'bool'},
-  {label:'Entrega',classic:'24hs',premium:'24hs',deluxe:'24hs',type:'text'}
-];
-
-function renderComparison(){
-  var tbody=document.getElementById('comp-body');
-  COMP_ROWS.forEach(function(r){
-    var tr=document.createElement('tr');
-    function cell(val,type){ return type==='bool'?(val?'<td class="yes">✓</td>':'<td class="no">–</td>'):'<td>'+val+'</td>'; }
-    tr.innerHTML='<td>'+r.label+'</td>'+cell(r.classic,r.type)+cell(r.premium,r.type)+cell(r.deluxe,r.type);
-    tbody.appendChild(tr);
-  });
-}
-
-var FAQS=[
-  {q:'¿Cómo recibo la invitación?',a:'Después de elegir tu plan y enviarnos los datos, te entregamos el link personalizado en un máximo de 24 horas. Puedes compartirlo por WhatsApp, Instagram, email o cualquier otra plataforma.'},
-  {q:'¿Puedo pedir cambios después de recibirla?',a:'Sí. Incluimos hasta 2 revisiones sin costo adicional para ajustar textos, fotos o colores después de la entrega.'},
-  {q:'¿Cuánto tiempo estará activa la invitación?',a:'La invitación permanece activa desde que la entregas y por al menos 3 meses después de la fecha del evento.'},
-  {q:'¿Hay límite de invitados?',a:'No. Puedes compartir el link con todos los invitados que necesites, sin ningún costo adicional.'},
-  {q:'¿Qué información necesitan para personalizarla?',a:'Nombres de los novios, fecha y lugar del evento, fotos, colores preferidos y cualquier detalle especial. Te enviamos un formulario guía para completar todo fácilmente.'},
-  {q:'¿Cuáles son los métodos de pago?',a:'Aceptamos transferencia bancaria, Nequi, Daviplata y efectivo. El pago se realiza antes de iniciar el diseño.'}
-];
-
-function renderFAQ(){
-  var list=document.getElementById('faq-list');
-  list.innerHTML=FAQS.map(function(f,i){
-    return '<div class="faq-item" id="fi-'+i+'">'+
-      '<button class="faq-btn" data-i="'+i+'"><span>'+f.q+'</span><span class="faq-arrow">▾</span></button>'+
-      '<div class="faq-body"><p class="faq-answer">'+f.a+'</p></div></div>';
+/* ═══════════════════════════════════════════════════════════════
+   BUILD COMPARISON TABLE
+   ═══════════════════════════════════════════════════════════════ */
+function buildCompTable() {
+  const tbody = document.getElementById('comp-body');
+  tbody.innerHTML = COMP_ROWS.map(r => {
+    const cell = v => {
+      if (v === true) return '<td class="yes">✓</td>';
+      if (v === false) return '<td class="no">—</td>';
+      return `<td>${v}</td>`;
+    };
+    return `<tr><td>${r.label}</td>${cell(r.c)}${cell(r.p)}${cell(r.d)}</tr>`;
   }).join('');
-  list.addEventListener('click',function(e){
-    var btn=e.target.closest('.faq-btn'); if(!btn) return;
-    var item=document.getElementById('fi-'+btn.dataset.i),wasOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
-    if(!wasOpen) item.classList.add('open');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD FAQ
+   ═══════════════════════════════════════════════════════════════ */
+function buildFaq() {
+  const list = document.getElementById('faq-list');
+  list.innerHTML = FAQS.map((f,i) => `
+    <div class="faq-item" id="faq-${i}">
+      <button class="faq-btn" onclick="toggleFaq(${i})">
+        ${f.q}
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-answer">${f.a}</div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleFaq(i) {
+  const item = document.getElementById('faq-'+i);
+  item.classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD SWATCHES
+   ═══════════════════════════════════════════════════════════════ */
+function buildSwatches() {
+  const grid = document.getElementById('swatch-grid');
+  grid.innerHTML = SWATCHES.map((s,i) => `
+    <div class="swatch" style="background:${s.color}" title="${s.label}" onclick="selectSwatch(${i})" id="swatch-${i}"></div>`).join('');
+}
+
+function selectSwatch(i) {
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+  document.getElementById('swatch-'+i).classList.add('selected');
+  selectedSwatch = SWATCHES[i].label;
+  document.getElementById('swatch-hint').textContent = 'Seleccionado: ' + SWATCHES[i].label;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DRAWER
+   ═══════════════════════════════════════════════════════════════ */
+function openDrawer(planKey) {
+  selectedPlan = planKey;
+  const p = PLANES[planKey];
+
+  // Actualizar header del drawer
+  document.getElementById('dh-plan').innerHTML = `<em>${p.nombre}</em>`;
+  document.getElementById('dh-before').textContent = p.precioAntes;
+  document.getElementById('dh-now').innerHTML = `${p.precioAhora} <small>COP</small>`;
+
+  // Pre-seleccionar el plan en el select
+  document.getElementById('plan_seleccionado').value = planKey;
+
+  // Resaltar tarjeta seleccionada
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected-plan'));
+  const card = document.getElementById('card-'+planKey);
+  if (card) card.classList.add('selected-plan');
+
+  // Ajustar fotos al plan
+  onPlanChange();
+
+  // Ir al tab 0
+  currentTab = 0;
+  renderTab();
+
+  // Abrir drawer
+  document.getElementById('checkout-drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('checkout-drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PLAN CHANGE → ajusta límite de fotos
+   ═══════════════════════════════════════════════════════════════ */
+function onPlanChange() {
+  const planKey = document.getElementById('plan_seleccionado').value;
+  if (!planKey) return;
+
+  selectedPlan = planKey;
+  const p = PLANES[planKey];
+
+  // Ajustar máximo de fotos
+  if (photoCount > p.maxFotos) photoCount = p.maxFotos;
+  if (photoCount < p.minFotos) photoCount = p.minFotos;
+
+  document.getElementById('cantidad_fotos').value = photoCount;
+  document.getElementById('pc-limits').textContent = `Mín. ${p.minFotos} · Máx. ${p.maxFotos} para plan ${p.nombre}`;
+  document.getElementById('foto-hint').textContent = `Plan ${p.nombre}: hasta ${p.maxFotos} fotos`;
+  updatePhotoUI();
+
+  // Actualizar mini-summary
+  document.getElementById('ms-plan').textContent = p.nombre;
+  document.getElementById('ms-precio-val').textContent = p.precio;
+
+  // Música solo en Premium/Deluxe
+  const musicaField = document.getElementById('musica-field');
+  const musicaHint = document.getElementById('musica-hint');
+  if (planKey === 'CLASSIC') {
+    musicaField.style.opacity = '.45';
+    musicaHint.textContent = 'No disponible en plan Classic';
+  } else {
+    musicaField.style.opacity = '1';
+    musicaHint.textContent = 'Incluida en tu plan';
+  }
+
+  // Extras
+  renderExtras(planKey);
+}
+
+function renderExtras(planKey) {
+  const p = PLANES[planKey];
+  const grid = document.getElementById('extras-grid');
+  const field = document.getElementById('extras-field');
+  field.style.display = 'block';
+  grid.innerHTML = p.features.filter(f=>f.ok).map(f=>`
+    <div class="extra-item included">
+      <div class="extra-cb-icon">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <span class="extra-label">${f.label}</span>
+      <span class="extra-tag">Incluido</span>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PHOTO COUNTER
+   ═══════════════════════════════════════════════════════════════ */
+function changePhoto(delta) {
+  const planKey = document.getElementById('plan_seleccionado').value;
+  const max = planKey && PLANES[planKey] ? PLANES[planKey].maxFotos : 12;
+  const min = planKey && PLANES[planKey] ? PLANES[planKey].minFotos : 1;
+
+  photoCount = Math.min(max, Math.max(min, photoCount + delta));
+  document.getElementById('cantidad_fotos').value = photoCount;
+  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
+  updatePhotoUI();
+}
+
+function updatePhotoUI() {
+  document.getElementById('pc-value').textContent = photoCount;
+  document.getElementById('cantidad_fotos').value = photoCount;
+  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
+
+  const planKey = document.getElementById('plan_seleccionado').value;
+  const max = planKey && PLANES[planKey] ? PLANES[planKey].maxFotos : 12;
+  const min = planKey && PLANES[planKey] ? PLANES[planKey].minFotos : 1;
+
+  document.getElementById('pc-minus').disabled = photoCount <= min;
+  document.getElementById('pc-plus').disabled = photoCount >= max;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+function goTab(dir) {
+  if (dir === 1 && !validateTab(currentTab)) return;
+  if (dir === 1 && currentTab < 2) {
+    markTabDone(currentTab);
+    currentTab++;
+  } else if (dir === -1 && currentTab > 0) {
+    currentTab--;
+  }
+  renderTab();
+}
+
+function renderTab() {
+  // Panels
+  document.querySelectorAll('.tab-panel').forEach((p,i) => {
+    p.classList.toggle('active', i === currentTab);
+  });
+  // Tabs
+  document.querySelectorAll('.dtab').forEach((t,i) => {
+    t.classList.toggle('active', i === currentTab);
+  });
+  // Botones footer
+  document.getElementById('btn-prev').style.display = currentTab > 0 ? '' : 'none';
+  document.getElementById('btn-next').style.display = currentTab < 2 ? '' : 'none';
+  document.getElementById('btn-buy-final').style.display = currentTab === 2 ? '' : 'none';
+  document.getElementById('btn-buy-sub').style.display = currentTab === 2 ? '' : 'none';
+
+  // Barra de progreso
+  document.getElementById('progress-fill').style.width = ((currentTab+1)/3*100) + '%';
+
+  // Actualizar mini-summary al llegar al tab 3
+  if (currentTab === 2) updateMiniSummary();
+}
+
+function markTabDone(i) {
+  const tab = document.querySelector(`.dtab[data-tab="${i}"]`);
+  if (tab) tab.classList.add('done');
+}
+
+function updateMiniSummary() {
+  const planKey = document.getElementById('plan_seleccionado').value;
+  if (planKey && PLANES[planKey]) {
+    const p = PLANES[planKey];
+    document.getElementById('ms-plan').textContent = p.nombre;
+    document.getElementById('ms-precio-val').textContent = p.precio;
+
+    // Features chips
+    const chipsCont = document.getElementById('ms-features-list');
+    chipsCont.innerHTML = p.features.map(f =>
+      `<span class="ms-feat-chip ${f.ok?'':'off'}">${f.label}</span>`
+    ).join('');
+  }
+  const modelo = document.getElementById('modelo_invitacion').value;
+  const categoria = document.getElementById('categoria_evento').value;
+  document.getElementById('ms-modelo').textContent = modelo || '—';
+  document.getElementById('ms-categoria').textContent = categoria || '—';
+  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
+  document.getElementById('dh-meta').textContent =
+    (categoria || 'Evento') + ' · ' + (modelo || 'Modelo no seleccionado');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VALIDACIÓN POR TAB
+   ═══════════════════════════════════════════════════════════════ */
+function validateTab(tab) {
+  if (tab === 0) {
+    let ok = true;
+    ok = validateField('nombre_protagonistas','err-nombres') && ok;
+    ok = validateField('categoria_evento','err-categoria') && ok;
+    ok = validateField('fecha_evento','err-fecha') && ok;
+    ok = validateField('plan_seleccionado','err-plan') && ok;
+    ok = validateField('modelo_invitacion','err-modelo') && ok;
+    return ok;
+  }
+  if (tab === 2) {
+    let ok = true;
+    ok = validateField('nombre_cliente','err-contacto') && ok;
+    ok = validateField('whatsapp_cliente','err-tel') && ok;
+    return ok;
+  }
+  return true;
+}
+
+function validateField(id, errId) {
+  const el = document.getElementById(id);
+  const errEl = document.getElementById(errId);
+  const val = el ? el.value.trim() : '';
+  if (!val) {
+    if (el) el.classList.add('err');
+    if (errEl) errEl.classList.add('show');
+    return false;
+  }
+  if (el) el.classList.remove('err');
+  if (errEl) errEl.classList.remove('show');
+  return true;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HANDLE BUY — ACCIÓN PRINCIPAL
+   Envía datos a Google Sheets y abre WhatsApp simultáneamente
+   ═══════════════════════════════════════════════════════════════ */
+function handleBuy() {
+  // 1. Validar tab de contacto
+  if (!validateTab(2)) return;
+
+  // 2. Validar términos
+  const termsChecked = document.getElementById('f-terms').checked;
+  const termsWrap = document.getElementById('terms-wrap');
+  const errTerms = document.getElementById('err-terms');
+  if (!termsChecked) {
+    termsWrap.classList.add('terms-error');
+    errTerms.classList.add('show');
+    return;
+  }
+  termsWrap.classList.remove('terms-error');
+  errTerms.classList.remove('show');
+
+  // 3. Recopilar todos los datos del formulario
+  const planKey = document.getElementById('plan_seleccionado').value;
+  const planInfo = PLANES[planKey] || {};
+
+  const pedido = {
+    estado: 'Pendiente',
+    fecha_registro: new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
+    nombre_protagonistas: document.getElementById('nombre_protagonistas').value.trim(),
+    categoria_evento: document.getElementById('categoria_evento').value,
+    fecha_evento: document.getElementById('fecha_evento').value,
+    lugar_evento: document.getElementById('lugar_evento').value.trim(),
+    plan_seleccionado: planKey,
+    precio_plan: planInfo.precioAhora || '',
+    modelo_invitacion: document.getElementById('modelo_invitacion').value,
+    cantidad_fotos: parseInt(document.getElementById('cantidad_fotos').value) || photoCount,
+    paleta_colores: selectedSwatch || 'Sin selección',
+    musica_fondo: document.getElementById('f-musica').value.trim(),
+    notas_adicionales: document.getElementById('f-notas').value.trim(),
+    nombre_cliente: document.getElementById('nombre_cliente').value.trim(),
+    whatsapp_cliente: document.getElementById('whatsapp_cliente').value.trim(),
+    ciudad_evento: document.getElementById('f-ciudad').value.trim(),
+  };
+
+  // 4. Enviar a Google Sheets de forma asíncrona (sin bloquear)
+  fetch(URL_WEB_API_GOOGLE, {
+    method: 'POST',
+    mode: 'no-cors', // necesario para Google Apps Script
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(pedido),
+  }).catch(() => {
+    // El modo no-cors no permite leer respuesta; los errores de red se ignoran silenciosamente
+    console.warn('No se pudo conectar con Google Sheets');
+  });
+
+  // 5. Construir mensaje de WhatsApp estructurado
+  const msg = [
+    '🌿 *NUEVO PEDIDO — GUEKA IDEAS*',
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    '',
+    '📋 *DATOS DEL EVENTO*',
+    `👤 *Protagonistas:* ${pedido.nombre_protagonistas}`,
+    `🎉 *Categoría:* ${pedido.categoria_evento}`,
+    `📅 *Fecha y hora:* ${pedido.fecha_evento}`,
+    `📍 *Lugar:* ${pedido.lugar_evento || 'No especificado'}`,
+    '',
+    '💎 *PLAN SELECCIONADO*',
+    `✅ *Plan:* ${pedido.plan_seleccionado}`,
+    `💰 *Precio:* ${pedido.precio_plan} COP`,
+    `🖼 *Modelo:* ${pedido.modelo_invitacion}`,
+    `📸 *Fotos en galería:* ${pedido.cantidad_fotos}`,
+    `🎨 *Paleta de colores:* ${pedido.paleta_colores}`,
+    `🎵 *Música de fondo:* ${pedido.musica_fondo || 'Sin indicar'}`,
+    '',
+    '📝 *NOTAS ADICIONALES*',
+    pedido.notas_adicionales || 'Ninguna',
+    '',
+    '👤 *DATOS DE CONTACTO*',
+    `📛 *Nombre:* ${pedido.nombre_cliente}`,
+    `📱 *WhatsApp:* ${pedido.whatsapp_cliente}`,
+    `🏙 *Ciudad:* ${pedido.ciudad_evento || 'No especificada'}`,
+    '',
+    '━━━━━━━━━━━━━━━━━━━━━━',
+    '⏳ _Estado: Pendiente de confirmación_',
+  ].join('\n');
+
+  // 6. Mostrar toast de confirmación
+  showToast();
+
+  // 7. Abrir WhatsApp simultáneamente
+  const waUrl = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg);
+  window.open(waUrl, '_blank');
+
+  // 8. Cerrar drawer tras breve pausa
+  setTimeout(() => closeDrawer(), 1200);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════════════════════════ */
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVBAR SCROLL
+   ═══════════════════════════════════════════════════════════════ */
+function initNavbar() {
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MENU
+   ═══════════════════════════════════════════════════════════════ */
+document.getElementById('hamburger').addEventListener('click', () => {
+  const mm = document.getElementById('mobile-menu');
+  mm.style.display = mm.style.display === 'flex' ? 'none' : 'flex';
+});
+
+function closeMobile() {
+  document.getElementById('mobile-menu').style.display = 'none';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TÉRMINOS TOGGLE
+   ═══════════════════════════════════════════════════════════════ */
+function initTermsToggle() {
+  const cb = document.getElementById('f-terms');
+  const wrap = document.getElementById('terms-wrap');
+  cb.addEventListener('change', () => {
+    wrap.classList.toggle('terms-checked', cb.checked);
+    if (cb.checked) {
+      wrap.classList.remove('terms-error');
+      document.getElementById('err-terms').classList.remove('show');
+    }
   });
 }
 
-var navbar=document.getElementById('navbar');
-window.addEventListener('scroll',function(){ navbar.classList.toggle('scrolled',window.scrollY>40); });
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+function initScrollAnimations() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.fade-in,.fade-from-left,.fade-from-right').forEach(el => obs.observe(el));
+}
 
-var hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobile-menu');
-hamburger.addEventListener('click',function(){
-  var open=mobileMenu.style.display==='flex';
-  mobileMenu.style.display=open?'none':'flex';
-  hamburger.textContent=open?'☰':'✕';
-});
-function closeMobile(){ mobileMenu.style.display='none'; hamburger.textContent='☰'; }
-
-var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold:0.08});
-
-renderPlans(); renderComparison(); renderFAQ();
-document.querySelectorAll('.fade-in,.fade-from-left,.fade-from-right').forEach(function(el){ obs.observe(el); });
+/* URL params: ?modelo=Cinema+Boda&categoria=Matrimonio */
+(function readUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const modelo = params.get('modelo');
+  const categoria = params.get('categoria');
+  if (modelo) {
+    const chip = document.getElementById('modelo-chip');
+    const chipText = document.getElementById('modelo-chip-text');
+    if (chip && chipText) { chip.style.display = 'inline-flex'; chipText.textContent = modelo; }
+    // Pre-seleccionar modelo en el select cuando abra el drawer
+    window.addEventListener('DOMContentLoaded', () => {
+      const sel = document.getElementById('modelo_invitacion');
+      if (sel) {
+        for (const opt of sel.options) {
+          if (opt.value === modelo) { sel.value = modelo; break; }
+        }
+      }
+    });
+  }
+  if (categoria) {
+    const label = document.getElementById('header-categoria-label');
+    if (label) label.textContent = categoria;
+  }
+})();
 </script>
 </body>
 </html>
