@@ -851,6 +851,9 @@ function readUrlParams() {
   if (categoria) {
     const label = document.getElementById('header-categoria-label');
     if (label) label.textContent = categoria;
+    // Pre-seleccionar categoría en el formulario
+    const selCat = document.getElementById('categoria_evento');
+    if (selCat) selCat.value = categoria;
   }
 }
 </script>
