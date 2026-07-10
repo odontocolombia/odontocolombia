@@ -315,6 +315,32 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 
 /* FLOAT WA & TOAST */
 .float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s}
+
+/* SECCION PEDIDO */
+#seccion-pedido{padding:clamp(3rem,6vw,5rem) 1.5rem;background:var(--cream)}
+.pedido-inner{max-width:780px;margin:0 auto}
+#form-pedido-gueka{background:var(--marfil);border:1px solid var(--border);border-radius:1.5rem;padding:clamp(1.5rem,4vw,2.5rem);box-shadow:0 8px 32px var(--shadow)}
+.paso-formulario{margin-bottom:2rem}
+.paso-formulario:last-of-type{margin-bottom:1.5rem}
+.paso-titulo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--midnight);margin-bottom:1.1rem;display:flex;align-items:center;gap:.65rem}
+.paso-titulo em{font-style:italic;color:var(--gold)}
+.paso-num{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:540px){.f-grid{grid-template-columns:1fr}}
+.f-field{display:flex;flex-direction:column;gap:.35rem}
+.f-field label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(29,42,68,.45);font-weight:600}
+.f-field label .req{color:var(--red);margin-left:.18rem}
+.f-field input,.f-field select,.f-field textarea{width:100%;background:var(--marfil);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:.85rem;color:var(--midnight);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;font-family:'Jost',sans-serif}
+.f-field input::placeholder,.f-field textarea::placeholder{color:rgba(29,42,68,.28)}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.14)}
+.f-select-wrap{position:relative}
+.f-select-wrap::after{content:'▾';position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--gold);font-size:.75rem;pointer-events:none}
+.f-select-wrap select{padding-right:2.5rem}
+.f-hint{font-size:.68rem;color:var(--eucalyptus);margin-top:.2rem}
+.f-divider{height:1px;background:var(--border-soft);margin:1.5rem 0}
+.btn-pedido-wa{width:100%;background:var(--gold);color:#fff;border:none;border-radius:99px;padding:1.1rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;box-shadow:0 8px 24px rgba(197,160,89,.3);transition:background .25s,transform .2s,box-shadow .2s;margin-top:.5rem}
+.btn-pedido-wa:hover{background:var(--midnight);transform:translateY(-3px);box-shadow:0 14px 32px rgba(29,42,68,.2)}
+
 .float-wa:hover{transform:scale(1.1)}
 .ping{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
 @keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
@@ -378,10 +404,11 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
               <option value="Matrimonio">Matrimonio</option>
               <option value="15 Años">15 Años</option>
               <option value="Bautizo">Bautizo</option>
+              <option value="Comunión">Comunión</option>
+              <option value="Empresarial">Empresarial</option>
               <option value="Cumpleaños">Cumpleaños</option>
-              <option value="Grado">Grado</option>
-              <option value="Baby Shower">Baby Shower</option>
-              <option value="Otro">Otro</option>
+              <option value="Graduación">Graduación</option>
+              <option value="Infantiles">Infantiles</option>
             </select>
           </div>
           <span class="field-err" id="err-categoria">Selecciona la categoría</span>
@@ -395,7 +422,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
         </div>
         <div class="field">
           <label>Lugar / Salón</label>
-          <input type="text" id="lugar_evento" placeholder="Ej: Club Campestre"/>
+          <input type="text" id="lugar_evento" placeholder="Ej: Salón de Cristal, Bogotá"/>
         </div>
       </div>
       <div class="field">
@@ -415,6 +442,8 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
         <div class="select-wrap">
           <select id="modelo_invitacion">
             <option value="">Seleccionar diseño…</option>
+            <option value="Sofía &amp; Mateo">Sofía &amp; Mateo</option>
+            <option value="Valentina &amp; Diego">Valentina &amp; Diego</option>
             <option value="Cinema Boda">Cinema Boda</option>
             <option value="Jardín Romántico">Jardín Romántico</option>
             <option value="Atardecer Dorado">Atardecer Dorado</option>
@@ -423,9 +452,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
             <option value="Salón de Cristal">Salón de Cristal</option>
             <option value="Playa Dorada">Playa Dorada</option>
             <option value="Arco Floral">Arco Floral</option>
-            <option value="Ramo de Novia">Ramo de Novia</option>
             <option value="Orquídeas &amp; Luz">Orquídeas &amp; Luz</option>
-            <option value="Beso al Atardecer">Beso al Atardecer</option>
             <option value="Lago &amp; Serenidad">Lago &amp; Serenidad</option>
           </select>
         </div>
@@ -434,17 +461,9 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
       <div class="field-section-divider"></div>
       <div class="field">
         <label>Cantidad de fotos para la galería<span class="req">*</span></label>
-        <div class="photo-counter">
-          <button class="pc-btn" id="pc-minus" type="button" onclick="changePhoto(-1)">−</button>
-          <span class="pc-val" id="pc-value">4</span>
-          <button class="pc-btn" id="pc-plus" type="button" onclick="changePhoto(1)">+</button>
-          <input type="hidden" id="cantidad_fotos" value="4"/>
-          <div class="pc-info">
-            <span>fotos seleccionadas</span>
-            <span class="pc-limits" id="pc-limits">Selecciona un plan primero</span>
-          </div>
-        </div>
-        <span class="field-hint" id="foto-hint"></span>
+          <input type="number" id="cantidad_fotos" value="4" min="1" max="12"
+            style="width:100%;background:#fff;border:1px solid var(--border);border-radius:.75rem;padding:.78rem 1rem;font-size:.84rem;color:var(--midnight);outline:none;transition:border-color .2s,box-shadow .2s"/>
+          <span class="field-hint" id="info-fotos">Selecciona un plan para ver el límite de fotos</span>
       </div>
     </div>
 
@@ -620,6 +639,133 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 <!-- PLANS -->
 <section id="plans">
   <div class="plans-grid" id="plans-grid"></div>
+</section>
+
+<!-- SECCIÓN PEDIDO UNIFICADO -->
+<section id="seccion-pedido">
+  <div class="pedido-inner">
+    <div class="section-head fade-in">
+      <p class="section-label">Formulario de Pedido</p>
+      <h2 class="section-title">Completa tu <em>Pedido</em></h2>
+      <div class="divider"><div class="dvl"></div><span class="dvs">✦</span><div class="dvl"></div></div>
+      <p style="font-size:.85rem;color:rgba(29,42,68,.45);margin-top:.5rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7">Llena el formulario y te enviamos tu invitación en 24 horas. Sin pago por adelantado.</p>
+    </div>
+    <form id="form-pedido-gueka" novalidate>
+
+      <!-- PASO 1 -->
+      <div class="paso-formulario">
+        <div class="paso-titulo">
+          <span class="paso-num">1</span>
+          Información del <em>Evento</em>
+        </div>
+        <div class="f-grid">
+          <div class="f-field">
+            <label>Nombres de los protagonistas<span class="req">*</span></label>
+            <input type="text" id="nombre_protagonistas" placeholder="Ej: Valentina &amp; Diego" autocomplete="off" required/>
+          </div>
+          <div class="f-field">
+            <label>Categoría del evento<span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="categoria_evento" required>
+                <option value="">Seleccionar…</option>
+                <option value="Matrimonio">Matrimonio</option>
+                <option value="15 Anos">15 Años</option>
+                <option value="Bautizo">Bautizo</option>
+                <option value="Comunion">Comunión</option>
+                <option value="Empresarial">Empresarial</option>
+                <option value="Cumpleanos">Cumpleaños</option>
+                <option value="Graduacion">Graduación</option>
+                <option value="Infantiles">Infantiles</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="f-grid" style="margin-top:.9rem">
+          <div class="f-field">
+            <label>Fecha y hora del evento<span class="req">*</span></label>
+            <input type="datetime-local" id="fecha_evento" required/>
+          </div>
+          <div class="f-field">
+            <label>Lugar / Salón</label>
+            <input type="text" id="lugar_evento" placeholder="Ej: Salón de Cristal, Bogotá"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="f-divider"></div>
+
+      <!-- PASO 2 -->
+      <div class="paso-formulario">
+        <div class="paso-titulo">
+          <span class="paso-num">2</span>
+          Elección de <em>Plan y Modelo</em>
+        </div>
+        <div class="f-grid">
+          <div class="f-field">
+            <label>Plan a contratar<span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="plan_seleccionado" onchange="actualizarTopesFormulario()" required>
+                <option value="">Seleccionar plan…</option>
+                <option value="CLASSIC">CLASSIC</option>
+                <option value="PREMIUM">PREMIUM</option>
+                <option value="DELUXE">DELUXE</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-field">
+            <label>Modelo de diseño<span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="modelo_invitacion" required>
+                <option value="">Seleccionar diseño…</option>
+                <option value="Sofia &amp; Mateo">Sofía &amp; Mateo</option>
+                <option value="Valentina &amp; Diego">Valentina &amp; Diego</option>
+                <option value="Cinema Boda">Cinema Boda</option>
+                <option value="Jardin Romantico">Jardín Romántico</option>
+                <option value="Atardecer Dorado">Atardecer Dorado</option>
+                <option value="Hacienda Clasica">Hacienda Clásica</option>
+                <option value="Novios al Amanecer">Novios al Amanecer</option>
+                <option value="Salon de Cristal">Salón de Cristal</option>
+                <option value="Playa Dorada">Playa Dorada</option>
+                <option value="Arco Floral">Arco Floral</option>
+                <option value="Orquideas &amp; Luz">Orquídeas &amp; Luz</option>
+                <option value="Lago &amp; Serenidad">Lago &amp; Serenidad</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="f-field" style="margin-top:.9rem;max-width:260px">
+          <label>Cantidad de fotos<span class="req">*</span></label>
+          <input type="number" id="cantidad_fotos" value="8" min="1" max="12" required/>
+          <span class="f-hint" id="info-fotos">Selecciona un plan para ver el límite de fotos</span>
+        </div>
+      </div>
+
+      <div class="f-divider"></div>
+
+      <!-- PASO 3 -->
+      <div class="paso-formulario">
+        <div class="paso-titulo">
+          <span class="paso-num">3</span>
+          Información de <em>Contacto</em>
+        </div>
+        <div class="f-grid">
+          <div class="f-field">
+            <label>Nombre completo<span class="req">*</span></label>
+            <input type="text" id="nombre_cliente" placeholder="Tu nombre completo" required/>
+          </div>
+          <div class="f-field">
+            <label>WhatsApp del cliente<span class="req">*</span></label>
+            <input type="tel" id="whatsapp_cliente" placeholder="Ej: 573001234567" required/>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-pedido-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        ✦ Enviar Pedido por WhatsApp ✦
+      </button>
+    </form>
+  </div>
 </section>
 
 <!-- COMPARISON TABLE -->
@@ -958,14 +1104,13 @@ function onPlanChange() {
   selectedPlan = planKey;
   const p = PLANES[planKey];
 
-  // Ajustar máximo de fotos
-  if (photoCount > p.maxFotos) photoCount = p.maxFotos;
-  if (photoCount < p.minFotos) photoCount = p.minFotos;
-
-  document.getElementById('cantidad_fotos').value = photoCount;
-  document.getElementById('pc-limits').textContent = `Mín. ${p.minFotos} · Máx. ${p.maxFotos} para plan ${p.nombre}`;
-  document.getElementById('foto-hint').textContent = `Plan ${p.nombre}: hasta ${p.maxFotos} fotos`;
-  updatePhotoUI();
+  // Ajustar máximo de fotos según el plan y actualizar id="info-fotos"
+  const fotoInput = document.getElementById('cantidad_fotos');
+  const infoFotos = document.getElementById('info-fotos');
+  fotoInput.max = p.maxFotos;
+  fotoInput.value = p.maxFotos;
+  photoCount = p.maxFotos;
+  if (infoFotos) infoFotos.textContent = `Máx. ${p.maxFotos} fotos para plan ${p.nombre}`;
 
   // Actualizar mini-summary
   document.getElementById('ms-plan').textContent = p.nombre;
@@ -1181,35 +1326,21 @@ function handleBuy() {
     console.warn('No se pudo conectar con Google Sheets');
   });
 
-  // 5. Construir mensaje de WhatsApp estructurado
+  // 5. Construir mensaje de WhatsApp con el formato exacto solicitado
   const msg = [
-    '🌿 *NUEVO PEDIDO — GUEKA IDEAS*',
-    '━━━━━━━━━━━━━━━━━━━━━━',
+    '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
     '',
-    '📋 *DATOS DEL EVENTO*',
-    `👤 *Protagonistas:* ${pedido.nombre_protagonistas}`,
-    `🎉 *Categoría:* ${pedido.categoria_evento}`,
-    `📅 *Fecha y hora:* ${pedido.fecha_evento}`,
-    `📍 *Lugar:* ${pedido.lugar_evento || 'No especificado'}`,
+    `• *Plan:* ${pedido.plan_seleccionado}`,
+    `• *Modelo:* ${pedido.modelo_invitacion}`,
+    `• *Categoría:* ${pedido.categoria_evento}`,
+    `• *Nombres:* ${pedido.nombre_protagonistas}`,
+    `• *Fecha/Hora:* ${pedido.fecha_evento}`,
+    `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
+    `• *Fotos:* ${pedido.cantidad_fotos}`,
     '',
-    '💎 *PLAN SELECCIONADO*',
-    `✅ *Plan:* ${pedido.plan_seleccionado}`,
-    `💰 *Precio:* ${pedido.precio_plan} COP`,
-    `🖼 *Modelo:* ${pedido.modelo_invitacion}`,
-    `📸 *Fotos en galería:* ${pedido.cantidad_fotos}`,
-    `🎨 *Paleta de colores:* ${pedido.paleta_colores}`,
-    `🎵 *Música de fondo:* ${pedido.musica_fondo || 'Sin indicar'}`,
+    `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
     '',
-    '📝 *NOTAS ADICIONALES*',
-    pedido.notas_adicionales || 'Ninguna',
-    '',
-    '👤 *DATOS DE CONTACTO*',
-    `📛 *Nombre:* ${pedido.nombre_cliente}`,
-    `📱 *WhatsApp:* ${pedido.whatsapp_cliente}`,
-    `🏙 *Ciudad:* ${pedido.ciudad_evento || 'No especificada'}`,
-    '',
-    '━━━━━━━━━━━━━━━━━━━━━━',
-    '⏳ _Estado: Pendiente de confirmación_',
+    'Quedo atento a las instrucciones de pago.',
   ].join('\n');
 
   // 6. Mostrar toast de confirmación
@@ -1279,7 +1410,97 @@ function initScrollAnimations() {
   document.querySelectorAll('.fade-in,.fade-from-left,.fade-from-right').forEach(el => obs.observe(el));
 }
 
-/* URL params: ?modelo=Cinema+Boda&categoria=Matrimonio */
+/* ═══════════════════════════════════════════════════════════════
+   FUNCIÓN: actualizarTopesFormulario
+   Ajusta max/value del campo cantidad_fotos al cambiar el plan
+   en el formulario unificado #seccion-pedido
+   ═══════════════════════════════════════════════════════════════ */
+function actualizarTopesFormulario() {
+  const plan = document.getElementById('plan_seleccionado').value;
+  const input = document.getElementById('cantidad_fotos');
+  const hint = document.getElementById('info-fotos');
+  if (!input || !hint) return;
+  const topes = {
+    CLASSIC:  { max: 4,  texto: 'Plan Classic: Máximo 4 fotografías fijas.' },
+    PREMIUM:  { max: 8,  texto: 'Plan Premium: Máximo 8 fotografías en carrusel slider.' },
+    DELUXE:   { max: 12, texto: 'Plan Deluxe: Máximo 12 fotografías en álbum premium.' },
+  };
+  if (topes[plan]) {
+    input.max   = topes[plan].max;
+    input.value = topes[plan].max;
+    hint.textContent = topes[plan].texto;
+  }
+  // Sincronizar con el drawer si está abierto
+  onPlanChange();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LISTENER: #form-pedido-gueka submit
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const formPedido = document.getElementById('form-pedido-gueka');
+  if (!formPedido) return;
+  formPedido.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Validar campos requeridos
+    const campos = ['nombre_protagonistas','categoria_evento','fecha_evento',
+                    'plan_seleccionado','modelo_invitacion','cantidad_fotos',
+                    'nombre_cliente','whatsapp_cliente'];
+    let valido = true;
+    campos.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !el.value.trim()) { el.style.borderColor = 'var(--red)'; valido = false; }
+      else if (el) el.style.borderColor = '';
+    });
+    if (!valido) return;
+
+    // Empaquetar datos
+    const pedido = {
+      estado: 'Pendiente',
+      fecha_registro: new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
+      nombre_protagonistas: document.getElementById('nombre_protagonistas').value.trim(),
+      categoria_evento:     document.getElementById('categoria_evento').value,
+      fecha_evento:         document.getElementById('fecha_evento').value,
+      lugar_evento:         document.getElementById('lugar_evento').value.trim(),
+      plan_seleccionado:    document.getElementById('plan_seleccionado').value,
+      modelo_invitacion:    document.getElementById('modelo_invitacion').value,
+      cantidad_fotos:       document.getElementById('cantidad_fotos').value,
+      nombre_cliente:       document.getElementById('nombre_cliente').value.trim(),
+      whatsapp_cliente:     document.getElementById('whatsapp_cliente').value.trim(),
+    };
+
+    // Envío asíncrono a Google Sheets
+    fetch(URL_WEB_API_GOOGLE, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(pedido),
+    }).catch(() => console.warn('No se pudo registrar en Google Sheets'));
+
+    // Mensaje WhatsApp
+    const msg = [
+      '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
+      '',
+      `• *Plan:* ${pedido.plan_seleccionado}`,
+      `• *Modelo:* ${pedido.modelo_invitacion}`,
+      `• *Categoría:* ${pedido.categoria_evento}`,
+      `• *Nombres:* ${pedido.nombre_protagonistas}`,
+      `• *Fecha/Hora:* ${pedido.fecha_evento}`,
+      `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
+      `• *Fotos:* ${pedido.cantidad_fotos}`,
+      '',
+      `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
+      '',
+      'Quedo atento a las instrucciones de pago.',
+    ].join('\n');
+
+    showToast();
+    window.open('https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg), '_blank');
+  });
+});
+
+
 (function readUrlParams() {
   const params = new URLSearchParams(window.location.search);
   const modelo = params.get('modelo');
