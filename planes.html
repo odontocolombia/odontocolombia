@@ -1012,32 +1012,43 @@ function readUrlParams() {
   const modelo    = params.get('modelo');
   const categoria = params.get('categoria');
 
+  // Normaliza slugs con guiones a texto normal: "Cinema-Boda" → "Cinema Boda"
+  function slugToText(slug) {
+    return slug.replace(/-/g, ' ');
+  }
+
   if (modelo) {
+    const modeloTexto = slugToText(modelo);
     // Mostrar chip en el header
     const chip     = document.getElementById('modelo-chip');
     const chipText = document.getElementById('modelo-chip-text');
-    if (chip && chipText) { chip.style.display = 'inline-flex'; chipText.textContent = modelo; }
-    // Pre-seleccionar modelo en el formulario
+    if (chip && chipText) { chip.style.display = 'inline-flex'; chipText.textContent = modeloTexto; }
+    // Pre-seleccionar modelo en el formulario (busca coincidencia exacta)
     const sel = document.getElementById('modelo_invitacion');
     if (sel) {
       for (const opt of sel.options) {
-        if (opt.value === modelo) { sel.value = modelo; break; }
+        if (opt.value === modeloTexto) { sel.value = modeloTexto; break; }
       }
     }
-    // Ocultar el bloque visualmente — el valor ya quedó asignado y viaja en el submit
+    // Ocultar el bloque solo si el valor fue encontrado y asignado
     const bloque = document.getElementById('bloque-modelo-formulario');
-    if (bloque) bloque.style.display = 'none';
+    if (bloque && sel && sel.value === modeloTexto) bloque.style.display = 'none';
   }
 
   if (categoria) {
+    const categoriaTexto = slugToText(categoria);
     const label = document.getElementById('header-categoria-label');
-    if (label) label.textContent = categoria;
+    if (label) label.textContent = categoriaTexto;
     // Pre-seleccionar categoría en el formulario
     const selCat = document.getElementById('categoria_evento');
-    if (selCat) selCat.value = categoria;
-    // Ocultar el bloque visualmente — el valor ya quedó asignado y viaja en el submit
+    if (selCat) {
+      for (const opt of selCat.options) {
+        if (opt.value === categoriaTexto) { selCat.value = categoriaTexto; break; }
+      }
+    }
+    // Ocultar el bloque solo si el valor fue encontrado y asignado
     const bloqueCat = document.getElementById('bloque-categoria-formulario');
-    if (bloqueCat) bloqueCat.style.display = 'none';
+    if (bloqueCat && selCat && selCat.value === categoriaTexto) bloqueCat.style.display = 'none';
   }
 }
 </script>
