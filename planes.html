@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Planes & Precios – Gueka Ideas</title>
+<title>Planes &amp; Precios – Gueka Ideas</title>
 <meta name="description" content="Elige el plan perfecto para tu invitación digital. Classic, Premium o Deluxe con 50% de descuento."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -130,135 +130,6 @@ input,select,textarea,button{font-family:'Jost',sans-serif}
 .btn-select-gold:hover{box-shadow:0 10px 28px rgba(197,160,89,.4)}
 .btn-select-outline{background:transparent;border:1.5px solid var(--border);color:var(--gold)}
 .btn-select-outline:hover{border-color:var(--gold)}
-.btn-demo{width:100%;background:transparent;border:1px solid rgba(29,42,68,.1);border-radius:99px;padding:.75rem;font-size:.72rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,42,68,.4);cursor:pointer;transition:border-color .2s,color .2s;display:flex;align-items:center;justify-content:center;gap:.45rem}
-.btn-demo:hover{border-color:rgba(29,42,68,.25);color:rgba(29,42,68,.65)}
-.wa-link{text-align:center;font-size:.68rem;color:rgba(29,42,68,.28);transition:color .2s}
-.wa-link:hover{color:var(--gold)}
-
-/* CHECKOUT DRAWER */
-#drawer-overlay{position:fixed;inset:0;z-index:300;background:rgba(29,42,68,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s ease}
-#drawer-overlay.open{opacity:1;pointer-events:all}
-#checkout-drawer{position:fixed;top:0;right:0;bottom:0;z-index:301;width:min(680px,100vw);background:var(--marfil);box-shadow:-8px 0 48px rgba(29,42,68,.18);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.32,.72,0,1);overflow:hidden}
-#checkout-drawer.open{transform:translateX(0)}
-
-.drawer-head{background:var(--midnight);padding:1.5rem 1.75rem 1.25rem;position:relative;overflow:hidden;flex-shrink:0}
-.drawer-head::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(197,160,89,.18),transparent 70%)}
-.drawer-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;z-index:1}
-.drawer-close:hover{background:rgba(255,255,255,.15);color:#fff}
-.dh-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(253,251,247,.38);position:relative}
-.dh-plan{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;line-height:1.1;margin:.2rem 0 0;position:relative}
-.dh-plan em{font-style:italic;color:var(--gold)}
-.dh-meta{font-size:.7rem;color:rgba(253,251,247,.38);position:relative;margin-top:.2rem}
-.dh-prices{display:flex;align-items:flex-end;gap:.65rem;margin-top:.85rem;position:relative}
-.dh-before{font-size:.8rem;text-decoration:line-through;color:rgba(253,251,247,.22)}
-.dh-now{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1}
-.dh-now small{font-size:.7rem;color:rgba(253,251,247,.3);font-weight:300}
-.dh-save{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:700;display:flex;align-items:center;gap:.3rem;position:relative}
-.dh-save::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);animation:pdot 1.4s ease-in-out infinite}
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
-
-.drawer-tabs{display:flex;border-bottom:1px solid var(--border);background:#fff;flex-shrink:0}
-.dtab{flex:1;padding:.85rem .5rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:rgba(29,42,68,.38);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;display:flex;align-items:center;justify-content:center;gap:.4rem}
-.dtab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.dtab-num{width:18px;height:18px;border-radius:50%;background:rgba(197,160,89,.15);font-size:.55rem;font-weight:700;color:var(--gold);display:flex;align-items:center;justify-content:center;transition:background .2s}
-.dtab.active .dtab-num{background:var(--gold);color:#fff}
-.dtab.done .dtab-num{background:var(--eucalyptus);color:#fff}
-.dtab.done{color:var(--eucalyptus)}
-
-.drawer-body{flex:1;overflow-y:auto;padding:1.75rem}
-.drawer-body::-webkit-scrollbar{width:4px}
-.drawer-body::-webkit-scrollbar-track{background:transparent}
-.drawer-body::-webkit-scrollbar-thumb{background:rgba(197,160,89,.2);border-radius:99px}
-
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-.step-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--midnight);margin-bottom:1.25rem}
-.step-title em{font-style:italic;color:var(--gold)}
-
-.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
-.field:last-child{margin-bottom:0}
-.field label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(29,42,68,.48);font-weight:500}
-.field label .req{color:var(--red);margin-left:.2rem}
-.field input,.field select,.field textarea{width:100%;background:#fff;border:1px solid var(--border);border-radius:.75rem;padding:.78rem 1rem;font-size:.84rem;color:var(--midnight);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
-.field input::placeholder,.field textarea::placeholder{color:rgba(29,42,68,.28)}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.12)}
-.field input.err,.field select.err,.field textarea.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(230,57,70,.1)}
-.field-hint{font-size:.7rem;color:var(--eucalyptus);margin-top:.28rem}
-.field-err{font-size:.7rem;color:var(--red);margin-top:.28rem;display:none}
-.field-err.show{display:block}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-@media(max-width:500px){.field-row{grid-template-columns:1fr}}
-.select-wrap{position:relative}
-.select-wrap::after{content:'▾';position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--gold);font-size:.75rem;pointer-events:none}
-.select-wrap select{padding-right:2.5rem}
-input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(60%) sepia(40%) saturate(600%) hue-rotate(5deg);cursor:pointer}
-.field textarea{resize:vertical;min-height:80px}
-.field-section-divider{height:1px;background:var(--border-soft);margin:1.4rem 0}
-
-.photo-counter{display:flex;align-items:center;gap:.85rem;background:#fff;border:1px solid var(--border);border-radius:.75rem;padding:.62rem 1rem}
-.pc-btn{width:30px;height:30px;border-radius:50%;background:var(--cream);border:1px solid var(--border);color:var(--midnight);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s;flex-shrink:0}
-.pc-btn:hover:not(:disabled){background:var(--gold);border-color:var(--gold);color:#fff}
-.pc-btn:disabled{opacity:.3;cursor:default}
-.pc-val{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--gold);min-width:28px;text-align:center}
-.pc-info{display:flex;flex-direction:column}
-.pc-info span:first-child{font-size:.76rem;color:rgba(29,42,68,.65);font-weight:500}
-.pc-limits{font-size:.65rem;color:rgba(29,42,68,.32)}
-
-.swatch-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem}
-.swatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s;position:relative;flex-shrink:0}
-.swatch:hover{transform:scale(1.12)}
-.swatch.selected{border-color:var(--midnight);transform:scale(1.1)}
-.swatch.selected::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-
-.extras-grid{display:flex;flex-direction:column;gap:.45rem;margin-top:.25rem}
-.extra-item{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--border-soft);border-radius:.65rem;padding:.65rem .9rem;cursor:default;user-select:none}
-.extra-item.included{border-color:rgba(74,107,93,.2);background:rgba(74,107,93,.04)}
-.extra-cb-icon{width:18px;height:18px;border-radius:4px;background:var(--eucalyptus);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.extra-label{font-size:.78rem;color:rgba(29,42,68,.7);flex:1}
-.extra-tag{font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--eucalyptus);background:rgba(74,107,93,.1);border-radius:99px;padding:.18rem .5rem;white-space:nowrap}
-
-.mini-summary{background:#fff;border:1px solid var(--border);border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:1.25rem}
-.ms-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.45rem}
-.ms-row:last-child{margin-bottom:0}
-.ms-label{font-size:.7rem;color:rgba(29,42,68,.42);letter-spacing:.08em}
-.ms-val{font-size:.82rem;color:var(--midnight);font-weight:500}
-.ms-price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);font-weight:300}
-.ms-divider{height:1px;background:var(--border-soft);margin:.7rem 0}
-.ms-features-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
-.ms-feat-chip{font-size:.62rem;padding:.25rem .65rem;border-radius:.5rem;border:1px solid rgba(74,107,93,.2);color:var(--eucalyptus);background:rgba(74,107,93,.05)}
-.ms-feat-chip.off{border-color:rgba(29,42,68,.1);color:rgba(29,42,68,.25);background:transparent}
-
-/* TERMS CHECKBOX */
-.terms-wrap{background:#fff;border:1.5px solid var(--border);border-radius:.85rem;padding:1rem 1.1rem;margin-top:1.1rem;transition:border-color .25s,background .25s}
-.terms-wrap.terms-checked{background:rgba(74,107,93,.04);border-color:rgba(74,107,93,.35)}
-.terms-wrap.terms-error{border-color:var(--red);background:rgba(230,57,70,.04)}
-.terms-check-input{display:none}
-.terms-check-label{display:flex;align-items:flex-start;gap:.8rem;cursor:pointer}
-.terms-check-box{width:20px;height:20px;border-radius:.35rem;flex-shrink:0;margin-top:.1rem;border:1.5px solid rgba(197,160,89,.5);background:rgba(197,160,89,.06);display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
-.terms-check-input:checked + .terms-check-label .terms-check-box{background:var(--eucalyptus);border-color:var(--eucalyptus)}
-.terms-tick{opacity:0;transition:opacity .2s}
-.terms-check-input:checked + .terms-check-label .terms-tick{opacity:1}
-.terms-check-text{font-size:.79rem;color:rgba(29,42,68,.65);line-height:1.65}
-.terms-check-text a{color:var(--eucalyptus);text-decoration:underline;text-underline-offset:2px;font-weight:600}
-.terms-check-text a:hover{color:var(--gold)}
-.terms-err-msg{font-size:.7rem;color:var(--red);margin-top:.45rem;display:none;align-items:center;gap:.3rem}
-.terms-err-msg.show{display:flex}
-
-/* DRAWER FOOTER */
-.drawer-footer{padding:1.1rem 1.75rem;background:#fff;border-top:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:.55rem}
-.btn-nav-row{display:flex;gap:.7rem}
-.btn-prev{flex:0 0 auto;background:transparent;border:1.5px solid var(--border);border-radius:99px;padding:.82rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,42,68,.45);cursor:pointer;transition:border-color .2s,color .2s}
-.btn-prev:hover{border-color:var(--gold);color:var(--gold)}
-.btn-next{flex:1;background:var(--gold);color:#fff;border:none;border-radius:99px;padding:.88rem;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 6px 20px rgba(197,160,89,.28);transition:transform .2s,box-shadow .2s}
-.btn-next:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(197,160,89,.38)}
-.btn-buy-final{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;border:none;border-radius:99px;padding:1rem;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;box-shadow:0 8px 24px rgba(197,160,89,.3);transition:transform .2s,box-shadow .2s,opacity .2s}
-.btn-buy-final:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(197,160,89,.4)}
-.btn-buy-final:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-buy-sub{text-align:center;font-size:.68rem;color:rgba(29,42,68,.35);display:flex;align-items:center;justify-content:center;gap:.3rem}
-
-.progress-bar{height:3px;background:var(--border-soft);position:relative;flex-shrink:0}
-.progress-fill{height:100%;background:var(--gold);transition:width .4s ease;width:33.3%}
 
 /* COMPARISON TABLE */
 #comparison{padding:clamp(3rem,6vw,5rem) 1.5rem;background:var(--cream)}
@@ -315,8 +186,14 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 
 /* FLOAT WA & TOAST */
 .float-wa{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:transform .2s}
+.float-wa:hover{transform:scale(1.1)}
+.ping{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
+@keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--midnight);color:#fff;border:1px solid var(--border);border-radius:99px;padding:.75rem 1.75rem;font-size:.78rem;display:flex;align-items:center;gap:.55rem;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;z-index:400;white-space:nowrap;box-shadow:0 8px 32px rgba(29,42,68,.25)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast .t-icon{color:#25D366}
 
-/* SECCION PEDIDO */
+/* SECCIÓN PEDIDO UNIFICADO */
 #seccion-pedido{padding:clamp(3rem,6vw,5rem) 1.5rem;background:var(--cream)}
 .pedido-inner{max-width:780px;margin:0 auto}
 #form-pedido-gueka{background:var(--marfil);border:1px solid var(--border);border-radius:1.5rem;padding:clamp(1.5rem,4vw,2.5rem);box-shadow:0 8px 32px var(--shadow)}
@@ -341,12 +218,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 .btn-pedido-wa{width:100%;background:var(--gold);color:#fff;border:none;border-radius:99px;padding:1.1rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;box-shadow:0 8px 24px rgba(197,160,89,.3);transition:background .25s,transform .2s,box-shadow .2s;margin-top:.5rem}
 .btn-pedido-wa:hover{background:var(--midnight);transform:translateY(-3px);box-shadow:0 14px 32px rgba(29,42,68,.2)}
 
-.float-wa:hover{transform:scale(1.1)}
-.ping{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
-@keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
-#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--midnight);color:#fff;border:1px solid var(--border);border-radius:99px;padding:.75rem 1.75rem;font-size:.78rem;display:flex;align-items:center;gap:.55rem;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;z-index:400;white-space:nowrap;box-shadow:0 8px 32px rgba(29,42,68,.25)}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast .t-icon{color:#25D366}
 </style>
 </head>
 <body>
@@ -362,224 +233,6 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
   <svg class="t-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   Abriendo WhatsApp con tu pedido…
 </div>
-
-<!-- DRAWER OVERLAY -->
-<div id="drawer-overlay" onclick="closeDrawer()"></div>
-
-<!-- CHECKOUT DRAWER -->
-<div id="checkout-drawer" role="dialog" aria-modal="true" aria-label="Formulario de pedido">
-  <div class="drawer-head">
-    <button class="drawer-close" onclick="closeDrawer()" aria-label="Cerrar">✕</button>
-    <div class="dh-label">Completar pedido</div>
-    <div class="dh-plan" id="dh-plan"><em>Classic</em></div>
-    <div class="dh-meta" id="dh-meta">Matrimonio · Cinema Boda</div>
-    <div class="dh-prices">
-      <span class="dh-before" id="dh-before">$160.000</span>
-      <span class="dh-now" id="dh-now">$80.000 <small>COP</small></span>
-    </div>
-    <div class="dh-save">50% de descuento — tiempo limitado</div>
-  </div>
-  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-  <div class="drawer-tabs">
-    <button class="dtab active" data-tab="0"><span class="dtab-num">1</span><span class="dtab-text">Evento</span></button>
-    <button class="dtab" data-tab="1"><span class="dtab-num">2</span><span class="dtab-text">Diseño</span></button>
-    <button class="dtab" data-tab="2"><span class="dtab-num">3</span><span class="dtab-text">Contacto</span></button>
-  </div>
-  <div class="drawer-body">
-
-    <!-- TAB 1: EVENTO -->
-    <div class="tab-panel active" data-panel="0">
-      <h3 class="step-title">Datos del <em>Evento</em></h3>
-      <div class="field-row">
-        <div class="field">
-          <label>Nombres de los protagonistas<span class="req">*</span></label>
-          <input type="text" id="nombre_protagonistas" placeholder="Ej: Valentina &amp; Diego" autocomplete="off"/>
-          <span class="field-err" id="err-nombres">Por favor ingresa los nombres</span>
-        </div>
-        <div class="field">
-          <label>Categoría<span class="req">*</span></label>
-          <div class="select-wrap">
-            <select id="categoria_evento">
-              <option value="">Seleccionar…</option>
-              <option value="Matrimonio">Matrimonio</option>
-              <option value="15 Años">15 Años</option>
-              <option value="Bautizo">Bautizo</option>
-              <option value="Comunión">Comunión</option>
-              <option value="Empresarial">Empresarial</option>
-              <option value="Cumpleaños">Cumpleaños</option>
-              <option value="Graduación">Graduación</option>
-              <option value="Infantiles">Infantiles</option>
-            </select>
-          </div>
-          <span class="field-err" id="err-categoria">Selecciona la categoría</span>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label>Fecha y hora del evento<span class="req">*</span></label>
-          <input type="datetime-local" id="fecha_evento"/>
-          <span class="field-err" id="err-fecha">Ingresa la fecha y hora</span>
-        </div>
-        <div class="field">
-          <label>Lugar / Salón</label>
-          <input type="text" id="lugar_evento" placeholder="Ej: Salón de Cristal, Bogotá"/>
-        </div>
-      </div>
-      <div class="field">
-        <label>Plan seleccionado<span class="req">*</span></label>
-        <div class="select-wrap">
-          <select id="plan_seleccionado" onchange="onPlanChange()">
-            <option value="">Seleccionar plan…</option>
-            <option value="CLASSIC">CLASSIC</option>
-            <option value="PREMIUM">PREMIUM</option>
-            <option value="DELUXE">DELUXE</option>
-          </select>
-        </div>
-        <span class="field-err" id="err-plan">Selecciona un plan</span>
-      </div>
-      <div class="field">
-        <label>Modelo de invitación<span class="req">*</span></label>
-        <div class="select-wrap">
-          <select id="modelo_invitacion">
-            <option value="">Seleccionar diseño…</option>
-            <option value="Sofía &amp; Mateo">Sofía &amp; Mateo</option>
-            <option value="Valentina &amp; Diego">Valentina &amp; Diego</option>
-            <option value="Cinema Boda">Cinema Boda</option>
-            <option value="Jardín Romántico">Jardín Romántico</option>
-            <option value="Atardecer Dorado">Atardecer Dorado</option>
-            <option value="Hacienda Clásica">Hacienda Clásica</option>
-            <option value="Novios al Amanecer">Novios al Amanecer</option>
-            <option value="Salón de Cristal">Salón de Cristal</option>
-            <option value="Playa Dorada">Playa Dorada</option>
-            <option value="Arco Floral">Arco Floral</option>
-            <option value="Orquídeas &amp; Luz">Orquídeas &amp; Luz</option>
-            <option value="Lago &amp; Serenidad">Lago &amp; Serenidad</option>
-          </select>
-        </div>
-        <span class="field-err" id="err-modelo">Selecciona un modelo</span>
-      </div>
-      <div class="field-section-divider"></div>
-      <div class="field">
-        <label>Cantidad de fotos para la galería<span class="req">*</span></label>
-          <input type="number" id="cantidad_fotos" value="4" min="1" max="12"
-            style="width:100%;background:#fff;border:1px solid var(--border);border-radius:.75rem;padding:.78rem 1rem;font-size:.84rem;color:var(--midnight);outline:none;transition:border-color .2s,box-shadow .2s"/>
-          <span class="field-hint" id="info-fotos">Selecciona un plan para ver el límite de fotos</span>
-      </div>
-    </div>
-
-    <!-- TAB 2: DISEÑO -->
-    <div class="tab-panel" data-panel="1">
-      <h3 class="step-title">Personaliza tu <em>Diseño</em></h3>
-      <div class="field">
-        <label>Paleta de colores preferida</label>
-        <p style="font-size:.75rem;color:rgba(29,42,68,.42);margin-bottom:.5rem">Elige el tono dominante de tu invitación</p>
-        <div class="swatch-grid" id="swatch-grid"></div>
-        <span class="field-hint" id="swatch-hint">Sin selección — se usan los colores del modelo</span>
-      </div>
-      <div class="field-section-divider"></div>
-      <div class="field" id="extras-field" style="display:none">
-        <label>Funciones incluidas en tu plan</label>
-        <div class="extras-grid" id="extras-grid"></div>
-      </div>
-      <div class="field" id="musica-field">
-        <label>Música de fondo</label>
-        <input type="text" id="f-musica" placeholder="Nombre de la canción y artista"/>
-        <span class="field-hint" id="musica-hint">Solo disponible en planes Premium y Deluxe</span>
-      </div>
-      <div class="field">
-        <label>Notas adicionales</label>
-        <textarea id="f-notas" placeholder="Detalles especiales, frases, referencias de estilo…"></textarea>
-      </div>
-    </div>
-
-    <!-- TAB 3: CONTACTO -->
-    <div class="tab-panel" data-panel="2">
-      <h3 class="step-title">Tus <em>Datos</em> de Contacto</h3>
-      <div class="field-row">
-        <div class="field">
-          <label>Tu nombre completo<span class="req">*</span></label>
-          <input type="text" id="nombre_cliente" placeholder="Tu nombre"/>
-          <span class="field-err" id="err-contacto">Ingresa tu nombre</span>
-        </div>
-        <div class="field">
-          <label>Número de WhatsApp<span class="req">*</span></label>
-          <input type="tel" id="whatsapp_cliente" placeholder="+57 300 000 0000"/>
-          <span class="field-err" id="err-tel">Ingresa tu número</span>
-        </div>
-      </div>
-      <div class="field">
-        <label>Ciudad del evento</label>
-        <input type="text" id="f-ciudad" placeholder="Ciudad donde se celebra el evento"/>
-      </div>
-      <div class="field-section-divider"></div>
-
-      <div class="mini-summary">
-        <div class="ms-row"><span class="ms-label">Plan seleccionado</span><span class="ms-val" id="ms-plan">—</span></div>
-        <div class="ms-row"><span class="ms-label">Modelo</span><span class="ms-val" id="ms-modelo">—</span></div>
-        <div class="ms-row"><span class="ms-label">Categoría</span><span class="ms-val" id="ms-categoria">—</span></div>
-        <div class="ms-row"><span class="ms-label">Fotos en galería</span><span class="ms-val" id="ms-fotos">—</span></div>
-        <div class="ms-divider"></div>
-        <div class="ms-row"><span class="ms-label">Total</span><span class="ms-price" id="ms-precio-val">—</span></div>
-        <div style="margin-top:.75rem">
-          <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(29,42,68,.3);margin-bottom:.5rem">Funciones incluidas</div>
-          <div class="ms-features-list" id="ms-features-list"></div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem">
-        <span style="display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:rgba(29,42,68,.38)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Entrega en 24 h
-        </span>
-        <span style="display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:rgba(29,42,68,.38)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 revisiones incluidas
-        </span>
-        <span style="display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:rgba(29,42,68,.38)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Sin pago en línea
-        </span>
-      </div>
-
-      <!-- TÉRMINOS Y CONDICIONES -->
-      <div class="terms-wrap" id="terms-wrap">
-        <input type="checkbox" id="f-terms" class="terms-check-input"/>
-        <label for="f-terms" class="terms-check-label">
-          <div class="terms-check-box">
-            <svg class="terms-tick" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <span class="terms-check-text">
-            He leído y acepto los
-            <a href="terminos.html" target="_blank"><strong>Términos y Condiciones del Servicio</strong></a>
-            y autorizo el tratamiento de mis datos personales según la
-            <a href="terminos.html" target="_blank"><strong>Política de Privacidad</strong></a>
-            de Gueka Ideas.
-          </span>
-        </label>
-        <p class="terms-err-msg" id="err-terms">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Debes aceptar los términos y condiciones para enviar el pedido
-        </p>
-      </div>
-    </div>
-
-  </div><!-- /drawer-body -->
-
-  <div class="drawer-footer">
-    <div class="btn-nav-row">
-      <button class="btn-prev" id="btn-prev" style="display:none" onclick="goTab(-1)">← Anterior</button>
-      <button class="btn-next" id="btn-next" onclick="goTab(1)">
-        Continuar
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
-    </div>
-    <button class="btn-buy-final" id="btn-buy-final" style="display:none" onclick="handleBuy()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Enviar Pedido por WhatsApp
-    </button>
-    <p class="btn-buy-sub" id="btn-buy-sub" style="display:none">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Sin pago en línea · Te contactamos de inmediato
-    </p>
-  </div>
-</div><!-- /checkout-drawer -->
 
 <!-- ════ PAGE ════ -->
 
@@ -652,7 +305,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
     </div>
     <form id="form-pedido-gueka" novalidate>
 
-      <!-- PASO 1 -->
+      <!-- PASO 1: EVENTO -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">1</span>
@@ -694,7 +347,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 
       <div class="f-divider"></div>
 
-      <!-- PASO 2 -->
+      <!-- PASO 2: PLAN Y MODELO -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">2</span>
@@ -706,9 +359,9 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
             <div class="f-select-wrap">
               <select id="plan_seleccionado" onchange="actualizarTopesFormulario()" required>
                 <option value="">Seleccionar plan…</option>
-                <option value="CLASSIC">CLASSIC</option>
-                <option value="PREMIUM">PREMIUM</option>
-                <option value="DELUXE">DELUXE</option>
+                <option value="CLASSIC">CLASSIC — $80.000 COP</option>
+                <option value="PREMIUM">PREMIUM — $140.000 COP</option>
+                <option value="DELUXE">DELUXE — $200.000 COP</option>
               </select>
             </div>
           </div>
@@ -735,14 +388,14 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
         </div>
         <div class="f-field" style="margin-top:.9rem;max-width:260px">
           <label>Cantidad de fotos<span class="req">*</span></label>
-          <input type="number" id="cantidad_fotos" value="8" min="1" max="12" required/>
+          <input type="number" id="cantidad_fotos" value="4" min="1" max="12" required/>
           <span class="f-hint" id="info-fotos">Selecciona un plan para ver el límite de fotos</span>
         </div>
       </div>
 
       <div class="f-divider"></div>
 
-      <!-- PASO 3 -->
+      <!-- PASO 3: CONTACTO -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">3</span>
@@ -835,11 +488,8 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CONFIGURACIÓN GLOBAL
-   ► Reemplaza la URL con la de tu Google Apps Script desplegado
    ═══════════════════════════════════════════════════════════════ */
 const URL_WEB_API_GOOGLE = 'https://script.google.com/macros/s/AKfycbxdbML-0c5dg4F2BpXVKTqWCRfHacF_SdoCPxOP-YNSLlWRVKnVSUHnE4LlMYVseEr5AA/exec';
-
-/* Número comercial WhatsApp (formato internacional sin +) */
 const WA_NUMERO = '573242712162';
 
 /* ═══════════════════════════════════════════════════════════════
@@ -851,7 +501,6 @@ const PLANES = {
     precioAntes: '$160.000',
     precioAhora: '$80.000',
     maxFotos: 4,
-    minFotos: 1,
     screens: ['Portada','Galería','Detalles','Cuenta Regresiva'],
     features: [
       { label:'Portada animada', ok:true },
@@ -864,14 +513,12 @@ const PLANES = {
     ],
     badge: null,
     featured: false,
-    precio: '$80.000 COP',
   },
   PREMIUM: {
     nombre: 'Premium',
     precioAntes: '$280.000',
     precioAhora: '$140.000',
     maxFotos: 8,
-    minFotos: 1,
     screens: ['Portada','Galería','RSVP','Música','Detalles','Cuenta Regresiva'],
     features: [
       { label:'Portada animada', ok:true },
@@ -884,14 +531,12 @@ const PLANES = {
     ],
     badge: 'Más popular',
     featured: true,
-    precio: '$140.000 COP',
   },
   DELUXE: {
     nombre: 'Deluxe',
     precioAntes: '$400.000',
     precioAhora: '$200.000',
     maxFotos: 12,
-    minFotos: 1,
     screens: ['Portada','Galería','RSVP','Música','Mesa de Regalos','Video','Detalles','Mapa'],
     features: [
       { label:'Portada animada', ok:true },
@@ -904,7 +549,6 @@ const PLANES = {
     ],
     badge: 'Todo incluido',
     featured: false,
-    precio: '$200.000 COP',
   }
 };
 
@@ -927,27 +571,6 @@ const FAQS = [
   { q:'¿Qué pasa si necesito más fotos?', a:'Puedes agregar fotos adicionales por un valor extra. Consúltanos por WhatsApp para conocer la tarifa.' },
 ];
 
-const SWATCHES = [
-  { color:'#C5A059', label:'Dorado' },
-  { color:'#4A6B5D', label:'Eucalipto' },
-  { color:'#1D2A44', label:'Medianoche' },
-  { color:'#E8D5B7', label:'Crema' },
-  { color:'#C4736A', label:'Terracota' },
-  { color:'#8B6FAE', label:'Lavanda' },
-  { color:'#5B8DB8', label:'Azul Sereno' },
-  { color:'#D4756B', label:'Rosa Polvos' },
-  { color:'#6B8C6B', label:'Sage' },
-  { color:'#2C2C2C', label:'Negro' },
-];
-
-/* ═══════════════════════════════════════════════════════════════
-   ESTADO
-   ═══════════════════════════════════════════════════════════════ */
-let currentTab = 0;
-let selectedPlan = null;
-let photoCount = 4;
-let selectedSwatch = null;
-
 /* ═══════════════════════════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════════════════════════ */
@@ -955,15 +578,15 @@ document.addEventListener('DOMContentLoaded', () => {
   buildPlans();
   buildCompTable();
   buildFaq();
-  buildSwatches();
   initScrollAnimations();
   initNavbar();
-  initTermsToggle();
-  updatePhotoUI();
+  initFormListener();
+  readUrlParams();
 });
 
 /* ═══════════════════════════════════════════════════════════════
    BUILD PLAN CARDS
+   Los botones hacen scroll al formulario y pre-seleccionan el plan
    ═══════════════════════════════════════════════════════════════ */
 function buildPlans() {
   const grid = document.getElementById('plans-grid');
@@ -994,12 +617,137 @@ function buildPlans() {
         </div>
       </div>
       <div class="plan-footer">
-        <button class="btn-select btn-select-${p.featured?'gold':'outline'}" onclick="openDrawer('${key}')">
+        <button class="btn-select btn-select-${p.featured?'gold':'outline'}" onclick="selectPlan('${key}')">
           Elegir ${p.nombre}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </div>
     </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   selectPlan — pre-selecciona el plan y hace scroll al formulario
+   ═══════════════════════════════════════════════════════════════ */
+function selectPlan(key) {
+  // Resaltar tarjeta seleccionada
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected-plan'));
+  const card = document.getElementById('card-' + key);
+  if (card) card.classList.add('selected-plan');
+
+  // Pre-seleccionar plan en el formulario
+  const sel = document.getElementById('plan_seleccionado');
+  if (sel) { sel.value = key; actualizarTopesFormulario(); }
+
+  // Scroll suave al formulario
+  document.getElementById('seccion-pedido').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   actualizarTopesFormulario
+   Ajusta max/value del campo cantidad_fotos según el plan elegido
+   ═══════════════════════════════════════════════════════════════ */
+function actualizarTopesFormulario() {
+  const plan = document.getElementById('plan_seleccionado').value;
+  const input = document.getElementById('cantidad_fotos');
+  const hint  = document.getElementById('info-fotos');
+  if (!input || !hint) return;
+  const topes = {
+    CLASSIC: { max: 4,  texto: 'Plan Classic: Máximo 4 fotografías fijas.' },
+    PREMIUM: { max: 8,  texto: 'Plan Premium: Máximo 8 fotografías en carrusel slider.' },
+    DELUXE:  { max: 12, texto: 'Plan Deluxe: Máximo 12 fotografías en álbum premium.' },
+  };
+  if (topes[plan]) {
+    input.max   = topes[plan].max;
+    input.value = topes[plan].max;
+    hint.textContent = topes[plan].texto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   initFormListener — listener submit del formulario único
+   ═══════════════════════════════════════════════════════════════ */
+function initFormListener() {
+  const form = document.getElementById('form-pedido-gueka');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Validar campos requeridos
+    const requeridos = [
+      'nombre_protagonistas','categoria_evento','fecha_evento',
+      'plan_seleccionado','modelo_invitacion','cantidad_fotos',
+      'nombre_cliente','whatsapp_cliente'
+    ];
+    let valido = true;
+    requeridos.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--red)';
+        el.style.boxShadow   = '0 0 0 3px rgba(230,57,70,.1)';
+        valido = false;
+      } else {
+        el.style.borderColor = '';
+        el.style.boxShadow   = '';
+      }
+    });
+    if (!valido) {
+      // Scroll al primer campo con error
+      const primerError = requeridos.find(id => {
+        const el = document.getElementById(id);
+        return el && !el.value.trim();
+      });
+      if (primerError) {
+        document.getElementById(primerError).scrollIntoView({ behavior:'smooth', block:'center' });
+      }
+      return;
+    }
+
+    // Empaquetar datos
+    const pedido = {
+      estado:               'Pendiente',
+      fecha_registro:       new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
+      nombre_protagonistas: document.getElementById('nombre_protagonistas').value.trim(),
+      categoria_evento:     document.getElementById('categoria_evento').value,
+      fecha_evento:         document.getElementById('fecha_evento').value,
+      lugar_evento:         document.getElementById('lugar_evento').value.trim(),
+      plan_seleccionado:    document.getElementById('plan_seleccionado').value,
+      modelo_invitacion:    document.getElementById('modelo_invitacion').value,
+      cantidad_fotos:       document.getElementById('cantidad_fotos').value,
+      nombre_cliente:       document.getElementById('nombre_cliente').value.trim(),
+      whatsapp_cliente:     document.getElementById('whatsapp_cliente').value.trim(),
+    };
+
+    // Envío asíncrono a Google Sheets (no bloquea)
+    fetch(URL_WEB_API_GOOGLE, {
+      method: 'POST',
+      mode:   'no-cors',
+      headers:{ 'Content-Type': 'application/json' },
+      body:   JSON.stringify(pedido),
+    }).catch(() => console.warn('No se pudo registrar en Google Sheets'));
+
+    // Construir mensaje para WhatsApp
+    const msg = [
+      '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
+      '',
+      `• *Plan:* ${pedido.plan_seleccionado}`,
+      `• *Modelo:* ${pedido.modelo_invitacion}`,
+      `• *Categoría:* ${pedido.categoria_evento}`,
+      `• *Nombres:* ${pedido.nombre_protagonistas}`,
+      `• *Fecha/Hora:* ${pedido.fecha_evento}`,
+      `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
+      `• *Fotos:* ${pedido.cantidad_fotos}`,
+      '',
+      `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
+      '',
+      'Quedo atento a las instrucciones de pago.',
+    ].join('\n');
+
+    // Mostrar toast y abrir WhatsApp simultáneamente
+    showToast();
+    window.open('https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg), '_blank');
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1009,7 +757,7 @@ function buildCompTable() {
   const tbody = document.getElementById('comp-body');
   tbody.innerHTML = COMP_ROWS.map(r => {
     const cell = v => {
-      if (v === true) return '<td class="yes">✓</td>';
+      if (v === true)  return '<td class="yes">✓</td>';
       if (v === false) return '<td class="no">—</td>';
       return `<td>${v}</td>`;
     };
@@ -1035,323 +783,7 @@ function buildFaq() {
 }
 
 function toggleFaq(i) {
-  const item = document.getElementById('faq-'+i);
-  item.classList.toggle('open');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   BUILD SWATCHES
-   ═══════════════════════════════════════════════════════════════ */
-function buildSwatches() {
-  const grid = document.getElementById('swatch-grid');
-  grid.innerHTML = SWATCHES.map((s,i) => `
-    <div class="swatch" style="background:${s.color}" title="${s.label}" onclick="selectSwatch(${i})" id="swatch-${i}"></div>`).join('');
-}
-
-function selectSwatch(i) {
-  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
-  document.getElementById('swatch-'+i).classList.add('selected');
-  selectedSwatch = SWATCHES[i].label;
-  document.getElementById('swatch-hint').textContent = 'Seleccionado: ' + SWATCHES[i].label;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   DRAWER
-   ═══════════════════════════════════════════════════════════════ */
-function openDrawer(planKey) {
-  selectedPlan = planKey;
-  const p = PLANES[planKey];
-
-  // Actualizar header del drawer
-  document.getElementById('dh-plan').innerHTML = `<em>${p.nombre}</em>`;
-  document.getElementById('dh-before').textContent = p.precioAntes;
-  document.getElementById('dh-now').innerHTML = `${p.precioAhora} <small>COP</small>`;
-
-  // Pre-seleccionar el plan en el select
-  document.getElementById('plan_seleccionado').value = planKey;
-
-  // Resaltar tarjeta seleccionada
-  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected-plan'));
-  const card = document.getElementById('card-'+planKey);
-  if (card) card.classList.add('selected-plan');
-
-  // Ajustar fotos al plan
-  onPlanChange();
-
-  // Ir al tab 0
-  currentTab = 0;
-  renderTab();
-
-  // Abrir drawer
-  document.getElementById('checkout-drawer').classList.add('open');
-  document.getElementById('drawer-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDrawer() {
-  document.getElementById('checkout-drawer').classList.remove('open');
-  document.getElementById('drawer-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PLAN CHANGE → ajusta límite de fotos
-   ═══════════════════════════════════════════════════════════════ */
-function onPlanChange() {
-  const planKey = document.getElementById('plan_seleccionado').value;
-  if (!planKey) return;
-
-  selectedPlan = planKey;
-  const p = PLANES[planKey];
-
-  // Ajustar máximo de fotos según el plan y actualizar id="info-fotos"
-  const fotoInput = document.getElementById('cantidad_fotos');
-  const infoFotos = document.getElementById('info-fotos');
-  fotoInput.max = p.maxFotos;
-  fotoInput.value = p.maxFotos;
-  photoCount = p.maxFotos;
-  if (infoFotos) infoFotos.textContent = `Máx. ${p.maxFotos} fotos para plan ${p.nombre}`;
-
-  // Actualizar mini-summary
-  document.getElementById('ms-plan').textContent = p.nombre;
-  document.getElementById('ms-precio-val').textContent = p.precio;
-
-  // Música solo en Premium/Deluxe
-  const musicaField = document.getElementById('musica-field');
-  const musicaHint = document.getElementById('musica-hint');
-  if (planKey === 'CLASSIC') {
-    musicaField.style.opacity = '.45';
-    musicaHint.textContent = 'No disponible en plan Classic';
-  } else {
-    musicaField.style.opacity = '1';
-    musicaHint.textContent = 'Incluida en tu plan';
-  }
-
-  // Extras
-  renderExtras(planKey);
-}
-
-function renderExtras(planKey) {
-  const p = PLANES[planKey];
-  const grid = document.getElementById('extras-grid');
-  const field = document.getElementById('extras-field');
-  field.style.display = 'block';
-  grid.innerHTML = p.features.filter(f=>f.ok).map(f=>`
-    <div class="extra-item included">
-      <div class="extra-cb-icon">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <span class="extra-label">${f.label}</span>
-      <span class="extra-tag">Incluido</span>
-    </div>`).join('');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PHOTO COUNTER
-   ═══════════════════════════════════════════════════════════════ */
-function changePhoto(delta) {
-  const planKey = document.getElementById('plan_seleccionado').value;
-  const max = planKey && PLANES[planKey] ? PLANES[planKey].maxFotos : 12;
-  const min = planKey && PLANES[planKey] ? PLANES[planKey].minFotos : 1;
-
-  photoCount = Math.min(max, Math.max(min, photoCount + delta));
-  document.getElementById('cantidad_fotos').value = photoCount;
-  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
-  updatePhotoUI();
-}
-
-function updatePhotoUI() {
-  document.getElementById('pc-value').textContent = photoCount;
-  document.getElementById('cantidad_fotos').value = photoCount;
-  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
-
-  const planKey = document.getElementById('plan_seleccionado').value;
-  const max = planKey && PLANES[planKey] ? PLANES[planKey].maxFotos : 12;
-  const min = planKey && PLANES[planKey] ? PLANES[planKey].minFotos : 1;
-
-  document.getElementById('pc-minus').disabled = photoCount <= min;
-  document.getElementById('pc-plus').disabled = photoCount >= max;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   TAB NAVIGATION
-   ═══════════════════════════════════════════════════════════════ */
-function goTab(dir) {
-  if (dir === 1 && !validateTab(currentTab)) return;
-  if (dir === 1 && currentTab < 2) {
-    markTabDone(currentTab);
-    currentTab++;
-  } else if (dir === -1 && currentTab > 0) {
-    currentTab--;
-  }
-  renderTab();
-}
-
-function renderTab() {
-  // Panels
-  document.querySelectorAll('.tab-panel').forEach((p,i) => {
-    p.classList.toggle('active', i === currentTab);
-  });
-  // Tabs
-  document.querySelectorAll('.dtab').forEach((t,i) => {
-    t.classList.toggle('active', i === currentTab);
-  });
-  // Botones footer
-  document.getElementById('btn-prev').style.display = currentTab > 0 ? '' : 'none';
-  document.getElementById('btn-next').style.display = currentTab < 2 ? '' : 'none';
-  document.getElementById('btn-buy-final').style.display = currentTab === 2 ? '' : 'none';
-  document.getElementById('btn-buy-sub').style.display = currentTab === 2 ? '' : 'none';
-
-  // Barra de progreso
-  document.getElementById('progress-fill').style.width = ((currentTab+1)/3*100) + '%';
-
-  // Actualizar mini-summary al llegar al tab 3
-  if (currentTab === 2) updateMiniSummary();
-}
-
-function markTabDone(i) {
-  const tab = document.querySelector(`.dtab[data-tab="${i}"]`);
-  if (tab) tab.classList.add('done');
-}
-
-function updateMiniSummary() {
-  const planKey = document.getElementById('plan_seleccionado').value;
-  if (planKey && PLANES[planKey]) {
-    const p = PLANES[planKey];
-    document.getElementById('ms-plan').textContent = p.nombre;
-    document.getElementById('ms-precio-val').textContent = p.precio;
-
-    // Features chips
-    const chipsCont = document.getElementById('ms-features-list');
-    chipsCont.innerHTML = p.features.map(f =>
-      `<span class="ms-feat-chip ${f.ok?'':'off'}">${f.label}</span>`
-    ).join('');
-  }
-  const modelo = document.getElementById('modelo_invitacion').value;
-  const categoria = document.getElementById('categoria_evento').value;
-  document.getElementById('ms-modelo').textContent = modelo || '—';
-  document.getElementById('ms-categoria').textContent = categoria || '—';
-  document.getElementById('ms-fotos').textContent = photoCount + ' fotos';
-  document.getElementById('dh-meta').textContent =
-    (categoria || 'Evento') + ' · ' + (modelo || 'Modelo no seleccionado');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   VALIDACIÓN POR TAB
-   ═══════════════════════════════════════════════════════════════ */
-function validateTab(tab) {
-  if (tab === 0) {
-    let ok = true;
-    ok = validateField('nombre_protagonistas','err-nombres') && ok;
-    ok = validateField('categoria_evento','err-categoria') && ok;
-    ok = validateField('fecha_evento','err-fecha') && ok;
-    ok = validateField('plan_seleccionado','err-plan') && ok;
-    ok = validateField('modelo_invitacion','err-modelo') && ok;
-    return ok;
-  }
-  if (tab === 2) {
-    let ok = true;
-    ok = validateField('nombre_cliente','err-contacto') && ok;
-    ok = validateField('whatsapp_cliente','err-tel') && ok;
-    return ok;
-  }
-  return true;
-}
-
-function validateField(id, errId) {
-  const el = document.getElementById(id);
-  const errEl = document.getElementById(errId);
-  const val = el ? el.value.trim() : '';
-  if (!val) {
-    if (el) el.classList.add('err');
-    if (errEl) errEl.classList.add('show');
-    return false;
-  }
-  if (el) el.classList.remove('err');
-  if (errEl) errEl.classList.remove('show');
-  return true;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   HANDLE BUY — ACCIÓN PRINCIPAL
-   Envía datos a Google Sheets y abre WhatsApp simultáneamente
-   ═══════════════════════════════════════════════════════════════ */
-function handleBuy() {
-  // 1. Validar tab de contacto
-  if (!validateTab(2)) return;
-
-  // 2. Validar términos
-  const termsChecked = document.getElementById('f-terms').checked;
-  const termsWrap = document.getElementById('terms-wrap');
-  const errTerms = document.getElementById('err-terms');
-  if (!termsChecked) {
-    termsWrap.classList.add('terms-error');
-    errTerms.classList.add('show');
-    return;
-  }
-  termsWrap.classList.remove('terms-error');
-  errTerms.classList.remove('show');
-
-  // 3. Recopilar todos los datos del formulario
-  const planKey = document.getElementById('plan_seleccionado').value;
-  const planInfo = PLANES[planKey] || {};
-
-  const pedido = {
-    estado: 'Pendiente',
-    fecha_registro: new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
-    nombre_protagonistas: document.getElementById('nombre_protagonistas').value.trim(),
-    categoria_evento: document.getElementById('categoria_evento').value,
-    fecha_evento: document.getElementById('fecha_evento').value,
-    lugar_evento: document.getElementById('lugar_evento').value.trim(),
-    plan_seleccionado: planKey,
-    precio_plan: planInfo.precioAhora || '',
-    modelo_invitacion: document.getElementById('modelo_invitacion').value,
-    cantidad_fotos: parseInt(document.getElementById('cantidad_fotos').value) || photoCount,
-    paleta_colores: selectedSwatch || 'Sin selección',
-    musica_fondo: document.getElementById('f-musica').value.trim(),
-    notas_adicionales: document.getElementById('f-notas').value.trim(),
-    nombre_cliente: document.getElementById('nombre_cliente').value.trim(),
-    whatsapp_cliente: document.getElementById('whatsapp_cliente').value.trim(),
-    ciudad_evento: document.getElementById('f-ciudad').value.trim(),
-  };
-
-  // 4. Enviar a Google Sheets de forma asíncrona (sin bloquear)
-  fetch(URL_WEB_API_GOOGLE, {
-    method: 'POST',
-    mode: 'no-cors', // necesario para Google Apps Script
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(pedido),
-  }).catch(() => {
-    // El modo no-cors no permite leer respuesta; los errores de red se ignoran silenciosamente
-    console.warn('No se pudo conectar con Google Sheets');
-  });
-
-  // 5. Construir mensaje de WhatsApp con el formato exacto solicitado
-  const msg = [
-    '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
-    '',
-    `• *Plan:* ${pedido.plan_seleccionado}`,
-    `• *Modelo:* ${pedido.modelo_invitacion}`,
-    `• *Categoría:* ${pedido.categoria_evento}`,
-    `• *Nombres:* ${pedido.nombre_protagonistas}`,
-    `• *Fecha/Hora:* ${pedido.fecha_evento}`,
-    `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
-    `• *Fotos:* ${pedido.cantidad_fotos}`,
-    '',
-    `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
-    '',
-    'Quedo atento a las instrucciones de pago.',
-  ].join('\n');
-
-  // 6. Mostrar toast de confirmación
-  showToast();
-
-  // 7. Abrir WhatsApp simultáneamente
-  const waUrl = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg);
-  window.open(waUrl, '_blank');
-
-  // 8. Cerrar drawer tras breve pausa
-  setTimeout(() => closeDrawer(), 1200);
+  document.getElementById('faq-'+i).classList.toggle('open');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1386,21 +818,6 @@ function closeMobile() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TÉRMINOS TOGGLE
-   ═══════════════════════════════════════════════════════════════ */
-function initTermsToggle() {
-  const cb = document.getElementById('f-terms');
-  const wrap = document.getElementById('terms-wrap');
-  cb.addEventListener('change', () => {
-    wrap.classList.toggle('terms-checked', cb.checked);
-    if (cb.checked) {
-      wrap.classList.remove('terms-error');
-      document.getElementById('err-terms').classList.remove('show');
-    }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════════
    SCROLL ANIMATIONS
    ═══════════════════════════════════════════════════════════════ */
 function initScrollAnimations() {
@@ -1411,119 +828,31 @@ function initScrollAnimations() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FUNCIÓN: actualizarTopesFormulario
-   Ajusta max/value del campo cantidad_fotos al cambiar el plan
-   en el formulario unificado #seccion-pedido
+   URL PARAMS — pre-selección desde catálogo
    ═══════════════════════════════════════════════════════════════ */
-function actualizarTopesFormulario() {
-  const plan = document.getElementById('plan_seleccionado').value;
-  const input = document.getElementById('cantidad_fotos');
-  const hint = document.getElementById('info-fotos');
-  if (!input || !hint) return;
-  const topes = {
-    CLASSIC:  { max: 4,  texto: 'Plan Classic: Máximo 4 fotografías fijas.' },
-    PREMIUM:  { max: 8,  texto: 'Plan Premium: Máximo 8 fotografías en carrusel slider.' },
-    DELUXE:   { max: 12, texto: 'Plan Deluxe: Máximo 12 fotografías en álbum premium.' },
-  };
-  if (topes[plan]) {
-    input.max   = topes[plan].max;
-    input.value = topes[plan].max;
-    hint.textContent = topes[plan].texto;
-  }
-  // Sincronizar con el drawer si está abierto
-  onPlanChange();
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   LISTENER: #form-pedido-gueka submit
-   ═══════════════════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  const formPedido = document.getElementById('form-pedido-gueka');
-  if (!formPedido) return;
-  formPedido.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // Validar campos requeridos
-    const campos = ['nombre_protagonistas','categoria_evento','fecha_evento',
-                    'plan_seleccionado','modelo_invitacion','cantidad_fotos',
-                    'nombre_cliente','whatsapp_cliente'];
-    let valido = true;
-    campos.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && !el.value.trim()) { el.style.borderColor = 'var(--red)'; valido = false; }
-      else if (el) el.style.borderColor = '';
-    });
-    if (!valido) return;
-
-    // Empaquetar datos
-    const pedido = {
-      estado: 'Pendiente',
-      fecha_registro: new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
-      nombre_protagonistas: document.getElementById('nombre_protagonistas').value.trim(),
-      categoria_evento:     document.getElementById('categoria_evento').value,
-      fecha_evento:         document.getElementById('fecha_evento').value,
-      lugar_evento:         document.getElementById('lugar_evento').value.trim(),
-      plan_seleccionado:    document.getElementById('plan_seleccionado').value,
-      modelo_invitacion:    document.getElementById('modelo_invitacion').value,
-      cantidad_fotos:       document.getElementById('cantidad_fotos').value,
-      nombre_cliente:       document.getElementById('nombre_cliente').value.trim(),
-      whatsapp_cliente:     document.getElementById('whatsapp_cliente').value.trim(),
-    };
-
-    // Envío asíncrono a Google Sheets
-    fetch(URL_WEB_API_GOOGLE, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(pedido),
-    }).catch(() => console.warn('No se pudo registrar en Google Sheets'));
-
-    // Mensaje WhatsApp
-    const msg = [
-      '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
-      '',
-      `• *Plan:* ${pedido.plan_seleccionado}`,
-      `• *Modelo:* ${pedido.modelo_invitacion}`,
-      `• *Categoría:* ${pedido.categoria_evento}`,
-      `• *Nombres:* ${pedido.nombre_protagonistas}`,
-      `• *Fecha/Hora:* ${pedido.fecha_evento}`,
-      `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
-      `• *Fotos:* ${pedido.cantidad_fotos}`,
-      '',
-      `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
-      '',
-      'Quedo atento a las instrucciones de pago.',
-    ].join('\n');
-
-    showToast();
-    window.open('https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg), '_blank');
-  });
-});
-
-
-(function readUrlParams() {
-  const params = new URLSearchParams(window.location.search);
-  const modelo = params.get('modelo');
+function readUrlParams() {
+  const params   = new URLSearchParams(window.location.search);
+  const modelo   = params.get('modelo');
   const categoria = params.get('categoria');
+
   if (modelo) {
-    const chip = document.getElementById('modelo-chip');
+    // Mostrar chip en el header
+    const chip     = document.getElementById('modelo-chip');
     const chipText = document.getElementById('modelo-chip-text');
     if (chip && chipText) { chip.style.display = 'inline-flex'; chipText.textContent = modelo; }
-    // Pre-seleccionar modelo en el select cuando abra el drawer
-    window.addEventListener('DOMContentLoaded', () => {
-      const sel = document.getElementById('modelo_invitacion');
-      if (sel) {
-        for (const opt of sel.options) {
-          if (opt.value === modelo) { sel.value = modelo; break; }
-        }
+    // Pre-seleccionar modelo en el formulario
+    const sel = document.getElementById('modelo_invitacion');
+    if (sel) {
+      for (const opt of sel.options) {
+        if (opt.value === modelo) { sel.value = modelo; break; }
       }
-    });
+    }
   }
   if (categoria) {
     const label = document.getElementById('header-categoria-label');
     if (label) label.textContent = categoria;
   }
-})();
+}
 </script>
 </body>
 </html>
