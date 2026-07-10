@@ -218,6 +218,14 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
 .btn-pedido-wa{width:100%;background:var(--gold);color:#fff;border:none;border-radius:99px;padding:1.1rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;box-shadow:0 8px 24px rgba(197,160,89,.3);transition:background .25s,transform .2s,box-shadow .2s;margin-top:.5rem}
 .btn-pedido-wa:hover{background:var(--midnight);transform:translateY(-3px);box-shadow:0 14px 32px rgba(29,42,68,.2)}
 
+/* CAMPOS CONDICIONALES */
+.campo-condicional{overflow:hidden;transition:max-height .4s ease,opacity .35s ease,margin .3s ease}
+.campo-condicional.oculto{max-height:0!important;opacity:0;margin-top:0!important;margin-bottom:0!important;pointer-events:none}
+.campo-condicional.visible{max-height:600px;opacity:1}
+.plan-badge-aviso{display:inline-flex;align-items:center;gap:.4rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(197,160,89,.1);border:1px solid rgba(197,160,89,.25);border-radius:99px;padding:.28rem .8rem;color:var(--gold);font-weight:600;margin-bottom:.65rem}
+.plan-badge-aviso.deluxe{background:rgba(29,42,68,.07);border-color:rgba(29,42,68,.18);color:var(--midnight)}
+.f-field textarea{resize:vertical;min-height:90px}
+
 </style>
 </head>
 <body>
@@ -305,7 +313,7 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
     </div>
     <form id="form-pedido-gueka" novalidate>
 
-      <!-- PASO 1: EVENTO -->
+      <!-- ══ PASO 1: EVENTO ══ -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">1</span>
@@ -339,25 +347,31 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
             <input type="datetime-local" id="fecha_evento" required/>
           </div>
           <div class="f-field">
-            <label>Lugar / Salón</label>
+            <label>Lugar / Salón y Dirección</label>
             <input type="text" id="lugar_evento" placeholder="Ej: Salón de Cristal, Bogotá"/>
           </div>
+        </div>
+        <div class="f-field" style="margin-top:.9rem">
+          <label>Enlace de Google Maps del salón</label>
+          <input type="url" id="link_maps" placeholder="https://maps.google.com/..."/>
+          <span class="f-hint">Pega el enlace compartido de Google Maps para guiar a los invitados</span>
         </div>
       </div>
 
       <div class="f-divider"></div>
 
-      <!-- PASO 2: PLAN Y MODELO -->
+      <!-- ══ PASO 2: PLAN, DISEÑO Y DETALLES ══ -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">2</span>
-          Elección de <em>Plan y Modelo</em>
+          Diseño, <em>Plan y Detalles</em>
         </div>
+
         <div class="f-grid">
           <div class="f-field">
             <label>Plan a contratar<span class="req">*</span></label>
             <div class="f-select-wrap">
-              <select id="plan_seleccionado" onchange="actualizarTopesFormulario()" required>
+              <select id="plan_seleccionado" onchange="actualizarCamposDinamicos()" required>
                 <option value="">Seleccionar plan…</option>
                 <option value="CLASSIC">CLASSIC — $80.000 COP</option>
                 <option value="PREMIUM">PREMIUM — $140.000 COP</option>
@@ -386,16 +400,81 @@ footer{background:var(--cream2);border-top:1px solid var(--border);padding:2rem 
             </div>
           </div>
         </div>
+
+        <!-- Cantidad de fotos -->
         <div class="f-field" style="margin-top:.9rem;max-width:260px">
           <label>Cantidad de fotos<span class="req">*</span></label>
           <input type="number" id="cantidad_fotos" value="4" min="1" max="12" required/>
           <span class="f-hint" id="info-fotos">Selecciona un plan para ver el límite de fotos</span>
         </div>
-      </div>
+
+        <!-- Regalos / lluvia de sobres — todos los planes -->
+        <div class="f-field" style="margin-top:.9rem">
+          <label>Cuenta bancaria o Lluvia de Sobres</label>
+          <textarea id="info_regalos" placeholder="Ej: Nequi 3001234567 a nombre de Valentina Gómez · Daviplata 3109876543"></textarea>
+          <span class="f-hint">Puedes incluir datos de Nequi, Daviplata, transferencia o texto instructivo</span>
+        </div>
+
+        <!-- ── CONDICIONAL: Música (Premium + Deluxe) ── -->
+        <div id="contenedor-musica" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso">✦ Premium &amp; Deluxe</span>
+            <label>Enlace de Música de Fondo<span class="req">*</span></label>
+            <input type="url" id="link_musica" placeholder="https://open.spotify.com/track/..."/>
+            <span class="f-hint">Enlace de Spotify, YouTube o cualquier plataforma de streaming</span>
+          </div>
+        </div>
+
+        <!-- ── CONDICIONAL: Historia / Frase (Premium + Deluxe) ── -->
+        <div id="contenedor-historia" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso">✦ Premium &amp; Deluxe</span>
+            <label>Frase de Bienvenida o Historia<span class="req">*</span></label>
+            <textarea id="texto_historia" placeholder="Escribe tu frase de bienvenida o historia de amor…"></textarea>
+          </div>
+        </div>
+
+        <!-- ── CONDICIONAL: Hashtag y Redes (Premium + Deluxe) ── -->
+        <div id="contenedor-redes" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso">✦ Premium &amp; Deluxe</span>
+            <label>Hashtag Oficial y Redes Sociales<span class="req">*</span></label>
+            <input type="text" id="hashtag_redes" placeholder="Ej: #SofiaXV · @sofiamendoza"/>
+          </div>
+        </div>
+
+        <!-- ── CONDICIONAL: Cronograma (Premium + Deluxe) ── -->
+        <div id="contenedor-cronograma" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso" id="badge-cronograma">✦ Premium &amp; Deluxe</span>
+            <label id="label-cronograma">Cronograma / Agenda del Evento<span class="req">*</span></label>
+            <textarea id="texto_cronograma" placeholder="Ej: 6:00 pm — Ceremonia religiosa · 8:00 pm — Recepción y cena · 10:00 pm — Baile…"></textarea>
+          </div>
+        </div>
+
+        <!-- ── CONDICIONAL: Padrinos / Testigos (solo Deluxe) ── -->
+        <div id="contenedor-padrinos" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso deluxe">★ Solo Deluxe</span>
+            <label>Lista de Padrinos / Testigos<span class="req">*</span></label>
+            <textarea id="info_padrinos" placeholder="Ej: Padrinos de Arras: Carlos y Patricia Méndez · Testigos: Ana Ruiz y David Torres…"></textarea>
+          </div>
+        </div>
+
+        <!-- ── CONDICIONAL: Logística Transporte/Hoteles (solo Deluxe) ── -->
+        <div id="contenedor-logistica-deluxe" class="campo-condicional oculto" style="margin-top:.9rem">
+          <div class="f-field">
+            <span class="plan-badge-aviso deluxe">★ Solo Deluxe</span>
+            <label>Información de Buses y Hoteles<span class="req">*</span></label>
+            <textarea id="info_logistica_deluxe" placeholder="Ej: Bus de regreso: 2:00 am desde el salón · Hotel recomendado: Casa Hotel Boutique, habitaciones disponibles al +57 300…"></textarea>
+          </div>
+        </div>
+
+      </div><!-- /paso 2 -->
 
       <div class="f-divider"></div>
 
-      <!-- PASO 3: CONTACTO -->
+      <!-- ══ PASO 3: CONTACTO ══ -->
       <div class="paso-formulario">
         <div class="paso-titulo">
           <span class="paso-num">3</span>
@@ -636,31 +715,85 @@ function selectPlan(key) {
 
   // Pre-seleccionar plan en el formulario
   const sel = document.getElementById('plan_seleccionado');
-  if (sel) { sel.value = key; actualizarTopesFormulario(); }
+  if (sel) { sel.value = key; actualizarCamposDinamicos(); }
 
   // Scroll suave al formulario
   document.getElementById('seccion-pedido').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   actualizarTopesFormulario
-   Ajusta max/value del campo cantidad_fotos según el plan elegido
+   actualizarCamposDinamicos
+   Controla visibilidad, required y topes según plan elegido
    ═══════════════════════════════════════════════════════════════ */
-function actualizarTopesFormulario() {
+function actualizarCamposDinamicos() {
   const plan = document.getElementById('plan_seleccionado').value;
-  const input = document.getElementById('cantidad_fotos');
-  const hint  = document.getElementById('info-fotos');
-  if (!input || !hint) return;
-  const topes = {
-    CLASSIC: { max: 4,  texto: 'Plan Classic: Máximo 4 fotografías fijas.' },
-    PREMIUM: { max: 8,  texto: 'Plan Premium: Máximo 8 fotografías en carrusel slider.' },
-    DELUXE:  { max: 12, texto: 'Plan Deluxe: Máximo 12 fotografías en álbum premium.' },
-  };
-  if (topes[plan]) {
-    input.max   = topes[plan].max;
-    input.value = topes[plan].max;
-    hint.textContent = topes[plan].texto;
+  const input  = document.getElementById('cantidad_fotos');
+  const hint   = document.getElementById('info-fotos');
+
+  // Helper: mostrar/ocultar un contenedor y gestionar required de sus inputs
+  function setVisible(id, visible, inputIds) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (visible) {
+      el.classList.remove('oculto');
+      el.classList.add('visible');
+    } else {
+      el.classList.add('oculto');
+      el.classList.remove('visible');
+    }
+    if (inputIds) {
+      inputIds.forEach(iid => {
+        const inp = document.getElementById(iid);
+        if (inp) inp.required = visible;
+      });
+    }
   }
+
+  if (plan === 'CLASSIC') {
+    input.max   = 4;  input.value = 4;
+    hint.textContent = 'Plan Classic: Máximo 4 fotografías fijas.';
+    setVisible('contenedor-musica',          false, ['link_musica']);
+    setVisible('contenedor-historia',        false, ['texto_historia']);
+    setVisible('contenedor-redes',           false, ['hashtag_redes']);
+    setVisible('contenedor-cronograma',      false, ['texto_cronograma']);
+    setVisible('contenedor-padrinos',        false, ['info_padrinos']);
+    setVisible('contenedor-logistica-deluxe',false, ['info_logistica_deluxe']);
+
+  } else if (plan === 'PREMIUM') {
+    input.max   = 8;  input.value = 8;
+    hint.textContent = 'Plan Premium: Máximo 8 fotografías en carrusel slider.';
+    // Ajustar badge y label de cronograma
+    document.getElementById('badge-cronograma').textContent = '✦ Premium & Deluxe';
+    document.getElementById('badge-cronograma').classList.remove('deluxe');
+    document.getElementById('label-cronograma').innerHTML = 'Cronograma / Agenda del Evento<span class="req">*</span>';
+    document.getElementById('texto_cronograma').placeholder = 'Ej: 6:00 pm — Ceremonia · 8:00 pm — Recepción y cena · 10:00 pm — Baile…';
+    setVisible('contenedor-musica',          true,  ['link_musica']);
+    setVisible('contenedor-historia',        true,  ['texto_historia']);
+    setVisible('contenedor-redes',           true,  ['hashtag_redes']);
+    setVisible('contenedor-cronograma',      true,  ['texto_cronograma']);
+    setVisible('contenedor-padrinos',        false, ['info_padrinos']);
+    setVisible('contenedor-logistica-deluxe',false, ['info_logistica_deluxe']);
+
+  } else if (plan === 'DELUXE') {
+    input.max   = 12; input.value = 12;
+    hint.textContent = 'Plan Deluxe: Máximo 12 fotografías en álbum premium interactivo.';
+    // Ajustar badge y label de cronograma para Deluxe
+    document.getElementById('badge-cronograma').textContent = '★ Deluxe — Agenda Extendida';
+    document.getElementById('badge-cronograma').classList.add('deluxe');
+    document.getElementById('label-cronograma').innerHTML = 'Cronograma / Agenda Extendida<span class="req">*</span>';
+    document.getElementById('texto_cronograma').placeholder = 'Detalla cada momento: llegada de invitados, ceremonia, cóctel, cena, baile, momentos especiales…';
+    setVisible('contenedor-musica',          true,  ['link_musica']);
+    setVisible('contenedor-historia',        true,  ['texto_historia']);
+    setVisible('contenedor-redes',           true,  ['hashtag_redes']);
+    setVisible('contenedor-cronograma',      true,  ['texto_cronograma']);
+    setVisible('contenedor-padrinos',        true,  ['info_padrinos']);
+    setVisible('contenedor-logistica-deluxe',true,  ['info_logistica_deluxe']);
+  }
+
+  // Sync tarjeta seleccionada
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected-plan'));
+  const card = document.getElementById('card-' + plan);
+  if (card) card.classList.add('selected-plan');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -673,7 +806,7 @@ function initFormListener() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Validar campos requeridos
+    // Campos siempre requeridos
     const requeridos = [
       'nombre_protagonistas','categoria_evento','fecha_evento',
       'plan_seleccionado','modelo_invitacion','cantidad_fotos',
@@ -692,19 +825,46 @@ function initFormListener() {
         el.style.boxShadow   = '';
       }
     });
-    if (!valido) {
-      // Scroll al primer campo con error
-      const primerError = requeridos.find(id => {
-        const el = document.getElementById(id);
-        return el && !el.value.trim();
-      });
-      if (primerError) {
-        document.getElementById(primerError).scrollIntoView({ behavior:'smooth', block:'center' });
+
+    // Campos condicionales con required dinámico
+    const condIds = ['link_musica','texto_historia','hashtag_redes',
+                     'texto_cronograma','info_padrinos','info_logistica_deluxe'];
+    condIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.required) return;
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--red)';
+        el.style.boxShadow   = '0 0 0 3px rgba(230,57,70,.1)';
+        valido = false;
+      } else {
+        el.style.borderColor = '';
+        el.style.boxShadow   = '';
       }
+    });
+
+    if (!valido) {
+      const primerErr = [...requeridos, ...condIds].find(id => {
+        const el = document.getElementById(id);
+        return el && el.required !== false && !el.value.trim();
+      });
+      if (primerErr) document.getElementById(primerErr).scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
 
-    // Empaquetar datos
+    const plan = document.getElementById('plan_seleccionado').value;
+    const NA   = 'No aplica por plan';
+
+    // Leer valor o "No aplica" si el contenedor está oculto
+    function val(id, contenedorId) {
+      if (contenedorId) {
+        const cont = document.getElementById(contenedorId);
+        if (cont && cont.classList.contains('oculto')) return NA;
+      }
+      const el = document.getElementById(id);
+      return el ? (el.value.trim() || '—') : '—';
+    }
+
+    // Empaquetar datos completos
     const pedido = {
       estado:               'Pendiente',
       fecha_registro:       new Date().toLocaleString('es-CO', { timeZone:'America/Bogota' }),
@@ -712,14 +872,22 @@ function initFormListener() {
       categoria_evento:     document.getElementById('categoria_evento').value,
       fecha_evento:         document.getElementById('fecha_evento').value,
       lugar_evento:         document.getElementById('lugar_evento').value.trim(),
-      plan_seleccionado:    document.getElementById('plan_seleccionado').value,
+      link_maps:            document.getElementById('link_maps').value.trim(),
+      plan_seleccionado:    plan,
       modelo_invitacion:    document.getElementById('modelo_invitacion').value,
       cantidad_fotos:       document.getElementById('cantidad_fotos').value,
+      info_regalos:         document.getElementById('info_regalos').value.trim(),
+      link_musica:          val('link_musica',    'contenedor-musica'),
+      texto_historia:       val('texto_historia', 'contenedor-historia'),
+      hashtag_redes:        val('hashtag_redes',  'contenedor-redes'),
+      texto_cronograma:     val('texto_cronograma','contenedor-cronograma'),
+      info_padrinos:        val('info_padrinos',  'contenedor-padrinos'),
+      info_logistica_deluxe:val('info_logistica_deluxe','contenedor-logistica-deluxe'),
       nombre_cliente:       document.getElementById('nombre_cliente').value.trim(),
       whatsapp_cliente:     document.getElementById('whatsapp_cliente').value.trim(),
     };
 
-    // Envío asíncrono a Google Sheets (no bloquea)
+    // Envío asíncrono a Google Sheets
     fetch(URL_WEB_API_GOOGLE, {
       method: 'POST',
       mode:   'no-cors',
@@ -727,8 +895,8 @@ function initFormListener() {
       body:   JSON.stringify(pedido),
     }).catch(() => console.warn('No se pudo registrar en Google Sheets'));
 
-    // Construir mensaje para WhatsApp
-    const msg = [
+    // Construir mensaje completo para WhatsApp
+    const lineas = [
       '¡Hola Gueka Ideas! 👋 He realizado un pedido desde la web:',
       '',
       `• *Plan:* ${pedido.plan_seleccionado}`,
@@ -737,16 +905,25 @@ function initFormListener() {
       `• *Nombres:* ${pedido.nombre_protagonistas}`,
       `• *Fecha/Hora:* ${pedido.fecha_evento}`,
       `• *Ubicación:* ${pedido.lugar_evento || 'No especificada'}`,
+      `• *Google Maps:* ${pedido.link_maps || 'No indicado'}`,
       `• *Fotos:* ${pedido.cantidad_fotos}`,
+      '',
+      '*── Detalles del diseño ──*',
+      `• *Música:* ${pedido.link_musica}`,
+      `• *Historia/Frase:* ${pedido.texto_historia}`,
+      `• *Hashtag/Redes:* ${pedido.hashtag_redes}`,
+      `• *Cronograma:* ${pedido.texto_cronograma}`,
+      `• *Padrinos/Testigos:* ${pedido.info_padrinos}`,
+      `• *Transporte/Hoteles:* ${pedido.info_logistica_deluxe}`,
+      `• *Regalos/Sobres:* ${pedido.info_regalos || 'No indicado'}`,
       '',
       `*Contacto:* ${pedido.nombre_cliente} (${pedido.whatsapp_cliente})`,
       '',
       'Quedo atento a las instrucciones de pago.',
-    ].join('\n');
+    ];
 
-    // Mostrar toast y abrir WhatsApp simultáneamente
     showToast();
-    window.open('https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg), '_blank');
+    window.open('https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(lineas.join('\n')), '_blank');
   });
 }
 
